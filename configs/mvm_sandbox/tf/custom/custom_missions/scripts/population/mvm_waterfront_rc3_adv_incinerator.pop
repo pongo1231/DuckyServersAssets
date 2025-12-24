@@ -1,0 +1,1450 @@
+//  Mission by Waifu Enthusiast
+
+//  An unhinged advanced mission for Waterfront
+
+#base robot_giant.pop
+#base robot_standard.pop
+
+WaveSchedule
+{
+    StartingCurrency 0
+	CanBotsAttackWhileInSpawnRoom No
+	RespawnWaveTime 8
+	Advanced	1
+
+	Mission //  Sniper  -   Wave 05
+	{
+        Where spawnbot_mission_sniper
+		Objective Sniper
+		InitialCooldown 28
+		BeginAtWave 5
+		RunForThisManyWaves 1
+		CooldownTime 30
+		DesiredCount 4
+		TFBot
+		{
+			Template T_TFBot_Sniper_Incinerator_Razorback
+			Skill Normal
+		}
+	}
+
+    //  Wave 01
+    //  Max Cash    -   0
+    //  Wave Cash   -   400
+
+    Wave    
+    {
+		StartWaveOutput
+		{
+			Target wave_start_endurance_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		WaitWhenDone 65
+		Checkpoint Yes
+
+        WaveSpawn   //  Scout leads bomb so pyros dont get split up
+        {
+            Name "1_0"
+            Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+
+            TFBot
+            {
+                Template T_TFBot_Scout_Melee
+            }
+        }
+
+        WaveSpawn   //  pyro flush
+        {
+            Name "a_scout"
+            Where spawnbot
+			TotalCount 12
+			MaxActive 12
+			SpawnCount 12
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 0
+			TotalCurrency 50
+
+            TFBot
+            {
+                Template T_TFBot_Pyro_Longburn
+                Attributes AlwaysFireWeapon
+            }
+        }
+
+        WaveSpawn   //  Cleanup heavies
+        {
+            Name "1_0"
+            Where spawnbot
+			TotalCount 3
+			MaxActive 3
+			SpawnCount 3
+			WaitBeforeStarting 8
+			WaitBetweenSpawns 0
+			TotalCurrency 50
+
+            TFBot
+            {
+                Template T_TFBot_Heavy_Incinerator
+                Skill Normal
+            }
+        }
+
+        WaveSpawn   //  The big boss
+        {
+            Name "1_1"
+
+            WaitForAllDead "1_0"
+
+            Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 200
+
+            Squad
+            {
+                FormationSize 500
+
+                TFBot
+                {
+                    Template T_TFBot_Giant_Heavy_Incinerator
+                }
+                //TFBot
+                //{
+                    //Template T_TFBot_Medic
+                    //Tag bot_squadmember
+                //}
+            }
+        }
+
+        WaveSpawn   //  armored flaregun
+        {
+            Name "1_1"
+
+            Where spawnbot
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 15
+			WaitBetweenSpawns 12
+			TotalCurrency 25
+
+            Support 1
+
+            TFBot
+            {
+                Template T_TFBot_Armored_Scorch_Longburn
+            }
+        }
+
+        WaveSpawn   //  pyro flush support
+        {
+            Name "1_1"
+
+            WaitForAllDead "1_0"
+            
+            Where spawnbot
+			TotalCount 10
+			MaxActive 3
+			SpawnCount 2
+			WaitBeforeStarting 6
+			WaitBetweenSpawns 20
+			TotalCurrency 25
+
+            Support 1
+
+            TFBot
+            {
+                Template T_TFBot_Pyro_Longburn
+                Attributes AlwaysFireWeapon
+            }
+        }
+    }
+
+    //  Wave 02
+    //  Max Cash    -   500
+    //  Wave Cash   -   400
+
+    Wave    
+    {
+		StartWaveOutput
+		{
+			Target wave_start_endurance_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		WaitWhenDone 65
+		Checkpoint Yes
+
+        WaveSpawn   //  Giant scorch pyros with uber
+        {
+            Name "2_0"
+            Where spawnbot
+			TotalCount 4
+			MaxActive 4
+			SpawnCount 2
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 24
+			TotalCurrency 100
+
+            Squad
+            {
+                FormationSize 500
+
+                TFBot
+                {
+                    Template T_TFBot_Giant_Scorch_Longburn
+                }
+                TFBot
+                {
+                    Template T_TFBot_Medic_QuickUber
+                    Tag bot_squadmember
+                }
+            }
+        }
+        WaveSpawn   //  Incinerator heavies
+        {
+            Name "2_0"
+            Where spawnbot_mission_sniper
+			TotalCount 8
+			MaxActive 4
+			SpawnCount 2
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 18
+			TotalCurrency 50
+
+            TFBot
+            {
+                Template T_TFBot_Heavy_Incinerator
+            }
+        }
+        WaveSpawn   //  Final giant scorch pyro, no uber.
+        {
+            Name "2_1"
+            WaitForAllSpawned "2_0"
+            Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 6
+			WaitBetweenSpawns 0
+			TotalCurrency 25
+
+            TFBot
+            {
+                Template T_TFBot_Giant_Scorch_Longburn
+            }
+
+        }
+        WaveSpawn   //  Incinerator heavies with uber
+        {
+            Name "2_1"
+            WaitForAllSpawned "2_0"
+            Where spawnbot_mission_sniper
+			TotalCount 6
+			MaxActive 6
+			SpawnCount 2
+			WaitBeforeStarting 14
+			WaitBetweenSpawns 2
+			TotalCurrency 50
+
+            Squad
+            {
+                TFBot
+                {
+                    Template T_TFBot_Heavy_Incinerator
+                }
+                TFBot
+                {
+                    Template T_TFBot_Medic_QuickUber
+                    Tag bot_squad_member
+                }
+            }
+        }
+        WaveSpawn   //  Steel gauntlet support
+        {
+            Name "2_2"
+            Where spawnbot_mission_sniper
+			TotalCount 8
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 16
+			WaitBetweenSpawns 18
+			TotalCurrency 75
+
+            Support 1
+
+            TFBot
+            {
+                Template T_TFBot_Heavy_IronFist
+            }
+        }
+        WaveSpawn   //  Weak Tank
+        {
+			Name "2_TANK"
+			TotalCount 1
+			WaitBeforeStarting 0
+			TotalCurrency 100
+
+			Tank
+			{
+				Name Tank
+				Health 7500
+				Speed 74
+				StartingPathTrackNode "tankpath_alt"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+        }
+    }
+
+    //  Wave 03
+    //  Max Cash    -   1000
+    //  Wave Cash   -   400
+
+    Wave
+    {
+		StartWaveOutput
+		{
+			Target wave_start_endurance_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		WaitWhenDone 65
+		Checkpoint Yes
+
+        WaveSpawn   //  Pyros + uber
+        {
+            Name "3_0_A"
+            Where spawnbot
+			TotalCount 10
+			MaxActive 10
+			SpawnCount 10
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 45
+
+            Squad
+            {
+                TFBot
+                {
+                    Template T_TFBot_Pyro_Longburn
+                }
+                TFBot
+                {
+                    Template T_TFBot_Medic_QuickUber
+                    Tag bot_squad_member
+                }
+            }
+        }
+
+        WaveSpawn   //  Pyros + uber, alternate spawn
+        {
+            Name "3_0"
+
+            WaitForAllSpawned "3_0_A"
+
+            Where spawnbot_mission_sniper
+			TotalCount 8
+			MaxActive 8
+			SpawnCount 8
+			WaitBeforeStarting 22
+			WaitBetweenSpawns 0
+			TotalCurrency 45
+
+            Squad
+            {
+                TFBot
+                {
+                    Template T_TFBot_Pyro_Longburn
+                }
+                TFBot
+                {
+                    Template T_TFBot_Medic_QuickUber
+                    Tag bot_squad_member
+                }
+            }
+        }
+
+        WaveSpawn   //  Incinerator Scouts
+        {
+            Name "3_0_B"
+            Where spawnbot_mission_sniper
+			TotalCount 8
+			MaxActive 6
+			SpawnCount 4
+			WaitBeforeStarting 12
+			WaitBetweenSpawns 8
+			TotalCurrency 40
+
+            TFBot
+            {
+                Template T_TFBot_Scout_Incinerator
+            }
+        }
+
+        WaveSpawn   //  Incinerator Scouts, alternate spawn
+        {
+            Name "3_0"
+
+            WaitForAllSpawned "3_0_B"
+
+            Where spawnbot
+			TotalCount 8
+			MaxActive 6
+			SpawnCount 4
+			WaitBeforeStarting 12
+			WaitBetweenSpawns 8
+			TotalCurrency 40
+
+            TFBot
+            {
+                Template T_TFBot_Scout_Incinerator
+            }
+        }
+
+        WaveSpawn   //  Giant Incinerator Scouts
+        {
+            Name "3_giant_scouts"
+
+            WaitForAllDead "3_0"
+
+            Where spawnbot
+			TotalCount 3
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 7
+			WaitBetweenSpawns 0
+			TotalCurrency 30
+
+            TFBot
+            {
+                Template T_TFBot_Giant_Scout_Incinerator
+            }
+        }
+
+        WaveSpawn   //  Danmaku pyros
+        {
+            Name "3_support"
+
+            WaitForAllDead "3_0"
+
+            Where spawnbot
+			TotalCount 6
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 8
+			TotalCurrency 0
+
+            support 1
+
+            TFBot
+            {
+                Template T_TFBot_Armored_Scorch_Danmaku_Longburn
+            }
+        }
+
+        WaveSpawn   //  Weak Tank
+        {
+            WaitForAllDead "3_0"
+
+			Name "3_tank"
+			TotalCount 1
+			WaitBeforeStarting 0
+			TotalCurrency 100
+
+			Tank
+			{
+				Name Tank
+				Health 7500
+				Speed 74
+				StartingPathTrackNode "tankpath_alt"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+        }
+
+        WaveSpawn   //  SCOUT ARMY
+        {
+            Name "3_finale"
+
+            WaitForAllDead "3_giant_scouts"
+
+            Where spawnbot
+			TotalCount 10
+			MaxActive 10
+			SpawnCount 10
+			WaitBeforeStarting 8
+			WaitBetweenSpawns 0
+			TotalCurrency 50
+
+            TFBot
+            {
+                Template T_TFBot_Scout_Incinerator
+            }
+        }
+
+        WaveSpawn   //  Additional danmaku pyros
+        {
+            Name "3_support"
+
+            WaitForAllDead "3_giant_scouts"
+
+            Where spawnbot
+			TotalCount 3
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 10
+			TotalCurrency 20
+
+            support 1
+
+            TFBot
+            {
+                Template T_TFBot_Armored_Scorch_Danmaku_Longburn
+            }
+        }
+
+    }
+
+    Wave    //  Wave 04
+    {
+		StartWaveOutput
+		{
+			Target wave_start_endurance_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		WaitWhenDone 65
+		Checkpoint Yes
+
+        WaveSpawn   //  Pyros and bowmen
+        {
+            Name "4_1"
+            Where spawnbot
+			TotalCount 12
+			MaxActive 6
+			SpawnCount 3
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 6
+			TotalCurrency 0
+
+            Squad
+            {
+                FormationSize 50
+
+                TFBot
+                {
+                    Template T_TFBot_Sniper_Huntsman_Spammer_Longburn
+                    ItemAttributes
+                    {
+                        ItemName "The Huntsman"
+                        "fire rate bonus" 0.6
+                        "damage bonus" 0.5
+                    }
+                }
+                TFBot
+                {
+                    Template T_TFBot_Pyro_Longburn
+                    Attributes AlwaysFireWeapon
+                    Tag bot_squad_member
+                }
+                TFBot
+                {
+                    Template T_TFBot_Pyro_Longburn
+                    Attributes AlwaysFireWeapon
+                    Tag bot_squad_member
+                }
+            }
+        }
+
+        WaveSpawn   //  Incinerator knights
+        {
+            Name "4_0"
+            Where spawnbot_mission_sniper
+			TotalCount 15
+			MaxActive 5
+			SpawnCount 3
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 10
+			TotalCurrency 0
+
+            Support 1
+
+            TFBot
+            {
+                Template T_TFBot_Incinerator_Knight
+            }
+        }
+
+        WaveSpawn   //  Giant danmaku pyros
+        {
+            Name "4_2"
+
+            WaitForAllSpawned "4_1"
+
+            Where spawnbot
+			TotalCount 4
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 6
+			WaitBetweenSpawns 15
+			TotalCurrency 0
+
+            TFBot
+            {
+                Template T_TFBot_Giant_Scorch_Danmaku_Longburn
+            }
+        }
+
+        WaveSpawn   //  Pyro support
+        {
+            Name "4_0"
+            Where spawnbot_mission_sniper
+			TotalCount 15
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 12
+			WaitBetweenSpawns 10
+			TotalCurrency 0
+
+            Support 1
+
+            TFBot
+            {
+                Template T_TFBot_Pyro_Longburn
+                Attributes AlwaysFireWeapon
+            }
+        }
+
+        WaveSpawn   //  Incinerator heavies
+        {
+            Name "4_2"
+
+            WaitForAllSpawned "4_1"
+
+            Where spawnbot
+			TotalCount 6
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 12
+			TotalCurrency 0
+
+            TFBot
+            {
+                Template T_TFBot_Heavy_Incinerator
+            }
+        }
+    }
+
+    Wave    //  Wave 05
+    {
+		StartWaveOutput
+		{
+			Target wave_start_endurance_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		WaitWhenDone 65
+		Checkpoint Yes
+
+        WaveSpawn   //  Gas #1
+        {
+            Name "5_gas1"
+            Where spawnbot
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 2
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 100
+
+            Squad
+            {
+                FormationSize 500
+
+                TFBot
+                {
+                    Template T_TFBot_Giant_Pyro_Gas_Longburn
+                    Attributes AlwaysFireWeapon
+                }
+                TFBot
+                {
+                    Template T_TFBot_Giant_Medic_Regen
+                    Tag bot_squad_member
+                }
+            }
+        }
+
+        WaveSpawn   //  Gas #2
+        {
+            Name "5_gas2"
+
+            WaitForAllDead "5_gas1"
+
+            Where spawnbot
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 2
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 100
+
+            Squad
+            {
+                FormationSize 500
+
+                TFBot
+                {
+                    Template T_TFBot_Giant_Pyro_Gas_Longburn
+                    Attributes AlwaysFireWeapon
+                }
+                TFBot
+                {
+                    Template T_TFBot_Giant_Medic_Regen  // Possibly replace with 2 armored bigheal medics
+                    Tag bot_squad_member
+                }
+            }
+        }
+
+        WaveSpawn   //  Incinerator scout rush
+        {
+            Name "5_scout"
+            Where spawnbot
+			TotalCount 10
+			MaxActive 6
+			SpawnCount 5
+			WaitBeforeStarting 16
+			WaitBetweenSpawns 16
+			TotalCurrency 50
+
+            TFBot
+            {
+                Template T_TFBot_Scout_Incinerator
+                Skill Normal
+            }
+
+        }
+
+        WaveSpawn   //  Incinerator heavies
+        {
+            Name "5_support"
+
+            WaitForAllDead "5_gas1"
+
+            Where spawnbot_mission_sniper
+			TotalCount 10
+			MaxActive 4
+			SpawnCount 2
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 12
+			TotalCurrency 150
+
+            Support 1
+
+            Squad
+            {
+                TFBot
+                {
+                    Template T_TFBot_Heavy_Incinerator
+                    Skill Hard
+                }
+                TFBot
+                {
+                    Template T_TFBot_Medic_QuickUber    // Need variant of uber medic that dies if its pocket dies?? Remote uber medic?
+                    Tag bot_squad_member
+                }
+            }
+        }
+    }
+
+    Templates
+    {
+        //Appropriate weapon skins:
+        //Organ-ically Hellraised
+        //Hazard Warning
+
+        //Cool hats:
+        //Heavy - Mad Mask
+        //Heavy - Big Steel Jaw Of Summer Fun
+        //Heavy - The Eliminators Safeguard
+        //Demo  - Blast Protection
+
+        T_TFBot_Scout_Incinerator
+        {
+            Name "Incinerator Scout"
+            Class Scout
+            Skill Easy
+            MaxVisionRange 1200
+            WeaponRestrictions PrimaryOnly
+
+            Item "concealedkiller_scattergun_nightterror"
+            ItemAttributes
+            {
+                ItemName "concealedkiller_scattergun_nightterror"
+                "damage bonus vs burning" 11
+                "crit vs burning players" 1
+                "ragdolls become ash" 1
+                "attach particle effect" 13
+            }
+
+            Item "Big Steel Jaw Of Summer Fun"
+            Item "Death Racer's Helmet"
+            ItemAttributes
+            {
+                ItemName "Death Racer's Helmet"
+                "set item tint rgb" 2960676
+                "attach particle effect" 44
+                "particle effect use head origin" 1
+            }
+
+        }
+        T_TFBot_Giant_Scout_Incinerator
+		{
+			Class Scout
+			Name "Giant Incinerator Scout"
+			ClassIcon scout_giant
+			Skill Expert
+            MaxVisionRange 1200
+			Health 1600
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+                        
+            Item "concealedkiller_scattergun_nightterror"
+            ItemAttributes
+            {
+                ItemName "concealedkiller_scattergun_nightterror"
+                "damage bonus vs burning" 11
+                "crit vs burning players" 1
+                "ragdolls become ash" 1
+                "attach particle effect" 13
+            }
+            Item "Big Steel Jaw Of Summer Fun"
+            Item "Death Racer's Helmet"
+            ItemAttributes
+            {
+                ItemName "Death Racer's Helmet"
+                "set item tint rgb" 2960676
+                "attach particle effect" 44
+                "particle effect use head origin" 1
+            }
+			CharacterAttributes
+			{
+				"damage force reduction" 0.7
+				"airblast vulnerability multiplier" 0.7
+				"override footstep sound set" 5
+			}
+		}
+        T_TFBot_Heavy_Incinerator
+        {
+            Name "Incinerator Heavy"
+            Class Heavyweapons
+            Skill Easy
+            MaxVisionRange 1200
+
+            Item "Iron Curtain"
+            ItemAttributes
+            {
+                ItemName "Iron Curtain"
+                "damage bonus vs burning" 11
+                "crit vs burning players" 1
+                "ragdolls become ash" 1
+                "minigun spinup time increased" 1.5
+                "attach particle effect" 13
+            }
+
+            Item "Big Steel Jaw Of Summer Fun"
+            Item "The Eliminators Safeguard"
+            ItemAttributes
+            {
+                ItemName "The Eliminators Safeguard"
+                "attach particle effect" 44
+            }
+
+        }
+        T_TFBot_Giant_Heavy_Incinerator
+        {
+            Name "Giant Incinerator Heavy"
+            ClassIcon heavy_giant
+            Class Heavyweapons
+            Skill Expert
+            WeaponRestrictions PrimaryOnly
+            Health 5000
+            MaxVisionRange 1200
+            Attributes MiniBoss
+            
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.3
+				"airblast vulnerability multiplier" 0.3
+				"override footstep sound set" 2
+			}
+            
+            Item "Iron Curtain"
+            ItemAttributes
+            {
+                ItemName "Iron Curtain"
+                "damage bonus vs burning" 11
+                "crit vs burning players" 1
+                "ragdolls become ash" 1
+                "minigun spinup time increased" 1.5
+                "attach particle effect" 13
+            }
+
+            Item "Big Steel Jaw Of Summer Fun"
+            Item "The Eliminators Safeguard"
+            ItemAttributes
+            {
+                ItemName "The Eliminators Safeguard"
+                "attach particle effect" 44
+            }
+        }
+        T_TFBot_Sniper_Incinerator
+        {
+            Name "Incinerator Sniper"
+            Class Sniper
+            Skill Normal
+            MaxVisionRange 2500
+            Item "Big Steel Jaw Of Summer Fun"
+            ItemAttributes
+            {
+                ItemName "TF_WEAPON_SNIPERRIFLE"
+                "damage bonus vs burning" 11
+                "crit vs burning players" 1
+                "ragdolls become ash" 1
+                "attach particle effect" 13            //  Burning Flames
+            }
+            CharacterAttributes
+            {
+                "damage bonus" 0.75
+            }
+
+        }
+        T_TFBot_Sniper_Incinerator_Razorback
+        {
+            Name "Incinerator Sniper"
+            Class Sniper
+            Skill Normal
+            MaxVisionRange 2500
+            Item "Big Steel Jaw Of Summer Fun"
+            Item "The Razorback"
+            Item "Letch's LED"
+            ItemAttributes
+            {
+                ItemName "Letch's LED"
+                "attach particle effect" 44
+            }
+            ItemAttributes
+            {
+                ItemName "TF_WEAPON_SNIPERRIFLE"
+                "damage bonus vs burning" 11
+                "crit vs burning players" 1
+                "ragdolls become ash" 1
+                "attach particle effect" 13            //  Burning Flames
+
+            }
+            CharacterAttributes
+            {
+                "damage bonus" 0.75
+            }
+
+        }
+        T_TFBot_Incinerator_Knight
+		{
+			Class Demoman
+			Name "Incinerator Knight"
+			ClassIcon demoknight
+			Skill Hard
+			Scale 1.3
+			Health 400
+			Item "The Chargin' Targe"
+			Item "The Eyelander"
+            Item "Blast Defense"
+			WeaponRestrictions MeleeOnly
+			ItemAttributes
+			{
+				ItemName "The Eyelander"
+				"max health additive penalty" -0
+                "damage bonus vs burning" 11
+                "crit vs burning players" 1
+                "ragdolls become ash" 1
+                "attach particle effect" 13            //  Burning Flames
+			}
+            ItemAttributes
+            {
+                ItemName "Blast Defense"
+                "attach particle effect" 44
+                "particle effect use head origin" 1
+            }
+            CharacterAttributes
+            {
+                "Attack not cancel charge" 1
+				//"speed_boost_on_hit_enemy" 10
+				"move speed bonus" 0.65
+				"charge time increased" 10
+				"charge recharge rate increased" 2
+				"bot custom jump particle"	0
+            }
+		}
+        T_TFBot_Sniper_Ignition
+        {
+            Name "Heater Sniper"
+            Class Sniper
+            Skill Hard
+            MaxVisionRange 2500
+
+            ItemAttributes
+            {
+                ItemName "TF_WEAPON_SNIPERRIFLE"
+                "attach particle effect" 13
+            }
+            CharacterAttributes
+            {
+                "damage bonus" 0.1
+                "Set DamageType Ignite" 1
+            }
+
+        }
+        T_TFBot_Sniper_Huntsman_Spammer_Longburn
+		{
+			Class Sniper
+			Name "Bowman Rapid Fire"
+			Item "The Huntsman"
+			ClassIcon sniper_bow_multi
+			Skill Hard
+			Health 1200
+			"scale" 1.5
+			ItemAttributes
+			{
+				ItemName "The Huntsman"
+				"fire rate bonus" 0.6
+                "damage bonus" 0.5
+			}
+			CharacterAttributes
+			{
+				"head scale" 0.7
+				"move speed bonus"	0.85
+                "weapon burn time increased" 4.0
+                "weapon burn dmg reduced" 0.25
+			}
+		}
+        T_TFBot_Pyro_Longburn
+        {
+            Class Pyro
+            Skill Easy
+            CharacterAttributes
+            {
+                "weapon burn time increased" 4.0
+                "weapon burn dmg reduced" 0.25
+            }
+        }
+        T_TFBot_Flaregun_Longburn
+        {
+            Name "Flare Pyro"
+            ClassIcon pyro_flare
+			Class Pyro
+			Skill Normal
+			Item "The Flare Gun"
+			WeaponRestrictions SecondaryOnly
+            CharacterAttributes
+            {
+                "weapon burn time increased" 4.0
+                "weapon burn dmg reduced" 0.25
+            }
+        }
+        T_TFBot_Armored_Flaregun_Longburn
+        {
+            Name "Armored Flare Pyro"
+            ClassIcon pyro_flare
+			Class Pyro
+			Skill Normal
+            Health 400
+            Scale 1.4
+			Item "The Flare Gun"
+			WeaponRestrictions SecondaryOnly
+            CharacterAttributes
+            {
+                "weapon burn time increased" 4.0
+                "weapon burn dmg reduced" 0.25
+                "move speed bonus"	0.8
+            }
+        }
+        T_TFBot_Armored_Scorch_Longburn
+        {
+            Name "Armored Scorch Pyro"
+            ClassIcon pyro_scorch
+			Class Pyro
+			Skill Normal
+            Health 400
+            Scale 1.4
+            WeaponRestrictions SecondaryOnly
+			Item "The Scorch Shot"
+            ItemAttributes
+            {
+                ItemName "The Scorch Shot"
+                "projectile speed decreased" 0.5 //0.75 was enough for soldier to dodge without move speed
+            }
+            CharacterAttributes
+            {
+                "weapon burn time increased" 4.0
+                "weapon burn dmg reduced" 0.25
+                "move speed bonus"	0.8
+            }
+        }
+        T_TFBot_Armored_Scorch_Spammer_Longburn
+        {
+            Name "Rapid-Fire Scorch Pyro"
+            ClassIcon pyro_flare
+			Class Pyro
+			Skill Normal
+            Health 400
+            Scale 1.4
+            WeaponRestrictions SecondaryOnly
+			Item "The Scorch Shot"
+            ItemAttributes
+            {
+                ItemName "The Scorch Shot"
+                "projectile speed decreased" 0.5
+                "fire rate bonus" 0.3
+            }
+            CharacterAttributes
+            {
+                "weapon burn time increased" 4.0
+                "weapon burn dmg reduced" 0.25
+                "move speed bonus"	0.8
+            }
+        }
+        T_TFBot_Armored_Scorch_Danmaku_Longburn
+        {
+			Name	"Armored Danmaku Pyro"
+            ClassIcon	pyro_scorch
+            Class	Pyro
+			Skill	Normal
+			Health	600
+            Scale 1.4
+			WeaponRestrictions	SecondaryOnly
+
+			Item "The Scorch Shot"
+            ItemAttributes
+            {
+                ItemName "The Scorch Shot"
+                "projectile speed decreased" 0.2
+                "fire rate bonus" 0.1
+            }
+            CharacterAttributes
+            {
+                "weapon burn time increased" 4.0
+                "weapon burn dmg reduced" 0.25
+  				"move speed bonus"	0.8
+            }
+		}
+        T_TFBot_Armored_Pyro_Gas_Longburn
+		{
+            Name "Armored Gas Pyro"
+			ClassIcon pyro_gascann
+			Class Pyro
+			Skill Normal
+            Health 400
+            Scale 1.4
+			WeaponRestrictions SecondaryOnly
+            Attributes SpawnWithFullCharge
+            Attributes AlwaysFireWeapon
+            Item "The Gas Passer"
+            ItemAttributes
+            {
+                ItemName "The Gas Passer"
+                "item_meter_charge_rate" 0.5
+                "fire rate penalty" 4.7
+            }
+			CharacterAttributes
+			{
+				"move speed bonus"	0.75 //  Slow
+                "weapon burn time increased" 4.0
+                "weapon burn dmg reduced" 0.25
+			}
+		}
+        T_TFBot_Giant_Pyro_Longburn
+		{
+			Class Pyro
+			Name "Giant Pyro"
+			ClassIcon pyro_giant
+			Skill Expert
+			Health 3000
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+            Attributes AlwaysFireWeapon
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.6
+				"airblast vulnerability multiplier" 0.6
+				"override footstep sound set" 6
+                "weapon burn time increased" 4.0
+                "weapon burn dmg reduced" 0.25
+			}
+		}
+        T_TFBot_Giant_Pyro_Gas_Longburn
+		{
+			Class Pyro
+			Name "Giant Gas Pyro"
+			ClassIcon pyro_gascann
+			Skill Normal
+			Health 3000
+			WeaponRestrictions SecondaryOnly
+			Attributes MiniBoss
+            Attributes SpawnWithFullCharge
+            Item "The Gas Passer"
+            ItemAttributes
+            {
+                ItemName "The Gas Passer"
+                "item_meter_charge_rate" 0.5
+                "fire rate penalty" 4.7
+            }
+			CharacterAttributes
+			{
+				"move speed bonus"	0.35 //  Very slow
+				"damage force reduction" 0.6
+				"airblast vulnerability multiplier" 0.6
+				"override footstep sound set" 6
+                "weapon burn time increased" 4.0
+                "weapon burn dmg reduced" 0.25
+			}
+		}
+        T_TFBot_Giant_Pyro_Fireblast
+        {
+			Name	"Giant Fireblast Pyro"
+            ClassIcon	pyro_giant
+            Class	Pyro
+			Skill	Expert
+			Health	3000
+			WeaponRestrictions	PrimaryOnly
+			MaxVisionRange	800
+			
+			Attributes	"MiniBoss"
+
+			Item	"The Dragon's Fury"
+			ItemAttributes
+			{
+				ItemName	"The Dragon's Fury"
+                "override projectile type" 2
+                "weapon burn time increased" 4.0
+                "weapon burn dmg reduced" 0.25
+			}
+			
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction"	0.6
+				"airblast vulnerability multiplier"	0.6
+				"override footstep sound set"	6
+			}
+		}
+        T_TFBot_Giant_Soldier_Fireblast
+        {
+			Name	"Giant Fireblast Soldier"
+            ClassIcon	pyro_giant
+            Class	Soldier
+			Skill	Expert
+			Health	3800
+			WeaponRestrictions	PrimaryOnly
+			MaxVisionRange	800
+			
+			Attributes	"MiniBoss"
+
+			Item	"The Original"
+			ItemAttributes
+			{
+				ItemName	"The Original"
+                "override projectile type" 21
+                "weapon burn time increased" 4.0
+                "weapon burn dmg reduced" 0.25
+			}
+			
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction"	0.6
+				"airblast vulnerability multiplier"	0.6
+				"override footstep sound set"	6
+			}
+		}
+        T_TFBot_Giant_Scorch_Longburn
+        {
+			Name	"Giant Scorch Pyro"
+            ClassIcon	pyro_scorch
+            Class	Pyro
+			Skill	Expert
+			Health	3000
+			WeaponRestrictions	SecondaryOnly
+			
+			Attributes	"MiniBoss"
+
+			Item "The Scorch Shot"
+            ItemAttributes
+            {
+                ItemName "The Scorch Shot"
+                "projectile speed decreased" 0.5 //0.75 was enough for soldier to dodge without move speed
+                "fire rate bonus" 0.3
+                "weapon burn time increased" 4.0
+                "weapon burn dmg reduced" 0.25
+            }
+            CharacterAttributes
+            {
+  				"move speed bonus"	0.5
+				"damage force reduction"	0.6
+				"airblast vulnerability multiplier"	0.6
+				"override footstep sound set"	6
+            }
+		}
+        T_TFBot_Giant_Scorch_Danmaku_Longburn
+        {
+			Name	"Giant Scorch Spammer"
+            ClassIcon	pyro_scorch
+            Class	Pyro
+			Skill	Expert
+			Health	3000
+			WeaponRestrictions	SecondaryOnly
+			
+			Attributes	"MiniBoss"
+
+			Item "The Scorch Shot"
+            ItemAttributes
+            {
+                ItemName "The Scorch Shot"
+                "projectile speed decreased" 0.2
+                "fire rate bonus" 0.1
+                "weapon burn time increased" 4.0
+                "weapon burn dmg reduced" 0.25
+            }
+            CharacterAttributes
+            {
+  				"move speed bonus"	0.5
+				"damage force reduction"	0.6
+				"airblast vulnerability multiplier"	0.6
+				"override footstep sound set"	6
+            }
+		}
+        T_TFBot_Giant_Scorch_Burstfire_Longburn
+        {
+			Name	"Giant Scorch Burst-Fire"
+            ClassIcon	pyro_scorch
+            Class	Pyro
+			Skill	Expert
+			Health	3000
+			WeaponRestrictions	SecondaryOnly
+			
+			Attributes  MiniBoss
+            Attributes  HoldFireUntilFullReload
+
+            ItemAttributes
+            {
+                ItemName "TF_WEAPON_SHOTGUN"
+                "override projectile type" 6
+                "projectile speed decreased" 0.5
+                "faster reload rate" 0.5 //50% increase
+                "fire rate bonus" 0.1
+				"clip size upgrade atomic" 8.0
+                "projectile spread angle penalty" 5
+
+                //Mimic scorch shot
+                "damage bonus" 0.33
+                "Set DamageType Ignite" 1
+                //"crit vs burning players" 0
+                //"minicrit vs burning player" 1
+
+                "weapon burn time increased" 4.0
+                "weapon burn dmg reduced" 0.25
+            }
+            CharacterAttributes
+            {
+  				"move speed bonus"	0.5
+				"damage force reduction"	0.6
+				"airblast vulnerability multiplier"	0.6
+				"override footstep sound set"	6
+            }
+		}
+        T_TFBot_Heavy_IronFist
+		{
+			Class Heavyweapons
+			Name "Steel Gauntlet Pusher"
+			ClassIcon heavy_steelfist
+			Health 900
+			Scale 1.5
+			WeaponRestrictions MeleeOnly			
+			Skill Expert	
+			Item "Fists of Steel"				
+		}
+    }
+}
+
+//  SOME SWAVE IDEAS
+
+//Giant pyro (standard, scorch or fireball launching) supported by legion of incinerator snipers.
+//Steel gauntlet support to partially counter sentry-camping the sniper spot. This should not be an outright counter, as camping the sniper spawns is a valid tactic, however, this just makes it more complicated to do so.
+
+//Army of pyros with uber medics, followed by army of incinerator scouts.
+
+//Incinerator heavies with uber medics + armored scorch danmaku pyros?
+
+//Giant blast soldier with uber flings everyone around and throws them into pyros.
+
+//Pyros with uber and giant incinerator sniper
+
+//Some wave breaks with standard robots?
+
+//Is it possible to create multiple bombs on waterfront? A giant soldier spammer takes one route while the incinerator bros take the other route?
+
+//Ignition heater heavies with incinerator demoknights.
+
+//  SOME BOT IDEAS:
+
+//Armored incinerator scout: A min-giant scout that moves slightly slower but has the incinerator properties.
+
+//Armored danmaku pyro: A min-giant scourch shot pyro that rapid fires slow-moving flares.
+
+//Giant Burst-fire Scorch Pyro: A giant pyro that fires scorch shots in shotgun bursts with fast projectiles. Intention is to ignite entire team.
+
+//Fast pyro: Pyro but fast
+
+//Incinerator Demoknight Longcharge: A mini-giant demoknight that has low charge speed but a long charge distance and good charge control. They have incinerator properties.
+
+//Inceinerator rapid-fire bowman: The standard rapid-fire bowman min-giant except with incinerator properties

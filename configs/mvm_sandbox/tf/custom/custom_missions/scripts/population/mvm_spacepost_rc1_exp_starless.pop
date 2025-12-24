@@ -1,0 +1,1103 @@
+// Starless, a one-wave endurance mission by Seelpit
+// I Don't Care About You difficulty
+// aka I get to use whatever I want
+
+// spawnbot names:
+// spawnbot, spawnbot_upper (side), spawnbot_boss (wormhole; needs wormhole enabled to work!!!)
+// spawnbot_mission_sniper (side), spawnbot_mission_sentrybuster (both spawns)
+// Relays:
+// wormhole_start_relay (opens wormhole; can only be triggered once!!), pit_open_relay (opens pit)
+// pit_close_relay (closes pit), wormhole_end_relay (removes wormhole)
+// boss_deploy_relay (explodes hatch)
+// Tanks need to follow tank_path_a_1 and be named tankboss
+
+#base robot_giant.pop
+#base robot_standard.pop
+
+NoMore
+{
+	StartingCurrency 250
+	RespawnWaveTime	4
+	CanBotsAttackWhileInSpawnRoom Yes
+	AddSentryBusterWhenDamageDealtExceeds 2000
+	AddSentryBusterWhenKillCountExceeds	10
+	Advanced 1
+	Templates
+	{
+		
+		///////////////////////////////////////////////////////////////////
+		///////////////////////		Common Bots		///////////////////////
+		///////////////////////////////////////////////////////////////////
+		
+		//An unmodified Force-a-Nature Scout. Surprisingly powerful!
+		T_TFBot_Scout_FaN_Seel
+		{
+			Class Scout
+			Name "Force-a-Nature Scout"
+			Skill Hard
+			ClassIcon scout_fan
+			Item "The Force-a-Nature"
+		}
+		
+		T_TFBot_Soldier_Bison_Whip
+		{
+			Class Soldier
+			Name "Bison Whip Soldier"
+			Attributes AlwaysCrit
+			Item "The Disciplinary Action"
+			Item "The Righteous Bison"
+			Skill Hard
+			ClassIcon soldier_bison_spammer
+			WeaponRestrictions SecondaryOnly
+			ItemAttributes
+			{
+				ItemName "The Righteous Bison"
+				"faster reload rate" 0
+				"fire rate bonus" 0.3
+				"dmg bonus vs buildings" 5
+			}
+			ItemAttributes
+			{
+				ItemName "The Disciplinary Action"
+				"is_passive_weapon" 1
+			}
+		}
+		//A slowing pyro!
+		T_TFBot_Pyro_Slowdown
+		{
+			Class Pyro
+			Name "Slowing Pyro"
+			Skill Hard
+			Attributes AlwaysFireWeapon
+			ClassIcon pyro_slowdown
+			Item "powerhouse_flamethrower_turbinetorcher"
+			ItemAttributes
+			{
+				ItemName "powerhouse_flamethrower_turbinetorcher"
+				"slow enemy on hit" 1
+				"slow enemy on hit major" 2
+				"flame_drag" 6
+			}
+		}
+		//A Phlog Pyro! Can't really reflect, but *can* boost up when it tries to!
+		T_TFBot_Pyro_Phlog
+		{
+			Class Pyro
+			Skill Expert
+			Name "Phlogistinator Pyro"
+			Item "The Phlogistinator"
+			Item "The Bubble Pipe"
+			Attributes SpawnWithFullCharge
+			ClassIcon pyro_phlog
+			CharacterAttributes
+			{
+				"gesture speed increase" 1.5 //faster
+			}
+		}
+		//A smaller, spammier version of the Giant Flare Pyro!
+		T_TFBot_Pyro_Flare_Infinite
+		{
+			Name "Rapid Fire Flare Pyro"
+			Class Pyro
+			Item "The Flare Gun"
+			Item "Old Guadalajara"
+			Skill Expert
+			Health 175
+			ClassIcon pyro_flare_infinite
+			WeaponRestrictions SecondaryOnly
+			ItemAttributes
+			{
+				ItemName "The Flare Gun"
+				"faster reload rate" 0.25
+			}
+		}
+		//A smaller version of the *real* Rapid Fire Demo!
+		T_TFBot_Demoman_Spammer
+		{
+			Class Demoman
+			Skill Expert
+			Name "Rapid Fire Demo"
+			Item "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+			Item "The Broadband Bonnet"
+			ClassIcon demo_spammer
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+				"fire rate bonus" 0.75
+				"faster reload rate" 0
+			}
+		}
+		//Tomislav Heavies: great accuracy and a short spinup time!
+		T_TFBot_Heavy_Tomislav
+		{
+			Class Heavyweapons
+			Name "Black Market Heavy"
+			Skill Expert
+			Item "Tomislav"
+			Item "Capone's Capper"
+			ClassIcon heavy_accurate_lite
+			ItemAttributes
+			{
+				ItemName "Tomislav"
+				"weapon spread bonus" 0.5
+				"minigun spinup time decreased" 0.5
+			}
+		}
+		
+		//QFix Medic that always ubers.
+		//Heals at the same rate as a fully ramped-up QFix ubercharge!
+		//But, it only heals itself half as fast!
+		T_TFBot_Medic_SuperHeal
+		{
+			Name "Superheal Medic"
+			Class Medic
+			Skill Expert
+			Item "The Quick-Fix"
+			Attributes SpawnWithFullCharge
+			ClassIcon medic_infpop
+			ItemAttributes
+			{
+				ItemName "The Quick-Fix"
+				"heal rate bonus" 4.17 //Base 300 HP/sec heals
+				"overheal penalty" 0.001
+				"health from healers reduced" 0.5 //150 HP/sec selfheal
+				"uber duration bonus" -9 //Infinite uber duration
+			}
+			CharacterAttributes
+			{
+				"bot medic uber health threshold" 160
+			}
+		}
+		//A Shield-only Medic, from Rotten Resurgence!
+		T_TFBot_Medic_ShieldOnly
+		{
+            Class Medic
+            ClassIcon medic_shield_lite
+            Name "Shield Medic"
+            Skill Expert
+            WeaponRestrictions SecondaryOnly
+            Attributes SpawnWithFullCharge
+            Attributes ProjectileShield
+            Attributes IgnoreEnemies
+            Item "Titanium Tyrolean"
+            Item "The Buff Banner" //this does some funky stuff
+            ItemAttributes
+            {
+                ItemName "TF_WEAPON_MEDIGUN"
+                "ubercharge rate penalty" -3
+                "generate rage on heal" 2
+                "increase buff duration" 999
+            }
+            CharacterAttributes
+            {
+                "bot medic uber health threshold" 25
+                "bot medic uber deploy delay duration" 9999
+                "mod soldier buff type" 5
+                "deploy time increased" 1.34
+            }
+		}
+		
+		///////////////////////////////////////////////////////////////////
+		///////////////////////		Giant Bots		///////////////////////
+		///////////////////////////////////////////////////////////////////
+		
+		//A Giant Blaster Scout! Can move fast while still packing something of a punch!
+		T_TFBot_Giant_Scout_Blaster
+		{
+			Template T_TFBot_Giant_Scout
+			Name "Giant Blaster Scout"
+			Item "The Baby Face's Blaster"
+			Item "Dillinger's Duffel"
+			ClassIcon scout_blaster_nys
+			ItemAttributes
+			{
+				ItemName "The Baby Face's Blaster"
+				"mod rage on hit penalty" 100 //100% more hype per point of damage
+				"lose hype on take damage" 0
+				"hype resets on jump" 0
+				"weapon spread bonus" 0.6
+				"faster reload rate" 0
+			}
+		}
+		//A large Pocket Pistol Scout!
+		//Can heal an awful lot quite quickly. Dodge it!
+		T_TFBot_Giant_Scout_PocketPistol
+		{
+			Template T_TFBot_Giant_Scout
+			Name "Giant Pocket Pistol Scout"
+			Skill Hard
+			WeaponRestrictions SecondaryOnly
+			ClassIcon scout_pocketpistol_heal_lite
+			Item "Pretty Boy's Pocket Pistol"
+			Item "Fortunate Son"
+			ItemAttributes
+			{
+				ItemName "Pretty Boy's Pocket Pistol"
+				"heal on hit for rapidfire" 60
+				"faster reload rate" 0.1
+			}
+		}
+		
+		T_TFBot_Giant_Soldier_Burst_Direct
+		{
+			Template T_TFBot_Giant_Soldier
+			Name "Giant Burst Direct Soldier"
+			Item "The Direct Hit"
+			ClassIcon soldier_directhit_spammer
+			ItemAttributes
+			{
+				ItemName "The Direct Hit"
+				"fire rate bonus" 0.1
+				"projectile speed increased" 1.1 //more or less 60% slower
+				"faster reload rate" 0.6
+				"clip size upgrade atomic" 5
+			}
+		}
+		T_TFBot_Giant_Soldier_Barrage_Infinite
+		{
+			Name "Giant Infinite Barrage Soldier"
+			Health 4400
+			Class Soldier
+			Skill Expert
+			Attributes MiniBoss
+			ClassIcon soldier_barrage_infinite
+			ItemAttributes
+			{
+				ItemName "tf_weapon_rocketlauncher"
+				"faster reload rate" -0.8
+				"fire rate bonus" 0.15
+				"Projectile speed increased" 0.4
+				"projectile spread angle penalty" 5
+				"damage bonus" 1.5
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"damage force reduction" 0.4
+				"airblast vulnerability multiplier" 0.4
+				"override footstep sound set" 3
+				"health regen" 40
+			}
+		}
+		
+		T_TFBot_Giant_Pyro_BigFire
+		{
+			Class Pyro
+			Name "Giant Spread Fire Pyro"
+			ClassIcon pyro_bigfire
+			Skill Expert
+			Health 3300
+			Attributes MiniBoss
+            Attributes AlwaysFireWeapon
+            Item "Firewall Helmet"
+            Item "The Backburner"
+            ItemAttributes
+            {
+                ItemName "The Backburner"
+                "flame_drag" 4.25 //double range
+                "flame_spread_degree" 5.6 //double spread
+				"damage bonus" 1.25
+            }
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.3
+			}
+		}
+		
+		T_TFBot_Giant_Heavy_BoosterHeal
+		{
+			Template T_TFBot_Giant_Heavyweapons
+			Name "Giant Healing Booster Heavy"
+			ClassIcon heavy_heal_booster
+			Health 5500
+			Item "harvest_minigun_macabreweb"
+			Item "The Tungsten Toque"
+			ItemAttributes
+			{
+				ItemName "harvest_minigun_macabreweb"
+				"critboost on kill" 5
+				"heal on hit for rapidfire" 20
+				"restore health on kill" 40
+				"damage bonus" 1.5
+			}
+			CharacterAttributes
+			{
+				"health regen" 25
+			}
+		}
+		
+		//A 75% resist Giant Vacc medic. Their bubbles basically don't disappear.
+		T_TFBot_Giant_Medic_Vacc_Bullet
+		{
+			Class Medic
+			Skill Expert
+			Name "Giant Bullet Vaccinator Medic"
+			Health 4500
+			ClassIcon medic_bullet
+			Attributes MiniBoss
+			Attributes SpawnWithFullCharge
+			Item "gentlemanne_medigun_coffinnail"
+			Item "Commando Elite"
+			ItemAttributes
+			{
+				ItemName "gentlemanne_medigun_coffinnail"
+				"heal rate bonus" 250
+				"medigun charge is resists" 3
+				"lunchbox adds minicrits" 3
+				"medigun bullet resist passive" 0.75
+				"medigun bullet resist deployed" 0.75
+				"ubercharge rate bonus" 200
+				"uber duration bonus" 99
+				"bot medic uber health threshold" 33333
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.6
+				"damage force reduction" 0.1
+				"rage giving scale" 0.1 //too easy of a target to exploit
+				"health regen" 40
+			}
+		}
+	}
+	
+	//Overview
+	//Generally, keep team busy with multiple tasks!
+	//Do NOT let Heavy stomp things too hard, but don't go too out of your way for that either
+	
+	//Subwave 1 - check if you can handle everything
+	//- Tank
+	//- Giant Infinite Barrage Soldier + Superheal Medics
+	//- Giant Scout
+	//- Phlog Pyros
+	//- Force-a-Nature Scouts (no stats)
+	
+	//Subwave 2 - focus on swarms
+	//- Tomislav Heavies
+	//- Rapid Fire Demos
+	
+	//Subwave 3 - focus on giants: don't get killed by the heavy!
+	//- Giant Healing Booster Heavy
+	//- Giant Spread Fire Pyro
+	
+	//Subwave 4 - forward-spawning tank + speedy giants
+	//- Tele-in Tank
+	//- Giant Blaster Scout
+	//- Bison Whip Soldier (rapidfire + passive whip)
+	
+	//Subwave 5 - It's Called Synergy
+	//- Giant Burst Direct Soldier + Giant Bullet Vaccinator Medic
+	//- Slowing Pyros + Rapid Fire Demos
+	
+	//Subwave 6 - Squads, Squads, Squads
+	//- Shield Medic + Phlog Pyros (shield med is leader!)
+	//- Tomislav Heavies + Uber Medic (1 gets pocketed, 1 up front)
+	//- End: Giant Pocket Pistol Scout
+	
+	//Subwave 7 - A boss? TWO bosses? THREE bosses?
+	//- Tank
+	//- Great Void - Chief Bonk! Scout (forces highly focused DPS)
+	//- Bullet Cluster - Chief Healing Booster Heavy
+	//- What Lies Beyond - Chief Barrage Soldier (passive shotgun that fires a fast rocket, like in Discordant)
+	
+	//- Support: Giant Concheror Heavy, Rapid Flare Pyros
+	//- Mission support: Blast-Sapper Busters, Overclocked Engineers, Natascha Heavies (sniper)
+	
+	Mission
+	{
+		Objective DestroySentries
+		Where spawnbot_mission_sentrybuster
+		BeginAtWave	1
+		RunForThisManyWaves	1
+		InitialCooldown 5
+		CooldownTime 40
+		DesiredCount 1
+		TFBot
+		{
+			Template T_TFBot_SentryBuster
+			Class Spy
+			WeaponRestrictions SecondaryOnly
+			Name "Blast-Sapper Buster"
+			Item "The Ap-Sap"
+			Item "Bootleg Base Metal Billycock"
+			Attributes AlwaysFireWeapon
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_REVOLVER"
+				"override projectile type" 2
+				"damage bonus" 2.25
+				"damage blast push" 6
+				"is_passive_weapon" 1
+				"fire rate penalty" 4
+				"projectile speed increased" 0.75
+			}
+			ItemAttributes
+			{
+				ItemName "The Ap-Sap"
+				"sapper degenerates buildings" 0.9
+			}
+			CharacterAttributes
+			{
+				"cannot disguise" 1
+				"damage force reduction" 0
+				"airblast vulnerability multiplier" -0.3
+				"rage giving scale" 0.1 //too easy of a target to exploit
+			}
+		}
+	}
+	Mission
+	{
+		Objective Sniper
+		Where spawnbot_mission_sniper
+		BeginAtWave	1
+		RunForThisManyWaves	1
+		InitialCooldown	60
+		CooldownTime 48
+		DesiredCount 1
+		TFBot
+		{
+			Class Heavy
+			Name "Backup Natascha Heavy"
+			Skill Expert
+			// ClassIcon heavy_natascha_nys
+			ClassIcon heavy_giant
+			Item "Natascha"
+			Item "Well-Rounded Rifleman"
+			Item "The Battalion's Backup"
+			Attributes SpawnWithFullCharge
+			CharacterAttributes
+			{
+				"increase buff duration" 9
+			}
+		}
+	}
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_relay //that's right, unresettable bomb
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay_boss
+			Action	Trigger
+		}
+			
+		//Subwave 1 - check if you can handle everything - 566$
+		//- Tank
+		//- Giant Infinite Barrage Soldier + Superheal Medic
+		//- Giant Scout
+		//- Phlog Pyros
+		//- Force-a-Nature Scouts (no stats)
+		WaveSpawn
+		{
+			Name "wave1a1"
+			TotalCount 1
+			TotalCurrency 300
+			Tank
+			{
+				Health 15000
+				Name "tankboss"
+				Speed 75
+				StartingPathTrackNode tank_path_a_1
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave1a"
+			Where	spawnbot
+			Where	spawnbot_upper
+			WaitBeforeStarting	10.5
+			TotalCount	8
+			MaxActive	3
+			SpawnCount	2
+			TotalCurrency 160
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Barrage_Infinite
+					ClassIcon soldier_giant
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_SuperHeal
+					ClassIcon medic
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave1a2"
+			WaitBeforeStarting 7.5
+			WaitBetweenSpawnsAfterDeath 15
+			Where spawnbot
+			TotalCount	4
+			MaxActive	1
+			SpawnCount	1
+			TotalCurrency 40
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Scout
+					ClassIcon scout_giant
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave1a3"
+			WaitBeforeStarting	12
+			WaitBetweenSpawns	7.5
+			Where spawnbot_upper
+			TotalCount	30
+			MaxActive	6
+			SpawnCount	3
+			TotalCurrency 30
+			TFBot
+			{
+				Template T_TFBot_Pyro_Phlog
+				ClassIcon pyro
+			}
+		}
+		WaveSpawn
+		{
+			Name wave1a3
+			WaitBeforeStarting	12
+			WaitBetweenSpawns	6
+			Where	spawnbot
+			Where	spawnbot_upper
+			TotalCount	36
+			MaxActive	6
+			SpawnCount	2
+			TotalCurrency 36
+			TFBot
+			{
+				Template T_TFBot_Scout_FaN_Seel
+				ClassIcon scout
+			}
+		}
+		
+		
+		//Subwave 2 - focus on swarms - $196 ($762)
+		//- Tomislav Heavies
+		//- Rapid Fire Demos
+		WaveSpawn
+		{
+			Name "wave1b"
+			WaitForAllDead "wave1a"
+			Where	spawnbot
+			Where	spawnbot_upper
+			TotalCount	45
+			MaxActive	6
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0.5
+			TotalCurrency 100
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Heavy_Tomislav
+					ClassIcon heavy
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave1b2"
+			WaitForAllDead "wave1a3"
+			Where	spawnbot
+			Where	spawnbot_upper
+			TotalCount	48
+			MaxActive	8
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	4
+			TotalCurrency 96
+			TFBot
+			{
+				Template T_TFBot_Demoman_Spammer
+				ClassIcon demo
+			}
+		}
+		
+		
+		//Subwave 3 - focus on giants: don't get killed by the heavy! - $560 ($1322)
+		//- Giant Healing Booster Heavy + Shield Medic
+		//- Giant Spread Fire Pyro
+		WaveSpawn
+		{
+			Name "wave1c"
+			WaitForAllDead "wave1b2"
+			WaitForAllSpawned "wave1b"
+			TotalCurrency	400
+			TotalCount	8
+			MaxActive	4
+			SpawnCount	2
+			WaitBeforeStarting	3
+			WaitBetweenSpawns	6
+			Where	spawnbot
+			Squad
+			{
+				ShouldPreserveSquad 1
+				FormationSize 100
+				TFBot
+				{
+					Template T_TFBot_Medic_ShieldOnly
+					ClassIcon medic
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavy_BoosterHeal
+					ClassIcon heavy_giant
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave1c"
+			WaitForAllDead "wave1b"
+			WaitForAllSpawned "wave1b2"
+			TotalCurrency 160
+			TotalCount	8
+			MaxActive	4
+			SpawnCount	1
+			WaitBeforeStarting	3
+			WaitBetweenSpawns	3
+			Where	spawnbot
+			TFBot
+			{
+				Template T_TFBot_Giant_Pyro_BigFire
+				ClassIcon pyro_giant
+			}
+		}
+		
+		
+		//Subwave 4 - forward-spawning tank + speedy giants - $294 ($1616)
+		//- Tele-in Tank
+		//- Giant Blaster Scout
+		//- Bison Whip Soldier (rapidfire + passive whip)
+		WaveSpawn
+		{
+			Name "wave1d1"
+			WaitForAllSpawned "wave1c"
+			WaitBeforeStarting 10
+			TotalCount	1
+			TotalCurrency 90
+			Tank
+			{
+				Health	28000
+				Name "tankboss"
+				Speed 70
+				StartingPathTrackNode tank_path_a_26
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave1d"
+			WaitForAllDead "wave1a2"
+			WaitForAllSpawned "wave1c"
+			Where spawnbot
+			WaitBeforeStarting	3
+			WaitBetweenSpawns	7
+			TotalCurrency	120
+			TotalCount	6
+			MaxActive	2
+			SpawnCount	1
+			TFBot
+			{
+				Template T_TFBot_Giant_Scout_Blaster
+				ClassIcon scout_giant
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave1d2"
+			WaitForAllDead "wave1c"
+			Where spawnbot
+			Where spawnbot_upper
+			WaitBetweenSpawns 1
+			TotalCurrency 84
+			TotalCount	42
+			MaxActive	14
+			SpawnCount	1
+			TFBot
+			{
+				Template T_TFBot_Soldier_Bison_Whip
+				ClassIcon soldier
+			}
+		}
+		
+		
+		//Subwave 5 - It's Called Synergy
+		//- Giant Burst Direct Soldier + Giant Bullet Vaccinator Medic - $250 ($1866)
+		//- Slowing Pyros + Rapid Fire Demos
+		WaveSpawn
+		{
+			Name "wave1e"
+			WaitForAllDead "wave1d2"
+			Where spawnbot
+			WaitBeforeStarting	1
+			WaitBetweenSpawns	12
+			TotalCount	10
+			MaxActive	6
+			SpawnCount	2
+			TotalCurrency	200
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Burst_Direct
+					ClassIcon soldier_giant
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic_Vacc_Bullet
+					ClassIcon medic_giant
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave1e2"
+			WaitForAllDead "wave1d2"
+			TotalCurrency 50
+			TotalCount	56
+			MaxActive	8
+			SpawnCount	2
+			WaitBeforeStarting	3
+			WaitBetweenSpawns	1.5
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Pyro_Slowdown
+					ClassIcon pyro
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Spammer
+					ClassIcon demo
+				}
+			}
+		}
+		
+		
+		//Subwave 6 - Squads, Squads, Squads - $244 ($2110)
+		//- Shield Medic + Phlog Pyros (shield med is leader!)
+		//- Tomislav Heavies + Uber Medic (1 gets pocketed, 1 up front)
+		//- End: Giant Pocket Pistol Scout
+		WaveSpawn
+		{
+			Name "wave1f"
+			WaitForAllDead "wave1e"
+			WaitBetweenSpawns 4
+			Where spawnbot
+			TotalCount	36
+			MaxActive	9
+			SpawnCount	3
+			TotalCurrency 72
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Medic_ShieldOnly
+					ClassIcon medic
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Tomislav
+					ClassIcon heavy
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Tomislav
+					ClassIcon heavy
+				}
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name "wave1f"
+			WaitForAllDead "wave1e2"
+			WaitBetweenSpawns 4
+			Where spawnbot_upper
+			TotalCount	36
+			MaxActive	9
+			SpawnCount	3
+			TotalCurrency 72
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Medic_ShieldOnly
+					ClassIcon medic
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Phlog
+					ClassIcon pyro
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Phlog
+					ClassIcon pyro
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave1f2"
+			WaitForAllDead "wave1d"
+			WaitForAllSpawned "wave1e"
+			TotalCurrency 100
+			TotalCount	4
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting 5
+			WaitBetweenSpawnsAfterDeath	10
+			Where	spawnbot
+			TFBot
+			{
+				Template T_TFBot_Giant_Scout_PocketPistol
+				ClassIcon scout_giant
+			}
+		}
+		
+		
+		//Subwave 7 - A boss? TWO bosses? THREE bosses? - $800 each, $3200, $5310
+		//+$40 from support for $5350 total
+		//- Tank
+		//- Great Void - Chief Bonk! Scout (forces highly focused DPS)
+		//- Bullet Cluster - Chief Healing Booster Heavy
+		//- What Lies Beyond - Chief Sniper (passive SMG that spams flares)
+		
+		//- Support: Giant Concheror Heavy, Rapid Flare Pyros
+		
+		WaveSpawn
+		{
+			Name "wave1g"
+			WaitForAllSpawned "wave1f"
+			TotalCurrency 800
+			TotalCount 1
+			Tank
+			{
+				Health 35000
+				Name "tankboss"
+				StartingPathTrackNode tank_path_a_1
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave1g"
+			WaitForAllSpawned "wave1f"
+			WaitBeforeStarting	13
+			Where spawnbot_boss
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			TotalCurrency 800
+			StartWaveOutput
+			{
+				Target	wormhole_start_relay
+				Action	Trigger
+			}
+			TFBot
+			{
+				Template T_TFBot_Giant_Scout
+				// ClassIcon scout_bonk_nys
+				ClassIcon scout_giant
+				Health 12000
+				Name "Great Void"
+				Item "Upgradeable TF_WEAPON_SCATTERGUN"
+				Item "Bonk Leadwear"
+				Item "Bonk! Atomic Punch"
+				WeaponRestrictions PrimaryOnly
+				Attributes UseBossHealthbar
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_SCATTERGUN"
+					"faster reload rate" 0
+					"fire rate penalty" 1.3
+					"damage bonus" 2
+					"ragdolls plasma effect" 1
+				}
+				ItemAttributes
+				{
+					ItemName "Bonk! Atomic Punch"
+					"provide on active" 1
+					"single wep deploy time increased" 2.5
+					"dmg taken increased" 0.65
+					"dmg from melee increased" 3 //95% more damage from melee
+				}
+				ItemAttributes
+				{
+					ItemName "Bonk Helm"
+					"attach particle effect" 71 //green black hole
+				}
+				CharacterAttributes
+				{
+					"effect bar recharge rate increased" 0.6 //12 secs
+					"attach particle effect static" 3030
+				}
+				CharacterAttributes
+				{
+					"rage giving scale" 0.1
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave1g"
+			WaitForAllDead "wave1f"
+			Where spawnbot_boss
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			TotalCurrency 800
+			TFBot
+			{
+				Template T_TFBot_Giant_Heavy_BoosterHeal
+				ClassIcon heavy_giant
+				Name "Bullet Cluster"
+				Health 20000
+				Attributes UseBossHealthbar
+				ItemAttributes
+				{
+					ItemName "harvest_minigun_macabreweb"
+					"ragdolls plasma effect" 1
+				}
+				ItemAttributes
+				{
+					ItemName "The Tungsten Toque"
+					"attach particle effect" 99
+				}
+				CharacterAttributes
+				{
+					"rage giving scale" 0.35
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave1g2"
+			WaitForAllSpawned "wave1f2"
+			WaitForAllDead "wave1f"
+			Where spawnbot_boss
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	4
+			TotalCurrency 800
+			TFBot
+			{
+				Class Sniper
+				Name "What Lies Beyond"
+				ClassIcon sniper_sydneysleeper
+				Health 25000
+				Attributes MiniBoss
+				Attributes UseBossHealthbar
+				WeaponRestrictions SecondaryOnly
+				Item "Wavefinder"
+				Item "Head Mounted Double Observatory"
+				Item "Shooting Star"
+				Item "The Cleaner's Carbine"
+				ItemAttributes
+				{
+					ItemName "Shooting Star"
+					"damage bonus" 5 //250 base damage
+					"sniper only fire zoomed" 0
+					"projectile penetration" 1
+					"crit vs burning players" 1
+					"is_passive_weapon" 1
+					"damage blast push" 10
+				}
+				ItemAttributes
+				{
+					ItemName "The Cleaner's Carbine"
+					"override projectile type" 6
+					"fire rate penalty" 1
+					"fire rate bonus" 0.6
+					"clip size penalty" 1
+					"clip size bonus" 4
+					"damage bonus" 5 //40 base damage
+					"projectile spread angle penalty" 1.5
+					"projectile speed increased" 1.25
+					"damage blast push" 2.5
+				}
+				ItemAttributes
+				{
+					ItemName "Wavefinder"
+					"attach particle effect" 245
+				}
+				CharacterAttributes
+				{
+					"attach particle effect static" 3052
+					"rage giving scale" 0.5
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "Support"
+			WaitForAllDead "wave1f"
+			Where spawnbot_boss
+			TotalCount 10
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawnsAfterDeath 6
+			Support 1
+			TFBot
+			{
+				Template T_TFBot_Giant_Heavyweapons
+				Name "Giant Concheror Heavy"
+				// ClassIcon heavy_conch_lite
+				ClassIcon heavy_giant
+				Item "The Concheror"
+				CharacterAttributes
+				{
+					"increase buff duration" 9
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "Support"
+			WaitForAllDead "wave1f"
+			Where spawnbot
+			Where spawnbot_upper
+			WaitBetweenSpawns 12
+			TotalCount 5
+			MaxActive 10
+			SpawnCount 5
+			TotalCurrency 40
+			Support 1
+			TFBot
+			{
+				Template T_TFBot_Pyro_Flare_Infinite
+				ClassIcon pyro_flare
+			}
+		}
+	}
+}

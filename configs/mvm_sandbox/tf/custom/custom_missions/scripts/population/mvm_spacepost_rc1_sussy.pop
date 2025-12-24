@@ -1,0 +1,3114 @@
+#base robot_standard.pop
+#base robot_giant.pop
+#base robot_pda_expert.pop
+
+// made by pda expert
+// special thanks to :
+// the fat
+// dripbvbe
+// siilvagunner
+// newgrounds
+
+
+// spawns :
+// spawnbot
+// spawnbot_upper
+// spawnbot_boss
+
+// spawnbot_hatch (custom)
+// spawnbot_hatch2 (spawns on top of hatch instead of near it)
+WaveFUCKOFFIHATEYOUGETOUTOFMYGODDAMNLIFEBIIIIIIIIIIIIIIIIIIIIITCH
+{
+    StartingCurrency 800
+    RespawnWaveTime 4
+	TextPrintTime 0
+    CanBotsAttackWhileInSpawnRoom yes // comedy hahahaaaaa
+	
+	PrecacheModel "models/props_c17/furnituretoilet001a.mdl"  
+	PrecacheModel "models/props_forest/wheelbarrow.mdl"  
+	PrecacheModel "models/props_forest/sawblade_moving.mdl"  
+	PrecacheModel "models/sussy/weapons/c_models/c_double_barrel.mdl"
+	PrecacheModel "models/bots/skeleton_sniper/skeleton_sniper.mdl" 
+	
+	PrecacheSound "sussy/toilet_shoot.wav"  
+	PrecacheSound "sussy/among_us_tank.wav"  
+	PrecacheSound "sussy/woah_he_died.wav"
+	
+	BodyPartScaleSpeed 12
+	
+	ExtraSpawnPoint    //Adds spawn points on specified location
+    {
+        Name "spawnbot_hatch"
+		// StartDisabled 1 // If the spawn point starts disabled (Default: 0)
+        TeamNum 3 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        X	"4097.17"                     
+        Y	"1874.38"                  
+        Z	"75.03"        
+    }
+	
+	ExtraSpawnPoint    //Adds spawn points on specified location
+    {
+        Name "spawnbot_hut"
+		// StartDisabled 1 // If the spawn point starts disabled (Default: 0)
+        TeamNum 3 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        X	"201.53"                     
+        Y	"7.91"                  
+        Z	"-347.97"        
+    }
+	
+	ExtraSpawnPoint    //Adds spawn points on specified location
+    {
+        Name "spawnbot_hatch2"
+		// StartDisabled 1 // If the spawn point starts disabled (Default: 0)
+        TeamNum 3 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        X	"4095.44"                     
+        Y	"1484.02"                  
+        Z	"-52.97"        
+    }
+	
+	ExtraSpawnPoint    //Adds spawn points on specified location
+    {
+        Name "spawnbot_godzilla"
+		// StartDisabled 1 // If the spawn point starts disabled (Default: 0)
+        TeamNum 3 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        X	"644.29"                     
+        Y	"1485.84"                  
+        Z	"-184.86"        
+    }
+	
+	ExtraSpawnPoint    //Adds spawn points on specified location
+    {
+        Name "spawnbot_batman"
+		// StartDisabled 1 // If the spawn point starts disabled (Default: 0)
+        TeamNum 3 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        X	"-474.75"                     
+        Y	"389.88"                  
+        Z	"-397.22"        
+    }
+	
+	ExtraSpawnPoint    //Adds spawn points on specified location
+    {
+        Name "spawnbot_batman2"
+		// StartDisabled 1 // If the spawn point starts disabled (Default: 0)
+        TeamNum 3 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        X	"1205.34"                     
+        Y	"-307.36"                  
+        Z	"-386.94"        
+    }
+	
+	ExtraSpawnPoint    //Adds spawn points on specified location
+    {
+        Name "spawnbot_shaq"
+		// StartDisabled 1 // If the spawn point starts disabled (Default: 0)
+        TeamNum 3 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        X	"90.44"                     
+        Y	"996.64"                  
+        Z	"-340.13"        
+    }
+	
+	ExtraSpawnPoint    //Adds spawn points on specified location
+    {
+        Name "spawnbot_lincon"
+		// StartDisabled 1 // If the spawn point starts disabled (Default: 0)
+        TeamNum 3 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        X	"862.04"                     
+        Y	"-294.60"                  
+        Z	"-378.92"        
+    }
+	
+	ExtraSpawnPoint    //Adds spawn points on specified location
+    {
+        Name "spawnbot_lincon2"
+		// StartDisabled 1 // If the spawn point starts disabled (Default: 0)
+        TeamNum 3 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        X	"1337.18"                     
+        Y	"-290.41"                  
+        Z	"-365.86"        
+    }
+	
+	ExtraSpawnPoint
+	{
+	    Name "spawnbot_indiana"
+        TeamNum 3 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        X	"201.63"                     
+        Y	"-2.90"                  
+        Z	"-148.97"   
+	}
+	
+	ExtraSpawnPoint
+	{
+	    Name "spawnbot_carebear"
+        TeamNum 3 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        X	"971.20"                     
+        Y	"13.62"                  
+        Z	"-363.40"   
+	}
+	
+	OverrideSounds   //Replace sounds. Only server side sounds can be overridden. Must use sound script unless there is only a raw version of the sound.
+	{
+		"Demoman.CloakedSpy01" "sussy/among_us_tank.wav"
+		"Demoman.CloakedSpy02" "sussy/among_us_tank.wav"
+		"Demoman.CloakedSpy03" "sussy/among_us_tank.wav"
+		"Demoman.CloakedSpyIdentify01" "sussy/among_us_tank.wav"
+		"Demoman.CloakedSpyIdentify02" "sussy/among_us_tank.wav"
+		"Demoman.CloakedSpyIdentify03" "sussy/among_us_tank.wav"
+		"Demoman.CloakedSpyIdentify04" "sussy/among_us_tank.wav"
+		"Demoman.CloakedSpyIdentify05" "sussy/among_us_tank.wav"
+		"Demoman.CloakedSpyIdentify06" "sussy/among_us_tank.wav"
+		"Demoman.CloakedSpyIdentify07" "sussy/among_us_tank.wav"
+		"Demoman.CloakedSpyIdentify08" "sussy/among_us_tank.wav"
+		"Demoman.CloakedSpyIdentify09" "sussy/among_us_tank.wav"
+		"Heavy.CloakedSpy01" "sussy/among_us_tank.wav"
+		"Heavy.CloakedSpy02" "sussy/among_us_tank.wav"
+		"Heavy.CloakedSpy03" "sussy/among_us_tank.wav"
+		"Heavy.CloakedSpy04" "sussy/among_us_tank.wav"
+		"Heavy.CloakedSpyIdentify01" "sussy/among_us_tank.wav"
+		"Heavy.CloakedSpyIdentify02" "sussy/among_us_tank.wav"
+		"Heavy.CloakedSpyIdentify03" "sussy/among_us_tank.wav"
+		"Heavy.CloakedSpyIdentify04" "sussy/among_us_tank.wav"
+		"Heavy.CloakedSpyIdentify05" "sussy/among_us_tank.wav"
+		"Heavy.CloakedSpyIdentify06" "sussy/among_us_tank.wav"
+		"Heavy.CloakedSpyIdentify07" "sussy/among_us_tank.wav"
+		"Heavy.CloakedSpyIdentify08" "sussy/among_us_tank.wav"
+		"Heavy.CloakedSpyIdentify09" "sussy/among_us_tank.wav"
+		"Pyro.CloakedSpy01" "sussy/among_us_tank.wav"
+		"Pyro.CloakedSpyIdentify01" "sussy/among_us_tank.wav"
+		"Medic.CloakedSpy01" "sussy/among_us_tank.wav"
+		"Medic.CloakedSpy02" "sussy/among_us_tank.wav"
+		"Medic.CloakedSpy03" "sussy/among_us_tank.wav"
+		"Medic.CloakedSpyIdentify01" "sussy/among_us_tank.wav"
+		"Medic.CloakedSpyIdentify02" "sussy/among_us_tank.wav"
+		"Medic.CloakedSpyIdentify03" "sussy/among_us_tank.wav"
+		"Medic.CloakedSpyIdentify04" "sussy/among_us_tank.wav"
+		"Medic.CloakedSpyIdentify05" "sussy/among_us_tank.wav"
+		"Medic.CloakedSpyIdentify06" "sussy/among_us_tank.wav"
+		"Medic.CloakedSpyIdentify07" "sussy/among_us_tank.wav"
+		"Medic.CloakedSpyIdentify08" "sussy/among_us_tank.wav"
+		"Medic.CloakedSpyIdentify09" "sussy/among_us_tank.wav"
+		"Sniper.CloakedSpy01" "sussy/among_us_tank.wav"
+		"Sniper.CloakedSpy02" "sussy/among_us_tank.wav"
+		"Sniper.CloakedSpy03" "sussy/among_us_tank.wav"
+		"Sniper.CloakedSpyIdentify01" "sussy/among_us_tank.wav"
+		"Sniper.CloakedSpyIdentify02" "sussy/among_us_tank.wav"
+		"Sniper.CloakedSpyIdentify03" "sussy/among_us_tank.wav"
+		"Sniper.CloakedSpyIdentify04" "sussy/among_us_tank.wav"
+		"Sniper.CloakedSpyIdentify05" "sussy/among_us_tank.wav"
+		"Sniper.CloakedSpyIdentify06" "sussy/among_us_tank.wav"
+		"Sniper.CloakedSpyIdentify07" "sussy/among_us_tank.wav"
+		"Sniper.CloakedSpyIdentify08" "sussy/among_us_tank.wav"
+		"Sniper.CloakedSpyIdentify09" "sussy/among_us_tank.wav"
+		"Scout.CloakedSpy01" "sussy/among_us_tank.wav"
+		"Scout.CloakedSpy02" "sussy/among_us_tank.wav"
+		"Scout.CloakedSpy03" "sussy/among_us_tank.wav"
+		"Scout.CloakedSpyIdentify01" "sussy/among_us_tank.wav"
+		"Scout.CloakedSpyIdentify02" "sussy/among_us_tank.wav"
+		"Scout.CloakedSpyIdentify03" "sussy/among_us_tank.wav"
+		"Scout.CloakedSpyIdentify04" "sussy/among_us_tank.wav"
+		"Scout.CloakedSpyIdentify05" "sussy/among_us_tank.wav"
+		"Scout.CloakedSpyIdentify06" "sussy/among_us_tank.wav"
+		"Scout.CloakedSpyIdentify07" "sussy/among_us_tank.wav"
+		"Scout.CloakedSpyIdentify08" "sussy/among_us_tank.wav"
+		"Scout.CloakedSpyIdentify09" "sussy/among_us_tank.wav"
+		"Soldier.CloakedSpy01" "sussy/among_us_tank.wav"
+		"Soldier.CloakedSpy02" "sussy/among_us_tank.wav"
+		"Soldier.CloakedSpy03" "sussy/among_us_tank.wav"
+		"Soldier.CloakedSpyIdentify01" "sussy/among_us_tank.wav"
+		"Soldier.CloakedSpyIdentify02" "sussy/among_us_tank.wav"
+		"Soldier.CloakedSpyIdentify03" "sussy/among_us_tank.wav"
+		"Soldier.CloakedSpyIdentify04" "sussy/among_us_tank.wav"
+		"Soldier.CloakedSpyIdentify05" "sussy/among_us_tank.wav"
+		"Soldier.CloakedSpyIdentify06" "sussy/among_us_tank.wav"
+		"Soldier.CloakedSpyIdentify07" "sussy/among_us_tank.wav"
+		"Soldier.CloakedSpyIdentify08" "sussy/among_us_tank.wav"
+		"Soldier.CloakedSpyIdentify09" "sussy/among_us_tank.wav"
+		"Engineer.CloakedSpy01" "sussy/among_us_tank.wav"
+		"Engineer.CloakedSpy02" "sussy/among_us_tank.wav"
+		"Engineer.CloakedSpy03" "sussy/among_us_tank.wav"
+		"Engineer.CloakedSpyIdentify01" "sussy/among_us_tank.wav"
+		"Engineer.CloakedSpyIdentify02" "sussy/among_us_tank.wav"
+		"Engineer.CloakedSpyIdentify03" "sussy/among_us_tank.wav"
+		"Engineer.CloakedSpyIdentify04" "sussy/among_us_tank.wav"
+		"Engineer.CloakedSpyIdentify05" "sussy/among_us_tank.wav"
+		"Engineer.CloakedSpyIdentify06" "sussy/among_us_tank.wav"
+		"Engineer.CloakedSpyIdentify07" "sussy/among_us_tank.wav"
+		"Engineer.CloakedSpyIdentify08" "sussy/among_us_tank.wav"
+		"Engineer.CloakedSpyIdentify09" "sussy/among_us_tank.wav"
+		"Spy.CloakedSpy01" "sussy/among_us_tank.wav"
+		"Spy.CloakedSpy02" "sussy/among_us_tank.wav"
+		"Spy.CloakedSpy03" "sussy/among_us_tank.wav"
+		"Spy.CloakedSpy04" "sussy/among_us_tank.wav"
+		"Spy.CloakedSpyIdentify01" "sussy/among_us_tank.wav"
+		"Spy.CloakedSpyIdentify02" "sussy/among_us_tank.wav"
+		"Spy.CloakedSpyIdentify03" "sussy/among_us_tank.wav"
+		"Spy.CloakedSpyIdentify04" "sussy/among_us_tank.wav"
+		"Spy.CloakedSpyIdentify05" "sussy/among_us_tank.wav"
+		"Spy.CloakedSpyIdentify06" "sussy/among_us_tank.wav"
+		"Spy.CloakedSpyIdentify07" "sussy/among_us_tank.wav"
+		"Spy.CloakedSpyIdentify08" "sussy/among_us_tank.wav"
+		"Spy.CloakedSpyIdentify09" "sussy/among_us_tank.wav"
+	}
+	
+	ItemAttributes   //Adds attributes to specified item given to players
+	{
+		ItemName "The Iron Bomber"
+		"custom weapon fire sound" "sussy/toilet_shoot.wav"
+		"custom projectile model" models/props_c17/furnituretoilet001a.mdl
+	}
+	
+    PointTemplates 
+	{
+	    ColorTank 
+		{
+		    OnSpawnOutput 
+			{
+			Target  "!activator"
+			Action  "color"
+			Param  "255 225 0"
+			}
+		}
+	}
+	
+	Wave
+	{
+	
+		Explanation    //Dispayed once the wave is initialized
+		{
+			Line "{blue}hello and welcome to mcdonal"
+			Line "{blue}how can i elp ou today??"
+		}
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		
+		WaveSpawn
+		{
+		    TotalCount 3
+			Name "wave01"
+			SpawnCount 1
+			MaxActive 3
+			WaitBetweenSpawns 12
+			TotalCurrency 400
+			Where spawnbot_upper
+			TFBot
+			{
+			Template T_TFBot_Giant_Pyro_Flare_Spammer
+			Name "how the fuck do i meme this guy"
+			}
+		}
+		
+		WaveSpawn
+		{
+		    TotalCount 25
+			Name "wave01"
+			SpawnCount 3
+			MaxActive 13
+			WaitBeforeStarting 0
+		    WaitBetweenSpawns 5
+			TotalCurrency 600
+			Where spawnbot
+			TFBot
+			{
+			Template T_TFBot_Heavyweapons_Heavyweight_Champ
+			Skill hard
+			Name "pog weight champ"
+			}
+		}
+		
+	    WaveSpawn
+		{
+		    TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitForAllDead "wave01"
+			Support Limited
+			Where spawnbot_hatch
+			RandomChoice
+			{
+			RandomChoice
+			{
+			TFBot
+			{
+			health 60000
+			Class scout
+			Name "shame on you bitch"
+			Attributes IgnoreFlag
+			scale 0.25
+			Message //Displays message in the chat
+			{
+			Name "{blue}whats that. Not wacky enough??!?!?!?!" //Message in the chat displayed
+			Delay 0 //Time before the message is first displayed (Default: 10)
+			Cooldown 9999 //Time between each message (Default: 10)
+			Repeats 1 //How many times should bot display the message (Default: 0 - Infinite)
+			}
+			Message //Displays message in the chat
+			{
+			Name "{blue}you won't handle it this early bro." //Message in the chat displayed
+			Delay 4 //Time before the message is first displayed (Default: 10)
+			Cooldown 9999 //Time between each message (Default: 10)
+			Repeats 1 //How many times should bot display the message (Default: 0 - Infinite)
+			}
+			Message //Displays message in the chat
+			{
+			Name "{blue}ok you said it yourselves dumbasses." //Message in the chat displayed
+			Delay 8 //Time before the message is first displayed (Default: 10)
+			Cooldown 9999 //Time between each message (Default: 10)
+			Repeats 1 //How many times should bot display the message (Default: 0 - Infinite)
+			}
+			Message //Displays message in the chat
+			{
+			Name "{blue}don't say i didn't warn you all." //Message in the chat displayed
+			Delay 12 //Time before the message is first displayed (Default: 10)
+			Cooldown 9999 //Time between each message (Default: 10)
+			Repeats 1 //How many times should bot display the message (Default: 0 - Infinite)
+			}
+			CharacterAttributes
+			{
+			"health regen" -5000
+			}
+			}
+			}
+			}
+		}
+		
+		WaveSpawn
+		{
+		    TotalCount 20
+			Name "support"
+			Support Limited
+			WaitForAllDead "wave02"
+			Where spawnbot_upper
+			WaitBeforeStarting 5
+			MaxActive 3
+			SpawnCount 3
+			WaitBetweenSpawns 15
+			TFBot
+			{
+			Template T_TFBot_Soldier_RocketPush
+			Name "FUUUUUUUCK!"
+			Item "The Gunboats"
+			AimOffset "0 0 -10000"
+			CharacterAttributes
+			{
+			"projectile gravity" 9000
+			}
+			}
+		}
+		
+		WaveSpawn
+		{
+		    TotalCount 12
+			Name "Wave02"
+			WaitForAllDead "wave01"
+			WaitBeforeStarting 15
+			WaitBetweenSpawns 0.1
+			Where spawnbot
+			TFBot
+			{
+			Template T_TFBot_Demoman_Samurai
+			Health 999
+			AutoJumpMin 1
+			AutoJumpMax 3
+			Name "dante from the DMC series"
+			Message //Displays message in the chat
+			{
+			Name "{blue}dante :{FFFFFF} hello its me dante from the devil may cry series" //Message in the chat displayed
+			Delay 0 //Time before the message is first displayed (Default: 10)
+			Cooldown 3 //Time between each message (Default: 10)
+			Repeats 0 //How many times should bot display the message (Default: 0 - Infinite)
+			IfSeeTarget 1 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+			}
+			Attributes AlwaysFireWeapon
+			ItemAttributes
+			{
+			ItemName "The Splendid Screen"
+			"charge impact damage increased" 0.25
+			}
+			ItemAttributes
+			{
+			ItemName "The Half-Zatoichi"
+			"fire rate penalty" 9999
+			}
+			}
+		}
+		
+		WaveSpawn
+		{
+		    TotalCount 21
+			MaxActive 9
+			SpawnCount 2
+			WaitForAllDead "wave02"
+			Name "wave03"
+			WaitBeforeStarting 6
+			WaitBetweenSpawns  1
+			TotalCurrency 200
+			Where spawnbot
+			TFBot
+			{
+		    Class Heavyweapons
+            Name hotwheels		
+			ClassIcon heavy_heater_ring
+            Item Tomislav
+            Item "Football Helmet"
+			RingOfFire 40
+			Attributes SuppressFire
+			FireWeapon    //Periodically fires weapon
+            {
+			Delay 0 //Time before the first fire input starts (Default: 10)
+			Cooldown 0.1 //Time between each fire input (Default: 10)
+			Repeats 0 //How many times should bot use the fire input in total (Default: 0 - Infinite)
+			IfSeeTarget 1 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+			Type "Secondary" // Type of fire input, Possible values:
+			}
+			ItemModel   // Replaces item model
+			{
+			ItemName Tomislav
+			Model "models/props_forest/wheelbarrow.mdl"
+			}            	
+            ItemAttributes
+			{
+			ItemName Tomislav
+			"custom item model" "models/props_forest/wheelbarrow.mdl"
+			}			
+			CharacterAttributes
+			{
+			"torso scale" 1.25
+			}
+			}
+		}
+
+        WaveSpawn
+		{
+		    TotalCount 11
+			MaxActive 7
+			SpawnCount 1
+			WaitForAllDead "wave02"
+			Name "wave03"
+			Where spawnbot_upper
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 6
+			TotalCurrency 200
+			TFBot
+			{
+			Class Scout
+			Name "HOLY FUCKING SHITTTTTT"
+			Scale 1.25
+			ClassIcon scout_basher_lite
+			Health 300
+			WeaponRestrictions MeleeOnly
+			ItemModel   // Replaces item model
+			{
+			ItemName TF_WEAPON_BAT
+			Model "models/props_forest/sawblade_moving.mdl"
+			}  
+			CharacterAttributes
+			{
+			"fire rate bonus" 0.6
+		    "damage penalty" 0.5
+			}
+			}
+		}
+		
+		WaveSpawn
+		{
+		    TotalCount 4
+			MaxActive 4
+			SpawnCount 2
+			WaitForAllDead "wave02"
+			Where spawnbot
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 25
+			TotalCurrency 200
+			FirstSpawnWarningSound "vo/mvm/mght/demoman_mvm_m_gibberish10.mp3"
+			TFBot
+			{
+			Template T_TFBot_Giant_Demoman
+			Name "giant rapid demos can't aim"
+			CharacterAttributes
+			{
+			"projectile spread angle penalty" 200
+			}
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name       "wave04"
+			TotalCount 1
+			WaitBeforeStarting 0
+			WaitForAllDead     "Wave03"
+			Tank
+			{
+				Name   "Tank"
+				Health 16000
+				Speed  75
+				MaxTurnRate 0  
+				StartingPathTrackNode "boss_path_1"
+
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		
+		WaveSpawn
+		{
+		TotalCount 1
+		MaxActive 1
+		WaitBeforeStarting 5
+		Name "wave04"
+		Where spawnbot
+		WaitForAllDead     "Wave03"
+		WaitBeforeStarting 10
+		DoneWarningSound "sussy/toilet_explode.wav"
+		WaitBetweenSpawns 3
+		TFBot
+		{
+			Class Demoman
+			Name "the toilet smasher"
+			ClassIcon demo_burst_giant
+			Scale 1.8
+			Health 7000
+			Skill Expert
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			Attributes UseBossHealthBar
+			Attributes HoldFireUntilFullReload
+			Item "The Iron Bomber"
+			ItemAttributes
+			{
+				ItemName "The Iron Bomber"
+				"faster reload rate" 0.3
+				"fire rate bonus" 0.3
+				"damage penalty" 0.01
+				"damage causes airblast" 1
+				"clip size upgrade atomic" 7.0
+				"projectile spread angle penalty" 5
+				"Projectile speed increased"	1.1
+				"custom weapon fire sound" "sussy/toilet_shoot.wav"
+				"custom projectile model" models/props_c17/furnituretoilet001a.mdl
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.4
+				"airblast vulnerability multiplier" 0.4
+				"override footstep sound set" 4
+				"rage giving scale" 0.25
+			}
+		}
+		}
+		
+		WaveSpawn
+		{
+			TotalCurrency	200
+			Name "fuck"
+			TotalCount	9
+			MaxActive	6
+			SpawnCount	3
+			WaitBeforeStarting	2
+			WaitBetweenSpawns	30
+			Where	spawnbot_boss
+			TFBot
+			{
+			    Template br_atomic_caber_demo
+				Name	"crash landing"
+			}
+		}
+	}
+	
+	// among us 
+	
+	Wave
+	{
+		Explanation    //Dispayed once the wave is initialized
+		{
+			Line "{blue}ngl you lookin kinda sussy :flushed:"
+			Line "{red}You will recive reinforcements this wave."
+		}
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		
+		WaveSpawn
+		{
+		WaitBeforeStarting 5
+		FirstSpawnWarningSound "sussy/the_wild_wild_west.wav"
+		}
+		
+		WaveSpawn
+		{
+		WaitBeforeStarting 5
+		FirstSpawnWarningSound "sussy/the_wild_wild_west.wav"
+		}
+		
+		WaveSpawn
+		{
+		Name "crewmate_wave"
+		TotalCount 74
+		SpawnCount 2
+		MaxActive 22
+		WaitBeforeStarting 5
+		WaitBetweenSpawns 1.5
+		FirstSpawnWarningSound "sussy/the_wild_wild_west.wav"
+		FirstSpawnMessage "There are 6 imposters among us."
+		Where spawnbot
+		Where spawnbot_upper
+		RandomChoice
+		{
+		TFBot
+		{
+		Name "Crewmate (acting sussy)"
+		Class Spy
+		Skill Hard
+		ClassIcon crewmate
+		WeaponRestrictions MeleeOnly
+		Action FetchFlag
+		Item "Airtight Arsonist"
+		DeathSound "sussy/woah_he_died.wav"
+		CharacterAttributes
+		{
+		"cannot disguise" 1
+		}
+		}
+		TFBot
+		{
+		Name "Mini-Crewmate (reddit whore)"
+		Class Heavyweapons
+		Health 150
+		Scale 0.6
+		Skill Hard
+		ClassIcon crewmate
+		WeaponRestrictions MeleeOnly
+		Item "The Holiday Punch"
+		Item "Airtight Arsonist"
+		DeathSound "sussy/woah_he_died.wav"
+		CharacterAttributes
+		{
+		"move speed bonus" 0.8
+		"always crit" 1
+		}
+		}
+		TFBot
+		{
+		Name "Crewmate (new terminator role!)"
+		Item "Airtight Arsonist"
+		Item "The Purity Fist"
+		DeathSound "sussy/woah_he_died.wav"
+		ClassIcon crewmate
+		Template T_TFBot_Heavyweapons_Shotgun
+		}
+		TFBot
+		{
+		Name "Crewmate femdom crewmate fanfic"
+		ClassIcon crewmate
+		Item "Airtight Arsonist"
+		DeathSound "sussy/woah_he_died.wav"
+		Template T_TFBot_Heavyweapons_Fist
+		}
+		TFBot
+		{
+		Name "Crewmate (funny electrical!)"
+		ClassIcon crewmate
+		Class Pyro
+		WeaponRestrictions MeleeOnly
+		Skill Normal
+		Item "The Homewrecker"
+		Item "Airtight Arsonist"
+		DeathSound "sussy/woah_he_died.wav"
+		}
+		TFBot
+		{
+		Name "Crewmate (depressed)"
+		ClassIcon crewmate
+		Class Demoman
+		WeaponRestrictions MeleeOnly
+		Skill Normal
+		Item "The Ullapool Caber"
+		Item "Airtight Arsonist"
+		DeathSound "sussy/woah_he_died.wav"
+		ItemAttributes
+		{
+		ItemName	"The Ullapool Caber"
+		"damage bonus"	1.75
+		"blast dmg to self increased" 12.0
+		}
+		Skill Hard
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "crewmate_end"
+		WaitForAllSpawned "crewmate_wave"
+		TotalCount 1
+		Where spawnbot
+		WaitBeforeStarting 3
+		WaitBetweenSpawns 2
+		DoneWarningSound "sussy/who_pissed_my_pants.wav"
+		TotalCurrency 900
+		TFBot
+		{
+		Name "Emergency Meeting"
+		Class Heavyweapons
+		Health 300
+		Skill Hard
+		ClassIcon crewmate
+		WeaponRestrictions MeleeOnly
+		Item "Airtight Arsonist"
+		CharacterAttributes
+		{
+		"move speed bonus" 0.35
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "imposter"
+		WaitForAllDead "crewmate_end"
+		TotalCount 1
+		Where spawnbot_upper
+		StartWaveMessage "{blue}ok guys, who is the impooster????"
+		DoneMessage "shoe sniffer 42 was an impostor."
+	    DoneWarningSound "sussy/beep_boop.wav"
+		WaitBeforeStarting 10
+		TFBot
+		{
+		Name "shoe sniffer 42"
+		Class Spy
+		ClassIcon imposter
+		Health 5000
+		Action Mobber
+		WeaponRestrictions PrimaryOnly
+		Attributes UseBossHealthBar
+		Item "Airtight Arsonist"
+		Item "The Enforcer"
+		Skin 0
+		ItemAttributes
+		{
+		ItemName "Airtight Arsonist"
+		"set item tint RGB" 12073019
+		}
+		ItemAttributes
+		{
+		ItemName "The Enforcer"
+		"cannot disguise" 1
+		"damage bonus" 10.0
+		"fire rate penalty" 15.0
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "imposter"
+		WaitForAllDead "crewmate_end"
+		TotalCount 1
+		Where spawnbot_upper
+		DoneMessage "john wick was an impostor."
+	    DoneWarningSound "sussy/beep_boop.wav"
+		WaitBeforeStarting 13
+		TFBot
+		{
+		Name "john wick"
+		Class Scout
+		ClassIcon imposter
+		WeaponRestrictions SecondaryOnly
+		Health 3000
+		Action Mobber
+		Attributes UseBossHealthBar
+		Attributes AlwaysCrit
+		Item "Airtight Arsonist"
+		Skin 0
+		ItemAttributes
+		{
+		ItemName "Airtight Arsonist"
+		"set item tint RGB" 12073019
+		}
+		CharacterAttributes
+		{
+		"damage bonus" 6.0
+		"fire rate penalty" 6.0
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "imposter"
+		WaitForAllDead "crewmate_end"
+		TotalCount 1
+		Where spawnbot_upper
+		DoneMessage "your mom was an impostor."
+	    DoneWarningSound "sussy/beep_boop.wav"
+		WaitBeforeStarting 16
+		TFBot
+		{
+		Name "your mom"
+		Class Heavyweapons
+		ClassIcon imposter
+		Health 5000
+		Action Mobber
+		WeaponRestrictions MeleeOnly
+		Attributes UseBossHealthBar
+		Item "Airtight Arsonist"
+		Skin 0
+		ItemAttributes
+		{
+		ItemName "Airtight Arsonist"
+		"set item tint RGB" 12073019
+		}
+		CharacterAttributes
+		{
+		"damage bonus" 5.0
+		"move speed bonus" 0.5
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "imposter"
+		WaitForAllDead "crewmate_end"
+		TotalCount 1
+		Where spawnbot_upper
+		DoneMessage "jorma69 was an impostor."
+	    DoneWarningSound "sussy/beep_boop.wav"
+		WaitBeforeStarting 19
+		TFBot
+		{
+		Name "jorma69"
+		Class Spy
+		ClassIcon imposter
+		Health 3000
+		Action Mobber
+		WeaponRestrictions MeleeOnly
+		Attributes UseBossHealthBar
+		Item "Airtight Arsonist"
+		Skin 0
+		ItemAttributes
+		{
+		ItemName "Airtight Arsonist"
+		"set item tint RGB" 12073019
+		}
+		CharacterAttributes
+		{
+		"damage bonus" 3.0
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "imposter"
+		WaitForAllDead "crewmate_end"
+		TotalCount 1
+		Where spawnbot_upper
+		DoneMessage "amongula was an impostor."
+	    DoneWarningSound "sussy/beep_boop.wav"
+		WaitBeforeStarting 21
+		TFBot
+		{
+		Name "amongula"
+		Class Spy
+		Scale 0.5
+		ClassIcon imposter
+		Health 1500
+		Action Mobber
+		WeaponRestrictions MeleeOnly
+		Attributes UseBossHealthBar
+		Item "Airtight Arsonist"
+		Skin 0
+		ItemAttributes
+		{
+		ItemName "Airtight Arsonist"
+		"set item tint RGB" 12073019
+		}
+		CharacterAttributes
+		{
+		"damage bonus" 3.0
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "sus"
+		WaitForAllSpawned "imposter"
+		TotalCount 50
+		WaitBeforeStarting 8
+		WaitBetweenSpawns 2
+		SpawnCount 3
+		MaxActive 15
+		Where spawnbot
+		RandomChoice
+		{
+		TFBot
+		{
+		Class Demoman
+		Skill Normal
+		ClassIcon jerma_sus
+		UseHumanModel 1
+		Name "When the imposter is sus!"
+		}
+		TFBot
+		{
+		Class Scout
+		Skill Normal
+		ClassIcon jerma_sus
+		UseHumanModel 1
+		Name "When the bloke is conspicous!"
+		}
+		TFBot
+		{
+		Class Soldier
+		Skill Normal
+		ClassIcon jerma_sus
+		UseHumanModel 1
+		Name "When the private is a traitor!"
+		}
+		TFBot
+		{
+		Class Sniper
+		Skill Normal
+		WeaponRestrictions SecondaryOnly
+		ClassIcon jerma_sus
+		Name "When the spy is an enemy!"
+		Item "Jarate"
+		UseHumanModel 1
+		ItemAttributes
+		{
+		ItemName Jarate
+		"fire rate bonus" 0.7
+		"effect bar recharge rate increased"	0.00001		
+		}		
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "sus1" // too much sus
+		WaitForAllDead "imposter"
+		TotalCount 69
+		Support Limited
+		WaitBeforeStarting 30
+		WaitBetweenSpawns 20
+		MaxActive 5
+		SpawnCount 5
+		Where spawnbot_upper
+		TFBot
+		{
+		Template T_TFBot_Heavyweapons_Gnome
+		Name "When the imposter is thicc!"
+		ClassIcon jerma_thick
+		Health 200
+		Item "White Russian"
+		Item "Jungle Booty"
+		UseHumanModel 1
+		CharacterAttributes
+		{
+		"move speed bonus" 1.4
+		"torso scale" 1.75
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "sus"
+		WaitForAllDead "imposter"
+		TotalCount 6
+		WaitBeforeStarting 25
+		WaitBetweenSpawns 5
+		Where spawnbot
+		MaxActive 6
+		SpawnCount 1
+		TFBot
+		{
+			Class Demoman
+			Name "SUS! SUS! SUS! SUS! SUS! SUS!"
+			ClassIcon jerma_torment
+			Health 3300
+			Skill Expert
+			WeaponRestrictions PrimaryOnly
+			UseHumanModel 1
+			Attributes MiniBoss
+			Attributes AlwaysFireWeapon
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_GRENADELAUNCHER"
+				"faster reload rate" -2
+				"fire rate bonus" 0.3
+				"ragdolls plasma effect" 1
+				"damage penalty" 0.33
+				"projectile spread angle penalty" 50
+				"Projectile speed increased"	1.5
+				"fuse bonus" 0.1
+				"Blast radius increased" 2.0
+				"blast dmg to self increased" 0.25
+			}
+
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.4
+				"airblast vulnerability multiplier" 0.4
+				"override footstep sound set" 4
+			}
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "sus_tank"
+		WaitForAllDead "sus"
+		TotalCount 1
+		WaitBeforeStarting 12
+		Tank
+		{
+		Name   "Tank"
+		ClassIcon sussy_ass
+		Health 20000
+		Speed  66
+		Scale 1.5
+		MaxTurnRate 10  
+		StartingPathTrackNode "boss_path_1"
+		SpawnTemplate  "ColorTank"
+		PingSound  "sussy/among_us_tank.wav"
+		OnBombDroppedOutput
+		{
+		Target boss_deploy_relay
+		Action Trigger
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "sus_tank"
+		WaitForAllDead "sus"
+		TotalCount 1
+		WaitBeforeStarting 18
+		Where spawnbot_upper
+		TFBot
+		{
+		Template T_TFBot_Giant_Boxing_Heavy
+		Item "The Holiday Punch"
+		Item "White Russian"
+		Item "Jungle Booty"
+		Name   "damn he got the whole bakery"
+		Attributes UseBossHealthBar
+		ClassIcon sussy_ass
+		Health 20000
+		Scale 1.8
+		//SpawnTemplate  "ColorTank"
+		PainSound  "sussy/among_us_tank.wav"
+		UseHumanModel 1
+		ItemAttributes
+		{
+		ItemName "The Holiday Punch"
+		"fire rate bonus" 0.5
+		"damage bonus" 1.25
+		"critboost on kill" 6 //.9
+		}
+		CharacterAttributes
+		{
+		"rage giving scale" 0.1
+		"torso scale" 4.0
+		}
+		}
+		}
+		
+        WaveSpawn
+		{
+		WaitForAllDead "sus_tank"
+		WaitBeforeStarting 5
+		FirstSpawnWarningSound "sussy/epic_boss_music.mp3"
+		}
+		
+        WaveSpawn
+		{
+		WaitForAllDead "sus_tank"
+		WaitBeforeStarting 5
+		FirstSpawnWarningSound "sussy/epic_boss_music.mp3"
+		}
+		
+        WaveSpawn
+		{
+		Name "sus_trick"
+		WaitForAllDead "sus_tank"
+		TotalCount 1
+		WaitBeforeStarting 5
+		FirstSpawnWarningSound "sussy/epic_boss_music.mp3"
+		Where spawnbot_boss
+		DoneMessage "Sergeant Drip was an impostor."
+	    DoneWarningSound "sussy/beep_boop.wav"
+		TotalCurrency 500
+		RandomChoice
+		{
+		RandomChoice
+		{
+		TFBot
+		{
+			Class Scout
+			Name "Sergeant Drip"
+			ClassIcon imposter_drip
+			Skill Hard
+			Action Mobber
+			Item "Soldier Drill Hat"
+			Item "Airtight Arsonist"
+			Item "The Mantreads"
+			Item "The Force-a-Nature"
+			Health 16000
+			AimTrackingInterval 0.02  
+			Attributes MiniBoss
+			Attributes UseBossHealthBar
+			Skill Expert
+			MaxVisionRange 1200
+            Skin 0
+			ItemAttributes
+			{
+			ItemName "Airtight Arsonist"
+			"set item tint RGB" 12073019
+			}
+			ItemAttributes
+			{
+				ItemName "The Force-a-Nature"
+				"clip size bonus" 2
+				"bullets per shot bonus" 5
+				"fire rate bonus" 0.1
+				"custom item model" "models/sussy/weapons/c_models/c_double_barrel.mdl"
+				"faster reload rate" 2.0 // 70% slower reload
+				"damage bonus" 5.0	// 55% damage reduction
+				"weapon spread bonus" 2.0				
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.3
+				"damage force reduction" 0.1
+				"airblast vulnerability multiplier" 0.1
+				"rage giving scale" 0.1
+				"override footstep sound set" 5
+			}
+		}
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "susport"
+		TotalCount 32
+		MaxActive 11
+		Support 1
+		WaitForAllDead "sus_tank"
+		WaitBeforeStarting 20
+		WaitBetweenSpawns 2
+		Where spawnbot_upper
+		RandomChoice
+		{
+		TFBot
+		{
+		Name "sus...."
+		Health 97
+		ClassIcon jerma_missing
+		Class Scout
+		Attributes AlwaysCrit
+		WeaponRestrictions MeleeOnly
+		CharacterAttributes
+		{
+		"torso scale" -2.0
+		"head scale" 1.47
+		"hand scale" 1.22
+		}
+		}
+		TFBot
+		{
+		Name "so sussy......"
+		Health 347
+		Class Soldier
+		ClassIcon jerma_missing
+		Attributes AlwaysCrit
+		WeaponRestrictions MeleeOnly
+		CharacterAttributes
+		{
+		"torso scale" 2.0
+		"head scale" 1.11
+		"hand scale" 1.77
+		}
+		}
+		TFBot
+		{
+		Name "why are we sus?....."
+		Health 222
+		Class Pyro
+		ClassIcon jerma_missing
+		Attributes AlwaysCrit
+		WeaponRestrictions MeleeOnly
+		CharacterAttributes
+		{
+		"torso scale" 0.6
+		"head scale" 0.25
+		"hand scale" 3.33
+		}
+		}
+		TFBot
+		{
+		Name "stop being sus...."
+		Health 455
+		Class Demoman
+		ClassIcon jerma_missing
+		Attributes AlwaysCrit
+		WeaponRestrictions MeleeOnly
+		CharacterAttributes
+		{
+		"torso scale" 4.0
+		"head scale" 0.0
+		"hand scale" 0.0
+		}
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "STOPTALKINABOUTAMONGUSIAMTIREDOFSEEINGIT!"
+		WaitForAllDead "crewmate_end"
+		TotalCount 5
+		MaxActive 1
+		WaitBeforeStarting 20
+		Support Limited
+		FirstSpawnWarningSound "sussy/long_rant.mp3"
+		Where spawnbot_hatch
+		TFBot // thx braindawg
+		{
+			Class Demoman
+			Name "STOP POSTING ABOUT AMONG US"
+			ClassIcon red2_lite
+			Health 5500
+			Scale 1.25
+			Skill Expert
+				WeaponResist   //Multiplies damage received from weapons listed below
+				{
+					"TF_WEAPON_KNIFE" 0.1
+					"tf_weapon_revolver" 0.1
+					"TF_WEAPON_PISTOL" 0.1
+				}
+			Item "White Russian"
+			Item Graybanns
+			Item "The All-Father"
+			Item "Frying Pan"
+			UseHumanModel 1
+			AddCond   { Name TF_COND_REPROGRAMMED } 
+			Action Sniper  
+			Attributes MiniBoss
+			Attributes HoldFireUntilFullReload
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_GRENADELAUNCHER"
+				"faster reload rate" 0.45
+				"fire rate bonus" 0.25
+				"clip size upgrade atomic" 7.0
+			}
+			ItemAttributes
+			{
+			ItemName "White Russian"
+			"set item tint RGB" 1315860
+			"attachment name" "head"
+			}
+			ItemAttributes
+			{
+			ItemName "The All-Father"
+			"set item tint RGB" 1315860
+			}
+			ItemAttributes
+			{
+			ItemName Graybanns
+			"set item tint RGB" 8289918
+			"item style override" 2
+			}
+            ItemAttributes
+			{
+			    ItemName "Frying Pan"
+				"provide on active" 1
+				"hand scale" 3.0
+				"damage bonus" 1.5
+				"damage causes airblast" 1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	1.25
+				"gesture speed increase" 99
+				"health from packs decreased" 0.01 
+				"voice pitch scale" 0.90
+				"damage force reduction" 0.4
+				"airblast vulnerability multiplier" 0.4
+			}
+		}
+		}
+	}
+	
+	Wave
+	{
+		Explanation    //Dispayed once the wave is initialized
+		{
+			Line "{F5BABE}It is possible that a parsing error had occured. Check console for details"
+		}
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		
+		WaveSpawn
+		{
+		TotalCount 1
+		MaxActive 1
+		WaitForAllDead "realthreat"
+		Where spawnbot_hatch
+		TFBot
+		{
+		ClassIcon heavy
+		Scale 0.1
+		Action Mobber
+		Attributes MiniBoss
+		Name "you are winner!"
+		CharacterAttributes
+		{
+		"move speed bonus" 0.1
+		"health regen" -300
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		WaitBeforeStarting 10
+		FirstSpawnWarningSound "sussy/epicly_owned_and_trolled.mp3"
+		}
+		
+		WaveSpawn
+		{
+		WaitBeforeStarting 10
+		FirstSpawnWarningSound "sussy/epicly_owned_and_trolled.mp3"
+		}
+		
+		WaveSpawn
+		{
+		Name "sex"
+		TotalCount 1
+		MaxActive 1
+		Support Limited
+		WaitBeforeStarting 15
+		Where spawnbot_hatch
+		RandomChoice
+		{
+		Squad
+		{
+		TFBot
+		{
+		ClassIcon heavy_transform
+		Class Scout
+		Health 10000
+		Attributes SuppressFire
+		Action Mobber
+		Attributes UseBossHealthBar
+		Scale 0.1
+		ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+		{
+		Delay 0.4 //Time before the first bot attribute change (Default: 10)
+		Cooldown 10 //Time between each bot attribute change (Default: 10)
+		Repeats 5 //How many times should bot change attributes in total (Default: 0 - Infinite)
+		IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+		//IfHealthBelow 100 //When set, the task activates only when the bot health is below specified value
+		Name "Attr1" // Name of the bot attributes listed in EventChangeAttributes
+		}
+		EventChangeAttributes //Do not attempt to put any of custom keys here. ExtAttr is the only exception
+		{
+			Attr1
+			{
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "MvM GateBot Light Scout"
+			ItemAttributes               // turn off light hat
+			{
+			ItemName "MvM GateBot Light Scout"
+			"item style override" 0
+			}
+			Skill Normal
+			CharacterAttributes
+			{
+			"fire rate bonus" 0.25
+			"health regen" -10000
+			}
+			ExtAttr TargetStickies   //The bot will target stickies. 
+		    }
+		}
+		}
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "realthreat"
+		TotalCount 1
+		MaxActive 1
+		Support Limited
+		Where spawnbot
+		WaitBeforeStarting 15.6
+		FirstSpawnMessage "{red}WARNING! TROLLING LEVELS ARE AT CRITICAL LEVEL!"  
+		TotalCurrency 900
+		RandomChoice
+		{
+		Squad
+		{
+		TFBot
+		{
+		Class Heavyweapons
+		Skill Expert
+		ClassIcon pyro_troll
+		Attributes UseBossHealthBar
+		Attributes MiniBoss
+		WeaponRestrictions MeleeOnly
+		Name "Trolled"
+		Scale 1.5
+		Health 32000
+		Item "Necro Smasher"
+		Item "Handsome Devil"
+		ItemAttributes
+		{
+		ItemName "Handsome Devil"
+		"set item tint rgb" 15132390
+		"head scale" 12.0
+		}
+		ItemAttributes
+		{
+		ItemName "Necro Smasher"
+		"damage bonus" 4.0
+		"fire rate bonus" 0.75
+		"hand scale" 6.0
+		"apply z velocity on damage" -999999999
+		}
+		CharacterAttributes
+		{
+		"move speed bonus" 0.9
+		"rage giving scale" 2.0
+		}
+		}
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		Support Limited
+		TotalCount 1
+		Where spawnbot_hatch2
+		TFBot
+		{
+			Class Heavyweapons
+			Name "wow you suck"
+			ClassIcon red2_lite
+			Skill Expert
+			Health 30000
+			Scale 3.3
+			Item "The Team Captain"
+			AddCond   { Name TF_COND_REPROGRAMMED } 
+			ExtAttr AlwaysFireWeaponAlt
+				FireWeapon    //Periodically fires weapon
+                {
+                    Delay 0 //Time before the first fire input starts (Default: 10)
+                    Cooldown 60 //Time between each fire input (Default: 10)
+                    Repeats 0 //How many times should bot use the fire input in total (Default: 0 - Infinite)
+					IfSeeTarget 1 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+                    Duration 0.1
+					Type "Special"
+				}
+			Action Mobber  
+			MaxVisionRange 1200
+			Attributes MiniBoss
+			Attributes UseBossHealthBar
+			Attributes SpawnWithFullCharge
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_MINIGUN"
+				"damage bonus"	3.0
+				"fire rate bonus" 0.6
+				"generate rage on damage" 1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.001 
+				"health from packs decreased" 0.01
+				"dmg from melee increased" 8.0
+				"voice pitch scale" 0
+				"damage force reduction" 0.001
+				"airblast vulnerability multiplier" 0.3
+				"override footstep sound set" 2
+			}
+		}
+		}
+	}
+	
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		
+        WaveSpawn
+		{
+		WaitBeforeStarting 30
+		}
+		
+	}
+	
+	Wave
+	{
+	    Explanation    //Dispayed once the wave is initialized
+		{
+			Line "{000000}Be weary, as an angered entity is within this area..."
+			Line "{000000}On the bright side, a particular assasin will aid you in battle."
+		}
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		InitWaveOutput
+		{
+		    Target pit_close_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		
+		WaveSpawn
+		{
+		TotalCount 1
+		MaxActive 1
+		Where spawnbot_hatch
+		Name "dialong"
+		WaitBeforeStarting 10
+		FirstSpawnWarningSound "sussy/tricky_static.mp3"
+		RandomChoice
+		{
+		RandomChoice
+		{
+		TFBot
+		{
+			health 33000
+			Class scout
+			Name "shame on you bitch"
+			Attributes IgnoreFlag
+			Attributes SuppressFire
+			scale 0.1
+			Message //Displays message in the chat
+			{
+			Name "{red}INVALID" //Message in the chat displayed
+			Delay 0 //Time before the message is first displayed (Default: 10)
+			Cooldown 9999 //Time between each message (Default: 10)
+			Repeats 1 //How many times should bot display the message (Default: 0 - Infinite)
+			}
+			Message //Displays message in the chat
+			{
+			Name "{red}INCORRECT" //Message in the chat displayed
+			Delay 1 //Time before the message is first displayed (Default: 10)
+			Cooldown 9999 //Time between each message (Default: 10)
+			Repeats 1 //How many times should bot display the message (Default: 0 - Infinite)
+			}
+			Message //Displays message in the chat
+			{
+			Name "{red}SUFFER" //Message in the chat displayed
+			Delay 1.9 //Time before the message is first displayed (Default: 10)
+			Cooldown 9999 //Time between each message (Default: 10)
+			Repeats 1 //How many times should bot display the message (Default: 0 - Infinite)
+			}
+			Message //Displays message in the chat
+			{
+			Name "{red}FUTILE" //Message in the chat displayed
+			Delay 2.2 //Time before the message is first displayed (Default: 10)
+			Cooldown 9999 //Time between each message (Default: 10)
+			Repeats 1 //How many times should bot display the message (Default: 0 - Infinite)
+			}
+			Message //Displays message in the chat
+			{
+			Name "{red}WHAT?" //Message in the chat displayed
+			Delay 2.8 //Time before the message is first displayed (Default: 10)
+			Cooldown 9999 //Time between each message (Default: 10)
+			Repeats 1 //How many times should bot display the message (Default: 0 - Infinite)
+			}
+			CharacterAttributes
+			{
+			"health regen" -7500
+			}
+		}
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		TotalCount 1
+		MaxActive 1
+		Where spawnbot
+		Name "tricky"
+		FirstSpawnWarningSound "sussy/tricky_theme1.mp3"
+		WaitForAllDead "dialong"
+		RandomChoice
+		{
+		RandomChoice
+		{
+		TFBot
+		{
+		Class Pyro
+		Name "Tricky The Clown"
+		Health 56660
+		Skill Expert
+		WeaponRestrictions MeleeOnly
+		Action Mobber
+		Attributes UseBossHealthBar
+		Attributes AlwaysCrit
+		Attributes HoldFireUntilFullReload
+		Attributes DisableDodge
+		Item "Bozo's Bouffant"
+		Item "Bread Biter"
+		Item "The Maul"
+		ClassIcon objector_lite
+		UseHumanModel 1
+		
+			HomingRockets   
+			{
+				IgnoreDisguisedSpies 1 // Default: 1
+				IgnoreStealthedSpies 1 // Default: 1
+				RocketSpeed 0.1 // Multiplier of rocket speed. (Default: 1)
+				TurnPower 90 //How fast should the rocket rotate to face the target (Default: 10)
+			    MaxAimError 66 //Max angle between rocket and the target (Default: 105)
+				AimTime 5 //How long should the rocket be aiming (Default: 9999)
+				Acceleration 770 //Acceleration in hu (Default: 0)
+				AccelerationTime 2.5 //How long should the rocket accelerate (Default: 9999)
+				AccelerationStartTime 1 //Time before rockets start accelerating (Default: 0)
+				//Gravity 355 // Gravity of the rocket (Default: 0)
+				//FollowCrosshair 1 // Follow crosshair instead of enemies (Default: 0)
+			}
+		
+		ItemAttributes
+		{
+		ItemName "Bozo's Bouffant"
+		"set item tint RGB" 12073019
+		}
+		ItemAttributes
+		{
+		ItemName "Bread Biter"
+		"custom item model" "models/workshop/player/items/heavy/hwn2016_mad_mask/hwn2016_mad_mask.mdl"
+		}
+		ItemAttributes
+		{
+		ItemName "The Maul"
+		"damage bonus" 1.25
+		"fire rate bonus" 0.66
+		"hand scale" 1.33
+		"custom item model" "models/workshop/weapons/c_models/c_picket/c_picket.mdl"
+		}
+		CharacterAttributes
+		{
+		"move speed bonus" 1.35
+		"damage force reduction" 0.1
+		"airblast vulnerability multiplier" 0.1
+		"rage giving scale" 0.25
+		"head scale" 2.0
+		"cancel falling damage" 1
+		"voice pitch scale" 0.0
+		"cannot be backstabbed" 1
+		}
+		
+			ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+			{
+			    Delay 0 //Time before the first bot attribute change (Default: 10)
+			    Cooldown 25 //Time between each bot attribute change (Default: 10)
+			    Repeats 0 //How many times should bot change attributes in total (Default: 0 - Infinite)
+				IfSeeTarget 1 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+				IfHealthBelow 33000 //When set, the task activates only when the bot health is below specified value
+			    Name "jebus_halo" // Name of the bot attributes listed in EventChangeAttributes
+			}
+			
+			ChangeAttributes
+			{
+			    Delay 10
+				Cooldown 10
+				Repeats 0
+				IfSeeTarget 1
+				IfHealthBelow 33000
+				Name "hack_n_slash"
+			}
+			
+			ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+			{
+			    Delay 0 //Time before the first bot attribute change (Default: 10)
+			    Cooldown 31 //Time between each bot attribute change (Default: 10)
+			    Repeats 0 //How many times should bot change attributes in total (Default: 0 - Infinite)
+				IfSeeTarget 1 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+				IfHealthBelow 20000 //When set, the task activates only when the bot health is below specified value
+			    Name "drive_shot" // Name of the bot attributes listed in EventChangeAttributes
+			}
+			
+			EventChangeAttributes
+			{
+			    hack_n_slash
+				{
+				    WeaponRestrictions MeleeOnly
+					ItemAttributes
+					{
+					ItemName "The Maul"
+					"damage bonus" 1.66
+					"fire rate bonus" 0.55
+					"custom item model" "models/workshop/weapons/c_models/c_picket/c_picket.mdl"
+					}
+					
+            		CharacterAttributes
+					{
+                		"move speed bonus" 1.55
+						"damage force reduction" 0.05
+						"airblast vulnerability multiplier" 0.05
+						"rage giving scale" 0.1
+            		}
+				}
+			    jebus_halo
+				{
+			        //Item "Honest Halo"
+					Item TF_WEAPON_SHOTGUN_PYRO
+					WeaponRestrictions SecondaryOnly
+					ItemAttributes
+					{
+					    ItemName TF_WEAPON_SHOTGUN_PYRO
+						"damage bonus" 99.0
+						"custom item model" "models/player/items/all_class/all_halo.mdl"
+						"override projectile type" 13
+						"energy weapon penetration" 1
+						"fire rate bonus" 1.25
+						"faster reload rate" 99
+						"set item tint RGB" 10224132
+				    }
+			    }
+				
+				drive_shot
+				{
+				    Item "The Original"
+					WeaponRestrictions PrimaryOnly
+					ItemAttributes
+					{
+					    ItemName "The Original"
+						"damage bonus" 2.0
+						"fire rate bonus" 0.2
+						"faster reload rate" -2
+						"projectile spread angle penalty" 40
+						"heal on kill" 1000
+						"clip size upgrade atomic" 26
+						"Projectile speed increased" 0.1
+					}
+				}
+			}
+		}
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		TotalCount 1
+		MaxActive 1
+		Where spawnbot_hatch
+		Name "dialonger"
+		WaitForAllDead "tricky"
+		WaitBeforeStarting 45
+		FirstSpawnWarningSound "sussy/tricky_static.mp3"
+		RandomChoice
+		{
+		RandomChoice
+		{
+		TFBot
+		{
+			health 33000
+			Class scout
+			Name " "
+			Attributes IgnoreFlag
+			Attributes SuppressFire
+			scale 0.1
+			Message //Displays message in the chat
+			{
+			Name "{red}YOU" //Message in the chat displayed
+			Delay 0 //Time before the message is first displayed (Default: 10)
+			Cooldown 9999 //Time between each message (Default: 10)
+			Repeats 1 //How many times should bot display the message (Default: 0 - Infinite)
+			}
+			Message //Displays message in the chat
+			{
+			Name "{red}DONT" //Message in the chat displayed
+			Delay 1 //Time before the message is first displayed (Default: 10)
+			Cooldown 9999 //Time between each message (Default: 10)
+			Repeats 1 //How many times should bot display the message (Default: 0 - Infinite)
+			}
+			Message //Displays message in the chat
+			{
+			Name "{red}KILL" //Message in the chat displayed
+			Delay 1.9 //Time before the message is first displayed (Default: 10)
+			Cooldown 9999 //Time between each message (Default: 10)
+			Repeats 1 //How many times should bot display the message (Default: 0 - Infinite)
+			}
+			Message //Displays message in the chat
+			{
+			Name "{red}CLOWN!!!!" //Message in the chat displayed
+			Delay 2.2 //Time before the message is first displayed (Default: 10)
+			Cooldown 9999 //Time between each message (Default: 10)
+			Repeats 1 //How many times should bot display the message (Default: 0 - Infinite)
+			}
+			Message //Displays message in the chat
+			{
+			Name "{red}CLOWN" //Message in the chat displayed
+			Delay 2.8 //Time before the message is first displayed (Default: 10)
+			Cooldown 9999 //Time between each message (Default: 10)
+			Repeats 1 //How many times should bot display the message (Default: 0 - Infinite)
+			}
+			CharacterAttributes
+			{
+			"health regen" -7500
+			}
+		}
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		TotalCount 1
+		MaxActive 1
+		Where spawnbot_hatch
+		Name "dialongest"
+		WaitForAllDead "tricky"
+		WaitBeforeStarting 72.9
+		FirstSpawnWarningSound "sussy/tricky_static.mp3"
+		RandomChoice
+		{
+		RandomChoice
+		{
+		TFBot
+		{
+			health 20000
+			Class scout
+			Name " "
+			Attributes IgnoreFlag
+			Attributes SuppressFire
+			scale 0.1
+			Message //Displays message in the chat
+			{
+			Name "{red}KILLS" //Message in the chat displayed
+			Delay 0 //Time before the message is first displayed (Default: 10)
+			Cooldown 9999 //Time between each message (Default: 10)
+			Repeats 1 //How many times should bot display the message (Default: 0 - Infinite)
+			}
+			Message //Displays message in the chat
+			{
+			Name "{red}YOU!!!!!" //Message in the chat displayed
+			Delay 1 //Time before the message is first displayed (Default: 10)
+			Cooldown 99999 //Time between each message (Default: 10)
+			Repeats 3 //How many times should bot display the message (Default: 0 - Infinite)
+			}
+			Message //Displays message in the chat
+			{
+			Name "{red}YOU!!!!!" //Message in the chat displayed
+			Delay 1.9 //Time before the message is first displayed (Default: 10)
+			Cooldown 9999 //Time between each message (Default: 10)
+			Repeats 1 //How many times should bot display the message (Default: 0 - Infinite)
+			}
+			Message //Displays message in the chat
+			{
+			Name "{red}YOU!!!!!" //Message in the chat displayed
+			Delay 2.2 //Time before the message is first displayed (Default: 10)
+			Cooldown 9999 //Time between each message (Default: 10)
+			Repeats 1 //How many times should bot display the message (Default: 0 - Infinite)
+			}
+			Message //Displays message in the chat
+			{
+			Name "{red}YOU!!!!!" //Message in the chat displayed
+			Delay 2.8 //Time before the message is first displayed (Default: 10)
+			Cooldown 9999 //Time between each message (Default: 10)
+			Repeats 1 //How many times should bot display the message (Default: 0 - Infinite)
+			}
+			CharacterAttributes
+			{
+			"health regen" -7500
+			}
+		}
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		TotalCount 1
+		MaxActive 1
+		Where spawnbot
+		Name "die"
+		FirstSpawnWarningSound "sussy/tricky_death.mp3"
+		WaitForAllDead "dialongest"
+		RandomChoice
+		{
+		RandomChoice
+		{
+		TFBot
+		{
+		Class Pyro
+		Name "Tricky The Clown"
+		Health 999999
+		Scale 1.9
+		Skill Expert
+		WeaponRestrictions MeleeOnly
+		Action Mobber
+		Attributes UseBossHealthBar
+		Attributes AlwaysCrit
+		Attributes AlwaysFireWeapon
+		Attributes DisableDodge
+		Item "Bread Biter"
+		Item "Bozo's Bouffant"
+		Item "The Maul"
+		ClassIcon objector_lite
+		UseHumanModel 1
+		ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+		{
+		Delay 63 //Time before the first bot attribute change (Default: 10)
+		Cooldown 999999999 //Time between each bot attribute change (Default: 10)
+		Repeats 1 //How many times should bot change attributes in total (Default: 0 - Infinite)
+		IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+		Name "Attr2" // Name of the bot attributes listed in EventChangeAttributes
+		}
+		ItemAttributes
+		{
+		ItemName "Bozo's Bouffant"
+		"set item tint RGB" 12073019
+		}
+		ItemAttributes
+		{
+		ItemName "The Maul"
+		"damage bonus" 5.0
+		"fire rate bonus" 0.4
+		"melee range multiplier" 6
+		"hand scale" 1.33
+		"custom item model" "models/workshop/weapons/c_models/c_picket/c_picket.mdl"
+		}
+		CharacterAttributes
+		{
+		"move speed bonus" 2.0
+		"head scale" 2.0		
+		"voice pitch scale" 0.0
+		"cannot be backstabbed" 1
+		"attach particle effect" 1
+		}
+		
+		EventChangeAttributes //Do not attempt to put any of custom keys here. ExtAttr is the only exception
+		{
+			Attr2
+			{
+			CharacterAttributes
+			{
+			"health regen" -999999
+			}
+			}
+		}
+		}
+		
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		Support 1
+		TotalCount 3
+		MaxActive 1
+		Where spawnbot_hut
+		WaitBetweenSpawns 50
+		RandomChoice
+		{
+		Squad
+		{
+		TFBot
+		{
+			Class Sniper
+			Name "Hank J. Wimbleton"
+			Skill Expert
+			Health 10000
+			AimTrackingInterval 0.03  
+			Scale 1.0			
+			//WeaponRestrictions SecondaryOnly
+			AddCond   { Name TF_COND_REPROGRAMMED } 
+			Action Mobber  
+			//MaxVisionRange 1200			
+			UseHumanModel 1
+			
+			WeaponResist
+			{
+				"TF_WEAPON_SHOTGUN_PYRO" 0.1
+			}
+			
+			Item "The Direct Hit"
+			Item "Upgradeable TF_WEAPON_SMG"
+			Item "Prinny Machete"
+			
+			Item "The Tomb Readers"
+			Item "The Bruiser's Bandanna"
+			Item "Highway Star"
+			Item "The Toowoomba Tunic"
+			
+			WeaponSwitch    //Periodically switches weapon
+            {
+                Delay 0 //Time before the first weapon switch starts (Default: 10)
+                Cooldown 25 //Time between each weapon switch (Default: 10)
+                Repeats 0 //How many times should bot switch weapons in total (Default: 0 - Infinite)
+			    IfSeeTarget 1 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+			    Type "Primary" // Weapon slot, possible values:
+				//Primary
+				//Secondary
+				//Melee
+			    //IfHealthBelow 100 //When set, the task activates only when the bot health is below specified value
+			}
+			
+			WeaponSwitch    //Periodically switches weapon
+            {
+                Delay 0 //Time before the first weapon switch starts (Default: 10)
+                Cooldown 10 //Time between each weapon switch (Default: 10)
+                Repeats 0 //How many times should bot switch weapons in total (Default: 0 - Infinite)
+			    IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+			    Type "Secondary" // Weapon slot
+			}
+			
+			WeaponSwitch    //Periodically switches weapon
+            {
+                Delay 5 //Time before the first weapon switch starts (Default: 10)
+                Cooldown 15 //Time between each weapon switch (Default: 10)
+                Repeats 0 //How many times should bot switch weapons in total (Default: 0 - Infinite)
+			    IfSeeTarget 1 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+			    Type "Melee" // Weapon slot
+			    IfHealthBelow 5000 //When set, the task activates only when the bot health is below specified value
+			}
+			
+			ItemAttributes
+			{
+				ItemName "The Direct Hit"
+				"damage bonus"	5.0
+				"fire rate bonus" 1.5
+				"faster reload bonus" 2.0
+			}
+			
+			ItemAttributes
+			{
+			    ItemName "Upgradeable TF_WEAPON_SMG"
+				"damage bonus" 3.0
+				"fire rate bonus" 0.44
+				"faster reload rate" 1.75
+				"spread penalty" 1.5
+			}
+			
+			ItemAttributes
+			{
+			    ItemName "Prinny Machete"
+				"damage bonus" 3.5
+				"fire rate penalty" 2.0
+				"heal on hit for rapidfire" 1500
+				"custom item model" "models/workshop_partner/weapons/c_models/c_shogun_katana/c_shogun_katana_soldier.mdl"
+			}
+			
+			CharacterAttributes
+			{
+				"move speed bonus"	1.2
+				"health from packs decreased" 0.1
+				"hand scale" 1.33
+				"head scale" 2.0
+				"health regen" 60
+				"dmg from melee increased" 5
+				"voice pitch scale" 0
+				"damage force reduction" 0.001
+				"airblast vulnerability multiplier" 0.3
+			}
+			
+		}
+		}
+		}
+		}
+		
+	}
+	
+	// Ultimate Destiny
+	
+	Wave
+	{
+	    Explanation    //Dispayed once the wave is initialized
+		{
+			Line "observe."
+			Line "please just watch. Do not attack the robots this wave."
+			Line "pretty please?"
+			Line "oh and before i forget, don't block them either, got it?"
+			Line "hell, go spy or something. Use the cloak and dagger too if you are fancy."
+		}
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		
+        WaveSpawn
+		{
+		Name "shit"
+		WaitBeforeStarting 20
+		FirstSpawnWarningSound "sussy/final_piss_challenge.mp3"
+		}
+		
+        WaveSpawn
+		{
+		Name "shit"
+		WaitBeforeStarting 20
+		FirstSpawnWarningSound "sussy/final_piss_challenge.mp3"
+		}
+		
+		WaveSpawn
+		{
+		Name "godzilla"
+		WaitForAllDead "shit"
+		TotalCount 1
+		WaitBeforeStarting 8
+		Where spawnbot_godzilla
+		TFBot
+		{
+		Scale 3
+		Class Pyro
+		Health 40000
+		ClassIcon pyro_dragon_fury_swordstone_giant
+		Skill Hard
+		MaxVisionRange 1000
+		Action PushToCapturePoint
+		Name "Godzilla"
+		Item "The Dragon's Fury"
+		Item "Burny's Boney Bonnet"
+		ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+		{
+		Delay 4.0 //Time before the first bot attribute change (Default: 10)
+		Cooldown 999999999 //Time between each bot attribute change (Default: 10)
+		Repeats 1 //How many times should bot change attributes in total (Default: 0 - Infinite)
+		IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+		Name "Attr1" // Name of the bot attributes listed in EventChangeAttributes
+		}
+		ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+		{
+		Delay 95 //Time before the first bot attribute change (Default: 10)
+		Cooldown 999999999 //Time between each bot attribute change (Default: 10)
+		Repeats 1 //How many times should bot change attributes in total (Default: 0 - Infinite)
+		IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+		Name "Attr2" // Name of the bot attributes listed in EventChangeAttributes
+		}
+		Attributes MiniBoss
+		Attributes IgnoreFlag
+		Attributes UseBossHealthBar
+		WeaponRestrictions PrimaryOnly
+		ItemAttributes
+		{
+		ItemName "The Dragon's Fury"
+		"item_meter_charge_rate" 0.5
+		"damage bonus" 1.5
+		}
+		CharacterAttributes
+		{
+		"move speed bonus"	1.3
+		"damage force reduction"	0.3
+		"airblast vulnerability multiplier"	0.3
+		"override footstep sound set"	6
+		}
+		EventChangeAttributes //Do not attempt to put any of custom keys here. ExtAttr is the only exception
+		{
+			Attr1
+			{
+			CharacterAttributes
+			{
+			"move speed bonus" 0.01
+	"increased jump height" 0.001
+			}
+		    }
+			Attr2
+			{
+			CharacterAttributes
+			{
+			"health regen" -40000
+			}
+			}
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "batman1"
+		WaitForAllDead "shit"
+		TotalCount 1
+		WaitBeforeStarting 13
+		Where spawnbot_batman
+		TFBot
+		{
+		Class Soldier
+		Health 9000
+		Name "Batman"
+		Skill Expert
+		UseHumanModel 1
+		Action PushToCapturePoint
+		Attributes UseBossHealthBar
+		WeaponRestrictions PrimaryOnly
+		FireWeapon    //Periodically fires weapon
+		{
+		Delay 0 //Time before the first fire input starts (Default: 10)
+        Cooldown 99 //Time between each fire input (Default: 10)
+     	Repeats 1 //How many times should bot use the fire input in total (Default: 0 - Infinite)
+	    IfSeeTarget 1 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+        Duration 0.1
+		Type "Primary"
+		}
+		AddCond   { Name TF_COND_REPROGRAMMED } 
+		Item TF_WEAPON_GRENADELAUNCHER
+		Item "Arkham Cowl"
+		Item "Batter's Bracers"
+		Item "The Caped Crusader"
+		Item "Buttler"
+		ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+		{
+		Delay 14.0 //Time before the first bot attribute change (Default: 10)
+		Cooldown 999999999 //Time between each bot attribute change (Default: 10)
+		Repeats 1 //How many times should bot change attributes in total (Default: 0 - Infinite)
+		IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+		Name "Attr3" // Name of the bot attributes listed in EventChangeAttributes
+		}
+		ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+		{
+		Delay 6.0 //Time before the first bot attribute change (Default: 10)
+		Cooldown 999999999 //Time between each bot attribute change (Default: 10)
+		Repeats 1 //How many times should bot change attributes in total (Default: 0 - Infinite)
+		IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+		Name "Attr1" // Name of the bot attributes listed in EventChangeAttributes
+		}
+		ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+		{
+		Delay 30 //Time before the first bot attribute change (Default: 10)
+		Cooldown 999999999 //Time between each bot attribute change (Default: 10)
+		Repeats 1 //How many times should bot change attributes in total (Default: 0 - Infinite)
+		IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+		Name "Attr2" // Name of the bot attributes listed in EventChangeAttributes
+		}
+		CharacterAttributes
+		{
+		"move speed bonus" 0.1		
+	"increased jump height" 0.001
+		"fire rate penalty" 2000
+		}
+		EventChangeAttributes //Do not attempt to put any of custom keys here. ExtAttr is the only exception
+		{
+			Attr1
+			{
+			CharacterAttributes
+			{
+			"move speed bonus" 1.5
+			}
+		    }
+			Attr2
+			{
+			CharacterAttributes
+			{
+			"health regen" -40000			
+	"increased jump height" 0.001
+			}
+			}
+			Attr3
+			{
+			CharacterAttributes
+			{
+			"move speed bonus" 0.001
+	"increased jump height" 0.001
+			}
+			}
+		}
+		}
+		}
+	
+	WaveSpawn
+	{
+		Name "shaq1"
+		WaitForAllDead "shit"
+		TotalCount 1
+		WaitBeforeStarting 20
+		Where spawnbot_shaq
+		TFBot
+		{
+		Name "Shaq"
+		Class Demoman
+		ClassIcon heavy_fist_nys
+		Attributes UseBossHealthBar
+		Skill Hard
+		Action Mobber
+		Health 5000
+		ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+		{
+		Delay 12 //Time before the first bot attribute change (Default: 10)
+		Cooldown 999999999 //Time between each bot attribute change (Default: 10)
+		Repeats 1 //How many times should bot change attributes in total (Default: 0 - Infinite)
+		IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+		Name "Attr2" // Name of the bot attributes listed in EventChangeAttributes
+		}
+		UseHumanModel 1
+		AddCond   { Name TF_COND_REPROGRAMMED } 
+		Item "Weight Room Warmer"
+		Item "Highland High Heels"
+		Item "Outta' Sight"
+		WeaponRestrictions MeleeOnly
+		Attributes AlwaysCrit
+		CharacterAttributes
+		{
+		"move speed bonus" 1.5
+		"fire rate bonus" 0.5
+		"dmg taken from fire reduced" 0.001
+		}
+		EventChangeAttributes //Do not attempt to put any of custom keys here. ExtAttr is the only exception
+		{
+			Attr2
+			{
+			CharacterAttributes
+			{
+			"health regen" -40000
+			}
+			}
+		}
+		}
+	}
+	
+	WaveSpawn
+	{
+		Name "shaq1"
+		WaitForAllDead "shit"
+		TotalCount 1
+		WaitBeforeStarting 23
+		Where spawnbot_godzilla
+		TFBot
+		{
+		Name "Aaron Carter"
+		Class Soldier
+		ClassIcon heavy_fist_nys
+		Attributes UseBossHealthBar
+		Skill Hard
+		Health 5000
+		Action Mobber
+		UseHumanModel 1
+		ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+		{
+		Delay 8 //Time before the first bot attribute change (Default: 10)
+		Cooldown 999999999 //Time between each bot attribute change (Default: 10)
+		Repeats 1 //How many times should bot change attributes in total (Default: 0 - Infinite)
+		IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+		Name "Attr2" // Name of the bot attributes listed in EventChangeAttributes
+		}
+		Item "The Ullapool Caber"
+		Item "The Battle Bob"
+		WeaponRestrictions MeleeOnly
+		Attributes AlwaysCrit
+		Attributes DisableDodge
+		ItemAttributes
+		{
+		ItemName "The Battle Bob"
+		"set item tint RGB" 15185211
+		}
+		CharacterAttributes
+		{
+		"move speed bonus" 1.5
+		"fire rate bonus" 0.5
+		"damage bonus" 99.0
+		"dmg taken from fire reduced" 0.001
+		"blast dmg to self increased" 999
+		}
+		EventChangeAttributes //Do not attempt to put any of custom keys here. ExtAttr is the only exception
+		{
+			Attr2
+			{
+			CharacterAttributes
+			{
+			"health regen" -40000
+			}
+			}
+		}
+		}
+	}
+	
+	// 32
+	WaveSpawn
+	{
+		Name "lincon1"
+		WaitForAllDead "shit"
+		TotalCount 1
+		WaitBeforeStarting 32
+		Where spawnbot_lincon
+		TFBot
+		{
+		Class Sniper
+		Action Mobber
+		Skill Expert
+		Name "Zombie Lincon"
+		Attributes UseBossHealthBar
+		ClassIcon sniper_smg
+		WeaponRestrictions SecondaryOnly
+		Health 5000
+		UseHumanModel 1
+		ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+		{
+		Delay 8 //Time before the first bot attribute change (Default: 10)
+		Cooldown 999999999 //Time between each bot attribute change (Default: 10)
+		Repeats 1 //How many times should bot change attributes in total (Default: 0 - Infinite)
+		IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+		Name "Attr2" // Name of the bot attributes listed in EventChangeAttributes
+		}
+		AddCond   //Adds conditions to bots
+		{
+		Name "TF_COND_REPROGRAMMED" // Condition to apply. List of available conditions https://wiki.teamfortress.com/wiki/Cheats#addcond
+		//Index 43 //Condition index can be used instead
+		Delay 0 // Delay before the condition activates (Default: 0)
+		Duration 3 // Duration of the condition effect (Default: 0 - infinite duration)
+		}
+		Item "Ghastly Gibus"
+		CharacterAttributes
+		{
+		"move speed bonus" 0.001
+		"faster reload rate" 777
+	"increased jump height" 0.001
+		}
+		EventChangeAttributes //Do not attempt to put any of custom keys here. ExtAttr is the only exception
+		{
+			Attr2
+			{
+			CharacterAttributes
+			{
+			"health regen" -40000
+	"increased jump height" 0.001
+			}
+			}
+		}
+		}
+    }
+	
+	// 40 - prime
+	WaveSpawn
+	{
+		Name "lincon1"
+		WaitForAllDead "shit"
+		TotalCount 1
+		WaitBeforeStarting 40
+		Where spawnbot_godzilla
+		TFBot
+		{
+		Class Heavyweapons
+		Action PushToCapturePoint
+		Skill Expert
+		Scale 1.8
+		Name "Optimus Prime"
+		Attributes UseBossHealthBar
+		Attributes MiniBoss
+		ClassIcon heavy_chief
+		WeaponRestrictions MeleeOnly
+		Health 40000
+		ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+		{
+		Delay 28 //Time before the first bot attribute change (Default: 10)
+		Cooldown 999999999 //Time between each bot attribute change (Default: 10)
+		Repeats 1 //How many times should bot change attributes in total (Default: 0 - Infinite)
+		IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+		Name "Attr2" // Name of the bot attributes listed in EventChangeAttributes
+		}
+		ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+		{
+		Delay 5 //Time before the first bot attribute change (Default: 10)
+		Cooldown 999999999 //Time between each bot attribute change (Default: 10)
+		Repeats 1 //How many times should bot change attributes in total (Default: 0 - Infinite)
+		IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+		Name "Attr1" // Name of the bot attributes listed in EventChangeAttributes
+		}
+		CharacterAttributes
+		{
+		"move speed bonus" 1.25
+		"faster reload rate" 777
+		}
+		EventChangeAttributes //Do not attempt to put any of custom keys here. ExtAttr is the only exception
+		{
+			Attr2
+			{
+			CharacterAttributes
+			{
+			"health regen" -40000
+			"move speed bonus" 0.01
+			}
+			}
+			Attr1
+			{
+			CharacterAttributes
+			{
+			"move speed bonus" 0.01
+	"increased jump height" 0.001
+			}
+			}
+		}
+		}
+    }
+	// 72 - shaq2
+	WaveSpawn
+	{
+	Name "shaq2"
+	WaitForAllDead "shit"
+	TotalCount 1
+	WaitBeforeStarting 72
+	Where spawnbot_lincon
+	    TFBot
+		{
+		Name "Shaq (tiretracked)"
+		Class Demoman
+		ClassIcon heavy_fist_nys
+		Attributes UseBossHealthBar
+		Skill Hard
+		Action Mobber
+		Health 5000
+		ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+		{
+		Delay 32 //Time before the first bot attribute change (Default: 10)
+		Cooldown 999999999 //Time between each bot attribute change (Default: 10)
+		Repeats 1 //How many times should bot change attributes in total (Default: 0 - Infinite)
+		IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+		Name "Attr2" // Name of the bot attributes listed in EventChangeAttributes
+		}
+		UseHumanModel 1
+		AddCond   { Name TF_COND_REPROGRAMMED } 
+		Item "Weight Room Warmer"
+		Item "Highland High Heels"
+		Item "Outta' Sight"
+		WeaponRestrictions MeleeOnly
+		CharacterAttributes
+		{
+		"move speed bonus" 0.001
+		"fire rate bonus" 0.5
+		"damage bonus" 0.01
+		"dmg taken from fire reduced" 0.001
+		}
+		EventChangeAttributes //Do not attempt to put any of custom keys here. ExtAttr is the only exception
+		{
+			Attr2
+			{
+			CharacterAttributes
+			{
+			"health regen" -40000
+			}
+			}
+		}
+		}
+	}
+	// 74 - jackie chan
+	WaveSpawn
+	{
+	Name "shaq2"
+	WaitForAllDead "shit"
+	TotalCount 1
+	WaitBeforeStarting 74
+	Where spawnbot_lincon
+	    TFBot
+		{
+		Name "Jackie Chan"
+		Class Scout
+		Attributes UseBossHealthBar
+		Attributes SuppressFire
+		Skill Hard
+		Action Mobber
+		Health 30000
+		ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+		{
+		Delay 29 //Time before the first bot attribute change (Default: 10)
+		Cooldown 999999999 //Time between each bot attribute change (Default: 10)
+		Repeats 1 //How many times should bot change attributes in total (Default: 0 - Infinite)
+		IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+		Name "Attr2" // Name of the bot attributes listed in EventChangeAttributes
+		}
+		WeaponRestrictions MeleeOnly
+		CharacterAttributes
+		{
+		"move speed bonus" 0.001
+		"fire rate bonus" 0.5
+		}
+		EventChangeAttributes //Do not attempt to put any of custom keys here. ExtAttr is the only exception
+		{
+			Attr2
+			{
+			CharacterAttributes
+			{
+			"health regen" -40000
+			}
+			}
+		}
+		}
+	}
+	// 77 - batman2
+	WaveSpawn
+	{
+	Name "batman2"
+	WaitForAllDead "shit"
+	TotalCount 1
+	WaitBeforeStarting 77
+	Where spawnbot_batman2
+	TFBot
+	{
+		Class Soldier
+		Health 4000
+		Name "Batman (Injured)"
+		Skill Expert
+		UseHumanModel 1
+		Action PushToCapturePoint
+		Attributes UseBossHealthBar
+		WeaponRestrictions MeleeOnly
+		FireWeapon    //Periodically fires weapon
+		{
+		Delay 0 //Time before the first fire input starts (Default: 10)
+        Cooldown 99 //Time between each fire input (Default: 10)
+     	Repeats 1 //How many times should bot use the fire input in total (Default: 0 - Infinite)
+	    IfSeeTarget 1 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+        Duration 0.1
+		Type "Primary"
+		}
+		AddCond   { Name TF_COND_REPROGRAMMED } 
+		Item TF_WEAPON_PISTOL
+		Item "Arkham Cowl"
+		Item "Batter's Bracers"
+		Item "The Caped Crusader"
+		Item "Buttler"
+		ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+		{
+		Delay 10.0 //Time before the first bot attribute change (Default: 10)
+		Cooldown 999999999 //Time between each bot attribute change (Default: 10)
+		Repeats 1 //How many times should bot change attributes in total (Default: 0 - Infinite)
+		IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+		Name "Attr1" // Name of the bot attributes listed in EventChangeAttributes
+		}
+		ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+		{
+		Delay 29.0 //Time before the first bot attribute change (Default: 10)
+		Cooldown 999999999 //Time between each bot attribute change (Default: 10)
+		Repeats 1 //How many times should bot change attributes in total (Default: 0 - Infinite)
+		IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+		Name "Attr2" // Name of the bot attributes listed in EventChangeAttributes
+		}
+		CharacterAttributes
+		{
+		"move speed bonus" 0.1
+		"fire rate penalty" 2000
+	"increased jump height" 0.001
+		}
+		EventChangeAttributes //Do not attempt to put any of custom keys here. ExtAttr is the only exception
+		{
+			Attr1
+			{
+			WeaponRestrictions SecondaryOnly
+		    }
+			Attr2
+			{
+			CharacterAttributes
+			{
+			"health regen" -40000
+	"increased jump height" 0.001
+			}
+			}
+			}
+		}
+	}
+	// 78 - lincon2
+	WaveSpawn
+	{
+	Name "lincon2"
+	WaitForAllDead "shit"
+	TotalCount 1
+	WaitBeforeStarting 78
+	Where spawnbot_lincon2
+	TFBot
+	{
+		Class Sniper
+		Action Mobber
+		Skill Expert
+		Name "Zombie Lincon"
+		Attributes UseBossHealthBar
+		ClassIcon sniper_kukri_lite
+		WeaponRestrictions MeleeOnly
+		Health 5000
+		UseHumanModel 1
+		ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+		{
+		Delay 25 //Time before the first bot attribute change (Default: 10)
+		Cooldown 999999999 //Time between each bot attribute change (Default: 10)
+		Repeats 1 //How many times should bot change attributes in total (Default: 0 - Infinite)
+		IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+		Name "Attr2" // Name of the bot attributes listed in EventChangeAttributes
+		}
+		AddCond   //Adds conditions to bots
+		{
+		Name "TF_COND_REPROGRAMMED"
+		}
+		AddCond   //Adds conditions to bots
+		{
+		Index 71 //Condition index can be used instead
+		Delay 2 // Delay before the condition activates (Default: 0)
+		Duration 99 // Duration of the condition effect (Default: 0 - infinite duration)
+		}
+		Item "Ghastly Gibus"
+		CharacterAttributes
+		{
+		"move speed bonus" 0.001
+		"faster reload rate" 777
+	"increased jump height" 0.001
+		}
+		EventChangeAttributes //Do not attempt to put any of custom keys here. ExtAttr is the only exception
+		{
+			Attr2
+			{
+			CharacterAttributes
+			{
+			"health regen" -40000
+	"increased jump height" 0.001
+			}
+			}
+		}
+	}
+	}
+	// 82 - indiana // when the https://youtu.be/8OucF10ClpY?t=170
+	WaveSpawn
+	{
+	Name "indiana"
+	WaitForAllDead "shit"
+	TotalCount 1
+	WaitBeforeStarting 82
+	Where spawnbot_indiana
+	TFBot
+	{
+	Name "Indiana Jones"
+	Class Sniper
+	Skill Expert
+	Health 3000
+	Attributes UseBossHealthBar
+	Action PushToCapturePoint	
+	AddCond   { Name TF_COND_REPROGRAMMED } 
+	UseHumanModel 1
+    WeaponRestrictions MeleeOnly
+	Item "The Hat With No Name"
+		ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+		{
+		Delay 50 //Time before the first bot attribute change (Default: 10)
+		Cooldown 999999999 //Time between each bot attribute change (Default: 10)
+		Repeats 1 //How many times should bot change attributes in total (Default: 0 - Infinite)
+		IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+		Name "Attr2" // Name of the bot attributes listed in EventChangeAttributes
+		}
+	CharacterAttributes
+	{
+	"move speed bonus" 0.001
+	"head scale" 2.0
+	"torso scale" 1.25
+	"increased jump height" 0.001
+	}
+		EventChangeAttributes //Do not attempt to put any of custom keys here. ExtAttr is the only exception
+		{
+			Attr2
+			{
+			CharacterAttributes
+			{
+			"health regen" -40000
+			"move speed bonus" 0.001
+	"increased jump height" 0.001
+			}
+			}
+		}
+	}
+	}
+	// 86 - lincon3 (actually not needed.)
+	// 96 - carebear
+	WaveSpawn
+	{
+	Name "carebear"
+	WaitForAllDead "shit"
+	TotalCount 1
+	WaitBeforeStarting 100
+	Where spawnbot_carebear
+	TFBot
+	{
+	Skill Expert
+	Health 5000
+	Name "Carebear"
+	Class Heavyweapons
+	Action Mobber
+	Attributes UseBossHealthBar
+	AddCond   { Name TF_COND_REPROGRAMMED } 
+	CharacterAttributes
+	{
+	"move speed bonus" 0.001
+	"increased jump height" 0.001
+	}
+		ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+		{
+		Delay 5 //Time before the first bot attribute change (Default: 10)
+		Cooldown 999999999 //Time between each bot attribute change (Default: 10)
+		Repeats 1 //How many times should bot change attributes in total (Default: 0 - Infinite)
+		IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+		Name "Attr2" // Name of the bot attributes listed in EventChangeAttributes
+		}
+		EventChangeAttributes //Do not attempt to put any of custom keys here. ExtAttr is the only exception
+		{
+			Attr2
+			{
+			CharacterAttributes
+			{
+			"health regen" -40000
+			"move speed bonus" 0.001
+	"increased jump height" 0.001
+			}
+			}
+		}
+	}
+	}
+	// 122 - chucknoris
+	WaveSpawn
+	{
+	Name "chucknoris"
+	TotalCount 1
+	MaxActive 1
+	SpawnCount 1
+	WaitForAllDead "shit"
+	WaitBeforeStarting 122
+	Where spawnbot_boss
+	TFBot
+	{
+	Name "Chuck Noris"
+	Item "The Hat With No Name"
+	WeaponRestrictions MeleeOnly
+	Item "Support Spurs"
+	Item "The Texas Half-Pants"
+	Class Engineer
+	ClassIcon powerup_knockout_lite
+	UseHumanModel 1
+	AddCond   { Name TF_COND_REPROGRAMMED } 
+	Attributes UseBossHealthBar
+	Action Mobber
+	Health 6942
+	CharacterAttributes
+	{
+	"move speed bonus" 0.001
+	"head scale" 3.5
+	"damage force reduction" 0.01
+	"torso scale" 1.5
+	"increased jump height" 0.001
+	}
+	}
+	}
+	// 137 - kill indiana
+	// 137 - batman3
+	WaveSpawn
+	{
+	Name "batman3"
+	TotalCount 1
+	MaxActive 1
+	SpawnCount 1
+	WaitForAllDead "shit"
+	WaitBeforeStarting 141
+	Where spawnbot_indiana
+	TFBot
+	{
+	Name "Bruce Wayne"
+	ClassIcon support_normal
+	Skill Expert
+	Health 2000
+	Scale 1.001
+	Attributes UseBossHealthBar
+	AddCond   { Name TF_COND_REPROGRAMMED } 
+	WeaponRestrictions MeleeOnly
+	Action PushToCapturePoint
+	UseHumanModel 1
+	Class Soldier
+	Item "The Spook Specs"
+	CharacterAttributes
+	{
+	"move speed bonus" 0.001
+	"increased jump height" 0.001
+	}
+		ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+		{
+		Delay 9 //Time before the first bot attribute change (Default: 10)
+		Cooldown 999999999 //Time between each bot attribute change (Default: 10)
+		Repeats 1 //How many times should bot change attributes in total (Default: 0 - Infinite)
+		IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+		Name "Attr2" // Name of the bot attributes listed in EventChangeAttributes
+		}
+		EventChangeAttributes //Do not attempt to put any of custom keys here. ExtAttr is the only exception
+		{
+			Attr2
+			{
+			CharacterAttributes
+			{
+			"health regen" -40000
+			"move speed bonus" 0.001
+			"increased jump height" 0.001
+			}
+			}
+		}
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "them"
+	WaitForAllDead "batman3"
+	TotalCount 1
+	MaxActive 1
+	Where spawnbot_boss
+	WaitBeforeStarting 17
+	TFBot
+	{
+	Class Soldier
+	ClassIcon soldier_barrage
+	Health 40000
+	Action Mobber
+	Attributes AlwaysCrit
+	Attributes DisableDodge
+	Scale 1.5
+	Attributes MiniBoss
+	Name "listen to the song dipshit"
+	CharacterAttributes
+	{
+	"fire rate bonus" 0.4
+	"faster reload rate" -1
+	"damage bonus" 4.0
+	}
+		ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+		{
+		Delay 9 //Time before the first bot attribute change (Default: 10)
+		Cooldown 999999999 //Time between each bot attribute change (Default: 10)
+		Repeats 1 //How many times should bot change attributes in total (Default: 0 - Infinite)
+		IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+		Name "Attr2" // Name of the bot attributes listed in EventChangeAttributes
+		}
+		EventChangeAttributes //Do not attempt to put any of custom keys here. ExtAttr is the only exception
+		{
+			Attr2
+			{
+			CharacterAttributes
+			{
+			"health regen" -40000
+			"move speed bonus" 0.001
+			"increased jump height" 0.001
+			}
+			}
+		}
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "rogers"
+	WaitForAllDead "them"
+	WaitBeforeStarting 4
+	TotalCount 1
+	MaxActive 1
+	Where spawnbot_indiana
+	TFBot
+	{
+	Health 1
+	ClassIcon demoknight
+	Item "The Eyelander"
+	Item "The Brutal Bouffant"
+	Item "EOTL_pyro_sweater"
+	AddCond   { Name TF_COND_REPROGRAMMED } 
+	UseHumanModel 1
+	WeaponRestrictions MeleeOnly
+	Attributes UseBossHealthBar
+	Action Mobber
+	Class Demoman
+	Taunt    //Taunt periodically
+	{
+	Delay 22 //Time before the first taunt starts (Default: 10)
+	Cooldown 999 //Time between each taunt (Default: 10)
+	Repeats 1 //How many times the bot should taunt in total (Default: 0 - Infinite)
+	Duration 5 //Duration of a looping taunt (Default: 0.1)
+	// Name "Taunt: Kazotsky Kick" //If set, uses this item taunt instead of default
+	IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+	}
+	Name "Mr. Rogers"
+	CharacterAttributes
+	{
+	"move speed bonus" 0.001
+	"increased jump height" 0.001
+	"gesture speed increase" 0.25
+	}
+		ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+		{
+		Delay 29 //Time before the first bot attribute change (Default: 10)
+		Cooldown 999999999 //Time between each bot attribute change (Default: 10)
+		Repeats 1 //How many times should bot change attributes in total (Default: 0 - Infinite)
+		IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+		Name "Attr2" // Name of the bot attributes listed in EventChangeAttributes
+		}
+		EventChangeAttributes //Do not attempt to put any of custom keys here. ExtAttr is the only exception
+		{
+			Attr2
+			{
+			CharacterAttributes
+			{
+			"health regen" -40000
+			"move speed bonus" 0.001
+			"increased jump height" 0.001
+			}
+			}
+		}
+	}
+	}
+	// then kill him
+	// 150 - them
+	// 165 - rogers
+	// 180 - chaos' end
+	
+}
+}

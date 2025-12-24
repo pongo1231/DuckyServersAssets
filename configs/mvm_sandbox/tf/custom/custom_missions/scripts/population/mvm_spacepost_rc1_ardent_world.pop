@@ -1,0 +1,41 @@
+#base robot_Ardents.pop
+WaveSchedule
+{
+    StartingCurrency 9000
+    RespawnWaveTime 0
+    CanBotsAttackWhileInSpawnRoom no
+    FixedRespawnWaveTime	Yes
+	Advanced	1
+    MaxRedPlayers 1
+    
+    Wave // Wave 1 of 6
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        WaveSpawn
+        {
+            Name	Wave1a
+			TotalCurrency	30000
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	0
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Arbitrator_Asher
+			}
+        }
+    }
+}

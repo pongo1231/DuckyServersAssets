@@ -1,0 +1,815 @@
+#base robot_standard.pop
+#base robot_giant.pop
+WaveSchedule
+{
+    StartingCurrency 0
+	RespawnWaveTime 999
+	CanBotsAttackWhileInSpawnRoom Yes
+
+    ////////////////////////////////////////////////////////////////// GAME RULES //////////////////////////////////////////////////////////////////
+
+    EventPopFile Halloween
+
+    HumansMustJoinTeam blue  
+    NoReanimators 1  
+    SendBotsToSpectatorImmediately 1  
+    RobotLimit 24  
+    StandableHeads 1  
+    NoRomevisionCosmetics 1  
+    ReverseWinConditions 1   
+    BluHumanFlagPickup 1  
+    BluHumanFlagCapture 1  
+
+    ItemWhitelist  
+    {
+        Name "TF_WEAPON_SHOTGUN_PRIMARY"
+        Name "TF_WEAPON_SHOTGUN_HWG"
+        Name "TF_WEAPON_SHOTGUN_SOLDIER"
+        Name "TF_WEAPON_SHOTGUN_PYRO"
+        Name "TF_WEAPON_SHOVEL"
+        Name "TF_WEAPON_FISTS"
+        Name "TF_WEAPON_FIREAXE"
+        Name "TF_WEAPON_WRENCH"
+        Name "Frying Pan"
+        Name "Gold Frying Pan"
+    }
+
+    ClassLimit   //Limits the number of specified classes
+	{
+		Heavyweapons 1
+        Soldier 1
+        Pyro 1
+        Engineer 1
+		Medic 0
+		Sniper 0
+        Scout 0
+        Demoman 0
+        Spy 0
+	}
+
+    ItemAttributes
+    {
+        ItemName "TF_WEAPON_SHOTGUN_PRIMARY"
+        "fire rate bonus" 0.8
+    }
+    ItemAttributes
+    {
+        ItemName "TF_WEAPON_SHOTGUN_HWG"
+        "fire rate bonus" 0.8
+        "max health additive bonus" -100
+    }
+    ItemAttributes
+    {
+        ItemName "TF_WEAPON_SHOTGUN_SOLDIER"
+        "fire rate bonus" 0.8
+    }
+    ItemAttributes
+    {
+        ItemName "TF_WEAPON_SHOTGUN_PYRO"
+        "fire rate bonus" 0.8
+    }
+
+    PlayerAttributes   
+	{
+        "melee cleave attack" 1
+        "faster reload rate" 0.6
+        "projectile penetration heavy" 1
+        "crit mod disabled" 0
+        "melee range multiplier" 1.3
+        "melee bounds multiplier" 1.4
+        "weapon spread bonus" 1.25
+    
+		Heavyweapons
+        {
+            "move speed bonus" 1.043478260869565
+        }
+
+        Pyro
+        {
+            "move speed bonus" 0.8
+            "max health additive bonus" 25
+        }
+
+        Engineer
+        {
+            "move speed bonus" 0.8
+            "max health additive bonus" 75
+        }
+	}
+
+    PlayerAddCond   //Give players outlines
+	{
+		Index 114
+	}
+
+    ////////////////////////////////////////////////////////////////// POINT TEMPLATES //////////////////////////////////////////////////////////////////
+
+    PointTemplates    
+	{
+
+        /////////////////////////// Mission Logic ///////////////////////////
+
+        NoPacks //Pack genocide
+        {
+            OnSpawnOutput
+            {
+                Target item_healthkit_small
+                Action "Kill"
+            }
+            OnSpawnOutput
+            {
+                Target item_healthkit_medium
+                Action "Kill"
+            }
+            OnSpawnOutput
+            {
+                Target item_healthkit_full
+                Action "Kill"
+            }
+            OnSpawnOutput
+            {
+                Target item_ammopack_small
+                Action "Kill"
+            }
+            OnSpawnOutput
+            {
+                Target item_ammopack_medium
+                Action "Kill"
+            }
+            OnSpawnOutput
+            {
+                Target item_ammopack_full
+                Action "Kill"
+            }
+        }
+
+        NoFilter //Kills gate filter
+        {
+            OnSpawnOutput
+            {
+                Target "filter_blue_bombhat"
+                Action "Kill"
+            }
+        }
+
+        Sounds //Various sounds
+        {
+            NoFixup 1
+            ambient_generic
+            {
+                "targetname" "incoming_horde"
+                "message" "megamob.mp3"
+                "health" "10"
+                "spawnflags" "33"
+                "origin" "388 771 61"
+                "pitch" "100"
+                "pitchstart" "100"
+            }
+        }
+
+        EntityChecker
+        {
+            NoFixup 1
+            game_text_tf
+            {
+                "background" "3"
+                "display_to_team" "3"
+                "message" "Entity Spawned"
+                "targetname" "entitycheck"
+            }
+        }
+
+        MegamobFocus //Causes attacking zombies to move toward an area
+        {
+            filter_tf_bot_has_tag
+            {
+                "targetname" "megamob_filter"
+                "tags" "bot_megamob"
+                "Negated" "Allow entities that match criteria"
+            }
+        }
+
+        ElevatorDisable //Disables Elevator
+        {
+            OnSpawnOutput
+            {
+                Target "elevator_trigger"
+                Action "Disable"
+            }
+            OnSpawnOutput
+            {
+                Target "elevator_detect"
+                Action "Disable"
+            }
+        }
+
+        ElevatorEnable //Enables Elevator
+        {
+            OnSpawnOutput
+            {
+                Target "elevator_trigger"
+                Action "Enable"
+            }
+            OnSpawnOutput
+            {
+                Target "elevator_detect"
+                Action "Enable"
+            }
+        }
+
+        Teleport //Teleports player to spawnbot_elevator
+        {
+            NoFixup 1
+			trigger_teleport
+            {
+                "target" "elevator_tele_dest" 
+                "targetname" "elevator_tele"
+                "spawnflags" "1"
+                "solid" "2"
+                "mins" "-36 -36 -36"
+                "maxs" "36 36 36"
+            }
+        }
+
+        TeleportElevatorDestination //Elevator teleport destination
+        {
+            NoFixup 1 
+			info_teleport_destination
+            {
+                "targetname" "elevator_tele_dest"
+                "origin" "2100 -473 -155"
+                "angles" "0 270 0"
+            }
+        }
+
+        TeleportElevatorBomb //Teleports bomb away
+        {
+            NoFixup 1
+			trigger_teleport
+            {
+                "target" "elevator_tele_bomb_dest" 
+                "targetname" "elevator_tele_bomb"
+                "filtername" "filter_bomb_carrier"
+                "spawnflags" "1"
+                "origin" "2100 -473 -155"
+                "solid" "2"
+                "mins" "-100 -100 -100"
+                "maxs" "100 100 100"
+            }
+            info_teleport_destination
+            {
+                "targetname" "elevator_tele_bomb_dest"
+                "origin" "616 2392 -50"
+                "angles" "0 270 0"
+            }
+            filter_tf_bot_has_tag
+            {
+                "targetname" "filter_bomb_carrier"
+                "tags" "bomb_carrier"
+                "Negated" "0"
+            }
+        }
+
+        ResupplyElevator //Elevator resupply
+        {
+            func_regenerate
+            {
+                "origin" "2100 -473 -155"
+                "mins" "-16 -16 -36"
+                "maxs" "16 16 36"
+            }
+        }
+
+        Fence
+        {
+            NoFixup 1
+			prop_dynamic
+			{
+				"model" "models/props_gameplay/security_fence512.mdl"
+				"solid" "6"
+			}
+        }
+
+        Crate
+        {
+            NoFixup 1
+            prop_dynamic
+            {
+                "model" "models/props_lakeside/wood_crate_01.mdl"
+                "solid" "6"
+            }
+        }
+
+        IronPlate
+        {
+            NoFixup 1
+            prop_dynamic
+            {
+                "model" "models/props_2fort/corrugated_metal007.mdl"
+                "solid" "6"
+            }
+        }
+
+        CapPointPart1 //Part 1 capture point logic
+        {
+            NoFixup 1
+            filter_multi
+            {
+                "targetname" "gate1_zombie_filter"
+                "filter01" "filter_players"
+                "filter02" "filter_zombies"
+            }
+            filter_activator_tfteam
+            {
+                "targetname" "filter_players"
+                "teamnum" "3"
+                "Negated" "0"
+            }
+            filter_activator_tfteam
+            {
+                "targetname" "filter_zombies"
+                "teamnum" "2"
+                "Negated" "1"
+            }
+            logic_relay
+            {
+                "OnSpawn" "gate1_door_trigger,AddOutput,area_time_to_cap 30,0,-1" //Increase gate cap time to 30 sec
+                "OnSpawn" "gate1_door_trigger,AddOutput,spawnflags 3,0,-1" //Stops zombies from blocking cap
+                "OnSpawn" "gate1_door_trigger,AddOutput,filtername gate1_zombie_filter,0,-1" //Stops zombies from blocking cap
+                "OnSpawn" "gate1_door_trigger,AddOutput,team_cancap_2 0,0,-1" //Stops zombies from blocking cap
+                "OnSpawn" "gate1_door_trigger,AddOutput,OnStartCap text_horde_part1:Display::0:1,0,-1" //Display incoming horde message
+                "OnSpawn" "gate1_door_trigger,AddOutput,OnStartCap incoming_horde:PlaySound::2:1,0,-1" //Play incoming horde Sound
+                "OnSpawn" "gate1_door_trigger,AddOutput,OnStartCap megamob1:Enable::2:-1,0,-1" //Enables megamob spawn
+                //"OnSpawn" "gate1_door_trigger,Kill,,0,-1" //Pure regret
+                "OnSpawn" "garage_cap_wait,AddOutput,filtername megamob_filter,0,-1" //Causes megamob zombies to move toward point
+                "OnSpawn" "middle_avoid,AddOutput,filtername megamob_filter,0,-1" //Causes megamob zombies to take the correct path (I don't think it works)
+                "OnSpawn" "middle_avoid,Enable,,0,-1" //Causes megamob zombies to take the correct path (I don't think it works)
+                "OnSpawn" "garage_cap,AddOutput,OnCapTeam2 bots_win:RoundWin::20:-1,0,-1" //Causes win when capped after 20 sec
+                //"OnSpawn" "garage_cap,SetOwner,3,0,-1" //Changes team to blue
+                "OnSpawn" "bot_stun_reprogram,Kill,,0,-1" //Disable gate cap stun
+            }
+        }
+
+        FuckThis
+        {
+            NoFixup 1
+            trigger_timer_door
+            {
+                "targetname" "gate1_door_trigger_fix"
+                "area_cap_point" "garage_cap"
+                "area_time_to_cap" "30"
+                "door_name" "gate1_entrance_door"
+                "filtername" "gate1_zombie_filter"
+                "origin" "455 798 64"
+                "spawnflags" "3"
+                "StartDisabled" "0"
+                "team_cancap_2" "0"
+                "team_cancap_3" "1"
+                "team_numcap_2" "0"
+                "team_numcap_3" "1"
+                "team_spawn_2" "0"
+                "team_spawn_3" "0"
+                "team_startcap_2" "0"
+                "team_startcap_3" "1"
+                "OnCapTeam2" "gate1_relay,Trigger,,0,-1"
+                "OnBreakTeam2" "garage_emergency_light,SetAnimation,idle,0,-1"
+                "OnBreakTeam2" "garage_emergency_light,Skin,1,0,-1"
+                "OnBreakTeam2" "garage_alarm_yellow_flash,Stop,,0,-1"
+                "OnCapTeam2" "gateblab_take,Enable,,0,-1"
+                "OnCapTeam2" "gateblab_take,Disable,,0.1,-1"
+                "OnStartTeam2" "garage_emergency_light,SetAnimation,spin,0,-1"
+                "OnStartTeam2" "garage_emergency_light,Skin,2,0,-1"
+                "OnStartTeam2" "garage_alarm_yellow_flash,Start,,0,-1"
+                "OnStartCap" "text_horde_part1,Display,,0,-1"
+                "OnStartCap" "incoming_horde,PlaySound,,2,-1"
+                "OnStartCap" "megamob1,Enable,,2,-1"
+                "origin" "455 798 64"
+                "mins" "-127 -222 -128"
+                "maxs" "127 222 128"
+            }
+        }
+
+        MessagesPart1 //Part 1 message popups
+        {
+            NoFixup 1
+            game_text_tf
+            {
+                "background" "3"
+                "display_to_team" "3"
+                "message" "Capture Gate A to win."
+                "targetname" "text_objective_part1"
+            }
+            game_text_tf
+            {
+                "background" "3"
+                "display_to_team" "3"
+                "message" "Here they come..."
+                "targetname" "text_horde_part1"
+            }
+            OnSpawnOutput
+            {
+                Target "text_objective_part1"
+                Action Display
+            }
+        }
+
+        MegamobspawnPart1 //Part 1 megamob spawn point
+        {
+            NoFixup 1
+            info_player_teamspawn
+            {
+                "angles" "0 180 0"
+                "origin" "-1016 120 -107"
+                "spawnflags" "511"
+                "StartDisabled" "1"
+                "targetname" "megamob1"
+                "TeamNum" "3"
+            }
+            info_player_teamspawn
+            {
+                "angles" "0 180 0"
+                "origin" "-916 120 -90"
+                "spawnflags" "511"
+                "StartDisabled" "1"
+                "targetname" "megamob1"
+                "TeamNum" "3"
+            }
+            info_player_teamspawn
+            {
+                "angles" "0 0 0"
+                "origin" "-779 1271 -91"
+                "spawnflags" "511"
+                "StartDisabled" "1"
+                "targetname" "megamob1"
+                "TeamNum" "3"
+            }
+            info_player_teamspawn
+            {
+                "angles" "0 0 0"
+                "origin" "-779 1371 -91"
+                "spawnflags" "511"
+                "StartDisabled" "1"
+                "targetname" "megamob1"
+                "TeamNum" "3"
+            }
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////// INITIALISATION //////////////////////////////////////////////////////////////////
+
+    SpawnTemplate   //Make health and ammo commit die
+    {
+        Name "NoPacks" 
+    }
+
+    SpawnTemplate   //Turn on elevator
+    {
+        Name "NoFilter"
+    }
+
+    SpawnTemplate   //Makes megamob zombies move to location
+    {
+        Name "MegamobFocus" 
+    }
+
+    SpawnTemplate   //Sounds
+    {
+        Name "Sounds" 
+    }
+
+    SpawnTemplate   //Turn off elevator doors
+	{
+		Name "ElevatorDisable" 
+	}
+
+    SpawnTemplate   //Tele from spawnbot
+	{
+		Name "Teleport"
+		Origin "3901 450 80"
+	}
+
+    SpawnTemplate   //Tele from spawnbot
+	{
+		Name "Teleport"
+		Origin "3817 509 80"
+	}
+
+    SpawnTemplate   //Tele from spawnbot
+	{
+		Name "Teleport"
+		Origin "3979 507 80"
+	}
+
+    SpawnTemplate   //Tele from spawnbot
+	{
+		Name "Teleport"
+		Origin "3899 562 80"
+	}
+
+    SpawnTemplate   //Tele from spawnbot_support
+	{
+		Name "Teleport"
+		Origin "2239 -31 -62"
+	}
+
+    SpawnTemplate   //Tele from spawnbot_upper
+	{
+		Name "Teleport"
+		Origin "3190 -773 -50"
+	}
+
+    SpawnTemplate   //spawnbot_elevator tele destination
+	{
+		Name "TeleportElevatorDestination"
+	}
+
+    SpawnTemplate   //Tele bomb away
+	{
+		Name "TeleportElevatorBomb"
+	}
+
+    SpawnTemplate //Elevator Resupply
+    {
+        Name "ResupplyElevator"
+    }
+
+    SpawnTemplate   //Turn on elevator
+    {
+        Name "CapPointPart1"
+    }
+
+    SpawnTemplate   //Part 1 megamob spawners
+    {
+        Name "MegamobspawnPart1"
+    }
+
+    SpawnTemplate  
+    {
+        Name "EntityChecker"
+    }
+
+    //////////////////////////////////   Obstacles   ////////////////////////////
+
+    SpawnTemplate  
+    {
+        Name "Fence" 
+        Origin "1890 -626 -100"
+        Angles "0 90 0"
+    }
+    SpawnTemplate  
+    {
+        Name "Fence" 
+        Origin "2286 3 -100"
+        Angles "0 90 0"
+    }
+    SpawnTemplate  
+    {
+        Name "Fence" 
+        Origin "150 -488 -10"
+        Angles "0 154 0"
+    }
+    SpawnTemplate  
+    {
+        Name "Fence" 
+        Origin "-306 -264 -10"
+        Angles "0 154 0"
+    }
+    SpawnTemplate  
+    {
+        Name "Crate"
+        Origin "-217 -179 -124"
+    }
+    SpawnTemplate  
+    {
+        Name "Crate"
+        Origin "-224 -47 -124"
+    }
+    SpawnTemplate  
+    {
+        Name "IronPlate"
+        Origin "-129 196 -11"
+    }
+    SpawnTemplate  
+    {
+        Name "IronPlate"
+        Origin "-129 260 -11"
+    }
+    SpawnTemplate  
+    {
+        Name "IronPlate"
+        Origin "-129 324 -11"
+    }
+    SpawnTemplate  
+    {
+        Name "IronPlate"
+        Origin "-128 320 165"
+    }
+    SpawnTemplate  
+    {
+        Name "IronPlate"
+        Origin "-128 384 165"
+    }
+    SpawnTemplate  
+    {
+        Name "IronPlate"
+        Origin "-128 448 165"
+    }
+    SpawnTemplate  
+    {
+        Name "IronPlate"
+        Origin "-128 512 165"
+    }
+
+    ////////////////////////////////////////////////////////////////// BOT TEMPLATES //////////////////////////////////////////////////////////////////
+
+    Templates 
+    {
+        T_TFBot_Scout_Bomb
+        {
+            Class Scout
+            Tag bomb_carrier
+            Health 1
+            CharacterAttributes
+            {
+                "health regen" -1
+                "move speed bonus" 0
+                "increased jump height" 0 
+            }
+        }
+
+        T_TFBot_Scout_Zombie
+        {
+            Class Scout
+            Tag bot_zombie
+            Health 25
+            WeaponRestrictions MeleeOnly
+            CharacterAttributes
+            {
+                "move speed bonus" 0.6
+                "damage bonus" 0.02
+            }
+        }
+
+        T_TFBot_Scout_Zombie_Megamob
+        {
+            Class Scout
+            Name "Infected"
+            Skill Hard
+            Tag bot_zombie
+            Tag bot_megamob
+            Health 25
+            WeaponRestrictions MeleeOnly
+            AddCond   
+            {
+                Name "TF_COND_SPEED_BOOST"
+                Duration 3
+            }
+            AddCond  
+            {
+                Index 43
+                Duration 99999
+            }
+            CharacterAttributes
+            {
+                "crit mod disabled" 0
+                "move speed bonus" 0.66
+                "damage bonus" 0.06
+                "increased jump height" 1.5
+                "increased air control" 2
+            }
+        }
+        T_TFBot_Soldier_Zombie_Megamob
+        {
+            Class Soldier
+            Name "Infected"
+            Skill Hard
+            Tag bot_zombie
+            Tag bot_megamob
+            Health 35
+            WeaponRestrictions MeleeOnly
+            AddCond   
+            {
+                Name "TF_COND_SPEED_BOOST"
+                Duration 3
+            }
+            AddCond  
+            {
+                Index 43
+                Duration 99999
+            }
+            CharacterAttributes
+            {
+                "crit mod disabled" 0
+                "move speed bonus" 1
+                "damage bonus" 0.06
+                "increased jump height" 1.5
+                "increased air control" 2
+            }
+        }
+        T_TFBot_Heavy_Zombie_Megamob
+        {
+            Class Heavyweapons
+            Name "Infected"
+            Skill Hard
+            Tag bot_zombie
+            Tag bot_megamob
+            Health 45
+            WeaponRestrictions MeleeOnly
+            AddCond   
+            {
+                Name "TF_COND_SPEED_BOOST"
+                Duration 3
+            }
+            AddCond  
+            {
+                Index 43
+                Duration 99999
+            }
+            CharacterAttributes
+            {
+                "crit mod disabled" 0
+                "move speed bonus" 0.97
+                "damage bonus" 0.06
+                "increased jump height" 1.5
+                "increased air control" 2
+            }
+        }
+    }
+
+    Wave
+    {
+        StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		WaitWhenDone 65
+		Checkpoint Yes
+
+        Explanation    //Dispayed once the wave is initialized
+		{
+			Line "{red}NO RESPAWNS"
+            Line "{red}Team wipe results in loss"
+			Line "{white}Max 4 players"
+            Line "{green}Allowed weapons: Stock shotgun, melee, pans"
+		}
+
+        BlueTeamWipeCausesWaveLoss 1  
+
+        SpawnTemplate  
+        {
+            Name "MessagesPart1"
+        }
+
+        WaveSpawn
+        {
+            Where "spawnbot"
+            TotalCount 1
+            SpawnCount 1
+            WaitBeforeStarting 3
+            TotalCurrency 100
+
+            TFBot
+            {
+                Template T_TFBot_Scout_Bomb
+                
+                SpawnTemplate   //Turn on elevator
+                {
+                    Name "ElevatorEnable"
+                }
+            }
+        }
+
+        WaveSpawn
+        {
+            Where "megamob1"
+            TotalCount 500
+            SpawnCount 2
+            WaitBetweenSpawns 2
+            MaxActive 22
+
+            Support 1
+
+            RandomChoice
+            {
+                TFBot
+                {
+                    Template T_TFBot_Scout_Zombie_Megamob
+                }
+                TFBot
+                {
+                    Template T_TFBot_Soldier_Zombie_Megamob
+                }
+                TFBot
+                {
+                    Template T_TFBot_Heavy_Zombie_Megamob
+                }
+            }
+        }
+    }
+}

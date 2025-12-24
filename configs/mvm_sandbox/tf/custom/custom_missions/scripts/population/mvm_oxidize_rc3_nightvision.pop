@@ -1,0 +1,118 @@
+WaveSchedule
+{
+	StartingCurrency 3000
+	RespawnWaveTimeBlue 1
+	FixedRespawnWaveTimeBlue 1
+	RedPlayersAreRobots 1
+	
+	AllowJoinTeamBlue 1
+	AllowJoinTeamBlueMax 6
+	BluHumanInfiniteAmmo 1
+	BluHumanInfiniteCloak 0
+	BluHumanFlagCapture 1
+	BluHumanFlagPickup 1
+	BluPlayersAreRobots 1
+	HumansMustJoinTeam blue
+	ReverseWinConditions 1
+	
+	PlayerAttributes
+	{
+		"crit mod disabled" 0
+		"always allow taunt" 1
+		"increased air control" 5
+		"no damage view flinch" 1
+		"deploy time decreased" 0.65
+		"vision opt in flags" -34028234663852886000000000000000000000
+		Scout
+		{
+			"mult credit collect range" 1
+		}
+		Heavyweapons
+		{
+			"mod minigun can holster while spinning" 1
+		}
+		Engineer
+		{
+			"max health additive bonus" 150
+			"mult dispenser rate" 2
+			"construction rate increased" 1.5
+		}
+	}
+	PointTemplates
+	{
+		vision
+		{
+			OnSpawnOutput
+			{
+				Target fade
+				Action Fade
+			}
+			OnSpawnOutput
+			{
+				Target !activator
+				Action $setprop$m_nBotSkill
+				Param 2
+			}
+			logic_relay
+			{
+				"targetname" "looping_relay"
+				"ontrigger" "!self,trigger,0,0.1,-1"
+				"ontrigger" "fade,fade,!parent,0,-1"
+				"onspawn" "!self,trigger,0,0.1,-1"
+				"onspawn" "!parent,$setlocalorigin,0 0 -8000,0,-1"
+				"onspawn" "light,$hidetoall,0,0.01,-1"
+				"onspawn" "light,$showto,!parent,0.02,-1"
+				"onspawn" "!parent,$teleporttoentity,spawnbot,0.03,-1"
+				"spawnflags" "2"
+			}
+			light_dynamic
+			{
+				"targetname" "light"
+				"origin" "0 0 68"
+				"_light" "255 100 0"
+				"brightness" "0.5"
+				"distance" "2500"
+			}
+		}
+		stuff
+		{
+			NoFixup 1
+			env_fade
+			{
+				"targetname" "fade"
+				"holdtime" "60000"
+				//"duration" "0.25"
+				"spawnflags" "8"
+				"rendercolor" "255 175 0"
+				"renderamt" "15"
+			}
+		}
+	}
+	SpawnTemplate stuff
+	PlayerSpawnTemplate vision
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			HideIcon 1
+			TotalCount 1
+			WaitBeforeStarting 99999
+			SpawnCount 1
+			MaxActive 1
+			TFBot
+			{
+				Class Scout
+			}
+		}
+	}
+}

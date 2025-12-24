@@ -1,0 +1,976 @@
+//Biological Bombardment (Waterfront Intermediate 1)
+//Signalmax
+//4500 Credits (Perfect) //Outdated
+///////////////////////////////////
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_caustic.pop
+WaveSchedule
+{
+	StartingCurrency 400 //+300
+	RespawnWaveTime 4
+	CanBotsAttackWhileInSpawnRoom no
+	Templates
+	{
+		T_TFBot_Soldier_Conch
+		{
+			Health	200
+			Name	"So-l-id LibIeIrty Sidekick #1-856800"
+			Class	Soldier
+			Skill	Expert
+			ClassIcon  soldier_conch
+			Attributes	"SpawnWithFullCharge"
+			Item	"tf_weapon_rocketlauncher"
+			Item	"the concheror"
+			Item	"tf_weapon_shovel"
+			CharacterAttributes
+			{
+				"increase buff duration"	20
+			}
+			ItemAttributes
+			{
+				ItemName	tf_weapon_rocketlauncher
+				"damage penalty"	1.7
+			}
+			ItemAttributes
+			{
+				ItemName	"the concheror"
+			}
+		}
+		T_TFBot_Soldier_Battalion's_Backup_Direct
+		{
+			Health	150
+			Name	"S-O-L-I-D L-I-B-E-R-T-Y Sidekick #2-5733000"
+			Class	Soldier
+			Skill	Hard
+			ClassIcon  soldier_directhit_battalion
+			Attributes	"SpawnWithFullCharge"
+			Item	"the direct hit"
+			Item	"the battalion's backup"
+			Item	"tf_weapon_shovel"
+			CharacterAttributes
+			{
+				"increase buff duration"	30
+			}
+			ItemAttributes
+			{
+				ItemName	"the direct hit"
+				"damage penalty"	1.6
+			}
+			ItemAttributes
+			{
+				ItemName	"the battalion's backup"
+			}
+		}
+		T_TFBot_Soldier_Buff_Banner_jumppi
+		{
+			Health	100
+			Name	"Solid Liberty Sidekick #3-99"
+			Class	Soldier
+			Skill	Normal
+			ClassIcon  soldier_rocket_jumper_prototype
+			Attributes	"SpawnWithFullCharge"
+			Item	"rocket jumper"
+			Item	"the buff banner"
+			Item	"tf_weapon_shovel"
+			CharacterAttributes
+			{
+				"increase buff duration"	9
+			}
+			ItemAttributes
+			{
+				ItemName	"rocket jumper"
+				"apply z velocity on damage"	750
+				"damage penalty"	1.99
+				"crit does no damage"  1
+			}
+			ItemAttributes
+			{
+				ItemName	"the buff banner"
+			}
+		}
+	}
+	Wave 
+	{
+		StartWaveOutput
+		{
+			Target wave_start_endurance_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		WaitWhenDone 65
+		Checkpoint Yes
+		WaveSpawn
+		{
+			Name	sc
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Squad
+			{
+				TFBot
+				{
+					Health	2
+					Name	"who is god"
+					Class	Scout
+					Skill	Normal
+					ClassIcon dead
+					WeaponRestrictions	PrimaryOnly
+					Attributes	"SuppressFire"
+					Item	"tf_weapon_scattergun"
+					Item	"tf_weapon_pistol_scout"
+					Item	"tf_weapon_bat"
+					CharacterAttributes
+					{
+						"health drain"	-2
+						"dmg from ranged reduced"	0.01
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	sol
+			WaitForAllDead	sc
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Squad
+			{
+				TFBot
+				{
+					Health	3
+					Name	"why did he"
+					Class	Soldier
+					Skill	Normal
+					ClassIcon dead
+					WeaponRestrictions	PrimaryOnly
+					Attributes	"SuppressFire"
+					Item	"tf_weapon_rocketlauncher"
+					Item	"tf_weapon_shotgun_soldier"
+					Item	"tf_weapon_shovel"
+					CharacterAttributes
+					{
+						"health drain"	-3
+						"dmg from ranged reduced"	0.01
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	py
+			WaitForAllDead	sol
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Squad
+			{
+				TFBot
+				{
+					Health	4
+					Name	"put us in"
+					Class	Pyro
+					Skill	Normal
+					ClassIcon dead
+					WeaponRestrictions	PrimaryOnly
+					Attributes	"SuppressFire"
+					Item	"tf_weapon_flamethrower"
+					Item	"tf_weapon_shotgun_pyro"
+					Item	"tf_weapon_fireaxe"
+					CharacterAttributes
+					{
+						"health drain"	-4
+						"dmg from ranged reduced"	0.01
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	deado
+			WaitForAllDead	py
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Squad
+			{
+				TFBot
+				{
+					Health	5
+					Name	"Mechanical Hell we  "
+					Class	Demoman
+					Skill	Normal
+					ClassIcon dead
+					WeaponRestrictions	PrimaryOnly
+					Attributes	"SuppressFire"
+					Item	"tf_weapon_grenadelauncher"
+					Item	"tf_weapon_pipebomblauncher"
+					Item	"tf_weapon_bottle"
+					CharacterAttributes
+					{
+						"health drain"	-5
+						"dmg from ranged reduced"	0.01
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	He-ad
+			WaitForAllDead	deado
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Squad
+			{
+				TFBot
+				{
+					Health	6
+					Name	"Robots endure every"
+					Class	HeavyWeapons
+					Skill	Normal
+					ClassIcon dead
+					WeaponRestrictions	PrimaryOnly
+					Attributes	"SuppressFire"
+					Item	"tf_weapon_minigun"
+					Item	"tf_weapon_shotgun_hwg"
+					Item	"tf_weapon_fists"
+					CharacterAttributes
+					{
+						"health drain"	-6
+						"dmg from ranged reduced"	0.01
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	Meds
+			WaitForAllDead	He-ad
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Squad
+			{
+				TFBot
+				{
+					Health	7
+					Name	"single Operating Moment"
+					Class	Medic
+					Skill	Normal
+					ClassIcon dead
+					WeaponRestrictions	SecondaryOnly
+					Item	"tf_weapon_syringegun_medic"
+					Item	"tf_weapon_medigun"
+					Item	"tf_weapon_bonesaw"
+					CharacterAttributes
+					{
+						"health drain"	-7
+						"dmg from ranged reduced"	0.01
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	SnipED
+			WaitForAllDead	Meds
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Squad
+			{
+				TFBot
+				{
+					Health	8
+					Name	"where We die"
+					Class	Sniper
+					Skill	Normal
+					ClassIcon dead
+					WeaponRestrictions	PrimaryOnly
+					Item	"tf_weapon_sniperrifle"
+					Item	"tf_weapon_smg"
+					Item	"tf_weapon_club"
+					CharacterAttributes
+					{
+						"health drain"	-8
+						"dmg from ranged reduced"	0.01
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	Spyonyou
+			WaitForAllDead	SnipED
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Squad
+			{
+				TFBot
+				{
+					Health	100
+					Name	"to Counterparts of"
+					Class	Spy
+					Skill	Normal
+					ClassIcon dead
+					WeaponRestrictions	MeleeOnly
+					Item	"tf_weapon_revolver"
+					Item	"tf_weapon_knife"
+					CharacterAttributes
+					{
+						"health drain"	-20
+						"dmg from ranged reduced"	0.01
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	EnginTrainAccident
+			WaitForAllDead	Spyonyou
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Squad
+			{
+				TFBot
+				{
+					Health	10
+					Name	"Our...     selfs..."
+					Class	Demoman
+					Skill	Normal
+					ClassIcon dead
+					BehaviorModifiers mobber
+					WeaponRestrictions	MeleeOnly
+					Item	"tf_weapon_grenadelauncher"
+					Item	"tf_weapon_pipebomblauncher"
+					Item	"tf_weapon_bottle"
+					CharacterAttributes
+					{
+						"health drain"	-10
+						"dmg from ranged reduced"	0.01
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	TrainPoV
+			WaitForAllDead	EnginTrainAccident
+			TotalCurrency	500
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Squad
+			{
+				Tank
+				{
+					Health	10000
+					Name	"Please Help US Souls Escape From OUR Cages"
+					Speed	30
+					StartingPathTrackNode  tankpath_alt
+					OnKilledOutput
+					{
+						Target	boss_dead_relay
+						Action	Trigger
+					}
+					OnBombDroppedOutput
+					{
+						Target	boss_deploy_relay
+						Action	Trigger
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	DemoGiantCharge
+			WaitForAllDead  TrainPoV
+			TotalCurrency	1050
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot_boss
+			WaitBeforeStarting	7
+			WaitBetweenSpawns	0
+			Squad
+			{
+				TFBot
+				{
+					Health	2520
+					Name	"Demo's Cracked Ways"
+					Scale	2.5
+					Class	Demoman
+					Skill	Hard
+					WeaponRestrictions	MeleeOnly
+					ClassIcon demoknight_bottle_lite
+					Attributes MiniBoss
+					Attributes AlwaysFireWeapon
+					Item	"the chargin' targe"
+					Item	"tf_weapon_bottle"
+					Item	"reggaelator"
+					CharacterAttributes
+					{
+						"health regen"	400
+						"move speed penalty"	0.4
+						"charge recharge rate increased"	0.040
+						"cancel falling damage"	1
+						"dmg taken from crit increased"	0.5
+					}
+					ItemAttributes
+					{
+						ItemName	tf_weapon_bottle
+						"fire rate bonus"	0.42
+						"bleeding duration"	6
+						"apply look velocity on damage"	1700
+						"hit self on miss"  1
+						"mark for death"	1
+						"minicrits become crits"	1
+					}
+					ItemAttributes
+					{
+						ItemName	reggaelator
+						"attach particle effect"	30
+					}
+				}
+			}
+		}
+	}
+	Wave ///WAVE 2 - 500 CREDITS (1800 P) (SNIPERS)
+	{
+		StartWaveOutput
+		{
+			Target wave_start_endurance_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		WaitWhenDone 65
+		Checkpoint Yes
+
+		//Reference
+
+		WaveSpawn
+		{
+			Name	sc2
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Squad
+			{
+				TFBot
+				{
+					Health	10
+					Name	oh
+					Class	Scout
+					Skill	Normal
+					ClassIcon scout_armored
+					BehaviorModifiers mobber
+					Item	"tf_weapon_scattergun"
+					Item	"tf_weapon_pistol_scout"
+					Item	"tf_weapon_bat"
+					CharacterAttributes
+					{
+						"health drain"	-10
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	sc3
+			WaitForAllDead	sc2
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	1
+			WaitBetweenSpawns	10
+			Squad
+			{
+				TFBot
+				{
+					Health	10
+					Name	shizzle
+					Class	Scout
+					Skill	Normal
+					ClassIcon scout_armored
+					BehaviorModifiers mobber
+					Item	"tf_weapon_scattergun"
+					Item	"tf_weapon_pistol_scout"
+					Item	"tf_weapon_bat"
+					CharacterAttributes
+					{
+						"health drain"	-10
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	sc4
+			WaitForAllDead	sc3
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	1
+			WaitBetweenSpawns	10
+			Squad
+			{
+				TFBot
+				{
+					Health	10
+					Name	the
+					Class	Scout
+					Skill	Normal
+					ClassIcon scout_armored
+					BehaviorModifiers mobber
+					Item	"tf_weapon_scattergun"
+					Item	"tf_weapon_pistol_scout"
+					Item	"tf_weapon_bat"
+					CharacterAttributes
+					{
+						"health drain"	-10
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	sc5
+			WaitForAllDead	sc4
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	1
+			WaitBetweenSpawns	10
+			Squad
+			{
+				TFBot
+				{
+					Health	10
+					Name	big
+					Class	Scout
+					Skill	Normal
+					ClassIcon scout_armored
+					BehaviorModifiers mobber
+					Item	"tf_weapon_scattergun"
+					Item	"tf_weapon_pistol_scout"
+					Item	"tf_weapon_bat"
+					CharacterAttributes
+					{
+						"health drain"	-10
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	sc6
+			WaitForAllDead	sc5
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	1
+			WaitBetweenSpawns	10
+			Squad
+			{
+				TFBot
+				{
+					Health	10
+					Name	Bad
+					Class	Scout
+					Skill	Normal
+					ClassIcon scout_armored
+					BehaviorModifiers mobber
+					Item	"tf_weapon_scattergun"
+					Item	"tf_weapon_pistol_scout"
+					Item	"tf_weapon_bat"
+					CharacterAttributes
+					{
+						"health drain"	-10
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	sc7
+			WaitForAllDead	sc6
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	1
+			WaitBetweenSpawns	10
+			Squad
+			{
+				TFBot
+				{
+					Health	10
+					Name	called
+					Class	Scout
+					Skill	Normal
+					ClassIcon scout_armored
+					BehaviorModifiers mobber
+					Item	"tf_weapon_scattergun"
+					Item	"tf_weapon_pistol_scout"
+					Item	"tf_weapon_bat"
+					CharacterAttributes
+					{
+						"health drain"	-10
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	sc8
+			WaitForAllDead	sc7
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	1
+			WaitBetweenSpawns	10
+			Squad
+			{
+				TFBot
+				{
+					Health	10
+					Name	he
+					Class	Scout
+					ClassIcon scout_armored
+					BehaviorModifiers mobber
+					Item	"tf_weapon_scattergun"
+					Item	"tf_weapon_pistol_scout"
+					Item	"tf_weapon_bat"
+					CharacterAttributes
+					{
+						"active health degen"	-10
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	scsus
+			WaitForAllDead	sc8
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	1
+			WaitBetweenSpawns	10
+			Squad
+			{
+				TFBot
+				{
+					Health	10
+					Name	wants
+					Class	Scout
+					ClassIcon scout_armored
+					BehaviorModifiers mobber
+					Item	"tf_weapon_scattergun"
+					Item	"tf_weapon_pistol_scout"
+					Item	"tf_weapon_bat"
+					CharacterAttributes
+					{
+						"active health degen"	-10
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	scsos
+			WaitForAllDead	scsus
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	1
+			WaitBetweenSpawns	10
+			Squad
+			{
+				TFBot
+				{
+					Health	10
+					Name	his
+					Class	Scout
+					ClassIcon scout_armored
+					BehaviorModifiers mobber
+					Item	"tf_weapon_scattergun"
+					Item	"tf_weapon_pistol_scout"
+					Item	"tf_weapon_bat"
+					CharacterAttributes
+					{
+						"active health degen"	-10
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	scsms
+			WaitForAllDead	scsos
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	1
+			WaitBetweenSpawns	10
+			Squad
+			{
+				TFBot
+				{
+					Health	10
+					Name	legalley
+					Class	Scout
+					ClassIcon scout_armored
+					BehaviorModifiers mobber
+					Item	"tf_weapon_scattergun"
+					Item	"tf_weapon_pistol_scout"
+					Item	"tf_weapon_bat"
+					CharacterAttributes
+					{
+						"active health degen"	-10
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	scsms
+			WaitForAllDead	scsos
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	1
+			WaitBetweenSpawns	10
+			Squad
+			{
+				TFBot
+				{
+					Health	10
+					Name	owned
+					Class	Scout
+					ClassIcon scout_armored
+					BehaviorModifiers mobber
+					Item	"tf_weapon_scattergun"
+					Item	"tf_weapon_pistol_scout"
+					Item	"tf_weapon_bat"
+					CharacterAttributes
+					{
+						"active health degen"	-10
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	scsis
+			WaitForAllDead	scsms
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	1
+			WaitBetweenSpawns	10
+			Squad
+			{
+				TFBot
+				{
+					Health	10
+					Name	Robots
+					Class	Scout
+					ClassIcon scout_armored
+					BehaviorModifiers mobber
+					Item	"tf_weapon_scattergun"
+					Item	"tf_weapon_pistol_scout"
+					Item	"tf_weapon_bat"
+					CharacterAttributes
+					{
+						"active health degen"	-10
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	scskk
+			WaitForAllDead	scsis
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	1
+			WaitBetweenSpawns	10
+			Squad
+			{
+				TFBot
+				{
+					Health	10
+					Name	Back
+					Class	Scout
+					ClassIcon scout_armored
+					BehaviorModifiers mobber
+					Item	"tf_weapon_scattergun"
+					Item	"tf_weapon_pistol_scout"
+					Item	"tf_weapon_bat"
+					CharacterAttributes
+					{
+						"active health degen"	-10
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	"Soldiers magazine's of boobs"
+			WaitForAllDead scskk
+			TotalCurrency	800
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot_boss
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			FirstSpawnOutput
+			{
+				Target boss_door_open_relay
+				Action Trigger
+			}
+			Squad
+			{
+				TFBot
+				{
+					Health	80085
+					Name	"S-O-L-I-D L-I-B-E-R-T-Y"
+					Scale	2.35
+					Class	Soldier
+					Skill	Expert
+					ClassIcon	soldier_pocket_push
+					WeaponRestrictions	PrimaryOnly
+					Item	"the liberty launcher"
+					Item	"tf_weapon_shotgun_soldier"
+					Item	"tf_weapon_shovel"
+					Attributes MiniBoss
+					Attributes UseBossHealthBar
+					CharacterAttributes
+					{
+						"move speed penalty"	0.09
+						"airblast vertical pushback scale"	0.0001
+					}
+					ItemAttributes
+					{
+						ItemName	"the liberty launcher"
+						"damage bonus"	1.1
+						"apply z velocity on damage"	980
+						"fire rate penalty"	2.0
+						"clip size upgrade atomic"	75
+						"heal on hit for slowfire"	300
+						"dmg falloff decreased"	1.4
+						"mod mini-crit airborne deploy"	1
+						"mod stun waist high airborne" 1.6
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+		    WaitForAllDead scskk
+			TotalCurrency	0
+			TotalCount	30
+			MaxActive	9
+			SpawnCount	3
+			Where	spawnbot
+			WaitBeforeStarting	21
+			WaitBetweenSpawns	31
+			RandomChoice
+			{
+			    TFBot
+				{
+				    Template  T_TFBot_Soldier_Conch
+				}
+				TFBot
+				{
+				    Template  T_TFBot_Soldier_Battalion's_Backup_Direct
+				}
+				TFBot
+				{
+				    Template  T_TFBot_Soldier_Buff_Banner_jumppi
+				}
+			}
+		}
+	}
+}

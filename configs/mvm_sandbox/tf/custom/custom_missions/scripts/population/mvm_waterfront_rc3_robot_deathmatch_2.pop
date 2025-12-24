@@ -1,0 +1,653 @@
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_D_I_L.pop
+#base robot_deathmatch_base.pop
+#base robot_deathmatch_commonspawns.pop
+#base robot_deathmatch_giant_spawns.pop
+//Updated Version
+WaveSchedule
+{
+
+	StartingCurrency 0
+	CanBotsAttackWhileInSpawnRoom No
+	RespawnWaveTime 1
+	RobotLimit 24
+	SniperAllowHeadshots 1
+	NoReanimators 1
+	UpgradeStationKeepWeapons 1
+	ExtendedUpgradesOnly 1
+	BluPlayersAreRobots 1
+	RedPlayersAreRobots 1
+	BodyPartScaleSpeed 99
+	NoRedBotsRandomCrit 1
+	
+	PointTemplates
+	{
+
+
+		NoFixup 1
+		finaltele
+		{
+			trigger_teleport //teleport timer to box
+           		{
+                		"targetname" "timertele"
+                		"origin" "-1794 -2375 128"
+                		"spawnflags" "1"
+                		"solid" "0"
+                		"StartDisabled" "0"
+                		"maxs" "30 30 30"
+                		"mins" "-30 -30 -30"
+                		"target" "timerbox"
+            		}
+            		info_target
+           		{
+                		"targetname" "timerbox"
+                		"origin" "-1479 -2567 330"
+            		}
+		}
+
+		NoFixup 1
+		blueman
+		{
+
+
+			trigger_add_tf_player_condition
+			{
+				"condition" "43"
+				"origin" "-798 -2591 320"
+				"maxs" "30 30 30"
+                		"mins" "-30 -30 -30"
+				"spawnflags" "1"
+				"duration" "999"
+			}			
+
+			trigger_teleport //teleport timer to box
+           		{
+                		"targetname" "timertele"
+                		"origin" "-798 -2591 320"
+                		"spawnflags" "1"
+                		"solid" "0"
+                		"StartDisabled" "0"
+                		"maxs" "20 20 30"
+                		"mins" "-20 -20 -30"
+                		"target" "timeregg"
+            		}
+            		info_target
+           		{
+                		"targetname" "timeregg"
+                		"origin" "2142 329 320"
+            		}
+
+			trigger_add_tf_player_condition
+			{
+				"condition" "43"
+				"origin" "-1040 -2189 320"
+				"maxs" "30 30 30"
+                		"mins" "-30 -30 -30"
+				"spawnflags" "1"
+				"duration" "999"
+			}			
+
+			trigger_teleport //teleport timer to box
+           		{
+                		"targetname" "timertele"
+                		"origin" "-1040 -2189 320"
+                		"spawnflags" "1"
+                		"solid" "0"
+                		"StartDisabled" "0"
+                		"maxs" "20 20 30"
+                		"mins" "-20 -20 -30"
+                		"target" "timeregg2"
+            		}
+            		info_target
+           		{
+                		"targetname" "timeregg2"
+                		"origin" "1257 1074 64"
+            		}
+		}
+
+		spawnIndicators
+        	{
+            		NoFixup 1
+
+			entity
+            		{
+                		"id" "6"
+                		"classname" "prop_dynamic"
+                		"angles" "0 90 0"
+                		"DefaultAnim" "idle"
+                		"fademindist" "-1"
+                		"fadescale" "1"
+                		"MaxAnimTime" "10"
+                		"MinAnimTime" "5"
+                		"model" "models/props_mvm/robot_spawnpoint.mdl"
+                		"modelscale" "0.6"
+                		"renderamt" "255"
+                		"rendercolor" "255 255 255"
+                		"skin" "0"
+                		"solid" "6"
+                		"targetname" "2ndLeftG"
+                		"origin" "-1794 -2375 128"
+                		editor
+                		{
+                    		"color" "30 220 220"
+                    		"visgroupshown" "1"
+                    		"visgroupautoshown" "1"
+                    		"logicalpos" "[0 0]"
+                		}
+            		}
+
+            		NoFixup 1
+
+			entity
+            		{
+                		"id" "6"
+                		"classname" "prop_dynamic"
+                		"angles" "0 0 0"
+                		"DefaultAnim" "idle"
+                		"fademindist" "-1"
+                		"fadescale" "1"
+                		"MaxAnimTime" "10"
+                		"MinAnimTime" "5"
+                		"model" "models/props_mvm/robot_spawnpoint.mdl"
+                		"modelscale" "0.6"
+                		"renderamt" "255"
+                		"rendercolor" "255 255 255"
+                		"skin" "0"
+                		"solid" "6"
+                		"targetname" "2ndLeftG"
+                		"origin" "-798 -2591 320"
+                		editor
+                		{
+                    		"color" "30 220 220"
+                    		"visgroupshown" "1"
+                    		"visgroupautoshown" "1"
+                    		"logicalpos" "[0 0]"
+                		}
+            		}
+
+            		NoFixup 1
+
+			entity
+            		{
+                		"id" "6"
+                		"classname" "prop_dynamic"
+                		"angles" "0 180 0"
+                		"DefaultAnim" "idle"
+                		"fademindist" "-1"
+                		"fadescale" "1"
+                		"MaxAnimTime" "10"
+                		"MinAnimTime" "5"
+                		"model" "models/props_mvm/robot_spawnpoint.mdl"
+                		"modelscale" "0.6"
+                		"renderamt" "255"
+                		"rendercolor" "255 255 255"
+                		"skin" "0"
+                		"solid" "6"
+                		"targetname" "2ndLeftG"
+                		"origin" "-1040 -2189 320"
+                		editor
+                		{
+                    		"color" "30 220 220"
+                    		"visgroupshown" "1"
+                    		"visgroupautoshown" "1"
+                    		"logicalpos" "[0 0]"
+                		}
+            		}
+		}
+
+	}
+
+	Spawntemplate "finaltele"
+	Spawntemplate "blueman"
+	Spawntemplate "spawnIndicators"
+
+	ExtraSpawnPoint  
+	{
+        	Name "red"
+        	TeamNum 2
+        	X	"-2708"                     
+        	Y	"-2016"                  
+        	Z	"240"        
+	}
+
+
+	ExtraSpawnPoint  
+	{
+        	Name "red"
+        	TeamNum 2
+        	X	"-2695"                     
+        	Y	"-955"                  
+        	Z	"240"        
+	}
+
+	ExtraSpawnPoint  
+	{
+        	Name "red"
+        	TeamNum 2
+        	X	"-1834"                     
+        	Y	"-1639"                  
+        	Z	"176"        
+	}
+
+
+	ExtraSpawnPoint  
+	{
+        	Name "red"
+        	TeamNum 2
+        	X	"-1813"                     
+        	Y	"-1043"                  
+        	Z	"176"        
+	}
+ 
+
+	ExtraSpawnPoint  
+	{
+        	Name "red"
+        	TeamNum 2
+        	X	"-779"                     
+        	Y	"-1879"                  
+        	Z	"320"        
+	}
+
+	ExtraSpawnPoint  
+	{
+        	Name "spawnbot"
+        	TeamNum 3
+        	X	"1312"                     
+        	Y	"1152"                  
+        	Z	"60"        
+	}
+
+	ExtraSpawnPoint  
+	{
+        	Name "spawnbot"
+        	TeamNum 3
+        	X	"1268"                     
+        	Y	"-32"                  
+        	Z	"320"        
+	}
+
+
+
+	
+
+
+
+	Templates
+	{
+
+	}
+	
+	Mission // sentry buster
+	{
+		Objective DestroySentries
+
+		InitialCooldown 5
+		Where spawnbot
+		BeginAtWave 1
+		RunForThisManyWaves 6
+
+		CooldownTime 35            
+
+            	TFBot
+		{
+			Template T_TFBot_SentryBuster
+            	}
+	}	
+
+
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		WaitWhenDone 65
+		Checkpoint Yes
+
+		Explanation    //Dispayed once the wave is initialized
+		{
+			Line "{green}Get money and buy new playstyles with !missionitems"
+			Line "{blu}Go through the Robot indicators to become blu for a single life"
+		}
+
+		WaveSpawn // 1 Heavyweight champ spawnbot ignore flag push (10)
+		{
+			Where spawnbot_boss
+			TotalCount 1
+			SpawnCount 1
+			WaitBeforeStarting 999
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Metalbeard
+					Attributes IgnoreFlag
+					Action Mobber  
+					Attributes IgnoreFlag
+					Health 25000
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Chief_Demo_Atomic
+					Attributes IgnoreFlag
+					Action Mobber  
+					Attributes IgnoreFlag
+					Health 25000
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Chief_Soldier
+					Attributes IgnoreFlag
+					Action Mobber  
+					Attributes IgnoreFlag
+					Health 25000
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Chief_Soldier_SlowCrit
+					Attributes IgnoreFlag
+					Action Mobber  
+					Attributes IgnoreFlag
+					Health 25000
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Chief_Pyro
+					Attributes IgnoreFlag
+					Action Mobber  
+					Attributes IgnoreFlag
+					Health 25000
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Chief_Tavish
+					Attributes IgnoreFlag
+					Action Mobber  
+					Attributes IgnoreFlag
+					Health 25000
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+				}
+
+				TFBot
+				{
+					Template T_TFBot_Chief_Gauntlet
+					Attributes IgnoreFlag
+					Action Mobber  
+					Attributes IgnoreFlag
+					Health 25000
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Major_League
+					Attributes IgnoreFlag
+					Action Mobber  
+					Attributes IgnoreFlag
+					Health 10000
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Spammer_Chief
+					Attributes IgnoreFlag
+					Action Mobber  
+					Attributes IgnoreFlag
+					Health 25000
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Spammer_Chief
+					Attributes IgnoreFlag
+					Action Mobber  
+					Attributes IgnoreFlag
+					Health 25000
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_D_E_M_O
+					Attributes IgnoreFlag
+					Action Mobber  
+					Attributes IgnoreFlag
+					Health 25000
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Pill_Master
+					Attributes IgnoreFlag
+					Action Mobber  
+					Attributes IgnoreFlag
+					Health 25000
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+				}
+			}
+		}
+
+		WaveSpawn // blu light
+		{
+			Where spawnbot
+			TotalCount 700
+			MaxActive 7
+			SpawnCount 1
+			WaitBetweenSpawns 1
+			TotalCurrency 3600
+			Template T_Wavespawn_Blu_Light
+			FirstSpawnOutput
+			{
+				Target boss_door_open_relay
+				Action Trigger
+			}
+		}
+
+		WaveSpawn // blu Med
+		{
+			Where spawnbot
+			TotalCount 100
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawns 1
+			TotalCurrency 400
+			Template T_Wavespawn_Blu_Medium
+		}
+
+		WaveSpawn // blu Heavy
+		{
+			Where spawnbot
+			TotalCount 200
+			MaxActive 3
+			SpawnCount 1
+			WaitBetweenSpawns 25
+			TotalCurrency 10000
+			Template T_Wavespawn_Blu_Heavy
+		}
+
+		WaveSpawn // blu event
+		{
+			Where spawnbot
+			TotalCount 8
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawns 360
+			WaitBeforeStarting 300
+			TotalCurrency 4000
+			RandomSpawn 1
+			Support 1
+			RandomChoice
+			{
+				TFBot
+				{
+					Template MrBomber
+					Action Mobber  
+					Attributes IgnoreFlag
+					ClassIcon Random_lite	
+				}
+				TFBot
+				{
+					Template HomingStar
+					Action Mobber  
+					Attributes IgnoreFlag
+					ClassIcon Random_lite	
+				}
+				TFBot
+				{
+					Template WeeBeastie
+					Action Mobber  
+					Attributes IgnoreFlag
+					ClassIcon Random_lite	
+				}
+				TFBot
+				{
+					Template SoldierSupreme
+					Action Mobber  
+					Attributes IgnoreFlag
+					ClassIcon Random_lite	
+				}
+				TFBot
+				{
+					Template PipePirate
+					Action Mobber  
+					Attributes IgnoreFlag
+					ClassIcon Random_lite	
+				}
+			}
+		}
+
+		WaveSpawn // red light
+		{
+			Where red
+			TotalCount 900
+			MaxActive 7
+			SpawnCount 1
+			WaitBetweenSpawns 1
+			Template T_Wavespawn_Red_Light		
+		}
+
+		WaveSpawn // red Med
+		{
+			Where red
+			TotalCount 100
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawns 1
+			Template T_Wavespawn_Red_Medium	
+		}
+
+		WaveSpawn // red heavy
+		{
+			Where red
+			TotalCount 900
+			MaxActive 3
+			SpawnCount 1
+			WaitBetweenSpawns 25
+			Template T_Wavespawn_Red_Heavy	
+		}
+
+		WaveSpawn // red event
+		{
+			Where red
+			TotalCount 900
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawns 360
+			WaitBeforeStarting 480
+			RandomSpawn 1
+			Support 1
+			RandomChoice
+			{
+				TFBot
+				{
+					Template MrBomber
+					Action Mobber  
+					Attributes IgnoreFlag
+					ClassIcon red2_lite
+					AddCond   { Name "TF_COND_REPROGRAMMED" }	
+				}
+				TFBot
+				{
+					Template HomingStar
+					Action Mobber  
+					Attributes IgnoreFlag
+					ClassIcon red2_lite
+					AddCond   { Name "TF_COND_REPROGRAMMED" }	
+				}
+				TFBot
+				{
+					Template WeeBeastie
+					Action Mobber  
+					Attributes IgnoreFlag
+					ClassIcon red2_lite
+					AddCond   { Name "TF_COND_REPROGRAMMED" }	
+				}
+				TFBot
+				{
+					Template SoldierSupreme
+					Action Mobber  
+					Attributes IgnoreFlag
+					ClassIcon red2_lite
+					AddCond   { Name "TF_COND_REPROGRAMMED" }	
+				}
+				TFBot
+				{
+					Template PipePirate
+					Action Mobber  
+					Attributes IgnoreFlag
+					ClassIcon red2_lite
+					AddCond   { Name "TF_COND_REPROGRAMMED" }	
+				}
+			}
+		}
+	}
+}

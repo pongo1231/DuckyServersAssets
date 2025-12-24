@@ -1,0 +1,308 @@
+//////////////////////////////////////////////////
+//Mission 'n' Robot Explanations				//
+//Author: Yakibomb								//
+//Released: October 24, 2019					//
+//Map Version: Alpha 6							//
+//////////////////////////////////////////////////
+
+//////////////////////////////////////////////////
+//		****NOTE: This is very WIP!!!****		//
+//////////////////////////////////////////////////
+
+// -?- For Popfile writers... Use this Example file to understand how to make your missions and robots of mvm_berserker!
+// -!- Please use the other .pop files that come with the map as examples.
+
+//Tags for Bots
+//bot_jarated				= bot has piss on them
+//bot_milked				= bot has milk on them
+//bot_bonked				= bot is 100% invulnerable (a la Bonk! Atomic Punch)
+//bot_disciplinaryaction	= bot has 40% speed boost
+//bot_rune_reflect			= bot has Mann Power's reflect rune
+//bot_invisible				= bot is cloaked
+//bot_crits					= bot has 100% crits
+//bot_ubered				= bot is Ubercharged
+//bot_stunned				= bot is stunned, like Mannhattan's GateBots. Note: Seems to not work when used with bot_healing (Uber Heal) or bot_bonked (Bonk! invuln).
+//bot_healing				= bot is healed from the Medigun to 200% HP (with restrictions for pre-set Health for the robot)
+//bot_healer				= bot heals other bots around itself (like the Amputator)
+//bot_chargin				= bot charges like the Demoknight
+//drop_random				= on death, bot will drop a small treasure chest (100% chance)
+//drop_random_chance		= on death, bot will drop a small treasure chest (6.25% chance)
+//drop_key_basic			= dying drops a basic dungeon key
+//drop_rare_heartpiece		= bot drops big chest a Zelda heart piece that adds 15 max health to the team (stacks 8 times).
+//drop_rare_trap			= bot drops big chest with 5 live pipe bombs (that are meant to kill the player..!)
+//drop_rare_cash			= bot drops big chest with $125 cold hard cash
+
+/////Tags for Bosses: Timer Mechanics/////
+// -!- Use tag "bot_boss" to add a timer mechanism for a boss robot. Combine them with another tag to tell the bot to what form to change to, and at what time.
+// -- The idea is you want to make a loop to cycle through behaviors. This is important for how it all works!
+// -- The bot_boss changes forms like a GateBot, using EventChangeAttributes to change forms.
+// -!- Valid parameters are "Behavior#" (replace # with 1-9) and "Default"
+//bot_boss_mod_behavior#		= changes boss' to behavior# in 1 second (replace behavior# with Default if you choose to use Default as form)
+//bot_boss_mod_behavior#_at_4	= changes boss' to behavior# in 4 seconds
+//bot_boss_mod_behavior#_at_8	= changes boss' to behavior# in 8 seconds
+//bot_boss_mod_behavior#_at_12	= changes boss' to behavior# in 12 seconds
+//bot_boss_mod_behavior#_at_16	= changes boss' to behavior# in 16 seconds
+// -!- Replace Behavior# with, for example, Behavior3 to change to Behavior3.
+// -?- It's recommended you look at the example boss at the bottom of this guide. (or in "robot_berserker", at the end of the file)
+// -!- If you use Default as a form, remember it'll conflict with other bosses if you choose to use more than one.
+
+
+/////Understanding How Berserker Manipulates Robot AI/////
+// -?- Where does the bomb go? How do robots attack players without a bomb present? Please read on to find out!
+// - When the map begins, the first robot spawned will teleport immediately to the bomb.
+// -- When the bomb is picked up, it will teleport the robot to a special room where he cannot be reached by players.
+// - When the bomb is in this room, bot AI will hunt for the nearest player.
+// -- The Bomb NEEDS to exist, otherwise the robots will stand around until the player engages
+
+/////Understanding Berserker's Event System (aka How do I write Popfiles for this map?)/////
+// -?- What do you need to know to make your own Berserker mission? Please, read on!
+// -!- There are two types of logic_relays you need to know about to write a popfile:
+// -!- They are two relay systems called "Setup" and "Event".
+// -!- Setup relays are used by the mission maker to trigger specific actions within a stage.
+// -- They start with "setup_sXaY_ACTION", where "X" is the stage #, "Y" is the area #, and ACTION is what it triggers. (Example, "setup_s1a6_cp2_lockdoor" would enable the first locked door in the Cemetery area)
+// -- They are logic_relays that are already enabled, and only need to be triggered by the popfile.
+// -- Setup relays can be used with Action Trigger
+// -!- Event relays are only triggered by CPs, Unlocking Doors... but ONLY if the relay is ENABLED!!
+// -- Enable "event_universal_trigger" for things like CPs, Unlocking Doors... to trigger events.
+// -- OnStartTouch for CPs automatically triggers all events, then disables self (doesn't need event_universal_trigger to be enabled).
+// -- Event relays can be used with Action Enable
+// -!- Search "dummy1" to see how to trigger these events.
+// -- Can use "StartWaveOutput" "FirstSpawnOutput" "DoneOutput" to trigger up to three events at once.
+// --- Combined with a bot WaveSpawn, use "WaitForAllSpawned" "WaitForAllDead" to do as implied.
+// ---- For a non-bot WaveSpawn, "WaitBeforeStarting" is the only one that works. "WaitBetweenSpawns" "WaitBetweenSpawnsAfterDeath" do not work.
+// ---- CANNOT USE "LastSpawnOutput" in WaveSpawn for events without robots, because if there are no robots to spawn, there is no "LastSpawnOutput"!
+
+/////How to Search for Events and Setups per stage////
+// -!- Open the map while on a level by setting up the wave_init_relay for that stage.
+// -!- In the console, type:
+//ent_fire PREFIX_STAGE
+//Where PREFIX is either setup, setup_onstarttouch, or event. STAGE uses the format "sXaY" where X = stage# and Y = area#.
+//You can input the Action after the entity is selected. Example:
+//ent_fire setup_s1a3_skeletons Trigger
+//This will make skeletons jump out of graves when players touch them in the cemetery area of stage 1.
+//Have fun finding all of them!
+
+
+/////EVENT / SETUP LIST (UNFINISHED!!!)/////
+// -!- To find all the events and setups, please use the console, type "sv_cheats 1", then "ent_fire YOURSEARCH", where YOURSEARCH is event_sXaY_, setup_,
+//Prefixes for Relay Entities
+//event_*
+//setup_*
+//setup_onstarttouch_s*
+//setup_chest_spawn_s*
+
+//spawnbot_* locations
+//spawnbot_bomb						== Used for when CPs are captured, locks are unlocked, doors are opened, etc...
+//spawnbot_thread1					== Used for special events (not used in map version a4)
+//spawnbot_thread2					== Used for special events (not used in map version a4)
+//spawnbot_boss_s1
+//Events
+/////All Stages////
+//event_bomb						== 
+//event_thread1						== 
+//event_thread2						== 
+//event_universal_trigger			= ALWAYS enable this if the next event the players run into is using this. When triggered, triggers all events, then disables itself.
+//setup_universal_trigger					= does the same as above, without waiting for Action Enable or for the map to run it.
+//event_kill_blu					= enable this to kill all BLU players upon event_universal_trigger being, well, triggered.
+//kill_blu							= trigger this to kill all BLU players (including ubered)
+//event_pause_botspawn_auto			== when triggered, it pauses bots from spawning, and enables event_unpause_botspawn so you don't have to.
+//event_pause_botspawn
+//event_unpause_botspawn
+//setup_pause_botspawn_auto			== when triggered, it pauses bots from spawning, and enables event_unpause_botspawn so you don't have to.
+//setup_pause_botspawn
+//setup_unpause_botspawn
+/////Stage1/////
+//setup_s1a1_cp1_unlock
+//setup_s1a1_cp1_lock
+//setup_onstarttouch_s1a1_cp1			== enable when you want to trigger an event on cap touch (disables self upon use).
+
+/////game text at the beginning of the map (use Action Display to see them?)
+//game_text_0 = "Author: Yakibomb"
+//game_text_1 = "Alpha 6"
+
+//Other Notes
+// - Use "Attributes IgnoreFlag" to make robots attack in place.
+// - CANNOT USE "WaitForAllSpawned" on robots that are not on the wave bar! (i.e. T_Bersk_Event_Bomb settings)
+// - (A "logic_relay" in Hammer is a message forwarder. These are used to trigger inputs to all sorts of entities in a map!)
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+WaveSchedule
+{
+	StartingCurrency		2500
+	RespawnWaveTime 0
+	CanBotsAttackWhileInSpawnRoom Yes
+	FixedRespawnWaveTime Yes
+	
+	Wave
+	{
+		InitWaveOutput
+		{
+			Target wave_init_relay_s1				//Notice "s1" at the end. It means Stage One.
+			Action Trigger
+		}
+		StartWaveOutput
+		{
+			Target wave_start_relay					//Universal. The only important one is the InitWaveOutput.
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay				//Universal. The only important one is the InitWaveOutput.
+			Action trigger
+		}
+		
+//Example
+//		WaveSpawn
+//		{
+//			Name "dummy1"
+//			
+//			StartWaveOutput
+//			{
+//				Target setup_sXaY_dummy
+//				Action Trigger
+//			}
+//			WaitBeforeStarting 3
+//			FirstSpawnOutput
+//			{
+//				Target event_sXaY_dummy
+//				Action Enable
+//			}
+//			DoneOutput
+//			{
+//				Target setup_sXaY_dummy
+//				Action Trigger
+//			}
+//		}
+
+//Setting up the stage events (bomb teleports)
+		WaveSpawn
+		{
+			FirstSpawnWarningSound "\vo\announcer_attack_controlpoints.mp3"
+			
+			Name "s1a1_cp1"
+			
+			StartWaveOutput
+			{
+				Target setup_pause_botspawn_auto
+				Action Trigger
+			}
+			
+			Where spawnbot_bomb
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+
+			TFBot
+			{
+				Template T_Bersk_Event_Bomb
+			}
+		}
+		
+//This enables the Universal Trigger event relay, which the first door in the map uses to trigger all "event_*" events enabled (in this case, only event_unpause_botspawn is enabled).
+//Unlocks spawn doors in 5 seconds
+		WaveSpawn
+		{
+			StartWaveOutput
+			{
+				Target event_universal_trigger
+				Action Enable
+			}
+			
+			WaitBeforeStarting 5
+			
+			FirstSpawnOutput
+			{
+				Target setup_s1a1_unlockspawndoor
+				Action Trigger
+			}
+		}
+		
+////////EXAMPLE BOSS////////
+
+		WaveSpawn
+		{
+			WaitForAllSpawned "s1a1_cp1"
+			
+			Name "s1a1_example_boss"
+			
+			Where spawnbot_s1a1_cp1_back
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 1
+				
+			TFBot
+			{
+				Class Soldier
+				Health 3300
+				ClassIcon enemy_boss_giant
+				Scale 1.75
+				
+				EventChangeAttributes
+				{
+					Default
+					{
+						Tag bot_boss_mod_behavior1_at_4
+						
+						Skill Normal
+						Attributes MiniBoss
+						Attributes UseBossHealthBar
+						Tag bot_boss
+						
+						WeaponRestrictions PrimaryOnly
+						Item "Rocket Jumper"
+					}
+					Behavior1
+					{
+						Tag bot_boss_mod_behavior2_at_4
+						
+						Skill Easy
+						Attributes MiniBoss
+						Attributes UseBossHealthBar
+						Tag bot_boss
+						
+						WeaponRestrictions MeleeOnly
+						
+						CharacterAttributes
+						{
+							"move speed bonus"	2
+						}
+					}
+					Behavior2
+					{
+						Tag bot_boss_mod_behavior1_at_4
+						
+						Skill Hard
+						Attributes MiniBoss
+						Attributes UseBossHealthBar
+						Tag bot_boss
+						Tag bot_crits
+						
+						WeaponRestrictions PrimaryOnly
+						Item "Rocket Jumper"
+					}
+					Behavior3
+					{
+						Tag bot_boss_mod_behavior1_at_4
+						
+						Skill Expert
+						Attributes MiniBoss
+						Attributes UseBossHealthBar
+						Attributes SpawnWithFullCharge
+						Attributes IgnoreFlag
+						
+						Tag bot_boss
+						Tag bot_ubered
+						
+						Item "The Buff Banner"
+						
+						WeaponRestrictions SecondaryOnly
+					}
+				}
+			}
+		}
+	}
+}

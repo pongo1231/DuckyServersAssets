@@ -1,0 +1,125 @@
+#base robot_standard.pop
+#base robot_giant.pop
+#base robot_fan_kaizo.pop
+WaveSchedule
+{
+	StartingCurrency 20000
+	CanBotsAttackWhileInSpawnRoom no
+	RespawnWaveTime 5
+	AddSentryBusterWhenDamageDealtExceeds 3000
+	AddSentryBusterWhenKillCountExceeds 15
+	Advanced 1
+	Templates {}
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_overbridge"
+        TeamNum 3
+        X    -9.56          
+        Y    -1184.45    
+        Z    600
+    }
+	Wave // Wave 1
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			Where spawnbot_overbridge
+			TotalCount 500
+			MaxActive 22
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+			RandomChoice
+			{
+				TFBot
+				{
+					Template    T_TFBot_Demoknight_Leaping
+					Attributes	IgnoreFlag
+					Action	Mobber
+				}
+				TFBot
+				{
+					Template    T_TFBot_Demoknight_Leaping_Persian
+					Attributes	IgnoreFlag
+					Action	Mobber
+				}
+				TFBot
+				{
+					Template    T_TFBot_Demoknight_Leaping_NineIron
+					Attributes	IgnoreFlag
+					Action	Mobber
+				}
+				TFBot
+				{
+					Template    T_TFBot_Demoman_Samurai_Kaizo
+					Attributes	IgnoreFlag
+					Action	Mobber
+				}
+				TFBot
+				{
+					Template    T_TFBot_Demoknight_Leaping_Skullcutter
+					Attributes	IgnoreFlag
+					Action	Mobber
+				}
+				TFBot
+				{
+					Template    T_TFBot_Demoknight_Leaping_Headtaker
+					Attributes	IgnoreFlag
+					Action	Mobber
+				}
+				TFBot
+				{
+					Template    T_TFBot_Demoknight_Leaping_Charge
+					Attributes	IgnoreFlag
+					Action	Mobber
+				}
+				TFBot
+				{
+					Template    T_TFBot_Demoknight_Leaping_Pan
+					Attributes	IgnoreFlag
+					Action	Mobber
+				}
+				TFBot
+				{
+					Template    T_TFBot_Demoknight_Leaping_Sign
+					Attributes	IgnoreFlag
+					Action	Mobber
+				}
+				TFBot
+				{
+					Template    T_TFBot_Demoknight_Leaping_Machete
+					Attributes	IgnoreFlag
+					Action	Mobber
+				}
+				TFBot
+				{
+					Template    T_TFBot_Demoknight_Leaping_Caber
+					Attributes	IgnoreFlag
+					Action	Mobber
+				}
+				TFBot
+				{
+					Template    T_TFBot_Demoknight_Leaping_Caber_Grapple
+					Attributes	IgnoreFlag
+					Action	Mobber
+				}
+				TFBot
+				{
+					Template    T_TFBot_Demoknight_Leaping_Paintrain
+					Attributes	IgnoreFlag
+					Action	Mobber
+				}
+			}
+		}
+	}
+}

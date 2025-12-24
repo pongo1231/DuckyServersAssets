@@ -1,0 +1,177 @@
+WaveSchedule
+{
+	Templates
+	{
+		//Scout
+		
+		T_TFBot_Scout_Cola
+		{
+			Name "Cola Scout"
+			Health 125
+			Class Scout
+			ClassIcon scout_cola
+			Skill Normal
+			MaxVisionRange 400
+			Item "Scattergun"
+			Item "Crit-a-Cola"
+			ItemAttributes
+			{
+				ItemName "Crit-a-Cola"
+				"effect bar recharge rate increased" 0.5
+			}
+		}
+		
+		//Soldier
+		
+		T_TFBot_Soldier_Equalizer
+		{
+			Name "Equalizer Soldier"
+			Health 600
+			Class Soldier
+			ClassIcon soldier_equalizer
+			Skill Normal
+			MaxVisionRange 400
+			Attributes SpawnWithFullCharge
+			Scale 1.5
+			Item "The Concheror"
+			Item "The Equalizer"
+			WeaponRestrictions MeleeOnly
+			CharacterAttributes
+			{
+				"increase buff duration" 9.0
+			}
+		}
+		
+		//Pyro
+		
+		T_TFBot_Pyro_Dragon
+		{
+			Name "Dragon's Fury Pyro"
+			Health 175
+			Class Pyro
+			ClassIcon pyro_dragon_fury_swordstone
+			Skill Normal
+			MaxVisionRange 400
+			Item "The Dragon's Fury"
+		}
+		
+		T_TFBot_Pyro_Gas
+		{
+			Name "Gas Passer Pyro"
+			Health 175
+			Class Pyro
+			ClassIcon pyro_gascann
+			Skill Normal
+			MaxVisionRange 400
+			Item "The Gas Passer"
+			Item "The Rusty Reaper"
+			Attributes SpawnWithFullCharge
+			Attributes AlwaysFireWeapon
+			WeaponRestrictions SecondaryOnly
+			ItemAttributes
+			{
+				ItemName "The Gas Passer"
+				"item_meter_charge_rate" 0.5
+				"fire rate penalty" 2.7
+			}
+			ItemAttributes
+			{
+				ItemName "The Rusty Reaper" //blue
+				"head scale" 1.28
+			}
+		}
+		
+		T_TFBot_Pyro_Gas_Explosive
+		{
+			Name "Explosive Passer Pyro"
+			Health 525
+			Class Pyro
+			ClassIcon pyro_gascann_explode
+			Skill Expert
+			MaxVisionRange 400
+			Scale 1.5
+			Item "The Gas Passer"
+			Item "The Rusty Reaper"
+			Attributes SpawnWithFullCharge
+			Attributes AlwaysFireWeapon
+			WeaponRestrictions SecondaryOnly
+			ItemAttributes
+			{
+				ItemName "The Gas Passer"
+				"item_meter_charge_rate" 0.5
+				"fire rate penalty" 2.7
+				"explode_on_ignite" 1
+			}
+			ItemAttributes
+			{
+				ItemName "The Rusty Reaper" //blue
+				"head scale" 1.28
+			}
+		}
+		
+		//Engineer
+		
+		T_TFBot_Turbine_Engineer
+		{
+			Name "Engineer"
+			Health 500
+			Class Engineer
+			Skill Expert
+			TeleportWhere Left_Spawn
+			Attributes TeleportToHint
+		}
+		
+		//Medic
+		
+		T_TFBot_Medic_Kritz
+		{
+			Name "Kritzkrieg Medic"
+			Health 150
+			Class Medic
+			ClassIcon medic_kritz
+			Skill Expert
+			MaxVisionRange 400
+			Attributes SpawnWithFullCharge
+			Tag "bot_squad_member"
+			Item "The Kritzkrieg"
+			Item "Vintage Tyrolean"
+			ItemAttributes
+			{
+				ItemName "The Kritzkrieg"
+				"ubercharge rate bonus" 100
+				"uber duration bonus" 200
+			}
+			CharacterAttributes
+			{
+				"bot medic uber health threshold" 200
+			}
+		
+		}
+		
+		T_TFBot_Giant_Medic_Kritz
+		{
+			Name "Giant Kritzkrieg Medic"
+			Health 4500
+			Class Medic
+			ClassIcon medic_kritz_giant
+			Skill Expert
+			Attributes SpawnWithFullCharge
+			Attributes Miniboss
+			Item "The Kritzkrieg"
+			Item "Vintage Tyrolean"
+			ItemAttributes
+			{
+				ItemName "The Kritzkrieg"
+				"ubercharge rate bonus" 100
+				"uber duration bonus" 200
+			}
+			CharacterAttributes
+			{
+				"bot medic uber health threshold" 5000
+				"move speed bonus" 0.5
+				"damage force reduction" 0.6
+				"airblast vulnerability multiplier" 0.6
+			}
+		}
+	}
+}

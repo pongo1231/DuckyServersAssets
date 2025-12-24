@@ -1,0 +1,979 @@
+
+// Guardian Map Template Mission 1
+
+// Made by Crinitus
+// Now with 99% less stupid comments
+
+// Ported to mvm_gd_fastener by Pont
+
+#base robot_giant.pop
+#base robot_standard.pop
+
+Why_yes,_I_infact_DO_give_my_WaveSchedules_a_custom_name._How_could_you_tell?_Actually,_better_question._Why_are_you_looking_here?
+{
+	StartingCurrency	800
+	RespawnWaveTime	2
+	CanBotsAttackWhileInSpawnRoom	no
+	Templates
+	{
+		// Scout train pusher
+		FastenerBot_ScoutPushFodder
+		{
+				Class Scout
+				ClassIcon Scout
+				Skill Normal
+				BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				WeaponRestrictions MeleeOnly
+				Name "Secondmann"
+				Item "Engineer's Cap"
+		}
+	//WAVESPAWN templates
+		// Pusher scout trickle
+		FastenerWave_Support_ScoutPushers_Trickle
+		{
+			Name "support_scoutPushers"
+            SpawnCount 1
+            MaxActive 3
+            WaitBeforeStarting 0
+            WaitBetweenSpawns 3
+            Where spawnbot
+            TotalCurrency 0
+			Support 1
+		
+            TFBot
+            {
+				Template FastenerBot_ScoutPushFodder
+				
+				// go to train
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot
+            }
+		}
+		// Pusher scout groups
+		FastenerWave_Support_ScoutPushers_Groups
+		{
+			Name "support_scoutPushers"
+            SpawnCount 3
+            MaxActive 3
+            WaitBeforeStarting 0
+            WaitBetweenSpawns 9
+            Where spawnbot
+            TotalCurrency 0
+			Support 1
+            TFBot
+            {
+				Template FastenerBot_ScoutPushFodder
+				
+				// go to train
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot
+            }
+		}
+	}
+	
+	
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		InitWaveOutput
+		{
+			Target	wave_reset_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name "wave_1_dynamic_element"
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 0
+			FirstSpawnOutput
+			{
+				Target wave_start_events_1
+				Action Trigger
+			}
+		}
+		
+		// Pusher scouts
+		WaveSpawn
+		{
+			Template FastenerWave_Support_ScoutPushers_Trickle
+		}
+		WaveSpawn
+		{
+			Name	wave1_s1
+			TotalCurrency	200
+			TotalCount	25
+			MaxActive	5
+			SpawnCount	1
+			WaitBetweenSpawns	1.5
+			Where	spawnbot
+			TFBot
+			{
+				Class	Soldier
+				Skill	Easy
+				BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				// go nearby the train
+				Tag bot_hoverbot
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave1_s1
+			TotalCurrency	200
+			TotalCount	24
+			MaxActive	6
+			SpawnCount	4
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	5
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Scout_Melee
+				BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				// go nearby the train
+				Tag bot_hoverbot
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave1_smolheavies
+			WaitForAllDead	wave1_s1
+			TotalCurrency	200
+			TotalCount	30
+			MaxActive	10
+			SpawnCount	2
+			WaitBeforeStarting	2
+			WaitBetweenSpawns	2
+			Where	spawnbot_right
+			Where	spawnbot_left
+			TFBot
+			{
+				Template	T_TFBot_Heavyweapons_Heavyweight_Champ
+				BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				// go nearby the train
+				Tag bot_hoverbot
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave1_them	// it's them
+			WaitForAllSpawned	wave1_smolheavies
+			TotalCurrency	200
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	2
+			Where	spawnbot
+			Squad
+			{
+				TFBot	// ONE. Just ONE steel fist heavy. Absolutely menacing. Fucking incredible
+				{
+					Template	T_TFBot_Heavyweapons_Fist
+					BehaviorModifiers	Push
+					Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_Bigheal
+				}
+			}
+		}
+
+	}
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		InitWaveOutput
+		{
+			Target	wave_reset_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name "wave_2_dynamic_element"
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 0
+			FirstSpawnOutput
+			{
+				Target wave_start_events_2
+				Action Trigger
+			}
+		}
+		// Pusher scouts
+		WaveSpawn
+		{
+			Template FastenerWave_Support_ScoutPushers_Trickle
+		}
+		WaveSpawn
+		{
+			Name	wave2a
+			TotalCurrency	150
+			TotalCount	24
+			MaxActive	12
+			SpawnCount	3
+			WaitBetweenSpawns	4
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Class	Demoman
+					Skill	Easy
+					BehaviorModifiers	Push
+					Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+
+				}
+				TFBot
+				{
+					Class	Demoman
+					Skill	Easy
+					WeaponRestrictions	MeleeOnly
+					ClassIcon	demoknight_bottle_lite
+					BehaviorModifiers	Push
+					Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+
+				}
+				TFBot
+				{
+					Class	Demoman
+					Skill	Easy
+					WeaponRestrictions	MeleeOnly
+					ClassIcon	demoknight_bottle_lite
+					BehaviorModifiers	Push
+					Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave2a
+			TotalCurrency	150
+			TotalCount	4
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	10
+			Where	spawnbot_left
+			Where	spawnbot_right
+			TFBot
+			{
+				Template	T_TFBot_Heavyweapons_Heavyweight_Champ_Fast
+				BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+
+				Attributes	AlwaysCrit
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave2b
+			WaitForAllDead	wavea
+			TotalCurrency	150
+			TotalCount	30
+			MaxActive	8
+			SpawnCount	2
+			WaitBetweenSpawns	2.5
+			Where	spawnbot
+			TFBot
+			{
+				Class	Scout
+				Skill	Easy
+				BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave2b
+			WaitForAllDead	wavea
+			TotalCurrency	150
+			TotalCount	1
+			SpawnCount	1
+			WaitBeforeStarting	25
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Giant_Pyro_Flare_Spammer
+				BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot
+				Tag bot_giant
+			}
+		}
+
+	}
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		InitWaveOutput
+		{
+			Target	wave_reset_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name "wave_3_dynamic_element"
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 0
+			FirstSpawnOutput
+			{
+				Target wave_start_events_3
+				Action Trigger
+			}
+		}
+		// Pusher scouts
+		WaveSpawn
+		{
+			Template FastenerWave_Support_ScoutPushers_Groups
+		}
+		WaveSpawn
+		{
+			Name	wave3a
+			TotalCurrency	150
+			TotalCount	24
+			MaxActive	8
+            SpawnCount	4
+			WaitBetweenSpawns	5
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Class	Soldier
+					BehaviorModifiers	Push
+					Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+
+				}
+				TFBot
+				{
+					Class	Pyro
+					ClassIcon	pyro_flare
+					WeaponRestrictions	SecondaryOnly
+					Skill	Easy
+					Item	"The Detonator"
+					BehaviorModifiers	Push
+					Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+				}
+				TFBot
+				{
+					Class	Pyro
+					ClassIcon	pyro_flare
+					WeaponRestrictions	SecondaryOnly
+					Skill	Easy
+					Item	"The Detonator"
+					BehaviorModifiers	Push
+					Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+				}
+				TFBot
+				{
+					Class	Pyro
+					ClassIcon	pyro_flare
+					WeaponRestrictions	SecondaryOnly
+					Skill	Easy
+					Item	"The Detonator"
+					BehaviorModifiers	Push
+					Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+				}
+
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave3a
+			TotalCurrency	150
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	20
+			Where	spawnbot_support_giant
+			TFBot
+			{
+				Template	T_TFBot_Giant_Scout
+				BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave3b
+			WaitForAllDead	wave3a
+			TotalCurrency	200
+			TotalCount	30
+			MaxActive	10
+			SpawnCount	2
+			WaitBeforeStarting	3
+			WaitBetweenSpawns	3
+			Where	spawnbot
+			TFBot
+			{
+				Class	Demoman
+				Skill	Easy
+				BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave3b
+			WaitForAllDead	wave3a
+			TotalCurrency	200
+			TotalCount	9
+			MaxActive	4
+			SpawnCount	3
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	15
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Sniper_Huntsman_Spammer
+					ClassIcon	sniper_bow_multi
+					Name	"Rapid-fire Bowman"
+					BehaviorModifiers	Push
+					Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+				}
+				TFBot
+				{
+					Class	Pyro
+					Attributes	AlwaysFireWeapon
+					BehaviorModifiers	Push
+					Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+				}
+				TFBot
+				{
+					Class	Pyro
+					Attributes	AlwaysFireWeapon
+					BehaviorModifiers	Push
+					Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+				}
+
+			}
+		}
+
+	}
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		InitWaveOutput
+		{
+			Target	wave_reset_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name "wave_4_dynamic_element"
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 0
+			FirstSpawnOutput
+			{
+				Target wave_start_events_4
+				Action Trigger
+			}
+		}
+		// Pusher scouts
+		WaveSpawn
+		{
+			Template FastenerWave_Support_ScoutPushers_Groups
+		}
+		WaveSpawn
+		{
+			Name	wave4a
+			TotalCurrency	200
+			TotalCount	5
+			SpawnCount	5
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Soldier_Crit
+					BehaviorModifiers	Push
+					Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_Bigheal
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_Bigheal
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_Bigheal
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_Bigheal
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave4b
+			WaitForAllDead	wave4a
+			TotalCurrency	200
+			TotalCount	36
+			MaxActive	12
+			SpawnCount	3
+			WaitBeforeStarting	4
+			WaitBetweenSpawns	4
+			Where	spawnbot
+			Where	spawnbot_left
+			Where	spawnbot_right
+			TFBot
+			{
+				Template	T_TFBot_Heavyweapons_Shotgun
+				Name	"Shotgun Heavy"
+				BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave4b
+			WaitForAllDead	wave4a
+			TotalCurrency	200
+			TotalCount	8
+			MaxActive	4
+			SpawnCount	4
+			WaitBeforeStarting	30
+			WaitBetweenSpawns	30
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Class	Demoman
+					Name	"Giant Demoman"
+					ClassIcon	demo_giant
+					Skill	Expert
+					Health	3300
+					WeaponRestrictions	PrimaryOnly
+					Attributes	HoldFireUntilFullReload
+					Attributes	MiniBoss
+					BehaviorModifiers	Push
+					Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"damage force reduction" 0.5
+						"airblast vulnerability multiplier" 0.5
+						"override footstep sound set" 4
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_Bigheal
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_Bigheal
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_Bigheal
+				}
+			}
+		}
+
+	}
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		InitWaveOutput
+		{
+			Target	wave_reset_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name "wave_5_dynamic_element"
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 0
+			FirstSpawnOutput
+			{
+				Target wave_start_events_5
+				Action Trigger
+			}
+		}
+		// Pusher scouts
+		WaveSpawn
+		{
+			Template FastenerWave_Support_ScoutPushers_Groups
+		}
+		WaveSpawn
+		{
+			Name	wave5a
+			TotalCurrency	200
+			TotalCount	30
+			MaxActive	10
+			SpawnCount	2
+			WaitBeforeStarting	4
+			WaitBetweenSpawns	4
+			Where	spawnbot_left
+			Where	spawnbot_right
+			Squad
+			{
+				TFBot
+				{
+					Class	Soldier
+					Skill	Hard
+					BehaviorModifiers	Push
+					Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_Bigheal
+				}
+
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave5a
+			TotalCurrency	200
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			WaitBetweenSpawns	30
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Giant_Scout_Baseball
+				BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot
+
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave5b
+			WaitForAllDead	wave5a
+			TotalCurrency	200
+			TotalCount	30
+			MaxActive	9
+			SpawnCount	3
+			WaitBeforeStarting	3
+			WaitBetweenSpawns	3
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Scout_FAN
+				BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave5b
+			WaitForAllDead	wave5a
+			TotalCurrency	200
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	30
+			WaitBetweenSpawns	30
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Giant_Soldier_Spammer
+				BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+
+			}
+		}
+	}
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		InitWaveOutput
+		{
+			Target	wave_reset_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name "wave_6_dynamic_element"
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 0
+			FirstSpawnOutput
+			{
+				Target wave_start_events_6
+				Action Trigger
+			}
+		}
+		// Pusher scouts
+		WaveSpawn
+		{
+			Template FastenerWave_Support_ScoutPushers_Groups
+		}
+		WaveSpawn
+		{
+			Name	wave6a
+			TotalCurrency	200
+			TotalCount	27
+			MaxActive	9
+			SpawnCount	3
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	6.5
+			Where	spawnbot
+			Where	spawnbot_right
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Fist
+					BehaviorModifiers	Push
+					Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+
+				}
+				TFBot
+				{
+					Class	Soldier
+					BehaviorModifiers	Push
+					Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+
+				}
+				TFBot
+				{
+					Class	Soldier
+					BehaviorModifiers	Push
+					Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+
+				}
+
+			}
+
+		}
+		WaveSpawn
+		{
+			Name	wave6a
+			TotalCurrency	200
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	45
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Giant_Heavyweapons
+				Item	"The One-Man Army"	// dear star: is having a reference to my main's loadout enough for a miniboss like I did with bootleg startacker on gd_trust? :^)
+				BehaviorModifiers	Push //dear crinitus: yes
+				Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave6b
+			WaitForAllDead	wave6a
+			TotalCurrency	200
+			TotalCount	50
+			MaxActive	8
+			SpawnCount	1
+			WaitBetweenSpawns	1
+			Where	spawnbot
+			Where	spawnbot_left
+			Where	spawnbot_right
+			RandomChoice
+			{
+				TFBot
+				{
+					Class	Demoman
+					BehaviorModifiers	Push
+					Attributes			IgnoreFlag
+					Tag nav_prefer_gate1_flank
+					Tag bot_gatebot
+
+				}
+				TFBot
+				{
+					Class	Pyro
+					BehaviorModifiers	Push
+					Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+
+				}
+				TFBot
+				{
+					Class	Heavyweapons
+					Skill	Easy
+					BehaviorModifiers	Push
+					Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+
+				}
+
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave6b
+			WaitForAllDead	wave6a
+			TotalCurrency	200
+			TotalCount	5
+			SpawnCount	5
+			WaitBeforeStarting	60
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Soldier_Spammer_Reload
+					Item	"Hawk Warrior"
+					Attributes	AlwaysCrit
+					BehaviorModifiers	Push
+					Attributes			IgnoreFlag
+					// go nearby the train
+					Tag bot_hoverbot
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_Bigheal
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_Bigheal
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_Bigheal
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_Bigheal
+				}
+			}
+		}
+
+
+	}
+
+}

@@ -1,0 +1,529 @@
+#base robot_standard.pop
+#base robot_giant.pop
+
+// WAVE 1 - 0$ + B(100$)
+// -------------------
+// TOTAL  - 0$ + B(100$)
+
+WaveSchedule
+{
+	StartingCurrency 30000
+	RespawnWaveTime  0
+	CanBotsAttackWhileInSpawnRoom no
+	
+	ExtraSpawnPoint    
+    {
+        Name "spawnbot_astrum" 
+        TeamNum 3 
+        X	"-320.72"                     
+        Y	"981.65"                  
+        Z	"-416.58"   	
+    }
+	
+	PointTemplates   
+	{
+		PhaseActivator
+		{
+			NoFixup 1
+			
+			trigger_teleport
+			{
+				"OnStartTouch" "teleporter_text,Display,,0,-1"
+				"targetname" "phase_activator"
+				"target" "intel"
+				"spawnflags" "1"
+				"mins" "-1 -1 -1"
+				"maxs" "1 1 1"
+				"origin" "-320.72 981.65 -416.58" //whatever the origin of phase bots spawn is
+			}	
+		}	
+	}		
+
+	Templates
+	{
+		T_TFBot_Boss_Astrum_Aureus_Revengeance_Phase1
+		{
+			Name "Astrum Aureus"
+			Class Soldier
+			ClassIcon boss_astrum_aureus
+			Health 15000
+			
+			Scale 2
+			
+			Attributes MiniBoss
+			Attributes UseBossHealthBar
+
+			ChangeAttributes   
+			{
+				Delay  0
+				Cooldown  18
+				Name  "Burst"
+			}
+			
+			ChangeAttributes   
+			{
+				Delay  7
+				Cooldown  18
+				Name  "AccFire" 
+			}
+			
+			ChangeAttributes   
+			{
+				Delay  12
+				Cooldown  18
+				Name  "HomingRocketBurst" 
+			}
+			
+			EventChangeAttributes
+			{		
+				Burst
+				{
+					Skill Expert
+					
+					Attributes AlwaysFireWeapon
+					WeaponRestrictions PrimaryOnly
+					
+					Item "The Mantreads"
+					
+					ItemAttributes
+					{
+						ItemName "tf_weapon_rocketlauncher"
+						"faster reload rate" -0.4
+						"fire rate bonus" 1.25
+						"mult projectile count" 7
+						"projectile spread angle penalty" 8
+						"mod projectile heat aim error" 0.01
+						"mod projectile heat seek power" 0.01
+						"mod projectile heat aim time" 0.01
+						"fire rate bonus with reduced health" 0.72
+						"projectile speed increased" 0.55
+						"projectile trail particle" "eyeboss_projectile"
+					}	
+					
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"dmg taken increased" 0.85
+						"blast dmg to self increased" 0
+						"damage force reduction" 0
+						"cancel falling damage" 1
+						"airblast vulnerability multiplier" 0
+						"override footstep sound set" 2
+					}
+				}
+				
+				AccFire
+				{
+					Skill Expert
+					
+					Attributes AlwaysFireWeapon
+					WeaponRestrictions PrimaryOnly
+					
+					ItemAttributes
+					{
+						ItemName "tf_weapon_rocketlauncher"
+						"faster reload rate" -0.4
+						"projectile spread angle penalty" 1
+						"mult projectile count" 7
+						"mod projectile heat aim error" 0.01
+						"mod projectile heat seek power" 0.01
+						"mod projectile heat aim time" 0.01
+						"fire rate bonus" 1.8
+						"projectile speed increased" 0.75
+						"fire rate bonus with reduced health" 0.66
+						"projectile trail particle" "eyeboss_projectile"
+					}	
+					
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"dmg taken increased" 0.85
+						"cancel falling damage" 1
+						"damage force reduction" 0
+						"blast dmg to self increased" 0
+						"airblast vulnerability multiplier" 0
+						"override footstep sound set" 2
+					}
+				}
+				
+				HomingRocketBurst
+				{
+					Skill Expert
+					
+					Attributes HoldFireUntilFullReload
+					WeaponRestrictions PrimaryOnly
+					
+					Item "The Mantreads"
+					
+					ItemAttributes
+					{
+						ItemName "tf_weapon_rocketlauncher"
+						"faster reload rate" 1
+						"mult projectile count" 8
+						"fire rate bonus" 0.01
+						"auto fires when full" 1
+						"auto fires full clip" 1
+						"mod projectile heat aim error" 90
+						"mod projectile heat seek power" 65
+						"mod projectile heat aim time" 4
+						"projectile spread angle penalty" 90
+						"projectile speed increased" 0.45
+						"custom projectile model" "models/weapons/w_models/w_drg_ball.mdl"
+						"explosion particle" "drg_cow_explosioncore_charged_blue"
+						"projectile trail particle" "drg_cow_rockettrail_charged_blue"
+					}	
+					
+					CharacterAttributes
+					{
+						"move speed bonus"	0.01
+						"damage force reduction" 0
+						"dmg taken increased" 0.6
+						"increased jump height" 0.01
+						"blast dmg to self increased" 0
+						"cancel falling damage" 1
+						"airblast vulnerability multiplier" 0
+						"override footstep sound set" 2
+					}
+				}
+			}
+		}
+		
+		T_TFBot_Boss_Astrum_Aureus_Revengeance_Phase2
+		{
+			Name "Astrum Aureus"
+			Class Soldier
+			ClassIcon boss_astrum_aureus
+			Health 15000
+			
+			Scale 2
+			
+			Attributes MiniBoss
+			Attributes UseBossHealthBar
+			
+			SpawnTemplate "PhaseActivator"  
+
+			ChangeAttributes   
+			{
+				Delay  0
+				Cooldown  18
+				Name  "Burst"
+			}
+			
+			ChangeAttributes   
+			{
+				Delay  7
+				Cooldown  18
+				Name  "AccFire" 
+			}
+			
+			ChangeAttributes   
+			{
+				Delay  12
+				Cooldown  18
+				Name  "HomingRocketBurst" 
+			}
+			
+			EventChangeAttributes
+			{		
+				Burst
+				{
+					Skill Expert
+					
+					Attributes AlwaysFireWeapon
+					WeaponRestrictions PrimaryOnly
+					
+					Item "The Mantreads"
+					
+					ItemAttributes
+					{
+						ItemName "tf_weapon_rocketlauncher"
+						"faster reload rate" -0.4
+						"fire rate bonus" 0.9
+						"mult projectile count" 5
+						"projectile spread angle penalty" 7
+						"mod projectile heat aim error" 0.01
+						"mod projectile heat seek power" 0.01
+						"mod projectile heat aim time" 0.01
+						"fire rate bonus with reduced health" 0.55
+						"projectile speed increased" 0.55
+						"projectile trail particle" "eyeboss_projectile"
+					}	
+					
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"dmg taken increased" 0.85
+						"blast dmg to self increased" 0
+						"damage force reduction" 0
+						"cancel falling damage" 1
+						"airblast vulnerability multiplier" 0
+						"override footstep sound set" 2
+					}
+				}
+				
+				AccFire
+				{
+					Skill Expert
+					
+					Attributes AlwaysFireWeapon
+					WeaponRestrictions PrimaryOnly
+					
+					ItemAttributes
+					{
+						ItemName "tf_weapon_rocketlauncher"
+						"faster reload rate" -0.4
+						"projectile spread angle penalty" 2
+						"mult projectile count" 5
+						"mod projectile heat aim error" 0.01
+						"mod projectile heat seek power" 0.01
+						"mod projectile heat aim time" 0.01
+						"fire rate bonus" 1.2
+						"projectile speed increased" 0.9
+						"fire rate bonus with reduced health" 0.4166
+						"projectile trail particle" "eyeboss_projectile"
+					}	
+					
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"dmg taken increased" 0.85
+						"cancel falling damage" 1
+						"damage force reduction" 0
+						"blast dmg to self increased" 0
+						"airblast vulnerability multiplier" 0
+						"override footstep sound set" 2
+					}
+				}
+				
+				HomingRocketBurst
+				{
+					Skill Expert
+					
+					Attributes HoldFireUntilFullReload
+					WeaponRestrictions PrimaryOnly
+					
+					Item "The Mantreads"
+					
+					ItemAttributes
+					{
+						ItemName "tf_weapon_rocketlauncher"
+						"faster reload rate" 0.5
+						"mult projectile count" 8
+						"fire rate bonus" 0.01
+						"auto fires when full" 1
+						"auto fires full clip" 1
+						"mod projectile heat aim error" 90
+						"mod projectile heat seek power" 65
+						"mod projectile heat aim time" 4
+						"projectile spread angle penalty" 90
+						"projectile speed increased" 0.45
+						"custom projectile model" "models/weapons/w_models/w_drg_ball.mdl"
+						"explosion particle" "drg_cow_explosioncore_charged_blue"
+						"projectile trail particle" "drg_cow_rockettrail_charged_blue"
+					}	
+					
+					CharacterAttributes
+					{
+						"move speed bonus"	0.01
+						"damage force reduction" 0
+						"dmg taken increased" 0.85
+						"increased jump height" 0.01
+						"blast dmg to self increased" 0
+						"cancel falling damage" 1
+						"airblast vulnerability multiplier" 0
+						"override footstep sound set" 2
+					}
+				}
+			}
+		}
+		
+		T_TFBot_Aureus_Spawn
+		{
+			Name  "Aureus Spawn"
+			Class Soldier
+			ClassIcon missing
+			
+			SpawnTemplate "PhaseActivator"  
+			
+			ChangeAttributes   
+			{
+				Delay  0
+				Cooldown  9999
+				Name  "Passive" 
+			}
+			
+			ChangeAttributes   
+			{
+				Delay  0
+				Cooldown  99999
+				Name  "HostileWandering"
+				IfHealthBelow 190				
+			}
+			
+			EventChangeAttributes
+			{		
+				Passive
+				{
+					Skill Expert
+					
+					Attributes SuppressFire
+					
+					Item "The Beggar's Bazooka"
+					
+					MaxVisionRange 150
+					
+					WeaponRestrictions MeleeOnly
+
+					CharacterAttributes
+					{
+						"move speed bonus"	0.75
+						"increased jump height" 0.01
+						"dmg taken increased" 0.1
+						"blast dmg to self increased" 100
+						"damage force reduction" 0
+						"cancel falling damage" 1
+						"airblast vulnerability multiplier" 0
+						"override footstep sound set" 2
+					}
+				}
+				
+				HostileWandering
+				{
+					Skill Expert
+					
+					WeaponRestrictions PrimaryOnly
+					
+					Attributes AlwaysFireWeapon
+					
+					MaxVisionRange 150
+					
+					Item "The Beggar's Bazooka"
+					
+					ItemAttributes
+					{
+						ItemName "The Beggar's Bazooka"
+						"blast radius increased" 2.4
+						"no damage falloff" 1
+						"damage bonus" 3
+					}
+					
+					CharacterAttributes
+					{
+						"move speed bonus"	1.2
+						"dmg taken increased" 0.01
+						"cancel falling damage" 1
+						"damage force reduction" 0
+						"blast dmg to self increased" 9999
+						"airblast vulnerability multiplier" 0
+						"override footstep sound set" 2
+					}
+				}
+			}
+		}
+	}
+
+	// WAVE 1 [$0]
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_boss
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay_boss
+			Action Trigger
+		}
+		
+		SpawnTemplate "PhaseActivator"  
+
+		//  [$0]
+		
+		WaveSpawn
+		{
+			Name  incredible
+			
+			FirstSpawnOutput
+			{
+				Target wormhole_start_relay
+				Action Trigger
+			}	
+		}
+		
+		WaveSpawn
+		{
+			Name  doctorsex
+			Where spawnbot_boss
+
+			TotalCount 1
+			MaxActive  1
+			SpawnCount 1
+			TotalCurrency 0
+
+			WaitBeforeStarting 5
+			WaitBetweenSpawns  0
+			FirstSpawnWarningSound "astrum_aureus.mp3"
+			Support Limited
+			
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot 
+					{ 
+						Template  T_TFBot_Boss_Astrum_Aureus_Revengeance_Phase1
+					}
+				}
+			}	
+		}
+		
+		WaveSpawn
+		{
+			Name  astrum_spawn
+			Where spawnbot_astrum
+
+			TotalCount 2
+			MaxActive  2
+			TotalCurrency 0
+
+			WaitBeforeStarting 12
+			WaitBetweenSpawns  20
+			Support 1
+			
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot 
+					{ 
+						Template  T_TFBot_Aureus_Spawn
+					}
+				}
+			}	
+		}
+		
+		WaveSpawn
+		{
+			Name  doctorsex2
+			Where spawnbot_astrum
+
+			TotalCount 1
+			MaxActive  1
+			SpawnCount 1
+			TotalCurrency 0
+
+			WaitBeforeStarting 0
+			WaitBetweenSpawns  0
+			WaitForAllDead doctorsex
+
+			TFBot 
+			{ 
+				Template  T_TFBot_Boss_Astrum_Aureus_Revengeance_Phase2
+			}
+		}
+		
+		
+	}
+}
+	

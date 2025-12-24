@@ -1,0 +1,813 @@
+#base robot_standard.pop
+#base robot_giant.pop
+#base robot_D_I_L.pop
+#base robot_D_I_L_advbot.pop
+
+WaveSchedule
+{
+	StartingCurrency 1500
+	RespawnWaveTime 1
+	CanBotsAttackWhileInSpawnRoom No
+
+	ExtraSpawnPoint    //Adds spawn points on specified location
+	{
+        	Name "ally"
+        	TeamNum 3 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        	X	"4484"                   
+        	Y	"66"                  
+        	Z	"1034"    
+	}
+
+
+	Templates
+	{
+		T_TFBot_Tisel_Soldier_TwoShot
+		{
+    			Class Soldier
+			Skill Hard
+			Name "Twin-linked Soldier (Tisel)"
+			Item "Stout Shako"
+			Attributes HoldFireUntilFullReload
+			ItemAttributes
+			{
+				ItemName "Stout Shako"
+				"set item tint rgb" 6901050
+						
+			}
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_ROCKETLAUNCHER"
+				"fire rate bonus" 0.01
+				"damage penalty" 0.6
+				"projectile spread angle penalty" 3.0
+				"clip size upgrade atomic" -2.0
+			}
+		}
+
+		T_TFBot_Giant_Engineer_Pomson
+		{
+			Class Engineer
+			Name "Giant Pomson Engineer"
+			ClassIcon engineer_pomson_giant
+			Skill Expert
+			Health 2600
+			Action FetchFlag  
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			Item "The Pomson 6000"
+			Item "The Gunslinger"
+			ItemAttributes
+			{
+				ItemName "The Pomson 6000"
+				"Projectile speed increased" 0.75
+				"fire rate penalty" 2
+				"faster reload rate" -0.2
+				"mult projectile count" 8
+				"projectile spread angle penalty" 4
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.65
+				"damage force reduction" 0.65
+				"airblast vulnerability multiplier" 0.65
+				"override footstep sound set" 3
+			}
+		}
+	}
+	
+	Mission // sentry buster
+	{
+		Objective DestroySentries
+
+		InitialCooldown 30
+		Where spawnbot_mission_sentrybuster
+		BeginAtWave 1
+		RunForThisManyWaves 7
+
+		CooldownTime 35            
+
+		TFBot
+		{
+			Template T_TFBot_SentryBuster
+		}
+	}
+
+// Wave 1 //////////////////////////////////////////////
+////////////////////////////////////////////////////////
+// 2 Groups of 5 bat scouts (200)
+// 4 Demomen (100)
+// -----------------------------------------------------
+// 4 Groups of 5 Shotgun Soldiers (200)
+// 2 Groups of 3 Heavyweight Champs (100)
+// Support Mobbing Twinlink Soldier (200)
+// Red Burst Fire Demo (0)
+////////////////////////////////////////////////////////
+	
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		WaitWhenDone 65
+		Checkpoint Yes
+		
+		WaveSpawn // 2 Groups of 5 bat scouts (200)
+		{
+			Name "A"
+			TotalCurrency 200
+			Where spawnbot
+			TotalCount 10
+			MaxActive 6
+			SpawnCount 5
+			WaitBetweenSpawns 6
+			
+			TFBot
+			{
+				Template T_TFBot_Scout_Melee
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_BAT"
+					"damage penalty" 0.6
+				}
+				CharacterAttributes
+				{
+					"move speed penalty" 0.9
+				}
+			}
+		}
+
+		WaveSpawn // 4 Demomen (100)
+		{
+			Name "A"
+			TotalCurrency 100
+			Where spawnbot
+			TotalCount 4
+			MaxActive 4
+			SpawnCount 2
+			WaitBetweenSpawns 3
+			WaitBeforeStarting 2
+			TFBot
+			{
+				Class Demoman
+				Skill Easy
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_GRENADE_LAUNCHER"
+					"damage penalty" 0.6
+				}
+				CharacterAttributes
+				{
+					"move speed penalty" 0.9
+				}
+			}
+		}
+
+		WaveSpawn // 4 Groups of 5 Shotgun Soldiers (200)
+		{
+			Name "B"
+			TotalCurrency 200
+			Where spawnbot_upper
+			TotalCount 24
+			MaxActive 8
+			SpawnCount 6
+			WaitBetweenSpawns 3
+			WaitBeforeStarting 0
+			WaitForAllDead "A"
+			TFBot
+			{
+				Template T_TFBot_Soldier_Shotgun
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_SHOTGUN_SOLDIER"
+					"damage penalty" 0.4
+				}
+				CharacterAttributes
+				{
+					"move speed penalty" 0.9
+				}
+			}
+		}
+
+		WaveSpawn // 2 Groups of 3 Heavyweight Champs (100)
+		{
+			Name "B"
+			TotalCurrency 200
+			Where spawnbot
+			TotalCount 6
+			MaxActive 4
+			SpawnCount 3
+			WaitBetweenSpawns 0
+			WaitBeforeStarting 4
+			WaitForAllDead "A"
+			TFBot
+			{
+				Template T_TFBot_Heavyweapons_Heavyweight_Champ
+				ItemAttributes
+				{
+					ItemName "The Killing Gloves Of Boxing"
+					"damage penalty" 0.6
+				}
+				CharacterAttributes
+				{
+					"move speed penalty" 0.9
+				}
+			}
+		}
+
+		WaveSpawn // Support Mobbing Twinlink Soldier (200)
+		{
+			Name "B"
+			TotalCurrency 200
+			Where spawnbot
+			TotalCount 6
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawns 5
+			WaitBeforeStarting 2
+			WaitForAllDead "A"
+			Support 1
+			TFBot
+			{
+				Template T_TFBot_Tisel_Soldier_TwoShot
+				Attributes IgnoreFlag
+				Action Mobber  
+				CharacterAttributes
+				{
+					"move speed penalty" 0.9
+				}
+			}
+		}
+
+		WaveSpawn // DemoAlly
+		{
+			Name "RedW1_A"
+			Where ally
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 4
+			TotalCurrency 0
+			Support 1
+			
+			TFBot
+			{
+				Template T_TFBot_Demo_Burst
+				Skill Normal
+				ClassIcon red2_lite
+				AddCond   //Adds conditions to bots
+				{
+					Name "TF_COND_REPROGRAMMED" // Condition to apply. List of available conditions https://wiki.teamfortress.com/wiki/Cheats#addcond
+				}
+				Attributes IgnoreFlag
+				Action Mobber  
+			}
+			
+		}
+	}
+
+// Wave 2 //////////////////////////////////////////////
+////////////////////////////////////////////////////////
+// 1 Tank (400)
+// 1 Giant Mangler Spammer Soldier (200)
+// 5 Demoknights (100)
+// --------------------------
+// 1 Giant Flare Pyro (100)
+// 3 Groups of 5 Heavies (200)
+// Red Mangler spammer (0)
+////////////////////////////////////////////////////////
+	
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		WaitWhenDone 65
+		Checkpoint Yes
+		
+		WaveSpawn // 1 Tank (400)
+		{
+			TotalCurrency 400
+			WaitBeforeStarting 0
+			TotalCount 1
+			
+			FirstSpawnOutput                                                                                                                                                            
+			{
+				 Target boss_spawn_relay                                            
+				 Action Trigger                         
+			}
+
+			Tank
+			{
+				Health 11000
+				Speed 75
+				Name "boss"
+				StartingPathTrackNode "tank_path_a_1"
+				//StartingPathTrackNode "boss_path_b1"
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}
+		}
+
+		WaveSpawn // 1 Giant Mangler Spammer Soldier (200)
+		{
+			Name "A"
+			TotalCurrency 200
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawns 6
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Soldier_Mangle_Rapidfire
+				Attributes UseBossHealthBar
+				ItemAttributes
+				{
+					ItemName "The Cow Mangler 5000"
+					"damage penalty" 0.35
+				}
+				CharacterAttributes
+				{
+					"move speed penalty" 0.45
+				}
+			}
+		}
+
+		WaveSpawn // 5 Demoknights (100)
+		{
+			Name "A"
+			TotalCurrency 100
+			Where spawnbot_upper
+			TotalCount 5
+			MaxActive 5
+			SpawnCount 5
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 20			
+
+			TFBot
+			{
+				Template T_TFBot_Demoman_Knight
+				ItemAttributes
+				{
+					ItemName "The Eyelander"
+					"damage penalty" 0.6
+				}
+				CharacterAttributes
+				{
+					"move speed penalty" 0.9
+				}
+			}
+		}
+
+		WaveSpawn // 2 Giant Flare Pyro (200)
+		{
+			Name "B"
+			TotalCurrency 300
+			Where spawnbot
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 30
+			WaitForAllDead "A"
+			TFBot
+			{
+				Template T_TFBot_Giant_Pyro_Flare_Spammer
+				ItemAttributes
+				{
+					ItemName "The Detonator"
+					"damage penalty" 0.8
+				}
+				CharacterAttributes
+				{
+					"move speed penalty" 0.45
+				}
+			}
+		}
+
+
+		WaveSpawn // 3 Groups of 5 Heavies (200)
+		{
+			Name "B"
+			TotalCurrency 200
+			Where spawnbot_upper
+			TotalCount 15
+			MaxActive 6
+			SpawnCount 5
+			WaitBetweenSpawns 7
+			
+			WaitForAllDead "A"
+			TFBot
+			{
+				Class Heavyweapons
+				Skill Easy
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_MINIGUN"
+					"damage penalty" 0.5
+				}
+				CharacterAttributes
+				{
+					"move speed penalty" 0.9
+				}
+			}
+		}
+
+		WaveSpawn // DemoAlly
+		{
+			Name "RedW1_A"
+			Where ally
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 4
+			TotalCurrency 0
+			Support 1
+			
+			TFBot
+			{
+				Template T_TFBot_Soldier_Mangle_Rapidfire
+				Skill Expert
+				ClassIcon red2_lite
+				AddCond   //Adds conditions to bots
+				{
+					Name "TF_COND_REPROGRAMMED" // Condition to apply. List of available conditions https://wiki.teamfortress.com/wiki/Cheats#addcond
+				}
+				Attributes IgnoreFlag
+				Action Mobber  
+			}
+			
+		}
+	}
+
+// Wave F //////////////////////////////////////////////
+////////////////////////////////////////////////////////
+// 1 Giant Pomson Engineer main (100)
+// 1 Giant Pomson Engineer Side (100)
+// 4 groups of 8 mixed pistol scouts and scouts (200)
+// --------------------------
+// 2 Giant Bazooka Soldiers (200)
+// 2 Groups of 1 rapidfire Bowman with a quickfix (100)
+// 4 Groups of 5 Mangler Spammer Soldiers (100)
+// Wait For All Spawned
+// 1 Tank (200)
+// 1 Unload Bazooka Soldier with 6 Quickfixes (200)
+// Red ADV Unload Demoman (0)
+////////////////////////////////////////////////////////
+	
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		WaitWhenDone 65
+		Checkpoint Yes
+
+		WaveSpawn // 1 Giant Pomson Engineer main (100)
+		{
+			Name "A"
+			TotalCurrency 100
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawns 6
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Engineer_Pomson
+				Attributes UseBossHealthBar
+				CharacterAttributes
+				{
+					"move speed penalty" 0.6
+				}
+			}
+		}
+
+		WaveSpawn // 1 Giant Pomson Engineer side (100)
+		{
+			Name "A"
+			TotalCurrency 100
+			Where spawnbot_upper
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawns 6
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Engineer_Pomson
+				Attributes UseBossHealthBar
+				CharacterAttributes
+				{
+					"move speed penalty" 0.6
+				}
+			}
+		}
+
+		WaveSpawn // 4 groups of 8 mixed pistol scouts and scouts (200)
+		{
+			Name "A"
+			TotalCurrency 200
+			Where spawnbot
+			TotalCount 32
+			MaxActive 8
+			SpawnCount 4
+			WaitBetweenSpawns 2
+			RandomChoice
+			{
+				TFBot
+				{
+					Class Scout
+					Skill Easy
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_SCATTERGUN"
+						"damage penalty" 0.6
+					}
+					CharacterAttributes
+					{
+						"move speed penalty" 0.9
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Pistol
+					Skill Easy
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_PISTOL"
+						"damage penalty" 0.5
+					}
+					CharacterAttributes
+					{
+						"move speed penalty" 0.8
+					}
+				}
+			}
+		}
+
+		WaveSpawn // 2 Giant Bazooka Soldiers (200)
+		{
+			Name "B"
+			TotalCurrency 200
+			Where spawnbot_upper
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 20
+			WaitForAllDead "A"
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Soldier_Spammer_Spread
+				Attributes UseBossHealthBar
+				ItemAttributes
+				{
+					ItemName "The Beggars Bazooka"
+					"damage penalty" 0.6
+				}
+				CharacterAttributes
+				{
+					"move speed penalty" 0.45
+				}
+			}
+		}
+
+		WaveSpawn // 2 Groups of 1 rapidfire Bowman with a quickfix (100)
+		{
+			Name "B"
+			TotalCurrency 100
+			Where spawnbot
+			TotalCount 4
+			MaxActive 4
+			SpawnCount 2
+			WaitBetweenSpawns 15
+			WaitForAllDead "A"
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman_Spammer
+					ClassIcon sniper_bow_multi
+					ItemAttributes
+					{
+						ItemName "The Huntsman"
+						"damage penalty" 0.5
+					}
+					CharacterAttributes
+					{
+						"move speed penalty" 0.7
+					}
+				}
+
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickFix
+					CharacterAttributes
+					{
+						"move speed penalty" 0.9
+					}
+				}
+			}
+		}
+
+		WaveSpawn // 4 Groups of 5 Mangler Spammer Soldiers (100)
+		{
+			Name "B"
+			TotalCurrency 100
+			Where spawnbot
+			TotalCount 20
+			MaxActive 5
+			SpawnCount 5
+			WaitBetweenSpawns 0
+			WaitBeforeStarting 5
+			WaitForAllDead "A"
+			TFBot
+			{
+				Template T_TFBot_Soldier_Mangle_Rapidfire
+				ItemAttributes
+				{
+					ItemName "The Cow Mangler 5000"
+					"damage penalty" 0.2
+				}
+				CharacterAttributes
+				{
+					"move speed penalty" 0.9
+				}
+			}
+		}
+
+		WaveSpawn // 1 Unload Bazooka Soldier with 6 Quickfixes (200)
+		{
+			Name "C"
+			TotalCurrency 200
+			Where spawnbot
+			TotalCount 7
+			MaxActive 7
+			SpawnCount 7
+			WaitBeforeStarting 25
+			WaitForAllSpawned "B"
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Unload_Spread_Homing
+					Attributes UseBossHealthBar
+					ItemAttributes
+					{
+						ItemName "The Huntsman"
+						"damage penalty" 0.5
+					}
+					CharacterAttributes
+					{
+						"move speed penalty" 0.7
+					}
+				}
+
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickFix
+					CharacterAttributes
+					{
+						"move speed penalty" 0.9
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickFix
+					CharacterAttributes
+					{
+						"move speed penalty" 0.9
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickFix
+					CharacterAttributes
+					{
+						"move speed penalty" 0.9
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickFix
+					CharacterAttributes
+					{
+						"move speed penalty" 0.9
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickFix
+					CharacterAttributes
+					{
+						"move speed penalty" 0.9
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickFix
+					CharacterAttributes
+					{
+						"move speed penalty" 0.9
+					}
+				}
+			}
+		}
+
+		WaveSpawn // 1 Tank (000)
+		{
+			TotalCurrency 0
+			WaitBeforeStarting 0
+			TotalCount 1
+			WaitForAllSpawned "B"
+			FirstSpawnOutput                                                                                                                                                            
+			{
+				 Target boss_spawn_relay                                            
+				 Action Trigger                         
+			}
+
+			Tank
+			{
+				Health 17000
+				Speed 75
+				Name "boss"
+				Skin 1
+				StartingPathTrackNode "tank_path_a_1"
+				//StartingPathTrackNode "boss_path_b1"
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}
+		}
+
+		WaveSpawn // DemoAlly
+		{
+			Name "RedW1_A"
+			Where ally
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 4
+			TotalCurrency 0
+			Support 1
+			
+			TFBot
+			{
+				Template T_TFBot_Demoman_Loads_Of_Bombs_ADV
+				Attributes AlwaysCrit
+				Skill Expert
+				ClassIcon red2_lite
+				AddCond   //Adds conditions to bots
+				{
+					Name "TF_COND_REPROGRAMMED" // Condition to apply. List of available conditions https://wiki.teamfortress.com/wiki/Cheats#addcond
+				}
+				Attributes IgnoreFlag
+				Action Mobber  
+			}
+			
+		}
+	}		
+}

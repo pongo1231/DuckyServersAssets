@@ -1,0 +1,374 @@
+//giant int
+//by StardustSpy
+#base robot_standard.pop
+#base robot_giant.pop
+#base robot_stardust_new.pop
+
+WaveSchedule
+{
+    StartingCurrency 800
+    CanBotsAttackWhileInSpawnRoom no
+    RespawnWaveTime 3
+    FixedRespawnWaveTime 1
+    AddSentryBusterWhenDamageDealtExceeds 4000
+    AddSentryBusterWhenKillCountExceeds 20
+
+    // Advanced 1
+    // EventPopfile Halloween
+
+    //spawnbot
+    //spawnbot_giant
+    //spawnbot_mission_sentry_buster
+    //spawnbot_all
+    //spawnbot_flank_left
+    //spawnbot_mission_sniper
+    //spawnbot_mission_spy
+    //spawnbot_flank_right
+
+    Templates 
+    {
+        //scout
+        T_TFBot_Scout_Grenade
+        {
+            Name "Bomber Scout"
+            Class Scout
+            ClassIcon demo
+            Scale 1
+            Health 125
+        
+            Skill Hard
+            MaxVisionRange 800
+            WeaponRestrictions SecondaryOnly
+        
+            Item "Mad Milk"
+            Item "The Bomber Knight"
+            ItemAttributes
+            {
+                Itemname "Mad Milk"
+                "override projectile type" 4
+                "dmg penalty vs players" 15
+                "projectile detonate time" 6
+                "stickybomb no stick" 1
+                "mult projectile scale" 0.85
+                "blast radius increased" 2
+                "arrow target bounce speed" 1
+                "fire rate penalty" 10
+                "blast dmg to self increased" 0
+                "energy weapon no deflect" 1
+                "explosion particle" "rd_robot_explosion_smoke_linger"
+                "custom projectile model" "models\props_lakeside_event\bomb_temp.mdl"
+            }
+            CharacterAttributes
+            {
+                "effect bar recharge rate increased" 0.05
+            }
+        }
+        //demo
+        T_TFBot_Demoman_FullHeads_Knight
+        {
+            Template T_TFBot_Demoman_Knight
+            Name "Full Heads Demoknight"	
+            SpawnTemplate EyelanderFullHeads
+            Skill Expert
+            Item "Prince Tavish's Crown"
+        }
+        //heavy
+        T_TFBot_Giant_Heavy_Energyball
+        {
+            Class Heavyweapons
+            Name "Energy Ravager"
+            ClassIcon heavy_fists_electro
+            Skill expert
+            Health 5000
+            Item "upgradeable tf_weapon_fists"
+            Item "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+            Item "Der Maschinensoldaten-Helm"
+            Attributes MiniBoss
+            Attributes HoldFireUntilFullReload
+            Scale 1.7
+            FireSound "Halloween.spell_lightning_impact"
+            ItemAttributes
+            {
+                Itemname "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+                "faster reload rate" -0.8
+                "clip size upgrade atomic" 96
+                "projectile lifetime" 0.35
+                "projectile speed increased" 2.5
+                "Blast radius decreased" 0.01
+                "no explosion particles" 1
+                "damage penalty" 0.25
+                "fire rate bonus hidden" 0.9
+                "no self blast dmg" 1
+                "projectile no deflect" 1
+                "no damage falloff" 1
+                "penetrate teammates" 1
+                "crit mod disabled" 0
+                "move speed bonus" 1.2
+                "mult_patient_overheal_penalty_active" 0.2
+                "projectile trail particle" "~dxhr_lightningball_parent_blue"
+                "custom projectile model" "models\empty.mdl"
+                "custom item model" "models\empty.mdl"
+                "special item description" "+25% Bigger. Short range energy weapon!"
+            }
+            ItemAttributes
+            {
+                Itemname "upgradeable tf_weapon_fists"
+                "fire rate bonus" 0.9
+                "is_passive_weapon" 1
+            }
+            CharacterAttributes
+            {
+                "move speed bonus"	0.5
+                "damage force reduction" 0.3
+                "airblast vulnerability multiplier" 0.3
+                "override footstep sound set" 2
+            }
+        }
+        //med
+        T_TFBot_Medic_Bow_Burst
+        {
+            Name "Burst Bow Medic"
+            Class Medic
+            ClassIcon medic_crossbow_burst
+            Scale 1.5
+            Health 750
+        
+            Attributes HoldFireUntilFullReload
+            Action FetchFlag
+            Skill Hard
+            MaxVisionRange 1500
+            WeaponRestrictions PrimaryOnly
+
+            Item "The Crusader's Crossbow"
+            Item "Berliner's Bucket Helm"
+            ItemAttributes
+            {
+                Itemname "The Crusader's Crossbow"
+                "clip size upgrade atomic" 3
+                "fire rate bonus" 0.2
+                "damage penalty" 0.67
+                "projectile speed decreased" 0.7
+            }
+            CharacterAttributes
+            {
+                "move speed penalty" 0.8
+            }
+        }
+        //sni
+        T_TFBot_Giant_Sniper_Burst
+        {
+
+            Name "Giant Burst Sniper"
+            Class Sniper
+            ClassIcon sniper_giant 
+            Scale 1.75
+            Health 3000
+        
+            Attributes MiniBoss
+            Attributes HoldFireUntilFullReload
+            Action FetchFlag
+            Skill Expert
+            MaxVisionRange 2000
+            WeaponRestrictions PrimaryOnly
+        
+            Tag bot_giant
+            Item "Upgradeable TF_WEAPON_SNIPERRIFLE"
+            Item "The Flamingo Kid"
+            FireWeapon   
+            {
+                Delay 1
+                Cooldown 0.01
+                Repeats 0 
+                IfSeeTarget 1
+                Duration 9999
+                Type "Primary"
+            }
+            ItemAttributes
+            {
+                ItemName "Upgradeable TF_WEAPON_SNIPERRIFLE"
+                "burst fire count" 4
+                "burst fire rate mult" 17
+                "fire rate bonus" 0.15
+                "sniper fires tracer" 1
+            }
+            CharacterAttributes
+            {
+                "move speed bonus" 0.5
+                "head scale" 0.7
+                "damage force reduction" 0.6
+                "airblast vulnerability multiplier" 0.6
+                "override footstep sound set" 7
+            }
+        }
+    }
+
+    PointTemplates 
+    {
+        EyelanderFullHeads
+        {
+            OnSpawnOutput 
+            {
+                Target !activator
+                Action $SetProp$m_iDecapitations
+                Param 5
+            }
+            OnSpawnOutput
+            {
+                Target !activator
+                Action $regenerate
+            }
+        }
+        regen
+        {
+            OnSpawnOutput
+            {
+                Target !activator
+                Action $regenerate
+            }
+        }
+    }
+
+    Mission // busat
+    {
+        Where spawnbot_mission_sentry_buster
+        Objective DestroySentries
+        BeginAtWave 1
+        RunForThisManyWaves 999
+        DesiredCount 1
+    
+        InitialCooldown 30
+        CooldownTime 75
+    
+        TFBot
+        {
+            Template T_TFBot_SentryBuster_Fix	
+        }
+    }
+
+    Wave // Wave 1
+    {
+        StartWaveOutput
+        {
+            Target wave_start_relay
+            Action Trigger
+        }
+        DoneOutput
+        {
+            Target wave_finished_relay
+            Action Trigger
+        }
+        InitWaveOutput
+        {
+            Target holograms_3way_relay
+            Action Trigger
+        }
+
+        WaveSpawn
+        {
+            Name "a1"
+            Where spawnbot
+            TotalCount 40
+            MaxActive 14
+            SpawnCount 2
+            WaitBeforeStarting 0
+            WaitBetweenSpawns 2
+            TotalCurrency 200
+        
+            TFBot
+            {
+                Template T_TFBot_Heavyweapons_Shotgun
+            }
+        }
+
+        WaveSpawn
+        {
+            Name "a1.1"
+            Where spawnbot_flank_left
+            Where spawnbot_flank_right
+            TotalCount 2
+            MaxActive 1
+            SpawnCount 1
+            WaitBeforeStarting 0
+            WaitBetweenSpawns 0
+            TotalCurrency 100
+        
+            TFBot
+            {
+                Template T_TFBot_Giant_Demoman_Stickybomb
+            }
+        }
+
+        WaveSpawn
+        {
+            Name ""
+            WaitForAllDead ""
+            Where spawnbot
+            TotalCount 0
+            MaxActive 0
+            SpawnCount 0
+            WaitBeforeStarting 0
+            WaitBetweenSpawns 0
+            TotalCurrency 0
+            
+            TFBot
+            {
+                Template T_TFBot_	
+            }
+        }
+    }
+
+    Wave // Wave 2
+    {
+        StartWaveOutput
+        {
+            Target wave_start_relay
+            Action Trigger
+        }
+        DoneOutput
+        {
+            Target wave_finished_relay
+            Action Trigger
+        }
+        InitWaveOutput
+        {
+            Target holograms_3way_relay
+            Action Trigger
+        }
+
+        WaveSpawn
+        {
+            Name "a1.1"
+            Where spawnbot
+            TotalCount 2
+            MaxActive 1
+            SpawnCount 1
+            WaitBeforeStarting 0
+            WaitBetweenSpawns 25
+            TotalCurrency 200
+
+            TFBot
+            {
+                Template T_TFBot_Giant_Soldier_RocketShotgun
+                Attributes AlwaysCrit
+            }
+        }
+
+        WaveSpawn
+        {
+            Name "a1"
+            Where spawnbot
+            TotalCount 30
+            MaxActive 15
+            SpawnCount 5
+            WaitBeforeStarting 5
+            WaitBetweenSpawns 8
+            TotalCurrency 200
+        
+            TFBot
+            {
+                Class Heavyweapons
+                Skill Normal  
+            }
+        }
+    }
+}

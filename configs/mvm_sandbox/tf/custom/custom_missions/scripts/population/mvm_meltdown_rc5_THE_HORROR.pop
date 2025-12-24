@@ -1,0 +1,50 @@
+// -----------------------------------------------------------\\
+// By Ultimaximus - https://steamcommunity.com/id/Ultimaximus \\
+// ---------------------------------------------------------- \\
+
+#base robot_giant.pop
+#base robot_standard.pop
+
+WaveSchedule
+{
+	StartingCurrency 0
+	RespawnWaveTime 4
+	CanBotsAttackWhileInSpawnRoom no
+	MaxSpeedLimit 1200  
+	Wave // Wave 1
+	{
+		StartWaveOutput
+		{
+			Target wave_start_endurance_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 999
+			MaxActive 22
+			SpawnCount 1
+			WaitBetweenSpawns 0
+			TFBot
+			{
+				Class Heavy
+				Name "BAD TOUCH HEAVIES"
+				Skill Expert
+				Item "The Holiday Punch"
+				ClassIcon heavy_mittens
+				WeaponRestrictions MeleeOnly
+				Attributes AlwaysCrit
+				CharacterAttributes
+				{
+					"move speed bonus"	10
+					"cannot pick up intelligence" 1
+				}
+			}
+		}
+	}
+}

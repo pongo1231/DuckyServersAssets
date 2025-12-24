@@ -1,0 +1,2824 @@
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_gatebot.pop
+#base robot_giant_red.pop
+#base robot_standard_red.pop
+#base robot_gatebot_red.pop
+//Reverse MvM
+//Made by Braindawg http://steamcommunity.com/id/HahaMoreLikeBraindead/
+//Advanced Skill
+//Requires sigsegv extensions
+
+WaveSchedule {
+
+	StartingCurrency				1000
+	CanBotsAttackWhileInSpawnRoom 	Yes
+	EventPopfile Halloween
+	RespawnWaveTime 9999
+	FixedRespawnWaveTime 1
+	CustomUpgradesFile "mvm_upgrades_brain_reverse.txt"  
+	
+	BuybacksPerWave -1  
+	RemoveGrapplingHooks 2  
+	BotsDropSpells 1   //If set, bots will drop spells
+	GiantsDropRareSpells 1   //If set, giants will drop rare spells rather than common
+	SpellDropRateCommon 0.1   //Drop chance for common spell books, from 0 to 1
+	SpellDropRateGiant 0.1   //Drop chance for rare spell books, from 0 to 1
+	NoReanimators 1   //Disable reanimators
+	DeathPenalty 200   //Player will lose this many credits after dying
+	SniperAllowHeadshots 1   
+	ImprovedAirblast 1  						 
+	NoSapUnownedBuildings 1  	 	
+	SendBotsToSpectatorImmediately 1  
+	BotsAreHumans 1  
+	RobotLimit 26  	 						 
+	ForceHoliday 2  	
+	MaxTotalPlayers 6  
+	DisplayRobotDeathNotice 1  
+	NoRomevisionCosmetics 1  
+	StandableHeads 1  
+	SniperHideLasers 1  
+	BodyPartScaleSpeed 20  					 
+	MaxSpectators 0 	
+	
+	DisableSound "music.mvm_end_last_wave"						   
+	DisableSound "music.mvm_end_mid_wave"						   
+	DisableSound "music.mvm_end_tank_wave"						   
+	DisableSound "music.mvm_end_wave"							   
+	DisableSound "music.mvm_lost_wave"							   
+	DisableSound "music.mvm_start_last_wave"					   
+	DisableSound "music.mvm_start_mid_wave"						   
+	DisableSound "music.mvm_start_tank_wave"					   
+	DisableSound "music.mvm_start_wave"							   
+	DisableSound "Announcer.MVM_Spy_Alert" 						   
+	DisableSound "Announcer.mvm_spybot_death"					   
+	DisableSound "Announcer.mvm_spybot_death_all"				   
+	DisableSound "Announcer.MVM_First_Wave_Start"				   
+	DisableSound "Announcer.MVM_Wave_Start"						   
+	DisableSound "Announcer.MVM_Wave_End"						   
+	DisableSound "Announcer.MVM_Wave_Lose"						   
+	DisableSound "Announcer.MVM_Final_Wave_Start"				   
+	DisableSound "Announcer.MVM_Final_Wave_End"					   
+	DisableSound "Announcer.MVM_Robots_Planted"					   
+	DisableSound "Announcer.MVM_All_Dead"						   
+	DisableSound "Announcer.MVM_Bomb_Alert_Entered"				   
+	DisableSound "Announcer.MVM_Bomb_Alert_Near_Hatch"			   
+	DisableSound "Announcer.MVM_Bomb_Alert_Deploying"			   
+	DisableSound "Announcer.MVM_Sentry_Buster_Alert"			   
+	DisableSound "Announcer.MVM_Sentry_Buster_Alert_Another"	   
+	DisableSound "Announcer.MVM_General_Wave_Start"				   
+	DisableSound "Announcer.MVM_Game_Over_Loss"					   
+	DisableSound "Announcer.MVM_Tank_Planted"					   
+	DisableSound "Announcer.MVM_Tank_Alert_Spawn"				    
+	DisableSound "Announcer.MVM_Tank_Alert_Another"				   
+	DisableSound "Announcer.MVM_Tank_Alert_Multiple"	 		   		 
+	DisableSound "Announcer.MVM_Tank_Alert_Halfway"	 			   			 
+	DisableSound "Announcer.MVM_Tank_Alert_Halfway_Multiple" 	   	 
+	DisableSound "Announcer.MVM_Tank_Alert_Near_Hatch" 			   		 
+	DisableSound "Announcer.MVM_Tank_Alert_Deploying" 			   
+	
+	// PrecacheModel "models/bots/soldier_boss/bot_soldier_gray_boss.mdl"  
+	// PrecacheModel "models/bots/heavy_boss/bot_heavy_gray_boss.mdl"  
+	// PrecacheModel "models/bots/heavy/bot_heavy_gray.mdl"  
+	// PrecacheModel "models/bots/sniper/bot_sniper_gray.mdl"  
+	// PrecacheModel "models/bots/soldier/bot_soldier_gray.mdl"  	 
+	// PrecacheModel "models/bots/demo/bot_demo_gray.mdl"  	 
+	// PrecacheModel "models/bots/demo_boss/bot_demo_gray_boss.mdl"  	 
+	// PrecacheModel "models/bots/scout/bot_scout_gray.mdl"  	 
+	// PrecacheModel "models/bots/pyro/bot_pyro_gray.mdl"  	 
+	// PrecacheModel "models/bots/pyro_boss/bot_pyro_gray_boss.mdl"  	 
+	// PrecacheModel "models/bots/boss_bot/boss_blimp_damage3.mdl"  
+	PrecacheModel "models/props_halloween/ghost.mdl"  
+	ClassLimit  
+	{
+		Engineer 1
+		Medic 1
+	}
+	PlayerAttributes   
+	{
+		"maxammo primary increased" 2
+		"maxammo secondary increased" 2
+		"min respawn time" 9999
+	//	"swimming mastery" 1
+		Engineer {
+			"hidden maxhealth non buffed" 75
+			"upgrade rate decrease" 2
+			"mult teleporter recharge rate" 0.01
+			"mod teleporter cost" 0.001
+			"engineer sentry build rate multiplier" 2
+			"engineer teleporter build rate multiplier" 3
+			"building cost reduction" 0.5
+			"maxammo metal increased" 3
+		}
+		Medic {
+			"medic machinery beam" 4
+		}
+		Demoman {
+		"hidden secondary max ammo penalty" 0.5
+		}
+	}
+	ItemAttributes  
+    {
+        ItemName "Madness vs Machines Hopeful Heart 2019"
+        "set item tint rgb" 3329330
+		"SPELL: set item tint rgb" 5
+    }
+	// ItemAttributes   
+	// {
+		// ItemName "Tomislav"
+		// "minigun spinup time decreased" 0.25
+		// "dmg taken increased" 1.5
+		// "aiming movespeed increased" 2
+		// "mod minigun can holster while spinning" 1
+	// }	
+	ItemAttributes   
+	{ //holster while spinning
+		ClassName "TF_WEAPON_MINIGUN"
+		"mod minigun can holster while spinning" 1
+	}
+	ItemAttributes   
+	{ //holster while spinning
+		ClassName "TF_WEAPON_PIPEBOMBLAUNCHER"
+		"hidden secondary max ammo penalty" 2
+	}
+	ItemAttributes   
+	{ //vita buff
+		ItemName "The Vita-Saw"
+	//	"ubercharge_preserved_on_spawn_max" 0.99
+		"max health additive penalty" 25
+	}
+	ItemAttributes   
+	{ //amputator change
+		ItemName "The Amputator"
+		"provide on active" 1
+		"health regen" 12
+		"gesture speed increase" 0.5
+		"cosmetic taunt sound" "BaseCombatWeapon.WeaponMaterialize"
+	}		
+	ItemAttributes   
+	{ 
+		ItemName "The Solemn Vow"
+		"provide on active" 1
+		"add give health to teammate on hit" 300
+		"melee range multiplier" 6
+		"melee bounds multiplier" 3
+		"mult smack time" 0
+	}
+	ItemAttributes   
+	{
+		ItemName "The Mantreads"
+		"max health additive bonus" 75
+		"reduced_healing_from_medics" 0.75
+	}
+	ItemAttributes   
+	{ //passive disposable
+		ItemName "The Gunslinger"
+		"engy disposable sentries" 1
+		"mvm sentry ammo" 11
+		"engineer sentry build rate multiplier" 2
+	}	
+	ItemAttributes   
+	{ //pistol buff
+		ClassName "TF_WEAPON_PISTOL"
+		"critboost on kill" 3
+		"max health additive bonus" 25
+		"provide on active" 0
+	}		
+	ItemAttributes   
+	{
+		ClassName "tf_weapon_handgun_scout_secondary"
+		"critboost on kill" 3
+		"max health additive bonus" 25
+		"provide on active" 0
+	}
+	ItemAttributes   
+	{ //shotgun buff
+		ClassName "TF_WEAPON_SHOTGUN"
+		"minicritboost on kill" 6
+		"max health additive bonus" 25
+	}
+	ItemAttributes   
+	{
+		ClassName "tf_weapon_shotgun_multiclass"
+		"minicritboost on kill" 6
+		"max health additive bonus" 25
+	}
+	ItemAttributes   
+	{
+		ItemName "tf_weapon_invis"
+		"max health additive bonus" 50
+	}
+	ItemAttributes   
+	{
+		ItemName "The Cloak and Dagger"
+		"max health additive bonus" 50
+	}
+	ItemAttributes   
+	{ //eoi rework
+		ItemName "The Gas Passer"
+		"max health additive penalty" -50
+		"explode_on_ignite" 1
+		"item_meter_charge_rate" 360
+		"item_meter_damage_for_full_charge" 6500
+	}
+	ItemAttributes   
+	{ //big slappum
+		ItemName "The Hot Hand"
+		"speed_boost_on_hit_enemy" 5
+	}
+	ItemAttributes   
+	{	//perma crits no pene
+		ItemName "The Pomson 6000"
+		"max health additive penalty" -50
+		"override projectile type" 1
+		"sniper fires tracer HIDDEN" 1
+		"always crit" 1
+		"dmg bonus vs buildings" 5
+		"damage applies to sappers" 1
+	}	
+	ItemAttributes   
+	{ //infinite caber
+        ItemName "The Ullapool Caber"
+        "regenerate stickbomb" 1
+	}
+	
+	PointTemplates   
+	{
+		corelogic //all the things we want to automatically run when the popfile loads.  Use this the most to avoid spaghetti
+		{  
+			NoFixup 1
+			logic_auto 
+			{
+				"targetname" "mainrelay"
+				"origin" "0 0 0" 
+				
+				"OnMapSpawn" "item_teamflag,Kill,,0,-1"
+				"OnMapSpawn" "trigger_hurt*,Kill,,0,-1"
+				"OnMapSpawn" "hatch_explo_kill_players,Kill,,0,-1"
+				"OnMapSpawn" "trigger_multiple,Disable,,0,-1" //lock doors
+				"OnMapSpawn" "event_sound,PlaySound,,0,-1"
+				"OnMapSpawn" "light_event,TurnOn,,6,-1"
+				"OnMapSpawn" "pumpkin_*,Enable,,0,-1"
+				"OnMapSpawn" "candle_*,Enable,,0,-1"
+				"OnMapSpawn" "event_door_pumpkin_*,Close,,0.01,-1"
+				"OnMapSpawn" "event_door_candle_*,Close,,0.01,-1"
+				"OnMapSpawn" "particle_candle,Start,,6,-1"
+				"OnMapSpawn" "func_respawnroom*,Kill,,0,-1"
+				"OnMapSpawn" "func_nav_avoid*,Kill,,0,-1"
+				"OnMapSpawn" "func_nav_prefer*,Kill,,0,-1"
+				
+				"OnMapSpawn" "wave_start_relay_classic,AddOutput,OnTrigger trigger_multiple:Enable:0:-1"
+				"OnMapSpawn" "wave_finished_relay,AddOutput,OnTrigger trigger_multiple:Disable:0:-1"
+				
+				"OnMapSpawn" "wave_finished_relay,AddOutput,OnTrigger restart:Enable:0:-1"
+				"OnMapSpawn" "wave_finished_relay,AddOutput,OnTrigger restart:Disable:1:-1"
+				"OnMapSpawn" "wave_finished_relay,AddOutput,OnTrigger obj_teleporter:SetHealth:-10000:-1"
+				"OnMapSpawn" "wave_finished_relay,AddOutput,OnTrigger obj_sentrygun:SetHealth:-10000:-1"
+				"OnMapSpawn" "wave_finished_relay,AddOutput,OnTrigger obj_dispenser:SetHealth:-10000:-1"
+				
+				"OnMapSpawn" "wave_start_relay*,AddOutput,OnTrigger powerup_relay:Trigger:0:-1"
+			}
+			logic_relay
+			{
+				"targetname" "wave1"
+				"origin" "0 0 0"
+				"OnTrigger" "hint,Show,,0,-1"
+				"OnTrigger" "hint2,Show,,10,-1"
+				"OnTrigger" "preround,PlaySound,,0,-1"
+			}
+			logic_relay
+			{
+				"targetname" "wave1door"
+				"origin" "0 0 0"
+				"OnTrigger" "trigger_multiple,Disable,,0,-1"
+				"OnTrigger" "trigger_multiple,Enable,,5,-1"
+			}
+			trigger_teleport
+			{
+				"origin" "866.573792 1540.498169 29.538052"
+				"targetname" "restart"
+				"target" "red_player_teamspawn"
+				"filtername" "filter_red"
+				"StartDisabled" "1"
+				"spawnflags" "3"
+				"maxs" "9999 9999 9999"
+				"mins" "-9999 -9999 -9999"
+			}
+			trigger_teleport
+			{
+				"origin" "-2196.798096 4357.285645 65.03131"
+				"targetname" "bosstele"
+				"target" "frontspawn"
+				"filtername" "filter_blu"
+				"StartDisabled" "1"
+				"spawnflags" "3"
+				"maxs" "200 200 200"
+				"mins" "-200 -200 -200"
+			}
+			trigger_brush
+			{
+				"origin" "-596 -232 34"
+				"targetname" "game_playerdie"
+				"StartDisabled" "0"
+				"OnUse" "item_powerup_rune,Kill,,0,-1"
+			}
+			ambient_generic
+			{
+				"targetname" "preround"
+				"origin" "0 0 0"
+				"volstart" "0"
+				"spinup" "0"
+				"spindown" "0"
+				"spawnflags" "33"
+				"radius" "9999"
+				"preset" "0"
+				"pitchstart" "100"
+				"pitch" "100"
+				"message" "#music\hl1_song19.mp3"
+				"lfotype" "0"
+				"lforate" "0"
+				"lfomodvol" "0"
+				"lfomodpitch" "0"
+				"health" "10"
+				"fadeoutsecs" "0"
+				"fadeinsecs" "0"
+				"cspinup" "0"
+			}
+			trigger_teleport
+			{
+				"origin" "-1094.382446 3485.951904 12.361217"
+				"targetname" "poweruptele"
+				"target" "haste"
+				"StartDisabled" "0"
+				"spawnflags" "3"
+				"maxs" "100 100 100"
+				"mins" "-100 -100 -100"
+			}
+			info_teleport_destination
+			{
+				"targetname" "haste"
+				"origin" "807.868164 -3096.937988 132.031311"
+			}
+			info_teleport_destination
+			{
+				"targetname" "vampire"
+				"origin" "707.868164 -3096.937988 132.031311"
+			}
+			info_teleport_destination
+			{
+				"targetname" "reflect"
+				"origin" "607.868164 -3096.937988 132.031311"
+			}
+			info_teleport_destination
+			{
+				"targetname" "strength"
+				"origin" "507.868164 -3096.937988 132.031311"
+			}
+			info_teleport_destination
+			{
+				"targetname" "king"
+				"origin" "407.868164 -3096.937988 132.031311"
+			}
+			info_teleport_destination
+			{
+				"targetname" "precision"
+				"origin" "307.868164 -3096.937988 132.031311"
+			}
+			logic_relay
+			{
+				"targetname" "powerup_relay"
+				"origin" "0 0 0"
+				"OnTrigger" "poweruptele,Enable,,0,-1"
+				"OnTrigger" "grabpowerup,Show,,0,-1"
+				"OnTrigger" "poweruptele,AddOutput,target vampire,1,-1"
+				"OnTrigger" "poweruptele,AddOutput,target reflect,2,-1"
+				"OnTrigger" "poweruptele,AddOutput,target strength,3,-1"
+				"OnTrigger" "poweruptele,AddOutput,target king,4,-1"
+				"OnTrigger" "poweruptele,AddOutput,target precision,5,-1"
+				"OnTrigger" "poweruptele,Disable,,10,-1"
+				"OnTrigger" "spawnbot_red_silent,Disable,,10,-1"
+			}			
+			func_forcefield
+			{
+				
+                "disablereceiveshadows" "0"
+				"origin" "253.012405 -3012.360596 132.031311"
+                "rendermode" "10"
+                "TeamNum" "2"
+                "targetname" "spawncover"
+                "mins" "0 -75 -50"
+                "maxs" "10 75 50"
+				"StartDisabled" "0"
+			}	
+			func_forcefield
+			{
+				
+                "disablereceiveshadows" "0"
+				"origin" "512.294312 -2441.593994 47.508453"	
+                "renderamt" "255"
+                "rendercolor" "255 255 255"
+                "renderfx" "0"
+                "rendermode" "10"
+                "TeamNum" "2"
+                "targetname" "spawncover1"
+                "mins" "0 -75 -50"
+                "maxs" "10 75 50"
+				"StartDisabled" "0"
+			}	
+			prop_dynamic
+			{
+				
+				"targetname" "hatchcover"
+				"angles" "-180 0 0"
+				"DisableBoneFollowers" "1"
+				"disablereceiveshadows" "1"
+				"model" "models\props_viaduct_event\fog_plane03.mdl"
+				"disableshadows" "1"
+				"ExplodeDamage" "0"
+				"ExplodeRadius" "0"
+				"fademaxdist" "0"
+				"fademindist" "-1"
+				"fadescale" "0.75"
+				"MaxAnimTime" "10"
+				"maxdxlevel" "0"
+				"MinAnimTime" "5"
+				"mindxlevel" "0"
+				"modelscale" "2.0"
+				"PerformanceMode" "0"
+				"pressuredelay" "0"
+				"RandomAnimation" "0"
+				"renderamt" "254"
+			//	"rendercolor" "100 100 255"
+			//	"renderfx" "9"
+				"rendermode" "0"
+				"SetBodyGroup" "0"
+				"CollisionGroup" "1"
+				"skin" "0"
+				"solid" "0"
+				"spawnflags" "0"
+				"StartDisabled" "0"
+				"origin" "-68.827797 55.033031 822.397583"	
+			}	
+			prop_dynamic
+			{
+				
+				"targetname" "hatchcover"
+				"angles" "-180 0 0"
+				"DisableBoneFollowers" "1"
+				"disablereceiveshadows" "1"
+				"model" "models\props_viaduct_event\fog_plane03.mdl"
+				"disableshadows" "1"
+				"ExplodeDamage" "0"
+				"ExplodeRadius" "0"
+				"fademaxdist" "0"
+				"fademindist" "-1"
+				"fadescale" "0.75"
+				"MaxAnimTime" "10"
+				"maxdxlevel" "0"
+				"MinAnimTime" "5"
+				"mindxlevel" "0"
+				"modelscale" "2.0"
+				"PerformanceMode" "0"
+				"pressuredelay" "0"
+				"RandomAnimation" "0"
+				"renderamt" "254"
+			//	"rendercolor" "100 100 255"
+			//	"renderfx" "9"
+				"rendermode" "0"
+				"SetBodyGroup" "0"
+				"CollisionGroup" "1"
+				"skin" "0"
+				"solid" "0"
+				"spawnflags" "0"
+				"StartDisabled" "0"
+				"origin" "-68.827797 55.033031 824.397583"	
+			}	
+			prop_dynamic
+			{
+				
+				"targetname" "hatchcover"
+				"angles" "0 0 0"
+				"DisableBoneFollowers" "1"
+				"disablereceiveshadows" "1"
+				"model" "models\props_lakeside_event\vortex_lakeside.mdl"
+				"disableshadows" "1"
+				"ExplodeDamage" "0"
+				"ExplodeRadius" "0"
+				"fademaxdist" "0"
+				"fademindist" "-1"
+				"fadescale" "0.75"
+				"MaxAnimTime" "10"
+				"maxdxlevel" "0"
+				"MinAnimTime" "5"
+				"mindxlevel" "0"
+				"modelscale" "2.0"
+				"PerformanceMode" "0"
+				"pressuredelay" "0"
+				"RandomAnimation" "0"
+				"renderamt" "254"
+			//	"rendercolor" "100 100 255"
+			//	"renderfx" "9"
+				"rendermode" "0"
+				"SetBodyGroup" "0"
+				"CollisionGroup" "1"
+				"skin" "0"
+				"solid" "0"
+				"spawnflags" "0"
+				"StartDisabled" "0"
+				"origin" "-148.468185 516.872681 719.658325"	
+			}	
+		}
+		GhostModel
+		{
+			OnSpawnOutput
+			{
+				Target "move_measure"
+				Action SetParent
+				Param  "!activator"
+				Delay  0.00
+			}
+			
+			prop_dynamic
+			{
+				"targetname" "model"
+				"modelscale" "1.5"
+				"rendercolor" "255 100 36"
+				"DisableBoneFollowers" "1"
+				"disableshadows" "1"
+				"model" "models/props_halloween/ghost.mdl"
+				"defaultanim" "idle"
+				"solid" "0"
+				"spawnflags" "0"
+				"StartDisabled" "0"
+				"origin" "0 0 -32"
+			}
+			
+			prop_dynamic
+			{
+				"targetname" "move_measure"
+				"DisableBoneFollowers" "1"
+				"disableshadows" "1"
+				"model" "models/empty.mdl"
+				"solid" "0"
+				"spawnflags" "0"
+				"StartDisabled" "0"
+				"origin" "0 0 -32"
+			}
+			
+			logic_measure_movement
+			{
+				"MeasureReference" "move_target"
+				"MeasureTarget" "move_measure"
+				"MeasureType" "0"
+				"Target" "model"
+				"TargetReference" "move_target"
+				"TargetScale" "1"			
+			}
+		}
+		BooTank
+		{
+			logic_auto
+			{
+				"targetname" "bootank_init_relay"
+				"OnMapSpawn" "tankboss_ghost,AddOutput,color,41 21 61,1,-1"
+				"OnMapSpawn" "tank_ghost,SetParent,tankboss_ghost,0.1,-1"
+				"OnMapSpawn" "tank_stun,SetParent,tankboss_ghost,0.1,-1"
+			}
+			trigger_stun
+			{
+				"trigger_delay" ".5"
+				"targetname" "tank_stun"
+				"stun_type" "2"
+				"stun_effects" "1"
+				"stun_duration" "3"
+				"StartDisabled" "0"
+				"spawnflags" "1"
+				"mins" "-80 -80 -80"
+				"maxs" "80 80 80"
+				"origin" "115 0 0"
+				"move_speed_reduction" "0"
+				"filtername" "filter_red"
+			}
+			prop_dynamic
+			{
+				"origin" "115 0 0"
+				"targetname" "tank_ghost"
+				"StartDisabled" "0"
+				"spawnflags" "0"
+				"solid" "0"
+				"skin" "0"
+				"SetBodyGroup" "0"
+				"rendermode" "0"
+				"renderfx" "0"
+				"rendercolor" "255 255 255"
+				"renderamt" "255"
+				"RandomAnimation" "0"
+				"pressuredelay" "0"
+				"PerformanceMode" "0"
+				"modelscale" "1.6"
+				"model" "models/props_halloween/ghost.mdl"
+				"mindxlevel" "0"
+				"MinAnimTime" "5"
+				"maxdxlevel" "0"
+				"MaxAnimTime" "10"
+				"fadescale" "1"
+				"fademindist" "-1"
+				"fademaxdist" "0"
+				"ExplodeRadius" "0"
+				"ExplodeDamage" "0"
+				"disableshadows" "1"
+				"disablereceiveshadows" "0"
+				"DefaultAnim" "idle"
+				"angles" "0 0 0"
+			}
+		}
+		annotation
+		{
+			NoFixup 1
+			training_annotation
+			{
+			  "targetname"   "hint"
+			  "display_text" "Zombies have swarmed the area, Get ready for a fight when those doors open!"
+			  "lifetime"     "10"
+			  "origin" "338.124207 -2764.986084 111.395599"	
+			}	
+			training_annotation
+			{
+			  "targetname"   "hint2"
+			  "display_text" "The round will end when the survivors have fallen"
+			  "lifetime"     "40"
+			  "origin" "338.124207 -2764.986084 111.395599"	
+			}	
+			training_annotation
+			{
+			  "targetname"   "blimphint"
+			  "display_text" "Destroy the Blimp!"
+			  "lifetime"     "5"
+			  "origin" "1520 256 500"	
+			}	
+			training_annotation
+			{
+			  "targetname"   "grabpowerup"
+			  "display_text" "Grab a powerup"
+			  "lifetime"     "10"
+			  "origin" "610.135254 -3093.090576 132.031311"	
+			}
+			training_annotation
+			{
+			  "targetname"   "rarespell"
+			  "display_text" "3 players have died, Rare spell rolled!"
+			  "lifetime"     "10"
+			  "origin" "610.135254 -3093.090576 132.031311"	
+			}
+			training_annotation
+			{
+			  "targetname"   "critboost"
+			  "display_text" "4 players have died, Crit boost enabled!"
+			  "lifetime"     "10"
+			  "origin" "610.135254 -3093.090576 132.031311"	
+			}
+			training_annotation
+			{
+			  "targetname"   "courtyard"
+			  "display_text" "Get to the courtyard!"
+			  "lifetime"     "10"
+			  "origin" "-279.563507 550.841980 -4.934776"	
+			}
+		}
+		cabinet
+		{  
+			//NoFixup 1
+			prop_dynamic
+			{
+				"targetname" "locker_model"
+				"model"      "models/props_gameplay/resupply_locker.mdl"
+				"solid"      "6"
+				"angles"     "0 0 0"
+			}
+			filter_tf_bot_has_tag
+			{
+				"Negated" "0"
+				"require_all_tags" "1"
+				"tags" "bot_red"
+				"targetname" "filter_redbot"
+			}
+			func_regenerate
+			{
+				"targetname" "regenerate"
+				"associatedmodel" "locker_model"
+				"TeamNum"         "2"
+				"mins"            "0 -48 0"
+				"maxs"            "40 48 128"
+				
+				"OnStartTouchAll"  "locker_model,SetAnimation,open,0,-1"
+				"OnEndTouchAll"    "locker_model,SetAnimation,close,0,-1"
+			}
+			trigger_multiple
+			{
+				"filtername" "filter_redbot"
+				"StartDisabled"    "0"
+				"targetname"    "block"
+				"mins"    "-40 -96 -40"
+				"maxs"    "80 96 168"
+				"spawnflags" "1"
+				
+				"OnStartTouch" "regenerate,Disable,,0,-1"
+				"OnEndTouchAll" "regenerate,Enable,,0,-1"
+			}
+		}	
+		PermaDeathLogic //by mince
+		{
+			NoFixup 1
+			
+			filter_activator_tfteam
+			{
+				"targetname" "filter_red"
+				"TeamNum"    "2"
+				"Negated"    "0"
+			}
+			
+			filter_activator_name
+			{
+				"targetname" "filter_deadplayer"
+				"filtername" "deadplayer"
+				"Negated"    "0"
+			}
+			
+			filter_activator_name
+			{
+				"targetname" "filter_deadplayer_false"
+				"filtername" "deadplayer"
+				"Negated"    "1"			
+			}
+			
+			filter_tf_bot_has_tag
+			{
+				"targetname" "filter_bot_false"
+				"Negated" "1"
+				"require_all_tags" "1"
+				"tags" "common"
+			}
+			
+			filter_multi
+			{
+				"targetname" "filter_redplayer"
+				"Filter01"   "filter_red"
+				"Filter02"   "filter_bot_false"
+				"filtertype" "0"
+				"Negated"    "0"	
+				
+				"OnPass"  "!activator,AddOutput,rendercolor 0 255 0,0,-1"
+				"OnFail"  "!activator,AddOutput,rendercolor 255 0 0,0,-1"
+			}
+			
+			filter_multi
+			{
+				"targetname" "filter_alive_redplayer"
+				"Filter01"   "filter_redplayer"
+				"Filter02"   "filter_deadplayer_false"
+				"filtertype" "0"
+				"Negated"    "0"	
+			}
+			
+			game_forcerespawn
+			{
+				"targetname" "forcerespawn"
+			}
+			trigger_multiple
+            {
+                "targetname"    "permadeath_detect_player_spell"
+                "filtername"    "filter_redplayer"
+                "spawnflags"    "1"
+                "StartDisabled" "1"
+                "wait"          "0"
+                "mins"          "-9216 -8192 -4096"
+                "maxs"          "9216 8192 4096"
+
+                "OnStartTouch"    "!activator,RollRareSpell,,0.01,-1"
+            }
+            trigger_add_tf_player_condition
+            {
+                "targetname"    "permadeath_detect_player_crit"
+                "filtername"    "filter_redplayer"
+                "condition"     "11"
+                "duration"      "9999999999" // It doesn't like applying when it's -1??
+                "spawnflags"    "1"
+                "StartDisabled" "1"
+                "mins"          "-9216 -8192 -4096"
+                "maxs"          "9216 8192 4096"
+            }
+            math_counter
+            {
+                "targetname" "permadeath_death_counter"
+                "min" "0"
+                "max" "6"
+                "startvalue" "0"
+                
+                "OutValue" "permadeath_death_case,InValue,,0,-1"
+            }
+            
+            logic_case
+            {
+                "targetname" "permadeath_death_case"
+                
+                "Case01" "3"
+                "Case02" "4"
+
+                "OnCase01" "permadeath_detect_player_spell,Enable,,0,-1"
+                "OnCase01" "permadeath_detect_player_spell,Disable,,0.01,-1"
+                "OnCase01" "rarespell,Show,,0,-1"
+                "OnCase02" "permadeath_detect_player_crit,Enable,,0,-1"
+                "OnCase02" "permadeath_detect_player_crit,Disable,,0,-1"
+                "OnCase02" "rarespell,Hide,,0.1,-1"
+                "OnCase02" "critboost,Show,,0.2,-1"
+            }
+			trigger_multiple
+			{
+				"targetname"    "permadeath_detect_latejoin_trigger"
+				"filtername"    "filter_redplayer"
+				"spawnflags"    "1"
+				"StartDisabled" "1"
+				"wait"          "0"
+				"mins"          "-9216 -8192 -4096"
+				"maxs"          "9216 8192 4096"
+
+				"OnStartTouch"  "permadeath_should_deny_player,Test,,0,-1"
+			}
+			
+			trigger_multiple
+			{
+				"targetname"    "permadeath_assign_trigger"
+				"filtername"    "filter_redplayer"
+				"spawnflags"    "1"
+				"StartDisabled" "1"
+				"wait"          "0"
+				"mins"          "-9216 -8192 -4096"
+				"maxs"          "9216 8192 4096"
+
+				"OnEndTouch"    "!activator,AddOutput,targetname deadplayer,0,-1"
+			}
+			
+			trigger_multiple
+			{
+				"targetname"    "permadeath_lose_trigger"
+				"filtername"    "filter_alive_redplayer"
+				"spawnflags"    "1"
+				"StartDisabled" "1"
+				"wait"          "0"
+				"mins"          "-9216 -8192 -4096"
+				"maxs"          "9216 8192 4096"
+
+				"OnEndTouchAll" "permadeath_can_bots_win,Test,,0,-1"
+			}
+
+			point_teleport
+			{
+				"targetname"    "permadeath_ghost_teleport_e"
+				"target"        "!activator"
+				"origin"        "353.804504 4785.397461 -57.541092"
+				"angles"        "0 0 0"
+			}
+			
+			trigger_add_tf_player_condition
+			{
+				"targetname"    "permadeath_ghost_trigger"
+				"filtername"    "filter_deadplayer"
+				"condition"     "66"
+				"duration"      "9999999999" // It doesn't like applying when it's -1??
+				"spawnflags"    "1"
+				"StartDisabled" "1"
+				"mins"          "-9216 -8192 -4096"
+				"maxs"          "9216 8192 4096"
+				
+				"OnStartTouch"  "permadeath_ghost_teleport_e,Teleport,,0,-1"
+				"OnStartTouch"  "ghost_model_maker,ForceSpawnAtEntityOrigin,!activator,0.01,-1"
+				"OnStartTouch"  "permadeath_death_counter,Add,1,0,-1"
+			}
+			trigger_add_tf_player_condition
+			{
+				"targetname"    "permadeath_ghost_trigger"
+				"filtername"    "filter_deadplayer"
+				"condition"     "77"
+				"duration"      "9999999999" // -1 works here but hehe symmetry go brrr
+				"spawnflags"    "1"
+				"StartDisabled" "1"
+				"mins"          "-9216 -8192 -4096"
+				"maxs"          "9216 8192 4096"
+			}
+			trigger_add_tf_player_condition
+			{
+				"targetname"    "permadeath_ghost_trigger"
+				"filtername"    "filter_deadplayer"
+				"condition"     "114"
+				"duration"      "9999999999" // -1 works here but hehe symmetry go brrr
+				"spawnflags"    "1"
+				"StartDisabled" "1"
+				"mins"          "-9216 -8192 -4096"
+				"maxs"          "9216 8192 4096"
+			}
+			trigger_add_tf_player_condition
+			{
+				"targetname"    "permadeath_ghost_trigger"
+				"filtername"    "filter_deadplayer"
+				"condition"     "43"
+				"duration"      "9999999999" // -1 works here but hehe symmetry go brrr
+				"spawnflags"    "1"
+				"StartDisabled" "1"
+				"mins"          "-9216 -8192 -4096"
+				"maxs"          "9216 8192 4096"
+			}
+
+			logic_relay
+			{
+				"targetname" "ghost_reset_relay"
+				"OnTrigger"  "deadplayer,$ForceRespawn,,0,-1" // Fucking sorcery
+				"OnTrigger"  "deadplayer,AddOutput,targetname ,0.01,-1"
+			}
+			
+			env_entity_maker
+			{
+				"targetname"     "ghost_model_maker"
+				"EntityTemplate" "GhostModel"
+			}
+			
+			info_target
+			{
+				"targetname" "move_target"
+				"origin"     "0 0 0"
+				"angles"     "0 0 0"
+			}
+
+			logic_branch
+			{
+				"targetname"   "permadeath_can_bots_win"
+				"InitialValue" "0"
+				
+				"OnTrue"       "bots_win,RoundWin,,0,-1"
+			}
+			
+			logic_branch
+			{
+				"targetname"   "permadeath_should_deny_player"
+				"InitialValue" "0"
+				
+				"OnTrue"       "!activator,AddOutput,targetname deadplayer,0,-1"
+				"OnTrue"       "permadeath_ghost_trigger,Disable,,0.01,-1"
+				"OnTrue"       "permadeath_ghost_trigger,Enable,,0.02,-1"
+			}
+		}
+		
+		GhostModel
+		{
+			OnSpawnOutput
+			{
+				Target "move_measure"
+				Action SetParent
+				Param  "!activator"
+				Delay  0.00
+			}
+			
+			prop_dynamic
+			{
+				"targetname"           "model"
+				"modelscale"           "1.5"
+				"rendercolor"          "255 100 36"
+				"DisableBoneFollowers" "1"
+				"disableshadows"       "1"
+				"model"                "models/props_halloween/ghost.mdl"
+				"defaultanim"          "idle"
+				"solid"                "0"
+				"spawnflags"           "0"
+				"StartDisabled"        "0"
+				"origin"               "0 0 -32"
+			}
+			
+			prop_dynamic
+			{
+				"targetname"           "move_measure"
+				"DisableBoneFollowers" "1"
+				"disableshadows"       "1"
+				"model"                "models/empty.mdl"
+				"solid"                "0"
+				"spawnflags"           "0"
+				"StartDisabled"        "0"
+				"origin"               "0 0 -32"
+			}
+			
+			logic_measure_movement
+			{
+				"MeasureReference" "move_target"
+				"MeasureTarget"    "move_measure"
+				"MeasureType"      "0"
+				"Target"           "model"
+				"TargetReference"  "move_target"
+				"TargetScale"      "1"			
+			}
+		}
+		
+		Misc
+		{
+			NoFixup 1
+			
+			OnSpawnOutput
+			{
+				Target entity_outputs
+				Action Trigger
+				Delay  0.00
+			}
+			
+			logic_relay
+			{
+				"targetname" "entity_outputs"
+				
+				"OnTrigger" "player,AddOutput,targetname ,0,-1"
+				
+				"OnTrigger" "wave_init*,AddOutput,OnTrigger ghost_reset_relay:Trigger::0:-1,0,-1"
+				
+				"OnTrigger" "wave_start_relay,AddOutput,OnTrigger permadeath_assign_trigger:Enable::0:-1,0,-1"
+				"OnTrigger" "wave_start_relay,AddOutput,OnTrigger permadeath_lose_trigger:Enable::0:-1,0,-1"
+				"OnTrigger" "wave_start_relay,AddOutput,OnTrigger permadeath_can_bots_win:SetValue:1:0:-1,0,-1"
+				"OnTrigger" "wave_start_relay,AddOutput,OnTrigger forcerespawn:ForceTeamRespawn:2:0:-1,0,-1" // Ensure all players are alive
+				"OnTrigger" "wave_start_relay,AddOutput,OnTrigger permadeath_detect_latejoin_trigger:Enable::0.01:-1,0,-1"
+				"OnTrigger" "wave_start_relay,AddOutput,OnTrigger permadeath_should_deny_player:SetValue:1:0.02:-1,0,-1"
+				"OnTrigger" "wave_start_relay,AddOutput,OnTrigger permadeath_ghost_trigger:Enable::0.03:-1,0,-1"
+				
+				"OnTrigger" "wave_finished_relay,AddOutput,OnTrigger permadeath_assign_trigger:Disable::0:-1,0,-1"
+				"OnTrigger" "wave_finished_relay,AddOutput,OnTrigger permadeath_ghost_trigger:Disable::0:-1,0,-1"
+				"OnTrigger" "wave_finished_relay,AddOutput,OnTrigger permadeath_lose_trigger:Disable::0:-1,0,-1"
+				"OnTrigger" "wave_finished_relay,AddOutput,OnTrigger permadeath_can_bots_win:SetValue:0:0:-1,0,-1"
+				"OnTrigger" "wave_finished_relay,AddOutput,OnTrigger permadeath_detect_latejoin_trigger:Disable::0:-1,0,-1"
+				"OnTrigger" "wave_finished_relay,AddOutput,OnTrigger permadeath_should_deny_player:SetValue:0:0:-1,0,-1"
+			}
+		}
+        BossFog
+        {
+            NoFixup 1
+            env_fog_controller
+            {
+                "farz"          "-1"
+                "fogblend"      "1"
+                "fogcolor"      "24 25 36"
+                "fogcolor2"      "18 20 24"
+                "fogdir"        "1 0 0"
+                "fogenable"     "1"
+                "fogend"        "1500"
+                "foglerptime"   "2"
+                "fogmaxdensity" "1"
+                "fogstart"      "30"
+				"spawnflags" 	"1"
+                "targetname"    "mist"
+            }
+            sky_camera
+            {
+                "fogmaxdensity" "1"
+                "origin"        "-3009.181396 8788.087891 1074.398193"
+                "angles"        "0 0 0"
+                "fogcolor"      "24 25 36"
+                "fogcolor2"      "18 20 24"
+                "fogdir"        "1 0 0"
+                "fogenable"     "1"
+                "fogend"        "12000"
+                "fogstart"      "300"
+                "scale"         "16"       
+                "targetname"    "mist_camera" 
+            }
+            trigger_multiple
+            {
+                "targetname"    "fog_system"
+                "origin"        "1847 -4007 71"
+                "mins"          "-9999 -9999 -9999"
+                "maxs"          "9999 9999 9999"
+                "StartDisabled" "0"
+                "spawnflags"    "1"
+                "OnStartTouch"  "!activator,SetFogController,mist,0,-1"
+                "OnStartTouch"  "!activator,SetFogController,mist_camera,0,-1"
+            }
+			// logic_relay
+			// {
+				// "targename" "fog_boss"
+				// "origin" "0 0 0"
+				// "OnTrigger" "mist,TurnOff,,0,-1"
+				// "OnTrigger" "fog_system,Disable,,0,-1"
+				// "OnTrigger" "mist,SetEndDist,750,0.01,-1"
+				// "OnTrigger" "mist,TurnOn,,0.02,-1"
+				// "OnTrigger" "fog_system,Enable,,0.02,-1"
+			// }
+        }
+	}
+	
+	SpawnTemplate "corelogic"  
+	
+	SpawnTemplate "Misc"  
+	
+	SpawnTemplate "PermaDeathLogic"  
+	
+	SpawnTemplate "annotation"  
+
+	SpawnTemplate "BossFog"  
+	
+	SpawnTemplate  
+	{
+		Name   "cabinet"
+		Origin "734.822083 -2639.339844 0"
+		Angles "0 -180 0"
+	}
+	ExtraSpawnPoint  
+    {
+        Name "red_player_teamspawn"
+        TeamNum 3 //2 for red 3 for blu
+        X	"697.282104"                     
+        Y	"-2850.460205"                  
+        Z	"132.031311"        
+    }
+	ExtraSpawnPoint  
+    {
+        Name "powerups"
+        TeamNum 3 //2 for red 3 for blu
+        X	" -1094.382446"                     
+        Y	"3485.951904"                  
+        Z	"12.361217"        
+    }
+	ExtraSpawnPoint  
+    {
+        Name "tunnelspawn"
+        TeamNum 3 //2 for red 3 for blu
+        X	"-1567.780762"                     
+        Y	"748.994446"                  
+        Z	"68.03363"        
+    }
+	ExtraSpawnPoint  
+    {
+        Name "towerspawn"
+        TeamNum 3
+        X	"508.808716"                     
+        Y	"1344.558960"                  
+        Z	"112.03131"        
+    }
+	ExtraSpawnPoint   //use RandomSpawn 1 in your WaveSpawn to split spawning evenly across spawns with the same name
+    {
+        Name "towerspawn"
+        TeamNum 3
+        X	"-1671.566895"                     
+        Y	"595.716675"                  
+        Z	"47.947960"        
+    }
+	ExtraSpawnPoint  
+    {
+        Name "closespawn"
+        TeamNum 3
+        X	"608.877380"                     
+        Y	"-726.791260"                  
+        Z	"132.031311"        
+    }
+	ExtraSpawnPoint  
+    {
+        Name "closespawn"
+        TeamNum 3
+        X	"-953.470825"                     
+        Y	"-1899.808716"                  
+        Z	"-59.968681"        
+    }
+	ExtraSpawnPoint  
+    {
+        Name "frontspawn"
+        TeamNum 3
+        X	"-206.383606"                 
+        Y	"483.974365"                  
+        Z	"798.433838"        
+    }
+	ExtraTankPath   //Adds tank path to follow
+	{
+		Name "blimppath" //name of the starting path node prefix. First tank node name would be name_1
+		Node "1520 256 500"
+		Node "2184 608 500"
+		Node "2000 1648 500"
+		Node "-1270 1604 500"
+	}
+	Mission {
+        Objective Sniper
+		Where spawnbot
+		BeginAtWave 4
+		RunForThisManyWaves 1
+		CooldownTime 45
+		DesiredCount 2
+		TFBot { 
+			Template T_TFBot_Sniper 
+			Skill Normal
+			Item "The Hitman's Heatmaker"
+			Item "The Shahanshah"
+			Name "Silent Assassin"
+			Attributes SpawnWithFullCharge
+			ClassIcon sniper_d
+			CharacterAttributes {
+				"voice pitch scale" 0.4
+				"rage giving scale" 0.33
+			}
+			ItemAttributes {
+				ItemName "The Hitman's Heatmaker"
+				"silent killer" 1
+				"increase buff duration" 99
+				"voice pitch scale" 0
+				"SRifle Charge rate decreased" 10
+			}
+			AddCond   { Name TF_COND_RUNE_PRECISION } 
+			AddCond   { Name TF_COND_STEALTHED_USER_BUFF_FADING } 
+			FireWeapon   {
+                Delay 0
+				Cooldown 0
+				Type "Reload"
+			}
+		}
+    }
+	// Mission {
+        // Objective Spy
+		// Where spawnbot
+		// BeginAtWave 3
+		// RunForThisManyWaves 2
+		// CooldownTime 60
+		// DesiredCount 1
+		// TFBot {
+			// Class Spy
+			// Skill Normal
+			// Item "The Spy-Cicle"
+		// }
+	// }
+	Wave { //Wave 1
+		RedTeamWipeCausesWaveLoss 1  
+		InitWaveOutput {
+			Target wave1
+			Action Trigger
+		}
+		StartWaveOutput {
+				Target wave_start_relay_classic_event
+				Action Trigger
+		}
+		DoneOutput {
+				Target wave_finished_relay
+				Action trigger
+		}		
+		Explanation   
+ 	 	{
+			Line "{D500FF}Wave 1/5"
+		}
+		WaveSpawn {
+			Name "powerups" 
+			Where "powerups"
+			MaxActive 1
+			SpawnCount 1
+			Support 1
+			WaitBeforeStarting 2
+			TFBot {	
+				Class Heavy
+				WeaponRestrictions MeleeOnly
+				Name "⠀⠀" 
+				Skin 2   
+				ClassIcon mini_sentry
+				Skill Normal
+				Attributes AlwaysFireWeapon
+				ItemAttributes { ItemName "TF_WEAPON_FISTS" "no_jump" 1 "move speed bonus" 0.001 "voice pitch scale" 0 "damage penalty" 0.01 "gesture speed increase" 100 "dmg taken increased" 0 "melee cleave attack" 1 "not solid to players" 1 }
+				Action Mobber  
+				AddCond   { Name TF_COND_RUNE_RESIST } 
+				DamageAppliesCond   { Name TF_COND_RUNE_RESIST } 
+			}
+		}
+		// WaveSpawn { 
+			// Name "sloteaters"
+			// Where red_player_teamspawn
+			// TotalCount 6
+			// MaxActive 6
+			// SpawnCount 6
+			// Support Limited
+			// StartWaveWarningSound "#music\hl1_song14.mp3"
+		// Squad { RandomChoice { TFBot {
+				// Class Heavy
+				// Name "⠀"
+				// Scale 0.001
+				// Attributes IgnoreEnemies
+				// AddCond   { Name TF_COND_REPROGRAMMED } 
+				// AddCond   { Name TF_COND_STEALTHED_USER_BUFF_FADING }
+				// CharacterAttributes {
+					// "dmg taken increased" 0
+					// "move speed bonus" 0.0001
+					// "no_jump" 1
+					// "voice pitch scale" 0
+				// }
+			// }}}
+		// }
+		WaveSpawn { 
+			Name "engis"
+			Where frontspawn
+			TotalCount 5
+			MaxActive 5
+			SpawnCount 1
+			TotalCurrency 100
+			Support Limited
+			TFBot { 
+				Template T_TFBot_Engineer_Sentry_Battle 
+				ClassIcon mini_sentry
+				Attributes AlwaysFireWeapon
+				StripItemSlot 0  
+				StripItemSlot 1  
+				Item "The Gunslinger"
+				CharacterAttributes {
+					"building max level" 1
+					"voice pitch scale" 0.4
+					"rage giving scale" 0.33
+				}
+			}
+		}
+		WaveSpawn { 
+			Name "Wave1a"
+			Where closespawn
+			TotalCount 30
+			MaxActive 5
+			SpawnCount 2
+			TotalCurrency 100
+			RandomSpawn 1
+			WaitBeforeStarting 5
+			StartWaveOutput {
+				Target wave1door
+				Action Trigger
+			}
+			TFBot {
+				Class Heavy
+				WeaponRestrictions MeleeOnly
+				Action Mobber  
+				ClassIcon heavy_fist_nys
+				Item "Upgradeable TF_WEAPON_FISTS"
+				ItemAttributes {
+					ItemName "Upgradeable TF_WEAPON_FISTS"
+					"fists have radial buff" 1
+					"voice pitch scale" 0.4
+					"rage giving scale" 0.33
+					"force distribute currency on death" 1
+				}
+			}
+		}
+		WaveSpawn { 
+			Name "Wave1"
+			Where towerspawn
+			TotalCount 45
+			MaxActive 16
+			SpawnCount 1
+			TotalCurrency 400
+			DoneWarningSound "#music\hl1_song21.mp3"
+			WaitForAllSpawned "wave1a"
+			TFBot {
+				Class Heavy
+				Skill Expert
+				WeaponRestrictions MeleeOnly
+				Action Mobber  
+				ClassIcon heavy_fist_nys
+				Item "Upgradeable TF_WEAPON_FISTS"
+				Tag flankers
+				ItemAttributes {
+					ItemName "Upgradeable TF_WEAPON_FISTS"
+					"fists have radial buff" 1
+					"voice pitch scale" 0.4
+					"rage giving scale" 0.33
+					"force distribute currency on death" 1
+				}
+			}
+		}
+		WaveSpawn { 
+			Name "Wave1"
+			Where closespawn
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			TotalCurrency 100
+			WaitBeforeStarting 5
+			RandomChoice {	
+				TFBot {
+					Class Heavy
+					Skill Expert 
+					Name "Giant Heavy"
+					Health 4500
+					WeaponRestrictions MeleeOnly
+					Action Mobber  
+					ClassIcon heavy_fist_nys_giant
+					Attributes MiniBoss
+					Attributes AlwaysCrit
+					CharacterAttributes {
+						"gesture speed increase" 1.5
+						"move speed bonus"	0.5
+						"damage force reduction" 0
+						"airblast vulnerability multiplier" 0
+						"airblast vertical vulnerability multiplier" 0
+						"override footstep sound set" 2
+						"voice pitch scale" 0.4
+						"force distribute currency on death" 1 
+						"rage giving scale" 0.33
+						
+					}
+				}		
+			}
+		}
+		WaveSpawn { 
+			Name "Wave1"
+			Where towerspawn
+			
+			TotalCount 4
+			MaxActive 2
+			SpawnCount 1
+			TotalCurrency 300
+			RandomSpawn 1
+			WaitBetweenSpawns 10
+			RandomChoice {	
+				TFBot {
+					Class Heavy
+					Skill Expert 
+					Name "Giant Heavy"
+					Health 4500
+					WeaponRestrictions MeleeOnly
+					Action Mobber  
+					ClassIcon heavy_fist_nys_giant
+					Attributes MiniBoss
+					AddCond   { Name TF_COND_OFFENSEBUFF }
+					CharacterAttributes {
+						"gesture speed increase" 1.5
+						"move speed bonus"	0.5
+						"damage force reduction" 0
+						"airblast vulnerability multiplier" 0
+						"airblast vertical vulnerability multiplier" 0
+						"override footstep sound set" 2
+						"voice pitch scale" 0.4
+						"force distribute currency on death" 1 
+						"rage giving scale" 0.33
+						
+					}
+				}				
+			}
+		}
+	}
+	Wave { //Wave 2
+		RedTeamWipeCausesWaveLoss 1  
+		StartWaveOutput {
+				Target wave_start_relay_classic
+				Action Trigger
+		}
+		DoneOutput {
+				Target wave_finished_relay
+				Action trigger
+		}		
+		Explanation   
+ 	 	{
+			Line "{D500FF}Wave 2/5"
+		}
+		WaveSpawn {
+			Name "powerups" 
+			Where "powerups"
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 2
+			Support 1
+			TFBot {	
+				Class Heavy
+				WeaponRestrictions MeleeOnly
+				Name "⠀⠀" 
+				Skin 2   
+				ClassIcon demoknight
+				Skill Normal
+				Attributes AlwaysFireWeapon
+				ItemAttributes { ItemName "TF_WEAPON_FISTS" "no_jump" 1 "move speed bonus" 0.001 "voice pitch scale" 0 "damage penalty" 0.01 "gesture speed increase" 100 "dmg taken increased" 0 "melee cleave attack" 1 "not solid to players" 1 }
+				Action Mobber  
+				AddCond   { Name TF_COND_RUNE_AGILITY } 
+				DamageAppliesCond   { Name TF_COND_RUNE_AGILITY } 
+			}
+		}
+		// WaveSpawn { 
+			// Name "sloteaters"
+			// Where red_player_teamspawn
+			// TotalCount 6
+			// MaxActive 6
+			// SpawnCount 6
+			// Support Limited
+		// Squad { RandomChoice { TFBot {
+				// Class Heavy
+				// Name "⠀"
+				// Scale 0.001
+				// Attributes IgnoreEnemies
+				// AddCond   { Name TF_COND_REPROGRAMMED } 
+				// AddCond   { Name TF_COND_STEALTHED_USER_BUFF_FADING }
+				// CharacterAttributes {
+					// "dmg taken increased" 0
+					// "move speed bonus" 0.0001
+					// "no_jump" 1
+					// "voice pitch scale" 0
+				// }
+			// }}}
+		// }
+		WaveSpawn { 
+			Name "engis"
+			Where frontspawn
+			TotalCount 5
+			MaxActive 5
+			SpawnCount 1
+			TotalCurrency 100
+			Support Limited
+			TFBot { 
+				Template T_TFBot_Engineer_Sentry_Battle 
+				ClassIcon sentry_gun
+				Attributes AlwaysFireWeapon
+				StripItemSlot 0  
+				StripItemSlot 1  
+				Item "The Gunslinger"
+				CharacterAttributes { "voice pitch scale" 0.4 }
+				ItemAttributes {
+					ItemName "The Gunslinger"
+					"building max level" 1
+					"mod wrench builds minisentry" 0
+					"rage giving scale" 0.33
+				}
+			}
+		}
+		WaveSpawn { 
+			Name "Wave2a"
+			Where closespawn
+			TotalCount 2
+			MaxActive 1
+			SpawnCount 1
+			TotalCurrency 300
+			RandomSpawn 1
+			TFBot { Template T_TFBot_Giant_Pyro Attributes AlwaysFireWeapon Action Mobber   AddCond   { Name TF_COND_SPEED_BOOST Duration 5 } CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33 } }
+		}
+		WaveSpawn { 
+			Name "Wave2a"
+			Where closespawn
+			TotalCount 18
+			MaxActive 8
+			SpawnCount 2
+			WaitBetweenSpawns 2
+			TotalCurrency 100
+			TFBot {
+				Class Pyro
+				ClassIcon pyro_axtinguisher
+				Action Mobber  
+				WeaponRestrictions MeleeOnly
+				Item "The Axtinguisher"
+				CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33 }
+			}
+		}
+		WaveSpawn { 
+			Name "Wave2b"
+			Where towerspawn
+			TotalCount 40
+			MaxActive 8
+			SpawnCount 2
+			TotalCurrency 100
+			RandomSpawn 1
+			WaitForAllDead "Wave2a"
+			WaitBeforeStarting 5
+			RandomChoice {
+				TFBot {
+					Class Demoman
+					Skill Expert 
+					Action Mobber  
+					AimAt Feet  
+					WeaponRestrictions SecondaryOnly
+					ItemAttributes {					
+						ItemName "TF_WEAPON_PIPEBOMBLAUNCHER"
+						"voice pitch scale" 0.4
+						"stickybomb charge rate" 0.001
+						"max pipebombs decreased" -5
+						"Projectile range increased" 0.35
+						"rage giving scale" 0.33 
+						"no self blast dmg" 2
+					}
+				}
+				TFBot {
+					Class Demoman
+					Skill Expert 
+					Action Mobber  
+					AimAt Feet  
+					WeaponRestrictions SecondaryOnly
+					Tag flankers
+					BehaviorModifiers Push
+					ItemAttributes {					
+						ItemName "TF_WEAPON_PIPEBOMBLAUNCHER"
+						"voice pitch scale" 0.4
+						"stickybomb charge rate" 0.001
+						"max pipebombs decreased" -5
+						"Projectile range increased" 0.35
+						"rage giving scale" 0.33 
+						"no self blast dmg" 2
+					}
+				}
+			}
+		}
+		WaveSpawn { 
+			Name "Wave2b"
+			Where towerspawn
+			TotalCount 3
+			MaxActive 2
+			SpawnCount 1
+			TotalCurrency 100
+			RandomSpawn 1
+			WaitBetweenSpawns 10
+			WaitForAllSpawned "Wave2a"
+			WaitBeforeStarting 5
+			TFBot {
+				Class Demoman
+				ClassIcon demo_pumpkin_giant
+				Name "Giant Pumpkin Bomber"
+				Action Mobber  
+				Skill Expert
+				Health 4500
+				Attributes MiniBoss
+				StripItemSlot 0  
+				StripItemSlot 1  
+				Item "TF_WEAPON_SPELLBOOK"
+				Item "The Bat Outta Hell"
+				CharacterAttributes
+				{
+					"move speed bonus"	0.5
+					"damage force reduction" 0
+					"airblast vulnerability multiplier" 0
+					"override footstep sound set" 6
+					"voice pitch scale" 0.4
+					"no self blast dmg" 2
+					"rage giving scale" 0.33 
+				}
+				Spell   //Gives specified spell to bots.
+				{
+					Delay 1 //Time before the first spell charges are given (Default: 10)
+                    Cooldown 5 //Time between each spell changes (Default: 10)
+                    Repeats 0 //How many times should spell charges be given in total (Default: 0 - Infinite)
+					IfSeeTarget 1 //When set to 1, this task activates only when the bot can see the target player (Default: 0 - Always activate)
+					Charges 1 //How many spell charges to give every time the spell is given (Default: 1)
+					Limit 1 //How many spell charges the bot can store (Default: Same as charges given)
+					Type "Pumpkin MIRV" 
+				}
+			}
+		}
+		WaveSpawn { 
+			Name "Wave2c"
+			Where spawnbot
+			TotalCount 40
+			MaxActive 8
+			SpawnCount 2
+			TotalCurrency 200
+			RandomSpawn 1
+			WaitForAllDead "Wave2b"
+			Support Limited
+			TFBot {
+				Template T_TFBot_Demoman_Knight
+				Action Mobber  
+				CharacterAttributes {
+					"voice pitch scale" 0.4
+					"rage giving scale" 0.33
+					"force distribute currency on death" 1
+					"lose demo charge on damage when charging" 1
+				}
+			}
+		}
+		WaveSpawn { 
+			Name "Wave2c"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			RandomSpawn 1
+			WaitForAllDead "Wave2b"
+			DoneWarningSound "#music\hl1_song3.mp3"
+			Tank {
+				Health 40000
+				Name "tankboss_ghost"
+				SpawnTemplate   "BooTank"
+				StartingPathTrackNode "tank_path_a_10"
+                DisableSmokeStack 1  
+                Model models/bots/boss_bot/boss_tank_color.mdl  
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}
+		}
+	}
+	Wave { //Wave 3
+		RedTeamWipeCausesWaveLoss 1  
+		StartWaveOutput {
+				Target wave_start_relay_classic
+				Action Trigger
+		}
+		DoneOutput {
+				Target wave_finished_relay
+				Action trigger
+		}		
+		Explanation   
+ 	 	{
+			Line "{D500FF}Wave 3/5"
+		}
+		WaveSpawn {
+			Name "powerups" 
+			Where "powerups"
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 2
+			Support 1
+			TFBot {	
+				Class Heavy
+				WeaponRestrictions MeleeOnly
+				Name "⠀⠀" 
+				Skin 2   
+				ClassIcon demoknight_giant
+				Skill Normal
+				Attributes AlwaysFireWeapon
+				ItemAttributes { ItemName "TF_WEAPON_FISTS" "no_jump" 1 "move speed bonus" 0.001 "voice pitch scale" 0 "damage penalty" 0.01 "gesture speed increase" 100 "dmg taken increased" 0 "melee cleave attack" 1 "not solid to players" 1 }
+				Action Mobber  
+				AddCond   { Name TF_COND_RUNE_STRENGTH } 
+				DamageAppliesCond   { Name TF_COND_RUNE_STRENGTH } 
+			}	
+		}
+		WaveSpawn {
+			Name "powerups" 
+			Where "powerups"
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 3
+			Support 1
+			TFBot {	
+				Class Heavy
+				WeaponRestrictions MeleeOnly
+				Name "⠀⠀" 
+				Skin 2   
+				ClassIcon sentry_gun
+				Skill Normal
+				Attributes AlwaysFireWeapon
+				ItemAttributes { ItemName "TF_WEAPON_FISTS" "no_jump" 1 "move speed bonus" 0.001 "voice pitch scale" 0 "damage penalty" 0.01 "gesture speed increase" 100 "dmg taken increased" 0 "melee cleave attack" 1 "not solid to players" 1 }
+				Action Mobber  
+				AddCond   { Name TF_COND_RUNE_PRECISION } 
+				DamageAppliesCond   { Name TF_COND_RUNE_PRECISION } 
+			}	
+		}
+		// WaveSpawn { 
+			// Name "sloteaters"
+			// Where red_player_teamspawn
+			// TotalCount 6
+			// MaxActive 6
+			// SpawnCount 6
+			// Support Limited
+		// Squad { RandomChoice { TFBot {
+				// Class Heavy
+				// Name "⠀"
+				// Scale 0.001
+				// Attributes IgnoreEnemies
+				// AddCond   { Name TF_COND_REPROGRAMMED } 
+				// AddCond   { Name TF_COND_STEALTHED_USER_BUFF_FADING }
+				// CharacterAttributes {
+					// "dmg taken increased" 0
+					// "move speed bonus" 0.0001
+					// "no_jump" 1
+					// "voice pitch scale" 0
+					// "rage giving scale" 0.33 
+				// }
+			// }}}
+		// }
+		WaveSpawn { 
+			Name "engis"
+			Where frontspawn
+			TotalCount 5
+			MaxActive 5
+			SpawnCount 1
+			TotalCurrency 100
+			Support Limited
+			TFBot { 
+				Template T_TFBot_Engineer_Sentry_Battle 
+				ClassIcon sentry_gun
+				Attributes AlwaysFireWeapon
+				StripItemSlot 0  
+				StripItemSlot 1  
+				Item "The Gunslinger"
+				Item "The Wrangler"
+				CharacterAttributes { "voice pitch scale" 0.4 }
+				ItemAttributes {
+					ItemName "The Gunslinger"
+					"building max level" 1
+					"mod wrench builds minisentry" 0
+					"rage giving scale" 0.33 
+				}
+			}
+		}
+		WaveSpawn { 
+			Name "Wave3a"
+			Where closespawn
+			TotalCount 3
+			MaxActive 3
+			SpawnCount 3
+			TotalCurrency 100
+			RandomSpawn 1
+			Squad {
+				TFBot {
+					Template T_TFBot_Giant_Boxing_Heavy
+					ClassIcon heavy_steelfist_nys
+					Action Mobber  
+					Name "Super Steelweight Champ"
+					Item "Fists of Steel"
+					AddCond   { Name TF_COND_RUNE_KNOCKOUT }
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33 }
+					ItemAttributes {
+						ItemName "Pugilist's Protector"
+						"set item tint rgb" 3947580
+					}
+				}
+				TFBot { Template T_TFBot_Giant_Medic_Regen CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33 } }
+				TFBot { Template T_TFBot_Giant_Medic CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33 } }
+			}	
+		}
+		WaveSpawn { 
+			Name "Wave3a"
+			Where closespawn
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			RandomSpawn 1
+			WaitBetweenSpawns 1
+			TFBot {
+				Class Scout
+				Attributes AlwaysCrit
+				WeaponRestrictions MeleeOnly 
+				ClassIcon scout_bat
+				Item "Unarmed Combat"
+				Action Mobber  
+				CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33 }
+			}
+		}
+		WaveSpawn { 
+			Name "Wave3a"
+			Where closespawn
+			TotalCount 34
+			MaxActive 8
+			SpawnCount 3
+			TotalCurrency 200
+			RandomSpawn 1
+			WaitBetweenSpawns 1
+			TFBot {
+				Class Scout
+				WeaponRestrictions MeleeOnly 
+				ClassIcon scout_bat
+				Item "Unarmed Combat"
+				Action Mobber  
+				ItemAttributes { 
+					ItemName "Unarmed Combat"
+					"voice pitch scale" 0.4 
+					"rage giving scale" 0.33
+					"crit vs non burning players" 1 //fps saver, no crit glow
+					"crit vs burning players" 1
+				}
+			}
+		}
+		WaveSpawn { 
+			Name "Wave3b"
+			Where towerspawn
+			TotalCount 8
+			MaxActive 4
+			SpawnCount 4
+			TotalCurrency 100
+			RandomSpawn 1
+			WaitForAllDead "wave3a"
+			WaitBetweenSpawns 10
+			Squad {
+				TFBot { Template T_TFBot_Giant_Heavyweapons Action Mobber   ExtAttr AlwaysFireWeaponAlt Skill Easy CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33 } }
+				TFBot { Template T_TFBot_Medic CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33 }  }
+			}
+		}
+		WaveSpawn { 
+			Name "Wave3b1"
+			Where towerspawn
+			TotalCount 45
+			MaxActive 10
+			SpawnCount 2
+			TotalCurrency 200
+			RandomSpawn 1
+			WaitForAllDead "wave3a"
+			WaitBeforeStarting 5
+			RandomChoice {
+				TFBot {
+					Class Sniper
+					Name "Bowman"
+					Skill Hard
+					ClassIcon sniper_bow
+					Item "TF_WEAPON_SPELLBOOK"
+					Item "The Fortified Compound"
+					Action Mobber  
+					CharacterAttributes { "damage bonus" 0.5 "voice pitch scale" 0.4 "cancel falling damage" 1 "rage giving scale" 0.33 }
+					Spell   //Gives specified spell to bots.
+					{
+						Delay 1 //Time before the first spell charges are given (Default: 10)
+						Cooldown 5 //Time between each spell changes (Default: 10)
+						Repeats 0 //How many times should spell charges be given in total (Default: 0 - Infinite)
+						IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default: 0 - Always activate)
+						Charges 1 //How many spell charges to give every time the spell is given (Default: 1)
+						Limit 1 //How many spell charges the bot can store (Default: Same as charges given)
+						Type "Teleport" 
+					}
+				}
+				TFBot {
+					Class Sniper
+					Name "Bowman"
+					Skill Hard
+					ClassIcon sniper_bow
+					Item "TF_WEAPON_SPELLBOOK"
+					Item "The Fortified Compound"
+					Action Mobber  
+					CharacterAttributes { "damage bonus" 0.5 "voice pitch scale" 0.4 "rage giving scale" 0.33 }
+					Spell   //Gives specified spell to bots.
+					{
+						Delay 1 //Time before the first spell charges are given (Default: 10)
+						Cooldown 5 //Time between each spell changes (Default: 10)
+						Repeats 0 //How many times should spell charges be given in total (Default: 0 - Infinite)
+						IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default: 0 - Always activate)
+						Charges 1 //How many spell charges to give every time the spell is given (Default: 1)
+						Limit 1 //How many spell charges the bot can store (Default: Same as charges given)
+						Type "Ball O' Bats"
+					}
+				}
+				TFBot {
+					Class Sniper
+					Name "Bowman"
+					Skill Hard
+					ClassIcon sniper_bow
+					Item "TF_WEAPON_SPELLBOOK"
+					Item "The Fortified Compound"
+					Action Mobber  
+					CharacterAttributes { "damage bonus" 0.5 "voice pitch scale" 0.4 "rage giving scale" 0.33 }
+					Spell   //Gives specified spell to bots.
+					{
+						Delay 1 //Time before the first spell charges are given (Default: 10)
+						Cooldown 5 //Time between each spell changes (Default: 10)
+						Repeats 0 //How many times should spell charges be given in total (Default: 0 - Infinite)
+						IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default: 0 - Always activate)
+						Charges 1 //How many spell charges to give every time the spell is given (Default: 1)
+						Limit 1 //How many spell charges the bot can store (Default: Same as charges given)
+						Type "Invisibility"
+					}
+				}
+				TFBot {
+					Class Sniper
+					Name "Bowman"
+					Skill Hard
+					ClassIcon sniper_bow
+					Item "TF_WEAPON_SPELLBOOK"
+					Item "The Fortified Compound"
+					Action Mobber  
+					CharacterAttributes { "damage bonus" 0.5 "voice pitch scale" 0.4 "rage giving scale" 0.33 }
+					Spell   //Gives specified spell to bots.
+					{
+						Delay 1 //Time before the first spell charges are given (Default: 10)
+						Cooldown 5 //Time between each spell changes (Default: 10)
+						Repeats 0 //How many times should spell charges be given in total (Default: 0 - Infinite)
+						IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default: 0 - Always activate)
+						Charges 1 //How many spell charges to give every time the spell is given (Default: 1)
+						Limit 1 //How many spell charges the bot can store (Default: Same as charges given)
+						Type "Superjump"	
+					}
+				}
+				TFBot {
+					Class Sniper
+					Name "Bowman"
+					Skill Hard
+					ClassIcon sniper_bow
+					Item "TF_WEAPON_SPELLBOOK"
+					Item "The Fortified Compound"
+					Action Mobber  
+					CharacterAttributes { "damage bonus" 0.5 "voice pitch scale" 0.4 "rage giving scale" 0.33 }
+					Spell   //Gives specified spell to bots.
+					{
+						Delay 1 //Time before the first spell charges are given (Default: 10)
+						Cooldown 5 //Time between each spell changes (Default: 10)
+						Repeats 0 //How many times should spell charges be given in total (Default: 0 - Infinite)
+						IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default: 0 - Always activate)
+						Charges 1 //How many spell charges to give every time the spell is given (Default: 1)
+						Limit 1 //How many spell charges the bot can store (Default: Same as charges given)
+						Type "Teleport" 
+					}
+				}
+				TFBot {
+					Class Sniper
+					Name "Bowman"
+					Skill Hard
+					ClassIcon sniper_bow
+					Item "TF_WEAPON_SPELLBOOK"
+					Item "The Fortified Compound"
+					Action Mobber  
+					CharacterAttributes { "damage bonus" 0.5 "voice pitch scale" 0.4 "rage giving scale" 0.33 }
+					Spell   //Gives specified spell to bots.
+					{
+						Delay 1 //Time before the first spell charges are given (Default: 10)
+						Cooldown 5 //Time between each spell changes (Default: 10)
+						Repeats 0 //How many times should spell charges be given in total (Default: 0 - Infinite)
+						IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default: 0 - Always activate)
+						Charges 1 //How many spell charges to give every time the spell is given (Default: 1)
+						Limit 1 //How many spell charges the bot can store (Default: Same as charges given)
+						Type "Ball O' Bats"
+					}
+				}
+				TFBot {
+					Class Sniper
+					Name "Bowman"
+					Skill Hard
+					ClassIcon sniper_bow
+					Item "TF_WEAPON_SPELLBOOK"
+					Item "The Fortified Compound"
+					Action Mobber  
+					CharacterAttributes { "damage bonus" 0.5 "voice pitch scale" 0.4 "rage giving scale" 0.33 }
+					Spell   //Gives specified spell to bots.
+					{
+						Delay 1 //Time before the first spell charges are given (Default: 10)
+						Cooldown 5 //Time between each spell changes (Default: 10)
+						Repeats 0 //How many times should spell charges be given in total (Default: 0 - Infinite)
+						IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default: 0 - Always activate)
+						Charges 1 //How many spell charges to give every time the spell is given (Default: 1)
+						Limit 1 //How many spell charges the bot can store (Default: Same as charges given)
+						Type "Invisibility"
+					}
+				}
+				TFBot {
+					Class Sniper
+					Name "Bowman"
+					Skill Hard
+					ClassIcon sniper_bow
+					Item "TF_WEAPON_SPELLBOOK"
+					Item "The Fortified Compound"
+					Action Mobber  
+					CharacterAttributes { "damage bonus" 0.5 "voice pitch scale" 0.4 "rage giving scale" 0.33 }
+					Spell   //Gives specified spell to bots.
+					{
+						Delay 1 //Time before the first spell charges are given (Default: 10)
+						Cooldown 5 //Time between each spell changes (Default: 10)
+						Repeats 0 //How many times should spell charges be given in total (Default: 0 - Infinite)
+						IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default: 0 - Always activate)
+						Charges 1 //How many spell charges to give every time the spell is given (Default: 1)
+						Limit 1 //How many spell charges the bot can store (Default: Same as charges given)
+						Type "Superjump"	
+					}
+				}
+			}
+		}
+		WaveSpawn { 
+			Name "Wave3c"
+			Where spawnbot
+			TotalCount 6
+			MaxActive 6
+			SpawnCount 6
+			RandomSpawn 1
+			WaitForAllDead "wave3b"
+			DoneWarningSound "#music\hl1_song20.mp3"
+			Squad {
+				TFBot { 
+					Template T_TFBot_Giant_Heavyweapons_Deflector
+					Skill Easy 
+					ExtAttr AlwaysFireWeaponAlt   
+					Action Mobber  
+					Attributes AlwaysCrit 
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33 } 
+				}
+				TFBot { Template T_TFBot_Giant_Medic CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33 } }
+				TFBot { Template T_TFBot_Giant_Medic CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33 } }
+				TFBot { Template T_TFBot_Medic CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33 } }
+				TFBot { Template T_TFBot_Medic CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33 } }
+				TFBot { Template T_TFBot_Medic CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33 } }
+			}
+		}
+		WaveSpawn { 
+			Name "Wave3c"
+			Where spawnbot
+			MaxActive 8
+			SpawnCount 2
+			TotalCurrency 100
+			WaitForAllDead "wave3b"
+			WaitBetweenSpawns 1
+			Support 1
+			TFBot { 
+				Template T_TFBot_Heavyweapons_Fist 
+				ClassIcon heavy_steelfist_nys_giant 
+				Action Mobber  
+				CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33 }
+			}
+		}
+	}
+	Wave { //Wave 4
+		RedTeamWipeCausesWaveLoss 1  
+		StartWaveOutput {
+				Target wave_start_relay_classic
+				Action Trigger
+		}
+		DoneOutput {
+				Target wave_finished_relay
+				Action trigger
+		}		
+		Explanation   
+ 	 	{
+			Line "{D500FF}Wave 4/5"
+		}
+		WaveSpawn {
+			Name "powerups" 
+			Where "powerups"
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 1
+			Support 1
+			TFBot {	
+				Class Heavy
+				WeaponRestrictions MeleeOnly
+				Name "⠀⠀" 
+				Skin 2   
+				ClassIcon sentry_gun
+				Skill Normal
+				Attributes AlwaysFireWeapon
+				ItemAttributes { ItemName "TF_WEAPON_FISTS" "no_jump" 1 "move speed bonus" 0.001 "voice pitch scale" 0 "damage penalty" 0.01 "gesture speed increase" 100 "dmg taken increased" 0 "melee cleave attack" 1 "not solid to players" 1 }
+				Action Mobber  
+				AddCond   { Name TF_COND_RUNE_REFLECT } 
+				DamageAppliesCond   { Name TF_COND_RUNE_REFLECT } 
+			}	
+		}
+		WaveSpawn {
+			Name "powerups" 
+			Where "powerups"
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 2
+			Support 1
+			TFBot {	
+				Class Heavy
+				WeaponRestrictions MeleeOnly
+				Name "⠀⠀" 
+				Skin 2   
+				ClassIcon sentry_gun
+				Skill Normal
+				Attributes AlwaysFireWeapon
+				ItemAttributes { ItemName "TF_WEAPON_FISTS" "no_jump" 1 "move speed bonus" 0.001 "voice pitch scale" 0 "damage penalty" 0.01 "gesture speed increase" 100 "dmg taken increased" 0 "melee cleave attack" 1 "not solid to players" 1 }
+				Action Mobber  
+				AddCond   { Name TF_COND_RUNE_VAMPIRE } 
+				DamageAppliesCond   { Name TF_COND_RUNE_VAMPIRE } 
+			}	
+		}
+		WaveSpawn {
+			Name "powerups" 
+			Where "powerups"
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 3
+			Support 1
+			TFBot {	
+				Class Heavy
+				WeaponRestrictions MeleeOnly
+				Name "⠀⠀" 
+				Skin 2   
+				ClassIcon sentry_gun
+				Skill Normal
+				Attributes AlwaysFireWeapon
+				ItemAttributes { ItemName "TF_WEAPON_FISTS" "no_jump" 1 "move speed bonus" 0.001 "voice pitch scale" 0 "damage penalty" 0.01 "gesture speed increase" 100 "dmg taken increased" 0 "melee cleave attack" 1 "not solid to players" 1 }
+				Action Mobber  
+				AddCond   { Name TF_COND_RUNE_RESIST } 
+				DamageAppliesCond   { Name TF_COND_RUNE_RESIST } 
+			}	
+		}
+		// WaveSpawn { 
+			// Name "sloteaters"
+			// Where red_player_teamspawn
+			// TotalCount 6
+			// MaxActive 6
+			// SpawnCount 6
+			// Support Limited
+		// Squad { RandomChoice { TFBot {
+				// Class Heavy
+				// Name "⠀"
+				// Scale 0.001
+				// Attributes IgnoreEnemies
+				// AddCond   { Name TF_COND_REPROGRAMMED } 
+				// AddCond   { Name TF_COND_STEALTHED_USER_BUFF_FADING }
+				// CharacterAttributes {
+					// "dmg taken increased" 0
+					// "move speed bonus" 0.0001
+					// "no_jump" 1
+					// "voice pitch scale" 0
+				// }
+			// }}}
+		// }
+		WaveSpawn { 
+			Name "engis"
+			Where frontspawn
+			TotalCount 5
+			MaxActive 5
+			SpawnCount 1
+			TotalCurrency 100
+			Support Limited
+			TFBot { 
+				Template T_TFBot_Engineer_Sentry_Battle 
+				ClassIcon sentry_gun
+				Attributes AlwaysFireWeapon
+				StripItemSlot 0  
+				StripItemSlot 1  
+				Item "The Gunslinger"
+				CharacterAttributes { "voice pitch scale" 0.4 }
+				ItemAttributes {
+					ItemName "The Gunslinger"
+					"building max level" 2
+					"mod wrench builds minisentry" 0
+					"rage giving scale" 0.33 
+				}
+			}
+		}
+		WaveSpawn { 
+			Name "wave4a"
+			Where closespawn
+			TotalCount 3
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 10
+			TotalCurrency 100
+			TFBot { 
+				Template T_TFBot_Giant_Soldier_RocketShotgun
+				Attributes AlwaysCrit
+				Attributes DisableDodge
+				Action Mobber  
+				CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33  }
+			}
+		}
+		WaveSpawn { 
+			Name "wave4a1"
+			Where closespawn
+			TotalCount 30
+			MaxActive 8
+			SpawnCount 2
+			TotalCurrency 100
+			WaitBeforeStarting 5
+			TFBot { 
+				Class Heavy
+				Skill Normal
+				Action Mobber  
+				CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33  }
+			}
+		}
+		WaveSpawn { 
+			Name "wave4b"
+			Where towerspawn
+			TotalCount 3
+			MaxActive 1
+			SpawnCount 1
+			TotalCurrency 100
+			RandomSpawn 1
+			WaitForAllDead "wave4a"
+			TFBot {
+				Template T_TFBot_Giant_Soldier_SlowBarrage
+				Skill Normal
+				Attributes DisableDodge
+				Action Mobber  
+				CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33  }
+			}
+		}
+		WaveSpawn { 
+			Name "wave4b"
+			Where towerspawn
+			TotalCount 36
+			MaxActive 12
+			SpawnCount 3
+			TotalCurrency 100
+			WaitForAllDead "wave4a"
+			Squad {
+				TFBot {
+					Template T_TFBot_Soldier_Extended_Concheror
+					ClassIcon soldier_banner_trio
+					Skill Normal
+					Attributes DisableDodge
+					Action Mobber  
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33  }
+				}
+				TFBot {
+					Template T_TFBot_Soldier_Extended_Buff_Banner
+					ClassIcon soldier_banner_trio
+					Skill Normal
+					Attributes DisableDodge
+					Action Mobber  
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33  }
+				}
+				TFBot {
+					Template T_TFBot_Soldier_Extended_Battalion
+					ClassIcon soldier_banner_trio
+					Skill Normal
+					Attributes DisableDodge
+					Action Mobber  
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33  }
+				}
+			}
+		}
+		WaveSpawn { 
+			Name "soundboost"
+			Where frontspawn
+			MaxActive 0
+			SpawnCount 0
+			WaitForAllDead "wave4b"
+			FirstSpawnWarningSound "misc\halloween\clock_tick.wav"
+			Squad {TFBot {}}
+		}
+		WaveSpawn { 
+			Name "soundboost"
+			Where frontspawn
+			MaxActive 0
+			SpawnCount 0
+			WaitForAllDead "wave4b"
+			WaitBeforeStarting 2
+			FirstSpawnWarningSound "misc\halloween\clock_tick.wav"
+			Squad {TFBot {}}
+		}
+		WaveSpawn { 
+			Name "Wave4c"
+			Where flankers
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitForAllDead "wave4b"
+			WaitBeforeStarting 4
+			FirstSpawnWarningSound "misc\halloween\clock_tick.wav"
+			FirstSpawnOutput {
+				Target courtyard
+				Action Show
+			}
+			DoneOutput {
+				Target bosstele
+				Action Disable
+			}
+			TFBot {
+				Class Demoman
+				Name "Major Bomber"
+				ClassIcon demo_bomber
+				Skill Normal
+				Health 40000
+				Item "Prince Tavish's Crown"
+				Item "TF_WEAPON_SPELLBOOK"
+				Attributes AlwaysCrit
+				Attributes MiniBoss
+				Attributes UseBossHealthBar
+				Attributes HoldFireUntilFullReload
+				Scale 3
+				Skill Normal
+				AlwaysGlow 1  
+				AddCond   { Name TF_COND_INVULNERABLE_USER_BUFF Duration 8 } 
+				AddCond   { Name TF_COND_RUNE_PLAGUE } 
+				Spell   //Gives specified spell to bots.
+				{
+                    Repeats 0 //How many times should spell charges be given in total (Default: 0 - Infinite)
+					Cooldown 20
+					IfSeeTarget 1 //When set to 1, this task activates only when the bot can see the target player (Default: 0 - Always activate)
+					Charges 1 //How many spell charges to give every time the spell is given (Default: 1)
+					Limit 1 //How many spell charges the bot can store (Default: Same as charges given)
+					Type "Summon Skeletons" 
+				}
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_GRENADELAUNCHER"
+					"fire rate bonus" 0.2
+					"faster reload rate" 0.3
+					"clip size penalty" 3.0
+					"Projectile speed increased" 1.5
+				}
+				CharacterAttributes
+				{
+					"move speed bonus"	0.01
+					"no_jump" 1
+					"damage force reduction" 0
+					"airblast vulnerability multiplier" 0
+					"override footstep sound set" 4
+					"airblast vertical vulnerability multiplier" 0
+					"rage giving scale" 0.1
+					"voice pitch scale" 0.4 
+					"cancel falling damage" 1 
+				}
+			}
+		}
+		WaveSpawn { 
+			Name "Wave4c"
+			Where towerspawn
+			SpawnCount 1
+			MaxActive 3
+			WaitBetweenSpawns 6
+			RandomSpawn 1
+			Support 1
+			WaitForAllSpawned "wave4c1"
+			TFBot {
+				Template T_TFBot_Soldier_Extended_Concheror
+				Action Mobber  
+				Name "King Soldier"
+				AddCond   { Name TF_COND_RUNE_KING } 
+				ClassIcon powerup_king_lite
+				ItemAttributes {
+					ItemName "The Concheror"
+					"effect cond override" 109
+				}
+				CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33  }
+			}
+		}
+		WaveSpawn { 
+			Name "Wave4c1"
+			Where flankers
+			TotalCount 24
+			SpawnCount 2
+			MaxActive 8
+			WaitBetweenSpawns 1
+			Support Limited
+			WaitForAllDead "wave4b"
+			FirstSpawnOutput {
+				Target bosstele
+				Action Enable
+			}
+			TFBot {
+				Template T_TFBot_Soldier_Extended_Concheror
+				Action Mobber  
+				Name "King Soldier"
+				AddCond   { Name TF_COND_RUNE_KING } 
+				ClassIcon powerup_king_lite
+				ItemAttributes {
+					ItemName "The Concheror"
+					"effect cond override" 109
+				}
+				CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33  }
+			}
+		}
+		WaveSpawn { 
+			Name "Wave4c"
+			Where towerspawn
+			SpawnCount 2
+			MaxActive 4
+			WaitBetweenSpawns 3
+			RandomSpawn 1
+			Support 1
+			WaitBeforeStarting 3
+			WaitForAllSpawned "wave4c1"
+			TFBot {
+				Class Soldier
+				Skill Expert 
+				Action Mobber  
+				UseBestWeapon 1
+				ClassIcon powerup_king_lite
+				CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33  }
+			}
+		}
+			// TFBot { 
+				// Class Soldier
+				// ClassIcon soldier_bison
+				// Skill Normal
+				// Item "The Righteous Bison"
+				// WeaponRestrictions SecondaryOnly
+				// Action Mobber  
+				// CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33 } 
+				// ItemAttributes {
+					// ItemName "The Righteous Bison"
+					// "dmg penalty vs players" 0.5
+					// "SPELL: set item tint RGB"	5
+					// "mod projectile heat seek power" 80
+					// "mod projectile heat aim error" 999
+					// "mod projectile heat aim time" 999
+				// }
+			// }
+	}
+	Wave { //Wave 5
+		RedTeamWipeCausesWaveLoss 1  
+		StartWaveOutput {
+				Target wave_start_relay_classic
+				Action Trigger
+		}
+		DoneOutput {
+				Target wave_finished_relay
+				Action trigger
+		}		
+		Explanation   
+ 	 	{
+			Line "{D500FF}Wave 5/5"
+		}
+		// WaveSpawn { 
+			// Name "Wave5a"
+			// TotalCount 1
+			// MaxActive 1
+			// SpawnCount 1
+			// WaitBeforeStarting 30
+			// LastSpawnOutput {
+				// Target "blimphint"
+				// Action Show
+			// }
+			// Tank {
+				// Health 30000
+				// Speed 40
+				// DisableSmokestack 1  
+				// Classicon blimp2_lite
+				// Skin 1  
+				// MaxTurnRate 20  
+				// Model "models/bots/boss_bot/boss_blimp_damage3.mdl"  
+				// Gravity 0  
+				// DisableTracks 1  
+				// ReplaceModelCollisions 1  
+				// DisableChildModels 1  
+				// EngineLoopSound "npc\combine_gunship\dropship_engine_distant_loop1.wav"  
+				// PingSound "npc\combine_gunship\ping_search.wav"  
+				// Name "tankboss_blimp"
+				// StartingPathTrackNode "blimppath_1"
+				// OnKilledOutput {
+					// Target boss_dead_relay
+					// Action Trigger
+				// }
+				
+				// OnBombDroppedOutput {
+					// Target boss_deploy_relay
+					// Action Trigger
+				// }
+			// }
+		// }
+		WaveSpawn { 
+			Name "Wave5a1"
+			Where closespawn
+			TotalCount 4
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 5
+			RandomSpawn 1
+			WaitBeforeStarting 30
+			TFBot {
+				Template T_TFBot_Giant_Soldier
+				CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33 } 
+				Action Mobber   
+				Attributes AlwaysCrit
+			}
+		}
+		WaveSpawn { 
+			Name "Wave5a2"
+			Where closespawn
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			RandomSpawn 1
+			WaitForAllDead "Wave5a1"
+			TFBot {
+				Template T_TFBot_Giant_Soldier_Extended_Battalion
+				CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33 } 
+				Action Mobber   
+				Attributes AlwaysCrit
+			}
+		}
+		WaveSpawn { 
+			Name "Wave5a"
+			Where closespawn
+			TotalCount 35
+			MaxActive 8
+			SpawnCount 2
+			RandomSpawn 1
+			WaitBeforeStarting 30
+			TFBot {
+				Template T_TFBot_Sniper_Huntsman_Spammer
+				CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.33 } 
+				Skill Normal
+				Action Mobber  
+				ClassIcon sniper_bow_multi
+			}
+		}
+		// WaveSpawn { 
+			// Name "Wave5boss"
+			// Where frontspawn
+			// TotalCount 1
+			// MaxActive 1
+			// SpawnCount 1
+			// RandomSpawn 1
+			// WaitForAllDead "wave5a2"
+			// FirstSpawnWarningSound "#music\hl1_song15.mp3"
+			// TFBot { // Shitty boss
+				// Class Pyro
+				// Name "H.A.T.E. II"
+				// ClassIcon engineer_ranger_nys
+				// Skill Expert
+				// Health 150000
+				// Action Mobber  
+				// FastUpdate 1  
+				// StripItemSlot 0  
+				// StripItemSlot 1  
+				// Item "The Maul"
+				// Item "The B.A.S.E. Jumper"
+				// Item "TF_WEAPON_GRAPPLINGHOOK"
+				// Attributes MiniBoss
+				// Attributes UseBossHealthBar
+				// ItemAttributes {
+					// ItemName "TF_WEAPON_GRAPPLINGHOOK"
+		// //			"is_passive_weapon" 1
+					// "apply z velocity on damage" 500
+					// "fire rate penalty" 2
+					// "always crit" 1
+				// }
+				// ItemAttributes {
+					// ItemName "The Maul"
+			// //		"disable weapon switch" 1
+					// "is_passive_weapon" 1
+					// "fire rate penalty" 2
+					// "melee range multiplier" 3
+					// "melee bounds mulitiplier" 3
+					// "apply z velocity on damage" -1000
+					// "dmg bonus vs buildings" 20
+					// "always crit" 1
+				// }
+				// CharacterAttributes {
+					// "move speed bonus"	0.5
+					// "damage force reduction" 0.6
+					// "airblast vulnerability multiplier" 0.6
+					// "override footstep sound set" 7
+					// "voice pitch scale" 0.4
+					// "damage penalty" 0.2
+					// "always crit" 1
+					// "gesture speed increase" 0.5
+					// "dmg taken increased" 0.01
+					// "dmg from melee increased" 100
+					// "dmg from ranged reduced" 100
+					// "boots falling stomp" 1
+				// }
+			// }
+		// }	
+
+			// TFBot { // Shitty boss
+				// Class Pyro
+				// Name "H.A.T.E. II"
+				// ClassIcon engineer_ranger_nys
+				// Skill Expert
+				// Health 150000
+				// Action Sniper  
+				// FastUpdate 1  
+				// Item "The Maul"
+				// Item "The B.A.S.E. Jumper"
+		// //		Item "TF_WEAPON_GRAPPLINGHOOK"
+				// Item "The Cow Mangler 5000"
+				// Attributes MiniBoss
+				// Attributes UseBossHealthBar
+				// Attributes HoldFireUntilFullReload
+				// UseMeleeThreatPrioritization 1  
+				// ItemAttributes {
+					// ItemName "The Cow Mangler 5000"
+					// "faster reload rate" 2
+					// "provide on active" 1
+					// "override projectile type" 26
+					// "mult projectile count" 5
+					// "projectile spread angle penalty" 10
+					// "hand scale" 0
+					// "mod projectile heat seek power" 800
+					// "mod projectile heat aim error" 999
+					// "mod projectile heat aim time" 999
+					// "damage penalty" 0.1
+					// "weapon burn time reduced" 0.01
+					// "apply z velocity on damage" 300
+					// "projectile trail particle" "drg_manmelter_vacuum"
+				// }
+				// // ItemAttributes {
+					// // ItemName "TF_WEAPON_GRAPPLINGHOOK"
+					// // "is_passive_weapon" 1
+					// // "apply z velocity on damage" 500
+					// // "fire rate penalty" 2
+					// // "always crit" 1
+				// // }
+				// ItemAttributes {
+					// ItemName "The Maul"
+					// "fire rate penalty" 2
+					// "melee range multiplier" 3
+					// "melee bounds mulitiplier" 3
+					// "apply z velocity on damage" -1000
+					// "dmg bonus vs buildings" 20
+					// "always crit" 1
+				// }
+				// CharacterAttributes {
+					// "move speed bonus"	0.5
+					// "damage force reduction" 0.6
+					// "airblast vulnerability multiplier" 0.6
+					// "override footstep sound set" 7
+					// "voice pitch scale" 0.4
+					// "damage penalty" 0.2
+					// "always crit" 1
+					// "gesture speed increase" 0.5
+					// "dmg taken increased" 0.01
+					// "dmg from melee increased" 100
+					// "dmg from ranged reduced" 100
+					// "boots falling stomp" 1
+					// "not solid to players" 1
+					// "jarate backstabber" 1
+				// }
+			// }
+		WaveSpawn {
+			Name "powerups" 
+			Where "powerups"
+			MaxActive 1
+			SpawnCount 1
+			Support 1
+			TFBot {	
+				Class Heavy
+				WeaponRestrictions MeleeOnly
+				Name "⠀⠀" 
+				Skin 2   
+				ClassIcon sentry_gun
+				Skill Normal
+				Attributes AlwaysFireWeapon
+				ItemAttributes { ItemName "TF_WEAPON_FISTS" "no_jump" 1 "move speed bonus" 0.001 "voice pitch scale" 0 "damage penalty" 0.01 "gesture speed increase" 100 "dmg taken increased" 0 "melee cleave attack" 1 "not solid to players" 1 }
+				Action Mobber  
+				AddCond   { Name TF_COND_RUNE_HASTE } 
+				DamageAppliesCond   { Name TF_COND_RUNE_HASTE } 
+			}
+		}
+		WaveSpawn {
+			Name "powerups" 
+			Where "powerups"
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 1
+			Support 1
+			TFBot {	
+				Class Heavy
+				WeaponRestrictions MeleeOnly
+				Name "⠀" 
+				Skin 2   
+				ClassIcon sentry_gun
+				Skill Normal
+				Attributes AlwaysFireWeapon
+				ItemAttributes { ItemName "TF_WEAPON_FISTS" "no_jump" 1 "move speed bonus" 0.001 "voice pitch scale" 0 "damage penalty" 0.01 "gesture speed increase" 100 "dmg taken increased" 0 "melee cleave attack" 1 "not solid to players" 1 }
+				Action Mobber  
+				AddCond   { Name TF_COND_RUNE_VAMPIRE } 
+				DamageAppliesCond   { Name TF_COND_RUNE_VAMPIRE } 
+			}
+		}
+		WaveSpawn {
+			Name "powerups" 
+			Where "powerups"
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 2
+			Support 1
+			TFBot {	
+				Class Heavy
+				WeaponRestrictions MeleeOnly
+				Name "⠀" 
+				Skin 2   
+				ClassIcon sentry_gun
+				Skill Normal
+				Attributes AlwaysFireWeapon
+				ItemAttributes { ItemName "TF_WEAPON_FISTS" "no_jump" 1 "move speed bonus" 0.001 "voice pitch scale" 0 "damage penalty" 0.01 "gesture speed increase" 100 "dmg taken increased" 0 "melee cleave attack" 1 "not solid to players" 1 }
+				Action Mobber  
+				AddCond   { Name TF_COND_RUNE_REFLECT } 
+				DamageAppliesCond   { Name TF_COND_RUNE_REFLECT } 
+			}
+		}
+		WaveSpawn {
+			Name "powerups" 
+			Where "powerups"
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 3
+			Support 1
+			TFBot {	
+				Class Heavy
+				WeaponRestrictions MeleeOnly
+				Name "⠀" 
+				Skin 2   
+				ClassIcon sentry_gun
+				Skill Normal
+				Attributes AlwaysFireWeapon
+				ItemAttributes { ItemName "TF_WEAPON_FISTS" "no_jump" 1 "move speed bonus" 0.001 "voice pitch scale" 0 "damage penalty" 0.01 "gesture speed increase" 100 "dmg taken increased" 0 "melee cleave attack" 1 "not solid to players" 1 }
+				Action Mobber  
+				AddCond   { Name TF_COND_RUNE_STRENGTH } 
+				DamageAppliesCond   { Name TF_COND_RUNE_STRENGTH } 
+			}
+		}
+		WaveSpawn {
+			Name "powerups" 
+			Where "powerups"
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 4
+			Support 1
+			TFBot {	
+				Class Heavy
+				WeaponRestrictions MeleeOnly
+				Name "⠀" 
+				Skin 2   
+				ClassIcon sentry_gun
+				Skill Normal
+				Attributes AlwaysFireWeapon
+				ItemAttributes { ItemName "TF_WEAPON_FISTS" "no_jump" 1 "move speed bonus" 0.001 "voice pitch scale" 0 "damage penalty" 0.01 "gesture speed increase" 100 "dmg taken increased" 0 "melee cleave attack" 1 "not solid to players" 1 }
+				Action Mobber  
+				AddCond   { Name TF_COND_RUNE_KING } 
+				DamageAppliesCond   { Name TF_COND_RUNE_KING } 
+			}
+		}
+		WaveSpawn {
+			Name "powerups" 
+			Where "powerups"
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 5
+			Support 1
+			TFBot {	
+				Class Heavy
+				WeaponRestrictions MeleeOnly
+				Name "⠀" 
+				Skin 2   
+				ClassIcon sentry_gun
+				Skill Normal
+				Attributes AlwaysFireWeapon
+				ItemAttributes { ItemName "TF_WEAPON_FISTS" "no_jump" 1 "move speed bonus" 0.001 "voice pitch scale" 0 "damage penalty" 0.01 "gesture speed increase" 100 "dmg taken increased" 0 "melee cleave attack" 1 "not solid to players" 1 }
+				Action Mobber  
+				AddCond   { Name TF_COND_RUNE_PRECISION } 
+				DamageAppliesCond   { Name TF_COND_RUNE_PRECISION } 
+			}
+		}
+	}
+}

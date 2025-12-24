@@ -1,0 +1,1 @@
+WaveSchedule {StartingCurrency 1 RespawnWaveTime 1 Wave {WaveSpawn {Where spawnbot TotalCount 1 WaitBeforeStarting 99999 TFBot {Class Scout ClassIcon hellmet_blank } } } PrecacheModel "models/props_mvm/temp.mdl" PrecacheModel "models/props_mvm/temp2.mdl"}

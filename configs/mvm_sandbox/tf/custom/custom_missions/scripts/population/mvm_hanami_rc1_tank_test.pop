@@ -1,0 +1,188 @@
+// hanami tank test
+
+#base  robot_standard.pop
+#base  robot_giant.pop
+
+WaveSchedule
+{
+    StartingCurrency 30000
+	RespawnWaveTime  1
+	CanBotsAttackWhileInSpawnroom  No
+	
+	PrecacheModel "models/bots/boss_bot/boss_tankred.mdl"
+	PrecacheModel "models/bots/boss_bot/boss_tankred_damage1.mdl"
+	PrecacheModel "models/bots/boss_bot/boss_tankred_damage2.mdl"
+	PrecacheModel "models/bots/boss_bot/boss_tankred_damage3.mdl"	
+	PrecacheModel "models/bots/boss_bot/boss_tankred_part1_destruction.mdl"
+	
+	ExtraTankPath  
+	{
+		Name "hanami_blimp_path"
+		Node "-2939 -1857 525"
+		Node "-1675 -1857 525"
+		Node "1264 -1857 525"
+		Node "1264 3029 525"
+		Node "-510 3029 525"
+		Node "-510 4206 525"
+		Node "568 4206 525"
+		Node "568 4720 525"
+	}
+	ExtraTankPath  
+	{
+		Name "red_tank_path"
+		Node "947 5022 72"
+		Node "568 4352 72"
+		Node "440 4224 72"
+		Node "-224 4224 72"
+		Node "-352 4096 72"
+		Node "-352 3648 72"
+		Node "-192 3328 72"
+		Node "0 3136 72"
+		Node "208 2872 40"
+		Node "208 2248 -96"
+		Node "64 1736 -168"
+		Node "64 1416 -152"
+		Node "136 1352 -152"
+		Node "1096 1352 -208"
+		Node "1232 1216 -208"
+		Node "1232 838 -144"
+		Node "1088 704 -144"
+		Node "384 704 -104"
+		Node "-576 704 -72"
+		Node "-768 480 -72"
+		Node "-768 -256 56"
+		Node "-264 -584 56"
+		Node "-200 -1464 72"
+		Node "-200 -1624 72"
+		Node "-392 -1840 80"
+		Node "-396 -2653 182"
+	}
+	ExtraTankPath  
+	{
+		Name "red_blimp_path"
+		Node "-644 5582 550"
+		Node "568 4720 550"
+		Node "568 3038 550"
+		Node "1264 2075 550"
+		Node "1264 -1665 550"
+		Node "-875 -1665 550"
+		Node "-2216 -2608 550"
+	}
+	
+	Wave 
+	{
+	    WaitWhenDone 65
+		Checkpoint Yes
+		StartWaveOutput
+		{
+			Target wave_start_1bomb_classic_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		WaveSpawn
+		{
+			Name "BLU_Blimp"
+			TotalCount 1
+			WaitBeforeStarting 1
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+			FirstSpawnOutput
+			{
+				Target boss_spawn_relay
+				Action Trigger
+			}
+			Tank 
+			{
+				Health 15000
+				Speed 100
+				DisableSmokestack 1  
+				Classicon blimp2_lite
+				MaxTurnRate 50  
+				Model "models/bots/boss_bot/boss_blimp.mdl"  
+				Skin 1
+				Gravity 0  
+				RotatePitch 1  
+				ReplaceModelCollisions 1  
+				DisableTracks 1  
+				EngineLoopSound "npc\combine_gunship\dropship_engine_distant_loop1.wav"  
+				PingSound "npc\combine_gunship\ping_search.wav"  
+				Name "tankboss"
+				StartingPathTrackNode "hanami_blimp_path_1"
+				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "RED_Tank"
+			TotalCount 1
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "red_tank_path_1"
+                ClassIcon tank_red_lite
+				Model models/bots/boss_bot/boss_tankred.mdl
+				TeamNum 2
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay
+					Action Trigger                         
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "RED_Blimp"
+			WaitForAllDead "BLU_Blimp"
+			TotalCurrency	0
+			TotalCount	1
+			WaitBeforeStarting	3
+			WaitBetweenSpawns  0
+			Tank
+			{
+				Health	12500
+				Name  "tankboss"
+				Classicon blimp2_red_lite
+				Gravity 0
+				MaxTurnRate 50
+				NoCrushDamage 1
+				DisableTracks 1
+				DisableSmokestack 1
+				DisableChildModels 1
+				Model "models/bots/boss_bot/boss_blimp.mdl"
+				PingSound "npc\combine_gunship\ping_search.wav"
+				EngineLoopSound "npc\combine_gunship\dropship_engine_distant_loop1.wav"
+				Speed 100
+				TeamNum 2		
+				StartingPathTrackNode	"red_blimp_path_1" 
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+	}
+}	

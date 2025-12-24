@@ -1,0 +1,1138 @@
+//////////////////////////////////////////////////
+//Mission: Advanced			 					//
+//Author: Yakibomb								//
+//Released: October 24, 2019					//
+//Version: Alpha 6								//
+//////////////////////////////////////////////////
+
+//Mission Details
+//s1a1 = beat mobs
+//s1a2 = nab key from giant, unlock door
+//s1a3 = nab key from giant, fight off skeletons, unlock door
+//s1boss = beat boss
+
+//Tags for Bots
+//bot_jarated				= bot has piss on them
+//bot_milked				= bot has milk on them
+//bot_bonked				= bot is 100% invulnerable (a la Bonk! Atomic Punch)
+//bot_disciplinaryaction	= bot has 40% speed boost
+//bot_rune_reflect			= bot has Mann Power's reflect rune
+//bot_invisible				= bot is cloaked
+//bot_crits					= bot has 100% crits
+//bot_ubered				= bot is Ubercharged
+//bot_stunned				= bot is stunned, like Mannhattan's GateBots. Note: Seems to not work when used with bot_healing (Uber Heal) or bot_bonked (Bonk! invuln).
+//bot_healing				= bot is healed from the Medigun to 200% HP (with restrictions for pre-set Health for the robot)
+//bot_healer				= bot heals other bots around itself (like the Amputator)
+//bot_chargin				= bot charges like the Demoknight
+//drop_random				= on death, bot will drop a small treasure chest (100% chance)
+//drop_random_chance		= on death, bot will drop a small treasure chest (6.25% chance)
+//drop_key_basic			= dying drops a basic dungeon key
+//drop_rare_trap			= bot drops big chest with 5 live pipe bombs (that are meant to kill the player..!)
+//drop_rare_cash			= bot drops big chest with $125 cold hard cash
+//bot_boss					= for bosses only. Use with bot_boss_mod_* to change forms every few seconds (specified below)
+//bot_boss_mod_behavior1		= changes boss' to behavior1 in 1 second
+//bot_boss_mod_behavior1_at_4	= changes boss' to behavior1 in 4 seconds
+//bot_boss_mod_behavior1_at_8	= changes boss' to behavior1 in 8 seconds
+//bot_boss_mod_behavior1_at_12	= changes boss' to behavior1 in 12 seconds
+//bot_boss_mod_behavior1_at_16	= changes boss' to behavior1 in 16 seconds
+// -!- Use up to behavior1 to behavior9
+// -!- Can also use bot_boss_mod_default (and up to 4 to 16 seconds)
+
+#base robot_berserker_a6.pop
+
+WaveSchedule
+{
+	StartingCurrency		550
+	RespawnWaveTime 0
+	Advanced 1
+	CanBotsAttackWhileInSpawnRoom Yes
+	FixedRespawnWaveTime Yes
+		
+	//STAGE 1 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		InitWaveOutput
+		{
+			Target wave_init_relay_s1
+			Action Trigger
+		}
+		StartWaveOutput
+		{
+			Target wave_start_relay					//Universal. The only important one is the InitWaveOutput.
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay				//Universal. The only important one is the InitWaveOutput.
+			Action trigger
+		}
+		
+		//Example
+//		WaveSpawn
+//		{
+//			Name "dummy1"
+//			
+//			StartWaveOutput
+//			{
+//				Target setup_sXaY_dummy
+//				Action Trigger
+//			}
+//			WaitBeforeStarting 3
+//			FirstSpawnOutput
+//			{
+//				Target event_sXaY_dummy
+//				Action Enable
+//			}
+//			DoneOutput
+//			{
+//				Target setup_sXaY_dummy
+//				Action Trigger
+//			}
+//		}
+		
+		//Setting up the stage events (bomb teleports)
+		WaveSpawn
+		{
+			FirstSpawnWarningSound "\vo\announcer_attack_controlpoints.mp3"
+			
+			Name "s1a1_cp1"
+			
+			StartWaveOutput
+			{
+				Target setup_pause_botspawn_auto
+				Action Trigger
+			}
+			
+			Where spawnbot_bomb
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+
+			TFBot
+			{
+				Template T_Bersk_Event_Bomb
+			}
+		}
+		//This spawns the collectible treasure chests on the map all over Stage 1
+		WaveSpawn
+		{			
+			StartWaveOutput
+			{
+				Target setup_chest_spawn_s1
+				Action Trigger
+			}
+		}
+		
+		//This enables the Universal Trigger event relay, which the first door in the map uses to trigger all "event_*" events enabled (in this case, only event_unpause_botspawn is enabled).
+		//Unlocks spawn doors in 5 seconds
+		WaveSpawn
+		{
+			StartWaveOutput
+			{
+				Target event_universal_trigger
+				Action Enable
+			}
+			
+			WaitBeforeStarting 5
+			
+			FirstSpawnOutput
+			{
+				Target setup_s1a1_unlockspawndoor
+				Action Trigger
+			}
+		}
+		
+		//Setting up mobs
+		WaveSpawn
+		{
+			WaitForAllSpawned "s1a1_cp1"
+			
+			Name "s1a1_mob"
+			
+			Where spawnbot_s1a1_frontdoor_staircase
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 3
+			WaitBetweenSpawns 0
+			TotalCurrency 10
+			
+			Support Limited
+			
+			TFBot
+			{
+				Tag bot_invisible
+				Tag bot_disciplinaryaction
+				
+				Class Pyro
+				Skill Expert
+				ClassIcon enemy
+				CharacterAttributes
+				{
+					"airblast disabled" 1
+				}
+			}
+		}
+		WaveSpawn
+		{
+			WaitForAllSpawned "s1a1_cp1"
+			
+			Name "s1a1_mob"
+			
+			Where spawnbot_s1a1_frontdoor_staircase
+			TotalCount 4
+			MaxActive 4
+			SpawnCount 2
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 1
+			TotalCurrency 20
+
+			Support Limited
+			
+			TFBot
+			{
+				Template T_Bersk_Demoknight
+				Attributes AirChargeOnly
+			}
+		}
+		WaveSpawn
+		{
+			WaitForAllSpawned "s1a1_cp1"
+			
+			Name "s1a1_mob"
+			
+			Where spawnbot_s1a1
+			TotalCount 6
+			MaxActive 6
+			SpawnCount 1
+			WaitBeforeStarting 2
+			WaitBetweenSpawns 1
+			TotalCurrency 35
+
+			Support Limited
+			
+			TFBot
+			{
+				Template T_Bersk_Demoknight
+			}
+		}
+		WaveSpawn
+		{
+			WaitForAllSpawned "s1a1_cp1"
+			
+			Name "s1a1_mob"
+			
+			Where spawnbot_s1a1_side
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 3
+			WaitBetweenSpawns 0
+			TotalCurrency 5
+
+			Support Limited
+			
+			TFBot
+			{
+				Template T_Bersk_Engineer_Buff
+				Tag drop_random_chance
+			}
+		}
+		
+		WaveSpawn		
+		{
+			WaitForAllSpawned "s1a1_cp1"
+			
+			Name "s1a1_mob"
+			
+			Where spawnbot_s1a1_cp1_back
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 1
+			TotalCurrency 20
+			
+			Support Limited
+
+			TFBot
+			{
+				Template T_Bersk_Giant_Demoman_RapidFire
+				Attributes IgnoreFlag
+				Scale 1.6
+				Health 2200
+			}
+		}
+		
+		
+		//After the mob has been defeated, CP1 Unlocks
+		WaveSpawn
+		{
+			WaitForAllDead "s1a1_mob"
+			
+			StartWaveWarningSound "\vo\announcer_we_secured_control.mp3"
+			
+			StartWaveOutput
+			{
+				Target event_universal_trigger
+				Action Enable
+			}
+			FirstSpawnOutput
+			{
+				Target event_bomb
+				Action Enable
+			}
+			
+			WaitBeforeStarting 3
+			
+			DoneOutput
+			{
+				Target setup_s1a1_cp1_unlock
+				Action Trigger
+			}
+		}
+		
+		//When CP1 is captured, kills "s1a1_cp1" to trigger:
+		//the relay to close the spawn door (killing anyone inside)
+		//unlocks the next door to area2.
+		//event_bomb triggers the events by killing the bot "s1a1_closing"...
+		WaveSpawn
+		{
+			WaitForAllDead "s1a1_cp1"
+			
+			FirstSpawnOutput
+			{
+				Target setup_s1a1_lockspawndoor
+				Action Trigger
+			}
+			StartWaveOutput
+			{
+				Target setup_s1a1_unlockcp1door
+				Action Trigger
+			}
+			DoneOutput
+			{
+				Target event_bomb
+				Action Enable
+			}
+		}
+		
+		//Setting up the stage events (key trigger)
+		//Stops any bots from spawning until the new area is opened.
+		//When this bot dies, spawns area2 mobs
+		WaveSpawn
+		{
+			WaitForAllDead "s1a1_cp1"
+			
+			Name "s1a1_closing"
+			
+			StartWaveOutput
+			{
+				Target event_universal_trigger
+				Action Enable
+			}
+			
+			Where spawnbot_bomb
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+
+			TFBot
+			{
+				Template T_Bersk_Event_Bomb
+			}
+		}
+		//Disables the key platform section of area2
+		WaveSpawn
+		{
+			StartWaveOutput
+			{
+				Target setup_s1a2_platforms_key_disable
+				Action Trigger
+			}
+		}
+
+		//Begins to spawn enemies behind the door.
+		//This first mob will enable the event_bomb, which will be triggered by the key touching the lock at the end of this area.
+		//Notice it is "FirstSpawnOutput", not "StartWaveOutput". This ensures the event_bomb is enabled after the s1a1 exit door is opened.
+		WaveSpawn
+		{
+			WaitForAllDead "s1a1_closing"
+			
+			FirstSpawnOutput
+			{
+				Target event_bomb
+				Action Enable
+			}
+			
+			Where spawnbot_s1a2_tunnel
+			TotalCount 8
+			MaxActive 8
+			SpawnCount 2
+			WaitBeforeStarting 1
+			WaitBetweenSpawns 4
+			TotalCurrency 40
+			
+			Support Limited
+
+			Squad
+			{
+				TFBot
+				{
+					Template T_Bersk_Demoknight
+					Tag drop_random_chance
+				}
+				TFBot
+				{
+					Class Medic
+					Skill Normal
+					ClassIcon enemy
+					WeaponRestrictions SecondaryOnly
+					Item "The Quick-Fix"
+				}
+			}
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "s1a1_closing"
+			
+			FirstSpawnOutput
+			{
+				Target event_universal_trigger
+				Action Enable
+			}
+			
+			Where spawnbot_s1a2_back
+			TotalCount 3
+			MaxActive 3
+			SpawnCount 3
+			WaitBeforeStarting 1
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+			
+			Support Limited
+			
+			Squad
+			{
+				ShouldPreserveSquad 1
+
+				TFBot
+				{
+					Tag drop_key_basic
+				
+					Class Heavyweapons
+					Name "Big Heavy"
+					Skill Hard
+					Scale 1.6
+					Health 2900
+					ClassIcon enemy_boss
+					WeaponRestrictions PrimaryOnly
+					Attributes IgnoreFlag
+					Attributes MiniBoss
+				}
+				TFBot
+				{
+					Tag bot_invisible
+					Tag bot_crits
+				
+					Class Soldier
+					Name "Giant Invisible Soldier"
+					Skill Hard
+					Scale 1.6
+					Health 2400
+					ClassIcon enemy_boss
+					WeaponRestrictions PrimaryOnly
+					Attributes HoldFireUntilFullReload
+					Attributes IgnoreFlag
+					Attributes MiniBoss
+				}
+				TFBot
+				{
+					Tag bot_invisible
+					Tag bot_crits
+				
+					Class Demoman
+					Name "Giant Invisible Demoman"
+					Skill Hard
+					Scale 1.6
+					Health 2200
+					ClassIcon enemy_boss
+					WeaponRestrictions PrimaryOnly
+					Attributes HoldFireUntilFullReload
+					Attributes IgnoreFlag
+					Attributes MiniBoss
+				}
+			}
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "s1a1_closing"
+			
+			Where spawnbot_s1a2_upperbalcony1
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 10
+			
+			Support Limited
+			
+			TFBot
+			{
+				Template T_Bersk_Pyro_ScorchShot
+				Tag drop_random_chance
+				Attributes IgnoreFlag
+			}
+		}
+		WaveSpawn
+		{
+			WaitForAllDead "s1a1_closing"
+			
+			Where spawnbot_s1a2_upperbalcony2
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 1
+			WaitBetweenSpawns 0
+			TotalCurrency 10
+			
+			Support Limited
+			
+			TFBot
+			{
+				Template T_Bersk_Pyro_ScorchShot
+				Tag drop_random_chance
+				Attributes IgnoreFlag
+			}
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "s1a1_closing"
+			
+			Where spawnbot_s1a2_upperbalcony3
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 1
+			WaitBetweenSpawns 0
+			TotalCurrency 10
+			
+			Support Limited
+			
+			TFBot
+			{
+				Template T_Bersk_Pyro_ScorchShot
+				Tag drop_random_chance
+				Attributes IgnoreFlag
+			}
+		}
+		WaveSpawn
+		{
+			WaitForAllDead "s1a1_closing"
+			
+			Where spawnbot_s1a2_key
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 1
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+			
+			Support Limited
+			
+			TFBot
+			{
+				Template T_Bersk_Pyro_ScorchShot
+				Tag drop_random_chance
+				Attributes IgnoreFlag
+			}
+		}
+		
+		//Setting up the stage events (skeletons in this mission)
+		//When this bot dies, starts the next mobs for area3.
+		WaveSpawn
+		{
+			WaitForAllDead "s1a1_closing"
+			
+			Name "s1a2_key"
+			
+			StartWaveOutput
+			{
+				Target event_universal_trigger
+				Action Enable
+			}
+			FirstSpawnOutput
+			{
+				Target event_bomb
+				Action Enable
+			}
+			
+			Where spawnbot_bomb
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+
+			TFBot
+			{
+				Template T_Bersk_Event_Bomb
+			}
+		}
+		
+		//Engineer bot spawns for the Shop area
+		//Use "Target kill_blu" "Action Trigger" to kill ALL enemies (including Ubered) at any time in the map.
+		//Or, use "Target event_kill_blu" "Action Enable" to kill them when an Event occurs.
+		WaveSpawn
+		{
+			WaitForAllSpawned "s1a2_key"
+			
+			Where spawnbot_s1_shop
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+			
+			Support Limited
+
+			TFBot
+			{
+				Template T_Bersk_Shopkeeper_1
+			}
+		}
+		
+		//Enables the locked door @ s1a3_cp2 area
+		//Disables s1a3_cp2
+		WaveSpawn
+		{
+			FirstSpawnOutput
+			{
+				Target setup_s1a3_cp2_lockdoor
+				Action Trigger
+			}
+			DoneOutput
+			{
+				Target setup_s1a3_cp2_disable
+				Action Trigger
+			}
+		}
+		
+		//Enables Skeletons when s1a3_cp2 is touched
+		//Enables Skeletons when graves are touched.
+		WaveSpawn
+		{
+			WaitForAllDead "s1a2_key"
+			
+			StartWaveOutput
+			{
+				Target event_s1a3_cp2_skeletonhorde
+				Action Enable
+			}
+			FirstSpawnOutput
+			{
+				Target setup_s1a3_skeletons
+				Action Trigger
+			}
+		}
+		
+		//These are the area3 mobs
+		WaveSpawn
+		{
+			WaitForAllDead "s1a2_key"
+			
+			Name "s1a3_mobs"
+			
+			Where spawnbot_s1a3_entrance_path
+			TotalCount 4
+			MaxActive 4
+			SpawnCount 1
+			WaitBeforeStarting 1
+			WaitBetweenSpawns 1
+			TotalCurrency 40
+			
+			Support Limited
+			
+			TFBot
+			{
+				Tag drop_random_chance
+				
+				Class Demoman
+				Skill Hard
+				ClassIcon enemy
+				Attributes IgnoreFlag
+				WeaponRestrictions PrimaryOnly
+				Attributes HoldFireUntilFullReload
+			}
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "s1a2_key"
+			
+			Name "s1a3_mobs"
+			
+			Where spawnbot_s1a3_entrance_path5
+			TotalCount 4
+			MaxActive 4
+			SpawnCount 4
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 0
+			TotalCurrency 40
+			
+			Support Limited
+			
+			Squad
+			{
+				TFBot
+				{
+					Tag drop_key_basic
+				
+					Class Pyro
+					Name "Giant Pyro"
+					Scale 1.75
+					Skill Hard
+					Attributes MiniBoss
+					Health 3300
+					ClassIcon enemy_boss
+					CharacterAttributes
+					{
+						"move speed penalty" 0.4
+						"airblast disabled" 1
+					}
+				}
+				TFBot
+				{				
+					Template T_Bersk_Medic_BigHeal
+				}
+				TFBot
+				{				
+					Template T_Bersk_Medic_BigHeal
+				}
+				TFBot
+				{				
+					Template T_Bersk_Medic_BigHeal
+				}
+			}
+			
+			DoneOutput
+			{
+				Target setup_onstarttouch_s1a3_cp2
+				Action Enable
+			}
+		}
+		
+		//Setting up the stage events (s1a3_key1)
+		WaveSpawn
+		{
+			WaitForAllDead "s1a3_mobs"
+			
+			StartWaveOutput
+			{
+				Target event_bomb
+				Action Enable
+			}
+			
+			Name "s1a3_key1"
+			
+			FirstSpawnOutput
+			{
+				Target event_universal_trigger
+				Action Enable
+			}
+			
+			Where spawnbot_bomb
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+
+			TFBot
+			{
+				Template T_Bersk_Event_Bomb
+			}
+		}
+		WaveSpawn
+		{
+			WaitForAllDead "s1a3_key1"
+			
+			StartWaveOutput
+			{
+				Target event_bomb
+				Action Enable
+			}
+			
+			Name "s1a3_key2"
+			
+			FirstSpawnOutput
+			{
+				Target event_universal_trigger
+				Action Enable
+			}
+			
+			Where spawnbot_bomb
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+
+			TFBot
+			{
+				Template T_Bersk_Event_Bomb
+			}
+		}
+		WaveSpawn
+		{
+			WaitForAllDead "s1a3_key1"
+		
+			Where spawnbot_s1a3_crypt2
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 1
+			WaitBetweenSpawns 0
+			TotalCurrency 10
+			
+			Support Limited
+			
+			TFBot
+			{
+				Template T_Bersk_Heavyweapons_Natty
+				MaxVisionRange 350
+				Tag drop_random
+				Tag bot_invisible
+				Attributes IgnoreFlag
+				Item "Honest Halo"
+			}
+		}
+		WaveSpawn
+		{
+			WaitForAllDead "s1a3_key2"
+			
+			Where spawnbot_s1a3_crypt1
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 2
+			WaitBetweenSpawns 1
+			TotalCurrency 20
+			
+			Support Limited
+			
+			TFBot
+			{
+				Template T_Bersk_Pyro_Primary
+				Item "Honest Halo"
+				Tag drop_random
+			}
+		}
+		WaveSpawn
+		{
+			WaitForAllDead "s1a3_cp2"
+		
+			Where spawnbot_s1a3
+			TotalCount 3
+			MaxActive 3
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 1
+			TotalCurrency 20
+			
+			Support Limited
+			
+			TFBot
+			{
+				Template T_Bersk_Pyro_Secondary
+				Item "The Detonator"
+				Attributes IgnoreFlag
+				Item "Honest Halo"
+			}
+		}
+		WaveSpawn
+		{
+			WaitForAllDead "s1a3_cp2"
+		
+			Where spawnbot_s1a3_2
+			TotalCount 3
+			MaxActive 3
+			SpawnCount 1
+			WaitBeforeStarting 3
+			WaitBetweenSpawns 1
+			TotalCurrency 15
+			
+			Support Limited
+			
+			TFBot
+			{
+				Template T_Bersk_Pyro_Secondary
+				Item "The Detonator"
+				Attributes IgnoreFlag
+				Item "Honest Halo"
+			}
+		}
+		WaveSpawn
+		{
+			WaitForAllDead "s1a3_cp2"
+		
+			Where spawnbot_s1a3_6
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 1
+			WaitBetweenSpawns 1
+			TotalCurrency 5
+			
+			Support Limited
+			
+			TFBot
+			{
+				Template T_Bersk_Pyro_Secondary
+				Item "The Detonator"
+				Attributes IgnoreFlag
+				Item "Honest Halo"
+			}
+		}
+		WaveSpawn
+		{
+			WaitForAllDead "s1a3_cp2"
+		
+			Where spawnbot_s1a3_7
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 1
+			WaitBetweenSpawns 1
+			TotalCurrency 5
+			
+			Support Limited
+			
+			TFBot
+			{
+				Template T_Bersk_Pyro_Secondary
+				Item "The Detonator"
+				Attributes IgnoreFlag
+				Item "Honest Halo"
+			}
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "s1a3_key1"
+		
+			Where spawnbot_s1a3_crypt3
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 1
+			WaitBetweenSpawns 0
+			TotalCurrency 10
+			
+			Support Limited
+			
+			TFBot
+			{
+				Template T_Bersk_Heavyweapons_Natty
+				MaxVisionRange 350
+				Tag drop_random
+				Tag bot_invisible
+				Attributes IgnoreFlag
+				Item "Honest Halo"
+			}
+		}
+		WaveSpawn
+		{
+			WaitForAllDead "s1a3_key2"
+			
+			Where spawnbot_s1a3_crypt3
+			TotalCount 6
+			MaxActive 6
+			SpawnCount 1
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 2
+			TotalCurrency 40
+			
+			Support Limited
+			
+			TFBot
+			{
+				Template T_Bersk_Pyro_VolcanoFragment
+				Item "Honest Halo"
+			}
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "s1a3_key2"
+			
+			StartWaveOutput
+			{
+				Target event_s1a3_openenemygates
+				Action Enable
+			}
+			DoneOutput
+			{
+				Target setup_onstarttouch_s1a3_underbelly
+				Action Enable
+			}
+		}
+		WaveSpawn
+		{
+			WaitForAllDead "s1a3_key2"
+			
+			Name "s1a3_underbelly"
+			
+			Where spawnbot_s1a3_underbelly
+			TotalCount 4
+			MaxActive 4
+			SpawnCount 1
+			WaitBeforeStarting 1
+			WaitBetweenSpawns 0
+			TotalCurrency 80
+			
+			Support Limited
+			
+			TFBot
+			{
+				Tag drop_random_chance
+				
+				Class Sniper
+				Skill Expert
+				Health 475
+				Scale 1.25
+				ClassIcon enemy
+				Attributes AlwaysFireWeapon
+				WeaponRestrictions MeleeOnly
+				Item "The Shahanshah"
+				ItemAttributes
+				{
+					ItemName "The Shahanshah"
+					"fire rate penalty" 0.7
+				}
+			}
+			DoneOutput
+			{
+				Target setup_s1a3_openkeygate
+				Action Trigger
+			}
+		}
+		
+		//Enemy drops Boss Key immediately in cell upon defeat
+		//BUG: For now it's bugged to where it doesn't spawn if the wave has progressed too far? Nav problem??
+		WaveSpawn
+		{
+			WaitForAllSpawned "s1a1_cp1"
+			
+			Where spawnbot_s1a3_underbelly_key
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 1
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+			
+			Support Limited
+			
+			TFBot
+			{
+				Template T_Bersk_AutoDie
+				Tag drop_key_basic
+			}
+		}
+		
+		//Setting up event: stage 1 boss
+		WaveSpawn
+		{
+			WaitForAllDead "s1a3_underbelly"
+			
+			Name "s1a3_closing"
+			
+			StartWaveOutput
+			{
+				Target event_bomb
+				Action Enable
+			}
+			
+			Where spawnbot_bomb
+			WaitBeforeStarting 2
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+
+			TFBot
+			{
+				Template T_Bersk_Event_Bomb
+			}
+			DoneOutput
+			{
+				Target kill_blu
+				Action Trigger
+			}
+		}
+		
+		//BOSS STAGE 1
+		WaveSpawn
+		{
+			StartWaveWarningSound "\music\mvm_start_last_wave.wav"
+			
+			WaitForAllDead "s1a3_closing"
+			
+			Name "s1a3_boss"
+			
+			Where spawnbot_s1_boss
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 50
+			
+			TFBot
+			{
+				Template T_Bersk_Boss_Giant_Soldier_3Forms_4Melee_4BlackBox_8Original
+				Name "Stage 1 Boss"
+			}
+		}
+	}
+	
+	//STAGE 2 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+//	Wave
+//	{
+//		InitWaveOutput
+//		{
+//			Target wave_init_relay_stage2
+//			Action Trigger
+//		}
+//		StartWaveOutput
+//		{
+//			Target wave_start_relay
+//			Action Trigger
+//		}
+//		DoneOutput					
+//		{
+//			Target wave_finished_relay
+//			Action trigger
+//		}
+//		
+//		WaveSpawn
+//		{			
+//			Where spawnbot_bomb
+//			TotalCount 8
+//			MaxActive 1
+//			SpawnCount 1
+//			WaitBeforeStarting 0
+//			WaitBetweenSpawns 0
+//			TotalCurrency 0
+//
+//			TFBot
+//			{
+//				Class Heavyweapons
+//				Skill Expert
+//				ClassIcon enemy
+//				Attributes SuppressFire
+//				Attributes IgnoreEnemies
+//				CharacterAttributes
+//				{
+//					"damage penalty" 0
+//				}
+//			}
+//		}
+//	}
+}

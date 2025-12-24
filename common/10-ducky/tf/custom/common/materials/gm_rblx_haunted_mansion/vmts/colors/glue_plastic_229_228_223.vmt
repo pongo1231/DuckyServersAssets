@@ -1,0 +1,6 @@
+LightmappedGeneric
+{
+	$basetexture gm_rblx_haunted_mansion\colors\glue_plastic_229_228_223
+	$surfaceprop plastic
+	$bumpmap gm_rblx_haunted_mansion\bumpmaps\plasticbmp
+}

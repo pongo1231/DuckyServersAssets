@@ -1,0 +1,1525 @@
+//mvm silentsky
+//The Beast Deluxe
+//Dylan_is_Legend/WizzardII
+
+// No Bomb. Loose if wipe, scout is not disabled.
+// no upgrade station You are provided upgrades
+// split into waves with phases
+// 1 The beast's return Similar to original beast shorter than original
+// 2 the beast's revenge longer phase with new patterns, weapon switches based on hp threshold and support from the wee beastie.
+// 3 the beast's last stand it gets a crit boost you get given true soldier squad head to escort you.
+// 3 finishes with the beast's death throws a single pattern that doesn't stop. It's extremely vunerable this phase and will eventually die on it's own.
+// The beast can destroy buildings with ease this mission.
+
+///////////////////////////////////////////////////////////////////////////
+// BEGIN POP FILE
+///////////////////////////////////////////////////////////////////////////
+
+WaveSchedule
+{
+
+	StartingCurrency 0
+	FixedRespawnWaveTime 3
+	CanBotsAttackWhileInSpawnRoom no
+	NoReanimators 1   //Disable reanimators
+	MaxRedPlayers 1  
+
+	Templates
+	{
+		T_TFBot_The_Beast_DummyInfo
+		{
+			Class Soldier
+			Name "THE BEAST!"
+			ClassIcon soldier_the_beast
+			Health 275000
+			Skill Expert
+			Scale 2.12
+			Item "War Head"
+			Attributes UseBossHealthBar
+			Attributes MiniBoss
+			Attributes HoldFireUntilFullReload
+			Attributes IgnoreFlag
+			Action Mobber  
+		}
+			
+		T_TFBot_TrueSSH
+		{
+			Class Soldier
+			Skill Expert
+			Health 15000
+			Name "True Soldier Squad Head"
+			Item "The Black Box"
+			Item "The Battalion's Backup"
+			Attributes HoldFireUntilFullReload
+			Attributes MiniBoss
+			Attributes UseBossHealthBar
+			ClassIcon red2_lite
+			Attributes SpawnWithFullCharge
+			Attributes IgnoreFlag
+			Action Mobber  
+			AddCond   //Adds conditions to bots
+			{
+				Name "TF_COND_REPROGRAMMED" // Condition to apply. List of available conditions https://wiki.teamfortress.com/wiki/Cheats#addcond
+			}
+			Tag botcontrol_block
+			ItemAttributes
+			{
+				ItemName "The Black Box"
+				"fire rate bonus" 0.33
+				"clip size upgrade atomic" 5.0
+				"faster reload rate" 0.5
+				"blast radius increased" 1.15
+				"Projectile speed increased"	1.25
+				"projectile spread angle penalty" 0.6
+				"heal on hit for rapidfire" 35
+				"mod projectile heat seek power" 15 //Sigmo only
+				"mod projectile heat aim error" 360
+				"projectile trail particle" eyeboss_projectile
+			}
+			CharacterAttributes
+			{
+				"health regen" 35
+				"move speed bonus"	0.45
+				"airblast vulnerability multiplier" 0.8
+				"damage force reduction" 0.8
+				"rage giving scale"	0.15
+				"increase buff duration"	100
+				"health from healers increased" 3.5
+			}
+		}
+	}
+
+	ExtraSpawnPoint    //Adds spawn points on specified location
+	{
+        	Name "SSH"
+		// StartDisabled 1 // If the spawn point starts disabled (Default: 0)
+        	TeamNum 3 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        	X	"-4868.020996"                     
+        	Y	"-3005.421142"            
+        	Z	"128.031250"     
+	}
+
+	PlayerAttributes   //Player attributes appied for the whole mission
+	{
+		"move speed bonus" 1.4
+		"health regen" 10
+		"dmg from ranged reduced" 0.25
+		"damage bonus vs burning" 1.8
+		"increased jump height" 1.6
+		"faster reload rate" 0.4
+		"fire rate bonus" 0.6
+		"maxammo primary increased" 3
+		"maxammo secondary increased" 3
+		"maxammo metal increased" 3
+		
+		"effect bar recharge rate increased" 0.4
+		Pyro
+		{
+			"weapon burn dmg increased" 2
+			"weapon burn time increased" 2
+			"damage bonus" 3
+		}
+		Soldier
+		{
+			"rocket specialist" 4
+			"damage bonus" 2.2
+			"increase buff duration" 1.5
+			//"clip size upgrade atomic" 8.0
+		}
+		Scout
+		{
+			"damage bonus" 2.2
+			"increase buff duration" 1.5
+			"clip size bonus" 3
+		}
+		Demoman
+		{
+			"Projectile speed increased" 2
+			"damage bonus" 2
+		}
+		Heavyweapons
+		{
+			"attack projectiles" 2
+			"damage bonus" 1.75
+			"projectile penetration heavy" 3
+			"clip size bonus" 3
+		}
+		Sniper
+		{
+			"damage bonus" 4.5
+			"sniper charge per sec" 2.25
+		}
+		Medic
+		{
+			"ubercharge rate bonus" 2
+			"generate rage on heal" 2
+			"uber duration bonus" 6
+			"overheal expert" 4
+			"healing mastery" 4
+			"damage bonus" 5
+		}
+		Spy
+		{
+			"damage bonus" 2.0
+		}
+		Engineer
+		{
+			"engy disposable sentries" 1
+			"engy building health bonus" 4
+			"engy sentry fire rate increased" 0.7
+			"engy dispenser radius increased" 5
+			"clip size bonus" 3
+			"damage bonus" 3.0
+		}
+	}
+
+
+
+	ItemAttributes   //Adds attributes to specified item given to players
+	{
+		Classname tf_weapon_scattergun // Classname of the weapon
+		"weapon spread bonus" 0.5
+		"bullets per shot bonus" 1.2
+	}
+
+	ItemAttributes   //Adds attributes to specified item given to players
+	{
+		Classname tf_weapon_knife // Classname of the weapon
+		"damage bonus" 4.5
+	}
+
+	ItemAttributes   //Adds attributes to specified item given to players
+	{
+		Classname tf_weapon_shotgun // Classname of the weapon
+		"weapon spread bonus" 0.5
+		"bullets per shot bonus" 1.2
+	}
+
+	ItemAttributes   //Adds attributes to specified item given to players
+	{
+		ItemName "TF_WEAPON_ROCKETLAUNCHER"
+		"clip size upgrade atomic" 8.0
+	}
+
+	ItemAttributes   //Adds attributes to specified item given to players
+	{
+		ItemName "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+		"clip size upgrade atomic" 8.0
+	}
+
+	ItemAttributes   //Adds attributes to specified item given to players
+	{
+		ItemName "The Direct Hit"
+		"clip size upgrade atomic" 8.0
+	}
+
+	ItemAttributes   //Adds attributes to specified item given to players
+	{
+		ItemName "The Original"
+		"clip size upgrade atomic" 8.0
+	}
+
+	ItemAttributes   //Adds attributes to specified item given to players
+	{
+		ItemName "The Liberty Launcher"
+		"clip size upgrade atomic" 8.0
+	}
+
+	ItemAttributes   //Adds attributes to specified item given to players
+	{
+		ItemName "The Black Box"
+		"clip size upgrade atomic" 8.0
+	}
+
+	ItemAttributes   //Adds attributes to specified item given to players
+	{
+		ItemName "The Beggar's Bazooka"
+		"clip size upgrade atomic" 8.0
+	}
+
+	ItemAttributes   //Adds attributes to specified item given to players
+	{
+		ItemName "TF_WEAPON_GRANADELAUNCHER"
+		"clip size upgrade atomic" 8.0
+	}
+
+	ItemAttributes   //Adds attributes to specified item given to players
+	{
+		ItemName "upgradable TF_WEAPON_GRANADELAUNCHER"
+		"clip size upgrade atomic" 8.0
+	}
+
+	ItemAttributes   //Adds attributes to specified item given to players
+	{
+		ItemName "The Loch-n-Load"
+		"clip size upgrade atomic" 8.0
+	}
+
+	ItemAttributes   //Adds attributes to specified item given to players
+	{
+		ItemName "The Loose Cannon"
+		"clip size upgrade atomic" 8.0
+	}
+
+	ItemAttributes   //Adds attributes to specified item given to players
+	{
+		ItemName "The Iron Bomber"
+		"clip size upgrade atomic" 8.0
+	}
+
+
+	
+/////////////////
+//MISSIONS
+/////////////////
+
+
+///////////////////////////////////////////////////////////////////////////
+//SENTRY BUSTER MISSIONS
+///////////////////////////////////////////////////////////////////////////
+	
+///////////////////////////////////////////////////////////////////////////
+//SNIPER MISSIONS
+///////////////////////////////////////////////////////////////////////////
+
+
+
+///////////////////////////////////////////////////////////////////////////
+//SPY MISSIONS
+///////////////////////////////////////////////////////////////////////////
+
+
+	
+///////////////////////////////////////////////////////////////////////////
+//ENGINEER MISSIONS
+///////////////////////////////////////////////////////////////////////////	
+	
+
+// Phase 1 ////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// The BEAST'S RETURN (0)
+///////////////////////////////////////////////////////////////////////////
+
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}	
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+
+		Checkpoint Yes
+
+		RedTeamWipeCausesWaveLoss 1   //If red team is wiped, it loses
+
+		Explanation    //Dispayed once the wave is initialized
+		{
+			Line "{green}The beast is back and it no longer needs a bomb to destroy you."
+			Line "{green}Don't die. That's how you lose."
+		}
+
+		WaveSpawn
+		{
+			TotalCount 0
+			TotalCurrency 0
+			WaitBeforeStarting 10
+			FirstSpawnOutput
+			{
+				Target bot_attributes_random10_relay
+				Action Trigger
+			}
+		}
+		
+		WaveSpawn // The BEAST'S RETURN (0)
+		{
+			Where spawnbot	
+			Name "W1_A"
+			TotalCount 1	
+			MaxActive 1						
+			SpawnCount 1									
+			WaitBetweenSpawns 0
+			WaitBeforeStarting 0
+			TotalCurrency 0
+			TFBot
+			{
+				Template T_TFBot_The_Beast_DummyInfo
+				Tag botcontrol_block
+				Tag giant
+				Name "THE BEAST'S RETURN!"
+				Health 35000
+				EventChangeAttributes
+				{
+					Default
+					{
+						Skill Expert
+					
+						WeaponRestrictions  PrimaryOnly
+						Tag attrbot
+						Skill Expert
+						MaxVisionRange 3500
+						Item "The Beggar's Bazooka"
+						Item "The Equalizer"
+						Item "War Head"
+						Attributes UseBossHealthBar
+						Attributes MiniBoss
+						Attributes HoldFireUntilFullReload
+						ItemAttributes
+						{
+							ItemName "The Beggar's Bazooka"
+							"faster reload rate" 0.4
+							"fire rate bonus" 0.07
+							"damage bonus" 1.5
+							"clip size upgrade atomic" 2.0
+							"mult projectile count" 3
+							"projectile spread angle penalty" 16
+							"Projectile speed increased" 0.5
+							"blast radius increased" 1.2
+							"bleeding duration" 4
+							"mod projectile heat seek power" 5 //Sigmo only
+							"mod projectile heat aim error" 360
+							"projectile trail particle" eyeboss_projectile
+						}
+						CharacterAttributes
+						{
+							"can overload" -1
+							"auto fires full clip" -1
+							"move speed bonus"	0.4
+							"damage force reduction" 0.1
+							"airblast vulnerability multiplier" 0.05
+							"override footstep sound set" 3
+							"health regen"	15
+							"airblast vertical vulnerability multiplier" 0.05
+							"rage giving scale" 0.03
+							"increased jump height" 2
+							"dmg taken increased" 0.05 
+   		 					"dmg from melee increased" 40
+   							"dmg from ranged reduced" 20
+							"head scale" 1.2
+							"boots falling stomp" 1
+							"health from healers reduced" 0.1
+							"rocket jump damage reduction" 0.01
+						}
+					}
+
+					BotAttributes1
+					{
+						Skill Expert
+						
+						WeaponRestrictions  SecondaryOnly
+						Tag attrbot
+						Skill Expert
+						MaxVisionRange 3500
+						Item "The Beggar's Bazooka"
+						Item "The Equalizer"
+						Item "War Head"
+						Attributes UseBossHealthBar
+						Attributes MiniBoss
+						Attributes HoldFireUntilFullReload
+						ItemAttributes
+						{
+							ItemName "TF_WEAPON_SHOTGUN_SOLDIER"
+							"damage bonus" 0.5
+							"projectile penetration" 4.0
+							"bullets per shot bonus" 3
+							"clip size upgrade atomic" 2.0
+							"faster reload rate" 0.38
+							"fire rate bonus" 0.3
+							"bleeding duration" 3
+						}
+						CharacterAttributes
+						{
+							//"can overload" -1
+							//"auto fires full clip" -1
+							"move speed bonus"	0.4
+							"damage force reduction" 0.1
+							"airblast vulnerability multiplier" 0.05
+							"override footstep sound set" 3
+							"health regen"	15
+							"airblast vertical vulnerability multiplier" 0.05
+							"rage giving scale" 0.03
+							"increased jump height" 2
+							"dmg taken increased" 0.05 
+   		 					"dmg from melee increased" 40
+   							"dmg from ranged reduced" 20
+							"head scale" 1.2
+							"boots falling stomp" 1
+							"health from healers reduced" 0.1
+						}
+					}
+					BotAttributes2
+					{
+						Skill Expert
+						
+						WeaponRestrictions  MeleeOnly
+						Tag attrbot
+						Skill Expert
+							
+						Item "The Beggar's Bazooka"
+						Item "The Equalizer"
+						Item "War Head"
+						Attributes UseBossHealthBar
+						Attributes MiniBoss
+						Attributes HoldFireUntilFullReload
+						ItemAttributes
+						{
+							ItemName "The Equalizer"
+							"damage bonus" 1.5
+							"fire rate bonus" 0.9
+							"heal on hit for rapidfire" 100
+							"heal on kill" 1700
+							"speed boost when active" 1
+							"bleeding duration" 16
+							"melee range multiplier" 1.5
+							"move speed bonus"	3
+							"dmg taken increased" 0.05 
+   		 					"dmg from melee increased" 120
+   							"dmg from ranged reduced" 25
+							"damage causes airblast" 1
+							"dmg bonus vs buildings" 2.5
+						}
+						CharacterAttributes
+						{
+							//"can overload" -1
+							//"auto fires full clip" -1
+							"move speed bonus"	0.4
+							"damage force reduction" 0.1
+							"airblast vulnerability multiplier" 0.3
+							"override footstep sound set" 3
+							"health regen"	15
+							"airblast vertical vulnerability multiplier" 0.2
+							"rage giving scale" 0.1
+							"increased jump height" 2
+							"dmg taken increased" 0.05 
+   		 					"dmg from melee increased" 40
+   							"dmg from ranged reduced" 20
+							"head scale" 1.2
+							"boots falling stomp" 1
+							"health from healers reduced" 0.1
+						}
+					}
+
+					BotAttributes3
+					{
+						Skill Expert
+						
+						WeaponRestrictions  PrimaryOnly
+						Tag attrbot
+						Skill Expert
+						MaxVisionRange 3500
+						Item "The Beggar's Bazooka"
+						Item "The Equalizer"
+						Item "War Head"
+						Attributes UseBossHealthBar
+						Attributes MiniBoss
+						Attributes HoldFireUntilFullReload
+						ItemAttributes
+						{
+							ItemName "The Beggar's Bazooka"
+							"faster reload rate" 0.01
+							"fire rate bonus" 0.01
+							"damage bonus" 2
+							"clip size upgrade atomic" 87.0
+							"projectile spread angle penalty" 120
+							"Projectile speed increased" 0.7
+							"blast radius increased" 1.6
+							"bleeding duration" 7
+							"mod projectile heat seek power" 7.5 //Sigmo only
+							"mod projectile heat aim error" 360
+							"projectile trail particle" eyeboss_projectile
+							"rocket jump damage reduction" 0.01
+						}
+						CharacterAttributes
+						{
+							"can overload" -1
+							"auto fires full clip" -1
+							"move speed bonus"	0.4
+							"damage force reduction" 0.1
+							"airblast vulnerability multiplier" 0.05
+							"override footstep sound set" 3
+							"health regen"	15
+							"airblast vertical vulnerability multiplier" 0.05
+							"rage giving scale" 0.03
+							"increased jump height" 2
+							"dmg taken increased" 0.05 
+   		 					"dmg from melee increased" 40
+   							"dmg from ranged reduced" 20
+							"head scale" 1.2
+							"boots falling stomp" 1
+							"health from healers reduced" 0.1
+							"rocket jump damage reduction" 0.01
+						}
+					}
+				}
+			}
+		}
+	}
+
+// Phase 2 ////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// The BEAST'S REVENGE (0)
+///////////////////////////////////////////////////////////////////////////
+
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}	
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+
+		Checkpoint Yes
+
+		RedTeamWipeCausesWaveLoss 1   //If red team is wiped, it loses
+
+		WaveSpawn
+		{
+			TotalCount 0
+			TotalCurrency 0
+			WaitBeforeStarting 10
+			FirstSpawnOutput
+			{
+				Target bot_attributes_random10_relay
+				Action Trigger
+			}
+		}
+
+// Starts With Primary
+// goes to Secondary at <75%
+// goes to Melee at <50%
+// goes to Primary at <25%
+// Primarys have panic attributes so second primary phase is harder.
+
+		Explanation    //Dispayed once the wave is initialized
+		{
+			Line "{green}Looks like it had a second body prepared and it has a fancy set of armements"
+			Line "{green}It's got a smaller back up robot called wee beastie."
+			Line "{green}Don't die. That's how you lose."
+		}
+
+		WaveSpawn // The BEAST'S REVENGE (0)
+		{
+			Where spawnbot	
+			Name "W1_A"
+			TotalCount 1	
+			MaxActive 1						
+			SpawnCount 1									
+			WaitBetweenSpawns 0
+			WaitBeforeStarting 0
+			TotalCurrency 0
+			TFBot
+			{
+				Template T_TFBot_The_Beast_DummyInfo
+				Tag botcontrol_block
+				Tag giant
+				Name "THE BEAST'S REVENGE!"
+				Health 60000
+				
+				EventChangeAttributes
+				{
+					Default
+					{
+						Skill Expert
+						Tag attrbot
+						Skill Expert
+						MaxVisionRange 3500
+						Item "The Righteous Bison"
+						Item "The Equalizer"
+						Item "War Head"
+						Attributes UseBossHealthBar
+						Attributes MiniBoss
+						Attributes HoldFireUntilFullReload
+						Item "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+				WeaponSwitch    //Periodically switches weapon
+                		{
+                    			Delay 1 //Time before the first weapon switch starts (Default: 10)
+                    			Cooldown 0 //Time between each weapon switch (Default: 10)
+                    			Repeats 1 //How many times should bot switch weapons in total (Default: 0 - Infinite)
+					Type "Secondary" // Weapon slot, possible values:
+					IfHealthBelow 45000 //When set, the task activates only when the bot health is below specified value
+				}
+				WeaponSwitch    //Periodically switches weapon
+                		{
+                    			Delay 1 //Time before the first weapon switch starts (Default: 10)
+                    			Cooldown 0 //Time between each weapon switch (Default: 10)
+                    			Repeats 1 //How many times should bot switch weapons in total (Default: 0 - Infinite)
+					Type "Melee" // Weapon slot, possible values:
+					IfHealthBelow 30000 //When set, the task activates only when the bot health is below specified value
+				}
+				WeaponSwitch    //Periodically switches weapon
+                		{
+                    			Delay 1 //Time before the first weapon switch starts (Default: 10)
+                    			Cooldown 0 //Time between each weapon switch (Default: 10)
+                    			Repeats 1 //How many times should bot switch weapons in total (Default: 0 - Infinite)
+					Type "Primary" // Weapon slot, possible values:
+					IfHealthBelow 15000 //When set, the task activates only when the bot health is below specified value
+				}
+						ItemAttributes //MangleSpammPattern
+						{
+							ItemName "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+							"is australium item" 1 // Australium description
+							"item style override" 1 // Australium variant
+							"turn to gold" 1 // Victims turn to gold
+							"faster reload rate" -0.8
+							"fire rate bonus" 0.2
+							"damage penalty" 0.6
+							"Projectile speed increased"	1.65
+							"projectile spread angle penalty" 0.5
+							"blast radius increased" 0.3
+							"fire rate bonus with reduced health" 0.75
+							"bleeding duration" 3
+						}
+						ItemAttributes //BisonEverwherePattern
+						{
+							ItemName "The Righteous Bison"
+							"faster reload rate" -0.8
+							"fire rate bonus" 2
+							"set item tint rgb" 		8208497
+							"Projectile speed increased"	1
+							"projectile spread angle penalty" 20
+							"mult projectile count" 13
+							"mod projectile heat seek power" 20 //Sigmo only
+							"mod projectile heat aim error" 360
+							"move speed bonus"	1.5
+							"provide on active" 1
+						}
+						ItemAttributes
+						{
+							ItemName "The Equalizer"
+							"damage bonus" 1.2
+							"fire rate bonus" 0.9
+							"heal on hit for rapidfire" 100
+							"heal on kill" 1700
+							"speed boost when active" 1
+							"melee range multiplier" 1.5
+							"move speed bonus"	2.8
+							"dmg taken increased" 0.05 
+   		 					"dmg from melee increased" 120
+   							"dmg from ranged reduced" 25
+							"dmg bonus vs buildings" 2.5
+						}
+						CharacterAttributes
+						{
+							"move speed bonus"	0.5
+							"damage force reduction" 0.05
+							"airblast vulnerability multiplier" 0.05
+							"override footstep sound set" 3
+							"health regen"	15
+							"airblast vertical vulnerability multiplier" 0.05
+							"rage giving scale" 0.03
+							"increased jump height" 2
+							"dmg taken increased" 0.05 
+   		 					"dmg from melee increased" 40
+   							"dmg from ranged reduced" 20
+							"head scale" 1.2
+							"boots falling stomp" 1
+							"health from healers reduced" 0.1
+							"rocket jump damage reduction" 0.01
+							"deploy time decreased" 0.1
+							"dmg taken from fire increased" 1.75
+						}
+					}
+
+					BotAttributes1
+					{
+						Skill Expert
+						Tag attrbot
+						Skill Expert
+						MaxVisionRange 3500
+						Item "The Equalizer"
+						Item "The Righteous Bison"
+						Item "War Head"
+						Attributes UseBossHealthBar
+						Attributes MiniBoss
+						Attributes HoldFireUntilFullReload
+						Item "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+				WeaponSwitch    //Periodically switches weapon
+                		{
+                    			Delay 1 //Time before the first weapon switch starts (Default: 10)
+                    			Cooldown 0 //Time between each weapon switch (Default: 10)
+                    			Repeats 1 //How many times should bot switch weapons in total (Default: 0 - Infinite)
+					Type "Secondary" // Weapon slot, possible values:
+					IfHealthBelow 45000 //When set, the task activates only when the bot health is below specified value
+				}
+				WeaponSwitch    //Periodically switches weapon
+                		{
+                    			Delay 1 //Time before the first weapon switch starts (Default: 10)
+                    			Cooldown 0 //Time between each weapon switch (Default: 10)
+                    			Repeats 1 //How many times should bot switch weapons in total (Default: 0 - Infinite)
+					Type "Melee" // Weapon slot, possible values:
+					IfHealthBelow 30000 //When set, the task activates only when the bot health is below specified value
+				}
+				WeaponSwitch    //Periodically switches weapon
+                		{
+                    			Delay 1 //Time before the first weapon switch starts (Default: 10)
+                    			Cooldown 0 //Time between each weapon switch (Default: 10)
+                    			Repeats 1 //How many times should bot switch weapons in total (Default: 0 - Infinite)
+					Type "Primary" // Weapon slot, possible values:
+					IfHealthBelow 15000 //When set, the task activates only when the bot health is below specified value
+				}
+						ItemAttributes //RocketWallPattern
+						{
+							ItemName "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+							"is australium item" 1 // Australium description
+							"item style override" 1 // Australium variant
+							"turn to gold" 1 // Victims turn to gold
+							"faster reload rate" -0.8
+							"fire rate bonus" 1.2
+							"damage bonus" 2
+							"Projectile speed increased"	0.5
+							"projectile spread angle penalty" 120
+							"mult projectile count" 55
+							"blast radius increased" 1.33
+							"fire rate bonus with reduced health" 0.8
+							"bleeding duration" 7
+						}
+						ItemAttributes //BisonShotgunPattern
+						{
+							ItemName "The Righteous Bison"
+							"faster reload rate" -0.8
+							"fire rate bonus" 5
+							"set item tint rgb" 		8208497
+							"Projectile speed increased"	1.25
+							"projectile spread angle penalty" 120
+							"mult projectile count" 75
+							"mod projectile heat seek power" 10 //Sigmo only
+							"mod projectile heat aim error" 360
+							"move speed bonus"	7
+							"provide on active" 1
+						}
+						ItemAttributes
+						{
+							ItemName "The Equalizer"
+							"damage bonus" 1.8
+							"fire rate bonus" 0.9
+							"heal on hit for rapidfire" 100
+							"heal on kill" 1700
+							"speed boost when active" 1
+							"bleeding duration" 16
+							"melee range multiplier" 1.5
+							"move speed bonus"	7
+							"dmg taken increased" 0.05 
+   		 					"dmg from melee increased" 120
+   							"dmg from ranged reduced" 25
+							"damage causes airblast" 1
+						}
+						CharacterAttributes
+						{
+							"move speed bonus"	0.15
+							"damage force reduction" 0.1
+							"airblast vulnerability multiplier" 0.05
+							"override footstep sound set" 3
+							"health regen"	15
+							"airblast vertical vulnerability multiplier" 0.05
+							"rage giving scale" 0.03
+							"increased jump height" 2
+							"dmg taken increased" 0.05 
+   		 					"dmg from melee increased" 40
+   							"dmg from ranged reduced" 20
+							"head scale" 1.2
+							"boots falling stomp" 1
+							"health from healers reduced" 0.1
+							"rocket jump damage reduction" 0.01
+							"deploy time decreased" 0.1
+							"dmg taken from fire increased" 1.75
+						}
+					}
+					BotAttributes2
+					{
+						Skill Expert
+						Tag attrbot
+						Skill Expert
+						MaxVisionRange 3500
+						Item "The Equalizer"
+						Item "The Righteous Bison"
+						Item "War Head"
+						Attributes UseBossHealthBar
+						Attributes MiniBoss
+						Attributes HoldFireUntilFullReload
+						Item "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+				WeaponSwitch    //Periodically switches weapon
+                		{
+                    			Delay 1 //Time before the first weapon switch starts (Default: 10)
+                    			Cooldown 0 //Time between each weapon switch (Default: 10)
+                    			Repeats 1 //How many times should bot switch weapons in total (Default: 0 - Infinite)
+					Type "Secondary" // Weapon slot, possible values:
+					IfHealthBelow 45000 //When set, the task activates only when the bot health is below specified value
+				}
+				WeaponSwitch    //Periodically switches weapon
+                		{
+                    			Delay 1 //Time before the first weapon switch starts (Default: 10)
+                    			Cooldown 0 //Time between each weapon switch (Default: 10)
+                    			Repeats 1 //How many times should bot switch weapons in total (Default: 0 - Infinite)
+					Type "Melee" // Weapon slot, possible values:
+					IfHealthBelow 30000 //When set, the task activates only when the bot health is below specified value
+				}
+				WeaponSwitch    //Periodically switches weapon
+                		{
+                    			Delay 1 //Time before the first weapon switch starts (Default: 10)
+                    			Cooldown 0 //Time between each weapon switch (Default: 10)
+                    			Repeats 1 //How many times should bot switch weapons in total (Default: 0 - Infinite)
+					Type "Primary" // Weapon slot, possible values:
+					IfHealthBelow 15000 //When set, the task activates only when the bot health is below specified value
+				}
+						ItemAttributes //HomingPattern
+						{
+							ItemName "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+							"is australium item" 1 // Australium description
+							"item style override" 1 // Australium variant
+							"turn to gold" 1 // Victims turn to gold
+							"faster reload rate" 0.15
+							"fire rate bonus" 0.6
+							"damage bonus" 1.25
+							"Projectile speed increased"	1
+							"projectile spread angle penalty" 20
+							"clip size upgrade atomic" 16.0
+							"blast radius increased" 0.5
+							"mod projectile heat seek power" 14 //Sigmo only
+							"mod projectile heat aim error" 360
+							"projectile trail particle" eyeboss_projectile
+							"fire rate bonus with reduced health" 0.5
+							"bleeding duration" 4
+						}
+						ItemAttributes //BisonEverwhereRapidfirePattern
+						{
+							ItemName "The Righteous Bison"
+							"faster reload rate" -0.8
+							"fire rate bonus" 0.1
+							"set item tint rgb" 		8208497
+							"Projectile speed increased"	1.25
+							"projectile spread angle penalty" 20
+							"mult projectile count" 2
+							"mod projectile heat seek power" 20 //Sigmo only
+							"mod projectile heat aim error" 360
+							"move speed bonus"	1.5
+							"provide on active" 1
+						}
+						ItemAttributes
+						{
+							ItemName "The Equalizer"
+							"damage bonus" 1.6
+							"fire rate bonus" 0.9
+							"heal on hit for rapidfire" 100
+							"heal on kill" 1700
+							"speed boost when active" 1
+							"bleeding duration" 16
+							"melee range multiplier" 1.5
+							"move speed bonus"	2.5
+							"dmg taken increased" 0.05 
+   		 					"dmg from melee increased" 120
+   							"dmg from ranged reduced" 25
+							"damage causes airblast" 1
+							"dmg bonus vs buildings" 2.5
+						}
+						CharacterAttributes
+						{
+							"move speed bonus"	0.5
+							"damage force reduction" 0.1
+							"airblast vulnerability multiplier" 0.05
+							"override footstep sound set" 3
+							"health regen"	15
+							"airblast vertical vulnerability multiplier" 0.05
+							"rage giving scale" 0.03
+							"increased jump height" 2
+							"dmg taken increased" 0.05 
+   		 					"dmg from melee increased" 40
+   							"dmg from ranged reduced" 20
+							"head scale" 1.2
+							"boots falling stomp" 1
+							"health from healers reduced" 0.1
+							"rocket jump damage reduction" 0.01
+							"deploy time decreased" 0.1
+							"dmg taken from fire increased" 1.75
+						}
+					}
+				}
+			}
+		}
+
+
+		WaveSpawn // The BEAST'S RETURN (0)
+		{
+			Where spawnbot	
+			Name "Wee Beastie"
+			TotalCount 1	
+			MaxActive 1						
+			SpawnCount 1									
+			WaitBetweenSpawnsAfterDeath 60
+			WaitBeforeStarting 10
+			TotalCurrency 0
+			Support 1
+			TFBot
+			{
+				Class Soldier
+				ClassIcon Soldier_The_Beast
+				Skill Expert
+				Scale 1.5
+				Item "War Head"
+				Attributes UseBossHealthBar
+				Attributes HoldFireUntilFullReload
+				Name "Wee Beastie"
+				Attributes IgnoreFlag
+				Action Mobber  
+				Health 1000
+				EventChangeAttributes
+				{
+					Default
+					{
+						Skill Expert
+					
+						WeaponRestrictions  PrimaryOnly
+						Tag attrbot
+						Skill Expert
+						MaxVisionRange 3500
+						Item "The Beggar's Bazooka"
+						Item "The Equalizer"
+						Item "War Head"
+						Attributes UseBossHealthBar
+						Attributes HoldFireUntilFullReload
+						ItemAttributes
+						{
+							ItemName "The Beggar's Bazooka"
+							"faster reload rate" 0.4
+							"fire rate bonus" 0.07
+							"damage bonus" 0.8
+							"clip size upgrade atomic" 2.0
+							"mult projectile count" 1
+							"projectile spread angle penalty" 16
+							"Projectile speed increased" 0.5
+							"blast radius increased" 1
+							"bleeding duration" 2
+							"mod projectile heat seek power" 5 //Sigmo only
+							"mod projectile heat aim error" 360
+							"projectile trail particle" eyeboss_projectile
+						}
+						CharacterAttributes
+						{
+							"can overload" -1
+							"auto fires full clip" -1
+							"move speed bonus"	0.75
+							"damage force reduction" 0.8
+							"airblast vulnerability multiplier" 0.3
+							"health regen"	2
+							"airblast vertical vulnerability multiplier" 0.8
+							"rage giving scale" 0.03
+							"increased jump height" 1.2
+							"dmg taken increased" 0.05 
+   		 					"dmg from melee increased" 40
+   							"dmg from ranged reduced" 20
+							"head scale" 1.2
+							"boots falling stomp" 1
+							"health from healers reduced" 0.1
+							"rocket jump damage reduction" 0.01
+							"dmg taken from fire increased" 1.75
+						}
+					}
+
+					BotAttributes1
+					{
+						Skill Expert
+						
+						WeaponRestrictions  SecondaryOnly
+						Tag attrbot
+						Skill Expert
+						MaxVisionRange 3500
+						Item "The Beggar's Bazooka"
+						Item "The Equalizer"
+						Item "War Head"
+						Attributes UseBossHealthBar
+						Attributes HoldFireUntilFullReload
+						ItemAttributes
+						{
+							ItemName "TF_WEAPON_SHOTGUN_SOLDIER"
+							"damage bonus" 0.25
+							"projectile penetration" 4.0
+							"bullets per shot bonus" 2
+							"clip size upgrade atomic" 1.0
+							"faster reload rate" 0.6
+							"fire rate bonus" 0.5
+							"bleeding duration" 1
+						}
+						CharacterAttributes
+						{
+							//"can overload" -1
+							//"auto fires full clip" -1
+							"move speed bonus"	0.75
+							"damage force reduction" 0.8
+							"airblast vulnerability multiplier" 0.3
+							"health regen"	2
+							"airblast vertical vulnerability multiplier" 0.8
+							"rage giving scale" 0.03
+							"increased jump height" 1.2
+							"dmg taken increased" 0.05 
+   		 					"dmg from melee increased" 40
+   							"dmg from ranged reduced" 20
+							"head scale" 1.2
+							"boots falling stomp" 1
+							"health from healers reduced" 0.1
+							"rocket jump damage reduction" 0.01
+							"dmg taken from fire increased" 1.75
+						}
+					}
+					BotAttributes2
+					{
+						Skill Expert
+						
+						WeaponRestrictions  MeleeOnly
+						Tag attrbot
+						Skill Expert
+							
+						Item "The Beggar's Bazooka"
+						Item "The Equalizer"
+						Item "War Head"
+						Attributes UseBossHealthBar
+						Attributes HoldFireUntilFullReload
+						ItemAttributes
+						{
+							ItemName "The Equalizer"
+							"damage bonus" 1
+							"fire rate bonus" 0.9
+							"heal on hit for rapidfire" 100
+							"heal on kill" 300
+							"speed boost when active" 1
+							"bleeding duration" 4
+							"melee range multiplier" 1.5
+							"move speed bonus"	2.7
+							"dmg taken increased" 0.05 
+   		 					"dmg from melee increased" 120
+   							"dmg from ranged reduced" 25
+						}
+						CharacterAttributes
+						{
+							//"can overload" -1
+							//"auto fires full clip" -1
+							"move speed bonus"	0.75
+							"damage force reduction" 0.8
+							"airblast vulnerability multiplier" 0.3
+							"health regen"	2
+							"airblast vertical vulnerability multiplier" 0.8
+							"rage giving scale" 0.03
+							"increased jump height" 1.2
+							"dmg taken increased" 0.05 
+   		 					"dmg from melee increased" 40
+   							"dmg from ranged reduced" 20
+							"head scale" 1.2
+							"boots falling stomp" 1
+							"health from healers reduced" 0.1
+							"rocket jump damage reduction" 0.01
+							"dmg taken from fire increased" 1.75
+						}
+					}
+
+					BotAttributes3
+					{
+						Skill Expert
+						
+						WeaponRestrictions  PrimaryOnly
+						Tag attrbot
+						Skill Expert
+						MaxVisionRange 3500
+						Item "The Beggar's Bazooka"
+						Item "The Equalizer"
+						Item "War Head"
+						Attributes UseBossHealthBar
+						Attributes HoldFireUntilFullReload
+						ItemAttributes
+						{
+							ItemName "The Beggar's Bazooka"
+							"faster reload rate" 0.01
+							"fire rate bonus" 0.1
+							"damage bonus" 0.75
+							"clip size upgrade atomic" 12.0
+							"projectile spread angle penalty" 120
+							"Projectile speed increased" 0.7
+							"blast radius increased" 0.8
+							"bleeding duration" 7
+							"mod projectile heat seek power" 7.5 //Sigmo only
+							"mod projectile heat aim error" 360
+							"projectile trail particle" eyeboss_projectile
+							"rocket jump damage reduction" 0.01
+						}
+						CharacterAttributes
+						{
+							"can overload" -1
+							"auto fires full clip" -1
+							"move speed bonus"	0.75
+							"damage force reduction" 0.8
+							"airblast vulnerability multiplier" 0.3
+							"health regen"	2
+							"airblast vertical vulnerability multiplier" 0.8
+							"rage giving scale" 0.03
+							"increased jump height" 1.2
+							"dmg taken increased" 0.05 
+   		 					"dmg from melee increased" 40
+   							"dmg from ranged reduced" 20
+							"head scale" 1.2
+							"boots falling stomp" 1
+							"health from healers reduced" 0.1
+							"rocket jump damage reduction" 0.01
+							"dmg taken from fire increased" 1.75
+						}
+					}
+				}
+			}
+		}
+	}
+
+// Phase 3 & 4 ////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// The BEAST'S LAST STAND (0)
+// Support Red True Soldier Squad Head (0)
+// -------------------------------
+// The Beast dies (10000)
+///////////////////////////////////////////////////////////////////////////
+
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}	
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+
+		Checkpoint Yes
+
+		RedTeamWipeCausesWaveLoss 1   //If red team is wiped, it loses
+		
+		Explanation    //Dispayed once the wave is initialized
+		{
+			Line "{green}It's overclocked itself. It seems like it's getting a little unstable."
+			Line "{green}We managed to reprogram a cool robot with battalions backup."
+			Line "{green}Don't all die. That's how you lose."
+		}
+		
+		WaveSpawn
+		{
+			TotalCount 0
+			TotalCurrency 0
+			WaitBeforeStarting 10
+			FirstSpawnOutput
+			{
+				Target bot_attributes_random10_relay
+				Action Trigger
+			}
+		}
+		
+		
+		WaveSpawn // The BEAST'S LAST STAND (0)
+		{
+			Where spawnbot	
+			Name "W1_A"
+			TotalCount 1	
+			MaxActive 1						
+			SpawnCount 1									
+			WaitBetweenSpawns 0
+			WaitBeforeStarting 0
+			TotalCurrency 0
+			TFBot
+			{
+				Template T_TFBot_The_Beast_DummyInfo
+				Tag botcontrol_block
+				Tag giant
+				Name "THE BEAST'S LAST STAND!"
+				Health 32000
+				Attributes AlwaysCrit
+				EventChangeAttributes
+				{
+					Default
+					{
+						Skill Expert
+					
+						WeaponRestrictions  PrimaryOnly
+						Tag attrbot
+						Skill Expert
+						MaxVisionRange 3500
+						Item "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+						Item "The Equalizer"
+						Attributes AlwaysCrit
+						Item "War Head"
+						Attributes UseBossHealthBar
+						Attributes MiniBoss
+						Attributes HoldFireUntilFullReload
+						ItemAttributes
+						{
+							ItemName "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+							"is australium item" 1 // Australium description
+							"item style override" 1 // Australium variant
+							"turn to gold" 1 // Victims turn to gold
+							"faster reload rate" 0.4
+							"fire rate bonus" 0.07
+							"damage bonus" 1.5
+							"clip size upgrade atomic" 2.0
+							"mult projectile count" 3
+							"projectile spread angle penalty" 16
+							"Projectile speed increased" 0.55
+							"blast radius increased" 1.2
+							"bleeding duration" 4
+							"mod projectile heat seek power" 5 //Sigmo only
+							"mod projectile heat aim error" 360
+							"projectile trail particle" eyeboss_projectile
+						}
+						CharacterAttributes
+						{
+							"move speed bonus"	0.4
+							"damage force reduction" 0.1
+							"airblast vulnerability multiplier" 0.05
+							"override footstep sound set" 3
+							"health regen"	15
+							"airblast vertical vulnerability multiplier" 0.05
+							"rage giving scale" 0.03
+							"increased jump height" 2
+							"dmg taken increased" 0.05 
+   		 					"dmg from melee increased" 40
+   							"dmg from ranged reduced" 20
+							"head scale" 1.2
+							"boots falling stomp" 1
+							"health from healers reduced" 0.1
+							"rocket jump damage reduction" 0.01
+						}
+					}
+
+					BotAttributes1
+					{
+						Skill Expert
+						
+						WeaponRestrictions  SecondaryOnly
+						Tag attrbot
+						Skill Expert
+						MaxVisionRange 3500
+						Item "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+						Item "The Equalizer"
+						Attributes AlwaysCrit
+						Item "War Head"
+						Attributes UseBossHealthBar
+						Attributes MiniBoss
+						Attributes HoldFireUntilFullReload
+						ItemAttributes
+						{
+							ItemName "TF_WEAPON_SHOTGUN_SOLDIER"
+							"damage bonus" 0.5
+							"projectile penetration" 4.0
+							"bullets per shot bonus" 3
+							"clip size upgrade atomic" 2.0
+							"faster reload rate" 0.38
+							"fire rate bonus" 0.3
+							"bleeding duration" 3
+						}
+						CharacterAttributes
+						{
+							"move speed bonus"	0.4
+							"damage force reduction" 0.1
+							"airblast vulnerability multiplier" 0.05
+							"override footstep sound set" 3
+							"health regen"	15
+							"airblast vertical vulnerability multiplier" 0.05
+							"rage giving scale" 0.03
+							"increased jump height" 2
+							"dmg taken increased" 0.05 
+   		 					"dmg from melee increased" 40
+   							"dmg from ranged reduced" 20
+							"head scale" 1.2
+							"boots falling stomp" 1
+							"health from healers reduced" 0.1
+						}
+					}
+					BotAttributes2
+					{
+						Skill Expert
+						
+						WeaponRestrictions  PrimaryOnly
+						Tag attrbot
+						Skill Expert
+						Attributes AlwaysCrit
+						Item "The Equalizer"
+						Item "War Head"
+						Item "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+						Attributes UseBossHealthBar
+						Attributes MiniBoss
+						Attributes HoldFireUntilFullReload
+						ItemAttributes //HomingPattern
+						{
+							ItemName "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+							"is australium item" 1 // Australium description
+							"item style override" 1 // Australium variant
+							"turn to gold" 1 // Victims turn to gold
+							"faster reload rate" 0.2
+							"fire rate bonus" 0.66
+							"damage bonus" 1.2
+							"Projectile speed increased"	1.1
+							"projectile spread angle penalty" 20
+							"clip size upgrade atomic" 12.0
+							"blast radius increased" 0.5
+							"mod projectile heat seek power" 14 //Sigmo only
+							"mod projectile heat aim error" 360
+							"projectile trail particle" eyeboss_projectile
+							"fire rate bonus with reduced health" 0.75
+							"bleeding duration" 3
+						}
+						CharacterAttributes
+						{
+							"move speed bonus"	0.4
+							"damage force reduction" 0.1
+							"airblast vulnerability multiplier" 0.3
+							"override footstep sound set" 3
+							"health regen"	15
+							"airblast vertical vulnerability multiplier" 0.2
+							"rage giving scale" 0.1
+							"increased jump height" 2
+							"dmg taken increased" 0.05 
+   		 					"dmg from melee increased" 40
+   							"dmg from ranged reduced" 20
+							"head scale" 1.2
+							"boots falling stomp" 1
+							"health from healers reduced" 0.1
+						}
+					}
+
+					BotAttributes3
+					{
+						Skill Expert
+						
+						WeaponRestrictions  PrimaryOnly
+						Tag attrbot
+						Skill Expert
+						MaxVisionRange 3500
+						Item "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+						Item "The Equalizer"
+						Item "War Head"
+						Attributes AlwaysCrit
+						Attributes UseBossHealthBar
+						Attributes MiniBoss
+						Attributes HoldFireUntilFullReload
+						ItemAttributes
+						{
+							ItemName "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+							"is australium item" 1 // Australium description
+							"item style override" 1 // Australium variant
+							"turn to gold" 1 // Victims turn to gold
+							"faster reload rate" 0.01
+							"fire rate bonus" 0.01
+							"damage bonus" 2
+							"clip size upgrade atomic" 87.0
+							"projectile spread angle penalty" 120
+							"Projectile speed increased" 0.7
+							"blast radius increased" 1.6
+							"bleeding duration" 7
+							"mod projectile heat seek power" 7.5 //Sigmo only
+							"mod projectile heat aim error" 360
+							"projectile trail particle" eyeboss_projectile
+							"rocket jump damage reduction" 0.01
+						}
+						CharacterAttributes
+						{
+							"move speed bonus"	0.4
+							"damage force reduction" 0.1
+							"airblast vulnerability multiplier" 0.05
+							"override footstep sound set" 3
+							"health regen"	15
+							"airblast vertical vulnerability multiplier" 0.05
+							"rage giving scale" 0.03
+							"increased jump height" 2
+							"dmg taken increased" 0.05 
+   		 					"dmg from melee increased" 40
+   							"dmg from ranged reduced" 20
+							"head scale" 1.2
+							"boots falling stomp" 1
+							"health from healers reduced" 0.1
+							"rocket jump damage reduction" 0.01
+							"dmg taken from fire increased" 2.5
+						}
+					}
+				}
+			}
+		}
+
+		WaveSpawn // The Beast dies (10000)
+		{
+			Where spawnbot	
+			Name "W1_B"
+			WaitForAllDead "W1_A"
+			TotalCount 1	
+			MaxActive 1						
+			SpawnCount 1									
+			WaitBetweenSpawns 0
+			WaitBeforeStarting 0
+			TotalCurrency 0
+			TFBot
+			{
+				Template T_TFBot_The_Beast_DummyInfo
+				Tag botcontrol_block
+				Tag giant
+				Name "THE BEAST'S DEATH THROES!"
+				Health 78000
+				Item "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+				ItemAttributes //RocketWallPattern
+				{
+					ItemName "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+					"is australium item" 1 // Australium description
+					"item style override" 1 // Australium variant
+					"turn to gold" 1 // Victims turn to gold
+					"faster reload rate" -0.8
+					"fire rate bonus" 0.18
+					"damage bonus" 2.5
+					"Projectile speed increased"	0.65
+					"projectile spread angle penalty" 120
+					"mult projectile count" 18
+					"blast radius increased" 1.25
+					"bleeding duration" 7
+					"mod projectile heat seek power" 1 //Sigmo only
+					"mod projectile heat aim error" 360
+				}
+				CharacterAttributes
+				{
+					"move speed bonus"	0.65
+					"damage force reduction" 0.1
+					"airblast vulnerability multiplier" 0.05
+					"override footstep sound set" 3
+					"health regen"	-1000
+					"airblast vertical vulnerability multiplier" 0.05
+					"rage giving scale" 0.03
+					"increased jump height" 2
+					"dmg taken increased" 0.1 
+   		 			"dmg from melee increased" 40
+   					"dmg from ranged reduced" 20
+					"head scale" 1.2
+					"boots falling stomp" 1
+					"health from healers reduced" 0.1
+					"rocket jump damage reduction" 0.2
+					"dmg taken from fire increased" 4
+				}
+			}
+		}
+
+		WaveSpawn // True Soldier Squad Head (0)
+		{
+			Where SSH
+			Name "TSSH"
+			TotalCount 1	
+			MaxActive 1						
+			SpawnCount 1									
+			WaitBetweenSpawnsAfterDeath 60
+			WaitBeforeStarting 2
+			TotalCurrency 0
+			Support 1
+			TFBot
+			{
+				Template T_TFBot_TrueSSH
+			}
+		}
+	}
+
+}

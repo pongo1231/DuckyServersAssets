@@ -1,0 +1,712 @@
+#base robot_giant.pop
+#base robot_standard.pop
+WaveSchedule
+{
+	StartingCurrency		5000
+	RespawnWaveTime 		3
+	CanBotsAttackWhileInSpawnRoom no
+	FixedRespawnWaveTime Yes
+	Mission
+	{
+		Objective DestroySentries
+
+		InitialCooldown 120
+		Where	spawn_blueAGiant
+		Where	spawn_blueA2Giant
+		Where	spawn_blueBGiant
+		Where	spawn_blueCGiants
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		CooldownTime 120
+		TFBot
+		{
+			Template T_TFBot_SentryBuster
+			Tag bot_giant
+		}
+	}
+	Mission
+	{
+		Objective Spy  
+
+		InitialCooldown 180
+		Where	spawn_blueA
+		Where	spawn_blueA2
+		Where	spawn_blueB
+		Where	spawn_blueC
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		CooldownTime 180
+		DesiredCount 2
+		TFBot
+		{
+			Class Spy
+			Skill Expert
+			Name Spy
+		}
+	}	
+	Mission
+	{
+		Objective Sniper
+
+		InitialCooldown 120
+		Where	spawn_blueA
+		Where	spawn_blueA2
+		Where	spawn_blueB
+		Where	spawn_blueC
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		CooldownTime 210
+		DesiredCount 2
+		TFBot
+		{
+			Class Sniper
+			Skill Hard
+			Name Sniper
+			MaxVisionRange 3000
+		}
+	}
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			Name "wave01"
+			Where	spawn_blueA
+			Where	spawn_blueA2
+			Where	spawn_blueB
+			Where	spawn_blueC
+			TotalCount 30
+			MaxActive 10
+			SpawnCount 10
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 300
+			TFBot
+			{
+				Template T_TFBot_Scout_Bonk
+				Attributes AlwaysCrit
+				Item "Point and Shoot"
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave01"
+			Where	spawn_blueA
+			Where	spawn_blueA2
+			Where	spawn_blueB
+			Where	spawn_blueC
+			TotalCount 32
+			MaxActive 8
+			SpawnCount 8
+			WaitBeforeStarting 3
+			WaitBetweenSpawns 7
+			TotalCurrency 200
+			TFBot
+			{
+				Class Pyro
+				Skill Easy
+				Attributes AlwaysFireWeapon
+				Item "Old Guadalajara"
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave01"
+			Where	spawn_blueAGiant
+			Where	spawn_blueA2Giant
+			Where	spawn_blueBGiant
+			Where	spawn_blueCGiants
+			TotalCount 12
+			MaxActive 4
+			SpawnCount 4
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 5
+			TotalCurrency 200
+			TFBot
+			{
+				Template T_TFBot_Giant_DemoMan_PrinceTavish
+				Tag bot_giant
+				Attributes AlwaysCrit
+				Item "Spine-Chilling Skull"
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave02"
+			Where	spawn_blueAGiant
+			Where	spawn_blueA2Giant
+			Where	spawn_blueBGiant
+			Where	spawn_blueCGiants
+			TotalCount 20
+			MaxActive 20
+			SpawnCount 4
+			WaitForAllDead "wave01"
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 2
+			TotalCurrency 400
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Crit
+					Tag bot_giant
+					Item "Idiot box"
+					Item "Shoestring Budget"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Item "The Warsworn Helmet"
+					Tag bot_giant
+				}
+			}
+		}
+		WaveSpawn 
+		{
+			Name "wave03"
+			Where	spawn_blueA
+			Where	spawn_blueA2
+			Where	spawn_blueB
+			Where	spawn_blueC
+			TotalCount 40
+			MaxActive 10
+			SpawnCount 5
+			WaitForAllDead "wave02"
+			WaitBeforeStarting 8
+			WaitBetweenSpawns 2
+			TotalCurrency 300
+			TFBot
+			{
+				Class Soldier
+				Skill Easy
+				Item "Defiant Spartan"
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave03"
+			Where	spawn_blueA
+			Where	spawn_blueA2
+			Where	spawn_blueB
+			Where	spawn_blueC
+			TotalCount 40
+			MaxActive 10
+			SpawnCount 5
+			WaitForAllDead "wave02"
+			WaitBeforeStarting 8
+			WaitBetweenSpawns 2
+			TotalCurrency 300
+			TFBot
+			{
+				Class Heavyweapons
+				Skill Easy
+				Item "Point and Shoot"
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave03"
+			Where	spawn_blueAGiant
+			Where	spawn_blueA2Giant
+			Where	spawn_blueBGiant
+			Where	spawn_blueCGiants
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitForAllDead "wave02"
+			WaitBeforeStarting 8
+			WaitBetweenSpawns 30
+			TotalCurrency 200
+			TFBot
+			{
+				Template T_TFBot_Giant_Soldier_Spammer
+				Tag bot_giant
+				Item "Idiot box"
+				Item "Shoestring Budget"
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave03"
+			Where	spawn_blueAGiant
+			Where	spawn_blueA2Giant
+			Where	spawn_blueBGiant
+			Where	spawn_blueCGiants
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitForAllDead "wave02"
+			WaitBeforeStarting 8
+			WaitBetweenSpawns 30
+			TotalCurrency 200
+			TFBot
+			{
+				Template T_TFBot_Giant_Heavyweapons
+				Tag bot_giant
+				Item "Point and shoot"
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave04"
+			Where	spawn_blueA
+			Where	spawn_blueA2
+			Where	spawn_blueB
+			Where	spawn_blueC
+			RandomSpawn 1
+			TotalCount 80
+			MaxActive 10
+			SpawnCount 5
+			WaitForAllDead "wave03"
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 8
+			TotalCurrency 600
+			TFBot
+			{
+				Class Scout
+				Skill Easy
+				Attributes AlwaysCrit
+				Item "Point and Shoot"
+			}
+		}
+		WaveSpawn 
+		{
+			Name "wave04"
+			TotalCount 3
+			WaitForAllDead "wave03"
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 50
+			TotalCurrency 600
+			FirstSpawnOutput
+			{
+				Target boss_spawn_relay
+				Action TriggeR
+			}
+			Tank
+			{
+				Health 35000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_1"
+				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay 
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave05"
+			Where	spawn_blueAGiant
+			Where	spawn_blueA2Giant
+			Where	spawn_blueBGiant
+			Where	spawn_blueCGiants
+			TotalCount 40
+			MaxActive 10
+			SpawnCount 5
+			WaitForAllDead "wave04"
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 10
+			TotalCurrency 500
+			TFBot
+			{
+				Template T_TFBot_Giant_Demo_RapidFire
+				Item "Spine-Chilling Skull"
+				Tag bot_giant
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave05"
+			Where	spawn_blueA
+			Where	spawn_blueA2
+			Where	spawn_blueB
+			Where	spawn_blueC
+			TotalCount 40
+			MaxActive 5
+			SpawnCount 5
+			WaitForAllDead "wave04"
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 8
+			TotalCurrency 500
+			TFBot
+			{
+				Template T_TFBot_Demoman_Knight
+				Attributes AlwaysCrit
+				Item "Spine-Chilling Skull"
+			}
+		}
+		WaveSpawn 
+		{
+			Name "wave05"
+			TotalCount 1
+			WaitForAllDead "wave04"
+			WaitBeforeStarting 55
+			WaitBetweenSpawns 0
+			TotalCurrency 600
+			FirstSpawnOutput
+			{
+				Target boss_spawn_relay
+				Action Trigger
+			}
+			Tank
+			{
+				Health 40000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_1"
+				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay 
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave06a"
+			Where	spawn_blueA
+			Where	spawn_blueA2
+			Where	spawn_blueB
+			Where	spawn_blueC
+			RandomSpawn 1
+			TotalCount 40
+			MaxActive 20
+			SpawnCount 10
+			WaitForAllDead "wave05"
+			WaitBeforeStarting 15
+			WaitBetweenSpawns 2
+			TotalCurrency 300
+			TFBot
+			{
+				Class Soldier
+				Skill Expert
+				WeaponRestrictions PrimaryOnly
+				Item "The Direct Hit"
+				Item "The Buff Banner"
+				Item "Defiant Spartan"
+				classicon soldier_buff
+				Attributes SpawnWithFullCharge
+				ItemAttributes
+				{
+					ItemName "The Direct Hit"
+					"damage bonus"	2.0 
+				}
+				CharacterAttributes 
+				{
+					"increase buff duration"	9.0
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave06b"
+			Where	spawn_blueAGiant
+			Where	spawn_blueA2Giant
+			Where	spawn_blueBGiant
+			Where	spawn_blueCGiants
+			TotalCount 8
+			MaxActive 8
+			SpawnCount 2
+			WaitForAllSpawned "wave06a"
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 30
+			TotalCurrency 400
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons_Deflector
+					Tag bot_giant
+					Attributes AlwaysCrit
+					Item "Point and Shoot"
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic
+					Item "The Warsworn Helmet"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave07"
+			TotalCount 4
+			WaitForAllDead "wave06b"
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 35
+			TotalCurrency 1100
+			FirstSpawnOutput
+			{
+				Target boss_spawn_relay
+				Action Trigger
+			}
+			Tank
+			{
+				Health 42000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_1"
+				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}				
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave07"
+			Where	spawn_blueA
+			Where	spawn_blueA2
+			Where	spawn_blueB
+			Where	spawn_blueC
+			TotalCount 96
+			MaxActive 16
+			SpawnCount 8
+			WaitForAllDead "wave06b"
+			WaitBeforeStarting 40
+			WaitBetweenSpawns 5
+			TotalCurrency 200
+			TFBot
+			{
+				Class Spy
+				Skill Expert
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave08a"
+			Where	spawn_blueA
+			Where	spawn_blueA2
+			Where	spawn_blueB
+			Where	spawn_blueC
+			RandomSpawn 1
+			TotalCount 75
+			MaxActive 20
+			SpawnCount 5
+			WaitForAllDead "wave07"
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 1
+			TotalCurrency 300
+			TFBot
+			{
+				Template T_TFBot_Sniper_Huntsman
+				Skill Expert
+				Item "Larrikin Robin"
+				Attributes AlwaysCrit
+				ItemAttributes
+				{
+					ItemName "The Huntsman"
+					"damage bonus"	1.5
+					"faster reload rate" 0.2
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave08b"
+			Where	spawn_blueA
+			Where	spawn_blueA2
+			Where	spawn_blueB
+			Where	spawn_blueC
+			RandomSpawn 1
+			TotalCount 75
+			MaxActive 20
+			SpawnCount 5
+			WaitForAllSpawned "wave08a"
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 1
+			TotalCurrency 300
+			TFBot
+			{
+				Class Soldier
+				Skill Expert
+				Attributes AlwaysCrit
+				Item "Defiant Spartan"
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_ROCKETLAUNCHER"
+					"damage bonus"	2.0
+					"faster reload rate" -0.8
+					"fire rate bonus" 0.6
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave08c"
+			Where	spawn_blueA
+			Where	spawn_blueA2
+			Where	spawn_blueB
+			Where	spawn_blueC
+			RandomSpawn 1
+			TotalCount 75
+			MaxActive 20
+			SpawnCount 5
+			WaitForAllSpawned "wave08b"
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 1
+			TotalCurrency 200
+			TFBot
+			{
+				Class Demoman
+				Skill Expert
+				Attributes AlwaysCrit
+				Item "Spine-Chilling Skull"
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_GRENADELAUNCHER"
+					"damage bonus"	2.0
+					"faster reload rate" -0.8
+					"Projectile speed increased" 2.0
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave08d"
+			Where	spawn_blueA
+			Where	spawn_blueA2
+			Where	spawn_blueB
+			Where	spawn_blueC
+			RandomSpawn 1
+			TotalCount 75
+			MaxActive 20
+			SpawnCount 5
+			WaitForAllSpawned "wave08c"
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 1
+			TotalCurrency 200
+			TFBot
+			{
+				Class Pyro
+				Skill Expert
+				Attributes AlwaysCrit
+				classicon pyro_crit
+				Item "Old Guadalajara"
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_FLAMETHROWER"
+					"damage bonus"	2.0
+				}
+				CharacterAttributes
+				{
+					
+					"move speed bonus"	1.5
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave08e"
+			Where	spawn_blueA
+			Where	spawn_blueA2
+			Where	spawn_blueB
+			Where	spawn_blueC
+			RandomSpawn 1
+			TotalCount 75
+			MaxActive 20
+			SpawnCount 5
+			WaitForAllSpawned "wave08d"
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 1
+			TotalCurrency 200
+			TFBot
+			{
+				Class Scout
+				Skill Expert
+				Attributes AlwaysCrit
+				Item "Point and Shoot"
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave08f"
+			Where	spawn_blueA
+			Where	spawn_blueA2
+			Where	spawn_blueB
+			Where	spawn_blueC
+			RandomSpawn 1
+			TotalCount 48
+			MaxActive 22
+			SpawnCount 4
+			WaitForAllSpawned "wave08e"
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 1
+			TotalCurrency 200
+			Squad
+			{
+				TFBot
+				{
+					Class Heavyweapons
+					Skill Expert
+					Attributes AlwaysCrit
+					Item "Point and Shoot"
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_MINIGUN"
+						"damage bonus"	1.5
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Item "The Warsworn Helmet"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave08g"
+			TotalCount 1
+			WaitForAllDead "wave08d"
+			WaitBeforeStarting 20
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+			FirstSpawnOutput
+			{
+				Target boss_spawn_relay
+				Action Trigger
+			}
+			Tank
+			{
+				Health 60000
+				Speed 75
+				Name "tankboss"
+				Skin 1
+				StartingPathTrackNode "boss_path_1"
+				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+	}	
+}

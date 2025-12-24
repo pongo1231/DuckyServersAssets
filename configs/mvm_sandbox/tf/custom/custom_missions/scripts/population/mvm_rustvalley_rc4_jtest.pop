@@ -1,0 +1,63 @@
+#base robot_standard.pop
+#base robot_giant.pop
+
+WaveSchedule
+{
+    StartingCurrency 800
+    CanBotsAttackWhileInSpawnRoom no
+    RespawnWaveTime 5
+    AddSentryBusterWhenDamageDealtExceeds 3000
+    AddSentryBusterWhenKillCountExceeds 15
+    Advanced 1
+    EventPopfile Halloween
+    Spawntemplate "m_m"
+
+    PointTemplates
+    {
+        m_m
+        {
+            NoFixup 1
+            OnSpawnOutput
+            {
+                Target "@f@fuckoffromevision@prop_dynamic"
+                Action $SetModelOverride
+                Param "models/bots/boss_bot/carrier_parts.mdl"
+                Delay 0.01
+            }
+            $filter_datamap
+            {
+                "targetname" "fuckoffromevision"
+                "$name" "m_iHammerID"
+                "$value" "48179"
+            }
+        }
+    }
+
+    Wave // Wave 1
+    {
+        StartWaveOutput
+        {
+            Target wave_start_relay
+            Action Trigger
+        }
+        DoneOutput
+        {
+            Target wave_finished_relay
+            Action Trigger
+        }
+        
+		WaveSpawn
+		{
+			//Where spawnbot
+			TotalCount 0
+			WaitBeforeStarting 9999
+            RandomChoice
+            {
+                RandomChoice
+                {
+			        TFBot { Class Scout ClassIcon hellmet_blank }
+                }
+            }
+		}
+    }
+}

@@ -1,0 +1,3522 @@
+#base robot_standard.pop
+#base robot_giant.pop
+#base robot_spacejockey.pop
+
+i_eat_tomboys_for_breakfast
+{
+    StartingCurrency 800
+    CanBotsAttackWhileInSpawnRoom no
+    RespawnWaveTime 999
+    FixedRespawnWaveTime Yes
+    AddSentryBusterWhenDamageDealtExceeds 1000000
+    AddSentryBusterWhenKillCountExceeds 10000
+
+    BotsAreHumans 1  					 
+	BuybacksPerWave 0 	 				 
+	BodyPartScaleSpeed 100 	 			 
+	BuybacksPerWave 0  					 
+	BotHumansHaveRobotVoice 0  
+   // ExtendedUpgradesOnly 1    
+    StandableHeads 1   //If set, robots will not push the players of their heads (default: 0)
+	ForceHoliday 2   	 
+	NoHolidayPickups 1    
+	NoCritPumpkin 1  
+	BonusRatioHalf 2  	 
+	// BotPushaway 0   
+	NoRomevisionCosmetics 1   
+	NoReanimators 1  
+	BonusRatioFull 2   
+	WaveStartCountdown 3  
+    MinibossSentrySingleKill 1  
+    RobotLimit 27  
+    FixedBuybacks 1	 
+    GrapplingHook 1  
+	DisplayRobotDeathNotice 1  
+	SendBotsToSpectatorImmediately 1  
+	NoJoinMidwave 1  
+	TextPrintTime 0  
+	MaxTotalPlayers 6  
+	MaxSpectators 0  
+	DeathPenalty 200    //Player will lose this many credits after dying
+
+	CustomUpgradesFile "mvm_upgrades_xeno.txt"  
+
+	PrecacheModel "models/props_halloween/ghost.mdl"  
+	PrecacheModel "models/community/player/items/medic/scientist_head_3/scientist_head_3.mdl"  
+	PrecacheModel "models/weapons/c_models/c_gamma_gazer/c_gamma_gazer_1.mdl"  
+	PrecacheModel "models/props_combine/combine_barricade_tall01b.mdl"  
+	PrecacheModel "models/props_island/mannco_case_small.mdl"  
+	PrecacheModel "models/props_frontline/ammocrate_2.mdl"  
+	PrecacheModel "models/props_frontline/ammocrate_1.mdl"  
+	PrecacheModel "models/workshop/weapons/c_models/c_uberdosis/c_crusaders_crossbow.mdl"  
+
+	PrecacheSound "isolation_main.mp3"  
+	PrecacheSound "alien_reveal.mp3"  
+	PrecacheSound "transitdelay.mp3"  
+	PrecacheSound "xeno_screech.wav"  
+	PrecacheSound "physics/flesh/flesh_squishy_impact_hard3.wav"  
+	PrecacheSound "npc/zombie/zombie_pain5.wav"  
+	PrecacheSound "npc/headcrab/pain1.wav"  
+	PrecacheSound "npc/headcrab/die2.wav"  
+	PrecacheSound "npc/ichthyosaur/attack_growl1.wav"  
+	PrecacheSound "npc/ichthyosaur/attack_growl2.wav"  
+	PrecacheSound "npc/ichthyosaur/attack_growl3.wav"  
+	PrecacheSound "npc/antlion_guard/angry3.wav"  
+	PrecacheSound "npc/antlion_guard/antlion_guard_die1.wav"  
+	PrecacheSound "npc/ichthyosaur/snap.wav"  
+	PrecacheSound "weapons/crossbow/fire1.wav"  
+	PrecacheSound "ambient/explosions/exp1.wav"  
+	PrecacheSound "ambient/materials/metal_rattle.wav"  
+	PrecacheSound "ambient/materials/metal_rattle2.wav"  
+	PrecacheSound "ambient/materials/metal_stress1.wav"  
+	PrecacheSound "ambient/materials/metal_stress4.wav"  
+	PrecacheSound "ambient/lair/crocs_growl1.wav"  
+	PrecacheSound "ambient/lair/crocs_growl2.wav"  
+	PrecacheSound "ambient/lair/crocs_growl3.wav"  
+	PrecacheSound "ambient/lair/crocs_growl4.wav"  
+	PrecacheSound "ambient/lair/crocs_growl5.wav"  
+
+    DisableSound "heavy_mvm_giant_robot01"	 							 
+	DisableSound "heavy_mvm_giant_robot02"  								 
+	DisableSound "heavy_mvm_giant_robot03"  								 
+	DisableSound "heavy_mvm_giant_robot04"  								 
+	DisableSound "engineer_mvm_giant_robot01"  							 
+	DisableSound "engineer_mvm_giant_robot02"  							 
+	DisableSound "engineer_mvm_giant_robot03"  							 
+	DisableSound "soldier_mvm_giant_robot01"  							 
+	DisableSound "soldier_mvm_giant_robot02"  							 
+	DisableSound "soldier_mvm_giant_robot03"  							 
+	DisableSound "soldier_mvm_giant_robot04"  							 
+	DisableSound "medic_mvm_giant_robot01"	 							 
+	DisableSound "medic_mvm_giant_robot02"  								 
+	DisableSound "medic_mvm_giant_robot03"  								 
+	DisableSound "music.mvm_end_last_wave"	 							 
+	DisableSound "music.mvm_end_mid_wave"  								 
+	DisableSound "music.mvm_end_tank_wave"  								 
+	DisableSound "music.mvm_end_wave"  								 
+	DisableSound "music.mvm_lost_wave"  									 
+	DisableSound "music.mvm_start_last_wave"  							 
+	DisableSound "music.mvm_start_mid_wave"	  							 
+	DisableSound "music.mvm_start_tank_wave"  							 
+	DisableSound "music.mvm_start_wave"	 		
+	DisableSound "MVM.BombWarning"  						 
+	DisableSound "Announcer.MVM_Get_To_Upgrade"	 						 
+	DisableSound "Announcer.MVM_Spy_Alert"  								 
+	DisableSound "Announcer.mvm_spybot_death"  						 
+	DisableSound "Announcer.mvm_spybot_death_all"  						 
+	DisableSound "Announcer.MVM_First_Wave_Start"	 					 
+	DisableSound "Announcer.MVM_Wave_Start"	 							 
+	DisableSound "Announcer.MVM_Wave_End"  								 
+	DisableSound "Announcer.MVM_Wave_Lose"  								 
+	DisableSound "Announcer.MVM_Final_Wave_Start"  						 	
+	DisableSound "Announcer.MVM_Final_Wave_End"	 						 
+	DisableSound "Announcer.MVM_Robots_Planted"  							 
+	DisableSound "Announcer.MVM_All_Dead"  								 
+	DisableSound "Announcer.MVM_Bomb_Alert_Entered"	  					 
+	DisableSound "Announcer.MVM_Bomb_Alert_Near_Hatch"  					 
+	DisableSound "Announcer.MVM_Bomb_Alert_Deploying"  					 
+	DisableSound "Announcer.MVM_Sentry_Buster_Alert"  					 
+	DisableSound "Announcer.MVM_Sentry_Buster_Alert_Another"  			 
+	DisableSound "Announcer.MVM_General_Wave_Start"	  					 
+	DisableSound "Announcer.MVM_Game_Over_Loss"	 						 
+	DisableSound "Announcer.MVM_Tank_Planted"  							 
+	DisableSound "Announcer.MVM_Tank_Alert_Another"	 					 
+	DisableSound "Announcer.MVM_Tank_Alert_Multiple"  					 
+	DisableSound "Announcer.MVM_Tank_Alert_Halfway"	 					 
+	DisableSound "Announcer.MVM_Tank_Alert_Halfway_Multiple"  			 
+	DisableSound "Announcer.MVM_Tank_Alert_Near_Hatch"  					 
+	DisableSound "Announcer.MVM_Tank_Alert_Deploying"  
+
+    ItemWhitelist     //Only allows to use specified weapons below
+	{
+		Classname "tf_weapon_parachute"
+		Classname "tf_wearable"
+		Classname "saxxy"
+		Classname "tf_powerup_bottle"
+		Classname "tf_weapon_grapplinghook"
+		
+		Classname "tf_weapon_lunchbox_drink"
+		Classname "tf_weapon_jar_milk"
+		Classname "tf_weapon_cleaver"
+		Classname "tf_weapon_bat"
+		Classname "tf_weapon_bat_wood"
+		Classname "tf_weapon_bat_fish"
+		Classname "tf_weapon_bat_giftwrap"
+		
+		//Classname "tf_weapon_rocketlauncher" //TESTING ONLY
+		// Name      "Rocket Jumper"
+		Classname "tf_weapon_buff_item"
+		Classname "tf_weapon_shovel"
+		Classname "tf_weapon_katana"
+		
+		Name	  "The Detonator"
+		Classname "tf_weapon_flamethrower"
+		Classname "tf_weapon_jar_gas"
+		Classname "tf_weapon_flaregun"
+		Classname "tf_weapon_rocketpack"
+		Classname "tf_weapon_fireaxe"
+		Classname "tf_weapon_breakable_sign"
+		Classname "tf_weapon_slap"
+		
+		Name	  "The Loose Cannon"
+		Name      "Sticky Jumper"
+		Classname "tf_wearable_demoshield"
+		Classname "tf_weapon_bottle"
+		Classname "tf_weapon_sword"
+		Classname "tf_weapon_stickbomb"
+		
+		Classname "tf_weapon_lunchbox"
+		Classname "tf_weapon_fists"
+		
+		Classname "tf_weapon_shotgun"
+		Classname "tf_weapon_shotgun_primary"
+		Classname "tf_weapon_sentry_revenge"
+		Classname "tf_weapon_pistol"
+		Classname "tf_weapon_laser_pointer"
+		Classname "tf_weapon_mechanical_arm" // Short Circuit
+		Classname "tf_weapon_wrench"
+		Classname "tf_weapon_robot_arm" // Gunslinger
+		Classname "tf_weapon_builder" // Toolbox
+		Classname "tf_weapon_pda_engineer_build"
+		
+		Classname "tf_weapon_crossbow"
+		Classname "tf_weapon_syringegun_medic"
+		Classname "tf_weapon_bonesaw"
+		
+		Classname "tf_weapon_compound_bow"
+		Classname "tf_weapon_razorback"
+		Classname "tf_weapon_jar"
+		Classname "tf_weapon_club" // Now *this*, is a knife.
+		Classname "tf_weapon_smg"
+		
+		Classname "tf_weapon_sapper"
+		Classname "tf_weapon_revolver"
+		DefIndex  735 // Sapper
+		DefIndex  736 // Sapper (Renamed/Strange)
+		// Classname "tf_weapon_knife"
+		// Classname "tf_weapon_pda_spy"
+		Classname "tf_weapon_invis"
+	}
+
+    ForceItem   // Force items to classes even if the item is not intended for the class
+    {
+		// All
+		// {
+		// 	Item "The MK 50"
+		// }
+
+        Pyro
+        {
+            Item "The Nostromo Napalmer"
+        }
+    }
+
+	PlayerAttributes  
+	{
+		"min respawn time" 999 
+		"ragdolls plasma effect" 1
+		"SET BONUS: alien isolation merc bonus pos" 1
+		"SET BONUS: alien isolation merc bonus neg" 1
+		"voice pitch scale" 0.7
+		"SET BONUS: special dsp" 134
+
+		Scout
+		{
+			"health regen" 10
+			"dmg taken increased" 0.65
+		}
+
+		Soldier
+		{
+			"increase buff duration" 0.5				
+		}
+
+		Engineer
+		{
+			"engy sentry damage bonus" 0.6
+			"engy sentry fire rate increased" 3	
+			"building max level" 2
+			"hidden secondary max ammo penalty" 0.18
+			"metal regen" 5
+		}
+	}
+
+	// Scout
+
+	ItemAttributes  
+	{
+		ItemName "Crit-a-Cola"
+		"effect cond override" 26
+		"special item description" "[INFO] Battalion Backup drink"
+	}
+
+	ItemAttributes   
+	{
+		ItemName "Bonk! Atomic Punch"
+		"mult effect duration" 0.5
+		"special item description" "[INFO]: Halved phase duration"
+	}
+
+	ItemAttributes   
+	{
+		ItemName "TF_WEAPON_BAT"
+		"minicrits become crits" 1
+		"special item description" "[INFO]: Crits instead of mini-critting"
+	}
+	
+	ItemAttributes   
+	{
+		ItemName "The Boston Basher"
+		"hit self on miss" 0
+		"bleeding duration" 20
+		"dmg penalty vs players" 0.5
+		"melee cleave attack" 1
+		"special item description" "[INFO]: No hit on miss, extended bleed duration, less damage"
+	}
+	
+	ItemAttributes   
+	{
+		ItemName "The Candy Cane"
+		"special item description" "[INFO]: Adds a stack on kill. Each stack grants you and your teammates +3% ammo regen within a 500 hu radius."
+	}
+
+
+	// Soldier
+
+	ItemAttributes  
+	{
+		ItemName "The Mantreads"
+		"max health additive bonus" 50
+		"air dash count" 1
+		"special item description" "[INFO]: Double jump and bonus health"
+	}
+
+	ItemAttributes  
+	{
+		ItemName "The Gunboats"
+		"uber on damage taken" 3
+		"special item description" "[INFO]: 3% chance of becoming invulnerable on hit"
+	}
+
+	// Pyro
+
+	ItemAttributes  
+	{
+		ItemName "The Nostromo Napalmer"
+		// "max aoe targets" 2
+		"flame_drag" 4
+		"max_flame_reflection_count" 2
+		"flame_reflect_on_collision" 1
+		"flame_spread_degree" 5
+		"flame_up_speed" -25
+		"lunchbox adds minicrits" 2
+		"airblast_give_teammate_speed_boost" 3
+		"maxammo primary reduced" 0.5
+		"mod flamethrower spinup time" 0.33
+		"damage penalty" 0.85
+		"special item description" "[INFO]: Flames bounce off surfaces, airblast gives teammates speed boost, halved ammo capacity due to extreme potency"
+	}
+
+	ItemAttributes  
+	{
+		ItemName "TF_WEAPON_FIREAXE"
+		"bleeding duration" 5
+		"special item description" "[INFO]: Bleed on hit"
+	}
+
+	ItemAttributes  		
+	{
+		ItemName "The Powerjack"
+		"provide on active" 1
+		"dmg taken increased" 1
+		"not solid to players" 1
+		"special item description" "[INFO]: Removed damage vulnerability, become not solid to players"
+	}
+
+	ItemAttributes   
+	{
+		ItemName "The Homewrecker"
+		"melee cleave attack" 1
+		"stun on damage" 50 // 1.2 * (50/60) = 1
+		"fire rate penalty" 1.5
+		"special item description" "[INFO]: AOE stun on hit"
+	}
+
+	// Demo
+	
+	ItemAttributes   
+	{
+		ItemName "The Ullapool Caber"
+		"fire rate penalty" 1
+		"regenerate stickbomb" 1
+		"hit self on miss" 1
+		"cancel falling damage" 1
+		"blast dmg to self increased" 0.0025
+		"self dmg push force decreased" 1.5
+		"health regen" 4
+		"special item description" "[INFO]: Jumpy caber, less suicidal with hp regen"
+	}
+
+	// Heavy
+
+	ItemAttributes  
+	{
+		ItemName "Warrior's Spirit"
+		"add cond on kill" 55
+		"add cond on kill duration" 5
+		"dmg taken increased" 1
+		"special item description" "[INFO]: Healing radius on kill"
+	}
+
+	ItemAttributes  
+	{
+		Itemname "The Eviction Notice"
+		"mod_maxhealth_drain_rate" 0
+		"melee cleave attack" 1
+		"special item description" "[INFO]: No health drain, cleave attack"
+	}
+
+	ItemAttributes  
+	{
+		Itemname "Gloves of Running Urgently"
+		"mod_maxhealth_drain_rate" 0
+		"self mark for death" 1
+		"damage penalty" 0.75
+		"special item description" "[INFO]: Reverted to pre-ji stats"
+	}
+
+	ItemAttributes  
+	{
+		Itemname "Festive Gloves of Running Urgently"
+		"mod_maxhealth_drain_rate" 0
+		"self mark for death" 1
+		"damage penalty" 0.75
+		"special item description" "[INFO]: Reverted to pre-ji stats"
+	}
+
+	ItemAttributes  
+	{
+		ItemName "The Killing Gloves of Boxing"
+		"critboost on kill"	0
+		"damage bonus" 2
+		"fire rate penalty" 1.5
+		"special item description" "[INFO]: No crits on kill, damage buff to compensate"
+	}
+
+	ItemAttributes  
+	{
+		ItemName "Fists of Steel"
+		"damage penalty" 0.8
+		"dmg from melee increased" 1
+		"max health additive bonus" 150
+		"maxammo secondary reduced" 0.33
+		"fists have radial buff" 1
+		"special item description" "[INFO]: Makes you tankier at the cost of ammo and damage"
+	}
+
+	// Medic
+	
+	ItemAttributes   
+	{
+		ItemName "The Overdose"
+		"move speed bonus resource level" 1
+		"lunchbox adds minicrits" 0
+		"move speed bonus" 1.3
+		"fire rate bonus"  0.5
+		"special item description" "[INFO] Faster movement speed regardless of uber, 50% faster firing speed"
+	}
+	
+	ItemAttributes   
+	{
+		ItemName "The Blutsauger"
+		"aoe heal chance" 571.4285 // .105 * (571.4285/60) ~ 1
+		"mod_maxhealth_drain_rate" 5
+		"special item description" "[INFO] AOE heal, health drain while active"
+	}
+	
+	ItemAttributes   
+	{
+		ItemName "TF_WEAPON_BONESAW"
+		"provide on active" 1
+		"bleeding duration" 5
+		"health regen" 10
+		"special item description" "[INFO] Bleeds on hit, health regen"
+	}
+
+	ItemAttributes   
+	{
+		ItemName "Upgradeable TF_WEAPON_BONESAW"
+		"provide on active" 1
+		"bleeding duration" 5
+		"health regen" 10
+		"special item description" "[INFO] Bleeds on hit, health regen"
+	}
+
+	ItemAttributes   
+	{
+		ItemName "Festive Bonesaw 2014"
+		"provide on active" 1
+		"bleeding duration" 5
+		"health regen" 10
+		"special item description" "[INFO] Bleeds on hit, health regen"
+	}
+	
+	ItemAttributes   
+	{
+		ItemName "The Ubersaw"
+		"fire rate penalty" 2
+		"damage bonus" 1.5
+	}
+	
+	ItemAttributes   
+	{
+		ItemName "Festive Ubersaw"
+		"fire rate penalty" 2
+		"damage bonus" 1.5
+	}
+	
+	ItemAttributes  
+	{
+		ItemName "The Vita-Saw"
+		"max health additive penalty" 0
+		"heal on hit for rapidfire" 20
+		"restore health on kill" 50
+	}
+	
+	ItemAttributes   
+	{
+		ItemName "The Amputator"
+		"max health additive bonus" 100
+		"add give health to teammate on hit" 50
+		"special item description" "[INFO] Heals allies on hit, health buff"
+	}
+	
+	ItemAttributes   
+	{
+		ItemName "The Solemn Vow"
+		"damage penalty" 0.015
+		"stun on damage" 75 
+		"single wep deploy time increased" 0.4
+		"teleport instead of die" 1
+		"special item description" "[INFO] Chance of save"
+	}
+
+	// Spy
+
+	ItemAttributes  
+	{
+		ItemName "The Enforcer"
+		"damage bonus while disguised" 1
+		"dmg pierces resists absorbs" 0
+		"fire rate penalty" 1
+		"fire rate bonus" 0.001
+		"reload time increased" 1.2
+		"bullets per shot bonus" 2.5
+		"auto fires full clip" 1
+		"spread penalty" 2
+		"special item description" "[INFO]: Simulates a shotgun revolver"
+	}
+
+	CustomWeapon   //Allows you to use an alias for items with custom attributes
+	{
+		Name "VP78 Pistol"
+		OriginalItemName "The C.A.P.P.E.R"
+		"custom item model" "models/weapons/c_models/c_gamma_gazer/c_gamma_gazer_1.mdl"
+		"fire rate bonus" 0.6
+		"damage penalty" 0.4
+	}
+
+	CustomWeapon   //Allows you to use an alias for items with custom attributes
+	{
+		Name "Uberdosis"
+		OriginalItemName "The Crusader's Crossbow"
+		"custom item model" "models/workshop/weapons/c_models/c_uberdosis/c_crusaders_crossbow.mdl"
+		"override projectile type" 8
+		"custom projectile model" "models/weapons/w_models/w_repair_claw.mdl"
+		"custom weapon fire sound" "=85|weapons/crossbow/fire1.wav"
+		"custom weapon reload sound" "weapons/crossbow/reload1.wav"
+		"custom kill icon" "crusaders_crossbow"
+		"can headshot" 1
+		"damage bonus" 2
+		"fire rate penalty" 2
+		"projectile penetration" 1
+	}
+
+	CustomWeapon   //Allows you to use an alias for items with custom attributes
+	{
+		Name "Classic SMG"
+		OriginalItemName "TF_WEAPON_SMG"
+		"custom item model" "models/weapons/c_models/c_tfc_sniperrifle/c_tfc_sniperrifle.mdl"
+		"custom kill icon" "the_classic"
+		"clip size bonus" 2
+		"reload time increased" 2
+		"projectile penetration" 1
+	}
+
+	PlayerItemEquipSpawnTemplate  
+	{
+		Name "CandyCane_Rework2_Electric_Boogaloo"
+		ItemName "The Candy Cane"
+	}
+
+	// ItemReplacement  
+	// {
+	// 	"Uberdosis"
+	// 	{
+	// 		Name "The Crusader's Crossbow"
+	// 	}
+	// }
+
+	PointTemplates  
+	{
+		general_logic
+		{
+			NoFixup 1
+			trigger_teleport
+			{
+				"targetname" "backtospawn"
+				"origin" "0 0 0"
+				"mins" "-9000 -9000 -9000"
+				"maxs" "9000 9000 9000"
+				"target" "coolkids_area"
+				"spawnflags" "1"
+				"StartDisabled" "1"
+			}
+			info_teleport_destination
+			{
+				"targetname" "coolkids_area"
+				"origin" "4167 2417 52"
+				"angles" "0 270 0"
+			}
+			logic_auto
+            {
+                "targetname" "mainrelay"
+				"origin" "0 0 0" 	
+				
+				"OnMapSpawn" "door_red_large_1a,Close,,0,-1" //lock doors
+                "OnMapSpawn" "door_red_large_1b,Close,,0,-1" //lock doors
+				"OnMapSpawn" "door_red_large_2a,Close,,0,-1" //lock doors
+				"OnMapSpawn" "door_red_large_2b,Close,,0,-1" //lock doors
+                "OnMapSpawn" "door_red_large_1a,Lock,,0.05,-1" //lock doors
+				"OnMapSpawn" "door_red_large_1b,Lock,,0.05,-1" //lock doors
+                "OnMapSpawn" "door_red_large_2a,Lock,,0.05,-1" //lock doors
+				"OnMapSpawn" "door_red_large_2b,Lock,,0.05,-1" //lock doors
+				"OnMapSpawn" "item_ammopack_medium,Kill,,0,-1"
+				"OnMapSpawn" "item_ammopack_full,Kill,,0,-1"
+				"OnMapSpawn" "tele_boss,Kill,,0,-1"
+				"OnMapSpawn" "intel,Kill,,0,-1"
+				//"OnMapSpawn" "dead*,BecomeRagdoll,,0,-1"
+
+                "OnMapSpawn" "wave_start_relay*,AddOutput,OnTrigger door_red_large_1a:Unlock::0:-1,0,-1"
+                "OnMapSpawn" "wave_start_relay*,AddOutput,OnTrigger door_red_large_1b:Unlock::0:-1,0,-1"
+				"OnMapSpawn" "wave_start_relay*,AddOutput,OnTrigger door_red_large_2a:Unlock::0:-1,0,-1"
+				"OnMapSpawn" "wave_start_relay*,AddOutput,OnTrigger door_red_large_2b:Unlock::0:-1,0,-1"
+                "OnMapSpawn" "wave_start_relay*,AddOutput,OnTrigger door_red_large_1a:Open::0.05:-1,0,-1"
+				"OnMapSpawn" "wave_start_relay*,AddOutput,OnTrigger door_red_large_1b:Open::0.05:-1,0,-1"
+                "OnMapSpawn" "wave_start_relay*,AddOutput,OnTrigger door_red_large_2a:Open::0.05:-1,0,-1"
+				"OnMapSpawn" "wave_start_relay*,AddOutput,OnTrigger door_red_large_2b:Open::0.05:-1,0,-1"
+				"OnMapSpawn" "wave_start_relay*,AddOutput,OnTrigger intel_new:Enable::0.05:-1,0,-1"
+
+                "OnMapSpawn" "wave_finished_relay,AddOutput,OnTrigger backtospawn:Enable:0:-1"
+                "OnMapSpawn" "wave_finished_relay,AddOutput,OnTrigger backtospawn:Disable:1:-1"
+
+				"OnMapSpawn" "wave_finished_relay,AddOutput,OnTrigger barrierwall*:Enable:0:-1"
+				"OnMapSpawn" "wave_finished_relay,AddOutput,OnTrigger barrierwall*:EnableCollision:0:-1"
+				"OnMapSpawn" "wave_finished_relay,AddOutput,OnTrigger doorbarrier:Enable:0:-1"
+				"OnMapSpawn" "wave_finished_relay,AddOutput,OnTrigger doorbarrier:EnableCollision:0:-1"
+				"OnMapSpawn" "wave_finished_relay,AddOutput,OnTrigger intel_new:Disable:0:-1"
+
+				"OnMapSpawn" "nav_refresh,RecomputeBlockers,,0.1,-1"
+            }
+			tf_point_nav_interface
+			{
+				"targetname" "nav_refresh"
+			}
+			item_teamflag
+			{
+				"origin" "-64 1568 -336"
+				"trail_effect" "2"
+				"TeamNum" "0"
+				"targetname" "intel_new"
+				"StartDisabled" "1"
+				"ScoringType" "0"
+				"ReturnTime" "6000000"
+				"ReturnBetweenWaves" "1"
+				"GameType" "3"
+				"NeutralType" "1"
+				"flag_trail" "flagtrail"
+				"flag_paper" "player_intel_papertrail"
+				"flag_model" "models/props_td/atom_bomb.mdl"
+				"flag_icon" "../hud/objectives_flagpanel_carried"
+				"angles" "0 180 0"
+			}
+			env_fog_controller
+			{
+				"targetname" "fog_dense"
+				"fogenable" "1"
+				"fogstart" "64"            // where fog begins in hammer units
+				"fogend" "375"                // where fog is its densest in hammer units
+				"fogmaxdensity" "1"            // in percentage of how much you can't see through the fog
+				"fogcolor" "1 1 1"
+				"fogcolor2" "1 1 1"    // change rgb values to the original env_fog_controller, or to black to convey darkness
+				"fogblend" "1"
+				"foglerptime" "2"
+			}
+			trigger_multiple
+			{
+				"targetname" "trigger_fog_dense"
+				"origin" "31 1632 -310"
+				"mins" "-4011 -2456 -888"
+				"maxs" "4011 2456 888"
+				"StartDisabled" "0"
+				"spawnflags" "1"
+				"OnStartTouch" "!activator,SetFogController,fog_dense,0,-1"
+			}
+			logic_relay
+			{
+				"targetname" "barrierwallsdisable"
+				"OnTrigger" "barrierwall,Disable,,0,-1"
+				"OnTrigger" "barrierwall,DisableCollision,,0,-1"
+			}
+			logic_relay
+			{
+				"targetname" "barrierwallsdisableupper"
+				"OnTrigger" "barrierwall_upper,Disable,,0,-1"
+				"OnTrigger" "barrierwall_upper,DisableCollision,,0,-1"
+			}
+			logic_relay
+			{
+				"targetname" "doorfencedisable"
+				"OnTrigger" "doorbarrier,Disable,,0,-1"
+				"OnTrigger" "doorbarrier,DisableCollision,,0,-1"
+			}
+			sky_camera
+			{
+				"targetname" "skyblack"
+				"angles" "0 0 0"
+				"fogcolor" "0 0 0"
+				"fogcolor2" "0 0 0"
+				"fogdir" "1 0 0"
+				"fogenable" "1"
+				"fogend" "1"
+				"fogmaxdensity" "1"
+				"fogstart" "0"
+				"scale" "40"
+				"origin" "2335 -2521.32 -265.854"
+			}
+		}
+
+		cabinet
+		{
+			prop_dynamic
+			{
+				"targetname" "resupply_locker"
+				"angles" "0 0 0"
+				"fademindist" "-1"
+				"fadescale" "1"
+				"MaxAnimTime" "10"
+				"MinAnimTime" "5"
+				"model" "models/props_gameplay/resupply_locker.mdl"
+				"modelscale" "1.0"
+				"renderamt" "255"
+				"rendercolor" "255 255 255"
+				"skin" "0"
+				"solid" "6"
+			}
+			func_regenerate
+			{
+				"targetname" "regenerate"
+				"associatedmodel" "resupply_locker"
+				"StartDisabled" "0"
+				"TeamNum" "2"
+				"mins" "-69 -34.5 -56.5"
+				"maxs" "69 34.5 56.5"
+				"OnStartTouchAll" "resupply_locker,SetAnimation,open,0,-1"
+				"OnEndTouchAll" "resupply_locker,SetAnimation,close,0,-1"
+			}
+			filter_tf_bot_has_tag
+			{
+				"Negated" "0"
+				"require_all_tags" "1"
+				"tags" "bot_red"
+				"targetname" "filter_redbot"
+			}
+			trigger_multiple
+			{
+				"filtername" "filter_redbot"
+				"StartDisabled"    "0"
+				"targetname"    "block"
+				"mins"    "-40 -96 -40"
+				"maxs"    "80 96 168"
+				"spawnflags" "1"	
+				"OnStartTouch" "regenerate,Disable,,0,-1"
+				"OnEndTouchAll" "regenerate,Enable,,0,-1"
+			}
+			trigger_stun
+			{
+				"trigger_delay" "0"
+				"TeamNum" "0"
+				"targetname" "slower0"
+				"stun_type" "0"
+				"stun_effects" "1"
+				"stun_duration" "1"
+				"StartDisabled" "1"
+				"spawnflags" "1"
+				"origin" "0 2176 48"
+				"move_speed_reduction" "0.65"
+				"filtername" "filter_is_red"
+				"classname" "trigger_stun"
+				"mins" "-8000 -8000 -1000"
+				"maxs" "8000 8000 1000"
+				"solid" "3"
+			}
+		}
+
+		annotations
+		{
+			NoFixup 1
+			training_annotation
+			{
+				"targetname" "tomboy1"
+				"origin" "3609 648 147"
+				"lifetime" "10"
+				"display_text" "Each death comes with a $200 penalty."
+			}
+			training_annotation
+			{
+				"targetname" "tomboy2"
+				"origin" "3609 648 147"
+				"lifetime" "10"
+				"display_text" "All money will be auto-collected at the end of each wave."
+			}
+			training_annotation
+			{
+				"targetname" "tomboy3"
+				"origin" "3609 648 147"
+				"lifetime" "10"
+				"display_text" "Good work! Now you are ready for the real thing."
+			}
+		}
+
+		facehuggermodel
+		{
+			OnSpawnOutput
+			{
+				Target "!activator"
+				Action "$SetModel"
+				Param ""
+				Delay 0.00
+			}
+			prop_dynamic
+            {
+                "targetname" "facehugger_model"
+                "angles" "0 0 0"
+                "fademindist" "-1"
+                "fadescale" "1"
+                "MaxAnimTime" "10"
+                "MinAnimTime" "5"
+                "model" "models/player/items/all_class/parasite_hat_soldier.mdl"
+                "modelscale" "2.5"
+                "renderamt" "200"
+                "rendercolor" "10 63 224"
+                "renderfx" "0"
+                "rendermode" "1"
+                "skin" "0"
+                "solid" "0"
+                "origin" "0 0 600"
+                "disableshadows" "1"
+            }
+		}
+
+		f_pusher
+		{
+			NoFixup 1
+			trigger_push
+			{
+				"alternateticksfix" "0"
+				"filtername" "filter_facehugger"
+				"origin" "-192 1072 0"
+				"mins" "-2000 -2000 -2000"
+				"maxs" "2000 2000 2000"
+				"pushdir" "0 165 0"
+				"spawnflags" "1"
+				"speed" "100"
+				"StartDisabled" "0"
+				"targetname" "pusher"
+			}
+			filter_tf_bot_has_tag //our tag
+			{
+				"Negated" "Allow entities that match criteria"
+				"require_all_tags" "1"
+				"tags" "bot_facehugger"
+				"targetname" "filter_facehugger"
+			}
+		}
+
+		Shaker
+		{
+			NoFixup 1
+			env_shake
+			{
+				"amplitude" "16"
+				"duration" "3"
+				"frequency" "50"
+				"radius" "50000"
+				"spawnflags" "1"
+				"targetname" "shake_effect"
+				"origin" "1134.57 -1063.62 -378.20"
+			}
+		}
+
+		PermaDeathLogic //Ghost logic by Mince, last man standing logic by Hellmet
+		{
+			NoFixup 1
+			logic_auto
+			{
+				"OnMapSpawn" "wave_start_relay*,AddOutput,OnTrigger permadeath_laststanding_relay:Enable:2:-1"
+				"OnMapSpawn" "wave_start_relay*,AddOutput,OnTrigger permadeath_resetbonus_relay:Enable:2:-1"
+			}			
+			filter_activator_tfteam
+			{
+				"targetname" "filter_is_red"
+				"TeamNum"    "2"
+				"Negated"    "Allow entities that match criteria"
+			}			
+			filter_activator_name
+			{
+				"targetname" "filter_is_dead"
+				"filtername" "deadplayer"
+				"Negated"    "0"
+			}
+			filter_tf_bot_has_tag
+			{
+				"targetname" "filter_redbots"
+				"tags" "bot_notplayer"
+				"require_all_tags" "1"
+				"Negated" "1"
+			}
+			filter_activator_name
+			{
+				"targetname" "filter_is_not_dead"
+				"filtername" "deadplayer"
+				"Negated"    "1"			
+			}			
+			filter_multi
+			{
+				"targetname" "filter_is_alive_red"
+				"Filter01"   "filter_is_red"
+				"Filter02"   "filter_is_not_dead"
+				"Filter03" 	 "filter_redbots"
+				"filtertype" "0"
+				"Negated"    "0"	
+			}			
+			trigger_multiple
+			{
+				"targetname"    "permadeath_assign_trigger"
+				"filtername"    "filter_is_alive_red"
+				"spawnflags"    "1"
+				"StartDisabled" "1"
+				"wait"          "0"
+				"mins"          "-9999 -9999 -9999"
+				"maxs"          "9216 8192 4096"
+
+				"OnEndTouch"     "!activator,AddOutput,targetname deadplayer,0,-1"
+				"OnEndTouch"     "permadeath_death_counter,Subtract,1,0,-1"
+				"OnStartTouch"   "permadeath_death_counter,Add,1,0,-1"
+			//	"OnEndTouch"  	"!activator,SetForcedTauntCam,1,0.01,-1"
+			}		
+			trigger_multiple
+			{
+				"targetname"    "permadeath_lose_trigger"
+				"filtername"    "filter_is_alive_red"
+				"spawnflags"    "1"
+				"StartDisabled" "1"
+				"wait"          "0"
+				"mins"          "-9999 -9999 -9999"
+				"maxs"          "9216 8192 4096"
+
+				"OnEndTouchAll" "permadeath_can_bots_win,Test,,0,-1"
+			}
+			point_teleport
+			{
+				"targetname"    "permadeath_ghost_teleport"
+				"target"        "!activator"
+				"origin"        "711.028870 4825.356445 -53.873909"
+				"angles"        "0 135 0"
+			}			
+			trigger_add_tf_player_condition
+			{
+				"targetname"    "permadeath_ghost_trigger"
+				"filtername"    "filter_is_dead"
+				"condition"     "66"
+				"duration"      "9999999999" // It doesn't like applying when it's -1??
+				"spawnflags"    "1"
+				"StartDisabled" "1"
+				"mins"          "-9999 -9999 -9999"
+				"maxs"          "9999 9999 9999"
+				
+				"OnStartTouch"  "permadeath_ghost_teleport,Teleport,,0,-1"
+				"OnStartTouch"  "ghost_model_maker,ForceSpawnAtEntityOrigin,!activator,0.01,-1"
+			}
+			trigger_add_tf_player_condition
+			{
+				"targetname"    "permadeath_ghost_trigger"
+				"filtername"    "filter_is_dead"
+				"condition"     "77"
+				"duration"      "9999999999" // -1 works here but hehe symmetry go brrr
+				"spawnflags"    "1"
+				"StartDisabled" "1"
+				"mins"          "-9999 -9999 -9999"
+				"maxs"          "9999 9999 9999"
+			}
+			trigger_add_tf_player_condition
+			{
+				"targetname"    "permadeath_ghost_trigger"
+				"filtername"    "filter_is_dead"
+				"condition"     "114"
+				"duration"      "9999999999" // -1 works here but hehe symmetry go brrr
+				"spawnflags"    "1"
+				"StartDisabled" "1"
+				"mins"          "-9999 -9999 -9999"
+				"maxs"          "9999 9999 9999"
+			}
+			trigger_add_tf_player_condition
+			{
+				"targetname"    "permadeath_detect_player_crit"
+				"filtername"    "filter_is_alive_red"
+				"condition"     "40"
+				"duration"      "9999999999" // It doesn't like applying when it's -1??
+				"spawnflags"    "1"
+				"StartDisabled" "1"
+				"mins"          "-9999 -9999 -9999"
+				"maxs"          "9999 9999 9999"
+			}
+			math_counter
+			{
+				"targetname" "permadeath_death_counter"
+				"min" "0"
+				"max" "6"
+				"startvalue" "0"
+				"OutValue" "permadeath_death_case,InValue,,0,-1"
+			}
+			logic_relay
+			{
+				"targetname" "permadeath_laststanding_relay"
+				"OnTrigger" "permadeath_detect_player_crit,Enable,,2.5,-1"
+				"OnTrigger" "permadeath_detect_player_crit,Disable,,2.6,-1"
+				"OnTrigger" "slower0,Enable,,2.5,-1"
+				"OnTrigger" "lastmann,PlaySound,,2.5,-1"
+				"OnTrigger" "goodluck,PlaySound,,3.5,-1"
+				"OnTrigger" "obj_dispenser,RemoveHealth,5000,2.6,-1"
+				"OnTrigger" "obj_sentrygun,RemoveHealth,5000,2.6,-1"
+				"OnTrigger" "obj_teleporter,RemoveHealth,5000,2.6,-1"
+				"StartDisabled" "1"
+			}
+			logic_relay
+			{
+				"targetname" "permadeath_resetbonus_relay"
+				"OnTrigger" "permadeath_resetbonus,Enable,,2.7,-1"
+				"OnTrigger" "permadeath_resetbonus,Disable,,2.8,-1"
+				"StartDisabled" "1"
+			}
+			logic_case
+			{
+				"targetname" "permadeath_death_case"   
+				"Case01" "1"
+				"Case02" "2"
+				"Case03" "3"
+				"Case04" "4"
+				"Case05" "5"
+				"Case06" "6"    
+				"OnCase01" "permadeath_laststanding_relay,Trigger,,0,-1"
+				"OnCase02" "permadeath_resetbonus_relay,Trigger,,0,-1"
+				"OnCase03" "permadeath_resetbonus_relay,Trigger,,0,-1"
+				"OnCase04" "permadeath_resetbonus_relay,Trigger,,0,-1"
+				"OnCase05" "permadeath_resetbonus_relay,Trigger,,0,-1"
+				"OnCase06" "permadeath_resetbonus_relay,Trigger,,0,-1"
+			}
+			logic_relay
+			{
+				"targetname" "ghost_reset_relay"
+		//		"OnTrigger"  "deadplayer,$ForceRespawn,,0,-1" // Fucking sorcery
+		//		"OnTrigger"  "deadplayer,SetForcedTauntCam,0,0.01,-1"
+				"OnTrigger"  "deadplayer,AddOutput,targetname ,0.02,-1"
+			}			
+			env_entity_maker
+			{
+				"targetname"     "ghost_model_maker"
+				"EntityTemplate" "GhostModel"
+			}			
+			info_target
+			{
+				"targetname" "move_target"
+				"origin"     "0 0 0"
+				"angles"     "0 0 0"
+			}
+			logic_branch
+			{
+				"targetname"   "permadeath_can_bots_win"
+				"InitialValue" "0"	
+				"OnTrue"       "bots_win,RoundWin,,0,-1"
+			}
+		}
+		
+		GhostModel
+		{
+			OnSpawnOutput
+			{
+				Target "move_measure"
+				Action SetParent
+				Param  "!activator"
+				Delay  0.00
+			}		
+			prop_dynamic
+			{
+				"targetname" "model"
+				"modelscale" "1.5"
+				"rendercolor" "255 100 36"
+				"DisableBoneFollowers" "1"
+				"disableshadows" "1"
+				"model" "models/props_halloween/ghost.mdl"
+				"defaultanim" "idle"
+				"solid" "0"
+				"spawnflags" "0"
+				"StartDisabled" "0"
+				"origin" "0 0 -32"
+			}		
+			prop_dynamic
+			{
+				"targetname" "move_measure"
+				"DisableBoneFollowers" "1"
+				"disableshadows" "1"
+				"model" "models/empty.mdl"
+				"solid" "0"
+				"spawnflags" "0"
+				"StartDisabled" "0"
+				"origin" "0 0 -32"
+			}		
+			logic_measure_movement
+			{
+				"MeasureReference" "move_target"
+				"MeasureTarget" "move_measure"
+				"MeasureType" "0"
+				"Target" "model"
+				"TargetReference" "move_target"
+				"TargetScale" "1"			
+			}
+		}
+
+		Misc
+		{
+			NoFixup 1			
+			OnSpawnOutput
+			{
+				Target entity_outputs
+				Action Trigger
+				Delay  0.00
+			}			
+			logic_relay
+			{
+				"targetname" "entity_outputs"
+				
+				"OnTrigger" "player,AddOutput,targetname ,0,-1"
+				
+				"OnTrigger" "wave_start_relay*,AddOutput,OnTrigger permadeath_assign_trigger:Enable::0:-1,0,-1"
+				"OnTrigger" "wave_start_relay*,AddOutput,OnTrigger permadeath_ghost_trigger:Enable::0:-1,0,-1"
+				"OnTrigger" "wave_start_relay*,AddOutput,OnTrigger permadeath_lose_trigger:Enable::0:-1,0.01,-1"
+				"OnTrigger" "wave_start_relay*,AddOutput,OnTrigger permadeath_can_bots_win:SetValue:1:0:-1,0,-1"
+				
+				"OnTrigger" "wave_finished_relay,AddOutput,OnTrigger permadeath_assign_trigger:Disable::0:-1,0,-1"
+				"OnTrigger" "wave_finished_relay,AddOutput,OnTrigger permadeath_ghost_trigger:Disable::0:-1,0,-1"
+				"OnTrigger" "wave_finished_relay,AddOutput,OnTrigger permadeath_lose_trigger:Disable::0.1:-1,0,-1"
+				"OnTrigger" "wave_finished_relay,AddOutput,OnTrigger permadeath_can_bots_win:SetValue:0:0:-1,0,-1"
+			}
+		}
+
+		blockers
+		{
+			NoFixup 1
+			prop_dynamic
+			{
+				"targetname" "barrierwall"
+				"angles" "0 270 0"
+				"fademindist" "-1"
+				"fadescale" "1"
+				"MaxAnimTime" "10"
+				"MinAnimTime" "5"
+				"model" "models/props_combine/combine_barricade_tall01b.mdl"
+				"modelscale" "1.0"
+				"renderamt" "255"
+				"rendercolor" "255 255 255"
+				"skin" "0"
+				"solid" "6"
+				"origin" "985 -780 -415"
+			}
+			prop_dynamic
+			{
+				"targetname" "barrierwall"
+				"angles" "0 270 0"
+				"fademindist" "-1"
+				"fadescale" "1"
+				"MaxAnimTime" "10"
+				"MinAnimTime" "5"
+				"model" "models/props_combine/combine_barricade_tall01b.mdl"
+				"modelscale" "1.0"
+				"renderamt" "255"
+				"rendercolor" "255 255 255"
+				"skin" "0"
+				"solid" "6"
+				"origin" "1045 -780 -415"
+			}
+			prop_dynamic
+			{
+				"targetname" "barrierwall"
+				"angles" "0 270 0"
+				"fademindist" "-1"
+				"fadescale" "1"
+				"MaxAnimTime" "10"
+				"MinAnimTime" "5"
+				"model" "models/props_combine/combine_barricade_tall01b.mdl"
+				"modelscale" "1.0"
+				"renderamt" "255"
+				"rendercolor" "255 255 255"
+				"skin" "0"
+				"solid" "6"
+				"origin" "1106 -780 -415"
+			}
+			prop_dynamic
+			{
+				"targetname" "barrierwall"
+				"angles" "0 270 0"
+				"fademindist" "-1"
+				"fadescale" "1"
+				"MaxAnimTime" "10"
+				"MinAnimTime" "5"
+				"model" "models/props_combine/combine_barricade_tall01b.mdl"
+				"modelscale" "1.0"
+				"renderamt" "255"
+				"rendercolor" "255 255 255"
+				"skin" "0"
+				"solid" "6"
+				"origin" "1169 -780 -415"
+			}
+			prop_dynamic
+			{
+				"targetname" "barrierwall"
+				"angles" "0 270 0"
+				"fademindist" "-1"
+				"fadescale" "1"
+				"MaxAnimTime" "10"
+				"MinAnimTime" "5"
+				"model" "models/props_combine/combine_barricade_tall01b.mdl"
+				"modelscale" "1.0"
+				"renderamt" "255"
+				"rendercolor" "255 255 255"
+				"skin" "0"
+				"solid" "6"
+				"origin" "1232 -780 -415"
+			}
+			prop_dynamic
+			{
+				"targetname" "barrierwall"
+				"angles" "0 270 0"
+				"fademindist" "-1"
+				"fadescale" "1"
+				"MaxAnimTime" "10"
+				"MinAnimTime" "5"
+				"model" "models/props_combine/combine_barricade_tall01b.mdl"
+				"modelscale" "1.0"
+				"renderamt" "255"
+				"rendercolor" "255 255 255"
+				"skin" "0"
+				"solid" "6"
+				"origin" "1295 -780 -415"
+			}
+			prop_dynamic
+			{
+				"targetname" "barrierwall"
+				"angles" "0 270 0"
+				"fademindist" "-1"
+				"fadescale" "1"
+				"MaxAnimTime" "10"
+				"MinAnimTime" "5"
+				"model" "models/props_combine/combine_barricade_tall01b.mdl"
+				"modelscale" "1.0"
+				"renderamt" "255"
+				"rendercolor" "255 255 255"
+				"skin" "0"
+				"solid" "6"
+				"origin" "1355 -780 -415"
+			}
+			prop_dynamic
+			{
+				"targetname" "barrierwall_upper"
+				"angles" "0 0 0"
+				"fademindist" "-1"
+				"fadescale" "1"
+				"MaxAnimTime" "10"
+				"MinAnimTime" "5"
+				"model" "models/props_combine/combine_barricade_tall01b.mdl"
+				"modelscale" "1.0"
+				"renderamt" "255"
+				"rendercolor" "255 255 255"
+				"skin" "0"
+				"solid" "6"
+				"origin" "1677 -683 -207"
+			}
+			prop_dynamic
+			{
+				"targetname" "barrierwall_upper"
+				"angles" "0 0 0"
+				"fademindist" "-1"
+				"fadescale" "1"
+				"MaxAnimTime" "10"
+				"MinAnimTime" "5"
+				"model" "models/props_combine/combine_barricade_tall01b.mdl"
+				"modelscale" "1.0"
+				"renderamt" "255"
+				"rendercolor" "255 255 255"
+				"skin" "0"
+				"solid" "6"
+				"origin" "1677 -621 -207"
+			}
+			prop_dynamic
+			{
+				"targetname" "barrierwall_upper"
+				"angles" "0 0 0"
+				"fademindist" "-1"
+				"fadescale" "1"
+				"MaxAnimTime" "10"
+				"MinAnimTime" "5"
+				"model" "models/props_combine/combine_barricade_tall01b.mdl"
+				"modelscale" "1.0"
+				"renderamt" "255"
+				"rendercolor" "255 255 255"
+				"skin" "0"
+				"solid" "6"
+				"origin" "1677 -560 -207"
+			}
+			prop_dynamic
+			{
+				"targetname" "barrierwall_upper"
+				"angles" "0 0 0"
+				"fademindist" "-1"
+				"fadescale" "1"
+				"MaxAnimTime" "10"
+				"MinAnimTime" "5"
+				"model" "models/props_combine/combine_barricade_tall01b.mdl"
+				"modelscale" "1.0"
+				"renderamt" "255"
+				"rendercolor" "255 255 255"
+				"skin" "0"
+				"solid" "6"
+				"origin" "1677 -502 -207"
+			}
+			prop_dynamic
+			{
+				"targetname" "doorbarrier"
+				"angles" "0 0 0"
+				"fademindist" "-1"
+				"fadescale" "1"
+				"MaxAnimTime" "10"
+				"MinAnimTime" "5"
+				"model" "models/props_island/island_large_electrical_box.mdl"
+				"modelscale" "1.0"
+				"renderamt" "255"
+				"rendercolor" "255 255 255"
+				"skin" "0"
+				"solid" "6"
+				"origin" "864.652 -1403.77 -298"
+			}
+			prop_dynamic
+			{
+				"targetname" "doorbarrier"
+				"angles" "0 0 0"
+				"fademindist" "-1"
+				"fadescale" "1"
+				"MaxAnimTime" "10"
+				"MinAnimTime" "5"
+				"model" "models/props_island/mannco_case_small.mdl"
+				"modelscale" "1.0"
+				"renderamt" "255"
+				"rendercolor" "255 255 255"
+				"skin" "0"
+				"solid" "6"
+				"origin" "867.84 -1465.59 -329"
+			}
+			prop_dynamic
+			{
+				"targetname" "doorbarrier"
+				"angles" "0 0 0"
+				"fademindist" "-1"
+				"fadescale" "1"
+				"MaxAnimTime" "10"
+				"MinAnimTime" "5"
+				"model" "models/props_island/mannco_case_small.mdl"
+				"modelscale" "1.0"
+				"renderamt" "255"
+				"rendercolor" "255 255 255"
+				"skin" "0"
+				"solid" "6"
+				"origin" "867.84 -1465.59 -285"
+			}
+			prop_dynamic
+			{
+				"targetname" "doorbarrier"
+				"angles" "0 0 30"
+				"fademindist" "-1"
+				"fadescale" "1"
+				"MaxAnimTime" "10"
+				"MinAnimTime" "5"
+				"model" "models/props_frontline/ammocrate_2.mdl"
+				"modelscale" "1.0"
+				"renderamt" "255"
+				"rendercolor" "255 255 255"
+				"skin" "0"
+				"solid" "6"
+				"origin" "866.562 -1441.21 -247.445"
+			}
+			prop_dynamic
+			{
+				"targetname" "doorbarrier"
+				"angles" "0 0 0"
+				"fademindist" "-1"
+				"fadescale" "1"
+				"MaxAnimTime" "10"
+				"MinAnimTime" "5"
+				"model" "models/props_frontline/ammocrate_1.mdl"
+				"modelscale" "1.0"
+				"renderamt" "255"
+				"rendercolor" "255 255 255"
+				"skin" "0"
+				"solid" "6"
+				"origin" "863.81 -1387.69 -245"
+			}	
+		}
+
+		particles 
+		{
+			NoFixup 1
+			info_particle_system
+			{
+				"targetname" "sparks"
+				"angles" "90 0 0"
+				"cpoint1_parent" "0"
+				"cpoint2_parent" "0"
+				"cpoint3_parent" "0"
+				"cpoint4_parent" "0"
+				"cpoint5_parent" "0"
+				"cpoint6_parent" "0"
+				"cpoint7_parent" "0"
+				"effect_name" "sparks_metal"
+				"flag_as_weather" "0"
+				"start_active" "1"		
+				"origin" "3563 453 122"
+			}
+			info_particle_system
+			{
+				"targetname" "fire_particle"
+				"angles" "0 270 90"
+				"cpoint1_parent" "0"
+				"cpoint2_parent" "0"
+				"cpoint3_parent" "0"
+				"cpoint4_parent" "0"
+				"cpoint5_parent" "0"
+				"cpoint6_parent" "0"
+				"cpoint7_parent" "0"
+				"effect_name" "mvm_hatch_destroy"
+				"flag_as_weather" "0"
+				"start_active" "0"		
+				"origin" "1180 -835 -364"
+			}
+			info_particle_system
+			{
+				"targetname" "fire_particle"
+				"angles" "0 0 90"
+				"cpoint1_parent" "0"
+				"cpoint2_parent" "0"
+				"cpoint3_parent" "0"
+				"cpoint4_parent" "0"
+				"cpoint5_parent" "0"
+				"cpoint6_parent" "0"
+				"cpoint7_parent" "0"
+				"effect_name" "mvm_hatch_destroy"
+				"flag_as_weather" "0"
+				"start_active" "0"		
+				"origin" "1750 -633.948 -134"
+			}
+		}
+
+		sounds
+		{
+			NoFixup 1
+			ambient_generic
+			{
+				"targetname" "lastmann"
+				"cspinup" "0"
+				"fadeinsecs" "0"
+				"fadeoutsecs" "0"
+				"health" "10"
+				"lfomodpitch" "0"
+				"lfomodvol" "0"
+				"lforate" "0"
+				"lfotype" "0"
+				"message" "vo/announcer_am_lastmanalive01.mp3"
+				"pitch" "100"
+				"pitchstart" "100"
+				"preset" "0"
+				"radius" "99999"
+				"spawnflags" "48"
+				"spindown" "0"
+				"spinup" "0"
+				"origin" "4234 300 291"
+			}
+			ambient_generic
+			{
+				"targetname" "goodluck"
+				"cspinup" "0"
+				"fadeinsecs" "0"
+				"fadeoutsecs" "0"
+				"health" "10"
+				"lfomodpitch" "0"
+				"lfomodvol" "0"
+				"lforate" "0"
+				"lfotype" "0"
+				"message" "#alien_reveal.mp3"
+				"pitch" "100"
+				"pitchstart" "100"
+				"preset" "0"
+				"radius" "99999"
+				"spawnflags" "48"
+				"spindown" "0"
+				"spinup" "0"
+				"origin" "4234 300 291"
+			}
+		}
+
+		teleportarea
+		{
+			NoFixup 1
+			trigger_teleport
+			{
+				"targetname" "tele_entrance1"
+				"origin" "0 0 2208"
+				"mins" "-128 -128 -32"
+				"maxs" "128 128 32"
+				"spawnflags" "1"
+				"StartDisabled" "0"
+				"target" "toptank"
+			}
+			info_teleport_destination
+			{
+				"targetname" "toptank"
+				"origin" "340 -476 -311"
+			}
+		}
+
+		outsideprops
+		{
+			NoFixup 1
+			prop_dynamic
+			{
+				"targetname" "destroy"
+				"angles" "0 0 0"
+				"fademindist" "-1"
+				"fadescale" "1"
+				"MaxAnimTime" "10"
+				"MinAnimTime" "5"
+				"model" "models/bots/boss_bot/boss_tank_part1_destruction.mdl"
+				"modelscale" "1.0"
+				"renderamt" "255"
+				"rendercolor" "255 255 255"
+				"skin" "0"
+				"solid" "6"
+				"origin" "283 -485 -480"
+			}
+		}
+
+		fakeicon
+        {
+            NoFixup 1
+            logic_auto
+            {
+                "OnMapSpawn" "!self,Kill,,0,-1"
+                "targetname" "yes"
+            }
+        }
+
+		safetynet
+		{
+			NoFixup 1
+			trigger_teleport
+			{
+				"targetname" "idiot-proof_trigger"
+				"origin" "2304 0 -1472"
+				"mins" "-128 -128 -320"
+				"maxs" "128 128 320"
+				"spawnflags" "1"
+				"filtername" "filter_giants"
+				"target" "saveme"
+				"StartDisabled" "0"
+			}
+			info_teleport_destination
+			{
+				"targetname" "saveme"
+				"origin" "2280 -561 -471"
+				"angles" "0 270 0" 
+			}
+			filter_tf_bot_has_tag
+			{
+				"targetname" "filter_giants"
+				"Negated" "0"
+				"require_all_tags" "1"
+				"tags" "bot_giant"
+			}
+		}
+
+		deadbodies
+		{
+			NoFixup 1
+			prop_dynamic_override
+			{
+				"angles" "0 0 0"
+				"DisableBoneFollowers" "0"
+				"disablereceiveshadows" "1"
+				"disableshadows" "1"
+				"ExplodeDamage" "0"
+				"ExplodeRadius" "0"
+				"fademindist" "-1"
+				"fadescale" "0"
+				"MaxAnimTime" "10"
+				"MinAnimTime" "5"
+				"model" "models/player/soldier.mdl"
+				"modelscale" "1.0"
+				"PerformanceMode" "0"
+				"pressuredelay" "0"
+				"RandomAnimation" "0"
+				"renderamt" "255"
+				"rendercolor" "255 255 255"
+				"renderfx" "0"
+				"rendermode" "0"
+				"SetBodyGroup" "2"
+				"skin" "0"
+				"solid" "6"
+				"spawnflags" "0"
+				"StartDisabled" "0"
+				"targetname" "dead_1"
+				"origin" "3769 -945 -183"
+			}
+			prop_dynamic
+			{
+				"angles" "90 240 0"
+				"DisableBoneFollowers" "0"
+				"disablereceiveshadows" "1"
+				"disableshadows" "1"
+				"ExplodeDamage" "0"
+				"ExplodeRadius" "0"
+				"fademindist" "-1"
+				"fadescale" "0"
+				"MaxAnimTime" "10"
+				"MinAnimTime" "5"
+				"model" "models/player/spy.mdl"
+				"modelscale" "1.0"
+				"PerformanceMode" "0"
+				"pressuredelay" "0"
+				"RandomAnimation" "0"
+				"renderamt" "255"
+				"rendercolor" "255 255 255"
+				"renderfx" "0"
+				"rendermode" "0"
+				"SetBodyGroup" "0"
+				"skin" "0"
+				"solid" "6"
+				"spawnflags" "0"
+				"StartDisabled" "0"
+				"targetname" "dead_2"
+				"origin" "3223.22 -1042.24 -74.2297"
+			}
+			prop_dynamic
+			{
+				"angles" "0 255 0"
+				"DisableBoneFollowers" "0"
+				"disablereceiveshadows" "1"
+				"disableshadows" "1"
+				"ExplodeDamage" "0"
+				"ExplodeRadius" "0"
+				"fademindist" "-1"
+				"fadescale" "0"
+				"MaxAnimTime" "10"
+				"MinAnimTime" "5"
+				"model" "models/player/pyro.mdl"
+				"modelscale" "1.0"
+				"PerformanceMode" "0"
+				"pressuredelay" "0"
+				"RandomAnimation" "0"
+				"renderamt" "255"
+				"rendercolor" "255 255 255"
+				"renderfx" "0"
+				"rendermode" "0"
+				"SetBodyGroup" "1"
+				"skin" "0"
+				"solid" "6"
+				"spawnflags" "0"
+				"StartDisabled" "0"
+				"targetname" "dead_3"
+				"origin" "3396.15 -437.911 -119"
+			}	
+		}
+
+		CandyCane_Rework2_Electric_Boogaloo // by royal
+		{
+			OnSpawnOutput
+			{
+				Target "!activator"
+				Action "$AddItemAttribute"
+				Param "add cond on kill|122|0"
+				Delay 0.1
+			}	
+			OnSpawnOutput
+			{
+				Target "!activator"
+				Action "$AddItemAttribute"
+				Param "add cond on kill duration|1|0"
+				Delay 0.1
+			}
+			OnSpawnOutput
+			{
+				Target "!activator"
+				Action "$AddItemAttribute"
+				Param "add cond on kill|122|1"
+				Delay 0.1
+			}
+			OnSpawnOutput
+			{
+				Target "!activator"
+				Action "$AddItemAttribute"
+				Param "add cond on kill duration|1|1"
+				Delay 0.1
+			}
+			OnSpawnOutput
+			{
+				Target "!activator"
+				Action "$AddItemAttribute"
+				Param "add cond on kill|122|2"
+				Delay 0.1
+			}
+			OnSpawnOutput
+			{
+				Target "!activator"
+				Action "$AddItemAttribute"
+				Param "add cond on kill duration|1|2"
+				Delay 0.1
+			}
+			filter_activator_tfteam 
+			{
+				"targetname" "candycane_filter_is_red"
+				"Negated" "0"
+				"TeamNum" "2"
+			}	
+			trigger_multiple
+			{
+				"targetname" "aoe_ammo_regen"
+				"mins" "-500 -500 -500"
+				"maxs" "500 500 500"
+				"spawnflags" "1"
+				"filtername" "candycane_filter_is_red"
+
+				//"OnTrigger" "!activator,$AddPlayerAttribute,ammo regen|0,0,-1"
+				"OnEndTouch" "!activator,$RemovePlayerAttribute,ammo regen,0,-1"
+
+				"OnUser1" "!self,Disable,,0,-1"
+				"OnUser1" "!self,Enable,,0.01,-1"
+			}
+			math_counter
+			{
+				"targetname" "regen_count"
+				"startvalue" "0"
+				"min" "0"
+				"max" "0.6" //cap
+
+				"OnGetValue" "aoe_regen_increaser,$FormatInput1,,0,-1"
+				"OnGetValue" "aoe_regen_increaser,$Format,,0.1,-1"
+				"OnUser1" "delay_count,FireUser1,,0,-1"
+				"OnUser1" "stacks_count,FireUser1,,0,-1"
+				"OnUser1" "!self,Add,0.03,0,-1" //amount each stack
+				"OnUser1" "!self,GetValue,,0.1,-1"
+			}
+			math_counter
+			{
+				"targetname" "delay_count"
+				"startvalue" "0"
+				"min" "0"
+				"max" "10"
+
+				"OnGetValue" "aoe_regen_increaser,$FormatInput2,,0,-1"
+				"OnGetValue" "aoe_regen_increaser,$Format,,0.1,-1"
+				"OnUser1" "!self,Add,0.001,0,-1"
+				"OnUser1" "!self,GetValue,,0.1,-1"
+			}
+			math_counter
+			{
+				"targetname" "stacks_count"
+				"startvalue" "0"
+				"min" "0"
+				"max" "20" //max stacks
+
+				"OnGetValue" "stack_counter_formatter,$FormatInput1,,0,-1"
+				"OnGetValue" "stack_counter_formatter,$Format,,0.1,-1"
+				"OnUser1" "!self,Add,1,0,-1"
+				"OnUser1" "!self,GetValue,,0.1,-1"
+			}
+			logic_case
+			{
+				"targetname" "aoe_regen_increaser"
+				"case16" "OnStartTouch !activator:$AddPlayerAttribute:ammo regen|%:%:-1"
+				"case01" "0"
+				"case02" "0"
+				"ondefault" "aoe_ammo_regen,AddOutput,,0,-1"
+				"ondefault" "aoe_ammo_regen,FireUser1,,0,-1"
+			}
+			OnSpawnOutput
+			{
+				Target "stack_counter_formatter"
+				Action "$Format"
+				Param 0.1
+			}
+			game_text
+			{
+				"origin" "1984 1984 99999"
+				"targetname" "stack_counter_text"
+				"message" "unassigned"
+				"x" "-1"
+				"y" "0.77"
+				"color" "255 255 255"
+				"fadein" "0"
+				"holdtime" "9999999"
+			}
+			logic_case
+			{
+				"targetname" "stack_counter_formatter"
+				"case16" "message Stacks %/20"
+				"case01" "0"
+				"ondefault" "stack_counter_text,AddOutput,,0,-1"
+				"ondefault" "stack_counter_text,Display,,0.1,-1"
+			}
+			filter_tf_condition
+			{
+				"targetname" "filter_new_stack"
+				"Negated" "0"
+				"condition" "122"
+				"OnPass" "regen_count,FireUser1,,0,-1" 
+				"OnPass" "!activator,$RemoveCond,122,0,-1" 
+			}	
+			OnSpawnOutput
+			{
+				Target "stack_checker"
+				Action "Trigger"
+				Delay 0.1
+			}
+			logic_relay 
+			{
+				"targetname" "stack_checker"
+				"spawnflags" "2"
+
+				"OnTrigger" "!self,Trigger,,0.1,-1"  
+				"OnTrigger" "filter_new_stack,TestActivator,!activator,0,-1"    
+			}
+		}
+
+		distort
+		{
+			OnSpawnOutput
+			{
+				Target "!activator"
+				Action AddOutput
+				Param "renderfx 15"
+				Delay 0.1
+			}
+		}
+
+		ammopacks
+		{
+			item_ammopack_small
+			{
+				"origin" "1904 -1280 -224"
+				"AutoMaterialize" "1"
+				"TeamNum" "2"
+			}
+			item_ammopack_small
+			{
+				"origin" "2224 -1280 -512"
+				"AutoMaterialize" "1"
+				"TeamNum" "2"
+			}
+			item_ammopack_small
+			{
+				"origin" "3512 -1760 -128"
+				"AutoMaterialize" "1"
+				"TeamNum" "2"
+			}
+			item_ammopack_small
+			{
+				"origin" "2992 -288 -448"
+				"AutoMaterialize" "1"
+				"TeamNum" "2"
+			}
+			item_ammopack_small
+			{
+				"origin" "1376 -144 -448"
+				"AutoMaterialize" "1"
+				"TeamNum" "2"
+			}
+			item_ammopack_small
+			{
+				"origin" "-104 -960 -352"
+				"AutoMaterialize" "1"
+				"TeamNum" "2"
+			}
+			item_ammopack_small
+			{
+				"origin" "288 -128 -472"
+				"AutoMaterialize" "1"
+				"TeamNum" "2"
+			}
+			item_ammopack_small
+			{
+				"origin" "288 -1600 -352"
+				"AutoMaterialize" "1"
+				"TeamNum" "2"
+			}
+			item_ammopack_small
+			{
+				"origin" "3952 -192 -448"
+				"AutoMaterialize" "1"
+				"TeamNum" "2"
+			}
+			item_ammopack_small
+			{
+				"origin" "3888 -192 -448"
+				"AutoMaterialize" "1"
+				"TeamNum" "2"
+			}
+			item_ammopack_small
+			{
+				"origin" "4512 320 -192"
+				"AutoMaterialize" "1"
+				"TeamNum" "2"
+			}
+			item_ammopack_small
+			{
+				"origin" "3488 -928 -128"
+				"AutoMaterialize" "1"
+				"TeamNum" "2"
+			}
+			item_ammopack_small
+			{
+				"origin" "4352 -1728 -112"
+				"AutoMaterialize" "1"
+				"TeamNum" "2"
+			}
+			item_ammopack_small
+			{
+				"origin" "2384 288 -152"
+				"AutoMaterialize" "1"
+				"TeamNum" "2"
+			}
+			item_ammopack_small
+			{
+				"origin" "1456 -640 -224"
+				"AutoMaterialize" "1"
+				"TeamNum" "2"
+			}
+			item_ammopack_small
+			{
+				"origin" "1456 -704 -224"
+				"AutoMaterialize" "1"
+				"TeamNum" "2"
+			}
+			item_ammopack_small
+			{
+				"origin" "832 480 -416"
+				"AutoMaterialize" "1"
+				"TeamNum" "2"
+			}
+			item_ammopack_small
+			{
+				"origin" "2128 -176 -512"
+				"AutoMaterialize" "1"
+				"TeamNum" "2"
+			}
+			item_ammopack_small
+			{
+				"origin" "-704 -32 -416"
+				"AutoMaterialize" "1"
+				"TeamNum" "2"
+			}
+			item_ammopack_small
+			{
+				"origin" "4544 960 0"
+				"AutoMaterialize" "1"
+				"TeamNum" "2"
+			}
+			item_ammopack_small
+			{
+				"origin" "3376 720 -64"
+				"AutoMaterialize" "1"
+				"TeamNum" "2"
+			}
+			item_ammopack_small
+			{
+				"origin" "4304 432 -63.7894"
+				"AutoMaterialize" "1"
+				"TeamNum" "2"
+			}
+			item_ammopack_small
+			{
+				"origin" "2304 -1472 -128"
+				"AutoMaterialize" "1"
+				"TeamNum" "2"
+			}
+		}
+	}
+
+	ExtraSpawnPoint  
+	{
+		Name "spawnbot_alien"
+		TeamNum 3
+		X "2168"
+		Y "-1256"
+		Z "-222.95"
+	}
+
+	ExtraSpawnPoint  
+	{
+		Name "spawnbot_alien"
+		TeamNum 3
+		X "4021"
+		Y "-1739"
+		Z "-96"
+	}
+
+	ExtraSpawnPoint  
+	{
+		Name "spawnbot_alien"
+		TeamNum 3
+		X "2379"
+		Y "-1262"
+		Z "-435"
+	}
+
+	ExtraSpawnPoint  
+	{
+		Name "spawnbot_alien"
+		TeamNum 3
+		X "3970"
+		Y "-499"
+		Z "-186"
+	}
+
+	ExtraSpawnPoint  
+	{
+		Name "spawnbot_alien"
+		TeamNum 3
+		X "3200"
+		Y "93"
+		Z "-117"
+	}
+
+	ExtraSpawnPoint  
+	{
+		Name "spawnbot_alien"
+		TeamNum 3
+		X "2312"
+		Y "-1172"
+		Z "-119"
+	}
+
+	ExtraSpawnPoint  
+	{
+		Name "spawnbot_swarm"
+		TeamNum 3
+		X "1175.01"
+		Y "-280.006"
+		Z "-445"
+	}
+
+	ExtraSpawnPoint  
+	{
+		Name "redspawn"
+		TeamNum 3
+		X "4574"
+		Y "1663.98"
+		Z "10"
+	}
+
+	ExtraSpawnPoint  
+	{
+		Name "redspawn"
+		TeamNum 3
+		X "3732"
+		Y "1663.98"
+		Z "10"
+	}
+
+	ExtraSpawnPoint  
+	{
+		Name "redspawn"
+		TeamNum 3
+		X "4098"
+		Y "1953"
+		Z "10"
+	}
+
+	ExtraSpawnPoint  
+	{
+		Name "spawnbot_money"
+		TeamNum 3
+		X "6487"
+		Y "1713"
+		Z "10"
+	}
+
+	ExtraSpawnPoint  
+	{
+		Name "chief"
+		TeamNum 3
+		X "4114.77"
+		Y "1445.74"
+		Z "-58"
+	}
+
+	SpawnTemplate "general_logic"  
+	SpawnTemplate "annotations"  
+	SpawnTemplate "f_pusher"  
+	SpawnTemplate "PermaDeathLogic"  
+	SpawnTemplate "Misc"  
+	SpawnTemplate "blockers"  
+	SpawnTemplate "sounds"  
+	SpawnTemplate "particles"  
+	SpawnTemplate "outsideprops"  
+	SpawnTemplate "teleportarea"  
+	SpawnTemplate "fakeicon"  
+	SpawnTemplate "safetynet"  
+	SpawnTemplate "ammopacks"  
+	SpawnTemplate "Shaker"  
+	SpawnTemplate "deadbodies"  
+
+	SpawnTemplate  
+	{
+		Name "cabinet"
+		Origin "3787 2543 34"
+		Angles "0 270 0"
+	}
+
+    Templates 
+	{
+		Xenomorph_Basic
+		{
+			Name "Xenomorph"
+			Class Scout
+			ClassIcon heavy_zombie_lite
+			Health 125
+			Attributes DisableDodge
+			Skill Expert
+			WeaponRestrictions MeleeOnly
+			StripItemSlot 0  
+			StripItemSlot 1  
+			Action Mobber  
+			PainSound "npc/zombie/zombie_pain5.wav"   //Override pain sound.
+            DeathSound "xeno_screech1.wav"   //Override death sound.
+			Item "The Alien Cranium"
+			Item "The Xeno Suit"	
+			Item "The Biomech Backpack"
+			Item "Zombie Scout"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_BAT"
+				"decapitate type" 1
+				"heal on kill" 50
+				"crit kill will gib" 1
+				"is invisible" 1
+				"custom hit sound" "physics/flesh/flesh_squishy_impact_hard3.wav"
+				"custom kill icon" "skull_tf"
+			}
+			CharacterAttributes 
+			{
+				"voice pitch scale" 0
+				"cancel falling damage" 1		
+			}
+		}
+
+		Xenomorph_Small
+		{
+			Name "Baby Xenomorph"
+			Class Scout
+			ClassIcon heavy_zombie_lite
+			Scale 0.75
+			Health 70
+			Attributes DisableDodge
+			Skill Expert
+			WeaponRestrictions MeleeOnly
+			StripItemSlot 0  
+			StripItemSlot 1  
+			Action Mobber  
+			PainSound "npc/headcrab/pain1.wav"   //Override pain sound.
+            DeathSound "xeno_screech1.wav"   //Override death sound.
+			Item "The Alien Cranium"
+			Item "The Xeno Suit"	
+			Item "The Biomech Backpack"
+			Item "Zombie Scout"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_BAT"
+				"decapitate type" 1
+				// "heal on kill" 50
+				"crit kill will gib" 1
+				"is invisible" 1
+				"custom hit sound" "physics/flesh/flesh_squishy_impact_hard3.wav"
+				"custom kill icon" "skull_tf"
+			}
+			CharacterAttributes 
+			{
+				"head scale" 1.3
+				"voice pitch scale" 0
+				"move speed bonus" 1.3
+				"cancel falling damage" 1		
+			}
+		}
+
+		Xenomorph_Large
+		{
+			Name "Xenomorph"
+			Class Scout
+			ClassIcon heavy_zombie_lite_giant
+			Scale 1.3
+			Health 600
+			Attributes MiniBoss
+			Attributes DisableDodge
+			Skill Expert
+			WeaponRestrictions MeleeOnly
+			StripItemSlot 0  
+			StripItemSlot 1  
+			Action Mobber  
+			PainSound "npc/zombie/zombie_pain5.wav"   //Override pain sound.
+			DeathSound "npc/ichthyosaur/attack_growl1.wav"   //Override death sound.
+			Item "The Alien Cranium"
+			Item "The Xeno Suit"	
+			Item "The Biomech Backpack"
+			Item "Zombie Scout"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_BAT"
+				"decapitate type" 1
+				// "heal on kill" 50
+				"crit kill will gib" 1
+				"is invisible" 1
+				"custom hit sound" "physics/flesh/flesh_squishy_impact_hard3.wav"
+				"custom kill icon" "skull_tf"
+			}
+			CharacterAttributes
+			{
+				"move speed penalty" 0.6
+				"damage force reduction" 0
+				"airblast vulnerability multiplier" 0
+				"override footstep sound set" 7
+				"head scale" 1.3
+				"cancel falling damage" 1
+			}
+		}
+
+		Xenomorph_Buff
+		{
+			Name "Buff Xenomorph"
+			Class Soldier
+			ClassIcon heavy_zombie_lite
+			Health 200
+			// Attributes SpawnWithFullCharge
+			Skill Expert
+			WeaponRestrictions MeleeOnly
+			StripItemSlot 0  
+			Action Mobber  
+			PainSound "npc/headcrab/pain1.wav"   //Override pain sound.
+            DeathSound "xeno_screech1.wav"   //Override death sound.
+			Item "The Biomech Backpack"
+			Item "The Alien Cranium"
+			Item "The Xeno Suit"
+			Item "Zombie Soldier"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_SHOVEL"
+				"decapitate type" 1
+				"crit kill will gib" 1
+				"is invisible" 1
+				"custom hit sound" "physics/flesh/flesh_squishy_impact_hard3.wav"
+				"custom kill icon" "skull_tf"
+			}
+			CharacterAttributes 
+			{
+				"head scale" 1.3
+				"voice pitch scale" 0
+				"move speed bonus" 1.3
+				"cancel falling damage" 1	
+				"deploy time decreased" 0.5	
+				// "increase buff duration" 200
+			}
+			AddCond  
+			{
+				Name "TF_COND_OFFENSEBUFF"
+				Delay 2
+			}
+		}
+
+		Xenomorph_Conch
+		{
+			Name "Conch Xenomorph"
+			Class Soldier
+			ClassIcon heavy_zombie_lite
+			Health 200
+			// Attributes SpawnWithFullCharge
+			Skill Expert
+			WeaponRestrictions MeleeOnly
+			StripItemSlot 0  
+			Action Mobber  
+			PainSound "npc/headcrab/pain1.wav"   //Override pain sound.
+            DeathSound "xeno_screech1.wav"   //Override death sound.
+			Item "The Biomech Backpack"
+			Item "The Alien Cranium"
+			Item "The Xeno Suit"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_SHOVEL"
+				"decapitate type" 1
+				"crit kill will gib" 1
+				"is invisible" 1
+				"custom hit sound" "physics/flesh/flesh_squishy_impact_hard3.wav"
+				"custom kill icon" "skull_tf"
+			}
+			CharacterAttributes 
+			{
+				"head scale" 1.3
+				"voice pitch scale" 0
+				"move speed bonus" 1.3
+				"cancel falling damage" 1	
+				"deploy time decreased" 0.5	
+				// "increase buff duration" 200
+			}
+			AddCond  
+			{
+				Name "TF_COND_REGENONDAMAGEBUFF"
+				Delay 2
+			}	
+		}
+
+		Xenomorph_Acid
+		{
+			Name "Bleeding Xenomorph"
+			Class Scout
+			ClassIcon pyro_membrain_lite
+			Health 125
+			Attributes AlwaysFireWeapon
+			Skill Expert
+			WeaponRestrictions SecondaryOnly
+			Action Mobber  
+			StripItemSlot 0  
+			StripItemSlot 2  
+			PainSound "npc/headcrab/pain1.wav"   //Override pain sound.
+            DeathSound "xeno_screech1.wav"   //Override death sound.
+			Item "The Alien Cranium"
+			Item "The Xeno Suit"
+			Item "The Biomech Backpack"
+			Item "The Flying Guillotine"
+			Item "Zombie Scout"
+			ItemAttributes
+			{
+				ItemName "The Flying Guillotine"
+				"effect bar recharge rate increased" -1
+				"dmg penalty vs players" 0.25
+				"bleeding duration" 5
+				"is invisible" 1
+				"custom kill icon" "mannpower_plague"
+			}
+			CharacterAttributes 
+			{
+				"voice pitch scale" 0
+				"cancel falling damage" 1	
+				"gesture speed increase" 0.2	
+				"weapon burn dmg reduced" 0.001
+				"weapon burn time increased" 0.001
+			}
+			DamageAppliesCond  
+			{
+				Name "TF_COND_GAS"
+				Duration 5
+			}
+		}
+
+		Xenomorph_Stealth
+		{
+			Name "Camouflage Xenomorph"
+			Class Sniper
+			ClassIcon heavy_zombie_lite
+			Health 100
+			Attributes DisableDodge
+			Skill Expert
+			WeaponRestrictions MeleeOnly
+			Skin 23  
+			Action Mobber  
+			StripItemSlot 0  
+			StripItemSlot 1  
+			UseCustomModel "models/player/spy.mdl"  
+			Item "Prinny Machete"
+			Item "The Biomech Backpack"
+			Item "The Xeno Suit"
+			Item "Zombie Spy"
+			Item "The Graylien"
+			ItemAttributes
+			{
+				ItemName "Prinny Machete"
+				"custom kill icon" "skull_tf"
+				"decapitate type" 1
+				"crit kill will gib" 1
+				"custom hit sound" "physics/flesh/flesh_bloody_break.wav"
+				"is invisible" 1
+				"damage penalty" 0.65
+			}
+			CharacterAttributes 
+			{
+				"crit from behind" 1
+				"voice pitch scale" 0
+				"cancel falling damage" 1
+				"gesture speed increase" 0.65
+			}
+			AddCond   
+			{
+				Name "TF_COND_STEALTHED_USER_BUFF_FADING"  
+			}
+		}
+
+		FaceHugger
+		{
+			Name "Facehugger"
+			Class Scout
+			ClassIcon spy_facepeel_lite
+			Scale 0.4
+			Health 10
+			Skill Expert
+			Attributes DisableDodge
+			WeaponRestrictions MeleeOnly
+			Tag bot_facehugger
+			Action Mobber  
+			StripItemSlot 0  
+			StripItemSlot 1  
+			ExtAttr IgnoreBuildings  
+			Item "Parasite Hat"
+			Item "TF_WEAPON_GRAPPLINGHOOK"
+			Item "Zombie Scout"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_BAT"
+				"bleeding duration" 5
+				"custom kill icon" "skull_tf"
+				"remove cond on hit" 86
+				"custom hit sound" "physics/flesh/flesh_bloody_break.wav"
+				"is invisible" 1
+			}
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_GRAPPLINGHOOK"
+				"is_passive_weapon" 1
+			}
+			CharacterAttributes 
+			{
+				"head scale" 3.9
+				"torso scale" 0
+				"hand scale" 0
+				"dmg penalty vs players" 2
+				"move speed bonus" 0.5
+				"stomp player damage" 10
+				"stomp player force" 100
+				"stomp player time" 0.025
+				"increased air control" 100
+				"no double jump" 1
+				"mult smack time" 0
+				"crit kill will gib" 1
+				"gesture speed increase" 0
+				"voice pitch scale" 0
+				"cancel falling damage" 1
+			}
+			ItemModel  
+			{
+				ItemName "TF_WEAPON_GRAPPLINGHOOK"
+				Model "models/empty.mdl"
+			}
+			DamageAppliesCond  
+			{
+				Name "TF_COND_FREEZE_INPUT"
+				Duration 2
+			}
+			FireWeapon   
+			{
+				Delay 5
+				Cooldown 0
+				Repeats 0
+				IfSeeTarget 1
+				Duration 0
+				Type "Action"
+			}
+			FireWeapon   
+			{
+				Delay 5
+				Cooldown 2
+				Repeats 0
+				IfSeeTarget 1
+				Duration 0
+				Type "Primary"
+			}
+			FireWeapon   
+			{
+				Delay 5
+				Cooldown 0.25
+				Repeats 0
+				IfSeeTarget 1
+				Duration 0
+				Type "Jump"
+			}
+		}
+
+		Xenomorph_Queen
+		{
+			Name "Xenomorph Queen"
+			Class Scout
+			ClassIcon heavy_zombie_lite_giant
+			Health 2000
+			Attributes MiniBoss
+			// Attributes UseBossHealthBar
+			Skill Expert		
+			WeaponRestrictions MeleeOnly
+			Tag bot_giant
+			StripItemSlot 0  
+			StripItemSlot 1  
+			Action Mobber   
+			NoIdleSound 1  
+			Item "The Alien Cranium"
+			Item "The Xeno Suit"	
+			Item "The Biomech Backpack"
+			Item "Zombie Scout"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_BAT"
+				"damage bonus" 1.2
+				"crit kill will gib" 1
+				"is invisible" 1
+				"custom hit sound" "physics/flesh/flesh_squishy_impact_hard3.wav"
+				"custom kill icon" "skull_tf"
+			}
+			CharacterAttributes
+			{
+				"head scale" 1.2
+				"hand scale" 0
+				"move speed penalty" 0.75
+				"damage force reduction" 0
+				"airblast vulnerability multiplier" 0.5
+				"airblast vertical vulnerability multiplier" 0.5
+				"override footstep sound set" 7
+			}
+		}
+
+		Engineer_Giant
+		{
+			Class Engineer
+			ClassIcon heavy_zombie_lite_giant
+			Scale 1.4
+			Health 900
+			Attributes MiniBoss
+			Attributes DisableDodge
+			Skill Expert
+			WeaponRestrictions MeleeOnly
+			Tag bot_giant
+			Action Mobber  
+			StripItemSlot 0  
+			StripItemSlot 1  
+			StripItemSlot 3  
+			StripItemSlot 4  
+			StripItemSlot 5  
+			NoIdleSound 1  
+			DeathSound "npc/ichthyosaur/attack_growl3.wav"  
+			Item "Necro Smasher"
+			Item "Texas Slim's Dome Shine"
+			Item "Talon Trotters"
+			Item "Polycount Pin"
+			Item "Zombie Engineer"
+			ItemAttributes
+			{
+				ItemName "Necro Smasher"
+				"bleeding duration" 10
+				"fire rate penalty" 1.5
+				"custom kill icon" "skull_tf"
+				"melee cleave attack" 1
+				"dmg penalty vs players" 0.65
+				"is invisible" 1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"damage force reduction" 0
+				"voice pitch scale" 0
+				"airblast vulnerability multiplier" 0.5
+				"airblast vertical vulnerability multiplier" 0
+				"override footstep sound set" 7
+				"gesture speed increase" 0.2
+				"rage giving scale" 0.1
+			}
+			ItemColor  
+			{
+				ItemName "Talon Trotters"
+				Red 47
+				Green 79
+				Blue 79
+			}
+			ItemModel  
+			{
+				ItemName "Polycount Pin"
+				Model "models/workshop/player/items/pyro/invasion_phobos_filter/invasion_phobos_filter.mdl"
+			}
+		}
+
+		Xenomorph_Punch
+		{
+			Name "Xeno Punch"
+			Class Heavyweapons
+			ClassIcon heavy_chief
+			Health 2500
+			Attributes MiniBoss
+			Skill Expert
+			WeaponRestrictions MeleeOnly
+			Tag bot_giant
+			Action Mobber  
+			StripItemSlot 0  
+			StripItemSlot 1  
+			NoIdleSound 1  
+			PainSound "npc/antlion_guard/angry3.wav"  
+			DeathSound "misc/bonzo_vomit02.wav"  
+			Item "Fists of Steel"
+			Item "War Head"
+			Item "The Biomech Backpack"
+			Item "The Xeno Suit"
+			Item "Zombie Heavy"
+			ItemAttributes
+			{
+				ItemName "Fists of Steel"
+				"damage bonus" 2
+				"fire rate penalty" 2.5
+				"melee cleave attack" 1
+				"dmg bonus vs buildings" 5
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"damage force reduction" 0.2
+				"airblast vulnerability multiplier" 0.2
+				"override footstep sound set" 2
+				"rage giving scale" 0.1
+				"gesture speed increase" 0.5
+				"head scale" 1.3
+			}
+		}
+
+		T_TFBot_Chief_Engineer
+		{
+			Name "Chief Engineer"
+			Class Engineer
+			ClassIcon engineer_armored
+			Scale 1.9
+			Health 30000
+			Attributes MiniBoss
+			Attributes UseBossHealthBar
+			Skill Expert
+			WeaponRestrictions MeleeOnly
+			Tag bomb_carrier
+			Action FetchFlag  
+			Skin 1  
+			AddCond   { Name "TF_COND_REPROGRAMMED" Delay 0.1 }
+			UseCustomModel "models/bots/engineer/bot_engineer.mdl"  
+			Item "The Frontier Justice"
+			Item "Golden Wrench"
+			Item "Texas Tin-Gallon"
+			ItemAttributes
+			{
+				ItemName "Golden Wrench"
+				"damage bonus" 1.25
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.01
+				"damage force reduction" 0
+				"airblast vulnerability multiplier" 0
+				"airblast vertical vulnerability multiplier" 0
+				"override footstep sound set" 7
+			}
+		}
+
+		Survivor_1
+		{
+			Name "Survivor"
+			Class Engineer
+			Health 200
+			Skill Expert
+			WeaponRestrictions SecondaryOnly
+			MaxVisionRange 500
+			Tag bot_red
+			Tag bot_notplayer
+			AddCond   { Name "TF_COND_REPROGRAMMED" }
+			NoPushaway 1   //Dont push other close bots away
+			Action Mobber  
+			StripItemSlot 0  
+			StripItemSlot 2  
+			StripItemSlot 3  
+			StripItemSlot 4  
+			StripItemSlot 5  
+			DropWeapon 1  
+			Item "VP78 Pistol"
+			Item "The MK 50"
+			Item "Immobile Suit"
+			Item "Polycount Pin"	
+			CharacterAttributes 
+			{
+				"crit mod disabled" 0	
+				"dmg taken from crit reduced" 0
+			}
+			ItemModel  
+			{
+				ItemName "Polycount Pin"
+				Model "models/workshop/player/items/engineer/sbox2014_scotch_saver/sbox2014_scotch_saver.mdl"
+			}
+		}
+
+		Survivor_2
+		{
+			Name "Survivor"
+			Class Medic
+			Health 200
+			Skill Expert
+			MaxVisionRange 500
+			WeaponRestrictions PrimaryOnly
+			Tag bot_red
+			Tag bot_notplayer
+			AddCond   { Name "TF_COND_REPROGRAMMED" }
+			NoPushaway 1   //Dont push other close bots away
+			Action Mobber  
+			StripItemSlot 1  
+			StripItemSlot 2  
+			DropWeapon 1  
+			AimAt Head  
+			Item "Uberdosis"
+			Item "Captain Space Mann"
+			Item "The Surgeon's Space Suit"
+			Item "The Lo-Grav Loafers"
+			CharacterAttributes 
+			{
+				"crit mod disabled" 0
+				"dmg taken from crit reduced" 0
+			}
+		}
+
+		Survivor_3
+		{
+			Name "Survivor"
+			Class Sniper
+			Health 200
+			Skill Expert
+			MaxVisionRange 500
+			WeaponRestrictions SecondaryOnly
+			Tag bot_red
+			Tag bot_notplayer
+			AddCond   { Name "TF_COND_REPROGRAMMED" }
+			NoPushaway 1   //Dont push other close bots away
+			DropWeapon 1  
+			Action Mobber  
+			StripItemSlot 0  
+			StripItemSlot 2  
+			Item "Classic SMG"
+			Item "The MK 50"
+			Item "Iron Lung"
+			Item "The Cammy Jammies"
+			Item "Polycount Pin"
+			CharacterAttributes 
+			{
+				"crit mod disabled" 0
+				"dmg taken from crit reduced" 0
+			}
+			ItemModel  
+			{
+				ItemName "Polycount Pin"
+				Model "models/workshop/player/items/all_class/sbox2014_camo_headband/sbox2014_camo_headband_sniper.mdl"
+			}
+		}
+
+		Survivor_4
+		{
+			Name "Survivor"
+			Class Demoman
+			Health 200
+			Skill Expert
+			MaxVisionRange 500
+			WeaponRestrictions MeleeOnly
+			Tag bot_red
+			Tag bot_notplayer
+			AddCond   { Name "TF_COND_REPROGRAMMED" }
+			NoPushaway 1   //Dont push other close bots away
+			Action Mobber  
+			StripItemSlot 0  
+			StripItemSlot 1  
+			Item "The MK 50"
+			Item "Blast Blocker"
+			Item "The Cammy Jammies"
+			Item "Polycount Pin"
+			CharacterAttributes 
+			{
+				"crit mod disabled" 0
+				"dmg taken from crit reduced" 0
+			}
+			ItemModel  
+			{
+				ItemName "Polycount Pin"
+				Model "models/workshop/player/items/demo/demo_beardpipe/demo_beardpipe.mdl"
+			}
+		}
+
+		Survivor_5
+		{
+			Name "Survivor"
+			Class Pyro
+			Health 200
+			Skill Expert
+			MaxVisionRange 500
+			WeaponRestrictions PrimaryOnly
+			Tag bot_red
+			Tag bot_notplayer
+			AddCond   { Name "TF_COND_REPROGRAMMED" }
+			NoPushaway 1   //Dont push other close bots away
+			Action Mobber  
+			StripItemSlot 1  
+			StripItemSlot 2  
+			Item "The MK 50"
+			Item "Blast Blocker"
+			Item "The Nostromo Napalmer"
+			CharacterAttributes 
+			{
+				"crit mod disabled" 0
+				"dmg taken from crit reduced" 0
+				"airblast disabled" 1
+			}
+		}
+
+		T_WaveSpawn_Money
+		{
+			Name "money"
+			Where spawnbot_money
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 800
+			Support Limited
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{ 
+						Class Scout
+						Name ""
+						Health 10
+						Attributes IgnoreFlag
+						CharacterAttributes { "health drain" -10 "force distribute currency on death" 1 }
+					}
+				}
+			}
+		}
+	}
+
+    Wave // Wave 1
+    {
+		WaitWhenDone 65
+		Checkpoint Yes
+        StartWaveOutput
+        {
+            Target wave_start_relay
+            Action Trigger
+        }
+        DoneOutput
+        {
+            Target wave_finished_relay
+            Action Trigger
+        }
+        InitWaveOutput
+        {
+            Target relay_emergencylights_on
+            Action Trigger
+        }
+
+		RedTeamWipeCausesWaveLoss 1  
+
+		Explanation  
+		{
+			Line "{yellow}-----------------------------------"
+			Line "{red}Greetings, mercenaries."
+			Line "{red}You have been tasked at clearing out a xenomorph infestation at this remote base."
+			Line "{red}Most of the weapons here have been destroyed, however we were able to gather what we found and give them to you."
+			Line "{red}They have also managed to destroy our reanimators as well, so once you're dead you're dead."
+			Line "{red}Good luck and don't die."
+			Line "{yellow}-----------------------------------"
+		}
+		
+		SoundLoop   //Played in a loop during wave. The sound must have looping enabled, like the minigun fire, or it will only play once. 
+		{
+			SoundFile "#isolation_main.mp3"
+		}
+
+		WaveSpawn // Dummy
+		{
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 0
+			FirstSpawnOutput
+			{
+				Target tomboy1
+				Action Show
+			}
+		}
+		WaveSpawn // Dummy
+		{
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 10
+			FirstSpawnOutput
+			{
+				Target tomboy2
+				Action Show
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave01_tutorial_a"
+			Where spawnbot_alien
+			TotalCount 16
+			MaxActive 4
+			SpawnCount 1
+			WaitBeforeStarting 20
+			WaitBetweenSpawns 1
+			TotalCurrency 0
+			// RandomSpawn 1
+			RandomChoice
+			{
+				TFBot
+				{
+					Template Xenomorph_Basic
+				}
+				TFBot
+				{
+					Template Xenomorph_Basic
+				}
+				TFBot
+				{
+					Template Xenomorph_Basic
+				}
+				TFBot
+				{
+					Template Xenomorph_Basic
+				}
+				TFBot
+				{
+					Template Xenomorph_Basic
+				}
+				TFBot
+				{
+					Template Xenomorph_Basic
+				}
+				TFBot
+				{
+					Template Xenomorph_Small
+				}
+				TFBot
+				{
+					Template Xenomorph_Small
+				}
+				TFBot
+				{
+					Template Xenomorph_Small
+				}
+				TFBot
+				{
+					Template Xenomorph_Small
+				}
+				TFBot
+				{
+					Template Xenomorph_Small
+				}
+				TFBot
+				{
+					Template Xenomorph_Small
+				}
+			}	
+		}
+		WaveSpawn
+		{
+			Name "wave01_tutorial_b"
+			WaitForAllDead wave01_tutorial_a
+			Where spawnbot_alien
+			TotalCount 3
+			MaxActive 3
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 1
+			TotalCurrency 0
+			RandomChoice
+			{
+				TFBot
+				{
+					Template Xenomorph_Large
+				}
+				TFBot
+				{
+					Template Xenomorph_Large
+				}
+				TFBot
+				{
+					Template Xenomorph_Large
+				}
+				TFBot
+				{
+					Template Xenomorph_Large
+				}
+				TFBot
+				{
+					Template Xenomorph_Large
+				}
+				TFBot
+				{
+					Template Xenomorph_Large
+				}
+				TFBot
+				{
+					Template Xenomorph_Large
+				}
+				TFBot
+				{
+					Template Xenomorph_Large
+				}
+				TFBot
+				{
+					Template Xenomorph_Large
+				}
+				TFBot
+				{
+					Template Xenomorph_Large
+				}
+				TFBot
+				{
+					Template Xenomorph_Large
+				}
+				TFBot
+				{
+					Template Xenomorph_Large
+				}
+				TFBot
+				{
+					Template Xenomorph_Large
+				}
+				TFBot
+				{
+					Template Xenomorph_Large
+				}
+				TFBot
+				{
+					Template Xenomorph_Large
+				}
+				TFBot
+				{
+					Template Xenomorph_Large
+				}
+				TFBot
+				{
+					Template Xenomorph_Queen
+				}
+				TFBot
+				{
+					Template Engineer_Giant
+				}
+			}
+		}
+		WaveSpawn // Dummy
+		{
+			WaitForAllDead wave01_tutorial_b
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 2	
+			FirstSpawnOutput
+			{
+				Target tomboy3
+				Action Show
+			}
+		}
+		WaveSpawn // Dummy
+		{
+			WaitForAllDead wave01_tutorial_b
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 10
+			FirstSpawnWarningSound "ambient/materials/metal_rattle2.wav"
+			FirstSpawnOutput
+			{
+				Target shake_effect
+				Action StartShake
+			}
+		}
+		WaveSpawn // Dummy
+		{
+			WaitForAllDead wave01_tutorial_b
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 10
+			FirstSpawnWarningSound "ambient/materials/metal_rattle2.wav"
+		}
+		WaveSpawn // Dummy
+		{
+			WaitForAllDead wave01_tutorial_b
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 15.5
+			FirstSpawnWarningSound "ambient/explosions/exp1.wav"
+		}
+		WaveSpawn // Dummy
+		{
+			WaitForAllDead wave01_tutorial_b
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 15.5
+			FirstSpawnWarningSound "ambient/materials/metal_rattle.wav"
+			FirstSpawnOutput
+			{
+				Target shake_effect
+				Action StartShake
+			}
+		}
+		WaveSpawn // Dummy
+		{
+			WaitForAllDead wave01_tutorial_b
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 21
+			FirstSpawnWarningSound "xeno_screech2.wav"
+		}
+		WaveSpawn // Dummy
+		{
+			WaitForAllDead wave01_tutorial_b
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 21
+			FirstSpawnWarningSound "xeno_screech2.wav"
+		}
+		WaveSpawn // Dummy
+		{
+			WaitForAllDead wave01_tutorial_b
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 22
+			FirstSpawnWarningSound "ambient/materials/metal_rattle2.wav"
+			FirstSpawnOutput
+			{
+				Target shake_effect
+				Action StartShake
+			}
+		}
+		WaveSpawn // Dummy
+		{
+			WaitForAllDead wave01_tutorial_b
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 24
+			FirstSpawnWarningSound "ambient_mp3/lair/crocs_growl4.mp3"
+		}
+		WaveSpawn // Dummy
+		{
+			WaitForAllDead wave01_tutorial_b
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 24
+			FirstSpawnWarningSound "ambient_mp3/lair/crocs_growl5.mp3"
+		}
+		WaveSpawn // Dummy
+		{
+			WaitForAllDead wave01_tutorial_b
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 27
+			FirstSpawnWarningSound "npc/ichthyosaur/attack_growl1.wav"
+		}
+		WaveSpawn // Dummy
+		{
+			WaitForAllDead wave01_tutorial_b
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 32
+			FirstSpawnWarningSound "mvm/giant_heavy/giant_heavy_step01.wav"
+		}
+		WaveSpawn // Dummy
+		{
+			WaitForAllDead wave01_tutorial_b
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 32.5
+			FirstSpawnWarningSound "mvm/giant_heavy/giant_heavy_step01.wav"
+		}
+		WaveSpawn // Dummy
+		{
+			WaitForAllDead wave01_tutorial_b
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 33
+			FirstSpawnWarningSound "mvm/giant_demoman/giant_demoman_step01.wav"
+		}
+		WaveSpawn // Dummy
+		{
+			WaitForAllDead wave01_tutorial_b
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 33.5
+			FirstSpawnWarningSound "mvm/giant_demoman/giant_demoman_step01.wav"
+		}
+		WaveSpawn // Dummy
+		{
+			WaitForAllDead wave01_tutorial_b
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 34
+			FirstSpawnWarningSound "mvm/giant_pyro/giant_pyro_step01.wav"
+		}
+		WaveSpawn // Dummy
+		{
+			WaitForAllDead wave01_tutorial_b
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 34.5
+			FirstSpawnWarningSound "mvm/giant_pyro/giant_pyro_step01.wav"
+		}
+		WaveSpawn // Dummy
+		{
+			WaitForAllDead wave01_tutorial_b
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 35
+			FirstSpawnWarningSound "mvm/giant_pyro/giant_pyro_step02.wav"
+		}
+		WaveSpawn // Dummy
+		{
+			WaitForAllDead wave01_tutorial_b
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 35.5
+			FirstSpawnWarningSound "mvm/giant_pyro/giant_pyro_step02.wav"
+		}
+		WaveSpawn // Dummy
+		{
+			WaitForAllDead wave01_tutorial_b
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 36
+			FirstSpawnWarningSound "mvm/giant_pyro/giant_pyro_step02.wav"
+		}
+		WaveSpawn // Dummy
+		{
+			WaitForAllDead wave01_tutorial_b
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 36.5
+			FirstSpawnWarningSound "mvm/giant_heavy/giant_heavy_step01.wav"
+		}
+		WaveSpawn // Dummy
+		{
+			WaitForAllDead wave01_tutorial_b
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 38
+			FirstSpawnWarningSound "xeno_screech1.wav"
+			FirstSpawnOutput
+			{
+				Target shake_effect
+				Action StartShake
+			}
+		}
+		WaveSpawn // Dummy
+		{
+			WaitForAllDead wave01_tutorial_b
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 38
+			FirstSpawnWarningSound "xeno_screech1.wav"
+		}
+		WaveSpawn // Dummy
+		{
+			WaitForAllDead wave01_tutorial_b
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 40
+			FirstSpawnWarningSound "items/cart_explode.wav"
+			FirstSpawnOutput
+			{
+				Target fire_particle
+				Action Start
+			}
+		}
+		WaveSpawn // Dummy
+		{
+			WaitForAllDead wave01_tutorial_b
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 40
+			FirstSpawnOutput
+			{
+				Target barrierwallsdisable
+				Action Trigger
+			}
+		}
+		WaveSpawn // Dummy
+		{
+			WaitForAllDead wave01_tutorial_b
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 40
+			FirstSpawnOutput
+			{
+				Target barrierwallsdisableupper
+				Action Trigger
+			}
+		}
+		WaveSpawn // Dummy
+		{
+			WaitForAllDead wave01_tutorial_b
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 40
+			FirstSpawnOutput
+			{
+				Target doorfencedisable
+				Action Trigger
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave01_flood"
+			WaitForAllDead wave01_tutorial_b
+			Where spawnbot_swarm
+			TotalCount 20
+			MaxActive 5
+			SpawnCount 1
+			WaitBeforeStarting 39
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+			RandomChoice
+			{
+				TFBot
+				{
+					Template Xenomorph_Basic
+				}
+				TFBot
+				{
+					Template Xenomorph_Basic
+				}
+				TFBot
+				{
+					Template Xenomorph_Basic
+				}
+				TFBot
+				{
+					Template Xenomorph_Basic
+				}
+				TFBot
+				{
+					Template Xenomorph_Basic
+				}
+				TFBot
+				{
+					Template Xenomorph_Basic
+				}
+				TFBot
+				{
+					Template Xenomorph_Conch
+				}
+				TFBot
+				{
+					Template Xenomorph_Conch
+				}
+				TFBot
+				{
+					Template Xenomorph_Small
+				}
+				TFBot
+				{
+					Template Xenomorph_Small
+				}
+				TFBot
+				{
+					Template Xenomorph_Small
+				}
+				TFBot
+				{
+					Template Xenomorph_Small
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "wave01_flood"
+			WaitForAllDead wave01_tutorial_b
+			Where spawnbot_boss
+			TotalCount 3
+			MaxActive 3
+			SpawnCount 1
+			WaitBeforeStarting 48
+			WaitBetweenSpawns 10
+			TotalCurrency 0
+			TFBot
+			{ 
+				Template Xenomorph_Large
+			}
+		}
+		WaveSpawn
+		{
+			Name "money"
+			Where spawnbot_money
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 1000
+			Support Limited
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{ 
+						Class Scout
+						Name ""
+						Health 10
+						Attributes IgnoreFlag
+						CharacterAttributes { "health drain" -10 "force distribute currency on death" 1 }
+					}
+				}
+			}
+		}
+		// WaveSpawn
+		// {
+		// 	Name "wave01_survivors"
+		// 	Where redspawn
+		// 	TotalCount 3
+		// 	MaxActive 3
+		// 	SpawnCount 3
+		// 	WaitBeforeStarting 0.5
+		// 	WaitBetweenSpawns 0
+		// 	TotalCurrency 0
+		// 	RandomSpawn 1
+		// 	Support Limited
+		// 	RandomChoice
+		// 	{
+		// 		RandomChoice
+		// 		{
+		// 			TFBot
+		// 			{
+		// 				Template Survivor_1
+		// 			}
+		// 			TFBot
+		// 			{
+		// 				Template Survivor_2
+		// 			}
+		// 			TFBot
+		// 			{
+		// 				Template Survivor_3
+		// 			}
+		// 			TFBot
+		// 			{
+		// 				Template Survivor_4
+		// 			}
+		// 			TFBot
+		// 			{
+		// 				Template Survivor_5
+		// 			}
+		// 		}
+		// 	}
+		// }
+		WaveSpawn
+		{
+			Name "chiefengi"
+			Where chief
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+			Support Limited
+			RandomChoice
+			{
+				RandomChoice
+				{
+					TFBot
+					{
+						Template T_TFBot_Chief_Engineer
+					}
+				}
+			}
+		}
+    }
+
+	Wave // Wave 2
+	{
+		WaitWhenDone 65
+		Checkpoint Yes
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		InitWaveOutput
+		{
+			Target relay_emergencylights_on
+			Action Trigger
+		}
+
+		RedTeamWipeCausesWaveLoss 1  
+
+		SoundLoop   //Played in a loop during wave. The sound must have looping enabled, like the minigun fire, or it will only play once. 
+		{
+			SoundFile "#isolation_main.mp3"
+		}
+
+		WaveSpawn
+		{
+			Name "wave02a"
+			Where spawnbot_alien
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 10
+			TotalCurrency 0
+			RandomSpawn 1
+			TFBot
+			{ 
+				Template FaceHugger
+			}
+		}	
+
+	}
+}

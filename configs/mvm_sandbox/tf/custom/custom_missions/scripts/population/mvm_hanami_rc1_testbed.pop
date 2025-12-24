@@ -1,0 +1,1266 @@
+#base robot_standard.pop
+
+WaveSchedule
+{
+	StartingCurrency 10000
+	RespawnWaveTime 0
+	CanBotsAttackWhileInSpawnRoom no
+	ForceHoliday 2  
+	WaveStartCountdown 0  
+	MaxSpeedLimit 1500  
+	PrecacheModel "models/ulti_pyro/pyro.mdl"  
+	
+	Templates
+	{
+		T_TFBot_Demo_Sticky
+		{
+			Class Demoman
+			Name "Sticky Demo"
+			Skill Normal
+			Item "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+			// Item "Stickybomb Jumper"
+			WeaponRestrictions SecondaryOnly
+			ClassIcon demo_sticky_daan
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_GRENADELAUNCHER"
+				"is_passive_weapon" 1
+				"override projectile type"  27
+			}
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+				// ItemName "Stickybomb Jumper"
+				"stickybomb charge rate" 0.001
+				"max pipebombs decreased" -3
+			}
+		}
+		T_TFBot_Sniper_Bowman
+		{
+			Class Sniper
+			Name "Bowman"
+			Skill Normal
+			Item "The Huntsman"
+			ClassIcon sniper_bow
+			ItemAttributes
+			{
+				ItemName "The Huntsman"
+				"damage penalty" 0.5
+			}
+		}
+	}
+	
+	Mission
+	{
+		Objective Sniper
+		Where spawnbot
+		BeginAtWave 2
+		RunForThisManyWaves 1
+		DesiredCount 1
+		InitialCooldown 185
+		CooldownTime 15
+		TFBot
+		{
+			Class Soldier
+			Name "Cow Mangler Soldier"
+			Skill Expert
+			Item "The Cow Mangler 5000"
+			ClassIcon soldier_cowmangler
+			ItemAttributes
+			{
+				ItemName "The Cow Mangler 5000"
+				"faster reload rate" -0.4
+				"override projectile type" 1
+			}
+		}
+	}
+	// Mission
+	// {
+		// Objective Sniper
+		// Where spawnbot
+		// BeginAtWave 1
+		// RunForThisManyWaves 1
+		// DesiredCount 1
+		// InitialCooldown 0
+		// CooldownTime 15
+		// TFBot
+		// {
+			// Class Pyro
+			// Health 10000
+			// Skill Expert
+			// ItemAttributes
+			// {
+				// ItemName "TF_WEAPON_FLAMETHROWER"
+			// }
+		// }
+	// }
+	
+	ItemAttributes  
+	{
+		ClassName "TF_WEAPON_FLAMETHROWER"
+		// "mult airblast refire time" 0.01
+		"charged airblast" 1
+	}
+	ItemAttributes  
+	{
+		ClassName "TF_WEAPON_FLAREGUN"
+		"damage bonus" 100
+		"fire rate bonus" 0
+		"heal on hit for rapidfire" 100000
+		"critboost on kill" 100
+		"projectile speed increased" 1.5
+		"move speed bonus" 5
+		"provide on active" 1
+		"SPELL: Halloween death ghosts" 1
+		"killstreak effect" 2006
+		"killstreak idleeffect" 7
+		"killstreak tier" 3
+		"maxammo secondary increased" 50
+		"projectile spread angle penalty" 1
+	}
+	ItemAttributes  
+	{
+		ClassName "TF_WEAPON_FIREAXE"
+		"damage bonus" 100
+		"fire rate bonus" 0.25
+		"heal on hit for rapidfire" 100000
+		"critboost on kill" 100
+		"move speed bonus" 5
+		"provide on active" 1
+		"SPELL: Halloween death ghosts" 1
+		"killstreak effect" 2006
+		"killstreak idleeffect" 7
+		"killstreak tier" 3
+		"dmg bonus vs buildings" 100
+		"dmg penalty vs players" 0.999
+	}
+	PlayerAttributes  
+	{
+		"move speed bonus" 1.5
+		"max health additive bonus" 10000
+	}
+	
+	PointTemplates  
+	{
+		Global
+		{
+			NoFixup 1
+			logic_relay
+			{
+				"targetname" "sluttele_relay"
+				"OnTrigger" "sluttele,Enable,,0,-1"
+			}
+			filter_tf_bot_has_tag
+			{
+				"targetname" "sluthelperfilter"
+				"tags" "sluthelper"
+			}
+			info_target
+			{
+				"targetname" "sluthelperspawn"
+				"origin" "250 -1350 40"
+				"angles" "0 -45 0"
+			}
+			trigger_teleport
+			{
+				"targetname" "sluttele"
+				"target" "sluthelperspawn"
+				"origin" "-2224 -2352 288"
+				"mins" "-100 -100 -100"
+				"maxs" "100 100 100"
+				"spawnflags" "1"
+				"filtername" "sluthelperfilter"
+				"startdisabled" "1"
+			}
+			filter_tf_bot_has_tag
+			{
+				"targetname" "slutdancerfilter"
+				"tags" "slutdancer"
+			}
+			info_target
+			{
+				"targetname" "slutdancerspawn"
+				"origin" "-625 4840 24"
+				"angles" "0 90 0"
+			}
+			trigger_teleport
+			{
+				"targetname" "sluttele"
+				"target" "slutdancerspawn"
+				"origin" "-2224 -2352 288"
+				"mins" "-100 -100 -100"
+				"maxs" "100 100 100"
+				"spawnflags" "1"
+				"filtername" "slutdancerfilter"
+				"startdisabled" "1"
+			}
+			filter_tf_bot_has_tag
+			{
+				"targetname" "slutdomfilter"
+				"tags" "slutdom"
+			}
+			info_target
+			{
+				"targetname" "slutdomspawn"
+				"origin" "-16 5224 24"
+				"angles" "0 -45 0"
+			}
+			trigger_teleport
+			{
+				"targetname" "sluttele"
+				"target" "slutdomspawn"
+				"origin" "-2224 -2352 288"
+				"mins" "-100 -100 -100"
+				"maxs" "100 100 100"
+				"spawnflags" "1"
+				"filtername" "slutdomfilter"
+				"startdisabled" "1"
+			}
+			filter_tf_bot_has_tag
+			{
+				"targetname" "slutcosplayerfilter"
+				"tags" "slutcosplayer"
+			}
+			info_target
+			{
+				"targetname" "slutcosplayerspawn"
+				"origin" "1288 4505 24"
+				"angles" "0 90 0"
+			}
+			trigger_teleport
+			{
+				"targetname" "sluttele"
+				"target" "slutcosplayerspawn"
+				"origin" "-2224 -2352 288"
+				"mins" "-100 -100 -100"
+				"maxs" "100 100 100"
+				"spawnflags" "1"
+				"filtername" "slutcosplayerfilter"
+				"startdisabled" "1"
+			}
+			trigger_multiple
+			{
+				"origin" "1662 4920 92"
+				"mins" "-35 -2 -2"
+				"maxs" "35 2 2"
+				"spawnflags" "1"
+				"OnStartTouch" "!activator,setforcedtauntcam,1,0,-1"
+			}
+		}
+	}
+	SpawnTemplate "Global"  
+	
+	Wave // Wave 1
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 1
+			TFBot
+			{
+				Class Pyro
+				Skill Expert
+				Health 10000
+				Attributes IgnoreFlag
+				Attributes Aggressive
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_FLAMETHROWER"
+					// "damage penalty" 0
+					"weapon burn dmg reduced" 0
+					"flame_reflect_on_collision" 1
+					"reflected_flame_dmg_reduction" 2
+					"flame_gravity" -10000
+					"flame_lifetime" 5
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			MaxActive 1
+			Support 1
+			TFBot
+			{
+				Class Pyro
+				Name "Slut Pyro"
+				Skill Expert
+				Health 10000
+				WeaponRestrictions MeleeOnly
+				ClassIcon pyro_slut
+				Attributes IgnoreFlag
+				Attributes IgnoreEnemies
+				Tag "sluthelper"
+				Item "The Disciplinary Action"  
+				Item "The Burning Question"
+				Item "The Lunatic's Leathers"
+				UseHumanModel 1  
+				AddCond  
+				{
+					Name "TF_COND_REPROGRAMMED"
+				}
+				ItemModel  
+				{
+					ItemName "TF_WEAPON_FLAMETHROWER"
+					Model "models/empty.mdl"
+				}
+				ItemModel  
+				{
+					ItemName "TF_WEAPON_SHOTGUN_PYRO"
+					Model "models/empty.mdl"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			MaxActive 1
+			Support 1
+			TFBot
+			{
+				Class Pyro
+				Name "Slut Pyro"
+				Skill Expert
+				Health 10000
+				WeaponRestrictions MeleeOnly
+				ClassIcon pyro_slut
+				Attributes IgnoreFlag
+				Attributes IgnoreEnemies
+				Tag "slutdancer"
+				Item "The Disciplinary Action"  
+				Item "Brim of Fire"
+				Item "The Lunatic's Leathers"
+				UseHumanModel 1  
+				ItemModel  
+				{
+					ItemName "TF_WEAPON_FLAMETHROWER"
+					Model "models/empty.mdl"
+				}
+				ItemModel  
+				{
+					ItemName "TF_WEAPON_SHOTGUN_PYRO"
+					Model "models/empty.mdl"
+				}
+				Taunt  
+				{
+					Name "Taunt: Mannrobics"
+					Delay 0.2
+					Cooldown 0.1
+					Duration 0
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			MaxActive 1
+			Support 1
+			TFBot
+			{
+				Class Pyro
+				Name "Slut Pyro"
+				Skill Expert
+				Health 10000
+				WeaponRestrictions MeleeOnly
+				ClassIcon pyro_slut
+				Attributes IgnoreFlag
+				Attributes IgnoreEnemies
+				Tag "slutdom"
+				Item "The Disciplinary Action"  
+				Item "The Smoking Skid Lid"
+				Item "Lollichop Licker"
+				Item "Rail Spikes"
+				UseCustomModel "models/ulti_pyro/pyro.mdl"  
+				CharacterAttributes
+				{
+					"move speed penalty" 0
+				}
+				ItemModel  
+				{
+					ItemName "TF_WEAPON_FLAMETHROWER"
+					Model "models/empty.mdl"
+				}
+				ItemModel  
+				{
+					ItemName "TF_WEAPON_SHOTGUN_PYRO"
+					Model "models/empty.mdl"
+				}
+				ItemAttributes
+				{
+					ItemName "Rail Spikes"
+					"set item tint RGB" 1315860
+					"unique craft index" 34
+				}
+				AddCond  
+				{
+					Name "TF_COND_REPROGRAMMED"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			MaxActive 1
+			Support 1
+			WaitBetweenSpawns 10
+			TFBot
+			{
+				Class Pyro
+				Name "Slut Pyro"
+				Skill Expert
+				Health 2147483583
+				WeaponRestrictions MeleeOnly
+				ClassIcon pyro_slut
+				Attributes IgnoreFlag
+				Attributes IgnoreEnemies
+				Tag "slutcosplayer"
+				Item "The Disciplinary Action"  
+				Item "Wings of Purity"
+				Item "The Head Prize"
+				UseHumanModel 1  
+				CharacterAttributes
+				{
+					"dmg taken increased" 0.000001 // 99.9999% reduction
+				}
+				ItemAttributes
+				{
+					ItemName "The Head Prize"
+					"set item tint RGB" 16738740
+					"unique craft index" 34
+				}
+				ItemModel  
+				{
+					ItemName "TF_WEAPON_FLAMETHROWER"
+					Model "models/empty.mdl"
+				}
+				ItemModel  
+				{
+					ItemName "TF_WEAPON_SHOTGUN_PYRO"
+					Model "models/empty.mdl"
+				}
+				Taunt  
+				{
+					Name "Taunt: Kazotsky Kick"
+					Delay 0.2
+					Cooldown 0.1
+					Duration 9999
+				}
+			}
+		}
+		WaveSpawn
+		{
+			WaitBeforeStarting 0.5
+			DoneOutput
+			{
+				Target sluttele_relay
+				Action Trigger
+			}
+		}
+	}
+	Wave // Wave 2
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 1
+			// WaitBeforeStarting 100
+			TFBot
+			{
+				Class Scout
+				Name "Pistol Scout"
+				Skill Hard
+				Item "Upgradeable TF_WEAPON_PISTOL"
+				ClassIcon scout_pistol
+				WeaponRestrictions SecondaryOnly
+				// Attributes AutoJump
+				// AutoJumpMin 1
+				// AutoJumpMax 1
+				// CharacterAttributes
+				// {
+					// "increased jump height" 2
+					// "cancel falling damage" 1
+				// }
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PISTOL"
+					"override projectile type" 1
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 1
+			// WaitBeforeStarting 100
+			TFBot
+			{
+				Class Heavy
+				Skill Normal
+				Health 125
+				Item "Upgradeable TF_WEAPON_MINIGUN"
+				// Item "The Huo Long Heatmaker"
+				CharacterAttributes
+				{
+					"move speed bonus" 1.5
+					"aiming movespeed decreased" 1
+				}
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_MINIGUN"
+					// ItemName "The Huo Long Heatmaker"
+					"fire rate penalty" 2
+					"override projectile type" 1
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 1
+			WaitBeforeStarting 15
+			TFBot
+			{
+				Class Soldier
+				Skill Hard
+				Item "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+				// Item "The Cow Mangler 5000"
+				// Item "Rocket Jumper"
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+					// ItemName "The Cow Mangler 5000"
+					// ItemName "Rocket Jumper"
+					"override projectile type" 1
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 1
+			WaitBeforeStarting 30
+			TFBot
+			{
+				Class Soldier
+				Name "Bison Soldier"
+				Skill Normal
+				Item "The Righteous Bison"
+				WeaponRestrictions SecondaryOnly
+				ClassIcon soldier_bison
+				ItemAttributes
+				{
+					ItemName "The Righteous Bison"
+					"override projectile type" 1
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 1
+			WaitBeforeStarting 45
+			TFBot
+			{
+				Template T_TFBot_Pyro_Flaregun
+				ItemAttributes
+				{
+					ItemName "The Flare Gun"
+					"override projectile type" 1
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 1
+			WaitBeforeStarting 60
+			TFBot
+			{
+				Class Demoman
+				Skill Normal
+				Item "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+					"override projectile type" 1
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 1
+			WaitBeforeStarting 75
+			TFBot
+			{
+				Class Demoman
+				Name "Sticky Demo"
+				Skill Normal
+				Item "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+				// Item "Stickybomb Jumper"
+				WeaponRestrictions SecondaryOnly
+				ClassIcon demo_sticky_daan
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_GRENADELAUNCHER"
+					"is_passive_weapon" 1
+					"override projectile type"  27
+				}
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					// ItemName "Stickybomb Jumper"
+					"stickybomb charge rate" 0.001
+					"max pipebombs decreased" -3
+					"override projectile type" 1
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 1
+			WaitBeforeStarting 90
+			TFBot
+			{
+				Class Medic
+				Name "Crossbow Medic"
+				Skill Normal
+				Item "The Crusader's Crossbow"
+				WeaponRestrictions PrimaryOnly
+				ClassIcon medic_crossbow
+				ItemAttributes
+				{
+					ItemName "The Crusader's Crossbow"
+					"override projectile type" 1
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 2
+			SpawnCount 2
+			WaitBeforeStarting 105
+			Squad
+			{
+				ShouldPreserveSquad 1
+				FormationSize 200
+				TFBot
+				{
+					Class Medic
+					Name "Syringe Medic"
+					Skill Normal
+					Item "Upgradeable TF_WEAPON_SYRINGEGUN_MEDIC"
+					ClassIcon medic_syringe
+					ItemAttributes
+					{
+						ItemName "Upgradeable TF_WEAPON_SYRINGEGUN_MEDIC"
+						"override projectile type" 1
+					}
+				}
+				TFBot
+				{
+					Class Engineer
+					Name "Short Circuit Engineer"
+					Skill Normal
+					Item "The Short Circuit"
+					WeaponRestrictions SecondaryOnly
+					ClassIcon engineer_shortcircuit_lite
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_SHOTGUN_PRIMARY"
+						"override projectile type"   7
+						"fire rate penalty" 2000
+					}
+					ItemAttributes
+					{
+						ItemName "The Short Circuit"
+						"is_passive_weapon" 1
+						"override projectile type" 1
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 1
+			WaitBeforeStarting 135
+			TFBot
+			{
+				Class Sniper
+				Name "Bowman"
+				Skill Normal
+				Item "The Huntsman"
+				ClassIcon sniper_bow
+				ItemAttributes
+				{
+					ItemName "The Huntsman"
+					"damage penalty" 0.5
+					"override projectile type" 1
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 1
+			WaitBeforeStarting 150
+			TFBot
+			{
+				Class Scout
+				Name "Milking Scout"
+				Skill Expert
+				Item "Mad Milk"
+				WeaponRestrictions SecondaryOnly
+				ClassIcon scout_milk
+				ItemAttributes
+				{
+					ItemName "Mad Milk"
+					"dmg penalty vs players" 20
+					"override projectile type" 1
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 1
+			WaitBeforeStarting 150
+			TFBot
+			{
+				Class Sniper
+				Name "Jarate Sniper"
+				Skill Expert
+				Item "Jarate"
+				WeaponRestrictions SecondaryOnly
+				ClassIcon sniper_jarate
+				ItemAttributes
+				{
+					ItemName "Jarate"
+					"dmg penalty vs players" 20
+					"override projectile type" 1
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 1
+			WaitBeforeStarting 150
+			TFBot
+			{
+				Class Pyro
+				Name "Gas Passer Pyro"
+				Skill Expert
+				Item "The Gas Passer"
+				WeaponRestrictions SecondaryOnly
+				ClassIcon pyro_gascann
+				ItemAttributes
+				{
+					ItemName "The Gas Passer"
+					"dmg penalty vs players" 20
+					"override projectile type" 1
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 1
+			WaitBeforeStarting 150
+			TFBot
+			{
+				Class Scout
+				Name "Guillotine Scout"
+				Skill Expert
+				Item "The Flying Guillotine"
+				WeaponRestrictions SecondaryOnly
+				ClassIcon scout_guillotine
+				ItemAttributes
+				{
+					ItemName "The Flying Guillotine"
+					"dmg penalty vs players" 20
+					"override projectile type" 1
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Support 1
+			TFBot
+			{
+				ClassIcon soldier_cowmangler
+			}
+		}
+	}
+	Wave // Wave 3
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 3
+			TFBot
+			{
+				Template T_TFBot_Demo_Sticky
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					"override projectile type" 1
+					"sniper fires tracer HIDDEN" 1
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 3
+			WaitBeforeStarting 15
+			TFBot
+			{
+				Template T_TFBot_Demo_Sticky
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					"override projectile type" 2
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 3
+			WaitBeforeStarting 30
+			TFBot
+			{
+				Template T_TFBot_Demo_Sticky
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					"override projectile type" 3
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 3
+			WaitBeforeStarting 45
+			TFBot
+			{
+				Template T_TFBot_Demo_Sticky
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					"override projectile type" 4
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 3
+			WaitBeforeStarting 60
+			TFBot
+			{
+				Template T_TFBot_Demo_Sticky
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					"override projectile type" 5
+				}
+			}
+		}
+		// WaveSpawn
+		// {
+			// Where spawnbot
+			// TotalCount 3
+			// WaitBeforeStarting 75
+			// TFBot
+			// {
+				// Template T_TFBot_Demo_Sticky
+				// ItemAttributes
+				// {
+					// ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					// "override projectile type" 6
+				// }
+			// }
+		// }
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 3
+			WaitBeforeStarting 90
+			TFBot
+			{
+				Template T_TFBot_Demo_Sticky
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					"override projectile type" 7
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 3
+			WaitBeforeStarting 105
+			TFBot
+			{
+				Template T_TFBot_Demo_Sticky
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					"override projectile type" 8
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 3
+			WaitBeforeStarting 120
+			TFBot
+			{
+				Template T_TFBot_Demo_Sticky
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					"override projectile type" 9
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 3
+			WaitBeforeStarting 135
+			TFBot
+			{
+				Template T_TFBot_Demo_Sticky
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					"override projectile type" 10
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 3
+			WaitBeforeStarting 150
+			TFBot
+			{
+				Template T_TFBot_Demo_Sticky
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					"override projectile type" 11
+				}
+			}
+		}
+		// WaveSpawn
+		// {
+			// Where spawnbot
+			// TotalCount 3
+			// WaitBeforeStarting 165
+			// TFBot
+			// {
+				// Template T_TFBot_Demo_Sticky
+				// ItemAttributes
+				// {
+					// ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					// "override projectile type" 12
+				// }
+			// }
+		// }
+		// WaveSpawn
+		// {
+			// Where spawnbot
+			// TotalCount 3
+			// WaitBeforeStarting 180
+			// TFBot
+			// {
+				// Template T_TFBot_Demo_Sticky
+				// ItemAttributes
+				// {
+					// ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					// "override projectile type" 13
+				// }
+			// }
+		// }
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 3
+			WaitBeforeStarting 195
+			TFBot
+			{
+				Template T_TFBot_Demo_Sticky
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					"override projectile type" 14
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 3
+			WaitBeforeStarting 210
+			TFBot
+			{
+				Template T_TFBot_Demo_Sticky
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					"override projectile type" 15
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 3
+			WaitBeforeStarting 225
+			TFBot
+			{
+				Template T_TFBot_Demo_Sticky
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					"override projectile type" 16
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 3
+			WaitBeforeStarting 240
+			TFBot
+			{
+				Template T_TFBot_Demo_Sticky
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					"override projectile type" 17
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 3
+			WaitBeforeStarting 255
+			TFBot
+			{
+				Template T_TFBot_Demo_Sticky
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					"override projectile type" 18
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 3
+			WaitBeforeStarting 270
+			TFBot
+			{
+				Template T_TFBot_Demo_Sticky
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					"override projectile type" 19
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 3
+			WaitBeforeStarting 285
+			TFBot
+			{
+				Template T_TFBot_Demo_Sticky
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					"override projectile type" 20
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 3
+			WaitBeforeStarting 300
+			TFBot
+			{
+				Template T_TFBot_Demo_Sticky
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					"override projectile type" 21
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 3
+			WaitBeforeStarting 315
+			TFBot
+			{
+				Template T_TFBot_Demo_Sticky
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					"override projectile type" 22
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 3
+			WaitBeforeStarting 330
+			TFBot
+			{
+				Template T_TFBot_Demo_Sticky
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					"override projectile type" 23
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 3
+			WaitBeforeStarting 345
+			TFBot
+			{
+				Template T_TFBot_Demo_Sticky
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					"override projectile type" 24
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 3
+			WaitBeforeStarting 360
+			TFBot
+			{
+				Template T_TFBot_Demo_Sticky
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					"override projectile type" 25
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 3
+			WaitBeforeStarting 375
+			TFBot
+			{
+				Template T_TFBot_Demo_Sticky
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					"override projectile type" 26
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 3
+			WaitBeforeStarting 390
+			TFBot
+			{
+				Template T_TFBot_Demo_Sticky
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					"override projectile type" 27
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 3
+			WaitBeforeStarting 405
+			TFBot
+			{
+				Template T_TFBot_Demo_Sticky
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					"override projectile type" 28
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 3
+			WaitBeforeStarting 420
+			TFBot
+			{
+				Template T_TFBot_Demo_Sticky
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+					"override projectile type" 29
+				}
+			}
+		}
+	}
+}

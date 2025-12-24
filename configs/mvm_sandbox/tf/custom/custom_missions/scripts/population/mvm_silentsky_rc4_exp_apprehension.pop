@@ -1,0 +1,46 @@
+#base robot_eyes.pop
+#base robot_giant.pop
+#base robot_standard.pop
+
+//Apprehension
+//Expert Difficulty
+
+WaveSchedule
+{
+	StartingCurrency 10000
+	RespawnWaveTime 7
+	CanBotsAttackWhileInSpawnRoom No
+	AddSentryBusterWhenKillCountExceeds 18
+	AddSentryBusterWhenDamageDealtExceeds 2600
+	CustomUpgradesFile "mvm_upgrades_eyes01.txt"
+	
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			Name "w1-a1"
+			TotalCurrency 200
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawns 0
+			WaitBeforeStarting 0
+			Where spawnbot
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Heavyweapons
+			}
+		}
+	}
+}

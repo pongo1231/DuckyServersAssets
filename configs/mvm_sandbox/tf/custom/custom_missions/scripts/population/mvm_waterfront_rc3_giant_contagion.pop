@@ -1,0 +1,906 @@
+#base robot_standard.pop
+#base robot_giant.pop
+#base robot_pda.pop
+
+// Contagion. A giant mode mission for Waterfront
+// Made by PDA Expert
+// sm_ent_fire !activator setforcedtauntcam 1 
+
+WaveSchedule
+{
+    StartingCurrency 1000
+	CanBotsAttackWhileInSpawnRoom no
+	RespawnWaveTime 8
+	RedPlayersAreRobots 1
+	RemoveGrapplingHooks 5
+	TextPrintTime 0
+	MaxSpeedLimit 521
+	WaveStartCountdown 5
+	SniperAllowHeadshots 1
+	NoThrillerTaunt 1
+	//PlayerRobotsUsePlayerAnimation 1
+	//NoReanimators 1 // reanimators might aswell not exist for giants, though disabling for the classes that can be revived is just rude
+	
+	SpawnTemplate "Props"
+	
+	OverrideSounds   //Replace sounds. Only server side sounds can be overridden. Must use sound script unless there is only a raw version of the sound.
+	{
+		"MVM.PlayerDied" "ambient\energy\zap9.wav"
+	}
+	
+	Mission
+	{
+		Where spawnbot
+		Objective DestroySentries
+		CooldownTime 30
+		TFBot
+		{
+			Template T_TFBot_SentryBuster
+		}
+	}
+	
+	Mission
+	{
+	    Where spawnbot_flank
+		DesiredCount 5
+		CooldownTime 60
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		InitialCooldown 50
+		Objective Sniper
+		TFBot
+		{
+		    Template T_TFBot_Sniper_Sydney_Sleeper
+		}
+	}
+	
+	Mission
+	{
+	    Where spawnbot
+		DesiredCount 4
+		CooldownTime 60
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		InitialCooldown 50
+		Objective Spy
+		TFBot
+		{
+		    Template T_TFBot_Spy
+			
+			CharacterAttributes
+			{
+			    "armor piercing" 1
+			}
+		}
+	}
+	
+	Mission
+	{
+	    Where spawnbot
+		DesiredCount 4
+		CooldownTime 60
+		BeginAtWave 2
+		RunForThisManyWaves 1
+		InitialCooldown 50
+		Objective Spy
+		TFBot
+		{
+		    Template T_TFBot_Spy
+			
+			CharacterAttributes
+			{
+			    "armor piercing" 2
+			}
+		}
+	}
+	
+	Mission
+	{
+	    Where spawnbot
+		DesiredCount 6
+		CooldownTime 55
+		BeginAtWave 3
+		RunForThisManyWaves 1
+		InitialCooldown 60
+		Objective Spy
+		TFBot
+		{
+		    Template T_TFBot_Spy
+			
+			CharacterAttributes
+			{
+			    "armor piercing" 4
+			}
+		}
+	}
+	
+	PlayerAttributes   //Player attributes appied for the whole mission
+	{
+	    // Giant Classes.
+		Soldier
+		{
+			"move speed penalty" 0.6
+			"is miniboss" 1
+			"max health additive bonus" 3600
+			"override footstep sound set" 3
+			"damage force reduction" 0.4
+			"airblast vulnerability multiplier" 0.4
+			//"ammo regen" 0.25
+			"health from packs decreased" 0.5
+			"SET BONUS: special dsp" 45
+			"voice pitch scale"	0.75
+		}
+		Demoman
+		{
+			"move speed penalty" 0.6
+			"is miniboss" 1
+			"max health additive bonus" 3125
+			"override footstep sound set" 4
+			"damage force reduction" 0.4
+			"airblast vulnerability multiplier" 0.4
+			//"ammo regen" 0.25
+			"health from packs decreased" 0.5
+			"SET BONUS: special dsp" 45
+			"voice pitch scale"	0.75
+		}
+		Heavyweapons
+		{
+			"move speed penalty" 0.55
+			"is miniboss" 1
+			"max health additive bonus" 4700
+			"override footstep sound set" 2
+			"damage force reduction" 0.4
+			"airblast vulnerability multiplier" 0.4
+			"health from packs decreased" 0.4
+			"SET BONUS: special dsp" 45
+			"voice pitch scale"	0.75
+		}		
+		Pyro
+		{
+			"move speed penalty" 0.69
+			"is miniboss" 1
+			"max health additive bonus" 2825
+			"override footstep sound set" 6
+			"damage force reduction" 0.4
+			"airblast vulnerability multiplier" 0.4
+			"health from packs decreased" 0.5
+			"SET BONUS: special dsp" 45
+			"voice pitch scale"	0.75
+		}	
+		Engineer
+		{
+		    "max health additive bonus" 150
+		}
+		Scout
+		{
+	    	"head scale" 0.7
+			"move speed bonus" 1.25
+			"model scale" 1.3
+			"voice pitch scale" 0.85
+			"SET BONUS: special dsp" 48
+			"max health additive bonus"	525
+		}
+	}
+	
+	PointTemplates
+	{
+	    Props
+		{
+		    prop_dynamic
+			{
+			    "targetname" "red_carrier"
+				"model" "models/bots/boss_bot_red/carrier.mdl" //keyvalue
+				"origin" "-2400 811 -300"
+				"angles" "0 -90 0"
+				"disableshadows" "1"
+				"disablebonefollowers" "1"
+		    }	
+			prop_dynamic_ornament
+			{
+			    "model" "models/bots/boss_bot_red/carrier_parts.mdl"
+				"targetname" "parts"
+				"disableshadows" "1"
+				"disablebonefollowers" "1"
+				"defaultanim" "idle"
+				"InitialOwner" "red_carrier"
+			}
+		    prop_dynamic
+			{
+			    "targetname" "red_carrier2"
+				"model" "models/bots/boss_bot_red/carrier.mdl" //keyvalue
+				"origin" "-4218 -2862 -275"
+				"angles" "0 56 0"
+				"disableshadows" "1"
+				"modelscale" 0.75
+				"disablebonefollowers" "1"
+		    }	
+			prop_dynamic_ornament
+			{
+			    "model" "models/bots/boss_bot_red/carrier_parts.mdl"
+				"targetname" "parts"
+				"disableshadows" "1"
+				"disablebonefollowers" "1"
+				"defaultanim" "idle"
+				"modelscale" 0.75
+				"InitialOwner" "red_carrier2"
+			}
+		    prop_dynamic
+			{
+			    "targetname" "engi"
+				"model" "models/bots/engineer/bot_engineer.mdl"
+				"origin" "-2755 -563 128"
+				"defaultanim" stand_melee
+				"disableshadows" "1"
+				"disablebonefollowers" "1"
+		    }			
+			prop_dynamic_ornament
+			{
+			    "model" "models/weapons/c_models/c_wrench/c_wrench.mdl"
+				"targetname" "engi_wrench"
+				"disableshadows" "1"
+				"disablebonefollowers" "1"
+				"InitialOwner" "engi"
+			}
+		    prop_dynamic
+			{
+			    "targetname" "heavy"
+				"model" "models/player/heavy.mdl"
+				"origin" "-2327 -2703 128"
+				"angles" "0 90 0"
+				"defaultanim" "competitive_loserstate_idle"		
+				"disableshadows" "1"
+				"disablebonefollowers" "1"		
+				"renderamt" "0"
+				"rendermode" "1"
+		    }		
+		    prop_dynamic_ornament
+			{
+			    "targetname" "heavy_body"
+				"model" "models/bots/heavy/bot_heavy.mdl"
+				"disableshadows" "1"
+				"disablebonefollowers" "1"
+				"InitialOwner" "heavy"
+		    }			
+		    prop_dynamic_ornament
+			{
+			    "targetname" "heavy_goggles"
+				"model" "models/workshop/player/items/heavy/sbox2014_war_goggles/sbox2014_war_goggles.mdl"
+				"disableshadows" "1"
+				"disablebonefollowers" "1"
+				"InitialOwner" "heavy"
+		    }					
+		    prop_dynamic_ornament
+			{
+			    "targetname" "heavy_hat"
+				"model" "models/player/items/heavy/hardhat_tower.mdl"
+				"disableshadows" "1"
+				"disablebonefollowers" "1"
+				"InitialOwner" "heavy"
+		    }		
+		}
+	}
+	
+	ItemBlacklist   //Disallows using specified weapons below
+	{
+		ItemName "Stickybomb Jumper" // useless
+		Classname tf_weapon_minigun
+	}
+	
+	ItemAttributes // probably sucks but its funny, probably.
+	{
+	    ItemName "Rocket Jumper"
+		"special item description" "[DESCRIPTION] Meme weapon."
+		"provide on active" 1
+		"increased jump height" 2.0
+		"increased air control" 6.0
+		"move speed bonus" 1.25
+	}
+	
+	ItemAttributes
+	{
+	    ItemName "Fists of Steel"
+		"special item description" "[DESCRIPTION] Takes more damage from melee, has Super Heavyweight Champ fire rate."
+		"dmg from melee increased" 4.0
+		"fire rate bonus HIDDEN" 0.8 // recreates super weight champ's fire rate
+		"mult smack time" 0.1 // if you for whatever reason buy firing speed
+	}
+	
+	ItemAttributes
+	{
+	    ItemName "The Killing Gloves of Boxing"
+		"special item description" "[DESCRIPTION] Super Heavyweight Champ fire rate."
+		"fire rate bonus HIDDEN" 0.6 // recreates super weight champ's fire rate
+		"mult smack time" 0.1 // if you for whatever reason buy firing speed
+	}
+	
+	ItemAttributes
+	{
+	    ItemName "Gloves of Running Urgently"
+		"special item description" "[DESCRIPTION] Super Heavyweight Champ fire rate, is not stupid new gru so your health doesn't vanish."
+		"fire rate bonus HIDDEN" 0.8 // recreates super weight champ's fire rate
+		"mult smack time" 0.1 // if you for whatever reason buy firing speed
+		"mod_maxhealth_drain_rate" 0
+		"lunchbox adds minicrits" 0
+		"self mark for death" 3
+	}
+	
+	ItemAttributes
+	{
+	    ItemName "Warrior's Spirit"
+		"special item description" "[DESCRIPTION] Super Heavyweight Champ fire rate, more damage but more damage taken. No heal on kill."
+		"fire rate bonus HIDDEN" 0.8 // recreates super weight champ's fire rate
+		"mult smack time" 0.1 // if you for whatever reason buy firing speed
+		"dmg taken increased" 1.6
+		"damage bonus" 1.5
+		"heal on kill" 0
+	}
+	
+	ItemAttributes
+	{
+	    ItemName "The Holiday Punch"
+		"special item description" "[DESCRIPTION] Major rework, it is now a charged-like weapon."
+		"fire rate penalty" 2.0
+		"damage penalty" 1.35
+		"crit does no damage" 0
+		"crit forces victim to laugh" 0
+		"tickle enemies wielding same weapon" 0
+		"always crit" 1
+	}
+	
+	ItemAttributes
+	{
+	    ItemName TF_WEAPON_FISTS
+		"provide on active" 1
+		"special item description" "[DESCRIPTION] haha finger go pow!"
+		"gesture speed increase" 1.75
+		"ragdolls become ash" 1
+	}
+	
+	ItemAttributes
+	{
+	    ItemName "Upgradeable TF_WEAPON_FISTS"
+		"provide on active" 1
+		"special item description" "[DESCRIPTION] haha finger go pow!"
+		"gesture speed increase" 1.75
+		"ragdolls become ash" 1
+	}
+	
+	ItemAttributes
+	{
+	    ItemName Apoco-Fists
+		"provide on active" 1
+		"special item description" "[DESCRIPTION] haha finger go pow!"
+		"gesture speed increase" 1.75
+		"ragdolls become ash" 1
+	}
+	
+	ItemAttributes
+	{
+	    ItemName "The Buffalo Steak Sandvich"
+		"special item description" "[DESCRIPTION] Upon consumption, gain permanent crits and a 40% reduced damage taken. Recharges 20 seconds slower."
+		"energy buff dmg taken multiplier" 0.6
+		"effect cond override" 33
+		"item_meter_charge_rate" 50
+	}
+	
+	ItemAttributes
+	{
+	    ItemName "The Sandvich"
+		"special item description" "[DESCRIPTION] Buffed healing due to giant mode, slower recharge time"
+		"item_meter_charge_rate" 40
+		"lunchbox healing decreased" 10
+	}
+	
+	ItemAttributes
+	{
+	    ItemName "The Second Banana"
+		"special item description" "[DESCRIPTION] Buffed healing due to giant mode, slower recharge time"
+		"lunchbox healing decreased" 8.50
+		"charge recharge rate increased" 1.0
+	}
+	
+	ItemAttributes
+	{
+	    ItemName "The Dalokohs Bar"
+		"special item description" "[DESCRIPTION] Buffed healing due to giant mode, slower recharge time. Also grants 2500 extra hp."
+		"lunchbox healing decreased" 20
+		"item_meter_charge_rate" 25
+		"max health additive bonus" 2500
+	}
+	
+	ItemAttributes
+	{
+	    ItemName "Fishcake"
+		"special item description" "[DESCRIPTION] Buffed healing due to giant mode, slower recharge time. Also grants 2500 extra hp."
+		"lunchbox healing decreased" 20
+		"item_meter_charge_rate" 25
+		"max health additive bonus" 2500
+		"attach particle effect" 157 
+	}
+	
+	ItemAttributes
+	{
+	    ItemName "The Robo-Sandvich"
+		"special item description" "[DESCRIPTION] Buffed healing due to giant mode, slower recharge time"
+		"item_meter_charge_rate" 40
+		"lunchbox healing decreased" 10
+		"attach particle effect" 31
+	}
+	
+	ItemAttributes
+	{
+	    ItemName "Festive Sandvich"
+		"special item description" "[DESCRIPTION] Buffed healing due to giant mode, slower recharge time"
+		"item_meter_charge_rate" 40
+		"lunchbox healing decreased" 10
+		"attach particle effect" 169
+	}
+	
+	CustomWeapon   //Allows you to use an alias for items with custom attributes
+	{
+		"Giant Shotgun Player" // The name you would use in Item key in TFBot
+		{
+			OriginalItemName "TF_WEAPON_SHOTGUN_HWG" // The item used as a base
+			"special item description" "[DESCRIPTION] Giant Shotgun Heavy's personal boomstick."
+			"fire rate penalty" 2.5
+			"bullets per shot bonus" 10
+			"damage penalty" 0.5
+			"faster reload rate" -1
+		}
+	}
+	
+	ItemReplacement
+	{
+	    "Giant Shotgun Player"
+		{
+			Name "TF_WEAPON_SHOTGUN_HWG"
+			Name "The Family Business"
+		}
+		"tw_pyrobot_armor"
+		{
+		    Name "Zombie Pyro"
+		}
+		"tw_demobot_armor"
+		{
+		    Name "Zombie Demo"
+		}
+		"tw_scoutbot_armor"
+		{
+		    Name "Zombie Scout"
+		}
+		"tw_engineerbot_armor"
+		{
+		    Name "Zombie Engineer"
+		}
+		"tw_heavybot_armor"
+		{
+		    Name "Zombie Heavy"
+		}
+		"tw_spybot_armor"
+		{
+		    Name "Zombie Spy"
+		}
+		"tw_soldierbot_armor"
+		{
+		    Name "Zombie Soldier"
+		}
+		"tw_medicbot_armor"
+		{
+		    Name "Zombie Medic"
+		}
+	}
+	
+	ItemAttributes // sir nukes parody
+	{
+	    ItemName "The Loose Cannon"
+		"special item description" "[DESCRIPTION] Shoots massive cannon balls that crush commons with their might."
+		"dmg penalty vs players" 1.5
+		"fire rate penalty" 2.5
+		"reload time increased" 2.0
+		"Blast radius increased" 1.4
+		"fuse bonus" 3.0
+		"mult projectile scale" 1.75
+		"custom projectile size" 35
+		"clip size penalty" 0.5
+		"grenade launcher mortar mode" 1
+	}
+	
+	ItemAttributes
+	{
+	    ItemName "The Bootlegger"
+		"move speed bonus shield required" 0.8
+	}
+	
+	ItemAttributes
+	{
+	    ItemName "Ali Baba's Wee Booties"
+		"move speed bonus shield required" 0.8
+	}
+	
+	ItemAttributes
+	{
+	    Classname tf_weapon_compound_bow
+		"model scale"	1.5
+		"max health additive bonus"	1075
+		"fire rate bonus" 0.6
+		"move speed bonus"	0.85
+		"voice pitch scale" 0.8
+		"SET BONUS: special dsp" 48
+	}
+	
+	ItemAttributes
+	{
+	    ItemName "The Gas Passer"		
+		"special item description" "[DESCRIPTION] Eoi that only deals ~123 dmg. Takes 3000 dmg to fully charge or 2 minutes."
+		"item_meter_damage_for_full_charge"	"3000"
+		"item_meter_charge_rate" "120"
+		"explode_on_ignite" 1
+		"attach particle effect" 1
+		"dmg penalty vs players" 0.35
+	}
+	
+	ItemAttributes
+	{
+	    ItemName "The Cow Mangler 5000"
+		"special item description" "[DESCRIPTION] Fueled by atomic energy which can burn anything smaller than a gauntlet into nothing but a pile of ash."
+		"fire rate penalty" 2.75
+		"faster reload rate" -1
+		"Set DamageType Ignite" 1
+		"set item tint rgb" 7511618
+		"Blast radius increased" 1.4
+		"Projectile speed decreased" 0.5
+		"attach particle effect" 3070
+		"dmg penalty vs players" 2.0
+		"SPELL: Halloween green flames" 1
+	}
+	
+	ItemAttributes // easter egg
+	{
+	    ItemName "Ghostly Gibus"
+		"SPELL: set item tint RGB" 5
+		"special item description" "[DESCRIPTION] cool paint."
+	}
+	
+	ExtendedUpgrades  
+	{
+		upgrade_dmgshotgunpistol
+		{
+			Name "+25% Damage Bonus"
+			Attribute "damage bonus hidden"
+			Cap 2
+			Increment 0.25
+			Cost 200
+			Description "Stacks with any damage bonus that the secondary/primary may start with." // Additional description line
+			
+			AllowedWeapons // Restricts upgrade to specified weapons
+			{
+				Classname tf_weapon_shotgun
+				Classname tf_weapon_shotgun_primary
+				Classname tf_weapon_smg
+				Classname tf_weapon_charged_smg
+				ItemName "The Frontier Justice"
+				ItemName "The Pomson 6000"
+				ItemName "TF_WEAPON_PISTOL"
+				ItemName "The Winger"
+				ItemName "Pretty Boy's Pocket Pistol"
+				ItemName "TTG Max Pistol"
+				ItemName "TTG Max Pistol - Poker Night"
+				ItemName "Panic Attack Shotgun"
+			}
+			
+			DisallowedWeapons
+			{
+			    ItemName "The Widowmaker"
+				ItemName "TF_WEAPON_SHOTGUN_HWG"
+			}
+		}
+		upgrade_dmgshotgun_widow
+		{
+			Name "+25% Damage Bonus"
+			Attribute "damage bonus"
+			Cap 2
+			Increment 0.25
+			Cost 400
+			
+			AllowedWeapons
+			{
+			    ItemName "The Widowmaker"
+			}
+		}
+		upgrade_dmgfists
+		{
+			Name "+25% Damage Bonus"
+			Attribute "damage bonus"
+			Cap 1.5
+			Increment 0.25
+			Cost 400
+			
+			AllowedWeapons
+			{
+			    ItemName TF_WEAPON_FISTS
+			    ItemName "Upgradeable TF_WEAPON_FISTS"
+			    ItemName Apoco-Fists
+				ItemName "The Holiday Punch"
+				ItemName "The Killing Gloves of Boxing"
+				ItemName "Fists of Steel"
+			}
+			DisallowedWeapons
+			{
+				ItemName "Warrior's Spirit"			
+			}
+		}
+		upgrade_dmgshotgun_heavy
+		{
+			Name "+25% Damage Bonus"
+			Attribute "damage bonus"
+			Cap 2
+			Increment 0.25
+			Cost 600
+			
+			AllowedWeapons
+			{
+				ItemName "TF_WEAPON_SHOTGUN_HWG"
+			}
+		}
+		upgrade_shotgunheavy_deflect
+		{
+			Name "Destroy Projectiles"
+			Attribute "attack projectiles"
+			Cap 2
+			Increment 1
+			Cost 350
+			Description "Bullets destroy rockets and grenades in-flight. Increased accuracy and frequency per-level."
+			
+			AllowedWeapons
+			{
+				ItemName "TF_WEAPON_SHOTGUN_HWG"
+			}
+		}
+		upgrade_cleaver
+		{
+			Name "Cleaver Mastery"
+			Attribute "dmg penalty vs players"
+			Cap 3
+			Increment 0.5
+			Cost 400
+			Description "Increases both direct hit damage and the bleed damage by 50% per tick." // Additional description line
+			
+			AllowedWeapons // Restricts upgrade to specified weapons
+			{
+				ItemName "The Flying Guillotine"
+			}
+		}
+		rapidfire_module
+		{
+			Name "Rapid Fire Module"
+			Attribute "reload time increased hidden"
+			Cap -0
+			Increment -0.4
+			Cost 1000
+			Description "Increases reload rate by 40%, increases fire rate by 20%. This stacks with the regular reload and fire rate upgrades." // Additional description line
+			
+			AllowedWeapons // Restricts upgrade to specified weapons
+			{
+				Classname tf_weapon_rocketlauncher
+				Classname tf_weapon_grenadelauncher
+				ItemName  "The Direct Hit"
+			}
+			
+			DisallowedWeapons
+			{
+			    ItemName "The Loose Cannon"
+				ItemName "Rocket Jumper"
+			}
+			
+			DisallowedUpgrade
+			{
+				Upgrade burstfire_module // Name of the upgrade, as specified in the outer block
+				Level 1 // Minimum level after which the upgrade becomes disabled (Default: 1)
+			} 
+			
+			SecondaryAttributes //Secondary attributes applied when upgrade is applied, for each upgrade level
+			{
+				"fire rate bonus HIDDEN" -0.2
+			}
+		}
+		burstfire_module
+		{
+			Name "Burst Fire Module"
+			Attribute "reload time increased hidden"
+			Cap 2
+			Increment 1.25
+			Cost 1000
+			Description "Lowers reload rate by 25%,but increases fire rate by 95% and increases clipsize by 15%." // Additional description line
+			
+			AllowedWeapons // Restricts upgrade to specified weapons
+			{
+				Classname tf_weapon_rocketlauncher
+				Classname tf_weapon_grenadelauncher
+				ItemName  "The Direct Hit"
+			}
+			
+			DisallowedWeapons
+			{
+			    ItemName "The Loose Cannon"
+				ItemName "Rocket Jumper"
+			}
+			
+			DisallowedUpgrade
+			{
+				Upgrade rapidfire_module // Name of the upgrade, as specified in the outer block
+				Level 1 // Minimum level after which the upgrade becomes disabled (Default: 1)
+			} 
+			
+			SecondaryAttributes //Secondary attributes applied when upgrade is applied, for each upgrade level
+			{
+				"fire rate bonus HIDDEN" -0.95
+				"clip size penalty HIDDEN" 1.15
+				"projectile spread angle penalty" 5
+			}
+		}
+	}
+	
+	// Wave 1/3 ($3000)
+	
+	// 3 Giant Demomen (Rapid-Fire)
+	// 3 Giant Rapid-Fire Soldiers
+	// 80 Scouts
+	
+	//
+	
+	// 
+	
+	// Support : Soldiers
+	
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_endurance_short_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		
+		Explanation
+		{
+		    Line "{blue}BOOTING.UP.SEQUENCE.COMPLETE={green}TRUE"
+			Line "{blue}CURRENT.OBJECTIVE.VARIABLE={red}PROTECT THE HATCH"
+			Line "{blue}PERMISSION.TO.USE.EXTENDED.UPGRADES?={green}GRANTED"
+			Line "{blue}ENEMY.SNIPER.CAN.HEADSHOT?={red}TRUE"
+			Line "{000000}download the following to see red carrier tanks : https://www.dropbox.com/s/v5negm4q4nw4m9k/red_tank_carrier.zip?dl=0"
+		}
+		
+		WaveSpawn
+		{
+		    FirstSpawnWarningSound "#music/hl2_song14.mp3"
+		}
+		
+		WaveSpawn
+		{
+		    FirstSpawnWarningSound "#music/hl2_song29.mp3"
+			WaitBeforeStarting 160
+		}
+		
+		WaveSpawn
+		{
+		    Name "wave01"
+		    TotalCount 3
+			MaxActive 3
+			SpawnCount 1
+			
+			Where spawnbot
+			TotalCurrency 200
+			WaitBetweenSpawns 10
+			
+			TFBot
+			{
+			    Template T_TFBot_Giant_Demoman
+			}
+		}
+		
+		WaveSpawn
+		{
+		    Name "wave01"
+		    TotalCount 3
+			MaxActive 3
+			SpawnCount 1
+			
+			Where spawnbot_flank2
+			TotalCurrency 200
+			WaitBetweenSpawns 10
+			
+			TFBot
+			{
+			    Template T_TFBot_Giant_Soldier_Spammer
+			}
+		}
+		
+		WaveSpawn
+		{
+		    Name "wave01"
+		    TotalCount 80
+			MaxActive 14
+			SpawnCount 2
+			
+			Where spawnbot
+			TotalCurrency 100
+			WaitBetweenSpawns 1
+			
+			TFBot
+			{
+			    Class Scout
+				Skill Normal
+			}
+		}
+	}
+	
+	// Wave 2/3 ($5000)
+	
+	// Support : Soldiers
+	
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_endurance_short_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		
+		WaveSpawn
+		{
+		    FirstSpawnWarningSound "#music/hl2_song4.mp3"
+		}
+		
+		WaveSpawn
+		{
+		    FirstSpawnWarningSound "#music/hl2_song15.mp3"
+			WaitBeforeStarting 66
+		}
+		
+		WaveSpawn
+		{
+		    FirstSpawnWarningSound "#music/hl1_song15.mp3"
+			WaitBeforeStarting 136
+		}
+	}
+	
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_endurance_short_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		
+
+		WaveSpawn
+		{
+			TotalCount 9999
+			MaxActive  2
+			SpawnCount 1
+			
+			Where spawnbot_flank2
+
+			TFBot
+			{
+			    Template T_TFBot_Giant_Scout_Fast
+				Action Mobber
+			}
+		}
+	
+	}
+}

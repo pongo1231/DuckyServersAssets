@@ -1,0 +1,364 @@
+#base robot_giant.pop
+#base robot_standard.pop
+
+WaveSchedule
+{
+	StartingCurrency	1700
+	RespawnWaveTime 		1 
+	CanBotsAttackWhileInSpawnRoom no
+	
+	TextPrintTime 7  
+	
+	ExtraSpawnPoint    //Adds spawn points on specified location
+    {
+        Name "spawntimer"
+        TeamNum 3 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        X	"-400.85"                     
+        Y	"5151.59"                  
+        Z	"774.40"        
+    }
+	
+	PointTemplates  
+	{
+		Earthquake
+        {
+            NoFixup 1
+            trigger_multiple
+            {
+                "targetname" "breakleg_trigger"
+                "filtername" "red_filter"
+                "spawnflags" "1"
+                "wait" "0.05"
+                "origin" "0 0 0"
+                "mins" "-350 -350 -350" //Size of hurtbox, the Z axis (down) is filled already.
+                "maxs" "350 350 350" //Size of hurtbox, the Z axis (up) is filled already.
+                "OnStartTouch" "!activator,AddOutput,targetname crush,0,-1"
+                "OnEndTouch" "!activator,AddOutput,targetname lol,0.01,-1" //Increase (or decrease, I guess) the -4000 to increase fall damage.
+            }
+			
+			env_shake
+            {
+                "targetname" "quake"
+                "spawnflags" "4" //Change to 0 if you don't want players in the air being shaked.
+                "radius" "550" //Do your magic.
+                "frequency" "200"
+                "duration" "3"
+                "amplitude" "12" //How strong the shake is.
+                "origin" "0 0 37.5" //The center of the sphere should line up with the center of the hurtbox.
+            }
+			
+            logic_timer
+            {
+                "targetname" "shake_timer"
+                "RefireTime" "1"
+                "spawnflags" "0"
+                "UseRandomTime" "0"
+                "OnTimer" "quake,StartShake,,0,-1"
+            }
+            logic_timer
+            {
+                "targetname" "breakleg_timer"
+                "RefireTime" "7" //Change the cooldown of the attack 
+                "spawnflags" "0"
+                "UseRandomTime" "0"
+                "OnTimer" "crush,AddOutput,basevelocity 0 0 2000,0,-1"
+                "OnTimer" "crush,AddOutput,basevelocity 0 0 -7000,0.01,-1"
+                "OnTimer" "quake_particle,Start,,0,-1"
+                "OnTimer" "quake_particle,Stop,,3,-1"
+                "OnTimer" "sound_quake,PlaySound,,0,-1"
+				"OnTimer" "breakbuilding_trigger,Enable,,0,-1"
+				"OnTimer" "breakbuilding_trigger,Disable,,0.05,-1"
+				"OnTimer" "crush,AddOutput,targetname lol,0.5,-1"
+				"OnTimer" "breakleg_trigger,Disable,,0.55,-1"
+				"OnTimer" "breakleg_trigger,Enable,,0.6,-1"
+            }
+            info_particle_system
+            {
+                "targetname" "quake_particle"
+                "effect_name" "hammer_impact_button"
+                "flag_as_weather" "0"
+                "start_active" "0"
+            }
+			
+            ambient_generic
+            {
+                "targetname" "sound_quake"
+                "message" "ambient/explosions/explode_1.wav"
+				"health" "10"
+                "spawnflags" "32"
+                "origin" "0 0 0"
+            }
+			
+            filter_activator_tfteam
+            {
+                "targetname" "red_filter"
+                "TeamNum" "2"
+                "Negated" "0"
+            }
+			
+			trigger_multiple
+            {
+                "targetname" "breakbuilding_trigger"
+                "filtername" "building_filter"
+                "spawnflags" "64"
+                "wait" "0.01"
+                "origin" "0 0 0"
+                "mins" "-350 -350 -350"
+                "maxs" "350 350 350"
+                "OnStartTouch" "!activator,RemoveHealth,1000,0,-1"
+            }
+            filter_multi
+            {
+                "targetname" "building_filter"
+                "FilterType" "1"
+                "Filter01" "red_filter"
+                "Filter02" "sentry_filter"
+            }
+            filter_activator_class
+            {
+                "targetname" "sentry_filter"
+                "filterclass" "obj_sentrygun"
+                "Negated" "0"
+            }
+        }
+		
+		LoseRelay
+		{
+			NoFixup 1
+			logic_relay
+			{
+				"targetname" "you_lose"
+				"OnTrigger"  "boss_deploy_relay,Trigger,,0,-1"
+			}
+		}
+	}
+
+	Templates
+	{	
+		T_TFBot_Boss_Heavy_Fatass
+		{
+			Class Heavyweapons
+			Name "Earth Shaker"
+			Health 20000
+			Skill Expert
+			Scale 1.85
+			
+			WeaponRestrictions MeleeOnly
+			
+			ClassIcon boss_earth_shaker 
+			
+			Attributes MiniBoss
+			Attributes UseBossHealthBar
+			
+			Attributes SuppressFire
+			
+			Item "Fists of Steel"
+			
+			Item "War Head"
+			Item "The Purity Fist"
+			
+			FireInput   
+            {
+                Target "breakleg_timer" 
+                Action "AddOutput" 
+                Param "RefireTime 5" 
+                Delay 0 
+                Cooldown 0 
+                Repeats 1
+                IfHealthBelow 17000 
+            }
+			
+			FireInput   
+            {
+                Target "breakleg_timer" 
+                Action "AddOutput" 
+                Param "RefireTime 4" 
+                Delay 0 
+                Cooldown 0 
+                Repeats 1
+                IfHealthBelow 14000
+            }
+			
+			FireInput   
+            {
+                Target "breakleg_timer" 
+                Action "AddOutput" 
+                Param "RefireTime 3" 
+                Delay 0 
+                Cooldown 0 
+                Repeats 1
+                IfHealthBelow 9000
+            }
+			
+			FireInput   
+            {
+                Target "breakleg_timer" 
+                Action "AddOutput" 
+                Param "RefireTime 2" 
+                Delay 0 
+                Cooldown 0 
+                Repeats 1
+                IfHealthBelow 5000
+            }
+			
+			FireInput   
+            {
+                Target "crush" 
+                Action "AddOutput" 
+                Param "targetname notdie"
+                Delay 0 
+                Cooldown 0 
+                Repeats 1
+            }
+		
+			
+			SpawnTemplate  
+			{
+				Name "Earthquake" //I know I've dunked on spawning templates this way before, but it seems to work here.
+                                     //FYI the entities spawn at the feet of the bot. Unless an "origin" in the entity is specified, which would offset it by the origin amount.
+			}
+			
+			Action Mobber			
+			
+			ItemAttributes
+			{
+				ItemName "Fists of Steel"
+				"fire rate bonus" 200
+			}	
+			
+			CharacterAttributes
+			{
+				"move speed bonus" 0.65
+				//"move speed bonus" 0.0001
+				"rage giving scale" 0.1
+				"increased jump height" 0.0001
+				"cannot pick up intelligence" 1
+				"cannot be backstabbed" 1
+				"dmg taken from crit increased" 0.25
+				"dmg from melee increased" 0.6
+				"damage force reduction" 0
+				"mult stun resistance" 0
+				"airblast vulnerability multiplier" 0
+				"override footstep sound set" 3
+				"airblast vertical vulnerability multiplier" 0
+			}	
+		}		
+
+		T_TFBot_Timer
+		{
+			Class Scout
+			Health 240
+			
+			Attributes SuppressFire
+			
+			ClassIcon timer_lite
+			
+			Attributes UseBossHealthBar
+			
+			Scale 0.001
+			
+			Action Mobber
+			
+			CharacterAttributes
+			{
+				"move speed bonus" 0.001
+				"increased jump height" 0.0001
+				"voice pitch scale" 0
+				"cannot pick up intelligence" 1
+				"health regen" -1
+			}	
+		}
+	}
+	
+	Wave
+	{	
+		StartWaveOutput											
+		{
+			Target wave_start_relay								
+			Action Trigger										
+		}
+		DoneOutput												
+		{
+			Target wave_finished_relay							
+			Action Trigger										
+		}
+		
+		SpawnTemplate "LoseRelay"  
+		
+		WaveSpawn
+		{
+			Name wave1a
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 2
+			TotalCurrency 50
+			FirstSpawnWarningSound "entry_boss_music.mp3"
+			
+			DoneOutput
+			{
+				Target you_lose
+				Action Kill
+			}
+			
+			TFBot
+			{
+				Template  T_TFBot_Boss_Heavy_Fatass
+			}
+		}
+		
+		//WaveSpawn
+		//{
+		//	Name wave1a
+			//Where spawnbot
+			//MaxActive 9
+		//	SpawnCount 3
+			//WaitBeforeStarting 5
+		//	WaitBetweenSpawns 5
+		//	TotalCurrency 50
+		//	Support 1
+			
+			
+		//	TFBot
+			//{
+		//		Class Scout
+			//	WeaponRestrictions MeleeOnly
+		//	}
+		//}
+		
+		WaveSpawn
+		{
+			Name wavesex
+			Where spawntimer
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 6
+			Support Limited
+			
+			DoneOutput
+			{	
+				Target you_lose
+				Action Trigger
+			}	
+			
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template  T_TFBot_Timer 
+					}
+				}
+			}	
+		}
+	}
+}	
+		
+		
+		
+		

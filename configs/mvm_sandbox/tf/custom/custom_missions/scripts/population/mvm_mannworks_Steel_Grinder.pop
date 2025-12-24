@@ -1,0 +1,349 @@
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_gatebot.pop
+population
+{
+	StartingCurrency	600
+	RespawnWaveTime	6
+	CanBotsAttackWhileInSpawnRoom	no
+	Templates
+	{
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	bombpath_arrows_clear_relay_ironman
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	bombpath_wavefinished
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	1-L-1
+			TotalCurrency	250
+			TotalCount	33
+			MaxActive	11
+			SpawnCount	11
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot_left
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	scout_bat
+					Health	125
+					Name	"Bat Scout"
+					Class	Scout
+					Skill	Normal
+					WeaponRestrictions	MeleeOnly
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	1-R-1
+			WaitForAllSpawned	1-L-1
+			WaitForAllDead	1-L-1
+			TotalCurrency	250
+			TotalCount	50
+			MaxActive	10
+			SpawnCount	10
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot_right
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	pyro
+					Health	175
+					Name	"Shotgun Pyro"
+					Class	Pyro
+					Skill	Normal
+					WeaponRestrictions	SecondaryOnly
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	bombpath_arrows_clear_relay_ironman
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	bombpath_wavefinished
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	1-L-1
+			TotalCurrency	250
+			TotalCount	30
+			MaxActive	15
+			SpawnCount	15
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot_left
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	heavy_heater
+					Health	300
+					Name	"Slow-on-Hit Heavy"
+					Class	HeavyWeapons
+					Skill	Normal
+					WeaponRestrictions	PrimaryOnly
+					ItemAttributes
+					{
+						ItemName	tomislav
+						"slow enemy on hit"	1
+					}
+					Item	"tomislav"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	1-R-1
+			WaitForAllSpawned	1-L-1
+			WaitForAllDead	1-L-1
+			TotalCurrency	500
+			TotalCount	88
+			MaxActive	22
+			SpawnCount	22
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot_right
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	demo_bomber
+					Health	175
+					Name	"Bottle Demoknight"
+					Class	Demoman
+					Skill	Normal
+					WeaponRestrictions	MeleeOnly
+					ItemAttributes
+					{
+						ItemName	"gold frying pan"
+						"damage bonus"	1.93
+					}
+					ItemAttributes
+					{
+						ItemName	"prince tavish's crown"
+						"attach particle effect"	17
+					}
+					Item	"ali baba's wee booties"
+					Item	"the tide turner"
+					Item	"gold frying pan"
+					Item	"prince tavish's crown"
+				}
+				TFBot
+				{
+					Name	"Blast Resistance Medic"
+					Template	T_TFBot_Medic_Vaccinator_Blast
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	Support-Piss-Snipers-1
+			TotalCurrency	0
+			TotalCount	10
+			MaxActive	5
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot_mission_sniper
+			Squad
+			{
+				TFBot
+				{
+					Name	"Piss-Inducing Sniper"
+					Template	T_TFBot_Sniper_Sydney_Sleeper
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	bombpath_arrows_clear_relay_ironman
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	bombpath_wavefinished
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	1-T-1
+			TotalCurrency	500
+			TotalCount	3
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Squad
+			{
+				Tank
+				{
+					Health	12593
+					Name	Tank
+					Speed	90
+					OnKilledOutput
+					{
+						Target	boss_dead_relay
+						Action	Trigger
+					}
+					OnBombDroppedOutput
+					{
+						Target	boss_deploy_relay
+						Action	Trigger
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	1-L-1
+			TotalCurrency	250
+			TotalCount	12
+			MaxActive	2
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot_left
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Soldier_Spammer
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	1-R-1
+			WaitForAllSpawned	1-L-1
+			WaitForAllDead	1-L-1
+			TotalCurrency	250
+			TotalCount	100
+			MaxActive	20
+			SpawnCount	20
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot_right
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	heavyweapons
+					Health	300
+					Name	"Robotic Russian Fat Man"
+					Class	HeavyWeapons
+					Skill	Normal
+					ItemAttributes
+					{
+						ItemName	tf_weapon_minigun
+						"damage bonus"	0.65
+					}
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	bombpath_arrows_clear_relay_ironman
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	bombpath_wavefinished
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	1-Lower-1
+			TotalCurrency	0
+			TotalCount	3
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot_lower
+			Squad
+			{
+				TFBot
+				{
+					Health	1392
+					Name	"Comedian Sniper"
+					WeaponRestrictions	SecondaryOnly
+					Template	T_TFBot_Sniper
+					Attributes	"AlwaysCrit"
+					ItemAttributes
+					{
+						ItemName	tf_weapon_smg
+						"clip size upgrade atomic"	0.1
+						"fire rate bonus"	2
+						"crit forces victim to laugh"	1
+					}
+					ItemAttributes
+					{
+						ItemName	tf_weapon_club
+						"effect bar recharge rate increased"	0.05
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	1-Finale-1
+			WaitForAllSpawned	1-Lower-1
+			WaitForAllDead	1-Lower-1
+			TotalCurrency	0
+			TotalCount	140
+			MaxActive	20
+			SpawnCount	20
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot_right
+			Where	spawnbot_left
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Demo_RapidFire
+					ItemAttributes
+					{
+						ItemName	tf_weapon_grenadelauncher
+						"fire rate bonus"	0.1
+					}
+				}
+			}
+		}
+	}
+}

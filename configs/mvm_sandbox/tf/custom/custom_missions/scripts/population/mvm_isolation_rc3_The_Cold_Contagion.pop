@@ -1,0 +1,1030 @@
+#base robot_giant.pop
+#base robot_standard.pop
+
+WaveSchedule
+{
+	StartingCurrency	1000
+	RespawnWaveTime	5
+	CanBotsAttackWhileInSpawnRoom	no
+	AddSentryBusterWhenDamageDealtExceeds	25000
+	AddSentryBusterWhenKillCountExceeds	25
+	
+	Templates
+	{
+		Sir_Nadesalot
+		{
+			ClassIcon	demo_barrage
+			Health	79000
+			Name	"Sir Nadesalot"
+			Scale	2.1
+			Class	Demoman
+			Skill	Expert
+			WeaponRestrictions	PrimaryOnly
+			Attributes	"MiniBoss"
+			Attributes	"UseBossHealthBar"
+			Attributes	"HoldFireUntilFullReload"
+			Attributes	"AlwaysCrit"
+			ItemAttributes
+			{
+				ItemName	tf_weapon_grenadelauncher
+				"faster reload rate"	0.05
+				"fire rate bonus"	0.05
+				"clip size upgrade atomic"	46.0
+				"projectile spread angle penalty"	5
+				"is australium item"	1
+				"item style override"	1
+				"killstreak tier"	3
+				"killstreak idleeffect"	1
+				"killstreak effect"	22003
+				"damage bonus"	1.5
+			}
+			CharacterAttributes
+			{
+				"damage force reduction"	0
+				"airblast vulnerability multiplier"	0
+				"override footstep sound set"	4
+				"move speed penalty"	0.4
+			}
+			Item	"the pure tin capotain"
+			Item	"the juggernaut jacket"
+		}
+		Giant_Heavy_Calibur_Sniper
+		{
+			ClassIcon	sniper_bigcal
+			Health	1250
+			Name	"Giant Heavy Calibur Sniper"
+			Scale	1.75
+			Class	Sniper
+			Skill	Expert
+			MaxVisionRange	2500
+			Attributes	"MiniBoss"
+			ItemAttributes
+			{
+				ItemName	"the awper hand"
+				"damage bonus"	2.5
+				"headshot damage increase"	15.0
+				"shot penetrate all players"	1
+			}
+			ItemAttributes
+			{
+				ItemName	tf_weapon_smg
+				"damage bonus"	6.5
+				"shot penetrate all players"	1
+			}
+			CharacterAttributes
+			{
+				"move speed penalty"	0.5
+				"override footstep sound set"	5
+			}
+			Item	"the awper hand"
+			Item	"the anger"
+			Item	"the birdman of australiacatraz"
+		}
+		Aggressor_Heavy
+		{
+			ClassIcon	heavy_aggressor
+			Health	600
+			Name	"Aggressor Heavy"
+			Class	HeavyWeapons
+			Skill	Expert
+			WeaponRestrictions	SecondaryOnly
+			ItemAttributes
+			{
+				ItemName	tf_weapon_shotgun_hwg
+				"bullets per shot bonus"	0.5
+				"dmg bonus while half dead"	3.5
+				"dmg penalty while half alive"	0.5
+				"spread penalty"	2.5
+			}
+			CharacterAttributes
+			{
+				"health regen"	5
+			}
+		}
+		Reaper_Pyro
+		{
+			ClassIcon	pyro_reaper
+			Health	1000
+			Name	"Reaper Pyro"
+			Class	Pyro
+			Skill	Expert
+			WeaponRestrictions	MeleeOnly
+			ItemAttributes
+			{
+				ItemName	"sharpened volcano fragment"
+				"damage bonus"	75.0
+			}
+			CharacterAttributes
+			{
+				"dmg taken from fire reduced"	0
+				"dmg taken from blast reduced"	0
+				"dmg taken from bullets reduced"	0
+				"dmg from melee increased"	20.0
+				"cancel falling damage"	1
+			}
+			Item	"sharpened volcano fragment"
+			Item	"the raven's visage"
+			Item	"the wraith wrap"
+		}
+		Gauntlet_Juggernaut
+		{
+			ClassIcon	heavy_steelfist_tank
+			Health	10000
+			Name	"Gauntlet Juggernaut"
+			Class	HeavyWeapons
+			Skill	Expert
+			MaxVisionRange	1200
+			WeaponRestrictions	MeleeOnly
+			Attributes	"MiniBoss"
+			Attributes	"UseBossHealthBar"
+			ItemAttributes
+			{
+				ItemName	tf_weapon_minigun
+				"damage bonus"	1.5
+			}
+			ItemAttributes
+			{
+				ItemName	"fists of steel"
+				"damage bonus"	4.5
+			}
+			CharacterAttributes
+			{
+				"damage force reduction"	0
+				"airblast vulnerability multiplier"	0
+				"override footstep sound set"	2
+				"dmg taken from bullets reduced"	0.5
+				"dmg taken from fire reduced"	0
+				"dmg taken from crit increased"	2.5
+				"move speed penalty"	0.2
+			}
+			Item	"fists of steel"
+			Item	"die regime-panzerung"
+			Item	"war head"
+		}
+	}
+	Mission
+	{
+		Objective	Spy
+		Where	spawnbot_mission_spy
+		BeginAtWave	2
+		RunForThisManyWaves	5
+		InitialCooldown	30
+		CooldownTime	30
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Spy
+			Item	"the enforcer"
+			Item	"the big earner"
+			Item	"dead of night"
+			Item	"the pom-pommed provocateur"
+		}
+	}
+	Mission
+	{
+		Objective	Sniper
+		Where	spawnbot_mission_sniper
+		BeginAtWave	2
+		RunForThisManyWaves	3
+		InitialCooldown	30
+		CooldownTime	30
+		DesiredCount	2
+		TFBot
+		{
+			Skill	Expert
+			Template	T_TFBot_Sniper
+			Item	"the hitman's heatmaker"
+			Item	"the extra layer"
+			Item	"tough stuff muffs"
+		}
+	}
+	Mission
+	{
+		Objective	DestroySentries
+		Where	spawnbot
+		BeginAtWave	1
+		RunForThisManyWaves	5
+		InitialCooldown	30
+		CooldownTime	30
+		DesiredCount	1
+		TFBot
+		{
+			Template	T_TFBot_SentryBuster
+		}
+	}
+	Mission
+	{
+		Objective	Sniper
+		Where	spawnbot_mission_sniper
+		BeginAtWave	5
+		RunForThisManyWaves	1
+		InitialCooldown	30
+		CooldownTime	30
+		DesiredCount	1
+		TFBot
+		{
+			Template	Giant_Heavy_Calibur_Sniper
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	scout
+			TotalCurrency	100
+			TotalCount	25
+			MaxActive	5
+			SpawnCount	5
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	scout
+					Health	125
+					Name	Scout
+					Class	Scout
+					Skill	Expert
+					Item	"baby face's blaster"
+					Item	"runner's warm-up"
+					Item	"the delinquent's down vest"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	demo
+			WaitForAllSpawned	scout
+			TotalCurrency	100
+			TotalCount	16
+			MaxActive	4
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	demo
+					Health	175
+					Name	Demoman
+					Class	Demoman
+					Skill	Expert
+					Item	"the loch-n-load"
+					Item	"the merc's muffler"
+					Item	"the brown bomber"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	soldier
+			WaitForAllSpawned	demo
+			TotalCurrency	100
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot_house
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	soldier
+					Health	200
+					Name	Soldier
+					Class	Soldier
+					Skill	Expert
+					Item	"the black box"
+					Item	"antarctic parka"
+					Item	"the war on smissmas battle hood"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	heavy
+			WaitForAllSpawned	soldier
+			TotalCurrency	100
+			TotalCount	12
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	heavy
+					Health	300
+					Name	HeavyWeapons
+					Class	HeavyWeapons
+					Skill	Expert
+					Item	"the brass beast"
+					Item	"the brown bomber"
+					Item	"the warmth preserver"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	giant_soldier
+			WaitForAllSpawned	heavy
+			TotalCurrency	400
+			TotalCount	2
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Where	spawnbot_house
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Soldier
+					Item	"the war on smissmas battle hood"
+					Item	"antarctic parka"
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	miniboss_soldier
+			TotalCurrency	400
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot_house
+			Squad
+			{
+				TFBot
+				{
+					Health	7600
+					Template	T_TFBot_Giant_Soldier
+					Attributes	"AlwaysCrit"
+					Attributes	"UseBossHealthBar"
+					ItemAttributes
+					{
+						ItemName	tf_weapon_rocketlauncher
+						"fire rate bonus"	0.5
+					}
+					Item	"the war on smissmas battle hood"
+					Item	"antarctic parka"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	pyrobow
+			WaitForAllSpawned	miniboss_soldier
+			TotalCurrency	100
+			TotalCount	32
+			MaxActive	4
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	pyro
+					Health	175
+					Name	Pyro
+					Class	Pyro
+					Skill	Expert
+					Attributes	"AlwaysFireWeapon"
+					Item	"the degreaser"
+					Item	"the sub zero suit"
+					Item	"the head warmer"
+				}
+				TFBot
+				{
+					Skill	Expert
+					Template	T_TFBot_Sniper_Huntsman
+					Item	"tough stuff muffs"
+					Item	"the extra layer"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	buffbackup
+			WaitForAllSpawned	pyrobow
+			TotalCurrency	100
+			TotalCount	52
+			MaxActive	6
+			SpawnCount	6
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot_house
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Soldier_Extended_Buff_Banner
+					Item	"the liberty launcher"
+					Item	"antarctic parka"
+					Item	"the war on smissmas battle hood"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Soldier_Extended_Battalion
+					Item	"the black box"
+					Item	"the war on smissmas battle hood"
+					Item	"antarctic parka"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	tough
+			WaitForAllSpawned	buffbackup
+			TotalCurrency	100
+			TotalCount	24
+			MaxActive	4
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	heavy
+					Health	300
+					Name	HeavyWeapons
+					Class	HeavyWeapons
+					Skill	Expert
+					Item	"tomislav"
+					Item	"the warmth preserver"
+					Item	"the brown bomber"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	"jumper "
+			WaitForAllSpawned	tough
+			TotalCurrency	100
+			TotalCount	16
+			MaxActive	4
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot_house
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	scout
+					Health	125
+					Name	Scout
+					Class	Scout
+					Skill	Normal
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	tank
+			TotalCurrency	1000
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Squad
+			{
+				Tank
+				{
+					Health	45000
+					Name	Tank
+					Speed	75
+					OnKilledOutput
+					{
+						Target	boss_dead_relay
+						Action	Trigger
+					}
+					OnBombDroppedOutput
+					{
+						Target	boss_deploy_relay
+						Action	Trigger
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	miniboss_heavy
+			WaitForAllSpawned	tank
+			TotalCurrency	400
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot_house
+			Squad
+			{
+				TFBot
+				{
+					Health	10000
+					Template	T_TFBot_Giant_Heavyweapons
+					Attributes	"UseBossHealthBar"
+					ItemAttributes
+					{
+						ItemName	natascha
+						"fire rate bonus"	0.05
+						"bullets per shot bonus"	0.25
+					}
+					Item	"natascha"
+					Item	"the warmth preserver"
+					Item	"the brown bomber"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	"scout "
+			WaitForAllSpawned	miniboss_heavy
+			TotalCurrency	400
+			TotalCount	50
+			MaxActive	5
+			SpawnCount	5
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Support	1
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	scout
+					Health	125
+					Name	Scout
+					Class	Scout
+					Skill	Expert
+					Item	"baby face's blaster"
+					Item	"runner's warm-up"
+					Item	"the delinquent's down vest"
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	miniboss_soldier
+			TotalCurrency	400
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Health	7600
+					Template	T_TFBot_Giant_Soldier
+					Attributes	"UseBossHealthBar"
+					Item	"the direct hit"
+					Item	"the war on smissmas battle hood"
+					Item	"antarctic parka"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	scout
+			WaitForAllSpawned	miniboss_soldier
+			TotalCurrency	100
+			TotalCount	35
+			MaxActive	5
+			SpawnCount	5
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	scout
+					Health	125
+					Name	Scout
+					Class	Scout
+					Skill	Expert
+					Item	"baby face's blaster"
+					Item	"runner's warm-up"
+					Item	"the delinquent's down vest"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	buffconch
+			TotalCurrency	100
+			TotalCount	64
+			MaxActive	6
+			SpawnCount	6
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot_house
+			Squad
+			{
+				TFBot
+				{
+					Skill	Expert
+					Template	T_TFBot_Soldier_Extended_Buff_Banner
+					Item	"the liberty launcher"
+					Item	"the war on smissmas battle hood"
+					Item	"antarctic parka"
+				}
+				TFBot
+				{
+					Skill	Expert
+					Template	T_TFBot_Soldier_Extended_Concheror
+					Item	"the direct hit"
+					Item	"the war on smissmas battle hood"
+					Item	"antarctic parka"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	bowpyro
+			WaitForAllSpawned	buffconch
+			TotalCurrency	100
+			TotalCount	48
+			MaxActive	8
+			SpawnCount	8
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Skill	Expert
+					Template	T_TFBot_Sniper_Huntsman
+					Item	"tough stuff muffs"
+					Item	"the extra layer"
+				}
+				TFBot
+				{
+					Skill	Expert
+					Template	T_TFBot_Pyro
+					Attributes	"AlwaysFireWeapon"
+					Item	"the degreaser"
+					Item	"the head warmer"
+					Item	"the sub zero suit"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	backupconch
+			WaitForAllSpawned	bowpyro
+			TotalCurrency	100
+			TotalCount	96
+			MaxActive	8
+			SpawnCount	8
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Skill	Expert
+					Template	T_TFBot_Soldier_Extended_Battalion
+					Item	"the black box"
+					Item	"the war on smissmas battle hood"
+					Item	"antarctic parka"
+				}
+				TFBot
+				{
+					Skill	Expert
+					Template	T_TFBot_Soldier_Extended_Concheror
+					Item	"the direct hit"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	reaper
+			WaitForAllSpawned	backupconch
+			TotalCurrency	100
+			TotalCount	10
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	250
+			Where	spawnbot_house
+			Squad
+			{
+				TFBot
+				{
+					Template	Reaper_Pyro
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	backupbuff
+			WaitForAllSpawned	backupconch
+			TotalCurrency	100
+			TotalCount	76
+			MaxActive	8
+			SpawnCount	8
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Skill	Expert
+					Template	T_TFBot_Soldier_Extended_Battalion
+					Item	"the black box"
+					Item	"the war on smissmas battle hood"
+					Item	"antarctic parka"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Soldier_Extended_Buff_Banner
+					Item	"the liberty launcher"
+					Item	"antarctic parka"
+					Item	"the war on smissmas battle hood"
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	supertank
+			TotalCurrency	1000
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Squad
+			{
+				Tank
+				{
+					Health	75000
+					Name	Tank
+					Speed	45
+					OnKilledOutput
+					{
+						Target	boss_dead_relay
+						Action	Trigger
+					}
+					OnBombDroppedOutput
+					{
+						Target	boss_deploy_relay
+						Action	Trigger
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	juggernaut
+			WaitForAllSpawned	supertank
+			TotalCurrency	400
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot_house
+			Squad
+			{
+				TFBot
+				{
+					Template	Gauntlet_Juggernaut
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	support
+			WaitForAllSpawned	juggernaut
+			TotalCurrency	100
+			TotalCount	16
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Support	1
+			Where	spawnbot
+			Where	spawnbot_house
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						ClassIcon	scout
+						Health	125
+						Name	Scout
+						Class	Scout
+						Skill	Expert
+						Attributes	"AutoJump"
+						Item	"baby face's blaster"
+						Item	"runner's warm-up"
+						Item	"the delinquent's down vest"
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						ClassIcon	soldier
+						Health	200
+						Name	Soldier
+						Class	Soldier
+						Skill	Expert
+						Attributes	"AlwaysCrit"
+						Item	"the direct hit"
+						Item	"the war on smissmas battle hood"
+						Item	"antarctic parka"
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	Aggressor_Heavy
+						Item	"the warmth preserver"
+						Item	"the brown bomber"
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						ClassIcon	scout
+						Health	125
+						Name	Scout
+						Class	Scout
+						Skill	Expert
+						WeaponRestrictions	SecondaryOnly
+						Item	"the winger"
+						Item	"runner's warm-up"
+						Item	"the delinquent's down vest"
+					}
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	Nadesalot
+			TotalCurrency	400
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	Sir_Nadesalot
+					ItemAttributes
+					{
+						ItemName	tf_weapon_grenadelauncher
+						"clip size upgrade atomic"	26.0
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	support
+			WaitForAllSpawned	Nadesalot
+			TotalCurrency	100
+			TotalCount	25
+			MaxActive	5
+			SpawnCount	5
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Support	1
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	scout
+					Health	125
+					Name	Scout
+					Class	Scout
+					Skill	Expert
+					Attributes	"AlwaysCrit"
+					Item	"baby face's blaster"
+					Item	"runner's warm-up"
+					Item	"the delinquent's down vest"
+				}
+			}
+		}
+	}
+}

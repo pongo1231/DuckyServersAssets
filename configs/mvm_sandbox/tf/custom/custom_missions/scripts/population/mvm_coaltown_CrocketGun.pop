@@ -1,0 +1,79 @@
+//Copy this file in your tf/scripts/population folder
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_gatebot.pop
+population
+{
+	StartingCurrency	15000
+	RespawnWaveTime	6
+	CanBotsAttackWhileInSpawnRoom	no
+	AddSentryBusterWhenDamageDealtExceeds	5000
+	AddSentryBusterWhenKillCountExceeds	1
+
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			TotalCurrency	15000
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Squad
+			{
+				TFBot
+				{
+					Health	56500
+					Name	CrocketGun
+					Scale	1.9
+					Class	Soldier
+					Skill	Expert
+					WeaponRestrictions	PrimaryOnly
+					Attributes	"HoldFireUntilFullReload"
+					Attributes	"MiniBoss"
+					Attributes	"UseBossHealthBar"
+					Item	"tf_weapon_rocketlauncher"
+					Item	"tf_weapon_shotgun_soldier"
+					Item	"tf_weapon_shovel"
+					Item	"soldier drill hat"
+					Item	"lord cockswain's novelty mutton chops and pipe"
+					ClassIcon	soldier_major_crits
+					CharacterAttributes
+					{
+						"move speed bonus"	0.4
+						"override footstep sound set"	3
+						"airblast vulnerability multiplier"	0.1
+						"airblast vertical vulnerability multiplier"	0.1
+						"rage giving scale"	0.4
+						"damage force reduction"	0.5
+					}
+					ItemAttributes
+					{
+						ItemName	tf_weapon_rocketlauncher
+						"damage bonus"	2
+						"critboost on kill"	6
+						"clip size upgrade atomic"	16.0
+						"fire rate bonus"	0.001
+						"projectile spread angle penalty"	9
+						"Projectile speed increased"	2
+						"faster reload rate"	0.3
+					}
+				}
+			}
+		}
+	}
+}

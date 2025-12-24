@@ -1,0 +1,546 @@
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_gatebot.pop
+population
+{
+	StartingCurrency	30000
+	RespawnWaveTime	6
+	CanBotsAttackWhileInSpawnRoom	no
+	AddSentryBusterWhenDamageDealtExceeds	50000
+	AddSentryBusterWhenKillCountExceeds	50
+	Templates
+	{
+		Dumpster_Diver_
+		{
+			ClassIcon	soldier_dumpster
+			WeaponRestrictions	PrimaryOnly
+			Scale	1.25
+			Health	400
+			Skill	Expert
+			Name	"Dumpster Diver "
+			Class	Soldier
+			Attributes	"SpawnWithFullCharge"
+			ItemAttributes
+			{
+				"damage bonus"	0.66
+				ItemName	"the beggar's bazooka"
+				"fire rate bonus"	0.7
+				"faster reload rate"	0.8
+				"auto fires when full"	2
+			}
+			CharacterAttributes
+			{
+				"increase buff duration"	9.0
+			}
+			Item	"the beggar's bazooka"
+			Item	"the battalion's backup"
+			Item	"the helmet without a home"
+			Item	"the captain's cocktails"
+		}
+		Giant_Dumpster_Diver
+		{
+			ClassIcon	soldier_dumpster_giant
+			WeaponRestrictions	PrimaryOnly
+			Health	4000
+			Skill	Expert
+			Name	"Giant Dumpster Diver"
+			Class	Soldier
+			Attributes	"MiniBoss"
+			ItemAttributes
+			{
+				ItemName	"the beggar's bazooka"
+				"faster reload rate"	0.45
+				"damage penalty"	0.73
+				"clip size upgrade atomic"	13
+				"auto fires full clip"	1
+				"Projectile speed decreased"	0.7
+				"auto fires when full"	1
+			}
+			CharacterAttributes
+			{
+				"override footstep sound set"	3
+				"airblast vulnerability multiplier"	0
+				"damage force reduction"	0
+				"move speed penalty"	0.35
+			}
+			Item	"the beggar's bazooka"
+			Item	"stainless pot"
+			Item	"the captain's cocktails"
+		}
+		Final_Boss__Titanium_Terror
+		{
+			ClassIcon	final_boss_titanium_terror
+			WeaponRestrictions	MeleeOnly
+			Scale	2.5
+			Health	1900000
+			Skill	Expert
+			Name	"Final Boss: Titanium Terror"
+			Class	HeavyWeapons
+			MaxVisionRange	1200
+			Attributes	"MiniBoss"
+			Attributes	"UseBossHealthBar"
+			ItemAttributes
+			{
+				"damage bonus"	100.0
+				ItemName	"fists of steel"
+				"heal on kill"	50000
+			}
+			CharacterAttributes
+			{
+				"override footstep sound set"	2
+				"airblast vulnerability multiplier"	0
+				"damage force reduction"	0.35
+				"move speed penalty"	0.15
+			}
+			Item	"fists of steel"
+			Item	"teufort knight"
+			Item	"die regime-panzerung"
+		}
+		Elite_Brass_Tank
+		{
+			ClassIcon	heavy_brasstank_elite
+			WeaponRestrictions	PrimaryOnly
+			Scale	1.2
+			Health	22000
+			Skill	Expert
+			Name	"Elite Brass Tank"
+			Class	HeavyWeapons
+			ItemAttributes
+			{
+				"damage bonus"	11.0
+				ItemName	"the brass beast"
+				"bullets per shot bonus"	0.25
+				"attack projectiles"	2
+				"weapon spread bonus"	0.5
+				"minigun spinup time increased"	2.0
+				"aiming movespeed decreased"	0.1
+			}
+			ItemAttributes
+			{
+				ItemName	"the eliminators safeguard"
+				"item style override"	1
+				"set item tint RGB"	1315860
+			}
+			CharacterAttributes
+			{
+				"cannot be backstabbed"	1
+				"move speed penalty"	0.6
+				"dmg taken from bullets reduced"	0.5
+				"cannot pick up intelligence"	1
+				"dmg taken from blast increased"	2.0
+			}
+			Item	"the brass beast"
+			Item	"the eliminators safeguard"
+			Item	"die regime-panzerung"
+		}
+		Steelpound
+		{
+			ClassIcon	robo_extremethreat
+			WeaponRestrictions	MeleeOnly
+			Scale	1.35
+			Health	5000
+			Skill	Expert
+			Name	Steelpound
+			Class	HeavyWeapons
+			MaxVisionRange	1200
+			Attributes	"MiniBoss"
+			ItemAttributes
+			{
+				"damage bonus"	1.2
+				ItemName	apoco-fists
+				"damage causes airblast"	1
+				"dmg bonus while half dead"	2.0
+			}
+			CharacterAttributes
+			{
+				"override footstep sound set"	2
+				"airblast vulnerability multiplier"	0.22
+				"damage force reduction"	0.22
+				"move speed penalty"	0.45
+				"dmg taken from bullets reduced"	0.5
+				"dmg taken from fire reduced"	0.3
+				"afterburn immunity"	1
+				"dmg from melee increased"	0.5
+				"dmg taken from blast increased"	1.5
+				"dmg taken from crit increased"	0.4
+			}
+			Item	"apoco-fists"
+			Item	"big steel jaw of summer fun"
+			Item	"cold war luchador"
+		}
+		Reaper_Sniper
+		{
+			ClassIcon	sniper_camper
+			WeaponRestrictions	PrimaryOnly
+			Scale	1.75
+			Health	1500
+			Skill	Expert
+			Name	"Reaper Sniper"
+			Class	Sniper
+			MaxVisionRange	2500
+			Attributes	"MiniBoss"
+			ItemAttributes
+			{
+				ItemName	"the classic"
+				"faster reload rate"	0.65
+				"heal on kill"	1500
+				"headshot damage increase"	4.45
+				"sniper charge per sec"	1.35
+			}
+			CharacterAttributes
+			{
+				"override footstep sound set"	5
+				"damage force reduction"	0.6
+				"move speed penalty"	0.5
+			}
+			Item	"the classic"
+			Item	"the golden garment"
+			Item	"the toy soldier"
+		}
+	}
+	Mission
+	{
+		Objective	DestroySentries
+		Where	spawnbot
+		BeginAtWave	1
+		RunForThisManyWaves	1
+		InitialCooldown	30
+		CooldownTime	30
+		DesiredCount	1
+		TFBot
+		{
+			Template	T_TFBot_SentryBuster
+		}
+	}
+	Mission
+	{
+		Objective	Spy
+		Where	spawnbot_mission_spy
+		BeginAtWave	1
+		RunForThisManyWaves	1
+		InitialCooldown	30
+		CooldownTime	30
+		DesiredCount	5
+		TFBot
+		{
+			Template	T_TFBot_Spy
+		}
+	}
+	Mission
+	{
+		Objective	Sniper
+		Where	spawnbot_giant
+		BeginAtWave	1
+		RunForThisManyWaves	1
+		InitialCooldown	30
+		CooldownTime	30
+		DesiredCount	2
+		TFBot
+		{
+			Template	Reaper_Sniper
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	boss
+			TotalCurrency	999999
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			FirstSpawnWarningSound   "finalbossintro.mp3"
+			Squad
+			{
+				TFBot
+				{
+					Template	Final_Boss__Titanium_Terror
+					ItemAttributes
+					{
+						ItemName	"teufort knight"
+						"attach particle effect"	79
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	bannercrit
+			TotalCurrency	0
+			TotalCount	45
+			MaxActive	5
+			SpawnCount	5
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllSpawned	boss
+			Where	spawnbot_giant
+			Squad
+			{
+				TFBot
+				{
+					Skill	Expert
+					Template	T_TFBot_Soldier_Extended_Buff_Banner
+					Attributes	"AlwaysCrit"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	scouts
+			TotalCurrency	0
+			TotalCount	130
+			MaxActive	8
+			SpawnCount	8
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllSpawned	boss
+			Where	spawnbot_giant
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	scout
+					Health	125
+					Skill	Normal
+					Name	Scout
+					Class	Scout
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_FAN
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	giantsoldiers
+			TotalCurrency	0
+			TotalCount	20
+			MaxActive	2
+			SpawnCount	2
+			WaitBeforeStarting	110
+			WaitBetweenSpawns	10
+			Where	spawnbot_giant
+			FirstSpawnWarningSound    "finalbosstheme.mp3"
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Soldier
+					Attributes	"AlwaysCrit"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	dumpsters
+			TotalCurrency	0
+			TotalCount	24
+			MaxActive	8
+			SpawnCount	8
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllSpawned	bannercrit
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	Dumpster_Diver_
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	boxers
+			TotalCurrency	0
+			TotalCount	20
+			MaxActive	4
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllDead	bannercrit
+			Where	spawnbot_giant
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Boxing_Heavy
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	bowpyrocrit
+			TotalCurrency	0
+			TotalCount	60
+			MaxActive	10
+			SpawnCount	10
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllDead	giantsoldiers
+			Where	spawnbot
+			Where	spawnbot_giant
+			Squad
+			{
+				TFBot
+				{
+					Skill	Expert
+					Template	T_TFBot_Sniper_Huntsman
+					Attributes	"AlwaysCrit"
+				}
+				TFBot
+				{
+					Skill	Expert
+					Template	T_TFBot_Pyro
+					Attributes	"AlwaysCrit"
+					Attributes	"AlwaysFireWeapon"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	giantdumpsters
+			TotalCurrency	0
+			TotalCount	10
+			MaxActive	10
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllDead	dumpsters
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	Giant_Dumpster_Diver
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	gauntletcrit
+			TotalCurrency	0
+			TotalCount	24
+			MaxActive	12
+			SpawnCount	12
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllDead	bowpyrocrit
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Skill	Expert
+					Template	T_TFBot_Heavyweapons_Fist
+					Attributes	"AlwaysCrit"
+				}
+				TFBot
+				{
+					Skill	Expert
+					Template	T_TFBot_Medic_QuickUber
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	giantdeflectorcrit
+			TotalCurrency	0
+			TotalCount	16
+			MaxActive	4
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllDead	giantdumpsters
+			Where	spawnbot_giant
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Heavyweapons_Deflector
+					Attributes	"AlwaysCrit"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Giant_Medic
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	majorleague
+			TotalCurrency	0
+			TotalCount	4
+			MaxActive	4
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllDead	giantdeflectorcrit
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Scout_Baseball
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	steelpounds
+			TotalCurrency	0
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllDead	majorleague
+			Where	spawnbot_giant
+			FirstSpawnWarningSound      "Steelpound_Spawn.mp3"
+			Squad
+			{
+				TFBot
+				{
+					Template	Steelpound
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	autogameover
+			TotalCurrency	0
+			TotalCount	20
+			MaxActive	20
+			SpawnCount	1
+			WaitBeforeStarting	1150
+			WaitBetweenSpawns	1
+			Support	1
+			Where	spawnbot
+			FirstSpawnWarningSound   "wtf.mp3"
+			Squad
+			{
+				TFBot
+				{
+					Template	Elite_Brass_Tank
+				}
+			}
+		}
+	}
+}
+

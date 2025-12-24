@@ -1,0 +1,1860 @@
+#base robot_giant.pop
+#base robot_standard.pop
+//Halloween thing
+//Made by Braindawg http://steamcommunity.com/id/HahaMoreLikeBraindead/
+//Original player-counting lua script (now rewritten in vscript) was done by royal https://steamcommunity.com/profiles/76561198835403557
+
+WaveSchedule {
+
+	StartingCurrency				500
+	CanBotsAttackWhileInSpawnRoom 	Yes
+	// EventPopfile Halloween
+	RespawnWaveTime 9999
+	FixedRespawnWaveTime 1
+
+	Mission {
+		Objective Sniper
+		BeginAtWave 4
+		CooldownTime 15
+		InitialCooldown 120
+		Where spawnbot
+		RandomChoice {
+			TFBot { 
+				Class Spy
+				// Action Sniper  
+				Item "The Dead Ringer"
+				Item "The Big Earner"
+				Item "The L'Etranger"
+				Item "Zombie Spy"
+				ClassIcon spy_revolver_lite
+				CharacterAttributes { "rage giving scale" 0.25 "faster reload rate" 3 "voice pitch scale" 0.4 }
+			}
+			TFBot { 
+				Class Spy
+				// Action Sniper  
+				Item "The Dead Ringer"
+				Item "Your Eternal Reward"
+				Item "The Enforcer"
+				Item "Zombie Spy"
+				ClassIcon spy_revolver_lite
+				CharacterAttributes { "rage giving scale" 0.25 "faster reload rate" 3 "voice pitch scale" 0.4 }
+			}
+		}
+	}
+	Wave { //Wave 1
+		// RedTeamWipeCausesWaveLoss 1    
+		
+		InitWaveOutput { Target wave_start_relay_classic Action RunScriptFile Param oxidize_main }
+		StartWaveOutput { Target wave_start_relay_classic Action Trigger }
+		DoneOutput { Target wave_finished_relay_event Action Trigger }
+		
+		// WaveSpawn { 
+			// Name "engis"
+			// Where spawnbot_mission_sentrybuster
+			// TotalCount 3
+			// MaxActive 3
+			// SpawnCount 1
+			// Support Limited
+			// TFBot { 
+				// Template T_TFBot_Engineer_Sentry_Battle 
+				// ClassIcon mini_sentry
+				// Attributes AlwaysFireWeapon
+				// StripItemSlot 0  
+				// StripItemSlot 1  
+				// Item "The Gunslinger"
+				// CharacterAttributes {
+					// "building max level" 1
+					// "voice pitch scale" 0.4
+					// "rage giving scale" 0.25
+				// }
+			// }
+		// }
+		WaveSpawn {
+			Name "dummy"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			Support Limited
+			TFBot {
+				Class Scout
+				ClassIcon heavy_zombie_lite
+				Tag bot_dummy
+				Attributes IgnoreEnemies
+				Attributes AlwaysCrit
+				Scale 0.001
+				CharacterAttributes { "move speed bonus" 0.0001 "no_jump" 1 "dmg from ranged reduced" 0 "dmg from melee increased" 0 "mod weapon blocks healing" 1 }
+			}
+		}
+		WaveSpawn { 
+			Name "wave1a"
+			Where spawnbot_mission_sniper
+			TotalCount 25
+			MaxActive 12
+			SpawnCount 2
+			TotalCurrency 400
+			RandomSpawn 1
+			WaitForAllSpawned "dummy"
+			WaitBeforeStarting 1
+			LastSpawnOutput { Target halflife_radio Action PickRandomShuffle }
+			RandomChoice {
+				TFBot {
+					Class Heavy
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					ClassIcon heavy_zombie_lite
+					Tag bot_speedboost
+					Name "Zombie"
+					Item "Zombie Heavy"
+					// Item "The Bat Outta Hell"
+					// AddCond { Name TF_COND_SPEED_BOOST Duration 10 }
+					// AddCond { Name TF_COND_ENERGY_BUFF }
+					CharacterAttributes {
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+						"crit vs burning players" 1
+						"crit vs non burning players" 1
+						"crits_become_minicrits" 1
+						
+					}
+				}
+				TFBot {
+					Class Soldier
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					ClassIcon heavy_zombie_lite 
+					Tag bot_speedboost
+					Name "Zombie"
+					Item "Zombie Soldier"
+					// Item "The Bat Outta Hell"
+					// AddCond { Name TF_COND_SPEED_BOOST Duration 10 }
+					// AddCond { Name TF_COND_ENERGY_BUFF }
+					CharacterAttributes {
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+						"crit vs burning players" 1
+						"crit vs non burning players" 1
+						"crits_become_minicrits" 1
+						
+					}
+				}
+				TFBot {
+					Class Pyro
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					ClassIcon heavy_zombie_lite 
+					Name "Zombie"
+					Item "Zombie Pyro"
+					// Item "The Bat Outta Hell"
+					Tag bot_speedboost
+					// AddCond { Name TF_COND_SPEED_BOOST Duration 10 }
+					// AddCond { Name TF_COND_ENERGY_BUFF }
+					CharacterAttributes {
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+						"crit vs burning players" 1
+						"crit vs non burning players" 1
+						"crits_become_minicrits" 1
+						// "custom impact sound" "Weapon_Fist.HitFlesh"
+						// "custom kill icon" "fists"
+						// "is invisible" 1
+					}
+				}
+				TFBot {
+					Class Demoman
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					ClassIcon heavy_zombie_lite 
+					Tag bot_speedboost
+					Name "Zombie"
+					Item "Zombie Demo"
+					// Item "The Bat Outta Hell"
+					// AddCond { Name TF_COND_SPEED_BOOST Duration 10 }
+					// AddCond { Name TF_COND_ENERGY_BUFF }
+					CharacterAttributes {
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+						"crit vs burning players" 1
+						"crit vs non burning players" 1
+						"crits_become_minicrits" 1
+						
+					}
+				}
+				TFBot {
+					Class Scout
+					WeaponRestrictions MeleeOnly
+					ClassIcon heavy_zombie_lite 
+					// Tag bot_speedboost
+					// AddCond { Name TF_COND_ENERGY_BUFF }
+					Name "Zombie"
+					Item "Zombie Scout"
+					// Item "The Bat Outta Hell"
+					CharacterAttributes {
+						"damage penalty" 0.5
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+						"crit vs burning players" 1
+						"crit vs non burning players" 1
+						"crits_become_minicrits" 1
+					}
+				}
+			}
+		}
+		WaveSpawn { 
+			Name "wave1a"
+			Where spawnbot_mission_sniper
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			TotalCurrency 200
+			WaitBeforeStarting 3
+			TFBot {
+				Class Heavy
+				Skill Expert 
+				Name "Giant Zombie"
+				Health 4500
+				WeaponRestrictions MeleeOnly
+				Attributes DisableDodge
+				ClassIcon heavy_zombie_lite_giant
+				Attributes Miniboss 
+				// NoIdleSound 1
+				Attributes AlwaysCrit
+				Item "Zombie Heavy"
+				CharacterAttributes {
+					"gesture speed increase" 1.5
+					"move speed bonus"	0.5
+					"damage force reduction" 0
+					"airblast vulnerability multiplier" 0
+					"airblast vertical vulnerability multiplier" 0	
+					"voice pitch scale" 0.4
+					"rage giving scale" 0.25
+					"override footstep sound set" 9
+				}
+			}		
+		}
+		WaveSpawn { 
+			Name "wave1b"
+			Where spawnbot
+			TotalCount 50
+			MaxActive 20
+			SpawnCount 2
+			TotalCurrency 100
+			WaitForAllSpawned "wave1a"
+			FirstSpawnOutput { Target opendoors Action Trigger }
+			RandomSpawn 1
+			RandomChoice {
+				TFBot {
+					Class Heavy
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					ClassIcon heavy_zombie_lite 
+					Name "Zombie"
+					Item "Zombie Heavy"
+					// Item "The Bat Outta Hell"
+					Tag bot_speedboost
+					// AddCond { Name TF_COND_SPEED_BOOST Duration 10 }
+					// AddCond { Name TF_COND_ENERGY_BUFF }
+					CharacterAttributes {
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+						"crit vs burning players" 1
+						"crit vs non burning players" 1
+						"crits_become_minicrits" 1
+					}
+				}
+				TFBot {
+					Class Soldier
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					ClassIcon heavy_zombie_lite 
+					Name "Zombie"
+					Item "Zombie Soldier"
+					// Item "The Bat Outta Hell"
+					Tag bot_speedboost
+					// AddCond { Name TF_COND_SPEED_BOOST Duration 10 }
+					// AddCond { Name TF_COND_ENERGY_BUFF }
+					CharacterAttributes {
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+						"crit vs burning players" 1
+						"crit vs non burning players" 1
+						"crits_become_minicrits" 1
+					}
+				}
+				TFBot {
+					Class Pyro
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					ClassIcon heavy_zombie_lite 
+					Name "Zombie"
+					Item "Zombie Pyro"
+					// Item "The Bat Outta Hell"
+					Tag bot_speedboost
+					// AddCond { Name TF_COND_SPEED_BOOST Duration 10 }
+					// AddCond { Name TF_COND_ENERGY_BUFF }
+					CharacterAttributes {
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+						"crit vs burning players" 1
+						"crit vs non burning players" 1
+						"crits_become_minicrits" 1
+						// "custom impact sound" "Weapon_Fist.HitFlesh"
+						// "custom kill icon" "fists"
+						// "is invisible" 1
+					}
+				}
+				TFBot {
+					Class Demoman
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					ClassIcon heavy_zombie_lite 
+					Name "Zombie"
+					Item "Zombie Demo"
+					// Item "The Bat Outta Hell"
+					Tag bot_speedboost
+					// AddCond { Name TF_COND_SPEED_BOOST Duration 10 }
+					// AddCond { Name TF_COND_ENERGY_BUFF }
+					CharacterAttributes {
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+						"crit vs burning players" 1
+						"crit vs non burning players" 1
+						"crits_become_minicrits" 1
+					}
+				}
+			}
+		}
+		WaveSpawn { 
+			Name "wave1b"
+			Where spawnbot
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			TotalCurrency 100
+			RandomSpawn 1
+			WaitBetweenSpawns 15
+			WaitForAllSpawned "dummy"
+			WaitBeforeStarting 1
+			TFBot {
+				Class Heavy
+				Skill Expert 
+				Name "Giant Zombie"
+				Health 4500
+				WeaponRestrictions MeleeOnly
+				Item "Zombie Heavy"
+				Attributes DisableDodge
+				ClassIcon heavy_zombie_lite_giant
+				Attributes MiniBoss 
+				// NoIdleSound 1
+				// AddCond { Name TF_COND_ENERGY_BUFF }
+				CharacterAttributes {
+					"gesture speed increase" 1.5
+					"move speed bonus"	0.5
+					"damage force reduction" 0
+					"airblast vulnerability multiplier" 0
+					"airblast vertical vulnerability multiplier" 0
+					"override footstep sound set" 9
+					"voice pitch scale" 0.4
+					"rage giving scale" 0.25
+					
+				}
+			}	
+		}
+		WaveSpawn { 
+			Name "wave1c"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			RandomSpawn 1
+			WaitBeforeStarting 5
+			WaitForAllDead "wave1b"
+			RandomChoice {	
+				TFBot {
+					Class Heavy
+					Skill Expert 
+					Name "Giant Zombie"
+					Health 4500
+					Attributes DisableDodge
+					WeaponRestrictions MeleeOnly
+					BehaviorModifiers Push
+					// Attributes IgnoreFlag
+					ClassIcon heavy_zombie_lite_giant
+					Attributes Miniboss 
+					Attributes AlwaysCrit
+					Tag bot_front
+					Item "Zombie Heavy"
+					CharacterAttributes {
+						"gesture speed increase" 1.5
+						"move speed bonus"	0.5
+						"damage force reduction" 0
+						"airblast vulnerability multiplier" 0
+						"airblast vertical vulnerability multiplier" 0
+						"override footstep sound set" 9
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+						
+					}
+				}				
+			}
+		}		
+		WaveSpawn { 
+			Name "wave1support"
+			Where spawnbot
+			TotalCount 999
+			MaxActive 10
+			SpawnCount 2
+			RandomSpawn 1
+			Support Limited
+			WaitForAllSpawned "wave1b"
+			RandomChoice {
+				TFBot {
+					Class Heavy
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					ClassIcon heavy_zombie_lite 
+					Name "Zombie"
+					Item "Zombie Heavy"
+					// Item "The Bat Outta Hell"
+					Tag bot_speedboost
+					CharacterAttributes {
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+						"crit vs burning players" 1
+						"crit vs non burning players" 1
+						"crits_become_minicrits" 1
+						
+					}
+				}
+				TFBot {
+					Class Soldier
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					ClassIcon heavy_zombie_lite 
+					Name "Zombie"
+					Item "Zombie Soldier"
+					// Item "The Bat Outta Hell"
+					Tag bot_speedboost
+					CharacterAttributes {
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+						"crit vs burning players" 1
+						"crit vs non burning players" 1
+						"crits_become_minicrits" 1
+					}
+				}
+				TFBot {
+					Class Pyro
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					ClassIcon heavy_zombie_lite 
+					Name "Zombie"
+					Item "Zombie Pyro"
+					// Item "The Bat Outta Hell"
+					Tag bot_speedboost
+					// AddCond { Name TF_COND_SPEED_BOOST Duration 10 }
+					// AddCond { Name TF_COND_ENERGY_BUFF }
+					CharacterAttributes {
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+						"crit vs burning players" 1
+						"crit vs non burning players" 1
+						"crits_become_minicrits" 1
+						// "custom impact sound" "Weapon_Fist.HitFlesh"
+						// "custom kill icon" "fists"
+						// "is invisible" 1
+					}
+				}
+				TFBot {
+					Class Demoman
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					ClassIcon heavy_zombie_lite 
+					Name "Zombie"
+					Item "Zombie Demo"
+					// Item "The Bat Outta Hell"
+					Tag bot_speedboost
+					CharacterAttributes {
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+						"crit vs burning players" 1
+						"crit vs non burning players" 1
+						"crits_become_minicrits" 1
+					}
+				}
+				TFBot {
+					Class Scout
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge 
+					ClassIcon heavy_zombie_lite 
+					Name "Zombie"
+					Item "Zombie Scout"
+					// Item "The Bat Outta Hell"
+					Tag bot_speedboost
+					CharacterAttributes {
+						"damage penalty" 0.5
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+						"crit vs burning players" 1
+						"crit vs non burning players" 1
+						"crits_become_minicrits" 1
+					}
+				}
+			}
+		}
+	}
+	Wave { //Wave 2
+	
+		// RedTeamWipeCausesWaveLoss 1    
+		
+		InitWaveOutput { Target wave_start_relay_classic Action RunScriptFile Param oxidize_main }
+		StartWaveOutput { Target wave_start_relay_classic Action Trigger }
+		DoneOutput { Target wave_finished_relay_event Action Trigger }
+		
+		// WaveSpawn { 
+			// Name "engis"
+			// Where spawnbot_mission_sentrybuster
+			// TotalCount 5
+			// MaxActive 5
+			// SpawnCount 1
+			// TotalCurrency 100
+			// Support Limited
+			// TFBot { 
+				// Template T_TFBot_Engineer_Sentry_Battle 
+				// ClassIcon sentry_gun
+				// Attributes AlwaysFireWeapon
+				// StripItemSlot 0  
+				// StripItemSlot 1  
+				// CharacterAttributes { "voice pitch scale" 0.4 }
+				// ItemAttributes {
+					// ItemName "TF_WEAPON_WRENCH"
+					// "building max level" 1
+					// "rage giving scale" 0.25
+				// }
+			// }
+		// }
+		WaveSpawn {
+			Name "dummy"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			Support Limited
+			TFBot {
+				Class Scout
+				ClassIcon demoknight
+				Tag bot_dummy
+				Attributes IgnoreEnemies
+				Scale 0.001
+				CharacterAttributes { "move speed bonus" 0.0001 "no_jump" 1 "dmg from ranged reduced" 0 "dmg from melee increased" 0 "mod weapon blocks healing" 1 }
+			}
+		}
+		WaveSpawn { 
+			Name "wave2a"
+			Where spawnbot_mission_sniper
+			TotalCount 3
+			MaxActive 2
+			SpawnCount 1
+			TotalCurrency 300
+			RandomSpawn 1
+			WaitForAllSpawned "dummy"
+			WaitBetweenSpawns 8
+			TFBot { 
+				Template T_TFBot_Giant_Pyro 
+				Attributes AlwaysFireWeapon 
+				Item "Zombie Pyro"
+				Attributes DisableDodge 
+				 
+				// NoIdleSound 1
+				// AddCond { Name TF_COND_SPEED_BOOST Duration 5 } 
+				CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25 "override footstep sound set" 9 } 
+			}
+		}
+		WaveSpawn { 
+			Name "wave2a"
+			Where spawnbot_mission_sniper
+			TotalCount 45
+			MaxActive 16
+			SpawnCount 2
+			WaitBetweenSpawns 1
+			WaitForAllSpawned "dummy"
+			TotalCurrency 200
+			LastSpawnOutput { Target opendoors Action Trigger }
+			TFBot {
+				Class Pyro
+				Name "Axtinguisher Pyro"
+				Item "Zombie Pyro"
+				ClassIcon pyro_axtinguisher
+				Attributes DisableDodge
+				WeaponRestrictions MeleeOnly
+				Item "The Axtinguisher"
+				CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25  }
+			}
+		}
+		WaveSpawn { 
+			Name "wave2b"
+			Where spawnbot
+			TotalCount 5
+			MaxActive 5
+			SpawnCount 1
+			TotalCurrency 200
+			RandomSpawn 1
+			WaitForAllDead "wave2a"
+			TFBot {
+				Class Demoman
+				Attributes DisableDodge
+				// AimAt Feet  
+				Item "Zombie Demo"
+				WeaponRestrictions SecondaryOnly
+				ItemAttributes {					
+				ItemName "TF_WEAPON_PIPEBOMBLAUNCHER"
+					"voice pitch scale" 0.4
+					"stickybomb charge rate" 0.5
+					"max pipebombs decreased" -6
+					"Projectile range increased" 0.35
+					"rage giving scale" 0.25 
+					"no self blast dmg" 2
+					"sticky arm time penalty" 1.5
+				}
+			}
+		}
+		WaveSpawn { 
+			Name "wave2b"
+			Where spawnbot
+			TotalCount 35
+			MaxActive 12
+			SpawnCount 2
+			TotalCurrency 200
+			RandomSpawn 1
+			WaitBetweenSpawns 1
+			WaitBeforeStarting 8
+			WaitForAllSpawned "wave2a"
+			TFBot {
+				Class Demoman
+				  
+				Attributes DisableDodge
+				// AimAt Feet  
+				Item "Zombie Demo"
+				WeaponRestrictions SecondaryOnly
+				ItemAttributes {					
+				ItemName "TF_WEAPON_PIPEBOMBLAUNCHER"
+					"voice pitch scale" 0.4
+					"stickybomb charge rate" 0.2
+					"max pipebombs decreased" -6
+					"Projectile range increased" 0.35
+					"rage giving scale" 0.25 
+					"no self blast dmg" 2
+					"sticky arm time penalty" 1.5
+				}
+			}
+		}
+		WaveSpawn { 
+			Name "wave2b"
+			Where spawnbot
+			TotalCount 4
+			MaxActive 2
+			SpawnCount 1
+			TotalCurrency 200
+			RandomSpawn 1
+			WaitBetweenSpawns 10
+			WaitForAllSpawned "wave2a"
+			WaitBeforeStarting 3
+			LastSpawnOutput { Target halflife_radio Action PickRandomShuffle }
+			TFBot {
+				Class Demoman
+				ClassIcon demo_pumpkin_giant
+				Name "Giant Pumpkin Bomber"
+				Skill Expert
+				Health 4500
+				Attributes MiniBoss 
+				// NoIdleSound 1
+				Tag bot_spell
+				Item "Zombie Demo"
+				Attributes DisableDodge
+				WeaponRestrictions MeleeOnly
+				StripItemSlot 0  
+				StripItemSlot 1  
+				Item "TF_WEAPON_SPELLBOOK"
+				// Item "The Bat Outta Hell"
+				// ItemAttributes
+				// {
+				// 	Itemname "TF_WEAPON_SPELLBOOK"
+				// 	"is_passive_weapon" 1
+				// }
+				CharacterAttributes
+				{
+					"move speed bonus"	0.5
+					"damage force reduction" 0
+					"airblast vulnerability multiplier" 0
+					"override footstep sound set" 9
+					"voice pitch scale" 0.4
+					"no self blast dmg" 2
+					"rage giving scale" 0.25 
+				}
+				// Spell  
+				// {
+				// 	Delay 1 
+                //     Cooldown 5
+                //     Repeats 0
+				// 	IfSeeTarget 1
+				// 	Charges 1
+				// 	Limit 1
+				// 	Type "Pumpkin MIRV" 
+				// }
+			}
+		}
+		WaveSpawn { 
+			Name "wave2c"
+			Where spawnbot
+			TotalCount 40
+			MaxActive 8
+			SpawnCount 2
+			RandomSpawn 1
+			WaitForAllSpawned "wave2b"
+			Support Limited
+			RandomChoice {
+				TFBot {
+					Template T_TFBot_Demoman_Knight
+					Item "Zombie Demo"
+					Item "TF_WEAPON_PIPEBOMBLAUNCHER"
+					Attributes DisableDodge
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25 }
+				}
+				TFBot {
+					Template T_TFBot_Demoman_Knight
+					Item "Zombie Demo"
+					Item "TF_WEAPON_PIPEBOMBLAUNCHER"
+					Item "The Claidheamohmor"
+					Attributes DisableDodge
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25 }
+				}
+				TFBot {
+					Template T_TFBot_Demoman_Knight
+					Item "Zombie Demo"
+					Item "TF_WEAPON_PIPEBOMBLAUNCHER"
+					Item "The Scotsman's Skullcutter"
+					Attributes DisableDodge
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25 }
+				}
+				TFBot {
+					Template T_TFBot_Demoman_Knight
+					Item "Zombie Demo"
+					Item "The Persian Persuader"
+					Attributes DisableDodge
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25 }
+				}
+			}
+		}
+		WaveSpawn { 
+			Name "wave2ctank"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			RandomSpawn 1
+			WaitForAllSpawned "wave2b"
+			LastSpawnOutput
+			{
+				Target "wave_start_relay_classic"
+				Action "RunScriptCode"
+				Param "
+					SpawnEntityFromTable(`logic_relay`, {
+						spawnflags = 1
+						targetname = `bootank_relay`
+						`OnSpawn#1`: `tank_ghost,SetParent,tankboss_ghost,0.1,-1`
+						`OnSpawn#2`: `bootank*,SetParent,tankboss_ghost,0.1,-1`
+						`OnSpawn#3`: `bootank_*RunScriptCodeself.SetLocalOrigin(Entities.FindByName(null, \`tankboss_ghost\`).GetOrigin() + Vector(0, -130, 0))0.1-1`
+						// `OnSpawn#4`: `bootank_*RunScriptCodeself.SetAngles(0, 90, 0)0.12-1`
+						`OnSpawn#5`: `hudhint,AddOutput,message OBJECTIVE Destroy the Tank!,0,-1`
+						`OnSpawn#6`: `tankboss_ghost,color,41 21 61,1,-1`
+						`OnSpawn#7`: `bootank_*,Enable,,1,-1`
+					})
+
+					local stun = SpawnEntityFromTable(`trigger_stun`, {
+						targetname = `bootank_stun`
+						trigger_delay = 0.5
+						stun_type = 2
+						stun_effects = 1
+						stun_duration = 3
+						spawnflags = 1
+						// origin = Vector(-2839.249512, 2971.172363, -27.968681)
+						origin = Vector(115, 0, 0)
+						move_speed_reduction = 0
+						StartDisabled = 0
+						filtername = `filter_red`
+					})
+
+					stun.KeyValueFromInt(`solid`, 2)
+					stun.KeyValueFromString(`mins`, `-80 -80 -80`)
+					stun.KeyValueFromString(`maxs`, `80 80 80`)
+
+					local ghost = SpawnEntityFromTable(`prop_dynamic`, {
+						origin = Vector(115, 0 ,0)
+						angles = QAngle(0, -90, 0)
+						targetname = `bootank_ghost`
+						modelscale = 1.6
+						model = `models/props_halloween/ghost.mdl`
+						disableshadows = 1
+						StartDisabled = 0
+						DefaultAnim = `idle`
+					})
+					"
+			}
+			Tank {
+				Health 20000
+				Name "tankboss_ghost"
+				Speed 70
+				StartingPathTrackNode "tank_path_a_10"
+				OnBombDroppedOutput { Target boss_deploy_relay Action Trigger }
+			}
+		}
+		// WaveSpawn {
+		// 	Name "dummy"
+		// 	Where spawnbot
+		// 	TotalCount 1
+		// 	SpawnCount 1
+		// 	MaxActive 1
+		// 	WaitForAllSpawned "wave2ctank"
+		// 	FirstSpawnOutput
+		// 	{
+		// 		Target "wave_start_relay_classic"
+		// 		Action "RunScriptCode"
+		// 		Param "
+		// 			SpawnEntityFromTable(`logic_relay`, {
+		// 				spawnflags = 1
+		// 				targetname = `bootank_relay`
+		// 				`OnSpawn#1`: `tank_ghost,SetParent,tankboss_ghost,0.1,-1`
+		// 				`OnSpawn#2`: `bootank*,SetParent,tankboss_ghost,0.1,-1`
+		// 				// `OnSpawn#3`: `bootank_*RunScriptCodeself.SetOrigin(Entities.FindByName(null, `tankboss_ghost`).GetOrigin())0.1-1`
+		// 				`OnSpawn#4`: `hudhint,AddOutput,message OBJECTIVE Destroy the Tank!,0,-1`
+		// 				`OnSpawn#5`: `tankboss_ghost,color,41 21 61,1,-1`
+		// 				`OnSpawn#6`: `bootank_*,Enable,,1,-1`
+		// 			})
+
+		// 			local stun = SpawnEntityFromTable(`trigger_stun`, {
+		// 				targetname = `bootank_stun`
+		// 				trigger_delay = 0.5
+		// 				stun_type = 2
+		// 				stun_effects = 1
+		// 				stun_duration = 3
+		// 				spawnflags = 1
+		// 				// origin = Vector(-2839.249512, 2971.172363, -27.968681)
+		// 				origin = Vector(115, 0, 0)
+		// 				move_speed_reduction = 0
+		// 				StartDisabled = 0
+		// 				filtername = `filter_red`
+		// 			})
+
+		// 			stun.KeyValueFromInt(`solid`, 2)
+		// 			stun.KeyValueFromString(`mins`, `-80 -80 -80`)
+		// 			stun.KeyValueFromString(`maxs`, `80 80 80`)
+
+		// 			local ghost = SpawnEntityFromTable(`prop_dynamic`, {
+		// 				origin = Vector(115, 0 ,0)
+		// 				targetname = `bootank_ghost`
+		// 				modelscale = 1.6
+		// 				model = `models/props_halloween/ghost.mdl`
+		// 				disableshadows = 1
+		// 				StartDisabled = 0
+		// 				DefaultAnim = `idle`
+		// 			})
+		// 			local tank = Entities.FindByName(null, `tankboss_ghost`)
+		// 			DoEntFire(`bootank_*`,`RunScriptCode`,`self.SetOrigin(tank.GetOrigin())`, 3.0, null, null)
+		// 			"
+		// 	}
+		// }
+	}
+	Wave { //Wave 3
+	
+		// RedTeamWipeCausesWaveLoss 1    
+		
+		InitWaveOutput { Target wave_start_relay_classic Action RunScriptFile Param oxidize_main }
+		StartWaveOutput { Target wave_start_relay_classic Action Trigger }
+		DoneOutput { Target wave_finished_relay_event Action Trigger }
+		WaveSpawn {
+			Name "dummy"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			Support Limited
+			StartWaveOutput { Target spawnbot_mission_sentrybuster Action Disable }
+			TFBot {
+				Class Scout
+				ClassIcon spy_revolver_lite
+				Tag bot_dummy
+				Attributes IgnoreEnemies
+				Scale 0.001
+				CharacterAttributes { "move speed bonus" 0.0001 "no_jump" 1 "dmg from ranged reduced" 0 "dmg from melee increased" 0 "mod weapon blocks healing" 1 }
+			}
+		}		
+		WaveSpawn { 
+			Name "wave4a1"
+			Where spawnbot_mission_sniper
+			TotalCount 30
+			MaxActive 16
+			SpawnCount 2
+			TotalCurrency 200
+			RandomSpawn 1
+			WaitForAllSpawned "dummy"
+			StartWaveOutput { Target spawnbot_mission_spy Action Disable }
+			RandomChoice {
+				TFBot {
+					Class Soldier
+					Name "Undead Samurai"
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					MaxVisionRange 420
+					ClassIcon demoknight_samurai
+					Item "Zombie Soldier"
+					Tag bot_speedboost
+					// // AddCond { Name TF_COND_SPEED_BOOST Duration 10 }  
+					Item "The Half-Zatoichi"
+					ItemAttributes {
+						ItemName "The Half-Zatoichi"
+						"move speed penalty" 0.7
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+					}
+				}		
+				TFBot {
+					Class Demoman
+					Name "Undead Samurai"
+					WeaponRestrictions MeleeOnly
+					MaxVisionRange 420
+					Attributes DisableDodge
+					ClassIcon demoknight_samurai
+					Tag bot_speedboost
+					Item "Zombie Demo"
+					// AddCond { Name TF_COND_SPEED_BOOST Duration 10 }  
+					Item "The Half-Zatoichi"
+					ItemAttributes {
+						ItemName "The Half-Zatoichi"
+						"move speed penalty" 0.7
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+					}
+				}		
+			}
+		}
+		WaveSpawn { 
+			Name "wave4a"
+			Where spawnbot
+			TotalCount 50
+			MaxActive 18
+			SpawnCount 2
+			TotalCurrency 200
+			RandomSpawn 1
+			WaitBeforeStarting 10
+			DoneOutput { Target halflife_radio Action PickRandomShuffle }
+			RandomChoice {
+				TFBot {
+					Class Soldier
+					Name "Undead Samurai"
+					WeaponRestrictions MeleeOnly
+					MaxVisionRange 420
+					Attributes DisableDodge
+					ClassIcon demoknight_samurai
+					Tag bot_speedboost
+					Item "Zombie Soldier"
+					// AddCond { Name TF_COND_SPEED_BOOST Duration 10 }  
+					Item "The Half-Zatoichi"
+					ItemAttributes {
+						ItemName "The Half-Zatoichi"
+						"move speed penalty" 0.7
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+					}
+				}		
+				TFBot {
+					Class Demoman
+					Name "Undead Samurai"
+					WeaponRestrictions MeleeOnly
+					MaxVisionRange 420
+					Attributes DisableDodge
+					ClassIcon demoknight_samurai
+					Tag bot_speedboost
+					Item "Zombie Demo"
+					// AddCond { Name TF_COND_SPEED_BOOST Duration 10 }  
+					Item "The Half-Zatoichi"
+					ItemAttributes {
+						ItemName "The Half-Zatoichi"
+						"move speed penalty" 0.7
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+					}
+				}		
+			}
+		}
+		WaveSpawn { 
+			Name "wave4b1"
+			Where Anywhere
+			Where Behind
+			Where Ahead
+			TotalCount 60
+			MaxActive 10
+			SpawnCount 2
+			RandomSpawn 1
+			WaitBetweenSpawns 2
+			Support Limited
+			WaitForAllSpawned "wave4a"
+			FirstSpawnOutput { Target opendoors Action Trigger }
+			RandomChoice {
+				TFBot { 
+					Class Spy 
+					Tag bot_fist
+					ClassIcon spy_revolver_lite 
+					Item "Zombie Spy"
+					ItemAttributes {ItemName "TF_WEAPON_REVOLVER" "auto fires full clip" 1 "auto fires when full" 1}
+					CharacterAttributes { "rage giving scale" 0.25 "faster reload rate" 3 "voice pitch scale" 0.4 } 
+				}
+				TFBot { 
+					Class Spy 
+					Item "The Diamondback"
+					Tag bot_fist
+					ClassIcon spy_revolver_lite 
+					Item "Zombie Spy"
+					ItemAttributes {ItemName "The Diamondback" "auto fires full clip" 1 "auto fires when full" 1}
+					CharacterAttributes { "rage giving scale" 0.25 "faster reload rate" 3 "voice pitch scale" 0.4 } 
+				}
+				TFBot { 
+					Class Spy 
+					Tag bot_fist
+					Item "The Ambassador" 
+					ClassIcon spy_revolver_lite 
+					Item "Zombie Spy"
+					ItemAttributes {ItemName "The Ambassador" "auto fires full clip" 1 "auto fires when full" 1}
+					CharacterAttributes { "rage giving scale" 0.25 "faster reload rate" 3 "voice pitch scale" 0.4 } 
+				}
+			}
+		}
+		WaveSpawn { 
+			Name "wave4tank"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			TotalCurrency 700
+			FirstSpawnOutput { Target tankhint Action Trigger }
+			Tank {
+				Health 20000
+				Name "tankboss_green"
+				// Model models/bots/boss_bot/boss_tank_color.mdl  
+				// SpawnTemplate "W4Tank"  
+				StartingPathTrackNode "tank_path_a_10"
+				OnBombDroppedOutput { Target boss_deploy_relay Action Trigger }
+				// OnKilledOutput { Target tankhint Action Trigger }
+			}
+		}
+		WaveSpawn { 
+			Name "wave4b"
+			Where spawnbot
+			TotalCount 8
+			MaxActive 2
+			SpawnCount 2
+			RandomSpawn 1
+			WaitForAllSpawned "wave4a1"
+			WaitBeforeStarting 5
+			Squad {
+				TFBot { 
+					Template T_TFBot_Giant_Scout_Baseball 
+					Item "Zombie Scout" 
+					CharacterAttributes { "rage giving scale" 0.25 "voice pitch scale" 0.4 "override footstep sound set" 9 } 
+				}
+				TFBot { 
+					Template T_TFBot_Giant_Scout_Baseball 
+					Item "Zombie Scout" 
+					CharacterAttributes { "rage giving scale" 0.25 "voice pitch scale" 0.4 "override footstep sound set" 9 } 
+				}
+			}
+		}
+		WaveSpawn { 
+			Name "wave4c"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			RandomSpawn 1
+			WaitForAllDead "wave4b"
+			DoneWarningSound "#music/hl2_song2.mp3"
+			TFBot { 
+				Template T_TFBot_Giant_Soldier_SlowBarrage
+				Item "Zombie Soldier"
+				Attributes DisableDodge
+				BehaviorModifiers Push
+				Tag bot_front
+				CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25 "override footstep sound set" 9 } 
+			}
+		}
+		WaveSpawn { 
+			Name "wave4support"
+			Where flankers
+			MaxActive 6
+			SpawnCount 1
+			RandomSpawn 1
+			WaitBetweenSpawns 5
+			WaitForAllSpawned "wave4a1"
+			Support 1
+			TFBot {
+				Class Medic
+				Name "Kritzkrieg Medic"
+				ClassIcon  medic_kritz
+				Skill  Expert
+				Attributes  SpawnWithFullCharge
+				// Attributes Aggressive
+				Item  "The Overdose"
+				Item  "The Kritzkrieg"
+				Item "Zombie Medic"
+				CharacterAttributes { "voice pitch scale" 0.4 "bot medic uber health threshold"  9999 "rage giving scale" 0.25 }
+				ItemAttributes {
+					ItemName  "The Kritzkrieg"
+					"ubercharge rate bonus"  100
+					"uber duration bonus"  100
+					"heal rate penalty" 0.01
+				}
+			}
+		}
+	}
+	Wave { //Wave 4
+	
+		// RedTeamWipeCausesWaveLoss 1    
+		
+		InitWaveOutput { Target wave_start_relay_classic Action RunScriptFile Param oxidize_main }
+		StartWaveOutput { Target wave_start_relay_classic Action Trigger }
+		DoneOutput { Target wave_finished_relay Action Trigger } //doesn't trigger music shuffle and a few other things.
+		
+		// WaveSpawn { 
+			// Name "engis"
+			// Where spawnbot_mission_sentrybuster
+			// TotalCount 5
+			// MaxActive 5
+			// SpawnCount 1
+			// TotalCurrency 100
+			// Support Limited
+			// TFBot { 
+				// Template T_TFBot_Engineer_Sentry_Battle 
+				// ClassIcon sentry_gun_lvl2_lite
+				// Attributes AlwaysFireWeapon
+				// StripItemSlot 0  
+				// StripItemSlot 1
+				// CharacterAttributes { "voice pitch scale" 0.4 }
+				// ItemAttributes {
+					// ItemName "TF_WEAPON_WRENCH"
+					// "building max level" 2
+					// "rage giving scale" 0.25 
+				// }
+			// }
+		// }		
+		WaveSpawn {
+			Name "dummy"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			Support Limited
+			TFBot {
+				Class Scout
+				ClassIcon heavy_steelfist_giant
+				Tag bot_dummy
+				Attributes IgnoreEnemies
+				Scale 0.001
+				CharacterAttributes { "move speed bonus" 0.0001 "no_jump" 1 "dmg from ranged reduced" 0 "dmg from melee increased" 0 "mod weapon blocks healing" 1 }
+			}
+		}
+		WaveSpawn { 
+			Name "wave3a"
+			Where spawnbot_mission_sniper
+			TotalCount 3
+			MaxActive 3
+			SpawnCount 3
+			TotalCurrency 200
+			RandomSpawn 1
+			WaitForAllSpawned "dummy"
+			WaitBeforeStarting 1
+			Squad {
+				TFBot {
+					Template T_TFBot_Giant_Boxing_Heavy
+					// NoIdleSound 1
+					ClassIcon heavy_steelfist
+					Name "Super Steelweight Champ"
+					Item "Fists of Steel"
+					Item "Zombie Heavy"
+					Tag bot_resist
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25 "override footstep sound set" 9 }
+					ItemAttributes {
+						ItemName "Pugilist's Protector"
+						"set item tint rgb" 3947580
+					}
+				}
+				TFBot { 
+					Template T_TFBot_Giant_Medic_Regen 
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25 "override footstep sound set" 9 }
+					Item "Zombie Medic"
+				}
+				TFBot { 
+					Template T_TFBot_Giant_Medic_Regen
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25 "override footstep sound set" 9 }
+					Item "Zombie Medic"
+				}
+			}	
+		}
+		WaveSpawn { 
+			Name "wave3a"
+			Where spawnbot_mission_sniper
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			RandomSpawn 1
+			TotalCurrency 10
+			WaitBetweenSpawns 1
+			WaitForAllSpawned "dummy"
+			WaitBeforeStarting 1
+			TFBot {
+				Class Scout
+				Attributes AlwaysCrit //wavebar
+				WeaponRestrictions MeleeOnly 
+				ClassIcon scout_bat
+				Item "Zombie Scout"
+				Item "Unarmed Combat"
+				Attributes DisableDodge
+				CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25 }
+			}
+		}
+		WaveSpawn { 
+			Name "wave3a"
+			Where spawnbot_mission_sniper
+			TotalCount 59
+			MaxActive 14
+			SpawnCount 3
+			TotalCurrency 290
+			RandomSpawn 1
+			WaitBetweenSpawns 1
+			WaitForAllSpawned "dummy"
+			WaitBeforeStarting 1
+			TFBot {
+				Class Scout
+				WeaponRestrictions MeleeOnly 
+				ClassIcon scout_bat
+				Item "Unarmed Combat"
+				Item "Zombie Scout"
+				Attributes DisableDodge
+				// AddCond { Name TF_COND_ENERGY_BUFF } //minicrits instead of crits
+				ItemAttributes { 
+					ItemName "Unarmed Combat"
+					"voice pitch scale" 0.4 
+					"rage giving scale" 0.25
+					"crit vs burning players" 1
+					"crit vs non burning players" 1
+					"crits_become_minicrits" 1
+				}
+			}
+		}
+		WaveSpawn { 
+			Name "wave3b"
+			Where spawnbot
+			TotalCount 8
+			MaxActive 4
+			SpawnCount 4
+			TotalCurrency 200
+			RandomSpawn 1
+			WaitForAllDead "wave3a"
+			WaitBetweenSpawns 10
+			LastSpawnOutput { Target opendoors Action Trigger }
+			Squad {
+				TFBot { 
+					Template T_TFBot_Giant_Heavyweapons 
+					MaxVisionRange 1800
+					Attributes DisableDodge
+					Tag bot_altfire
+					Item "Zombie Heavy"
+					WeaponRestrictions PrimaryOnly
+					// ExtAttr AlwaysFireWeaponAlt 
+					Skill Normal
+					// NoIdleSound 1
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25 "override footstep sound set" 9  } 
+				}
+				TFBot { 
+					Template T_TFBot_Medic 
+					Attributes IgnoreEnemies 
+					Item "Zombie Medic" 
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25 }  
+				}
+			}
+		}
+		WaveSpawn { 
+			Name "wave3b1"
+			Where spawnbot
+			TotalCount 50
+			MaxActive 12
+			SpawnCount 2
+			TotalCurrency 200
+			RandomSpawn 1
+			WaitForAllDead "wave3a"
+			WaitBeforeStarting 5
+			FirstSpawnOutput { Target halflife_radio Action PickRandomShuffle }
+			RandomChoice {
+				TFBot {
+					Class Sniper
+					Name "Bowman"
+					Skill Hard
+					ClassIcon spellbook_lite
+					Item "TF_WEAPON_SPELLBOOK"
+					Item "The Fortified Compound"
+					Item "Zombie Sniper"
+					Tag bot_spell
+					Attributes DisableDodge
+					CharacterAttributes { "damage bonus" 0.5 "voice pitch scale" 0.4 "cancel falling damage" 1 "rage giving scale" 0.25 }
+				}
+				TFBot {
+					Class Sniper
+					Name "Bowman"
+					Skill Hard
+					ClassIcon spellbook_lite
+					Item "TF_WEAPON_SPELLBOOK"
+					Item "The Fortified Compound"
+					Item "Zombie Sniper"
+					Tag bot_spell
+					Attributes DisableDodge 
+					CharacterAttributes { "damage bonus" 0.5 "voice pitch scale" 0.4 "rage giving scale" 0.25  }
+				}
+				TFBot {
+					Class Sniper
+					Name "Bowman"
+					Skill Hard
+					ClassIcon spellbook_lite
+					Item "TF_WEAPON_SPELLBOOK"
+					Item "The Fortified Compound"
+					Item "Zombie Sniper"
+					Tag bot_spell
+					Attributes DisableDodge 
+					CharacterAttributes { "damage bonus" 0.5 "voice pitch scale" 0.4 "rage giving scale" 0.25  }
+				}
+				TFBot {
+					Class Sniper
+					Name "Bowman"
+					Skill Hard
+					ClassIcon spellbook_lite
+					Item "TF_WEAPON_SPELLBOOK"
+					Item "The Fortified Compound"
+					Item "Zombie Sniper"
+					Tag bot_spell
+					Attributes DisableDodge 
+					CharacterAttributes { "damage bonus" 0.5 "voice pitch scale" 0.4 "rage giving scale" 0.25  }
+				}
+				TFBot {
+					Class Sniper
+					Name "Bowman"
+					Skill Hard
+					ClassIcon spellbook_lite
+					Item "TF_WEAPON_SPELLBOOK"
+					Item "The Fortified Compound"
+					Item "Zombie Sniper"
+					Tag bot_spell
+					Attributes DisableDodge 
+					CharacterAttributes { "damage bonus" 0.5 "voice pitch scale" 0.4 "rage giving scale" 0.25  }
+				}
+				TFBot {
+					Class Sniper
+					Name "Bowman"
+					Skill Hard
+					ClassIcon spellbook_lite
+					Item "TF_WEAPON_SPELLBOOK"
+					Item "The Fortified Compound"
+					Item "Zombie Sniper"
+					Tag bot_spell
+					Attributes DisableDodge 
+					CharacterAttributes { "damage bonus" 0.5 "voice pitch scale" 0.4 "rage giving scale" 0.25  }
+				}
+			}
+		}
+		WaveSpawn { 
+			Name "wave3c"
+			Where spawnbot
+			TotalCount 4
+			MaxActive 4
+			SpawnCount 4
+			RandomSpawn 1
+			WaitForAllDead "wave3b"
+			Squad {
+				TFBot { 
+					Template T_TFBot_Giant_Heavyweapons_Deflector
+					WeaponRestrictions PrimaryOnly
+					Skill Normal
+					Item "Zombie Heavy"
+					Attributes DisableDodge 
+					BehaviorModifiers Push
+					Tag bot_front
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25 "override footstep sound set" 9 } 
+				}
+				TFBot { 
+					Template T_TFBot_Giant_Medic_Regen
+					Item "Zombie Medic" 
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25 "override footstep sound set" 9 } 
+				}
+				TFBot { 
+					Template T_TFBot_Medic 
+					Item "Zombie Medic" 
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25 } 
+				}
+				TFBot { 
+					Template T_TFBot_Medic 
+					Item "Zombie Medic" 
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25 } 
+				}
+			}
+		}
+		WaveSpawn { 
+			Name "wave3c"
+			Where spawnbot
+			MaxActive 2
+			SpawnCount 1
+			WaitForAllDead "wave3b"
+			WaitBetweenSpawns 5
+			Support 1
+			TFBot { 
+				Template T_TFBot_Heavyweapons_Fist 
+				Item "Zombie Heavy"
+				Attributes DisableDodge 
+				ClassIcon heavy_steelfist_giant 
+				  
+				CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25 }
+			}
+		}
+	}
+	Wave { //Wave 5
+	
+		InitWaveOutput { Target wave_start_relay_classic Action RunScriptFile Param oxidize_main }
+		StartWaveOutput { Target wave_start_relay_classic Action Trigger }
+		DoneOutput { Target wave_finished_relay Action Trigger } //doesn't trigger music shuffle and a few other things.
+		WaveSpawn {
+			Name "dummy"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			Support Limited
+			TFBot {
+				Class Scout
+				ClassIcon heavy_zombie_lite
+				Tag bot_dummy
+				Attributes IgnoreEnemies
+				Scale 0.001
+				CharacterAttributes { "move speed bonus" 0.0001 "no_jump" 1 "dmg from ranged reduced" 0 "dmg from melee increased" 0 "mod weapon blocks healing" 1 }
+			}
+		}
+		WaveSpawn { 
+			Name "Wave5a"
+			Where spawnbot_mission_sniper
+			TotalCount 3
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 10
+			TotalCurrency 300
+			WaitForAllSpawned "dummy"
+			WaitBeforeStarting 1
+			TFBot { 
+				Template T_TFBot_Giant_Soldier_RocketShotgun
+				Attributes DisableDodge
+				Item "Zombie Soldier"
+				CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25 "override footstep sound set" 9 }
+			}
+		}
+		WaveSpawn { 
+			Name "Wave5a1"
+			Where spawnbot_mission_sniper
+			TotalCount 30
+			MaxActive 8
+			SpawnCount 2
+			TotalCurrency 300
+			WaitBeforeStarting 2
+			// DoneOutput { Target halflife_radio Action PickRandomShuffle }
+			TFBot { 
+				Class Heavy
+				Item "Zombie Heavy"
+				MaxVisionRange 500
+				CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25 "override footstep sound set" 9 }
+			}
+		}
+		WaveSpawn { 
+			Name "Wave5b"
+			Where spawnbot
+			TotalCount 3
+			MaxActive 2
+			SpawnCount 1
+			TotalCurrency 200
+			RandomSpawn 1
+			WaitForAllSpawned "Wave5a1"
+			WaitBeforeStarting 3
+			TFBot {
+				Template T_TFBot_Giant_Soldier_Spammer_Reload
+				Skill Normal
+				Attributes DisableDodge
+				Item "Zombie Soldier"
+				CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25 "override footstep sound set" 9 }
+			}
+		}
+		WaveSpawn { 
+			Name "Wave5b"
+			Where spawnbot
+			TotalCount 24
+			MaxActive 12
+			SpawnCount 3
+			TotalCurrency 100
+			WaitForAllSpawned "Wave5a1"
+			RandomChoice {
+				TFBot {
+					Template T_TFBot_Soldier_Extended_Concheror
+					ClassIcon soldier_banner_trio
+					Skill Easy
+					Item "Zombie Soldier"
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25  }
+				}
+				TFBot {
+					Template T_TFBot_Soldier_Extended_Buff_Banner
+					ClassIcon soldier_banner_trio
+					Skill Easy
+					Item "Zombie Soldier"
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25  }
+				}
+				TFBot {
+					Template T_TFBot_Soldier_Extended_Concheror
+					ClassIcon soldier_banner_trio
+					Skill Easy
+					Item "Zombie Soldier"
+					Attributes DisableDodge
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25  }
+				}
+				TFBot {
+					Template T_TFBot_Soldier_Extended_Buff_Banner
+					ClassIcon soldier_banner_trio
+					Skill Easy
+					Item "Zombie Soldier"
+					Attributes DisableDodge
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25  }
+				}
+				TFBot {
+					Template T_TFBot_Soldier_Extended_Concheror
+					ClassIcon soldier_banner_trio
+					Skill Easy
+					Item "Zombie Soldier"
+					Attributes DisableDodge
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25  }
+				}
+				TFBot {
+					Template T_TFBot_Soldier_Extended_Buff_Banner
+					ClassIcon soldier_banner_trio
+					Skill Easy
+					Item "Zombie Soldier"
+					Attributes DisableDodge
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25  }
+				}
+				TFBot {
+					Template T_TFBot_Soldier_Extended_Concheror
+					ClassIcon soldier_banner_trio
+					Skill Easy
+					Item "Zombie Soldier"
+					Attributes DisableDodge
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25  }
+				}
+				TFBot {
+					Template T_TFBot_Soldier_Extended_Buff_Banner
+					ClassIcon soldier_banner_trio
+					Skill Easy
+					Item "Zombie Soldier"
+					Attributes DisableDodge
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25  }
+				}
+				TFBot {
+					Template T_TFBot_Soldier_Extended_Concheror
+					ClassIcon soldier_banner_trio
+					Skill Easy
+					Item "Zombie Soldier"
+					Attributes DisableDodge
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25  }
+				}
+				TFBot {
+					Template T_TFBot_Soldier_Extended_Buff_Banner
+					ClassIcon soldier_banner_trio
+					Skill Easy
+					Item "Zombie Soldier"
+					Attributes DisableDodge
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25  }
+				}
+				TFBot {
+					Template T_TFBot_Soldier_Extended_Concheror
+					ClassIcon soldier_banner_trio
+					Skill Easy
+					Item "Zombie Soldier"
+					Attributes DisableDodge
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25  }
+				}
+				TFBot {
+					Template T_TFBot_Soldier_Extended_Buff_Banner
+					ClassIcon soldier_banner_trio
+					Skill Easy
+					Item "Zombie Soldier"
+					Attributes DisableDodge
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25  }
+				}
+				TFBot {
+					Template T_TFBot_Soldier_Extended_Battalion
+					ClassIcon soldier_banner_trio
+					Skill Easy
+					Item "Zombie Soldier"
+					Attributes DisableDodge
+					CharacterAttributes { "voice pitch scale" 0.4 "rage giving scale" 0.25  }
+				}
+			}
+		}
+		WaveSpawn { 
+			Name "soundboost"
+			Where spawnbot_mission_sentrybuster
+			MaxActive 0
+			SpawnCount 0
+			Support 1
+			WaitForAllDead "Wave5b"
+			FirstSpawnWarningSound "misc/halloween/clock_tick.wav"
+			// DoneOutput { Target fog_boss Action Trigger } //removed
+			Squad { TFBot {  } }
+		}
+		WaveSpawn { 
+			Name "soundboost"
+			Where spawnbot_mission_sentrybuster
+			MaxActive 0
+			SpawnCount 0
+			Support 1
+			WaitForAllDead "Wave5b"
+			WaitBeforeStarting 2
+			FirstSpawnWarningSound "misc/halloween/clock_tick.wav"
+			Squad { TFBot {  } }
+		}
+		WaveSpawn { 
+			Name "Wave5c"
+			Where flankers
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitForAllDead "Wave5b"
+			WaitBeforeStarting 4
+			FirstSpawnWarningSound "misc/halloween/clock_tick.wav"
+			DoneWarningSound "npc/antlion_guard/antlion_guard_die2.wav"
+			LastSpawnOutput { Target opendoors Action Trigger }
+			DoneOutput { Target bosstele Action Disable }
+			TFBot {
+				Class Demoman
+				Name "The Undead Bomber"
+				ClassIcon demo_bomber
+				Health 85000
+				Item "Prince Tavish's Crown"
+				Item "TF_WEAPON_SPELLBOOK"
+				Item "Zombie Demo"
+				BehaviorModifiers Push
+				WeaponRestrictions PrimaryOnly
+				Attributes IgnoreFlag
+				Attributes MiniBoss 
+				Attributes UseBossHealthBar
+				Scale 3
+				Skill Expert
+				Tag bot_boss
+				Tag bot_spell
+				ItemAttributes {
+					ItemName "TF_WEAPON_GRENADELAUNCHER"
+					"fire rate bonus" 0.2
+					"faster reload rate" 0.2
+					"clip size penalty" 4.0
+					"Projectile speed increased" 1.5
+					"auto fires full clip" 1
+					"auto fires when full" 1
+				}
+				CharacterAttributes	{
+					"move speed bonus"	0.5
+					// "move speed bonus" 0.001
+					"no_jump" 1
+					"damage force reduction" 0
+					"airblast vulnerability multiplier" 0
+					"override footstep sound set" 7
+					"airblast vertical vulnerability multiplier" 0
+					"rage giving scale" 0.1
+					"voice pitch scale" 0.4 
+					"cancel falling damage" 1 
+				}
+			}
+		}
+		WaveSpawn { 
+			Name "Wave5c1"
+			Where flankers
+			Where spawnbot
+			TotalCount 30
+			SpawnCount 2
+			MaxActive 18
+			RandomSpawn 1
+			Support Limited
+			WaitForAllDead "Wave5b"
+			FirstSpawnOutput { Target bosstele Action Enable }
+			RandomChoice {
+				TFBot {
+					Class Heavy
+					WeaponRestrictions MeleeOnly
+					ClassIcon heavy_zombie_lite 
+					Name "Zombie"
+					Item "Zombie Heavy"
+					// Item "The Bat Outta Hell"
+					Tag bot_speedboost
+					Tag bot_fist
+					CharacterAttributes {
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+					}
+				}
+				TFBot {
+					Class Soldier
+					WeaponRestrictions MeleeOnly
+					ClassIcon heavy_zombie_lite 
+					Name "Zombie"
+					// Item "The Bat Outta Hell"
+					Item "Zombie Soldier"
+					Tag bot_speedboost
+					Tag bot_fist
+					CharacterAttributes {
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+					}
+				}
+				TFBot {
+					Class Pyro
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					ClassIcon heavy_zombie_lite 
+					Name "Zombie"
+					Item "Zombie Pyro"
+					// Item "The Bat Outta Hell"
+					Tag bot_speedboost
+					Tag bot_fist
+					CharacterAttributes {
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+						"crit vs burning players" 1
+						"crit vs non burning players" 1
+						"crits_become_minicrits" 1
+					}
+				}
+				TFBot {
+					Class Demoman
+					WeaponRestrictions MeleeOnly
+					ClassIcon heavy_zombie_lite 
+					Name "Zombie"
+					// Item "The Bat Outta Hell"
+					Item "Zombie Demo"
+					Tag bot_speedboost
+					Tag bot_fist
+					CharacterAttributes {
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+					}
+				}
+				TFBot {
+					Class Scout
+					WeaponRestrictions MeleeOnly
+					ClassIcon heavy_zombie_lite 
+					Name "Zombie"
+					// Item "The Bat Outta Hell"
+					Item "Zombie Scout"
+					Tag bot_fist
+					CharacterAttributes {
+						"damage penalty" 0.5
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+					}
+				}
+			}
+		}
+		WaveSpawn { 
+			Name "Wave5c"
+			// Where spawnbot
+			Where flankers
+			TotalCount 999
+			SpawnCount 2
+			MaxActive 16
+			RandomSpawn 1
+			Support Limited
+			WaitForAllSpawned "Wave5c1"
+			RandomChoice {
+				TFBot {
+					Class Heavy
+					WeaponRestrictions MeleeOnly
+					ClassIcon dead_blu_lite
+					Name "Zombie"
+					Item "Zombie Heavy"
+					// Item "The Bat Outta Hell"
+					Tag bot_speedboost
+					Tag bot_fist
+					CharacterAttributes {
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+					}
+				}
+				TFBot {
+					Class Soldier
+					WeaponRestrictions MeleeOnly
+					ClassIcon dead_blu_lite
+					Name "Zombie"
+					Item "Zombie Soldier"
+					// Item "The Bat Outta Hell"
+					Tag bot_speedboost
+					Tag bot_fist
+					CharacterAttributes {
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+					}
+				}
+				TFBot {
+					Class Pyro
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					ClassIcon heavy_zombie_lite 
+					Name "Zombie"
+					Item "Zombie Pyro"
+					// Item "The Bat Outta Hell"
+					Tag bot_speedboost
+					Tag bot_fist
+					CharacterAttributes {
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+						"crit vs burning players" 1
+						"crit vs non burning players" 1
+						"crits_become_minicrits" 1
+					}
+				}
+				TFBot {
+					Class Demoman
+					WeaponRestrictions MeleeOnly
+					ClassIcon dead_blu_lite
+					Name "Zombie"
+					Item "Zombie Demo"
+					// Item "The Bat Outta Hell"
+					Tag bot_speedboost
+					Tag bot_fist
+					CharacterAttributes {
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+					}
+				}
+				TFBot {
+					Class Scout
+					WeaponRestrictions MeleeOnly
+					ClassIcon dead_blu_lite
+					Name "Zombie"
+					Item "Zombie Scout"
+					// Item "The Bat Outta Hell"
+					Tag bot_speedboost
+					Tag bot_fist
+					CharacterAttributes {
+						"damage penalty" 0.5
+						"voice pitch scale" 0.4
+						"rage giving scale" 0.25
+					}
+				}
+			}
+		}
+	}
+}

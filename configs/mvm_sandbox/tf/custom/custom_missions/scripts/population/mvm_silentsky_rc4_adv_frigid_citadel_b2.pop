@@ -1,0 +1,1009 @@
+#base robot_giant.pop
+#base robot_gatebot.pop
+#base robot_standard.pop
+#base robot_sif.pop
+
+//==========================================
+// Are your icons missing? Click here.
+
+// Frigid Citadel [Advanced]
+// made by SiF // https://steamcommunity.com/id/SiFWolfy/
+// @2023
+//
+// Map: Silentsky rc4 by PenolAkushari
+// Thanks to lite for the icons // https://steamcommunity.com/id/liteflame  
+// And nys // https://steamcommunity.com/profiles/76561198048562129
+
+// Weapons are based off cut and TFC weapons. 
+// 
+// spawnbot, spawnbot_side, tank_path1
+// Available ExtraSpawn are.. sky, sky2, sky3, sniper_ambush, sniper_far, sniper_close, sniper_fence
+// spy_close, stairs, tank_gate, tank_gate2
+
+// beta 0.1 Added all 5 waves, 29 weapons, and 26 upgrades.
+// beta 0.2 Revamped the waves, again using existing icons.
+
+WaveSchedule
+{
+	StartingCurrency 600
+	RespawnWaveTime 3
+	Advanced 1
+	
+	BunnyHop 1
+	AllowMultipleSappers 1
+	ImprovedAirblast 1
+	NoSapUnownedBuildings 1
+	DisplayRobotDeathNotice 1 
+	AllowBotExtraSlots 1
+	ForceHoliday 2
+	NoCritPumpkin 1
+	NoThrillerTaunt 1
+	NoRomevisionCosmetics 1 
+	TextPrintTime 0
+	FixHuntsmanDamageBonus 1
+	SandmanStun 1
+	
+	WaveStartCountdown 5
+	
+	SendBotsToSpectatorImmediately 1
+
+	// Custom Weapon Models
+	PrecacheModel	"models\workshop\weapons\c_models\c_nailgun\c_nailgun.mdl"	
+	PrecacheModel "models\workshop\weapons\c_models\c_pilot_flamer\c_pilot_flamer.mdl"
+	PrecacheModel "models\weapons\c_models\c_pilot_flaregun\c_pilot_flaregun.mdl"
+	PrecacheModel "models\weapons\c_models\c_wasp_launcher\c_wasp_launcher_1.mdl"
+	PrecacheModel "models\weapons\c_models\c_big_man\c_big_man.mdl"
+	PrecacheModel "models\weapons\c_models\c_biobreaker\c_biobreaker.mdl"
+	PrecacheModel "models\workshop\weapons\c_models\c_tokamak\c_tomislav.mdl"
+	PrecacheModel "models\weapons\w_models\w_grenade_conc.mdl"
+	PrecacheModel "models/weapons/c_models/c_bmmh/c_bmmh.mdl"
+	
+	// Disabled Sounds
+	DisableSound "Announcer.MVM_Wave_Start"
+	DisableSound "Announcer.MVM_Wave_End"  
+	DisableSound "Announcer.MVM_Bonus"
+	DisableSound "MVM.Robot_Teleporter_Deliver"
+	DisableSound "MVM.PlayerBoughtIn"
+	DisableSound "MVM.TankPing" // Ow, my effing ears.
+	DisableSound "MVM.PlayerDiedScout"
+	DisableSound "MVM.PlayerDiedSoldier"
+	DisableSound "MVM.PlayerDiedPyro"
+	DisableSound "MVM.PlayerDiedDemoman"
+	DisableSound "MVM.PlayerDiedHeavy"
+	DisableSound "MVM.PlayerDiedEngineer"
+	DisableSound "MVM.PlayerDiedMedic"
+	DisableSound "MVM.PlayerDiedSniper"
+	DisableSound "MVM.PlayerDiedSpy"
+	
+	DisableSound "Game.YourTeamWon"
+
+// Custom Upgrade Ban
+
+	DisallowUpgrade	"explode_on_ignite"  
+	DisallowUpgrade	"weapon burn time increased" // Broken
+	DisallowUpgrade	"weapon burn dmg increased"
+	DisallowUpgrade	"generate rage on damage"
+	DisallowUpgrade	"engy disposable sentries"
+	DisallowUpgrade
+	{
+		Upgrade	"engy sentry fire rate increased" // Broken
+		MaxLevel 2 
+	}
+	
+	ExtraSpawnPoint 
+    {
+        Name "sniperright"
+        TeamNum 3 
+        X	"-6232"                     
+        Y	"-1225"                  
+        Z	"200"        
+    }
+	ExtraSpawnPoint 
+    {
+        Name "sniperleft"
+        TeamNum 3 
+        X	"-6232"                     
+        Y	"-1489"                  
+        Z	"200"        
+    }
+	ExtraSpawnPoint 
+    {
+        Name "spawnbot_forward_side" // near window, very aggressive spot
+        TeamNum 3 
+        X	"-6083"                     
+        Y	"-453"                  
+        Z	"180"        
+    }
+	ExtraSpawnPoint 
+    {
+        Name "spawnbot_forward_main" // near window, very aggressive spot
+        TeamNum 3 
+        X	"-5719"                     
+        Y	"-331"                  
+        Z	"150"        
+    }
+	
+	// All 6 waves sentry buster mission
+	Mission
+	{
+		Where spawnbot
+		Where spawnbot_side
+		Objective DestroySentries
+		InitialCooldown	25
+		CooldownTime 60
+		DesiredCount	1
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		TFBot
+		{
+			Template	T_TFBot_SentrybusterMod
+			Name	"Sentry Buster Mk. II"
+		}
+	}
+	Mission
+	{
+		Where spawnbot_side
+		Objective DestroySentries
+		InitialCooldown	30
+		CooldownTime 50
+		DesiredCount	1
+		BeginAtWave 2
+		RunForThisManyWaves 1
+		TFBot
+		{
+			Template	T_TFBot_SentrybusterMod
+			Name	"Sentry Buster Mk. II"
+		}
+	}
+	Mission
+	{
+		Where spawnbot
+		Objective DestroySentries
+		InitialCooldown	35
+		CooldownTime 45
+		DesiredCount	1
+		BeginAtWave 3
+		RunForThisManyWaves 1
+		TFBot
+		{
+			Template	T_TFBot_SentrybusterMod
+			Name	"Sentry Buster Mk. II"
+		}
+	}
+	Mission
+	{
+		Where spawnbot_side
+		Objective DestroySentries
+		InitialCooldown	40
+		CooldownTime 40
+		DesiredCount	1
+		BeginAtWave 4
+		RunForThisManyWaves 1
+		TFBot
+		{
+			Template	T_TFBot_SentrybusterMod
+			Name	"Sentry Buster Mk. II"
+		}
+	}
+	Mission
+	{
+		Where spawnbot_side
+		Objective DestroySentries
+		InitialCooldown	45
+		CooldownTime 35
+		DesiredCount	1
+		BeginAtWave 5
+		RunForThisManyWaves 1
+		TFBot
+		{
+			Template	T_TFBot_SentrybusterMod
+			Name	"Sentry Buster Mk. II"
+		}
+	}
+	
+	// Current Sniper Mission
+	Mission
+	{
+		Where sniperleft
+		Where sniperright
+		Objective Sniper
+		InitialCooldown 30
+		CooldownTime 30
+		DesiredCount	1
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		TFBot
+		{
+			Template	T_TFBot_Sniper_Classic // If you have never tried my missions before, this basically fires regardless of whether they are scoped in or not on a hidden interval. Their range is sorta garbage though.
+			ClassIcon "sniper_classic_sif"
+			MaxVisionRange 3000
+			Name	"Classic Sniper"
+		}
+	}
+	
+	ItemAttributes
+	{
+		ItemName	"The Loose Cannon"
+		"override projectile type" 3
+		"custom projectile model" "models\weapons\w_models\w_cannonball.mdl"
+		"grenade launcher mortar mode"	0
+	}
+	ItemAttributes
+	{
+		ItemName	"The Ambassador"
+		"crit_dmg_falloff" 0	// undo terrible nerf
+	}
+	ItemAttributes
+	{
+		ItemName	"The Scorch Shot" // Fuck you, no scorch shot stalling
+		"mod flaregun fires pellets with knockback" 1 // detonator proj
+	}
+	ItemAttributes
+	{
+		ItemName	"TF_WEAPON_FLAMETHROWER" 
+		"airblast functionality flags" 6 // airblast pushback is now removed
+	}
+	ItemAttributes
+	{
+		ItemName	"The Nostromo Napalmer"
+		"airblast functionality flags" 6 // airblast pushback is now removed
+	}
+	ItemAttributes
+	{
+		ItemName	"The Degreaser"
+		"airblast functionality flags" 6 // airblast pushback is now removed
+	}
+	
+	// Custom Weapon Test
+
+	CustomWeapon
+	{
+		"Nailgun" 
+		{
+			OriginalItemName "The Shortstop"
+			"custom item model" "models/workshop/weapons/c_models/c_nailgun/c_nailgun.mdl"
+			"custom projectile model" "models/weapons/w_models/w_nail.mdl"
+			"custom weapon fire sound" "weapons/supernailgun_shoot.wav"
+			"override projectile type" 5
+			"clip size bonus" 10
+			"fire rate bonus" 0.25
+			"custom kill icon" "syringegun_medic"
+			"maxammo primary increased" 6.25
+			"mult credit collect range" 1.5
+			"health from credits" 10
+		}
+		"Semi-Auto QS-Shotgun"
+		{
+			OriginalItemName "The Backscatter"
+			
+			"spread penalty" 0.8
+			"move speed bonus" 1.10
+			"clip size bonus" 2 // holds 8 in clip
+			"no double jump" 1
+			"fire rate bonus" 0.75
+			"Reload time decreased" 0.75
+			"force damage falloff" 1
+			"no reduced damage rampup" 1
+		}
+		"Saboteur 66"
+		{
+			OriginalItemName "The C.A.P.P.E.R"
+			"special item description" "On hit, return ammo to primary. Deal 20% less damage to buildings."
+			"fire rate penalty" 2
+			"clip size penalty HIDDEN" 0.5
+			"override projectile type" 13
+			//"Set DamageType Ignite" 1
+			"damage penalty" 0.25
+			"energy weapon no hurt building" 1
+			"Projectile speed increased" 1.5
+			"energy weapon no deflect" 1
+			"crit mod disabled" 0
+			"ragdolls become ash" 1
+			"maxammo secondary reduced" 0.25
+			"add attributes on kill" "ammo regen|0.25|5|add onhit addammo|1|30"
+		}
+		"Concussion Grenade"
+		{
+			OriginalItemName "Mad Milk"
+			"effect bar recharge rate increased" 2.5
+			"override projectile type" 3 // projectile is now a grenade
+			"custom item model" "models/workshop/weapons/c_models/c_quadball/w_quadball_grenade.mdl"
+			//"custom projectile model" "models/weapons/w_models/w_grenade_conc.mdl"
+			"custom projectile model" 	"models/workshop/weapons/c_models/c_quadball/w_quadball_grenade.mdl"
+			"custom projectile size" 20
+			"projectile no deflect" 1
+			"Projectile speed increased" 1.5
+			"projectile gravity" 200
+			"cannot be upgraded" 1
+			"damage causes airblast" 1
+			"apply z velocity on damage" 25
+			"apply look velocity on damage" 50
+			"add cond on hit" 87 // stunned
+			"add cond on hit duration" 2
+			//"grenade explode on impact" 1
+		}
+		"Catcher's Mitt"
+		{
+			OriginalItemName "Batsaber"
+			"special item description" "Well-timed melee swings now reflects projectile"
+			"custom item model" "models/weapons/c_models/c_wooden_bat/c_wooden_bat.mdl"
+			"melee airblast" 1
+			"melee grants protection"0.3 // a bit of a safety bonus here for those people that are laggy 
+			"melee cleave attack" 1
+			"mult smack time" 0.1
+		}
+		"H.E.C.U. RPG" 
+		{
+			OriginalItemName "The Original"
+			"custom weapon fire sound" "rpg_sounds/rocketfire1.wav"
+			"projectile gravity" 650
+			"projectile speed increased" 1.6
+			"centerfire projectile" 0
+			"clip size penalty" 0.25
+			"damage bonus" 1.25
+			"Blast radius increased" 2
+			"Reload time increased"  1.35
+			"fire rate penalty" 2
+			"projectile trail particle" "rockettrail_airstrike_line"
+			"custom kill icon" "liberty_launcher"
+			
+			//"mod projectile heat seek power" 90
+			//"mod projectile heat aim error" 25
+			//"mod projectile heat aim time" 0.25
+		}
+		"Mortar Launcher" 
+		{
+			OriginalItemName "The Air Strike"
+			"custom item model" "models/workshop/weapons/c_models/c_liberty_launcher/c_liberty_launcher.mdl"
+			//"projectile gravity" 800
+			"clipsize increase on kill" 0
+			"provide on active" 1
+			"clip size penalty HIDDEN" 0.25
+			"move speed penalty" 0.7
+			"Blast radius increased" 1.75
+			"projectile acceleration start time" 1
+			"projectile acceleration time" 2
+			"mini rockets" 0
+			"rocketjump attackrate bonus" 0
+			"Reload time increased" 3.25
+			"fire rate bonus" 0.35
+			"Projectile speed decreased" 0.85
+			"projectile trail particle" "rockettrail_airstrike_line"
+			"mod projectile heat follow crosshair" 1
+			"mod projectile heat seek power" 360
+			"mod projectile heat aim error" 180
+			"custom kill icon" "liberty_launcher"
+			"projectile no deflect" 1
+		}
+		"Double Barrel Shotgun" 
+		{
+			OriginalItemName "TF_WEAPON_SHOTGUN_SOLDIER"
+			"special item description"  "Only able to load 6 shells, but fire more pellet and deal more damage."
+			"Reload time increased" 1.66
+			"fire rate penalty" 1.25
+			"bullets per shot bonus" 2.34 // 14 pellets. what
+			"spread penalty" 1.5
+			"damage bonus" 2.5
+		}
+		"Split Equalizer"
+		{
+			OriginalItemName "The Escape Plan"
+			"special item description" "As user gets injured, they gain speed and damage. But they can no longer be healed."
+			"provide on active" 1
+			"mod weapon blocks healing" 1
+			//"mod shovel damage boost" 1
+			"dmg bonus while half dead" 1
+			"self mark for death" 0
+			"add cond on kill" 46 // weapon glows
+			"add cond on kill" 7936 // cannot be healed
+			"add cond on kill" 4587520 // prevent being instantly gibbed; I might remove this.
+			"add cond on kill duration" 3
+		}
+		"Afterburner" 
+		{
+			OriginalItemName "The Nostromo Napalmer"
+			//"custom item model" "models/workshop/weapons/c_models/c_pilot_flamer/c_pilot_flamer"
+			"special item description"  "Robot that are already on fire takes more damage. Next airblasted projectile will crit after a successful reflect."
+			"provide on active" 1
+			"no primary ammo from dispensers while active" 1
+			"damage penalty" 0.1 // it deals 1 dmg per particle lol
+			"mult reflect velocity" 1.5
+			"airblast_pushback_disabled" 1
+			"flame ammopersec increased" 2.5
+			"weapon burn dmg increased" 5 // deals 20 afterburn. Target will die in the next 5-12 seconds. Guaranteed.
+			"afterburn duration bonus" 2
+			"dmg taken from blast increased" "1.4"
+			"airblast cost decreased" 0.5 // airblast costs 15 ammo, now.
+			"add attributes on kill" "crit does no damage|1|5|minicrits become crits|1|5"
+			"add cond on kill" 31 // all reflect are now crits
+			"add cond on kill duration" 3
+		}
+		"Incendiary Cannon" 
+		{
+			OriginalItemName "The Detonator"
+			
+			"custom item model" "models/weapons/c_models/c_pilot_flaregun/c_pilot_flaregun.mdl"
+			"special item description" "Fires a rocket-like projectile that ignites robots on impact."	
+			"override projectile type" 2
+			"Set DamageType Ignite" 1
+			//"minicrit vs burning player" 1 // used to be =1
+			"damage bonus" 1.75
+			"custom kill icon" "detonator"
+		//	"weapon burn time reduced" 0.20  // does 2*4 burn.
+			"weapon burn dmg reduced" 0.5
+			"no self effect" 1
+			"Projectile speed increased HIDDEN" 1.20
+		}
+		"Single Barrel Shotgun" 
+		{
+			OriginalItemName "TF_WEAPON_SHOTGUN_PYRO"
+			"provide on active" 1
+			//"faster reload rate" 0.33
+			"fire rate bonus" 0.66
+			"receive friendly fire" 1
+			"bullets per shot bonus" 0.8
+			"clip size bonus" 1.34
+			"spread penalty" 0.9
+			"damage penalty" 0.8
+		}
+		"Disentangler 180"
+		{
+			OriginalItemName "The Iron Bomber"
+			"special item description" "grenades will explode on impact and ignites target"
+			"Set DamageType Ignite" 1
+			"Blast radius increased" 0.75
+			"fire rate penalty" 1.25
+			"grenade no spin" 1
+			"sticky air burst mode" 2
+			 "projectile lifetime" 15
+		}
+		"Precursor"
+		{
+			OriginalItemName "TF_WEAPON_GRENADELAUNCHER"
+			"special item description" "Grenade bounces on surface"
+			"centerfire projectile" 1 
+			"clip size bonus" 1.25 // holds 5
+			"Reload time increased" 0.8
+			"grenade bounce speed" 0.85
+			"grenade bounce damage" 1.25
+			"hidden primary max ammo bonus" 4
+			"item style override" 1
+			"is australium item" 1
+		}
+		"PipeBomb Launcher" 
+		{
+			OriginalItemName "TF_WEAPON_PIPEBOMBLAUNCHER"
+			//"custom projectile model" "models/weapons/w_models/w_grenade_pipebomb.mdl"
+			"clip size penalty HIDDEN" 0.75
+			"sticky arm time bonus" 2
+			"stickybomb stick to enemies" 1
+			//"stickybomb no stick" 1
+			"no damage falloff" 1
+		}
+		"Assault Cannon" 
+		{
+			OriginalItemName "Tomislav"
+			"custom item model" "models\workshop\weapons\c_models\c_tokamak\c_tomislav.mdl"
+			"minigun no spin sounds" 0
+			 "alt-fire disabled" 1
+			"override projectile type" 13 // Pomson laser
+			"damage bonus" 1.25
+			"fire rate penalty" 1.5
+			"weapon spread bonus" 0.6
+			"projectile penetration" 1
+			"projectile speed decreased" 0.75
+		}
+		"Ludmilla" 
+		{
+			OriginalItemName "Natascha"
+			"special item description" "Heal +3 on hit, but unable to rev up."
+			"heal on hit for rapidfire" 3
+			"slow enemy on hit" 0
+			"damage penalty" 0.85
+			"alt-fire disabled" 1
+		}
+		"Salvo Blaster" 
+		{
+			OriginalItemName "TF_WEAPON_SHOTGUN_HWG"
+			"Reload time increased" 1.5
+			"fire rate bonus" 0.66
+			"bullets per shot bonus" 2.34 // 14 pellets. what
+			"spread penalty" 1.5
+			"damage penalty" 0.8
+			"auto fires full clip"  1
+		}
+		"Big Mean Mother Hubbard" 
+		{
+			OriginalItemName "The Widowmaker"
+			"custom item model" "models/weapons/c_models/c_bmmh/c_bmmh.mdl"
+			"slower reload rate" 0.66
+			"fire rate penalty" 1.25
+			"bullets per shot bonus" 2.34 // 14 pellets. what
+			"spread penalty" 1.5
+			"damage bonus" 2
+			"explosive bullets" 130
+			"mod ammo per shot" 10
+			"add onhit addammo" 50
+			"ammo regen" 0.25
+			"custom kill icon" "reserve_shooter"
+		}
+		"Super SMG"
+		{
+			OriginalItemName "TF_WEAPON_SYRINGEGUN_MEDIC"
+			"special item description" "Your teammates are useless? Shoot them yourself"
+			"custom item model" "models/weapons/c_models/c_smg/c_smg.mdl"
+			"can headshot" 1
+			//"allow friendly fire" 1 // oops
+			"override projectile type" 1
+			"custom kill icon" "smg"
+			"custom weapon fire sound" "weapons/smg_shoot.wav"
+			"heal on kill" 25
+			"maxammo primary increased" 4
+			"damage bonus" 1.25
+		}
+		"Super Shotgun"
+		{
+			OriginalItemName "TF_WEAPON_SYRINGEGUN_MEDIC"
+			"custom item model" "models/weapons/c_models/c_shotgun/c_shotgun.mdl"
+			"can headshot" 1
+			"fire rate penalty" 5
+			"bullets per shot bonus"  2
+			"override projectile type" 1
+			"custom kill icon" "shotgun_primary"
+			"custom weapon fire sound" "weapons/shotgun_shoot.wav"
+			"heal on kill" 25
+			"maxammo primary reduced" 0.7 
+			"clip size penalty" 0.2
+			"damage bonus" 1.25
+		}
+		"Dartfly Crossbow"
+		{
+			OriginalItemName "Festive Crusader's Crossbow"
+			"special item description" "Alt-fire to fire milk bolts. prim-fire to fire a bolt with DOT"
+			"fires milk bolt" 2
+			"can headshot"	1
+			"revolver use hit locations" 1
+			"bleeding duration" 8 // bleed for 36
+			"custom kill icon" mannpower_plague
+		}
+		"Overhealer" 
+		{
+			OriginalItemName "The Quick-Fix"
+			//"custom item model" "models/weapons/c_smodels/c_overhealer/c_overhealer.mdl"
+			"custom item model" "models/weapons/c_models/c_medigun/c_medigun.mdl"
+			//"custom item model" "models/weapons/c_models/c_proto_medigun/c_proto_medigun.mdl"
+			"cannot be upgraded" 1
+			"generate rage on heal" 1
+			"effect cond override" 55
+			"overheal expert" 4
+			//"uber duration bonus" 0.1
+			"ubercharge rate penalty" 0.5
+			"overheal decay bonus" 4
+			"heal rate penalty" 0.5
+			//"overheal decay disabled" 1
+		}
+		"Assault Rifle" 
+		{
+			OriginalItemName "TF_WEAPON_SMG"
+			
+			"special item description"  "AR is able to fire constant semi-accurate shots with no fall-off."
+			
+			"custom item model" "models/weapons/c_models/c_tfc_sniperrifle/c_tfc_sniperrifle.mdl"
+			
+			"provide on active" 1
+			"can headshot" 1
+			"fire rate bonus" 0.5
+			"damage penalty" 0.8
+			"clip size bonus" 2.9
+			"no damage falloff" 1
+			"weapon spread bonus"	1.25
+			"slow enemy on hit major" 1 // tagged mechanic
+			"maxammo secondary increased" 4
+		}
+		"Hunting Rifle" 
+		{
+			OriginalItemName "The Bazaar Bargain"
+			
+			"special item description"  "Fires a piercing round at faster rate, but unable to headshot"
+			"max health additive bonus" 25
+			"damage penalty on bodyshot" 0.75
+			"headshot damage increase" 2
+			//"alt-fire disabled" 1
+			//"provide on active" 1
+			"fire rate bonus" 1.5
+			"Reload time decreased" 0.5
+			"sniper crit no scope" 1
+			"sniper charge per sec" 0.001
+			"sniper no headshot without full charge" 0
+			"zoom speed mod disabled" 1
+			"sniper zoom penalty" 0.1
+			"dmg pierces resists absorbs" 1
+		}
+		"Walkabout" 
+		{
+			OriginalItemName "TF_WEAPON_SNIPERRIFLE"
+			
+			"special item description"  "Increased charge rate on kill, but unable to headshot."
+			
+			//"provide on active" 1
+			"custom item model" "models/workshop/weapons/c_models/c_invasion_sniperrifle/c_invasion_sniperrifle.mdl"
+			"sniper no charge" 1
+			"SRifle Charge rate decreased" 0.2
+			"can headshot" 0
+			"zoom speed mod disabled" 1
+			"mult sniper charge per sec with enemy under crosshair" 1.2
+			"sniper zoom penalty" 0.25
+			"sniper beep with enemy under crosshair" 1
+			"maxammo primary increased" 1.5
+		}
+		"Classic Rifle" 
+		{
+			OriginalItemName "The Classic"
+			"special item description"  "Headshot does not require full charge. Legshot cripples target movement."
+			"custom item model" "models/weapons/c_models/c_tfc_sniperrifle/c_tfc_sniperrifle.mdl"
+			"provide on active" 1
+			"fire rate penalty" 2
+			"no damage view flinch" 1
+			"crit kill will gib" 1
+			"damage penalty on bodyshot" 0.5
+			"sniper no headshot without full charge" 0
+			"slow enemy on hit major" 3
+			"maxammo primary increased" 3
+			//"cannot be upgraded" 1 // You know what? I'll let you do whatever with this.
+		}
+		"Fish Wacker"
+		{
+			OriginalItemName "TF_WEAPON_CLUB"
+			"special item description" "Deals increased damage to target that was previously hit"
+			"custom item model" "models/weapons/c_models/c_wooden_bat/c_wooden_bat.mdl"
+			"custom impact sound" "sound/weapons/icicle_hit_world2.wav"
+			"fire rate bonus" 1.25
+			"add attributes on hit"  "dmg from melee increased|0.75|8|dmg taken increased|0.85|8"
+		}
+		"Tranquilizer Gun" 
+		{
+			OriginalItemName "L'Etranger"
+			"special item description"  "Inflict slow on target that was shot"
+			//"custom item model" "models/weapons/w_models/w_tranq.mdl"
+			"custom weapon fire sound" "Weapon_SydneySleeper.Single"
+			
+			"provide on active" 1
+			//"override projectile type" 5 // this makes this weapon even more garbage
+			//"ignored by bots" 1
+			"keep disguise on attack" 1
+			"Reload time increased" 0.2
+			"fire rate penalty" 4
+			"clip size penalty HIDDEN" 0.1
+			"revolver use hit locations" 1
+			"slow enemy on hit major" 5 
+			"apply look velocity on damage" 90
+			"apply z velocity on damage" 100
+			"add cloak on hit" -2
+			"silent killer" 1
+			"maxammo secondary reduced" 0.5
+			"add cond on hit" 87
+			"add cond on hit duration" 4
+		}
+		"Dart Gun" 
+		{
+			OriginalItemName "TTG Sam Revolver"
+			"special item description"  "Shot applies DOT poison damage that scales on robot's health"
+			"custom weapon fire sound" "Weapon_SydneySleeper.Single"
+			
+			"provide on active" 1
+			//"override projectile type" 5
+			"projectile speed increased HIDDEN" 1.75
+			//"clip size penalty HIDDEN" 0.8 // holds 5 shots
+			"fire rate penalty" 0.75
+			"damage penalty" 0.25
+			"custom kill icon" mannpower_plague
+			"last shot crits" 1
+			"add cond on hit" 112
+			"add cond on hit duration" 9
+		}
+		"Aperture Reprogrammer" 
+		{
+			OriginalItemName "The Ap-Sap"
+			
+			"special item description"  "Temporarily reprogram robots to fight for you"
+			
+			"provide on active" 1
+			//"override projectile type" 5 // this makes this weapon even more garbage
+			"cannot be upgraded" 1
+			"robo sapper" 1
+			"sapper degenerates buildings" 1
+			"sapper damage leaches health" 0.75
+			"effect cond override" 43
+			"sapper damage bonus" 0.5
+			"mult effect duration" 3
+			"charge recharge rate increased" 5
+		}
+	}
+	ExtraLoadoutItems 
+	{
+		AllowEquipOutsideSpawn 1
+		AllowRefund 1
+		Scout
+		{
+			Primary			{	Item "Nailgun"	}
+			Primary			{	Item "Semi-Auto QS-Shotgun"	}
+			Secondary	{ 	Item	"Saboteur 66"	} // on hit, return ammo
+			Secondary 	{ 	Item "Concussion Grenade"	} // on hit, apply airblast-like knockback
+			Melee			{	Item "Catcher's Mitt"	} // cut reflect on hit, similar to airblast
+		}
+		Soldier
+		{
+			Primary			{	Item "H.E.C.U. RPG" 	} // arc rocket
+			Primary			{	Item "Mortar Launcher"	} // rocket homes in to crosshair
+			Secondary	{	Item "Double Barrel Shotgun"	}
+			Melee			{	Item "Split Equalizer" }
+			AllowEquipOutsideSpawn 1
+			AllowRefund 1
+		}
+		Pyro
+		{
+			Primary			{	Item "Afterburner"	} // lose flame damage for more afterburn + airblast dmg
+			Secondary	{	Item "Incendiary Cannon"	} // fires rocket that ignites target
+			Secondary	{	Item "Single Barrel Shotgun"	}
+			AllowEquipOutsideSpawn 1
+			AllowRefund 1
+		}
+		Demoman
+		{
+			Primary 		{	Item "Precursor"	} // grenade bounces on impact
+			Primary 		{	Item "Disentangler 180"	} // grenade ignites, but it breaks on impact
+			Secondary	{	Item "PipeBomb Launcher"	} // pipe sticks to enemy
+			AllowRefund 1
+		}
+		Heavyweapons
+		{
+			Primary			{	Item "Assault Cannon"	} // fires laser
+			Primary			{	Item "Ludmilla"	} // heal +2 on hit
+			Secondary	{	Item "Salvo Blaster" 	}
+			AllowEquipOutsideSpawn 1
+			AllowRefund 1
+		}
+		Engineer
+		{
+			Primary			{	Item "Big Mean Mother Hubbard" 	}
+			Secondary	{	Item "Coilgun"	} // alt-fire to shoot laser. Goliathron 83 ref
+			AllowEquipOutsideSpawn 1
+			AllowRefund 1
+		}
+		Medic
+		{
+			Primary			{	Item "Super SMG"		}
+			Primary			{	Item "Super Shotgun"	}
+			Primary			{	Item	"Dartfly Crossbow"		} // Instead of burst heal, give target regen 
+			Secondary	{	Item "Overhealer"	} // heal target to x2 their max hp, can't uber
+			AllowEquipOutsideSpawn 1
+			AllowRefund 1
+		}
+		Sniper
+		{
+			Primary			{	Item "Classic Rifle"	}	// TFC classic port
+			Primary			{	Item "Hunting Rifle" 	}	// less zoom, but fires faster
+			Primary			{	Item "Walkabout"	} // unable to headshot, but has no movement penalty on zoom
+			Secondary		{	Item "Assault Rifle"	} // no fall-off, but has reduced max ammo
+			Melee 			{	Item "Fish Wacker"	} // concept
+			AllowEquipOutsideSpawn 1
+			AllowRefund 1
+		}
+		Spy
+		{
+			Secondary		{	Item "Tranquilizer Gun"	} // slows target
+			Secondary		{	Item "Dart Gun"	}	// poison target
+			Secondary		{	Item "Victorious Mongoose"	}	// marks multiple target with vulnerability
+			Building		{	Item "Aperture Reprogrammer"	} // switches robot team to red
+			AllowEquipOutsideSpawn 1
+			AllowRefund 1
+		}
+	}
+	
+	//==========================
+	// Wave 1
+	//==========================
+	Wave 
+	{
+		Sound "Announcer.MVM_Manned_Up"
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}	
+		WaitWhenDone 5
+	
+	
+	//==================
+	// Subwave 1A (Spawn order)
+	// (wait 0s) Crowbar Scout,
+	// (wait 10s) Nailgun Scout,
+	// (wait 15s) "Precursor" Grenade Launcher Demoman (1/4 = Hard; 2/4 = Easy)
+	// (wait 20s) Classic Sniper, harrassing from window
+	// (wait 20s) Crowbar Scout, drops no money from window
+	//==================
+	WaveSpawn {
+	Name wave1a_supp
+	TotalCount 14
+	MaxActive 2
+	SpawnCount 2
+	TotalCurrency 0
+	WaitBeforeStarting 20
+	WaitBetweenSpawns 15
+	Where spawnbot_side
+	Support Limited
+	TFBot	{
+		Template T_TFBot_Scout_Crowbar
+		//ClassIcon "crowbar_lite"	
+		}	
+	}
+	WaveSpawn {
+	Name wave1a_nail
+	TotalCount 15
+	MaxActive 6
+	SpawnCount 3
+	TotalCurrency 150
+	WaitBeforeStarting 10
+	WaitBetweenSpawns 15
+	Where spawnbot
+	RandomChoice{
+	TFBot	{
+		Template T_TFBot_Scout_Nailgun
+		Skill Normal
+		//ClassIcon "scout_nailgun_lite"	
+		}	
+	TFBot	{
+		Template T_TFBot_Scout_Nailgun
+		Skill Easy
+		//ClassIcon "scout_nailgun_lite"	
+		}	
+	TFBot	{
+		Template T_TFBot_Scout_Nailgun
+		Skill Easy
+		//ClassIcon "scout_nailgun_lite"	
+		}	
+	TFBot	{
+		Template T_TFBot_Scout_Nailgun
+		Skill Hard
+		//ClassIcon "scout_nailgun_lite"	
+		}
+	}
+	}
+	WaveSpawn {
+	Name wave1a
+	TotalCount 40
+	MaxActive 12
+	SpawnCount 5
+	TotalCurrency 240
+	WaitBeforeStarting 0
+	WaitBetweenSpawns 15
+	Where spawnbot
+	Support Limited
+	TFBot	{
+		Template T_TFBot_Scout_Crowbar
+		//ClassIcon "crowbar_lite"	
+		}	
+	}
+	WaveSpawn {
+	Name wave1a_demo
+	TotalCount 30
+	MaxActive 6
+	SpawnCount 4
+	TotalCurrency 60
+	WaitBeforeStarting 15
+	WaitBetweenSpawns 10
+	Where spawnbot_forward_side
+	Where spawnbot_forward_main
+	RandomChoice	{
+	TFBot	{
+		Template T_TFBot_Demoman_Precursor
+		Skill Hard
+		}
+	TFBot	{
+		Template T_TFBot_Demoman_Precursor
+		Skill Normal
+		}
+	TFBot	{
+		Template T_TFBot_Demoman_Precursor
+		Skill Easy
+		}
+	TFBot	{
+		Template T_TFBot_Demoman_Precursor
+		Skill Easy
+		}
+	}
+	}
+	//==================
+	// Subwave 1B (WaitFor 1A to fully spawn first)
+	// (wait 15s) Shield Medic (Ignore RED) 
+	// (wait 25s) RL Soldier + Kritzkrieg Medic (Delayed kritz) // headshot them asap
+	// (wait 40s, a.k.a basically when 1A support died out) Giant Scout // pray your team knows how to block
+	//==================
+	WaveSpawn {
+	Name wave1b
+	TotalCount 10
+	MaxActive 4
+	SpawnCount 2
+	TotalCurrency 50
+	WaitBeforeStarting 15
+	WaitBetweenSpawns 10
+	WaitForAllDead wave1a_nail
+	Where spawnbot
+	Squad	{
+	TFBot	{
+		Template T_TFBot_Soldier_Critical
+		ClassIcon soldier_crit
+		}
+	TFBot	{
+		Template T_TFBot_Medic_Shield
+		ClassIcon medic_shield
+		Attributes IgnoreEnemies
+		}
+	}
+	}
+	WaveSpawn {
+	Name wave1b
+	TotalCount 10
+	MaxActive 8
+	SpawnCount 4
+	TotalCurrency 50
+	WaitBeforeStarting 30
+	WaitBetweenSpawns 10
+	WaitForAllSpawned wave1a_nail
+	Where spawnbot
+	Squad	{
+	TFBot	{
+		Template T_TFBot_Soldier_Critical
+		ClassIcon soldier_crit
+		Skill Hard
+		}
+	TFBot	{
+		Template T_TFBot_Medic_Kritzkrieg
+		ClassIcon medic_kritz
+		}
+	}
+	}
+	WaveSpawn {
+	Name wave1b
+	TotalCount 15
+	MaxActive 12
+	SpawnCount 3
+	TotalCurrency 90
+	WaitBeforeStarting 10
+	WaitBetweenSpawns 10
+	WaitForAllDead wave1a_nail
+	Where spawnbot_forward_main
+	Where spawnbot_forward_side
+	TFBot	{
+		Template T_TFBot_Soldier_Critical
+		Name "Uncharged Soldier"
+		ClassIcon soldier_crit
+		Skill Normal
+		}
+	}
+	WaveSpawn {
+	Name wave1b
+	TotalCount 1
+	MaxActive 1
+	SpawnCount 1
+	TotalCurrency 100
+	WaitBeforeStarting 5
+	WaitBetweenSpawns 0
+	WaitForAllDead wave1a_supp
+	Where spawnbot
+	TFBot	{
+		Template T_TFBot_Giant_Scout
+		Item "The Atomizer"
+		WeaponRestrictions MeleeOnly
+		Attributes AutoJump
+		AutoJumpMin	5 // Attempting to prevent that one stuck spot
+		AutoJumpMax 10 // If this does not work, I might add a prop or something
+		}
+	}
+	} // wave 1 ends
+}

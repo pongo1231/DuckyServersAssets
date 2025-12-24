@@ -1,0 +1,3158 @@
+WaveSchedule
+{
+	Templates
+	{
+		T_TFBot_Scout_Basic
+		{
+			Class Scout
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Scout_Baseball
+		{
+			Class Scout
+			Name "Play Ball!"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "The Sandman"
+			Item "Batter's Helmet"
+			ItemAttributes
+			{
+				ItemName "The Sandman"
+				"effect bar recharge rate increased" 0.3
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Scout_Force
+		{
+			Class Scout
+			Name "Force of Bullets"
+			Skill Easy
+			WeaponRestrictions PrimaryOnly
+			Item "The Force-a-Nature"
+			Item "The Face Plante"
+			ItemAttributes
+			{
+				ItemName "The Force-a-Nature"
+				"bullets per shot bonus" 15
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Scout_Fast
+		{
+			Class Scout
+			Name "Frickin' Blur"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "The Holy Mackerel"
+			Item "Ye Olde Baker Boy"
+			CharacterAttributes
+			{
+				"move speed bonus" 2
+			}
+		}
+		T_TFBot_Scout_Annoying
+		{
+			Class Scout
+			Health 600
+			Name "Annoying Scout"
+			Skill Expert
+			WeaponRestrictions MeleeOnly
+			Attributes AutoJump
+				AutoJumpMin 0.5
+				AutoJumpMax 0.5
+			Item "The Candy Cane"
+			Item "Mann Co. Online Cap"
+			ItemAttributes
+			{
+				ItemName "The Candy Cane"
+				"fire rate bonus" 0.4
+				"critboost on kill" 15
+				"crit forces victim to laugh" 1
+				"melee range multiplier" 3
+				"turn to gold" 1
+				"crit does no damage" 1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 4
+				"damage force increase" 10
+				"head scale" 10
+				"cannot pick up intelligence"    1
+			}
+		}
+		T_TFBot_Scout_Elf
+		{
+			Class Scout
+			Name "Elf"
+			Skill Easy
+			Scale 0.08
+			WeaponRestrictions MeleeOnly
+			Item "The Wrap Assassin"
+			Item "The Bootie Time"
+			Item "The Big Elfin Deal"
+			ItemAttributes
+			{
+				ItemName "The Wrap Assassin"
+				"effect bar recharge rate increased" 0.3
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Scout_Flying
+		{
+			Class Scout
+			Health 300
+			Name "Flying Scout"
+			Skill Expert
+			WeaponRestrictions MeleeOnly
+			Attributes AutoJump
+				AutoJumpMin 0.35
+				AutoJumpMax 3
+			Item "The Atomizer"
+			ItemAttributes
+			{
+				ItemName "The Atomizer"
+				"fire rate penalty" 1
+				"damage bonus" 1.5
+				"air dash count" 3
+				"cancel falling damage" 1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.9
+				"increased jump height" 10
+				"health regen" 30
+			}
+		}
+		T_TFBot_Scout_Milk
+		{
+			Class Scout
+			Name "Milkman"
+			Skill Easy
+			WeaponRestrictions SecondaryOnly
+			Item "Mad Milk"
+			Item "The Milkman"
+			ItemAttributes
+			{
+				ItemName "Mad Milk"
+				"effect bar recharge rate increased" 0.1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Scout_Fan
+		{
+			Class Scout
+			Name "Fan of the Crit"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "The Fan O'War"
+			Item "Hero's Tail"
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Scout_Resistant
+		{
+			Class Scout
+			Health 5000
+			Name "Alascout"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "Ali Baba's Wee Booties"
+			Item "Sun-on-a-Stick"
+			Item "Sultan's Ceremonial"
+			Item "Aladdin's Private Reserve"
+			Item "The Liquor Locker"
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"health regen" 5000
+				"dmg from melee increased" 1000
+			}
+		}
+		T_TFBot_Scout_Guillotine
+		{
+			Class Scout
+			Name "Butcher"
+			Skill Normal
+			WeaponRestrictions SecondaryOnly
+			Item "The Flying Guillotine"
+			Item "Horrific Headsplitter"
+			ItemAttributes
+			{
+				ItemName "The Flying Guillotine"
+				"fire rate bonus" 0.3
+				"effect bar recharge rate increased" 0.01
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Scout_Stunner
+		{
+			Class Scout
+			Health 300
+			Name "Stunner"
+			Skill Normal
+			WeaponRestrictions SecondaryOnly
+			Item "The Winger"
+			Item "The Beastly Bonnet"
+			ItemAttributes
+			{
+				ItemName "The Winger"
+				"mod stun waist high airborne" 1
+				"bleeding duration" 2
+				"damage causes airblast" 1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Scout_Bonk_Annoying
+		{
+			Class Scout
+			Name "Yo, What's Up?"
+			Skill Normal
+			WeaponRestrictions SecondaryOnly
+			Item "Bonk! Atomic Punch"
+			Item "Bonk Helm"
+			ItemAttributes
+			{
+				ItemName "Bonk! Atomic Punch"
+				"effect bar recharge rate increased" 0.1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Scout_Thief
+		{
+			Class Scout
+			Health 450
+			Name "Thief"
+			Skill Hard
+			WeaponRestrictions PrimaryOnly
+			Item "Baby Face's Blaster"
+			Item "The Fed-Fightin' Fedora"
+			Item "The Dillinger's Duffel"
+			ItemAttributes
+			{
+				ItemName "Baby Face's Blaster"
+				"damage bonus" 1.5
+				"weapon spread bonus" 0.4
+				"scattergun has knockback" 1
+				"scattergun knockback mult" 3
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.8
+			}
+		}
+		T_TFBot_Scout_Pistol
+		{
+			Class Scout
+			Name "Pistol Scout"
+			Skill Easy
+			WeaponRestrictions SecondaryOnly
+			Item "Bonk Boy"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_PISTOL_SCOUT"
+				"faster reload rate" 0.1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 2
+			}
+		}
+		T_TFBot_Scout_Scattergun
+		{
+			Class Scout
+			Name "Scattergun Scout"
+			Skill Hard
+			WeaponRestrictions PrimaryOnly
+			Item "Flipped Trilby"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_SCATTERGUN"
+				"damage bonus" 2
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Scout_Shinobi
+		{
+			Class Scout
+			Health 300
+			Name "Shinobi"
+			Skill Expert
+			WeaponRestrictions PrimaryOnly
+			Item "The Shortstop"
+			Item "The Cross-Comm Express"
+			ItemAttributes
+			{
+				ItemName "The Shortstop"
+				"damage bonus" 1.5
+				"heal on hit for rapidfire" 50
+				"subtract victim medigun charge on hit" 25
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 10
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Soldier_Base
+		{
+			Class Soldier
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Soldier_Minicrit
+		{
+			Class Soldier
+			Name "Minicrit Soldier"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Attributes SpawnWithFullCharge
+			Item "The Buff Banner"
+			Item "The Equalizer"
+			Item "Soldier's Stash"
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"increase buff duration" 5
+			}
+		}
+		T_TFBot_Soldier_Resistant
+		{
+			Class Soldier
+			Name "Resistant Soldier"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Attributes SpawnWithFullCharge
+			Item "The Battalion's Backup"
+			Item "The Escape Plan"
+			Item "The Grenadier's Softcap"
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"increase buff duration" 5
+			}
+		}
+		T_TFBot_Soldier_Samurai
+		{
+			Class Soldier
+			Name "Samurai Soldier"
+			Skill Expert
+			WeaponRestrictions MeleeOnly
+			Attributes SpawnWithFullCharge
+			Item "The Concheror"
+			Item "The Half-Zatoichi"
+			Item "Furious Fukaamigasa"
+			CharacterAttributes
+			{
+				"increase buff duration" 5
+			}
+		}
+		T_TFBot_Soldier_Samurai_Advanced
+		{
+			Class Soldier
+			Health 1000
+			Name "Shokun Soldier"
+			Skill Expert
+			WeaponRestrictions MeleeOnly
+			Item "The Half-Zatoichi"
+			Item "Soldier Samurai Hat"
+			ItemAttributes
+			{
+				ItemName "The Half-Zatoichi"
+				"damage bonus" 2.1
+				"damage causes airblast" 1
+				"airblast pushback scale" 1.5
+				"melee range multiplier" 5
+				"fire rate penalty" 1.5
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 5
+				"damage force increase" -5000
+				"airblast vulnerability multiplier" -3
+				"increased jump height" 0.4
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Soldier_Aura
+		{
+			Class Soldier
+			Health 800
+			Name "Rocket Aura"
+			Skill Normal
+			WeaponRestrictions PrimaryOnly
+			Item "The Virtual Viewfinder"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_ROCKETLAUNCHER"
+				"damage bonus" 8
+				"fire rate bonus" 0.1
+				"Projectile speed increased" 10
+				"self dmg push force decreased" 0.25
+				"faster reload rate" -1
+				"no self blast dmg" 2
+				"projectile spread angle penalty" 80
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"cancel falling damage" 1
+			}
+		}
+		T_TFBot_Soldier_Nuke
+		{
+			Class Soldier
+			Health 1500
+			Name "Nuke Launcher"
+			Skill Normal
+			WeaponRestrictions PrimaryOnly
+			Item "The Original"
+			Item "The Federal Casemaker"
+			ItemAttributes
+			{
+				ItemName "The Original" //Fire type reworked, it now fires very slowly but reloads instantly
+				"damage bonus" 20
+				"Blast radius increased" 6
+				"use large smoke explosion" 1
+				"no self blast dmg" 2
+				"faster reload rate" 0.01
+				"fire rate penalty" 6
+				"Projectile speed decreased" 0.03
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Soldier_RocketShotgun_30Waves
+		{
+			Class Soldier
+			Health 500
+			Name "Rocket Shotgunner"
+			Skill Normal
+			WeaponRestrictions PrimaryOnly
+			Attributes HoldFireUntilFullReload
+			Item "The Direct Hit"
+			Item "The Valley Forge"
+			ItemAttributes
+			{
+				ItemName "The Direct Hit"
+				"damage bonus" 1
+				"clip size bonus" 3
+				"fire rate bonus" -1
+				"faster reload rate" 0.3
+				"no self blast dmg" 2
+				"projectile spread angle penalty" 7
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Soldier_Shotgun
+		{
+			Class Soldier
+			Name "Shotgun Soldier"
+			Skill Easy
+			WeaponRestrictions SecondaryOnly
+			Item "Jumper's Jeepcap"
+			Item "The Soldier's Stogie"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_SHOTGUN_SOLDIER"
+				"damage bonus" 2
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Soldier_Lunar
+		{
+			Class Soldier
+			Name "Lunar Soldier"
+			Skill Easy
+			WeaponRestrictions PrimaryOnly
+			Item "The Cow Mangler 5000"
+			Item "Lord Cockswain's Pith Helmet"
+			Item "Lord Cockswain's Novelty Mutton Chops and Pipe"
+			ItemAttributes
+			{
+				ItemName "The Cow Mangler 5000"
+				"faster reload rate" 0.01
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Soldier_Rocket
+		{
+			Class Soldier
+			Name "Rocket Soldier"
+			Skill Hard
+			WeaponRestrictions PrimaryOnly
+			Attributes HoldFireUntilFullReload
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_ROCKETLAUNCHER"
+				"damage bonus" 1.5
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Soldier_Painis
+		{
+			Class Soldier
+			Health 1000
+			Name "Robotic Painis Cupcake"
+			Skill Expert
+			WeaponRestrictions MeleeOnly
+			Item "The Market Gardener"
+			ItemAttributes
+			{
+				ItemName "The Market Gardener"
+				"heal on kill" 300
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 2
+			}
+		}
+		T_TFBot_Soldier_Heal
+		{
+			Class Soldier
+			Health 400
+			Name "Rocket Healer"
+			Skill Hard
+			WeaponRestrictions PrimaryOnly
+			Item "The Black Box"
+			Item "The Hat With No Name"
+			ItemAttributes
+			{
+				ItemName "The Black Box"
+				"health on radius damage" 0
+				"damage bonus" 2
+				"heal on hit for rapidfire" 150
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Soldier_Unknown
+		{
+			Class Soldier
+			Health 250
+			Name "????????"
+			Skill Hard
+			WeaponRestrictions PrimaryOnly
+			Attributes AlwaysCrit
+			Item "The Liberty Launcher"
+			Item "Pocket Medic"
+			ItemAttributes
+			{
+				ItemName "The Liberty Launcher"
+				"damage bonus" 2
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Soldier_Curse
+		{
+			Class Soldier
+			Health 250
+			Name "Curse Caster"
+			Skill Hard
+			WeaponRestrictions PrimaryOnly
+			Attributes AlwaysFireWeapon
+			Item "The Beggar's Bazooka"
+			Item "Tyrant's Helm"
+			ItemAttributes
+			{
+				ItemName "The Beggar's Bazooka"
+				"faster reload rate" 0.05
+				"no self blast dmg" 2
+				"self dmg push force decreased" 0
+				"Blast radius increased" 10
+				"damage penalty" 0.1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Soldier_Bison
+		{
+			Class Soldier
+			Health 250
+			Name "Laser Cybermann"
+			Skill Hard
+			WeaponRestrictions SecondaryOnly
+			Item "The Righteous Bison"
+			Item "The Cross-Comm Crash Helmet"
+			ItemAttributes
+			{
+				ItemName "The Righteous Bison"
+				"fire rate bonus" 0.25
+				"faster reload rate" 0.01
+				"damage penalty" 0.01
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Pyro_Basic
+		{
+			Class Pyro
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Pyro_Cook
+		{
+			Class Pyro
+			Name "Cooking Pyro"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "Sharpened Volcano Fragment"
+			Item "Connoisseur's Cap"
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Pyro_FireLover
+		{
+			Class Pyro
+			Name "Fire Loving Pyro"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "The Axtinguisher"
+			Item "Hottie's Hoodie"
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"dmg taken from fire reduced" 0
+			}
+		}
+		T_TFBot_Pyro_AntiSentry
+		{
+			Class Pyro
+			Name "Anti-Sentry Pyro"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "The Homewrecker"
+			Item "Respectless Rubber Glove"
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"dmg taken from bullets reduced" 0.5 //Since the sentry damage resistance attribute does not work on robots, these are here to give the robot some defence against sentries
+				"dmg taken from blast reduced" 0.25
+			}
+		}
+		T_TFBot_Pyro_Vacuum
+		{
+			Class Pyro
+			Health 500
+			Name "Vacuum Pyro"
+			Skill Expert
+			WeaponRestrictions PrimaryOnly
+			Item "The Pampered Pyro"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_FLAMETHROWER"
+				"airblast pushback scale" -4
+				"airblast vertical pushback scale" -3
+				"mult airblast refire time" 0.05
+				"deflection size multiplier" 4
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Pyro_Deflector
+		{
+			Class Pyro
+			Health 500
+			Name "Super Deflector Pyro"
+			Skill Expert
+			WeaponRestrictions PrimaryOnly
+			Item "The Centurion"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_FLAMETHROWER"
+				"airblast pushback scale" 100
+				"airblast vertical pushback scale" 100
+				"deflection size multiplier" 100
+				"mult airblast refire time" 3
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Pyro_Neon
+		{
+			Class Pyro
+			Name "Neon Pyro"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "The Neon Annihilator"
+			Item "The Human Cannonball"
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Pyro_Chaos
+		{
+			Class Pyro
+			Health 300
+			Name "Chaos Pyro"
+			Skill Expert
+			WeaponRestrictions SecondaryOnly
+			Item "Pop-Eyes"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_SHOTGUN_PYRO" //Using stock shotgun because the Reserve Shooter does not work on robots without a special server plugin
+				"damage bonus" 1.3
+				"bleeding duration" 90
+				"Set DamageType Ignite" 1
+				"weapon burn dmg increased" 1.5
+				"weapon burn time increased" 1.5
+				"faster reload rate" 0.1
+				"slow enemy on hit major" 19
+				"subtract victim medigun charge on hit" 10
+				"subtract victim cloak on hit" 30
+				"damage all connected" 1
+				"turn to gold" 1
+				"ragdolls become ash" 1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Pyro_Resistant
+		{
+			Class Pyro
+			Health 5000
+			Name "Alapyro"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "Ali Baba's Wee Booties"
+			Item "The Third Degree"
+			Item "Sultan's Ceremonial"
+			Item "Aladdin's Private Reserve"
+			Item "The Liquor Locker"
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"health regen" 5000
+				"cannot be backstabbed" 1
+				"dmg taken from fire increased" 1000
+			}
+		}
+		T_TFBot_Pyro_Firework
+		{
+			Class Pyro
+			Name "Firework Mann"
+			Skill Normal
+			WeaponRestrictions SecondaryOnly
+			Item "The Detonator"
+			Item "Brigade Helm"
+			ItemAttributes
+			{
+				ItemName "The Detonator"
+				"weapon burn dmg increased" 10
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Pyro_Astro
+		{
+			Class Pyro
+			Name "Astronomer"
+			Skill Normal
+			WeaponRestrictions SecondaryOnly
+			Item "The Manmelter"
+			Item "The Bubble Pipe"
+			Item "The Moonman Backpack"
+			ItemAttributes
+			{
+				ItemName "The Manmelter"
+				"weapon burn time increased" 10
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Pyro_Pusher
+		{
+			Class Pyro
+			Name "Pusher"
+			Skill Normal
+			WeaponRestrictions SecondaryOnly
+			Item "The Scorch Shot"
+			Item "The DethKapp"
+			ItemAttributes
+			{
+				ItemName "The Scorch Shot"
+				"damage penalty" 1
+				"fire rate bonus" 0.4
+				"faster reload rate" 0.3
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Pyro_Hell
+		{
+			Class Pyro
+			Name "Hell Pyro"
+			Skill Normal
+			WeaponRestrictions SecondaryOnly
+			Item "The Flare Gun"
+			Item "Pyromancer's Mask"
+			ItemAttributes
+			{
+				ItemName "The Flare Gun"
+				"damage bonus" 5
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Pyro_Backburner
+		{
+			Class Pyro
+			Name "Backburner"
+			Skill Easy
+			WeaponRestrictions PrimaryOnly
+			Item "The Backburner"
+			Item "Sight for Sore Eyes"
+			ItemAttributes
+			{
+				ItemName "The Backburner"
+				"damage bonus" 5
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Pyro_LongBurn
+		{
+			Class Pyro
+			Name "Arsonist"
+			Skill Hard
+			WeaponRestrictions PrimaryOnly
+			Item "The Degreaser"
+			Item "The Attendant"
+			ItemAttributes
+			{
+				ItemName "The Backburner"
+				"weapon burn time increased" 100
+				"damage penalty" 0.75
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 1.5
+				"dmg taken from fire reduced" 0
+			}
+		}
+		T_TFBot_Pyro_Solar
+		{
+			Class Pyro
+			Name "Solar Pulse"
+			Skill Easy
+			WeaponRestrictions PrimaryOnly
+			Attributes AlwaysCrit
+			Item "The Phlogistinator"
+			Item "The Birdcage"
+			ItemAttributes
+			{
+				ItemName "The Phlogistinator"
+				"damage bonus" 10
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Demoman_Basic
+		{
+			Class Demoman
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Demoman_Caber
+		{
+			Class Demoman
+			Health 75
+			Name "KABOOM!"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "The Ullapool Caber"
+			Item "Ghostly Gibus"
+			ItemAttributes
+			{
+				ItemName "The Ullapool Caber"
+				"damage bonus" 10
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"bombinomicon effect on death" 1
+			}
+		}
+		T_TFBot_Demoman_Axe
+		{
+			Class Demoman
+			Health 250
+			Name "Sharp Sider"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "The Scotsman's Skullcutter"
+			Item "Rimmed Raincatcher"
+			ItemAttributes
+			{
+				ItemName "The Scotsman's Skullcutter"
+				"melee range multiplier" 2.5
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Demoknight
+		{
+			Class Demoman
+			Health 325
+			Name "Demoknight"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "The Chargin' Targe"
+			Item "The Eyelander"
+			Item "The Bolgan"
+			ItemAttributes
+			{
+				ItemName "The Chargin' Targe"
+				"charge recharge rate increased" 3
+			}
+		}
+		T_TFBot_Demoknight_Jet
+		{
+			Class Demoman
+			Health 300
+			Name "Jetknight"
+			Skill Normal
+			WeaponRestrictions MeleeOnly
+			Attributes AutoJump
+				AutoJumpMin 2
+				AutoJumpMax 2
+			Attributes AirChargeOnly
+			Item "The Splendid Screen"
+			Item "The Claidheamohmor"
+			Item "Pirate Bandana"
+			ItemAttributes
+			{
+				ItemName "The Claidheamohmor"
+				"dmg taken increased" 1
+				"heal on kill" 1
+				"charge time increased" 0.5 //Reverting to old stats (Old Claid was great)
+				"fire rate penalty" 1.3
+			}
+			ItemAttributes
+			{
+				ItemName "The Splendid Screen"
+				"charge recharge rate increased" 7
+			}
+			CharacterAttributes
+			{
+				"increased jump height" 30
+				"cancel falling damage" 1
+			}
+		}
+		T_TFBot_Demoman_Launcher
+		{
+			Class Demoman
+			Name "Launcher Demoman"
+			Skill Hard
+			WeaponRestrictions PrimaryOnly
+			Attributes HoldFireUntilFullReload
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_GRENADELAUNCHER"
+				"damage bonus" 2
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Demoman_Resistant
+		{
+			Class Demoman
+			Health 2000
+			Name "Alademo"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "Ali Baba's Wee Booties"
+			Item "The Splendid Screen"
+			Item "The Persian Persuader"
+			Item "Sultan's Ceremonial"
+			Item "Aladdin's Private Reserve"
+			Item "The Liquor Locker"
+			ItemAttributes
+			{
+				ItemName "The Splendid Screen"
+				"charge recharge rate increased" 3
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"health regen" 2000
+				"dmg taken from crit increased" 1000
+			}
+		}
+		T_TFBot_Demoman_Pirate
+		{
+			Class Demoman
+			Health 400
+			Name "Pirate"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "The Bootlegger"
+			Item "The Splendid Screen"
+			Item "The Scottish Handshake"
+			Item "The Buccaneer's Bicorne"
+			Item "A Whiff of the Old Brimstone"
+			Item "The Bird-Man of Aberdeen"
+			ItemAttributes
+			{
+				ItemName "The Splendid Screen"
+				"charge time increased" 20
+				"charge recharge rate increased" 2
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"dmg taken from crit reduced" -1
+			}
+		}
+		T_TFBot_Demoman_Stickybomb
+		{
+			Class Demoman
+			Name "Sticky Boom"
+			Skill Expert
+			WeaponRestrictions SecondaryOnly
+			Item "Glengarry Bonnet"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_PIPEBOMBLAUNCHER"
+				"stickybomb charge rate" 0
+				"damage bonus" 2
+				"Blast radius increased" 2
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Demoman_Stickybomb_Marker
+		{
+			Class Demoman
+			Name "Boom Marker"
+			Skill Expert
+			WeaponRestrictions SecondaryOnly
+			Item "The Scottish Resistance"
+			Item "Scotch Bonnet"
+			ItemAttributes
+			{
+				ItemName "The Scottish Resistance"
+				"stickybomb charge rate" 0
+				"damage bonus" 2
+				"mark for death" 1
+				"damage causes airblast" 1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"dmg taken from blast reduced" 0
+			}
+		}
+		T_TFBot_Demoman_LochNLoad
+		{
+			Class Demoman
+			Name "Loch-N-Demoman"
+			Skill Hard
+			WeaponRestrictions PrimaryOnly
+			Attributes HoldFireUntilFullReload
+			Item "The Loch-N-Load"
+			Item "The Tavish DeGroot Experience"
+			ItemAttributes
+			{
+				ItemName "The Loch-N-Load"
+				"damage bonus" 4
+				"fire rate bonus" 0.4
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Demoman_Shadow
+		{
+			Class Demoman
+			Health 400
+			Name "Shadow Demoman"
+			Skill Hard
+			WeaponRestrictions PrimaryOnly
+			Item "The Loose Cannon"
+			Item "The Chargin' Targe"
+			Item "Conjurer's Cowl"
+			ItemAttributes
+			{
+				ItemName "The Loose Cannon"
+				"grenade launcher mortar mode" 0
+				"auto fires full clip" 1
+				"auto fires when full" 1
+				"damage bonus" 3
+				"no self blast dmg" 2
+			}
+			ItemAttributes
+			{
+				ItemName "The Chargin' Targe"
+				"charge recharge rate increased" 1000
+				"charge time increased" 5
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 10
+				"airblast vulnerability multiplier" 0
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Heavy_Basic
+		{
+			Class Heavy
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Heavy_Boxer
+		{
+			Class Heavy
+			Name "Boxer"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Attributes AlwaysCrit
+			Item "The Killing Gloves of Boxing"
+			Item "Pugilist's Protector"
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Heavy_Wrestler
+		{
+			Class Heavy
+			Health 600
+			Name "Wrestler"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "Gloves of Running Urgently"
+			Item "Large Luchadore"
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Heavy_Gangster
+		{
+			Class Heavy
+			Name "Gangster"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "The Eviction Notice"
+			Item "The Outdoorsman"
+			ItemAttributes
+			{
+				ItemName "The Eviction Notice"
+				"fire rate bonus" 0.6
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 2
+			}
+		}
+		T_TFBot_Heavy_Iron
+		{
+			Class Heavy
+			Health 800
+			Name "Iron Heavy"
+			Skill Easy
+			Scale 1.5
+			WeaponRestrictions MeleeOnly
+			Item "Fists of Steel"
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Heavy_Resistant
+		{
+			Class Heavy
+			Health 5000
+			Name "Alaheavy"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "Ali Baba's Wee Booties"
+			Item "Warrior's Spirit"
+			Item "Sultan's Ceremonial"
+			Item "Aladdin's Private Reserve"
+			Item "The Liquor Locker"
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"health regen" 5000
+				"cannot be backstabbed" 1
+				"dmg taken from bullets increased" 1000
+			}
+		}
+		T_TFBot_Heavy_Armor
+		{
+			Class Heavy
+			Health 25000
+			Name "Armor Heavy"
+			Skill Expert
+			WeaponRestrictions MeleeOnly
+			Item "Apoco-Fists"
+			Item "The Soviet Gentleman"
+			CharacterAttributes
+			{
+				"move speed bonus" 0.15
+				"damage force reduction" 0
+				"airblast vulnerability multiplier" 0
+			}
+		}
+		T_TFBot_Heavy_LOL
+		{
+			Class Heavy
+			Name "LOL Heavy"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Attributes AlwaysCrit
+			Item "The Holiday Punch"
+			Item "Officer's Ushanka"
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Heavy_Shotgun
+		{
+			Class Heavy
+			Name "Shotgun Heavy"
+			Skill Easy
+			WeaponRestrictions SecondaryOnly
+			Item "Capone's Capper"
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Heavy_Slowdown
+		{
+			Class Heavy
+			Name "Slowdown Heavy"
+			Skill Normal
+			WeaponRestrictions PrimaryOnly
+			Item "Natascha"
+			Item "Heavy Hair"
+			ItemAttributes
+			{
+				ItemName "Natascha"
+				"fire rate bonus" 0.1
+				"slow enemy on hit major" 10
+				"damage penalty" 0.1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Heavy_Minigun
+		{
+			Class Heavy
+			Name "Minigun Heavy"
+			Skill Normal
+			WeaponRestrictions PrimaryOnly
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_MINIGUN"
+				"damage bonus" 1.5
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Heavy_Goldengun
+		{
+			Class Heavy
+			Name "Robot with a Golden Gun"
+			Skill Normal
+			WeaponRestrictions PrimaryOnly
+			Item "Upgradeable TF_WEAPON_MINIGUN" //<-- Weapon must be "Upgradeable" version for australium stock weapons (Not for non-stock weapons like the Force-a-Nature)
+			Item "War Head"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_MINIGUN"
+				"is australium item" 1 //Adds the "Australium" prefix to the weapon's name in the deathcam
+				"item style override" 1 //Sets the weapon's material to the australium material
+				"fire rate bonus" 0.8
+				"turn to gold" 1
+				"attack projectiles" 1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"dmg taken from bullets reduced" 0
+			}
+		}
+		T_TFBot_Heavy_Fast
+		{
+			Class Heavy
+			Name "Fast Spin Heavy"
+			Skill Normal
+			WeaponRestrictions PrimaryOnly
+			Item "Tomislav"
+			Item "Brock's Locks"
+			ItemAttributes
+			{
+				ItemName "Tomislav"
+				"minigun spinup time decreased" 0.01
+				"aiming movespeed increased" 100
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"dmg taken from blast reduced" 0.26
+			}
+		}
+		T_TFBot_Heavy_Dragon
+		{
+			Class Heavy
+			Name "Dragon Heavy"
+			Skill Normal
+			WeaponRestrictions PrimaryOnly
+			Item "The Huo Long Heatmaker"
+			Item "Heavy Do-Rag"
+			ItemAttributes
+			{
+				ItemName "The Huo Long Heatmaker"
+				"Set DamageType Ignite" 1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"dmg taken from fire reduced" 0.26
+			}
+		}
+		T_TFBot_Heavy_Healing
+		{
+			Class Heavy
+			ClassIcon heavy_d
+			Health 99999999
+			Name "Healing Heavy"
+			Skill Expert
+			Scale 1
+			WeaponRestrictions MeleeOnly
+			Attributes MiniBoss
+			Item "The Wilson Weave"
+			Item "The Deus Specs"
+			Item "The All-Father"
+			Item "The Merc's Muffler"
+			Item "The Red Army Robin"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_FISTS"
+				"melee range multiplier" 5
+				"melee bounds multiplier" 2
+				"damage penalty" -2
+				"self mark for death" 1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 4
+				"damage force reduction" 0
+				"airblast vulnerability multiplier" 10
+				"rage giving scale" 100
+				"cannot be backstabbed" 1
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Heavy_TestSubject
+		{
+			Class Heavy
+			Name "Test Subject"
+			Skill Expert
+			CharacterAttributes
+			{
+				"cannot be backstabbed" 1
+			}
+		}
+		T_TFBot_Medic_Basic
+		{
+			Class Medic
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Medic_Uber
+		{
+			Class Medic
+			Name "Uber Medic"
+			Skill Easy
+			WeaponRestrictions SecondaryOnly
+			Attributes SpawnWithFullCharge
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_MEDIGUN"
+				"uber duration bonus" 8 //Best to use 16 seconds otherwise after this point, the medic will lose the uber effect but his patient won't.
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Medic_Bonus
+		{
+			Class Medic
+			Health 300
+			Name "Bonus"
+			Skill Expert
+			WeaponRestrictions PrimaryOnly
+			Attributes AlwaysFireWeapon
+			Item "The Crusader's Crossbow"
+			Item "Das Ubersternmann"
+			ItemAttributes
+			{
+				ItemName "The Crusader's Crossbow"
+				"fire rate bonus" 0.1
+				"faster reload rate" 0.1
+				"damage penalty" -500
+			}
+			CharacterAttributes
+			{
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Medic_Kritzkrieg
+		{
+			Class Medic
+			Name "Critical Medic"
+			Skill Easy
+			WeaponRestrictions SecondaryOnly
+			Attributes SpawnWithFullCharge
+			Item "The Kritzkrieg"
+			ItemAttributes
+			{
+				ItemName "The Kritzkrieg"
+				"overheal bonus" 10
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"bot medic uber health threshold" 999
+			}
+		}
+		T_TFBot_Medic_Healer
+		{
+			Class Medic
+			Name "Healer Medic"
+			Skill Expert
+			WeaponRestrictions SecondaryOnly
+			Item "The Quick-Fix"
+			ItemAttributes
+			{
+				ItemName "The Quick-Fix"
+				"heal rate bonus" 10
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Medic_Resistant
+		{
+			Class Medic
+			Health 5000
+			Name "Alamedic"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "The Vita-Saw"
+			Item "Sultan's Ceremonial"
+			Item "Aladdin's Private Reserve"
+			Item "The Liquor Locker"
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"health regen" 5000
+				"cannot be backstabbed" 1
+				"dmg taken from blast increased" 1000
+			}
+		}
+		T_TFBot_Medic_Syringe
+		{
+			Class Medic
+			Name "Syringe Medic"
+			Skill Easy
+			WeaponRestrictions PrimaryOnly
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Medic_Regen
+		{
+			Class Medic
+			Health 500
+			Name "I Hit, I Alive"
+			Skill Normal
+			WeaponRestrictions PrimaryOnly
+			Item "The Blutsauger"
+			Item "The Surgeon's Stahlhelm"
+			ItemAttributes
+			{
+				ItemName "The Blutsauger"
+				"heal on hit for rapidfire" 500
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Medic_Overdose
+		{
+			Class Medic
+			Name "Overdose Medic"
+			Skill Normal
+			WeaponRestrictions PrimaryOnly
+			Attributes AlwaysFireWeapon
+			Item "The Overdose"
+			Item "German Gonzila"
+			ItemAttributes
+			{
+				ItemName "The Overdose"
+				"fire rate bonus" 0.15
+				"faster reload rate" 0
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 1.5
+			}
+		}
+		T_TFBot_Sniper_Basic
+		{
+			Class Sniper
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Sniper_Bleeder
+		{
+			Class Sniper
+			Name "Posion Edge"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "The Tribalman's Shiv"
+			Item "Towering Pillar of Hats"
+			ItemAttributes
+			{
+				ItemName "The Tribalman's Shiv"
+				"bleeding duration" 20
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Sniper_Jarate
+		{
+			Class Sniper
+			Name "Jarate Sniper"
+			Skill Easy
+			WeaponRestrictions SecondaryOnly
+			Item "Jarate"
+			Item "Trophy Belt"
+			ItemAttributes
+			{
+				ItemName "Jarate"
+				"effect bar recharge rate increased" 0.1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Sniper_India
+		{
+			Class Sniper
+			Health 600
+			Name "India Sniper"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "The Shahanshah"
+			Item "Desert Marauder"
+			ItemAttributes
+			{
+				ItemName "The Shahanshah"
+				"dmg penalty while half alive" 0
+				"dmg bonus while half dead" 10
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Sniper_Crocodile
+		{
+			Class Sniper
+			Health 375
+			Name "Mechanical Crocodile"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "Darwin's Danger Shield"
+			Item "The Bushwacka"
+			Item "Ol' Snaggletooth"
+			ItemAttributes
+			{
+				ItemName "The Bushwacka"
+				"critboost on kill" 15
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Sniper_SMG
+		{
+			Class Sniper
+			Name "Terrorist"
+			Skill Easy
+			WeaponRestrictions SecondaryOnly
+			Item "Liquidator's Lid"
+			CharacterAttributes
+			{
+				"move speed bonus" 0.6
+			}
+		}
+		T_TFBot_Bowman
+		{
+			Class Sniper
+			Name "Robin Hood"
+			Skill Easy
+			WeaponRestrictions PrimaryOnly
+			Item "The Huntsman"
+			Item "Larrikin Robin"
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Giant_Sniper
+		{
+			Class Sniper
+			ClassIcon sniper_giant
+			Health 1500
+			Name "Giant Sniper"
+			Skill Normal
+			WeaponRestrictions SecondaryOnly
+			Attributes MiniBoss
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_SMG"
+				"damage bonus" 1.5
+				"fire rate bonus" 0.2
+				"faster reload rate" 0
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"damage force reduction" 0.3
+				"airblast vulnerability multiplier" 0.3
+				"override footstep sound set" 2
+			}
+		}
+		T_TFBot_Sniper_Christian
+		{
+			Class Sniper
+			Health 1000
+			Name "Christian Brutal Robot"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "The Tribalman's Shiv"
+			ItemAttributes
+			{
+				ItemName "The Tribalman's Shiv"
+				"bleeding duration" 100
+				"mark for death" 1
+				"heal on hit for rapidfire" 100
+			}
+		}
+		T_TFBot_Spy_Sapper
+		{
+			Class Spy
+			ClassIcon spy_d
+			Name "Sapper Spy"
+			Skill Expert
+			WeaponRestrictions SecondaryOnly
+			Attributes AlwaysFireWeapon
+		}
+		T_TFBot_Spy_Basic
+		{
+			Class Spy
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			CharacterAttributes
+			{
+				"move speed bonus" 0.6
+			}
+		}
+		T_TFBot_Spy_Deadringer
+		{
+			Class Spy
+			Name "Not a Deadringer Spy"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "The Dead Ringer"
+			ItemAttributes
+			{
+				ItemName "The Dead Ringer"
+				"mult decloak rate" 3
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.6
+			}
+		}
+		T_TFBot_Spy_Mage
+		{
+			Class Spy
+			Health 200
+			Name "Spy Mage"
+			Skill Normal
+			WeaponRestrictions MeleeOnly
+			Attributes AlwaysFireWeapon
+			Item "L'Homme Burglerre"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_KNIFE"
+				"fire rate bonus" 0.05
+				"damage causes airblast" 1
+				"melee range multiplier" 6
+				"damage penalty" 0.05
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.8
+				"airblast vulnerability multiplier" 0.3
+				"cannot pick up intelligence" 1
+				"gesture speed increase" 5
+			}
+		}
+		T_TFBot_Spy_Ninja
+		{
+			Class Spy
+			Name "Ninja Spy"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "Conniver's Kunai"
+			Item "Spy Oni Mask"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_INVIS"
+				"mult cloak rate" 0.1
+				"mult decloak rate" 0.1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 3
+			}
+		}
+		T_TFBot_Spy_Sahara
+		{
+			Class Spy
+			Health 200
+			Name "Sahara Spy"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "Your Eternal Reward"
+			Item "The Familiar Fez"
+			CharacterAttributes
+			{
+				"move speed bonus" 0.6
+			}
+		}
+		T_TFBot_Spy_Necromancer
+		{
+			Class Spy
+			Health 200
+			Name "Necromancer Spy"
+			Skill Normal
+			WeaponRestrictions MeleeOnly
+			Item "Hong Kong Cone"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_KNIFE"
+				"fire rate bonus" 0.9
+				"melee range multiplier" 100
+				"damage penalty" 0.5
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"override footstep sound set" 2
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Spy_Resistant
+		{
+			Class Spy
+			Health 5000
+			Name "Alaspy"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "Ali Baba's Wee Booties"
+			Item "The Big Earner"
+			Item "Sultan's Ceremonial"
+			Item "Aladdin's Private Reserve"
+			Item "The Liquor Locker"
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"health regen" 5000
+			}
+		}
+		T_TFBot_Spy_Icicle
+		{
+			Class Spy
+			Name "I-Spy"
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+			Item "The Spy-Cicle"
+			Item "Fancy Fedora"
+			Item "Le Party Phantom"
+		}
+		T_TFBot_Spy_Gunslinger
+		{
+			Class Spy
+			Name "Gunslinger Spy"
+			Skill Expert
+			WeaponRestrictions PrimaryOnly
+			Attributes AlwaysFireWeapon
+			Item "Detective Noir"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_REVOLVER"
+				"damage bonus" 5
+				"cannot disguise" 1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Giant_Spy
+		{
+			Class Spy
+			ClassIcon spy_giant
+			Health 1500
+			Name "Giant Spy"
+			Skill Normal
+			Attributes MiniBoss
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_REVOLVER"
+				"fire rate bonus" 0.6
+			}
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_KNIFE"
+				"fire rate bonus" 0.6
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 10
+				"damage force reduction" 0.3
+				"airblast vulnerability multiplier" 0.3
+				"override footstep sound set" 2
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Spy_Sapper_Super
+		{
+			Class Spy
+			Health 3000
+			Name "Super Sapper Spy"
+			Skill Expert
+			WeaponRestrictions SecondaryOnly
+			Attributes AlwaysFireWeapon
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_BUILDER_SPY"
+				"sapper damage bonus" 2
+				"sapper health bonus" 10
+			}
+		}
+		//Busters
+		T_TFBot_SentryBuster_Error
+		{
+			Class Demoman
+			ClassIcon sentry_buster
+			Health 2500
+			Name "Error Buster"
+			Skill Expert
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			Attributes AlwaysFireWeapon
+			Item "The Splendid Screen"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_GRENADELAUNCHER"
+				"fire rate bonus" 0.1
+				"faster reload rate" 0.01
+				"drop health pack on kill" 1
+				"damage penalty" 0.5
+			}
+			ItemAttributes
+			{
+				ItemName "The Splendid Screen"
+				"charge time increased" 30
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 2
+				"damage force reduction" 0.5
+				"airblast vulnerability multiplier" 0.5
+				"override footstep sound set" 7
+				"cannot be backstabbed" 1
+			}
+		}
+		T_TFBot_SentryBuster_Spy
+		{
+			Class Spy
+			ClassIcon sentry_buster
+			Health 2500
+			Name "Spy Buster"
+			Skill Expert
+			WeaponRestrictions SecondaryOnly
+			Attributes MiniBoss
+			Attributes AlwaysFireWeapon
+			CharacterAttributes
+			{
+				"move speed bonus" 2
+				"damage force reduction" 0.5
+				"airblast vulnerability multiplier" 0.5
+				"override footstep sound set" 7
+				"cannot be backstabbed" 1
+			}
+		}
+		T_TFBot_SentryBuster_Sword
+		{
+			Class Demoman
+			ClassIcon sentry_buster
+			Health 2500
+			Name "Sword Buster"
+			Skill Expert
+			WeaponRestrictions MeleeOnly
+			Attributes MiniBoss
+			Attributes AlwaysFireWeapon
+			Item "The Eyelander"
+			ItemAttributes
+			{
+				ItemName "The Eyelander"
+				"damage bonus" 2
+				"fire rate bonus" 0.5
+				"drop health pack on kill" 1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 2
+				"damage force increase" -1000
+				"airblast vulnerability multiplier" 0.5
+				"override footstep sound set" 7
+				"cannot be backstabbed" 1
+			}
+		}
+		//Engineers
+		T_TFBot_Engineer_Pusher
+		{
+			Class Engineer
+			Health 1000
+			Name "Airblast Engineer"
+			Skill Expert
+			TeleportWhere spawnbot
+			Item "The Viking Braider"
+			CharacterAttributes
+			{
+				"damage causes airblast" 1
+				"engy sentry fire rate increased" 0.01
+			}
+		}
+		T_TFBot_Engineer_Defender
+		{
+			Class Engineer
+			Health 5000
+			Name "Defender Engineer"
+			Skill Expert
+			TeleportWhere spawnbot
+			Item "The Last Straw"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_WRENCH"
+				"fire rate bonus" 0.4
+				"Repair rate increased" 10
+			}
+			CharacterAttributes
+			{
+				"damage force reduction" 0
+				"engy sentry damage bonus" 0.7
+			}
+		}
+		T_TFBot_Engineer_Fast
+		{
+			Class Engineer
+			Health 750
+			Name "Speedy Engineer"
+			Skill Expert
+			TeleportWhere spawnbot
+			Item "Texas Ten Gallon"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_WRENCH"
+				"build rate bonus" 0.1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 4
+				"engy sentry damage bonus" 0.7
+				"gesture speed increase" 5
+			}
+		}
+		T_TFBot_Engineer_Sniper
+		{
+			Class Engineer
+			Health 1000
+			Name "Sniper Engineer"
+			Skill Expert
+			TeleportWhere spawnbot
+			Item "Industrial Festivizer"
+			CharacterAttributes
+			{
+				"engy sentry radius increased" 5
+			}
+		}
+		//Support Snipers
+		T_TFBot_Sniper_Accurate
+		{
+			Class Sniper
+			Health 500
+			Name "Accurate Sniper"
+			Skill Expert
+			Attributes AlwaysCrit
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_SNIPERRIFLE"
+				"damage bonus" 1.5
+				"sniper charge per sec" 5
+			}
+		}
+		T_TFBot_Sniper_Piss
+		{
+			Class Sniper
+			ClassIcon sniper_sydneysleeper
+			Health 575
+			Name "Piss Dart Sniper"
+			Skill Expert
+			Item "The Sydney Sleeper"
+			Item "Darwin's Danger Shield"
+			Item "The Bushwacka"
+			Item "Ol' Snaggletooth"
+			ItemAttributes
+			{
+				ItemName "The Sydney Sleeper"
+				"damage bonus" 3.5
+				"sniper charge per sec" 5
+			}
+		}
+		T_TFBot_Sniper_Magnum
+		{
+			Class Sniper
+			Health 500
+			Name "Railgun Sniper"
+			Skill Expert
+			Item "The Machina"
+			Item "The Lone Star"
+			ItemAttributes
+			{
+				ItemName "The Machina"
+				"damage bonus" 10000
+				"projectile penetration" 1
+				"sniper charge per sec" 5
+				"fire rate penalty" 10
+			}
+		}
+		T_TFBot_Sniper_RapidFire
+		{
+			Class Sniper
+			Health 500
+			Name "Desert Sniper"
+			Skill Expert
+			Item "The Bazaar Bargain"
+			Item "The Shahanshah"
+			Item "Desert Marauder"
+			ItemAttributes
+			{
+				ItemName "The Bazaar Bargain"
+				"fire rate bonus" 0.1
+				"sniper charge per sec" 5
+			}
+		}
+		T_TFBot_Sniper_Hitman
+		{
+			Class Sniper
+			Health 500
+			Name "Hitman Sniper"
+			Skill Expert
+			Item "The Hitman's Heatmaker"
+			Item "The Cleaner's Carbine"
+			Item "Liquidator's Lid"
+			ItemAttributes
+			{
+				ItemName "The Hitman's Heatmaker"
+				"damage bonus" 2
+				"mark for death" 2
+				"bleeding duration" 100
+				"silent killer" 1
+				"sniper charge per sec" 5
+			}
+		}
+		//Wizards
+		T_TFBot_Pyro_Wizard
+		{
+			Class Pyro
+			ClassIcon 30waves_wizard
+			Health 10000
+			Name "Fire Wizard"
+			Skill Normal
+			WeaponRestrictions MeleeOnly
+			Attributes UseBossHealthBar
+			Attributes AlwaysFireWeapon
+			Item "Point and Shoot"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_FIREAXE"
+				"Set DamageType Ignite" 1
+				"weapon burn dmg increased" 40
+				"melee range multiplier" 10
+				"damage penalty" 0.4
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"dmg taken from fire reduced" 0
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Spy_Wizard
+		{
+			Class Spy
+			ClassIcon 30waves_wizard
+			Health 10000
+			Name "Frost Wizard"
+			Skill Normal
+			WeaponRestrictions MeleeOnly
+			Attributes UseBossHealthBar
+			Attributes AlwaysCrit
+			Attributes AlwaysFireWeapon
+			Item "Point and Shoot"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_KNIFE"
+				"slow enemy on hit major" 20
+				"subtract victim medigun charge on hit" 100
+				"subtract victim cloak on hit" 100
+				"crit forces victim to laugh" 1
+				"melee range multiplier" 10
+				"damage penalty" 0.4
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Scout_Wizard
+		{
+			Class Scout
+			ClassIcon 30waves_wizard
+			Health 10000
+			Name "Wind Wizard"
+			Skill Normal
+			WeaponRestrictions MeleeOnly
+			Attributes UseBossHealthBar
+			Attributes AutoJump
+				AutoJumpMin 1
+				AutoJumpMax 5
+			Attributes AlwaysFireWeapon
+			Item "Point and Shoot"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_BAT"
+				"fire rate bonus" 0.5
+				"melee range multiplier" 15
+				"melee bounds multiplier" 5
+				"damage causes airblast" 1
+				"airblast pushback scale" 30
+				"damage penalty" 0.4
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.3
+				"damage force increase" 10
+				"increased jump height" 10
+				"cancel falling damage" 1
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Heavy_Wizard
+		{
+			Class Heavy
+			ClassIcon 30waves_wizard
+			Health 15000
+			Name "Earth Wizard"
+			Skill Normal
+			WeaponRestrictions MeleeOnly
+			Attributes UseBossHealthBar
+			Attributes AlwaysFireWeapon
+			Item "Point and Shoot"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_FISTS"
+				"damage bonus" 1.5
+				"melee range multiplier" 10
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"damage force reduction" 0
+				"airblast vulnerability multiplier" 0
+				"cannot pick up intelligence" 1
+			}
+		}
+		//SWATs
+		T_TFBot_Scout_SWAT
+		{
+			Class Scout
+			ClassIcon 30waves_SWAT
+			Health 500
+			Name "SWAT - Shotgun"
+			Skill Expert
+			Scale 1
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			Item "The Soda Popper"
+			Item "Fortunate Son"
+			ItemAttributes
+			{
+				ItemName "The Soda Popper"
+				"bullets per shot bonus" 3
+				"weapon spread bonus" 0.5
+				"faster reload rate" 0.1
+				"fire rate penalty" 1.3
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 4
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Pyro_SWAT
+		{
+			Class Pyro
+			ClassIcon 30waves_SWAT
+			Health 500
+			Name "SWAT - Pyrotechnics"
+			Skill Expert
+			Scale 1
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			Item "The Rainblower"
+			Item "The Bone Dome"
+			ItemAttributes
+			{
+				ItemName "The Rainblower"
+				"weapon burn dmg increased" 30
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 4
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Soldier_SWAT
+		{
+			Class Soldier
+			ClassIcon 30waves_SWAT
+			Health 500
+			Name "SWAT - RPG"
+			Skill Expert
+			Scale 1
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			Item "The Liberty Launcher"
+			Item "The Doe-Boy"
+			ItemAttributes
+			{
+				ItemName "The Liberty Launcher"
+				"damage bonus" 14
+				"Blast radius increased" 3
+				"faster reload rate" 0.1
+				"use large smoke explosion" 1
+				"fire rate penalty" 5
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 4
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Demoman_SWAT
+		{
+			Class Demoman
+			ClassIcon 30waves_SWAT
+			Health 1500
+			Name "SWAT - Defense"
+			Skill Expert
+			Scale 1
+			WeaponRestrictions MeleeOnly
+			Attributes MiniBoss
+			Item "The Chargin' Targe"
+			Item "The Pain Train"
+			Item "Scotch Bonnet"
+			ItemAttributes
+			{
+				ItemName "The Pain Train"
+				"damage bonus" 3
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 4
+				"damage force reduction" 0
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Sniper_SWAT
+		{
+			Class Sniper
+			ClassIcon 30waves_SWAT
+			Health 500
+			Name "SWAT - Assault"
+			Skill Expert
+			Scale 1
+			WeaponRestrictions SecondaryOnly
+			Attributes MiniBoss
+			Item "The Cleaner's Carbine"
+			Item "Letch's LED"
+			ItemAttributes
+			{
+				ItemName "The Cleaner's Carbine"
+				"damage bonus" 10
+				"fire rate bonus" 0.6
+				"faster reload rate" 0.9
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 4
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Heavy_SWAT
+		{
+			Class Heavy
+			ClassIcon 30waves_SWAT
+			Health 500
+			Name "SWAT - Machine Gun"
+			Skill Expert
+			Scale 1
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			Item "Tomislav"
+			Item "The Eliminators Safeguard"
+			ItemAttributes
+			{
+				ItemName "Tomislav"
+				"damage bonus" 4
+				"fire rate bonus" 0.08
+				"bullets per shot bonus" 0.3
+			}
+			CharacterAttributes
+			{
+				"cannot pick up intelligence" 1
+			}
+		}
+		//Copy Players
+		T_TFBot_Scout_CopyPlayer
+		{
+			Class Scout
+			ClassIcon 30waves_copyplayer
+			Health 750
+			Name "Copy Player Scout"
+			Skill Expert
+			WeaponRestrictions PrimaryOnly
+			Attributes UseBossHealthBar
+			Item "Loyalty Reward"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_SCATTERGUN"
+				"damage bonus" 2
+				"clip size bonus" 3
+				"fire rate bonus" 0.6
+				"faster reload rate" 0.4
+				"projectile penetration" 1
+				"heal on kill" 100
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 1.3
+				"increased jump height" 1.6
+				"dmg taken from bullets reduced" 0.25
+				"dmg taken from blast reduced" 0.25
+				"dmg taken from fire reduced" 0.25
+				"dmg taken from crit reduced" 0.1
+				"health regen" 10
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Soldier_CopyPlayer
+		{
+			Class Soldier
+			ClassIcon 30waves_copyplayer
+			Health 1200
+			Name "Copy Player Soldier"
+			Skill Expert
+			WeaponRestrictions PrimaryOnly
+			Attributes UseBossHealthBar
+			Item "Loyalty Reward"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_ROCKETLAUNCHER"
+				"damage bonus" 2
+				"clip size upgrade atomic" 8
+				"fire rate bonus" 0.6
+				"faster reload rate" 0.4
+				"rocket specialist" 4
+				"heal on kill" 100
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 1.3
+				"increased jump height" 1.6
+				"dmg taken from bullets reduced" 0.25
+				"dmg taken from blast reduced" 0.25
+				"dmg taken from fire reduced" 0.25
+				"dmg taken from crit reduced" 0.1
+				"health regen" 10
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Pyro_CopyPlayer
+		{
+			Class Pyro
+			ClassIcon 30waves_copyplayer
+			Health 1050
+			Name "Copy Player Pyro"
+			Skill Expert
+			WeaponRestrictions PrimaryOnly
+			Attributes UseBossHealthBar
+			Item "Loyalty Reward"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_FLAMETHROWER"
+				"damage bonus" 2
+				"weapon burn dmg increased" 2
+				"weapon burn time increased" 2
+				"airblast pushback scale" 2
+				"heal on kill" 100
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 1.3
+				"increased jump height" 1.6
+				"dmg taken from bullets reduced" 0.25
+				"dmg taken from blast reduced" 0.25
+				"dmg taken from fire reduced" 0.25
+				"dmg taken from crit reduced" 0.1
+				"health regen" 10
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Demoman_CopyPlayer
+		{
+			Class Demoman
+			ClassIcon 30waves_copyplayer
+			Health 1050
+			Name "Copy Player Demoman"
+			Skill Expert
+			WeaponRestrictions PrimaryOnly
+			Attributes UseBossHealthBar
+			Item "Loyalty Reward"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_GRENADELAUNCHER"
+				"damage bonus" 1.8
+				"clip size upgrade atomic" 8
+				"fire rate bonus" 0.6
+				"faster reload rate" 0.4
+				"Projectile speed increased" 2
+				"heal on kill" 100
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 1.3
+				"increased jump height" 1.6
+				"dmg taken from bullets reduced" 0.25
+				"dmg taken from blast reduced" 0.25
+				"dmg taken from fire reduced" 0.25
+				"dmg taken from crit reduced" 0.1
+				"health regen" 10
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Demoknight_CopyPlayer
+		{
+			Class Demoman
+			ClassIcon 30waves_copyplayer
+			Health 1050
+			Name "Copy Player Demoknight"
+			Skill Expert
+			WeaponRestrictions MeleeOnly
+			Attributes UseBossHealthBar
+			Item "The Splendid Screen"
+			Item "The Claidheamohmor"
+			Item "Loyalty Reward"
+			ItemAttributes
+			{
+				ItemName "The Splendid Screen"
+				"charge recharge rate increased" 5
+				"damage force reduction" 0.1
+			}
+			ItemAttributes
+			{
+				ItemName "The Claidheamohmor"
+				"damage bonus" 2
+				"melee attack rate bonus" 0.6
+				"critboost on kill" 4
+				"heal on kill" 100
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 1.3
+				"increased jump height" 1.6
+				"dmg taken from bullets reduced" 0.25
+				"dmg taken from blast reduced" 0.25
+				"dmg taken from fire reduced" 0.25
+				"dmg taken from crit reduced" 0.1
+				"health regen" 10
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Heavy_CopyPlayer
+		{
+			Class Heavy
+			ClassIcon 30waves_copyplayer
+			Health 1800
+			Name "Copy Player Heavy"
+			Skill Expert
+			WeaponRestrictions PrimaryOnly
+			Attributes UseBossHealthBar
+			Item "Loyalty Reward"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_MINIGUN"
+				"fire rate bonus" 0.6
+				"attack projectiles" 2
+				"generate rage on damage" 3
+				"projectile penetration heavy" 3
+				"heal on kill" 100
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 1.3
+				"increased jump height" 1.6
+				"dmg taken from bullets reduced" 0.25
+				"dmg taken from blast reduced" 0.25
+				"dmg taken from fire reduced" 0.25
+				"dmg taken from crit reduced" 0.1
+				"health regen" 10
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Medic_CopyPlayer
+		{
+			Class Medic
+			ClassIcon 30waves_copyplayer
+			Health 900
+			Name "Copy Player Medic"
+			Skill Expert
+			WeaponRestrictions SecondaryOnly
+			Attributes UseBossHealthBar
+			Attributes SpawnWithFullCharge
+			Attributes ProjectileShield
+			Item "Loyalty Reward"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_MEDIGUN"
+				"ubercharge rate bonus" 2
+				"generate rage on heal" 2
+				"uber duration bonus" 6
+				"overheal expert" 4
+				"healing mastery" 4
+				"share consumable with patient" 3
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 1.3
+				"increased jump height" 1.6
+				"dmg taken from bullets reduced" 0.25
+				"dmg taken from blast reduced" 0.25
+				"dmg taken from fire reduced" 0.25
+				"dmg taken from crit reduced" 0.1
+				"health regen" 10
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Sniper_CopyPlayer
+		{
+			Class Sniper
+			ClassIcon 30waves_copyplayer
+			Health 750
+			Name "Copy Player Bowman"
+			Skill Expert
+			WeaponRestrictions PrimaryOnly
+			Attributes UseBossHealthBar
+			Item "The Huntsman"
+			Item "Loyalty Reward"
+			ItemAttributes
+			{
+				ItemName "The Huntsman"
+				"damage bonus" 2
+				"fire rate bonus" 0.6
+				"faster reload rate" 0.4
+				"projectile penetration" 1
+				"bleeding duration" 15
+				"heal on kill" 100
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 1.3
+				"increased jump height" 1.6
+				"dmg taken from bullets reduced" 0.25
+				"dmg taken from blast reduced" 0.25
+				"dmg taken from fire reduced" 0.25
+				"dmg taken from crit reduced" 0.1
+				"health regen" 10
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Spy_CopyPlayer
+		{
+			Class Spy
+			ClassIcon 30waves_copyplayer
+			Health 750
+			Name "Copy Player Spy"
+			Skill Expert
+			WeaponRestrictions MeleeOnly
+			Attributes UseBossHealthBar
+			Item "Loyalty Reward"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_KNIFE"
+				"melee attack rate bonus" 0.6
+				"armor piercing" 100
+				"critboost on kill" 4
+				"heal on kill" 100
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 1.3
+				"increased jump height" 1.6
+				"dmg taken from bullets reduced" 0.25
+				"dmg taken from blast reduced" 0.25
+				"dmg taken from fire reduced" 0.25
+				"dmg taken from crit reduced" 0.1
+				"health regen" 10
+				"cannot pick up intelligence" 1
+			}
+		}
+		//Mini-Bosses
+		T_TFBot_Chief_Heavyweapons_Indian
+		{
+			Class Heavy
+			ClassIcon heavy_giant
+			Health 10000
+			Name "Indian Chief"
+			Skill Expert
+			Scale 2
+			WeaponRestrictions MeleeOnly
+			Attributes MiniBoss
+			Attributes UseBossHealthBar
+			Item "Warrior's Spirit"
+			Item "Big Chief"
+			Item "The All-Father"
+			ItemAttributes
+			{
+				ItemName "Warrior's Spirit"
+				"damage bonus" 2
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"damage force reduction" 0.3
+				"airblast vulnerability multiplier" 0.3
+				"override footstep sound set" 2
+			}
+		}
+		T_TFBot_Giant_Heavyweapons_Indian
+		{
+			Class Heavy
+			ClassIcon heavy_giant
+			Health 5000
+			Name "Giant Indian Heavy"
+			Skill Expert
+			WeaponRestrictions MeleeOnly
+			Attributes MiniBoss
+			Item "Warrior's Spirit"
+			Item "Big Chief"
+			Item "The All-Father"
+			ItemAttributes
+			{
+				ItemName "Warrior's Spirit"
+				"damage bonus" 2
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"damage force reduction" 0.3
+				"airblast vulnerability multiplier" 0.3
+				"override footstep sound set" 2
+			}
+		}
+		T_TFBot_Chief_Scout_Fast
+		{
+			Class Scout
+			ClassIcon scout_giant_fast
+			Health 3000
+			Name "Fastest Super Scout"
+			Skill Easy
+			Scale 2
+			WeaponRestrictions MeleeOnly
+			Attributes MiniBoss
+			Attributes UseBossHealthBar
+			Item "The Atomizer"
+			Item "Bonk Boy"
+			CharacterAttributes
+			{
+				"move speed bonus" 3
+				"damage force reduction" 0.7
+				"airblast vulnerability multiplier" 0.7
+				"override footstep sound set" 5
+			}
+		}
+		T_TFBot_Chief_Demoknight
+		{
+			Class Demoman
+			ClassIcon demoknight_giant
+			Health 30000
+			Name "The King Knight"
+			Skill Expert
+			Scale 2
+			WeaponRestrictions MeleeOnly
+			Attributes MiniBoss
+			Attributes UseBossHealthBar
+			Item "The Chargin' Targe"
+			Item "The Claidheamohmor"
+			Item "Prince Tavish's Crown"
+			ItemAttributes
+			{
+				ItemName "The Claidheamohmor"
+				"dmg taken increased" 1
+				"heal on kill" 0
+				"damage bonus" 2
+				"charge time increased" 10
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"damage force reduction" 0.5
+				"airblast vulnerability multiplier" 0.5
+				"override footstep sound set" 4
+			}
+		}
+		//Legendary Robots
+		T_TFBot_Chief_Scout_Legendary
+		{
+			Class Scout
+			ClassIcon scout_stun_giant
+			Health 19000
+			Name "The Legendary Scout"
+			Skill Expert
+			Scale 1.1
+			WeaponRestrictions MeleeOnly
+			Attributes MiniBoss
+			Attributes UseBossHealthBar
+			Item "The Sandman"
+			Item "The Fed-Fightin' Fedora"
+			Item "The Dillinger's Duffel"
+			Item "Merc's Pride Scarf"
+			ItemAttributes
+			{
+				ItemName "The Sandman"
+				"fire rate bonus" 0.5
+				"mark for death" 1
+				"bleeding duration" 20
+				"heal on hit for rapidfire" 25
+				"effect bar recharge rate increased" 0.01
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 3
+				"increased jump height" 2
+				"dmg taken from bullets reduced" 0.1
+				"dmg taken from blast reduced" 0.1
+				"dmg taken from fire reduced" 0.1
+				"dmg taken from crit reduced" 0.1
+				"dmg from melee increased" 10
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Chief_Soldier_Legendary
+		{
+			Class Soldier
+			ClassIcon soldier_spammer
+			Health 500000
+			Name "The Legendary Soldier"
+			Skill Expert
+			Scale 2.5
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			Attributes UseBossHealthBar
+			Item "The Liberty Launcher"
+			Item "Stout Shako"
+			Item "The All-Father"
+			ItemAttributes
+			{
+				ItemName "The Liberty Launcher"
+				"fire rate bonus" 0.01
+				"faster reload rate" 0.01
+				"projectile spread angle penalty" 6
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"damage force reduction" 0.4
+				"airblast vulnerability multiplier" 0.4
+				"override footstep sound set" 3
+				"health regen" 150
+				"increased jump height" 2
+				"dmg taken from bullets increased" 10
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Chief_Pyro_Legendary
+		{
+			Class Pyro
+			ClassIcon pyro_giant
+			Health 80000
+			Name "The Legendary Pyro"
+			Skill Expert
+			Scale 2.5
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			Attributes UseBossHealthBar
+			Item "The Backburner"
+			Item "L4D Hat"
+			Item "The Scrap Pack"
+			Item "The Cremator's Conscience"
+			ItemAttributes
+			{
+				ItemName "The Backburner"
+				"damage bonus" 10
+				"weapon burn dmg increased" 10
+				"weapon burn time increased" 10
+				"flame life bonus" 2
+				"airblast pushback scale" 10
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"damage force reduction" 0.6
+				"airblast vulnerability multiplier" 0.6
+				"override footstep sound set" 6
+				"health regen" 100
+				"increased jump height" 2
+				"dmg taken from fire reduced" -0.1
+				"dmg taken from crit increased" 10
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Chief_Demoman_Legendary
+		{
+			Class Demoman
+			ClassIcon demo_giant
+			Health 80000
+			Name "The Legendary Demoman"
+			Skill Expert
+			Scale 2.5
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			Attributes UseBossHealthBar
+			Attributes HoldFireUntilFullReload
+			Item "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+			Item "Reggaelator"
+			Item "A Whiff of the Old Brimstone"
+			Item "The Bird-Man of Aberdeen"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+				"is australium item" 1
+				"item style override" 1
+				"damage bonus" 10
+				"fire rate bonus" -1
+				"clip size upgrade atomic" 16
+				"Blast radius increased" 5
+				"Projectile speed increased" 10
+				"faster reload rate" 0.7
+				"no self blast dmg" 2
+				"use large smoke explosion" 1
+				"projectile spread angle penalty" 15
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"damage force reduction" 0.4
+				"airblast vulnerability multiplier" 0.4
+				"override footstep sound set" 4
+				"health regen" 50
+				"increased jump height" 2
+				"dmg taken from crit reduced" 0.1
+				"dmg taken from fire increased" 10
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Chief_Heavyweapons_Legendary
+		{
+			Class Heavy
+			ClassIcon heavy_giant
+			Health 110000
+			Name "The Legendary Heavy"
+			Skill Expert
+			Scale 2.5
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			Attributes UseBossHealthBar
+			Item "Tomislav"
+			Item "The Team Captain"
+			Item "The Deus Specs"
+			ItemAttributes
+			{
+				ItemName "Tomislav"
+				"is australium item" 1
+				"item style override" 1
+				"fire rate bonus" 0.1
+				"bullets per shot bonus" 10
+				"minigun spinup time decreased" 0.1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"damage force reduction" 0.3
+				"airblast vulnerability multiplier" 0.3
+				"override footstep sound set" 2
+				"health regen" 50
+				"increased jump height" 2
+				"dmg taken from blast increased" 10
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Chief_Medic_Legendary
+		{
+			Class Medic
+			ClassIcon medic_giant
+			Health 10000
+			Name "The Legendary Medic"
+			Skill Expert
+			Scale 2.5
+			WeaponRestrictions SecondaryOnly
+			Attributes MiniBoss
+			Attributes UseBossHealthBar
+			Item "Upgradeable TF_WEAPON_MEDIGUN"
+			Item "The Gentleman's Ushanka"
+			Item "The Nine-Pipe Problem"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_MEDIGUN"
+				"is australium item" 1
+				"item style override" 1
+				"heal rate bonus" 1000
+				"overheal bonus" 499.5
+				"ubercharge rate bonus" 100
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"damage force reduction" 0.6
+				"airblast vulnerability multiplier" 0.6
+				"health regen" 500
+				"increased jump height" 2
+				"dmg taken from blast increased" 10
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFBot_Chief_Sniper_Legendary
+		{
+			Class Sniper
+			ClassIcon sniper_bow
+			Health 33000
+			Name "The Legendary Sniper"
+			Skill Expert
+			Scale 1
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			Attributes UseBossHealthBar
+			Item "The Huntsman"
+			Item "The Cozy Camper"
+			Item "The Anger"
+			ItemAttributes
+			{
+				ItemName "The Huntsman"
+				"damage bonus" 4
+				"fire rate bonus" 0.5
+				"faster reload rate" 0.1
+				"Set DamageType Ignite" 1
+				"projectile penetration" 1
+			}
+			ItemAttributes
+			{
+				ItemName "The Cozy Camper"
+				"health regen" 100
+			}
+			CharacterAttributes
+			{
+				"airblast vulnerability multiplier" 2
+				"cannot pick up intelligence" 1
+				"dmg taken from fire increased" 10
+			}
+		}
+		T_TFBot_Chief_Spy_Legendary
+		{
+			Class Spy
+			ClassIcon spy_giant
+			Health 4000
+			Name "The Legendary Spy"
+			Skill Easy
+			Scale 0.05
+			Attributes MiniBoss
+			Attributes UseBossHealthBar
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_REVOLVER"
+				"damage bonus" 10
+			}
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_KNIFE"
+				"damage all connected" 1
+			}
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_BUILDER_SPY"
+				"sapper damage bonus" 10
+				"sapper health bonus" 4
+				"sapper damage leaches health" 50
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 3
+				"cannot pick up intelligence" 1
+				"dmg taken from bullets increased" 10
+			}
+		}
+	}
+}

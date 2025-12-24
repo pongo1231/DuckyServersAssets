@@ -1,0 +1,165 @@
+#base robot_standard.pop
+#base robot_giant.pop
+
+WaveSchedule
+{
+	StartingCurrency 800
+	CanBotsAttackWhileInSpawnRoom no
+	RespawnWaveTime 0
+	Advanced 1
+
+	ExtraTankPath
+	{
+		Name "laserblimppath"
+		Node "-1056 3488 697"
+		Node "-576 3488 697"
+		Node "-208 3104 697"
+		Node "-208 1440 697"
+		Node "-762 1040 697"
+		Node "-752 -80 697"
+		Node "-272 -272 697"
+		Node "-16 -400 633"
+		Node "304 -672 633"
+	}
+
+	PointTemplates
+	{
+		laserblimp
+		{
+			logic_relay
+			{
+				"OnSpawn" "laserblimppath_3,addoutput,onpass lsr1:start::0:-1,0,-1"
+				"OnSpawn" "laserblimppath_3,addoutput,onpass lsrhurt:enable::0:-1,0,-1"
+			}
+			prop_dynamic
+			{
+				"modelscale" "0.33"
+				"angles" "60 180 180"
+				"model" "models/props_spytech/raygun003.mdl"
+				"origin" "-59 0 52"
+			}
+			NoFixup 1
+			info_particle_system
+			{
+				"targetname" "lsr1"
+				"effect_name" "passtime_beam_trail_stage3"
+				"start_active" "0"
+				"cpoint1" "lsr2"
+				"origin" "-50 5 -65"
+			}
+			NoFixup 1
+			info_particle_system
+			{
+				"targetname" "lsr1"
+				"effect_name" "passtime_beam_trail_stage3"
+				"start_active" "0"
+				"cpoint1" "lsr2"
+				"origin" "-50 -5 -65"
+			}
+			NoFixup 1
+			info_particle_system
+			{
+				"targetname" "lsr1"
+				"effect_name" "passtime_beam_trail_stage3"
+				"start_active" "0"
+				"cpoint1" "lsr2"
+				"origin" "-55 0 -65"
+			}
+			NoFixup 1
+			info_particle_system
+			{
+				"targetname" "lsr1"
+				"effect_name" "passtime_beam_trail_stage3"
+				"start_active" "0"
+				"cpoint1" "lsr2"
+				"origin" "-45 0 -65"
+			}
+			NoFixup 1
+			info_particle_system
+			{
+				"targetname" "lsr2"
+				"effect_name" "burninggibs"
+				"start_active" "0"
+				"cpoint1" "lsr2"
+				"origin" "-50 0 -656"
+			}
+			NoFixup 1
+			trigger_multiple
+			{
+				"targetname" "lsrhurt"
+				"origin" "-50 0 -287"
+				"mins" "-31 -31 -393"
+				"maxs" "31 31 263"
+				"startdisabled" "1"
+				"spawnflags" "1088"
+				"filtername" "filter_red"
+				"OnStartTouch" "!activator,set,0,0,-1"
+			}
+		}
+	}
+
+	Wave // Wave 1
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 2
+			SpawnCount 1
+			WaitBetweenSpawns 9999
+		
+			TFBot
+			{ Class Scout }
+		}
+		WaveSpawn
+		{
+			TotalCurrency 200
+			TotalCount	1
+			MaxActive 	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			FirstSpawnWarningSound "ambient/alarms/doomsday_lift_alarm.wav"
+		
+			Tank
+			{
+				Name "laserblimpboss"
+				StartingPathTrackNode "laserblimppath_1"
+				Health 10000
+				Skin 1
+				Speed 75
+
+				Model "models/bots/boss_bot/boss_blimp.mdl"
+				Gravity 0
+				DisableSmokeStack 1
+				DisableChildModels 1
+				ReplaceModelCollisions 1
+				RotatePitch 0
+				EngineLoopSound "npc/combine_gunship/dropship_engine_distant_loop1.wav"  
+
+				ClassIcon blimp2_laser_lite
+				SpawnTemplate "laserblimp"
+	
+				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+	}
+}

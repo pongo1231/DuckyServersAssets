@@ -1,0 +1,3128 @@
+// Coercion Scareground by catrain
+#base robot_standard.pop
+#base robot_giant.pop
+
+WaveSchedule
+{
+	StartingCurrency 4250
+	RespawnWaveTime 35
+	CanBotsAttackWhileInSpawnRoom no
+	EventPopfile Halloween
+	
+	ForceHoliday 2
+	ForceRobotBleed 1
+	NoCritPumpkin 1
+	NoRomevisionCosmetics 1
+	RobotLimit 26
+	ExtendedUpgradesOnly 1
+	UpgradeStationKeepWeapons 1
+
+	ItemAttributes
+	{
+		Classname tf_weapon_rocketlauncher
+		"damage bonus HIDDEN" 1.75
+		"blast dmg to self increased" 0.25
+		"self dmg push force decreased" 0.15
+	}
+
+	PlayerAttributes  
+	{
+		"crit mod disabled" 0
+		"mult_patient_overheal_penalty_active" 0.5
+
+		Soldier
+		{
+			"hidden maxhealth non buffed" -100
+		}
+	}
+
+	CustomWeapon
+	{
+		"Rapidfire Soldier Upgrade"
+		{
+			OriginalItemName "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+			"cannot be upgraded" 1
+			"damage bonus" 5.5
+			"fire rate bonus" 0.6
+			"faster reload rate" -0.8
+			"maxammo primary increased" 3
+			"blast dmg to self increased" 0.25
+			"self dmg push force decreased" 0
+			"custom weapon fire sound" MVM.GiantSoldierRocketShoot
+		}
+	}
+
+	ExtendedUpgrades
+	{
+		MaxUpgradesTier
+		{
+			1 999
+			2 999 
+		}
+		MinUpgradesTier
+		{
+			1 2
+			2 5
+		}
+
+		WU_Clipsize_Soldier
+		{
+			Name "+1 clip size"
+			Attribute "clip size upgrade atomic"
+			Increment 1
+			Cap 4
+			Cost 300
+			Tier 1
+			AllowPlayerClass Soldier
+			AllowedWeapons
+			{
+				Classname TF_WEAPON_ROCKETLAUNCHER
+			}
+		}
+
+		WU_Firerate_Soldier
+		{
+			Name "+10% fire rate"
+			Attribute "fire rate bonus"
+			Increment -0.1
+			Cap 0.5
+			Cost 200
+			Tier 1
+			AllowPlayerClass Soldier
+			AllowedWeapons
+			{
+				Classname TF_WEAPON_ROCKETLAUNCHER
+			}
+		}
+
+		WU_Damagebonus_Soldier
+		{
+			Name "+1 damage bonus"
+			Attribute "damage bonus"
+			Increment 0.5
+			Cap 7
+			Cost 300
+			Tier 1
+			AllowPlayerClass Soldier
+			AllowedWeapons
+			{
+				Classname TF_WEAPON_ROCKETLAUNCHER
+			}
+		}
+
+		WU_Reloadspeed_Soldier
+		{
+			Name "+20% reload speed"
+			Attribute "faster reload rate"
+			Increment -0.2
+			Cap -1
+			Cost 200
+			Tier 1
+			AllowPlayerClass Soldier
+			AllowedWeapons
+			{
+				Classname TF_WEAPON_ROCKETLAUNCHER
+			}
+		}
+
+		WU_PaP_T3_Rocket
+		{
+			Name "Überweapon Upgrade"
+			Attribute "dmg penalty vs players"
+			Increment 1
+			Cap 2
+			Cost 2000
+			Tier 2
+			AllowedWeapons
+			{
+				ItemName TF_WEAPON_ROCKETLAUNCHER
+			}
+			OnApply
+			{
+				Output "!activator,$giveitem,Rapidfire Soldier Upgrade,0"
+				Output "!activator,speakresponseconcept,TLK_MVM_LOOT_ULTRARARE,0,-1"
+			}
+		}
+
+		WU_AmmoPrim
+		{
+			Name "+50% max ammo"
+			Attribute "maxammo primary increased"
+			Increment 0.5
+			Cap 2.5
+			Cost 350
+			Tier 1
+			AllowedWeapons
+			{
+				Slot Primary
+			}
+			DisallowedWeapons
+			{
+				Classname weapon_demoman_boots
+				ItemName "The B.A.S.E. Jumper"
+				ItemName "Ali Baba's Wee Booties"
+				ItemName "The Bootlegger"
+				ItemName "Thunder Gun"
+				SimilarToItem "The Flying Guillotine"
+			}
+		}
+
+		healthupgrade
+        {
+            Name "+25 Health Bonus"
+            
+            Attribute "max health additive bonus"
+            Increment 25
+			Cap 400
+            Cost 75
+            AllowPlayerClass Soldier
+            PlayerUpgrade 1
+        }
+
+		movementupgrade
+        {
+            Name "+10% Speed Bonus"
+            
+            Attribute "move speed bonus"
+            Increment 0.1
+			Cap 1.6
+            Cost 150
+            AllowPlayerClass Soldier
+            PlayerUpgrade 1
+        }
+	}
+
+	Templates
+	{
+		T_Zombie_Special_Superfist
+		{
+			Class Demoman
+			Skill Expert
+			Health 600
+			StripItem "Zombie Demo"
+			StripItemSlot 0
+			Action Mobber
+			Attributes MiniBoss
+		//	DesiredAttackRange 50
+			ExtAttr IgnoreBuildings
+			Name "Bruiser Zombie"
+			ClassIcon demo_superfist
+			UseCustomModel "models/kirillian/infected/coomer_v4.mdl"
+			DeathSound =80|shadows/charger_death.mp3
+			Item "The Chargin' Targe"
+			Scale 1.25
+			NoIdleSound 1
+			VoiceCommand
+			{
+				Delay 15
+				Cooldown 5
+				Repeats 0
+				Type "Move up"
+			}
+			VoiceCommand
+			{
+				Delay 2
+				Cooldown 4
+				Repeats 0
+				IfSeeTarget 1
+				Type "Negative"
+			}
+			ItemAttributes
+			{
+				ItemName "The Chargin' Targe"
+				"is invisible" 1
+				"damage causes airblast" 1
+				"effect add attributes" "no_attack|1" // no slap
+				"dmg taken from fire reduced" 1
+				"dmg taken from blast reduced" 1 // negate resistances since players can't see the shield
+				"charge impact damage increased" 1.75 // bigger damage bash when you can't turn at all
+				"mult charge turn control" 2
+			}
+			ItemAttributes
+			{
+				ItemName TF_WEAPON_BOTTLE
+				"is invisible" 1
+				"fire rate penalty" 1.3
+				"damage bonus" 1.2
+				"custom kill icon" hot_hand
+				"custom impact sound" =80|player/taunt_chest_thump_alt.wav
+				"charge time increased" 2
+			}
+			CharacterAttributes
+			{
+			//	"voice pitch scale" 0
+				"cancel falling damage" 1
+				"override footstep sound set" 0
+				"mult stun resistance" 0
+				"increased jump height" 1.3
+				"cannot be sapped" 1
+				"force distribute currency on death" 1
+				"dmg taken from crit reduced" 0.7
+			}
+		}
+
+		T_Zombie_Special_Hulk
+		{
+			Class Heavy
+			Skill Expert
+			StripItem "Zombie Heavy"
+			StripItemSlot 0
+			Name "Tank"
+			Health 8000 // only %hp increase
+			Attributes MiniBoss
+			Attributes DisableDodge
+			ExtAttr IgnoreBuildings
+			Action Mobber
+			Tag bigguyalert
+			Tag swooce
+			UseMeleeThreatPrioritization 1
+			ClassIcon heavy_zombie_arm2_lite
+			UseCustomModel "models\kirillian\infected\hank_v4.mdl"
+			StripItem "Zombie Heavy"
+			Skin 1
+			NoIdleSound 1
+			AdditionalStepSound "=80|player/footsteps/giant2.wav"
+			DeathSound shadows\tank_death_01.mp3
+
+			WeaponSwitch
+			{
+				Delay 1
+				Cooldown 30
+				Repeats 1
+				Type "Melee"
+			}
+			VoiceCommand
+			{
+				Delay 2
+				Cooldown 4.2
+				Repeats 0
+				IfSeeTarget 0
+				Type "Move Up"
+			}
+			VoiceCommand
+			{
+				Delay 1
+				Cooldown 3
+				Repeats 0
+				IfSeeTarget 1
+				Type "Cheers"
+			}
+			ItemAttributes
+			{
+				ItemName TF_WEAPON_FISTS
+				"provide on active" 1
+				"damage bonus" 2
+				"dmg bonus vs buildings" 4444
+				"damage causes airblast" 1
+				"apply z velocity on damage" 160
+				"apply look velocity on damage" 1024
+				"fire rate bonus" 2
+				"custom impact sound" shadows/tank_punch_1.mp3
+				"deploy time decreased" 3
+				"alt-fire disabled" 1 // stop punching until you're actually close
+				"melee range multiplier" 1.4
+			}
+			ItemAttributes
+			{
+				ItemName TF_WEAPON_SHOTGUN_HWG
+				"provide on active" 1
+				"is invisible" 1
+				"single wep deploy time increased" 1.5
+				"override projectile type" 2
+				"fire rate bonus" 20
+				"no_jump" 1
+				"reload full clip at once" 1
+				"faster reload rate" -0.8
+				"dmg pierces resists absorbs" 1
+				"custom projectile model" models\props_forest\cliff_wall_09a.mdl
+				"damage bonus" 16.7
+				"dmg bonus vs buildings" 4444
+				"custom impact sound" shadows/thrown_projectile_hit_01.mp3
+				"custom weapon fire sound" misc/null.wav
+				"projectile gravity" 300
+				"projectile speed increased" 1.7
+				"blast radius increased" 1.25
+				"custom kill icon" mailbox
+				"rocket specialist" 1
+				"penetrate teammates" 1 // throw through teammates
+				"mult_player_movespeed_active" 0 // stop moving when throwing rocks!
+			}
+			CharacterAttributes
+			{
+				"voice pitch scale" 1
+				"cancel falling damage" 1
+				"override footstep sound set" 0
+				"damage force reduction" 0
+				"airblast vulnerability multiplier" 0
+				"mult stun resistance" 0
+				"dmg from ranged reduced" 0.75
+				"dmg taken mult from special damage type 1" -1
+				"cannot be sapped" 1
+				"no_duck" 1
+				"increased jump height" 1.3
+				"move speed penalty" 1.05
+				"dmg taken from crit reduced" 0.5
+			}
+		}
+	}
+	
+	Mission // Sentry Busters
+	{
+		Objective DestroySentries
+		Where spawnbot
+		BeginAtWave	1
+		RunForThisManyWaves	1
+		InitialCooldown	45
+		CooldownTime 45
+		TFBot
+		{
+			Template T_TFBot_SentryBuster
+		}
+	}
+	
+	Mission // Snipers
+	{
+		Objective Sniper
+		Where spawnbot_mission_sniper
+		BeginAtWave	1
+		RunForThisManyWaves	1
+		InitialCooldown	60
+		CooldownTime 60
+		DesiredCount 2
+		TFBot
+		{
+			Template T_TFBot_Sniper
+		}
+	}
+	
+	Mission // Spies
+	{
+		Objective Spy
+		Where spawnbot_mission_spy
+		BeginAtWave	1
+		RunForThisManyWaves	1
+		InitialCooldown	50
+		CooldownTime 60
+		DesiredCount 2
+		TFBot
+		{
+			Template T_TFBot_Spy
+			Item "Ghost of Spies Checked Past"
+		}
+	}
+	
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_classic_event
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay_event
+			Action Trigger
+		}
+		
+		WaveSpawn
+		{
+			Name "w1a"
+			Where spawnbot
+			TotalCount 60
+			MaxActive 14
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 2
+			TotalCurrency 0
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Class Scout
+					Name "Zombie"
+					Item "B'aaarrgh-n-Bicorne"
+					Health 100
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+				TFBot
+				{
+					Class Soldier
+					Health 125
+					Name "Zombie"
+					Item "The Big Daddy"
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+				TFBot
+				{
+					Class Pyro
+					Health 100
+					Name "Zombie"
+					Item "The Wraith Wrap"
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+				TFBot
+				{
+					Class Heavyweapons
+					Health 150
+					Name "Zombie"
+					Item "Squatter's Right"
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+				TFBot
+				{
+					Class Medic
+					Health 100
+					Name "Zombie"
+					Item "Medic's Mountain Cap"
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+				TFBot
+				{
+					Class Sniper
+					Health 100
+					Name "Zombie"
+					Item "Wet Works"
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w1b"
+			Where spawnbot
+			TotalCount 4
+			MaxActive 4
+			SpawnCount 1
+			WaitBeforeStarting 11
+			WaitBetweenSpawns 13
+			TotalCurrency 100
+
+			TFBot
+			{
+				Class Pyro
+				Name "Giant Acid Zombie"
+				Item "Creature's Grin"  
+				Item "The Mucous Membrain"
+				ClassIcon pyro_spitter
+				Tag bot_giant
+				Skill Expert
+				Health 3000
+				Scale 1.5
+				WeaponRestrictions PrimaryOnly
+				Attributes MiniBoss
+				Attributes AlwaysFireWeapon
+				Skin 1
+				NoIdleSound 1
+				DeathSound =80|shadows/gas_death.mp3
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_FLAMETHROWER"
+					"damage bonus" 0.8
+					"SPELL: Halloween green flames" 1
+					"item style override" 1
+				}
+				CharacterAttributes
+				{
+					"torso scale" 1.4
+					"hand scale" 0.7
+					"bleeding duration" 6
+					"move speed bonus"	0.5
+					"damage force reduction" 0.6
+					"airblast vulnerability multiplier" 0.6
+					"override footstep sound set" 6
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w1c"
+			Where spawnbot
+			TotalCount 7
+			MaxActive 4
+			SpawnCount 1
+			WaitForAllSpawned "w1b"
+			WaitBeforeStarting 11
+			WaitBetweenSpawns 15
+			TotalCurrency 100
+
+			TFBot
+			{
+				Class Demoman
+				Name "Tough Zombie Demoman"
+				Item "The Cross-Comm Crash Helmet"
+				ClassIcon heavy_zombie_breach_lite
+				Skill Expert
+				Health 4000
+				WeaponRestrictions PrimaryOnly
+				Attributes HoldFireUntilFullReload
+				Attributes MiniBoss
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_GRENADELAUNCHER"
+					"damage bonus" 0.75
+					"fire rate bonus" 0.65
+					"faster reload rate" 0.2
+				}
+				CharacterAttributes
+				{
+					"move speed bonus"	0.5
+					"damage force reduction" 0.6
+					"airblast vulnerability multiplier" 0.6
+					"override footstep sound set" 6
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w1d"
+			Where spawnbot
+			TotalCount 42
+			MaxActive 9
+			SpawnCount 3
+			WaitForAllSpawned "w1b"
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 7
+			TotalCurrency 0
+
+			TFBot
+			{
+				Class Heavyweapons
+				Name "Zombie"
+				Item "The Infernal Impaler"
+				ClassIcon heavy_zombie_lite
+				Skill Normal
+				Health 250
+				WeaponRestrictions PrimaryOnly
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w1e"
+			Where spawnbot
+			TotalCount 24
+			MaxActive 6
+			SpawnCount 2
+			WaitForAllSpawned "w1b"
+			WaitBeforeStarting 24
+			WaitBetweenSpawns 7
+			TotalCurrency 0
+
+			TFBot
+			{
+				Class Soldier
+				Name "Fast Zombie"
+				Item "The Lucky Shot"
+				ClassIcon soldier_shovel_ignited
+				Skill Normal
+				Health 300
+				WeaponRestrictions MeleeOnly
+
+				CharacterAttributes
+				{
+					"move speed bonus" 1.35
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w1f"
+			Where spawnbot
+			TotalCount 20
+			MaxActive 8
+			SpawnCount 2
+			WaitForAllSpawned "w1b"
+			WaitBeforeStarting 27
+			WaitBetweenSpawns 8
+			TotalCurrency 200
+
+			TFBot
+			{
+				Class Heavyweapons
+				Name "Big Zombie"
+				ClassIcon heavy_zombie_lite
+				Skill Expert
+				Health 600
+				WeaponRestrictions MeleeOnly
+				Scale 1.35
+
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_FISTS"
+					"damage bonus" 1.5
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w1g"
+			Where spawnbot
+			TotalCount 6
+			MaxActive 6
+			SpawnCount 2
+			WaitForAllSpawned "w1c"
+			WaitBeforeStarting 13
+			WaitBetweenSpawns 16
+			TotalCurrency 200
+
+			Squad
+			{
+				TFBot
+				{
+					Class Soldier
+					Name "Tough Zombie Colonel"
+					ClassIcon heavy_zombie_breach_lite
+					Skill Expert
+					Health 4200
+					Item "The Direct Hit"
+					Item "Fancy Dress Uniform"
+					Item "The Team Captain"
+					WeaponRestrictions PrimaryOnly
+					Attributes MiniBoss
+					ItemAttributes
+					{
+						ItemName "The Direct Hit"
+						"damage bonus" 1.5
+						"fire rate bonus" 2.5
+						"faster reload rate" 0.5
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"damage force reduction" 0.4
+						"airblast vulnerability multiplier" 0.4
+						"override footstep sound set" 3
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic_Regen
+					Name "Tough Zombie Medic"
+					Item "Das Ubersternmann"
+					Item "The Ward"
+				}
+			}
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w1g"
+			DoneOutput
+			{			
+				Target relay_bomb_forcereset
+				Action Trigger
+			}
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w1g"
+			WaitBeforeStarting 4
+			DoneWarningSound vo\mvm_get_to_upgrade01.mp3
+			DoneOutput
+			{
+				Target relay_upgradestation_enable
+				Action Trigger
+			}
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w1g"
+			WaitBeforeStarting 20
+			DoneOutput
+			{			
+				Target relay_change_route
+				Action Trigger
+			}
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w1g"
+			WaitBeforeStarting 25
+			FirstSpawnWarningSound vo\announcer_ends_5sec.mp3
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w1g"
+			WaitBeforeStarting 26
+			FirstSpawnWarningSound vo\announcer_ends_4sec.mp3
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w1g"
+			WaitBeforeStarting 27
+			FirstSpawnWarningSound vo\announcer_ends_3sec.mp3
+
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w1g"
+			WaitBeforeStarting 28
+			FirstSpawnWarningSound vo\announcer_ends_2sec.mp3
+
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w1g"
+			WaitBeforeStarting 29
+			FirstSpawnWarningSound vo\announcer_ends_1sec.mp3
+
+		}
+		
+		WaveSpawn
+		{
+			Name "w2a"
+			Where spawnbot
+			TotalCount 64
+			MaxActive 13
+			SpawnCount 1
+			WaitForAllDead "w1g"
+			WaitBeforeStarting 32
+			WaitBetweenSpawns 2
+			TotalCurrency 0
+			FirstSpawnWarningSound vo\announcer_am_roundstart01.mp3
+			FirstSpawnOutput
+			{
+				Target relay_upgradestation_disable
+				Action Trigger
+			}
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Class Scout
+					Name "Zombie"
+					Item "Greased Lightning"
+					Health 100
+					ClassIcon heavy_zombie_lite
+					Skill Normal
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+				TFBot
+				{
+					Class Soldier
+					Health 250
+					Name "Zombie"
+					Item "The Zipperface"
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w2b"
+			Where spawnbot
+			TotalCount 25
+			MaxActive 10
+			SpawnCount 5
+			WaitForAllDead "w1g"
+			WaitBeforeStarting 46
+			WaitBetweenSpawns 22
+			TotalCurrency 200
+			
+			Squad
+			{
+				TFBot
+				{
+					Class Heavyweapons
+					Name "Tough Zombie Colonel"
+					ClassIcon heavy_zombie_lite_giant
+					Skill Expert
+					Health 5000
+					Item "Fancy Dress Uniform"
+					Item "The Team Captain"
+					WeaponRestrictions PrimaryOnly
+					Attributes MiniBoss
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_MINIGUN"
+						"damage bonus" 1.5
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"damage force reduction" 0.4
+						"airblast vulnerability multiplier" 0.4
+						"override footstep sound set" 3
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic
+					Name "Zombie"
+					Item "The Ward"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic
+					Name "Zombie"
+					Item "The Ward"
+				}
+				TFBot
+				{
+					Class Soldier
+					Health 125
+					Name "Zombie"
+					Item "The Zipperface"
+					ClassIcon heavy_zombie_lite
+					Skill Normal
+				}
+				TFBot
+				{
+					Class Soldier
+					Health 125
+					Name "Zombie"
+					Item "The Zipperface"
+					ClassIcon heavy_zombie_lite
+					Skill Normal
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w2c"
+			Where spawnbot
+			TotalCount 36
+			MaxActive 7
+			SpawnCount 1
+			WaitForAllDead "w1g"
+			WaitBeforeStarting 41
+			WaitBetweenSpawns 4
+			TotalCurrency 0
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Class Pyro
+					Name "Mini Zombie"
+					Item "Traffic Cone"
+					Health 60
+					ClassIcon heavy_zombie_lite
+					Skill Normal
+					Item "Unarmed Combat"
+					Attributes AlwaysFireWeapon
+					Scale 0.8
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w2d"
+			Where spawnbot
+			TotalCount 25
+			MaxActive 9
+			SpawnCount 1
+			WaitForAllDead "w2b"
+			WaitBeforeStarting 12
+			WaitBetweenSpawns 4
+			TotalCurrency 0
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Class Heavyweapons
+					Name "Big Zombie"
+					ClassIcon heavy_zombie_lite
+					Skill Expert
+					Health 600
+					WeaponRestrictions MeleeOnly
+					Scale 1.35
+
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_FISTS"
+						"damage bonus" 1.5
+					}
+				}
+				TFBot
+				{
+					Class Soldier
+					Name "Fast Zombie"
+					Item "The Lucky Shot"
+					ClassIcon soldier_shovel_ignited
+					Skill Normal
+					Health 300
+					WeaponRestrictions MeleeOnly
+
+					CharacterAttributes
+					{
+						"move speed bonus" 1.35
+					}
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w2e"
+			WaitForAllDead "w2b"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 10
+			TotalCurrency 300
+			FirstSpawnOutput
+			{
+				Target boss_spawn_relay
+				Action Trigger
+			}
+			Tank
+			{
+				Health 25000
+				Name "tankboss"
+				Speed 70
+				StartingPathTrackNode "tank_path_a_10"
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w2f"
+			Where spawnbot
+			TotalCount 5
+			MaxActive 5
+			SpawnCount 1
+			WaitForAllDead "w2e"
+			WaitBeforeStarting 6
+			WaitBetweenSpawns 22
+			TotalCurrency 300
+			
+			TFBot
+			{
+				Template T_Zombie_Special_Hulk
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w2g"
+			Where spawnbot
+			TotalCount 9
+			MaxActive 5
+			SpawnCount 1
+			WaitForAllDead "w2e"
+			WaitBeforeStarting 11
+			WaitBetweenSpawns 13
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_Zombie_Special_Superfist
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w2h"
+			Where spawnbot
+			TotalCount 36
+			MaxActive 12
+			SpawnCount 1
+			WaitForAllDead "w2e"
+			WaitBeforeStarting 14
+			WaitBetweenSpawns 1.5
+			TotalCurrency 0
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Class Scout
+					Name "Zombie"
+					Item "B'aaarrgh-n-Bicorne"
+					Health 100
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+				TFBot
+				{
+					Class Soldier
+					Health 125
+					Name "Zombie"
+					Item "The Big Daddy"
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+				TFBot
+				{
+					Class Pyro
+					Health 100
+					Name "Zombie"
+					Item "The Wraith Wrap"
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+				TFBot
+				{
+					Class Heavyweapons
+					Health 150
+					Name "Zombie"
+					Item "Squatter's Right"
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+				TFBot
+				{
+					Class Medic
+					Health 100
+					Name "Zombie"
+					Item "Medic's Mountain Cap"
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+				TFBot
+				{
+					Class Sniper
+					Health 100
+					Name "Zombie"
+					Item "Wet Works"
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w2i"
+			Where spawnbot
+			TotalCount 3
+			MaxActive 3
+			SpawnCount 1
+			WaitForAllDead "w2e"
+			WaitBeforeStarting 19
+			WaitBetweenSpawns 17
+			TotalCurrency 150
+			
+			TFBot
+			{
+				Class Soldier
+				Skill Expert
+				Name "Tough Knockback Zombie"
+				Attributes MiniBoss
+				Health 3800
+				WeaponRestrictions PrimaryOnly
+				ClassIcon heavy_zombie_breach_lite
+				Attributes HoldFireUntilFullReload
+				Item "The Liberty Launcher"
+				Item "Stainless Pot"
+				Item "Marshall's Mutton Chops"
+
+				ItemAttributes
+				{
+					ItemName "The Liberty Launcher"
+					"damage causes airblast" 1
+					"damage bonus" 4
+				}
+
+				CharacterAttributes
+				{
+					"move speed bonus"	0.5
+					"airblast vulnerability multiplier" 0.5
+					"override footstep sound set" 4
+					"fire rate bonus" 3
+					"faster reload rate" 0.75
+					"hand scale" 1.2
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w2j"
+			Where spawnbot
+			TotalCount 27
+			MaxActive 7
+			SpawnCount 1
+			WaitForAllDead "w2e"
+			WaitBeforeStarting 22
+			WaitBetweenSpawns 5
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Class Heavyweapons
+				Name "Zombie"
+				Item "The Infernal Impaler"
+				ClassIcon heavy_zombie_lite
+				Skill Hard
+				Health 450
+				WeaponRestrictions PrimaryOnly
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w2k"
+			Where spawnbot
+			TotalCount 27
+			MaxActive 7
+			SpawnCount 1
+			WaitForAllDead "w2e"
+			WaitBeforeStarting 24
+			WaitBetweenSpawns 4
+			TotalCurrency 0
+			
+			TFBot
+			{
+				Class Demoman
+				Name "Zombie"
+				Item "Conjurer's Cowl"
+				ClassIcon heavy_zombie_lite
+				Skill Hard
+				Health 300
+				WeaponRestrictions PrimaryOnly
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w2k"
+			WaitForAllDead "w2f"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 16
+			WaitBetweenSpawns 10
+			TotalCurrency 300
+			FirstSpawnOutput
+			{
+				Target boss_spawn_relay
+				Action Trigger
+			}
+			Tank
+			{
+				Health 25000
+				Name "tankboss"
+				Speed 70
+				StartingPathTrackNode "tank_path_a_10"
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w2k"
+			Where spawnbot
+			TotalCount 12
+			MaxActive 9
+			SpawnCount 1
+			WaitForAllSpawned "w2f"
+			WaitBeforeStarting 7
+			WaitBetweenSpawns 6
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Class Scout
+				Name "Hunter"
+				ClassIcon scunter
+				Skill Expert
+				Scale 0.9
+				Health 250
+				Attributes MiniBoss
+				Item "Head Hunter"
+				Item "Claws And Infect"
+				Item "Crazy Legs"
+				Item "Unarmed Combat"
+				WeaponRestrictions MeleeOnly
+				Attributes AutoJump
+				AutoJumpMin 5
+				AutoJumpMax 5
+				ItemAttributes
+				{
+					ItemName "Unarmed Combat"
+					"fire rate bonus" 0.75
+					"damage bonus" 0.5
+				}
+				CharacterAttributes
+				{
+					"cannot pick up intelligence" 1
+					"increased jump height" 3
+					"hand scale" 1.1
+					"damage bonus"	1.5
+					"bleeding duration" 5
+					"cancel falling damage" 1
+					"move speed bonus"	1.5
+				}
+			}
+		}
+		
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w2k"
+			DoneOutput
+			{			
+				Target relay_bomb_forcereset
+				Action Trigger
+			}
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w2k"
+			WaitBeforeStarting 4
+			DoneWarningSound vo\mvm_get_to_upgrade01.mp3
+			DoneOutput
+			{
+				Target relay_upgradestation_enable
+				Action Trigger
+			}
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w2k"
+			WaitBeforeStarting 20
+			DoneOutput
+			{			
+				Target relay_change_route
+				Action Trigger
+			}
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w2k"
+			WaitBeforeStarting 25
+			FirstSpawnWarningSound vo\announcer_ends_5sec.mp3
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w2k"
+			WaitBeforeStarting 26
+			FirstSpawnWarningSound vo\announcer_ends_4sec.mp3
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w2k"
+			WaitBeforeStarting 27
+			FirstSpawnWarningSound vo\announcer_ends_3sec.mp3
+
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w2k"
+			WaitBeforeStarting 28
+			FirstSpawnWarningSound vo\announcer_ends_2sec.mp3
+
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w2k"
+			WaitBeforeStarting 29
+			FirstSpawnWarningSound vo\announcer_ends_1sec.mp3
+
+		}
+
+		WaveSpawn
+		{
+			Name "w3a"
+			Where spawnbot
+			TotalCount 27
+			MaxActive 7
+			SpawnCount 1
+			WaitForAllDead "w2k"
+			WaitBeforeStarting 32
+			WaitBetweenSpawns 4
+			TotalCurrency 0
+			FirstSpawnWarningSound vo\announcer_am_roundstart01.mp3
+			FirstSpawnOutput
+			{
+				Target relay_upgradestation_disable
+				Action Trigger
+			}
+			
+			TFBot
+			{
+				Class Demoman
+				Name "Zombie"
+				Item "Conjurer's Cowl"
+				ClassIcon heavy_zombie_lite
+				Skill Hard
+				Health 450
+				WeaponRestrictions PrimaryOnly
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w3b"
+			Where spawnbot
+			TotalCount 25
+			MaxActive 7
+			SpawnCount 1
+			WaitForAllDead "w2k"
+			WaitBeforeStarting 37
+			WaitBetweenSpawns 4
+			TotalCurrency 0
+			
+			TFBot
+			{
+				Class Pyro
+				Name "Giant Acid Zombie"
+				Item "Creature's Grin"  
+				Item "The Mucous Membrain"
+				ClassIcon pyro_spitter
+				Skill Expert
+				Health 400
+				WeaponRestrictions PrimaryOnly
+				Attributes AlwaysFireWeapon
+				Scale 1.1
+				Skin 1
+				NoIdleSound 1
+				DeathSound =80|shadows/gas_death.mp3
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_FLAMETHROWER"
+					"damage bonus" 0.6
+					"SPELL: Halloween green flames" 1
+					"item style override" 1
+				}
+				CharacterAttributes
+				{
+					"torso scale" 1.4
+					"bleeding duration" 6
+					"hand scale" 0.7
+					"move speed bonus" 0.8
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w3c"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitForAllDead "w2k"
+			WaitBeforeStarting 36
+			WaitBetweenSpawns 5
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFBot_Chief_Heavyweapons_HealOnKill
+				ClassIcon heavy_zombie_lite_giant
+				Health 12000
+				Item "Mad Mask"
+				Item "Commissar's Coat"
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w3d"
+			Where spawnbot
+			TotalCount 6
+			MaxActive 4
+			SpawnCount 1
+			WaitForAllDead "w3c"
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 18
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Class Soldier
+				ClassIcon soldier_bedouin_lite
+				Skill Expert
+				Name "Giant Hell Hunter Soldier"
+				Health 5000
+				Attributes MiniBoss
+				Item "Bedouin Bandana"
+				Item "Supernatural Stalker"
+				Item "Flakcatcher"
+				Item "UPGRADEABLE TF_WEAPON_ROCKETLAUNCHER"
+				Attributes HoldFireUntilFullReload
+
+				ItemAttributes
+				{
+					ItemName "UPGRADEABLE TF_WEAPON_ROCKETLAUNCHER"
+					"clip size upgrade atomic" 4.0
+					"projectile spread angle penalty" 1.5
+					"is australium item" 1
+					"item style override" 1
+				}
+
+				CharacterAttributes
+				{
+					"Projectile speed increased" 0.65
+					"fire rate bonus" 0.1
+					"faster reload rate" 0.5
+					"move speed bonus" 0.5
+					"damage force reduction" 0.4
+					"airblast vulnerability multiplier" 0.4
+					"override footstep sound set" 5
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w3e"
+			Where spawnbot
+			TotalCount 14
+			MaxActive 4
+			SpawnCount 1
+			WaitForAllDead "w3c"
+			WaitBeforeStarting 7
+			WaitBetweenSpawns 11
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Class Sniper
+				Name "Smoker" 
+				Item "Lollichop Licker"
+				ClassIcon sniper_smoker
+				Skill Expert
+				Attributes MiniBoss
+				Health 400
+				Scale 1.3
+				WeaponRestrictions PrimaryOnly
+				Attributes AlwaysFireWeapon
+				UseCustomModel "models\kirillian\infected\wanker_v4.mdl"
+				DeathSound =80|shadows\smoker_death.mp3
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_SNIPERRIFLE"
+					"damage bonus" 1.5
+					"fire rate bonus" 5.5
+					"apply z velocity on damage" 10
+					"apply look velocity on damage"	-1500
+					"air jump on attack" 1
+					"move speed bonus" 0.8
+				}
+				CharacterAttributes
+				{
+					"torso scale" 1.2
+					"bleeding duration" 1
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w3f"
+			Where spawnbot
+			TotalCount 18
+			MaxActive 4
+			SpawnCount 1
+			WaitForAllDead "w3c"
+			WaitBeforeStarting 19
+			WaitBetweenSpawns 7
+			TotalCurrency 0
+			
+			TFBot
+			{
+				Class Scout
+				Name "Hunter"
+				ClassIcon scunter
+				Skill Expert
+				Scale 0.9
+				Health 250
+				Attributes MiniBoss
+				Item "Head Hunter"
+				Item "Claws And Infect"
+				Item "Crazy Legs"
+				Item "Unarmed Combat"
+				WeaponRestrictions MeleeOnly
+				Attributes AutoJump
+				AutoJumpMin 5
+				AutoJumpMax 5
+				ItemAttributes
+				{
+					ItemName "Unarmed Combat"
+					"fire rate bonus" 0.75
+					"damage bonus" 0.5
+				}
+				CharacterAttributes
+				{
+					"cannot pick up intelligence" 1
+					"increased jump height" 3
+					"hand scale" 1.1
+					"damage bonus"	1.5
+					"bleeding duration" 5
+					"cancel falling damage" 1
+					"move speed bonus"	1.5
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w3g"
+			Where spawnbot
+			TotalCount 4
+			MaxActive 4
+			SpawnCount 1
+			WaitForAllSpawned "w3d"
+			WaitBeforeStarting 15
+			WaitBetweenSpawns 20
+			TotalCurrency 200
+
+			TFBot
+			{
+				Class Heavyweapons
+				Name "Tough Zombie Colonel"
+				ClassIcon heavy_zombie_lite_giant
+				Skill Expert
+				Health 5000
+				Item "Fancy Dress Uniform"
+				Item "The Team Captain"
+				WeaponRestrictions PrimaryOnly
+				Attributes MiniBoss
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_MINIGUN"
+					"damage bonus" 1.5
+				}
+				CharacterAttributes
+				{
+					"move speed bonus"	0.5
+					"damage force reduction" 0.4
+					"airblast vulnerability multiplier" 0.4
+					"override footstep sound set" 3
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w3h"
+			Where spawnbot
+			TotalCount 21
+			MaxActive 7
+			SpawnCount 1
+			WaitForAllDead "w3c"
+			WaitBeforeStarting 7
+			WaitBetweenSpawns 6
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Class Pyro
+				Name "Hellfire"
+				ClassIcon dead_flame_lite
+				Skill Expert
+				Scale 1.2
+				Health 500
+				Attributes MiniBoss
+				Item "Brigade Helm"
+				Item "Death Stare"
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_FLAMETHROWER"
+					"damage bonus" 0.1
+					"weapon burn dmg increased" 4
+					"weapon burn time increased" 2
+				}
+				CharacterAttributes
+				{
+					"move speed bonus" 0.8
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w3h"
+			Where spawnbot
+			TotalCount 29
+			MaxActive 7
+			SpawnCount 1
+			WaitForAllDead "w3c"
+			WaitBeforeStarting 7
+			WaitBetweenSpawns 6
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Class Demoman
+				Name "Pirate Skeleton"
+				ClassIcon dead_bicorne_lite
+				Skill Expert
+				Scale 1.2
+				Health 500
+				Attributes MiniBoss
+				Attributes HoldFireUntilFullReload
+				Item "The Buccaneer's Bicorne"
+				Item "Death Stare"
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_GRENADELAUNCHER"
+					"damage bonus" 1.5
+					"fire rate bonus" 1.5
+					"faster reload rate" -0.8
+				}
+				CharacterAttributes
+				{
+					"move speed bonus"	0.8
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w3i"
+			Where spawnbot
+			TotalCount 9
+			MaxActive 4
+			SpawnCount 1
+			WaitForAllDead "w3d"
+			WaitBeforeStarting 26
+			WaitBetweenSpawns 14
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Class Scout
+				Name "Hunter"
+				ClassIcon scunter
+				Skill Expert
+				Health 1200
+				Attributes MiniBoss
+				Item "Head Hunter"
+				Item "Claws And Infect"
+				Item "Crazy Legs"
+				Item "Unarmed Combat"
+				WeaponRestrictions MeleeOnly
+				ItemAttributes
+				{
+					ItemName "Unarmed Combat"
+					"fire rate bonus" 0.75
+					"damage bonus" 0.85
+				}
+				CharacterAttributes
+				{
+					"damage force reduction" 0.7
+					"airblast vulnerability multiplier" 0.7
+					"override footstep sound set" 3
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w3j"
+			Where spawnbot
+			TotalCount 145
+			MaxActive 14
+			SpawnCount 1
+			WaitForAllDead "w3c"
+			WaitBeforeStarting 9
+			WaitBetweenSpawns 1
+			TotalCurrency 0
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Class Scout
+					Name "Zombie"
+					Item "B'aaarrgh-n-Bicorne"
+					Health 100
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+				TFBot
+				{
+					Class Soldier
+					Health 125
+					Name "Zombie"
+					Item "The Big Daddy"
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+				TFBot
+				{
+					Class Pyro
+					Health 100
+					Name "Zombie"
+					Item "The Wraith Wrap"
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+				TFBot
+				{
+					Class Heavyweapons
+					Health 150
+					Name "Zombie"
+					Item "Squatter's Right"
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+				TFBot
+				{
+					Class Medic
+					Health 100
+					Name "Zombie"
+					Item "Medic's Mountain Cap"
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+				TFBot
+				{
+					Class Sniper
+					Health 100
+					Name "Zombie"
+					Item "Wet Works"
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w3h"
+			Where spawnbot
+			TotalCount 6
+			MaxActive 6
+			SpawnCount 2
+			WaitForAllDead "w3g"
+			WaitBeforeStarting 14
+			WaitBetweenSpawns 25
+			TotalCurrency 100
+			
+			Squad
+			{
+				TFBot
+				{
+					Class Pyro
+					Name "Hellfire"
+					ClassIcon dead_flame_lite
+					Skill Expert
+					Health 4000
+					Attributes MiniBoss
+					Item "Brigade Helm"
+					Item "Death Stare"
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_FLAMETHROWER"
+						"damage bonus" 0.2
+						"weapon burn dmg increased" 6
+						"weapon burn time increased" 2
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"damage force reduction" 0.6
+						"airblast vulnerability multiplier" 0.6
+						"override footstep sound set" 6
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic_Regen
+					Name "Tough Zombie Medic"
+					Item "Das Ubersternmann"
+					Item "The Ward"
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w3i"
+			Where spawnbot
+			TotalCount 17
+			MaxActive 5
+			SpawnCount 1
+			WaitForAllSpawned "w3d"
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 9
+			TotalCurrency 0
+
+			TFBot
+			{
+				Class Heavyweapons
+				Name "Big Zombie"
+				ClassIcon heavy_zombie_lite
+				Skill Expert
+				Health 600
+				WeaponRestrictions MeleeOnly
+				Scale 1.35
+
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_FISTS"
+					"damage bonus" 1.5
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w3j"
+			WaitForAllDead "w3g"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 35
+			WaitBetweenSpawns 10
+			TotalCurrency 250
+			FirstSpawnOutput
+			{
+				Target boss_spawn_relay
+				Action Trigger
+			}
+			Tank
+			{
+				Health 40000
+				Name "tankboss"
+				Speed 65
+				StartingPathTrackNode "tank_path_a_10"
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			WaitForAllDead "w3j"
+			DoneOutput
+			{			
+				Target relay_bomb_forcereset
+				Action Trigger
+			}
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w3j"
+			WaitBeforeStarting 4
+			DoneWarningSound vo\mvm_get_to_upgrade01.mp3
+			DoneOutput
+			{
+				Target relay_upgradestation_enable
+				Action Trigger
+			}
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w3j"
+			WaitBeforeStarting 20
+			DoneOutput
+			{			
+				Target relay_change_route
+				Action Trigger
+			}
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w3j"
+			WaitBeforeStarting 25
+			FirstSpawnWarningSound vo\announcer_ends_5sec.mp3
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w3j"
+			WaitBeforeStarting 26
+			FirstSpawnWarningSound vo\announcer_ends_4sec.mp3
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w3j"
+			WaitBeforeStarting 27
+			FirstSpawnWarningSound vo\announcer_ends_3sec.mp3
+
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w3j"
+			WaitBeforeStarting 28
+			FirstSpawnWarningSound vo\announcer_ends_2sec.mp3
+
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w3j"
+			WaitBeforeStarting 29
+			FirstSpawnWarningSound vo\announcer_ends_1sec.mp3
+
+		}
+
+		WaveSpawn
+		{
+			Name "w4a"
+			Where spawnbot
+			TotalCount 31
+			MaxActive 5
+			SpawnCount 1
+			WaitForAllDead "w3j"
+			WaitBeforeStarting 32
+			WaitBetweenSpawns 6
+			TotalCurrency 0
+			FirstSpawnWarningSound vo\announcer_am_roundstart01.mp3
+			FirstSpawnOutput
+			{
+				Target relay_upgradestation_disable
+				Action Trigger
+			}
+
+			TFBot
+			{
+				Class Heavyweapons
+				Name "Zombie"
+				Item "The Infernal Impaler"
+				ClassIcon heavy_zombie_lite
+				Skill Normal
+				Health 600
+				WeaponRestrictions PrimaryOnly
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w4b"
+			Where spawnbot
+			TotalCount 19
+			MaxActive 5
+			SpawnCount 1
+			WaitForAllDead "w3j"
+			WaitBeforeStarting 37
+			WaitBetweenSpawns 9
+			TotalCurrency 0
+
+			TFBot
+			{
+				Class Heavyweapons
+				Name "Zombie"
+				Item "The Infernal Impaler"
+				ClassIcon heavy_zombie_lite
+				Skill Expert
+				Health 500
+				WeaponRestrictions PrimaryOnly
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w4c"
+			Where spawnbot
+			TotalCount 137
+			MaxActive 12
+			SpawnCount 1
+			WaitForAllDead "w3j"
+			WaitBeforeStarting 39
+			WaitBetweenSpawns 1
+			TotalCurrency 0
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Class Scout
+					Name "Zombie"
+					Item "B'aaarrgh-n-Bicorne"
+					Health 100
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+				TFBot
+				{
+					Class Soldier
+					Health 125
+					Name "Zombie"
+					Item "The Big Daddy"
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+				TFBot
+				{
+					Class Pyro
+					Health 100
+					Name "Zombie"
+					Item "The Wraith Wrap"
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+				TFBot
+				{
+					Class Heavyweapons
+					Health 150
+					Name "Zombie"
+					Item "Squatter's Right"
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+				TFBot
+				{
+					Class Medic
+					Health 100
+					Name "Zombie"
+					Item "Medic's Mountain Cap"
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+				TFBot
+				{
+					Class Sniper
+					Health 100
+					Name "Zombie"
+					Item "Wet Works"
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w4d"
+			Where spawnbot
+			TotalCount 23
+			MaxActive 5
+			SpawnCount 1
+			WaitForAllDead "w3j"
+			WaitBeforeStarting 43
+			WaitBetweenSpawns 11
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_Zombie_Special_Superfist
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w4e"
+			Where spawnbot
+			TotalCount 5
+			MaxActive 3
+			SpawnCount 1
+			WaitForAllDead "w3j"
+			WaitBeforeStarting 57
+			WaitBetweenSpawns 18
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Class Soldier
+				ClassIcon soldier_bedouin_lite
+				Skill Expert
+				Name "Giant Hell Hunter Soldier"
+				Health 6400
+				Attributes MiniBoss
+				Item "Supernatural Stalker"
+				Item "Hellhunter's Headpiece"
+				Item "warbird_rocketlauncher_warhawk"
+				Attributes HoldFireUntilFullReload
+
+				ItemAttributes
+				{
+					ItemName "warbird_rocketlauncher_warhawk"
+					"clip size upgrade atomic" 4.0
+					"is australium item" 1
+					"item style override" 1
+					"override projectile type" 13
+					"energy weapon penetration" 1
+					"set item tint rgb" 16738740
+					"damage bonus" 2.5
+				}
+
+				CharacterAttributes
+				{
+					"Projectile speed increased" 0.65
+					"fire rate bonus" 0.1
+					"faster reload rate" 0.8
+					"move speed bonus" 0.5
+					"damage force reduction" 0.4
+					"airblast vulnerability multiplier" 0.4
+					"override footstep sound set" 5
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w4f"
+			Where spawnbot
+			TotalCount 17
+			MaxActive 4
+			SpawnCount 1
+			WaitForAllDead "w3j"
+			WaitBeforeStarting 39
+			WaitBetweenSpawns 11
+			TotalCurrency 0
+			
+			TFBot
+			{
+				Class Sniper
+				Name "Smoker" 
+				Item "Lollichop Licker"
+				ClassIcon sniper_smoker
+				Skill Expert
+				Attributes MiniBoss
+				Health 400
+				Scale 1.3
+				WeaponRestrictions PrimaryOnly
+				Attributes AlwaysFireWeapon
+				UseCustomModel "models\kirillian\infected\wanker_v4.mdl"
+				DeathSound =80|shadows\smoker_death.mp3
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_SNIPERRIFLE"
+					"damage bonus" 1.5
+					"fire rate bonus" 5.5
+					"apply z velocity on damage" 10
+					"apply look velocity on damage"	-1500
+					"air jump on attack" 1
+					"move speed bonus" 0.8
+				}
+				CharacterAttributes
+				{
+					"torso scale" 1.2
+					"bleeding duration" 1
+					"move speed bonus" 0.8
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w4g"
+			Where spawnbot
+			TotalCount 25
+			MaxActive 9
+			SpawnCount 1
+			WaitForAllDead "w3j"
+			WaitBeforeStarting 43
+			WaitBetweenSpawns 7
+			TotalCurrency 0
+			
+			TFBot
+			{
+				Class Scout
+				Name "Hunter"
+				ClassIcon scunter
+				Skill Expert
+				Scale 0.9
+				Health 250
+				Attributes MiniBoss
+				Item "Head Hunter"
+				Item "Claws And Infect"
+				Item "Crazy Legs"
+				Item "Unarmed Combat"
+				WeaponRestrictions MeleeOnly
+				Attributes AutoJump
+				AutoJumpMin 5
+				AutoJumpMax 5
+				ItemAttributes
+				{
+					ItemName "Unarmed Combat"
+					"fire rate bonus" 0.75
+					"damage bonus" 0.5
+				}
+				CharacterAttributes
+				{
+					"cannot pick up intelligence" 1
+					"increased jump height" 3
+					"hand scale" 1.1
+					"damage bonus"	1.5
+					"bleeding duration" 5
+					"cancel falling damage" 1
+					"move speed bonus"	1.5
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w4h"
+			Where spawnbot
+			TotalCount 37
+			MaxActive 7
+			SpawnCount 1
+			WaitForAllDead "w3j"
+			WaitBeforeStarting 69
+			WaitBetweenSpawns 6
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Class Pyro
+				Name "Hellfire"
+				ClassIcon dead_flame_lite
+				Skill Expert
+				Scale 1.2
+				Health 600
+				Attributes MiniBoss
+				Item "Brigade Helm"
+				Item "Death Stare"
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_FLAMETHROWER"
+					"damage bonus" 0.1
+					"weapon burn dmg increased" 4
+					"weapon burn time increased" 2
+				}
+				CharacterAttributes
+				{
+					"move speed bonus" 0.8
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w4i"
+			Where spawnbot
+			TotalCount 8
+			MaxActive 3
+			SpawnCount 1
+			WaitForAllDead "w4e"
+			WaitBeforeStarting 7
+			WaitBetweenSpawns 15
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Class Heavyweapons
+				Name "Giant Heater Heavy"
+				ClassIcon heavy_zombie_lite_giant
+				Skill Expert
+				Health 5000
+				WeaponRestrictions PrimaryOnly
+				MaxVisionRange 1200
+				Item "The Huo Long Heatmaker"
+				Attributes MiniBoss
+				ItemAttributes
+				{
+					ItemName "The Huo Long Heatmaker"
+					"damage bonus"	1.5
+				}
+				CharacterAttributes
+				{
+					"move speed bonus"	0.5
+					"damage force reduction" 0.3
+					"airblast vulnerability multiplier" 0.3
+					"override footstep sound set" 2
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w4j"
+			Where spawnbot
+			TotalCount 22
+			MaxActive 8
+			SpawnCount 2
+			WaitForAllDead "w4e"
+			WaitBeforeStarting 11
+			WaitBetweenSpawns 13
+			TotalCurrency 100
+			
+			Squad
+			{
+				TFBot
+				{
+					Class Demoman
+					Name "Skeleton Pirate"
+					ClassIcon dead_bicorne_lite
+					Skill Expert
+					Scale 1.2
+					Health 500
+					Attributes MiniBoss
+					Attributes HoldFireUntilFullReload
+					Item "The Buccaneer's Bicorne"
+					Item "Death Stare"
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_GRENADELAUNCHER"
+						"damage bonus" 1.5
+						"fire rate bonus" 1.5
+						"faster reload rate" -0.8
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"damage force reduction" 0.3
+						"airblast vulnerability multiplier" 0.3
+					}
+				}
+
+				TFBot
+				{
+					Template T_TFBot_Medic
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w4k"
+			Where spawnbot
+			TotalCount 20
+			MaxActive 8
+			SpawnCount 4
+			WaitForAllSpawned "w4i"
+			WaitBeforeStarting 19
+			WaitBetweenSpawns 22
+			TotalCurrency 100
+			
+			Squad
+			{
+				TFBot
+				{
+					Class Demoman
+					Name "Giant Pirate Skeleton"
+					ClassIcon dead_bicorne_lite
+					Skill Expert
+					Health 4200
+					Attributes MiniBoss
+					Attributes HoldFireUntilFullReload
+					Item "The Buccaneer's Bicorne"
+					Item "Death Stare"
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_GRENADELAUNCHER"
+						"damage bonus" 1.5
+						"fire rate bonus" 1.5
+						"faster reload rate" -0.8
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"damage force reduction" 0.3
+						"airblast vulnerability multiplier" 0.3
+						"override footstep sound set" 2
+					}
+				}
+
+				TFBot
+				{
+					Template T_TFBot_Medic_Quickfix
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Quickfix
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Quickfix
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w4l"
+			WaitForAllDead "w4j"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 10
+			TotalCurrency 200
+			FirstSpawnOutput
+			{
+				Target boss_spawn_relay
+				Action Trigger
+			}
+			Tank
+			{
+				Health 40000
+				Name "tankboss"
+				Speed 65
+				StartingPathTrackNode "tank_path_a_10"
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w4l"
+			Where spawnbot
+			TotalCount 69
+			MaxActive 19
+			SpawnCount 1
+			WaitForAllSpawned "w4j"
+			WaitBeforeStarting 25
+			WaitBetweenSpawns 0.5
+			TotalCurrency 0
+			
+			TFBot
+			{
+				Class Sniper
+				Name "Skeleton"
+				ClassIcon dead2_lite
+				Skill Expert
+				Health 250
+				WeaponRestrictions MeleeOnly
+				Item "The Dead Head"
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w4l"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitForAllSpawned "w4j"
+			WaitBeforeStarting 47
+			WaitBetweenSpawns 15
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Class Sniper
+				Name "Skeleton King"
+				ClassIcon dead2_king_lite
+				Skill Expert
+				Health 35000
+				Attributes MiniBoss
+				Attributes UseBossHealthBar
+				WeaponRestrictions SecondaryOnly
+				MaxVisionRange 1500
+				Scale 1.8
+				Item "Prince Tavish's Crown"
+				Item "The Dead Head"
+				Item "The Cleaner's Carbine"
+				Item "The Classic"
+
+				ItemAttributes
+				{ 
+					ItemName "The Classic"
+					"is_passive_weapon" 1
+					"counts as assister is some kind of pet this update is going to be awesome" 1
+				}
+				
+				ItemAttributes
+				{
+					ItemName "The Cleaner's Carbine"
+					"damage bonus" 15
+					"faster reload rate" 4
+					"fire rate bonus" 7.5
+					"Blast radius increased" 3
+					"override projectile type" 2
+					"clip size bonus" 20
+				}
+
+				CharacterAttributes
+				{
+					"move speed bonus"	0.4
+					"damage force reduction" 0.1
+					"airblast vulnerability multiplier" 0.01
+					"override footstep sound set" 4
+				}
+			}
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w4l"
+			DoneOutput
+			{			
+				Target relay_bomb_forcereset
+				Action Trigger
+			}
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w4l"
+			WaitBeforeStarting 4
+			DoneWarningSound vo\mvm_get_to_upgrade01.mp3
+			DoneOutput
+			{
+				Target relay_upgradestation_enable
+				Action Trigger
+			}
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w4l"
+			WaitBeforeStarting 20
+			DoneOutput
+			{			
+				Target relay_change_route
+				Action Trigger
+			}
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w4l"
+			WaitBeforeStarting 25
+			FirstSpawnWarningSound vo\announcer_ends_5sec.mp3
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w4l"
+			WaitBeforeStarting 26
+			FirstSpawnWarningSound vo\announcer_ends_4sec.mp3
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w4l"
+			WaitBeforeStarting 27
+			FirstSpawnWarningSound vo\announcer_ends_3sec.mp3
+
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w4l"
+			WaitBeforeStarting 28
+			FirstSpawnWarningSound vo\announcer_ends_2sec.mp3
+
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead "w4l"
+			WaitBeforeStarting 29
+			FirstSpawnWarningSound vo\announcer_ends_1sec.mp3
+
+		}
+
+		WaveSpawn
+		{
+			Name "w5a"
+			Where spawnbot
+			TotalCount 37
+			MaxActive 14
+			SpawnCount 1
+			WaitForAllDead "w4l"
+			WaitBeforeStarting 32
+			WaitBetweenSpawns 2
+			TotalCurrency 0
+			FirstSpawnWarningSound vo\announcer_am_roundstart01.mp3
+			FirstSpawnOutput
+			{
+				Target relay_upgradestation_disable
+				Action Trigger
+			}
+			
+			TFBot
+			{
+				Class Sniper
+				Name "Giant Heater Heavy"
+				ClassIcon dead2_lite
+				Skill Expert
+				Health 300
+				WeaponRestrictions MeleeOnly
+				Item "The Dead Head"
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w5ab"
+			WaitForAllDead "w4l"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 32
+			WaitBetweenSpawns 10
+			TotalCurrency 400
+			FirstSpawnOutput
+			{
+				Target boss_spawn_relay
+				Action Trigger
+			}
+			Tank
+			{
+				Health 45000
+				Name "tankboss"
+				Speed 70
+				StartingPathTrackNode "tank_path_a_10"
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w5b"
+			Where spawnbot
+			TotalCount 31
+			MaxActive 6
+			SpawnCount 1
+			WaitForAllDead "w4l"
+			WaitBeforeStarting 47
+			WaitBetweenSpawns 4
+			TotalCurrency 0
+
+			TFBot
+			{
+				Class Soldier
+				Name "Fast Zombie"
+				Item "The Lucky Shot"
+				ClassIcon soldier_shovel_ignited
+				Skill Normal
+				Health 300
+				WeaponRestrictions MeleeOnly
+
+				CharacterAttributes
+				{
+					"move speed bonus" 1.35
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w5c"
+			Where spawnbot
+			TotalCount 24
+			MaxActive 6
+			SpawnCount 2
+			WaitForAllDead "w4l"
+			WaitBeforeStarting 54
+			WaitBetweenSpawns 3
+			TotalCurrency 0
+
+			TFBot
+			{
+				Class Soldier
+				Health 350
+				Name "Zombie"
+				Item "The Zipperface"
+				ClassIcon heavy_zombie_lite
+				Skill Hard
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w5d"
+			Where spawnbot
+			TotalCount 7
+			MaxActive 4
+			SpawnCount 1
+			WaitForAllDead "w4l"
+			WaitBeforeStarting 57
+			WaitBetweenSpawns 22
+			TotalCurrency 200
+			
+			TFBot
+			{
+				Template T_Zombie_Special_Hulk
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w5e"
+			Where spawnbot
+			TotalCount 11
+			MaxActive 4
+			SpawnCount 1
+			WaitForAllDead "w4l"
+			WaitBeforeStarting 65
+			WaitBetweenSpawns 14
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Class Scout
+				Name "Hunter"
+				ClassIcon scunter
+				Skill Expert
+				Health 1200
+				Attributes MiniBoss
+				Item "Head Hunter"
+				Item "Claws And Infect"
+				Item "Crazy Legs"
+				Item "Unarmed Combat"
+				WeaponRestrictions MeleeOnly
+				ItemAttributes
+				{
+					ItemName "Unarmed Combat"
+					"fire rate bonus" 0.75
+					"damage bonus" 0.85
+				}
+				CharacterAttributes
+				{
+					"damage force reduction" 0.7
+					"airblast vulnerability multiplier" 0.7
+					"override footstep sound set" 3
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w5f"
+			Where spawnbot
+			TotalCount 31
+			MaxActive 7
+			SpawnCount 1
+			WaitForAllDead "w4l"
+			WaitBeforeStarting 32
+			WaitBetweenSpawns 5
+			TotalCurrency 0
+
+			TFBot
+			{
+				Class Heavyweapons
+				Name "Zombie"
+				Item "The Infernal Impaler"
+				ClassIcon heavy_zombie_lite
+				Skill Normal
+				Health 500
+				WeaponRestrictions PrimaryOnly
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w5g"
+			Where spawnbot
+			TotalCount 29
+			MaxActive 7
+			SpawnCount 1
+			WaitForAllDead "w4l"
+			WaitBeforeStarting 39
+			WaitBetweenSpawns 6
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Class Demoman
+				Name "Pirate Skeleton"
+				ClassIcon dead_bicorne_lite
+				Skill Expert
+				Scale 1.2
+				Health 700
+				Attributes MiniBoss
+				Attributes HoldFireUntilFullReload
+				Item "The Buccaneer's Bicorne"
+				Item "Death Stare"
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_GRENADELAUNCHER"
+					"damage bonus" 1.5
+					"fire rate bonus" 1.5
+					"faster reload rate" -0.8
+				}
+				CharacterAttributes
+				{
+					"move speed bonus"	0.8
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w5h"
+			Where spawnbot
+			TotalCount 26
+			MaxActive 7
+			SpawnCount 1
+			WaitForAllDead "w4l"
+			WaitBeforeStarting 69
+			WaitBetweenSpawns 7
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Class Pyro
+				Name "Hellfire"
+				ClassIcon dead_flame_lite
+				Skill Expert
+				Scale 1.2
+				Health 650
+				Attributes MiniBoss
+				Item "Brigade Helm"
+				Item "Death Stare"
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_FLAMETHROWER"
+					"damage bonus" 0.1
+					"weapon burn dmg increased" 4
+					"weapon burn time increased" 2
+				}
+				CharacterAttributes
+				{
+					"move speed bonus" 0.8
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w5i"
+			Where spawnbot
+			TotalCount 145
+			MaxActive 17
+			SpawnCount 1
+			WaitForAllDead "w4l"
+			WaitBeforeStarting 32
+			WaitBetweenSpawns 0.5
+			TotalCurrency 0
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Class Scout
+					Name "Zombie"
+					Item "B'aaarrgh-n-Bicorne"
+					Health 100
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+				TFBot
+				{
+					Class Soldier
+					Health 125
+					Name "Zombie"
+					Item "The Big Daddy"
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+				TFBot
+				{
+					Class Pyro
+					Health 100
+					Name "Zombie"
+					Item "The Wraith Wrap"
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+				TFBot
+				{
+					Class Heavyweapons
+					Health 150
+					Name "Zombie"
+					Item "Squatter's Right"
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+				TFBot
+				{
+					Class Medic
+					Health 100
+					Name "Zombie"
+					Item "Medic's Mountain Cap"
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+				TFBot
+				{
+					Class Sniper
+					Health 100
+					Name "Zombie"
+					Item "Wet Works"
+					ClassIcon heavy_zombie_lite
+					Skill Hard
+					Item "Unarmed Combat"
+					WeaponRestrictions MeleeOnly
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "w5j"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitForAllDead "w5d"
+			WaitBeforeStarting 26
+			WaitBetweenSpawns 15
+			TotalCurrency 0
+			
+			TFBot
+			{
+				Class Soldier
+				Name "Ghost Rider"
+				ClassIcon soldier_hellmet_lite
+				Skill Expert
+				Health 50000
+				Attributes MiniBoss
+				Attributes UseBossHealthBar
+				WeaponRestrictions PrimaryOnly
+				Item "The Hellmet"
+				Item "The Dead Head"
+				Item "warbird_rocketlauncher_warhawk"
+
+				ItemAttributes
+				{
+					ItemName "The Hellmet"
+					"attach particle effect" 2
+				}
+				ItemAttributes
+				{
+					ItemName "warbird_rocketlauncher_warhawk"
+					"damage bonus" 4
+					"fire rate bonus" 4
+					"faster reload rate" -2
+					"blast radius increased" 4
+					"projectile spread angle penalty" 3
+					"mini rockets" 1
+				}
+
+				CharacterAttributes
+				{
+					"head scale" 1.15
+					"move speed bonus"	0.4
+					"damage force reduction" 0.1
+					"airblast vulnerability multiplier" 0.01
+					"override footstep sound set" 4
+					"rage giving scale" 0.35
+					"gesture speed increase" 4
+				}
+			}
+		}
+	}
+}

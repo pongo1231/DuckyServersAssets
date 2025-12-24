@@ -1,0 +1,320 @@
+﻿"Phrases"
+{
+	"welcome message"
+	{
+		//"#format"	""
+		"en"		"To listen to the radio, type '!radio' into chat."
+	}
+	
+	"tuned in"
+	{
+		//"#format"	""
+		"en"		"The FragRadio plugin has been enabled, you have been auto tuned in."
+	}
+	
+	"tuned out"
+	{
+		//"#format"	""
+		"en"		"The FragRadio plugin has been disabled, you have been auto tuned out."
+	}
+	
+	"thanks for tuning in"
+	{
+		//"#format"	""
+		"en"		"Thanks for tuning into FragRadio!"
+	}
+	
+	"tuned into the radio"
+	{
+		"#format"	"{1:N}"	//1 = client name
+		"en"		"{1} has tuned into the radio by typing !radio into chat!"
+	}
+	
+	"thinks song is choon"
+	{
+		"#format"	"{1:N},{2:s}"	//1 = client name, 2 = song name
+		"en"		"{1} thinks {2} is a CHOON!"
+	}
+	
+	"thinks is choon"
+	{
+		"#format"	"{1:N}"	//1 = client name
+		"en"		"{1} thinks the current song is a CHOON!"
+	}
+	
+	"thinks song is poon"
+	{
+		"#format"	"{1:N},{2:s}"	//1 = client name, 2 = song name
+		"en"		"{1} thinks {2} is a POON!"
+	}
+	
+	"thinks is poon"
+	{
+		"#format"	"{1:N}"	//1 = client name
+		"en"		"{1} thinks the current song is a POON!"
+	}
+	
+	"thinks dj name is awesome"
+	{
+		"#format"	"{1:N},{2:s}"	//1 = client name, 2 = dj name
+		"en"		"{1} thinks {2} is Awesome!"
+	}
+	
+	"thinks dj is awesome"
+	{
+		"#format"	"{1:N}"	//1 = client name
+		"en"		"{1} thinks the current dj is Awesome!"
+	}
+	
+	"thinks dj name fails"
+	{
+		"#format"	"{1:N},{2:s}"	//1 = client name, 2 = dj name
+		"en"		"{1} thinks {2} Fails!"
+	}
+	
+	"thinks dj fails"
+	{
+		"#format"	"{1:N}"	//1 = client name
+		"en"		"{1} thinks the current dj Fails!"
+	}
+	
+	"thinks multi dj name are awesome"
+	{
+		"#format"	"{1:N},{2:s}"	//1 = client name, 2 = dj's name
+		"en"		"{1} thinks {2} are Awesome!"
+	}
+	
+	"thinks multi dj are awesome"
+	{
+		"#format"	"{1:N}"	//1 = client name
+		"en"		"{1} thinks the current dj's are Awesome!"
+	}
+	
+	"thinks multi dj name fails"
+	{
+		"#format"	"{1:N},{2:s}"	//1 = client name, 2 = dj's name
+		"en"		"{1} thinks {2} Fail!"
+	}
+	
+	"thinks multi dj fails"
+	{
+		"#format"	"{1:N}"	//1 = client name
+		"en"		"{1} thinks the current dj's Fail!"
+	}
+	
+	"now presenting"
+	{
+		"#format"	"{1:s}"	//1 = dj name
+		"en"		"Now Presenting:{lightgreen} {1}"
+	}
+	
+	"now playing"
+	{
+		"#format"	"{1:s}"	//1 = song name
+		"en"		"Now Playing:{lightgreen} {1}"
+	}
+	
+	"reply html motd disabled"
+	{
+		//"#format"	""
+		"en"		"You must set 'cl_disablehtmlmotd' to 0 in order to make this action, you can do this through console."
+	}
+	
+	"reply plugin disabled"
+	{
+		//"#format"	""
+		"en"		"The FragRadio Plugin has been disabled."
+	}
+	
+	"reply stream info gathering disabled"
+	{
+		//"#format"	""
+		"en"		"Stream info gathering has been disabled."
+	}
+	
+	"reply interaction commands disabled"
+	{
+		//"#format"	""
+		"en"		"Interaction commands have been disabled."
+	}
+	
+	"reply ratings commands disabled"
+	{
+		//"#format"	""
+		"en"		"Ratings commands have been disabled."
+	}
+	
+	"reply must be tuned in"
+	{
+		//"#format"	""
+		"en"		"You are not tuned in, type '!radio' to tune in now!"
+	}
+	
+	"reply current dj"
+	{
+		"#format"	"{1:s}"	//1 = dj name
+		"en"		"Current DJ:{lightgreen} {1}"
+	}
+	
+	"reply current song"
+	{
+		"#format"	"{1:s}"	//1 = song name
+		"en"		"Current Song:{lightgreen} {1}"
+	}
+	
+	"reply no stream information"
+	{
+		//"#format"	""
+		"en"		"No stream information has been received yet!"
+	}
+	
+	"reply request usage"
+	{
+		"#format"	"{1:s}"	//1 = command
+		"en"		"Usage: {1} <song>"
+	}
+	
+	"reply request autodj"
+	{
+		//"#format"	""
+		"en"		"Requests cannot be made while AutoDJ is onair!"
+	}
+	
+	"reply request string size"
+	{
+		//"#format"	""
+		"en"		"Requests must be more than 8 characters or less than 255 characters."
+	}
+	
+	"reply request sent to dj"
+	{
+		"#format"	"{1:s}"	//1 = dj name
+		"en"		"Your song request has been sent to {1}!"
+	}
+	
+	"reply request sent"
+	{
+		//"#format"	""
+		"en"		"Your song request has been sent!"
+	}
+	
+	"reply shoutout usage"
+	{
+		"#format"	"{1:s}"	//1 = command
+		"en"		"Usage: {1} <message>"
+	}
+	
+	"reply shoutout autodj"
+	{
+		//"#format"	""
+		"en"		"Shoutouts cannot be made while AutoDJ is onair!"
+	}
+	
+	"reply shoutout string size"
+	{
+		//"#format"	""
+		"en"		"Shoutouts must be more than 8 characters or less than 255 characters."
+	}
+	
+	"reply shoutout sent to dj"
+	{
+		"#format"	"{1:s}"	//1 = dj name
+		"en"		"Your shoutout has been sent to {1}!"
+	}
+	
+	"reply shoutout sent"
+	{
+		//"#format"	""
+		"en"		"Your shoutout has been sent!"
+	}
+	
+	"reply interact usage"
+	{
+		"#format"	"{1:s}"	//1 = command
+		"en"		"Usage: {1} <message>"
+	}
+	
+	"reply interact autodj"
+	{
+		//"#format"	""
+		"en"		"Interactions cannot be made while AutoDJ is onair!"
+	}
+	
+	"reply interact string size"
+	{
+		//"#format"	""
+		"en"		"Interactions must be more than 8 characters or less than 255 characters."
+	}
+	
+	"reply interact sent to dj"
+	{
+		"#format"	"{1:s}"	//1 = dj name
+		"en"		"Your interaction has been sent to {1}!"
+	}
+	
+	"reply interact sent"
+	{
+		//"#format"	""
+		"en"		"Your interaction has been sent!"
+	}
+	
+	"reply joke usage"
+	{
+		"#format"	"{1:s}"	//1 = command
+		"en"		"Usage: {1} <message>"
+	}
+	
+	"reply joke autodj"
+	{
+		//"#format"	""
+		"en"		"Jokes cannot be made while AutoDJ is onair!"
+	}
+	
+	"reply joke string size"
+	{
+		//"#format"	""
+		"en"		"Interactions must be more than 4 characters or less than 255 characters."
+	}
+	
+	"reply joke sent to dj"
+	{
+		"#format"	"{1:s}"	//1 = dj name
+		"en"		"Your joke has been sent to {1}!"
+	}
+	
+	"reply joke sent"
+	{
+		//"#format"	""
+		"en"		"Your joke has been sent!"
+	}
+	
+	"reply competition usage"
+	{
+		"#format"	"{1:s}"	//1 = command
+		"en"		"Usage: {1} <message>"
+	}
+	
+	"reply competition autodj"
+	{
+		//"#format"	""
+		"en"		"Competition entries cannot be made while AutoDJ is onair!"
+	}
+	
+	"reply competition string size"
+	{
+		//"#format"	""
+		"en"		"Competition entries must be more than 4 characters or less than 255 characters."
+	}
+	
+	"reply competition sent to dj"
+	{
+		"#format"	"{1:s}"	//1 = dj name
+		"en"		"Your competition entry has been sent to {1}!"
+	}
+	
+	"reply competition sent"
+	{
+		//"#format"	""
+		"en"		"Your competition entry has been sent!"
+	}
+}

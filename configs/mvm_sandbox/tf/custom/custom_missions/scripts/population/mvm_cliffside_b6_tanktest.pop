@@ -1,0 +1,371 @@
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_ultimentm.pop
+#base robot_ultimodded.pop
+#base robot_sigsegv_reloaded.pop
+population
+{
+	StartingCurrency 8000
+	RespawnWaveTime 3
+	CanBotsAttackWhileInSpawnRoom no
+	Advanced 1
+	Templates
+	{
+	}
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		WaveSpawn
+		{
+			Name epic
+			TotalCurrency 0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where spawnbot
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			TFBot
+			{
+				Template T_TFBot_Soldier_Homing_Hard
+			}
+		}
+		WaveSpawn
+		{
+			Name			wave1b
+			WaitForAllDead	epic
+			TotalCurrency 0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where spawnbot
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			TFBot
+			{
+				Template T_TFBot_Soldier_ChargedShot
+			}
+		}
+		WaveSpawn
+		{
+			Name			wave1c
+			WaitForAllDead	wave1b
+			TotalCurrency 0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where spawnbot
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			TFBot
+			{
+				Template T_TFBot_Soldier_Homing
+			}
+		}
+		WaveSpawn
+		{
+			Name			wave1d
+			WaitForAllDead	wave1c
+			TotalCurrency 0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where spawnbot
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			TFBot
+			{
+				Template T_TFBot_PlayerBuster
+			}
+		}
+		WaveSpawn
+		{
+			Name			wave1e
+			WaitForAllDead	wave1d
+			TotalCurrency 0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where spawnbot
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			TFBot
+			{
+				Template T_TFBot_Engineer_Widowmaker
+			}
+		}
+		WaveSpawn
+		{
+			Name			wave1f
+			WaitForAllDead	wave1e
+			TotalCurrency 0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where spawnbot
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			TFBot
+			{
+				Template T_TFBot_Engineer_Pomson
+			}
+		}
+		WaveSpawn
+		{
+			Name			wave1g
+			WaitForAllDead	wave1f
+			TotalCurrency 0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where spawnbot
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			TFBot
+			{
+				Template T_TFBot_Engineer_ShortCircuit
+			}
+		}
+		WaveSpawn
+		{
+			Name			wave1h
+			WaitForAllDead	wave1g
+			TotalCurrency 0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where spawnbot
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			TFBot
+			{
+				Template T_TFBot_Engineer_Sentry_Dispenser
+			}
+		}
+		WaveSpawn
+		{
+			Name			wave1i
+			WaitForAllDead	wave1h
+			TotalCurrency 0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where spawnbot
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			TFBot
+			{
+				Template T_TFBot_Engineer_Dispenser_Tele
+			}
+		}
+		WaveSpawn
+		{
+			Name			wave1j
+			WaitForAllDead	wave1i
+			TotalCurrency 0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where spawnbot
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			TFBot
+			{
+				Template T_TFBot_Giant_Pyro_Freeze
+			}
+		}
+	}
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		WaveSpawn
+		{
+			Name wave1a
+			TotalCurrency 0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			FirstSpawnOutput
+			{
+				Target ST_maker_relay
+				Action Trigger
+			}
+			Tank
+			{
+				Health 2000
+				Name sticky_tank
+				Speed 75
+				StartingPathTrackNode boss_path_abomb
+				ClassIcon tank_sticky
+				OnKilledOutput
+				{
+					Target ST_kill_relay
+					Action Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name			wave1b
+			WaitForAllDead	wave1a
+			TotalCurrency 0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health 2000
+				Name Tank
+				Speed 75
+				StartingPathTrackNode boss_path_wbomb
+				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+				SpawnTemplate "TankStickyHellmet"
+				ClassIcon tank_sticky_hellmet
+			}
+		}
+		WaveSpawn
+		{
+			Name			wave1c
+			WaitForAllDead	wave1b
+			TotalCurrency 0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health 2000
+				Name Tank
+				Speed 75
+				StartingPathTrackNode boss_path_wbomb
+				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+				SpawnTemplate "SmallTankTurret"
+				ClassIcon tank_small_turret
+				DisableSmokestack 1
+			}
+		}
+		WaveSpawn
+		{
+			Name			wave1d
+			WaitForAllDead	wave1c
+			TotalCurrency 0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health 2000
+				Name Tank
+				Speed 75
+				StartingPathTrackNode boss_path_wbomb
+				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+				SpawnTemplate "SmallTankTurretJarate"
+				ClassIcon tank_small_turret_jarate
+				DisableSmokestack 1
+			}
+		}
+		WaveSpawn
+		{
+			Name			wave1e
+			WaitForAllDead	wave1d
+			TotalCurrency 0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health 2000
+				Name Tank
+				Speed 75
+				StartingPathTrackNode boss_path_wbomb
+				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+				SpawnTemplate "TankVacMelee"
+				ClassIcon tank_vacc_melee
+			}
+		}
+		WaveSpawn
+		{
+			Name			wave1f
+			WaitForAllDead	wave1e
+			TotalCurrency 0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where spawnbot_giant
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			TFBot
+			{
+				Template Dispenser_Sig
+			}
+		}
+	}
+}

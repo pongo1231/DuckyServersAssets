@@ -1,0 +1,1641 @@
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_gatebot.pop
+#base robot_click_giant.pop
+Waveschedule
+{
+	StartingCurrency	12500
+	RespawnWaveTime	1
+	CanBotsAttackWhileInSpawnRoom	no
+	FixedRespawnWaveTime	Yes
+	Advanced	1
+    Mission
+	{
+		Objective	DestroySentries
+		Where	spawnbot
+		CooldownTime	40
+		DesiredCount	1
+		TFBot
+		{
+			Template	T_TFBot_SentryBuster
+		}
+	}
+    Mission
+	{
+		Objective	Spy
+		Where	spawnbot_mission_spy
+		BeginAtWave	6
+		RunForThisManyWaves	1
+		InitialCooldown	25
+		CooldownTime	25
+		DesiredCount	3
+		TFBot
+		{
+			ClassIcon	spy_d
+			Health	400
+			Name	"Pro Bandit"
+			Class	Spy
+			Skill	Expert
+			Attributes	"IgnoreFlag"
+			ItemAttributes
+			{
+				ItemName	tf_weapon_knife
+				"fire rate bonus"	0.6
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	3.0
+			}
+		    Item	"the doublecross-comm"
+		}
+	}
+    Wave //Wave 1: Demoknight
+    {
+        WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay_ironman
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay_ironman
+			Action	Trigger
+		}
+        WaveSpawn
+        {
+            Where spawnbot
+            Totalcount 1
+            Spawncount 1
+            MaxActive 1
+            TFBot
+            {
+                Name "PLEASE DO NOT STOP THE SCOUT"
+                Class scout
+                Attributes MiniBoss
+                Classicon h
+                Health 1
+                CharacterAttributes
+                {
+                    "Health regen" -2
+                    "damage force reduction" 0 
+                }
+            }
+        }
+        WaveSpawn
+        {
+            Name "Initial Push"
+            Where spawnbot
+            Totalcount 1
+            Spawncount 1
+            MaxActive 1
+            WaitBeforeStarting 10
+            TFBot
+            {
+                Name "I just move the bomb up :3"
+                Template T_TFBot_Giant_Scout_Blaster_Hyper
+                Health 15
+                ClassIcon h
+                CharacterAttributes
+                {
+                    "Health Regen" -1
+                    "damage force reduction" 0 
+					"airblast vulnerability multiplier"	0
+					"airblast vertical vulnerability multiplier" 0
+                    "dmg taken from fire reduced" -0.01
+                    "dmg taken from bullets reduced" -0.01
+                    "dmg taken from blast reduced" -0.01
+                    "dmg from melee increased" -0.01
+                    "cancel falling damage" 1
+                }
+            }
+        }
+        WaveSpawn
+        {
+            Waitforalldead "Initial Push"
+            Where spawnbot
+            Totalcount 1
+            Spawncount 1
+            MaxActive 1
+            FirstSpawnWarningSound "vo\scout_sf12_badmagic03.mp3"
+            TFBot
+            {
+                Name "Time to die"
+                Class scout
+                Attributes MiniBoss
+                Classicon h
+                Health 2
+                CharacterAttributes
+                {
+                    "Health regen" -3
+                    "damage force reduction" 0 
+                }
+            }
+        }
+        WaveSpawn
+		{
+			WaitForalldead "Initial Push"
+            TotalCurrency	150
+			TotalCount	15
+			MaxActive	15
+			SpawnCount	1
+			WaitBeforeStarting	3
+			WaitBetweenSpawns	5
+			Where	spawnbot
+			Where   spawnbot_upper
+            FirstSpawnWarningSound "vo\scout_sf12_badmagic04.mp3"
+			RandomChoice
+			{
+				TFBot
+		        {
+				    ClassIcon hellmet_blank
+					Name	"01111111"
+					Health 377777
+					Template	T_TFBot_Demoman_Samurai	
+					Attributes "AlwaysFireWeapon"
+					Attributes "MiniBoss"
+                    Item	"the scotsman's skullcutter"		
+					CharacterAttributes
+					{
+						"damage bonus"	2.5
+						"fire rate bonus" 1
+						"damage force reduction" 0.1
+						"cancel falling damage" 1
+						"turn to gold" 1
+						"melee range multiplier" 3.2
+						"hand scale" 3.2
+						"torso scale" 0.001
+						"head scale" 0.001
+						"move speed bonus" 3
+						"dmg taken increased" 25					
+					}				
+		        }
+		        TFBot
+		        {
+					ClassIcon hellmet_blank
+					Name	"C0R7UP4ED"
+					Health 377777
+					Template	T_TFBot_Demoman_Samurai					
+					Attributes "AlwaysFireWeapon"
+					Attributes "MiniBoss"	
+                    Item	"the persian persuader"				
+					CharacterAttributes
+					{
+						"damage bonus"	2.5
+						"fire rate bonus" 1
+						"damage force reduction" 0.1
+						"cancel falling damage" 1
+						"turn to gold" 1
+						"melee range multiplier" 3.2
+						"hand scale" 3.2
+						"torso scale" 0.001
+						"head scale" 0.001
+						"move speed bonus" 3
+						"dmg taken increased" 25
+					}										
+		        }
+		        TFBot
+	        	{
+                    ClassIcon hellmet_blank
+					Name	"ERRORNAME"
+					Health 377777
+					Template	T_TFBot_Demoman_Samurai
+					Attributes "AlwaysFireWeapon"
+					Attributes "MiniBoss"
+                    Item	"nessie's nine iron"
+					CharacterAttributes
+					{
+						"damage bonus"	2.5
+						"fire rate bonus" 1
+						"damage force reduction" 0.1
+						"cancel falling damage" 1
+						"turn to gold" 1
+						"melee range multiplier" 3.2
+						"hand scale" 3.2
+						"torso scale" 0.001
+						"head scale" 0.001
+						"move speed bonus" 3
+						"dmg taken increased" 25						
+					}							
+		        }
+		        TFBot
+		        {
+				    ClassIcon hellmet_blank
+				    Name	"TFBot"
+				    Health 377777
+				    Template	T_TFBot_Demoman_Samurai
+				    Attributes "AlwaysFireWeapon"
+				    Attributes "MiniBoss"	
+                    Item  "festive eyelander"	
+				    CharacterAttributes
+			        {
+    				    "damage bonus"	2.5
+				        "fire rate bonus" 1
+				        "damage force reduction" 0.1    
+				        "cancel falling damage" 1
+				        "turn to gold" 1
+				        "melee range multiplier" 3.2
+				        "hand scale" 3.2
+				        "torso scale" 0.001
+				        "head scale" 0.001
+	    			    "move speed bonus" 3
+    				    "dmg taken increased" 25	
+                    }
+		        }
+			}
+		}
+    }
+    Wave //Wave 2: Demoknight, Tank
+    {
+        WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay_ironman
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay_ironman
+			Action	Trigger
+		}
+        WaveSpawn
+        {
+            Where spawnbot
+            Totalcount 1
+            Spawncount 1
+            MaxActive 1
+            TFBot
+            {
+                Name "pLeAsE dO nOt StOp ThE sCoUt"
+                Class scout
+                Attributes MiniBoss
+                Classicon h
+                Health 1
+                CharacterAttributes
+                {
+                    "Health regen" -2
+                    "damage force reduction" 0 
+                }
+            }
+        }
+        WaveSpawn
+        {
+            Name "Initial Push"
+            Where spawnbot
+            Totalcount 1
+            Spawncount 1
+            MaxActive 1
+            WaitBeforeStarting 10
+			TotalCurrency 1000
+            TFBot
+            {
+                Name "It's ya boi; bomb boi"
+                Template T_TFBot_Giant_Scout_Blaster_Hyper
+                Health 15
+                ClassIcon h
+                CharacterAttributes
+                {
+                    "Health Regen" -1
+                    "damage force reduction" 0 
+					"airblast vulnerability multiplier"	0
+					"airblast vertical vulnerability multiplier" 0
+                    "dmg taken from fire reduced" -0.01
+                    "dmg taken from bullets reduced" -0.01
+                    "dmg taken from blast reduced" -0.01
+                    "dmg from melee increased" -0.01
+                    "cancel falling damage" 1
+                }
+            }
+        }
+        WaveSpawn
+        {
+            Waitforalldead "Initial Push"
+            Where spawnbot
+            Totalcount 1
+            Spawncount 1
+            MaxActive 1
+            FirstSpawnWarningSound "vo\taunts\soldier\soldier_tank_14.wav"
+            TFBot
+            {
+                Name "TAAAAAAAAAAAAAAAAAAAANK"
+                Class scout
+                Attributes MiniBoss
+                Classicon h
+                Health 2
+                CharacterAttributes
+                {
+                    "Health regen" -3
+                    "damage force reduction" 0 
+                }
+            }
+        }
+        WaveSpawn
+		{
+			WaitForalldead "Initial Push"
+            TotalCurrency	150
+			TotalCount	15
+			MaxActive	15
+			SpawnCount	1
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	5
+			Where	spawnbot
+			Where   spawnbot_upper
+			RandomChoice
+			{
+				TFBot
+		        {
+				    ClassIcon hellmet_blank
+					Name	"01111111"
+					Health 377777
+					Template	T_TFBot_Demoman_Samurai	
+					Attributes "AlwaysFireWeapon"
+					Attributes "MiniBoss"
+                    Item	"the scotsman's skullcutter"		
+					CharacterAttributes
+					{
+						"damage bonus"	2.5
+						"fire rate bonus" 1
+						"damage force reduction" 0.1
+						"cancel falling damage" 1
+						"turn to gold" 1
+						"melee range multiplier" 3.2
+						"hand scale" 3.2
+						"torso scale" 0.001
+						"head scale" 0.001
+						"move speed bonus" 3
+						"dmg taken increased" 25						
+					}					
+		        }
+		        TFBot
+		        {
+					ClassIcon hellmet_blank
+					Name	"C0R7UP4ED"
+					Health 377777
+					Template	T_TFBot_Demoman_Samurai					
+					Attributes "AlwaysFireWeapon"
+					Attributes "MiniBoss"	
+                    Item	"the persian persuader"				
+					CharacterAttributes
+					{
+						"damage bonus"	2.5
+						"fire rate bonus" 1
+						"damage force reduction" 0.1
+						"cancel falling damage" 1
+						"turn to gold" 1
+						"melee range multiplier" 3.2
+						"hand scale" 3.2
+						"torso scale" 0.001
+						"head scale" 0.001
+						"move speed bonus" 3
+						"dmg taken increased" 25
+					}										
+		        }
+		        TFBot
+	        	{
+                    ClassIcon hellmet_blank
+					Name	"ERRORNAME"
+					Health 377777
+					Template	T_TFBot_Demoman_Samurai
+					Attributes "AlwaysFireWeapon"
+					Attributes "MiniBoss"
+                    Item	"nessie's nine iron"
+					CharacterAttributes
+					{
+						"damage bonus"	2.5
+						"fire rate bonus" 1
+						"damage force reduction" 0.1
+						"cancel falling damage" 1
+						"turn to gold" 1
+						"melee range multiplier" 3.2
+						"hand scale" 3.2
+						"torso scale" 0.001
+						"head scale" 0.001
+						"move speed bonus" 3
+						"dmg taken increased" 25						
+					}							
+		        }
+		        TFBot
+		        {
+				    ClassIcon hellmet_blank
+				    Name	"TFBot"
+				    Health 377777
+				    Template	T_TFBot_Demoman_Samurai
+				    Attributes "AlwaysFireWeapon"
+				    Attributes "MiniBoss"	
+                    Item  "festive eyelander"	
+				    CharacterAttributes
+			        {
+    				    "damage bonus"	2.5
+				        "fire rate bonus" 1
+				        "damage force reduction" 0.1    
+				        "cancel falling damage" 1
+				        "turn to gold" 1
+				        "melee range multiplier" 3.2
+				        "hand scale" 3.2
+				        "torso scale" 0.001
+				        "head scale" 0.001
+	    			    "move speed bonus" 3
+    				    "dmg taken increased" 25	
+				    }    
+		        }
+			}
+		}
+        WaveSpawn
+		{
+			TotalCurrency	0
+			TotalCount	2
+			WaitForalldead "Initial Push"
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	30
+			Support	1
+			Where	spawnbot
+			Tank
+			{
+				Health	4000
+				Name	"Meme Tank"
+				Speed	400
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+        }
+    }
+    Wave //Wave 3: Demoknight, Tank, Nuker
+    {
+        WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay_ironman
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay_ironman
+			Action	Trigger
+		}
+                WaveSpawn
+        {
+            Where spawnbot
+            Totalcount 1
+            Spawncount 1
+            MaxActive 1
+            TFBot
+            {
+                Name "Scout Forward. Leave Alone."
+                Class scout
+                Attributes MiniBoss
+                Classicon h
+                Health 1
+                CharacterAttributes
+                {
+                    "Health regen" -2
+                    "damage force reduction" 0 
+                }
+            }
+        }
+        WaveSpawn
+        {
+            Name "Initial Push"
+            Where spawnbot
+            Totalcount 1
+            Spawncount 1
+            MaxActive 1
+            WaitBeforeStarting 10
+			TotalCurrency 1000
+            TFBot
+            {
+                Name "Bomb Forward. Defend Bomb."
+                Template T_TFBot_Giant_Scout_Blaster_Hyper
+                Health 15
+                ClassIcon h
+                CharacterAttributes
+                {
+                    "Health Regen" -1
+                    "damage force reduction" 0 
+					"airblast vulnerability multiplier"	0
+					"airblast vertical vulnerability multiplier" 0
+                    "dmg taken from fire reduced" -0.01
+                    "dmg taken from bullets reduced" -0.01
+                    "dmg taken from blast reduced" -0.01
+                    "dmg from melee increased" -0.01
+                    "cancel falling damage" 1
+                }
+            }
+        }
+        WaveSpawn
+        {
+            Waitforalldead "Initial Push"
+            Where spawnbot
+            Totalcount 1
+            Spawncount 1
+            MaxActive 1
+            TFBot
+            {
+                Name "Not even God can save you now"
+                Class scout
+                Attributes MiniBoss
+                Classicon h
+                Health 2
+                CharacterAttributes
+                {
+                    "Health regen" -3
+                    "damage force reduction" 0 
+                }
+            }
+        }
+        WaveSpawn
+		{
+			WaitForalldead "Initial Push"
+            TotalCurrency	150
+			TotalCount	15
+			MaxActive	15
+			SpawnCount	1
+			WaitBeforeStarting	20
+			WaitBetweenSpawns	5
+			Where	spawnbot
+			Where   spawnbot_upper
+			RandomChoice
+			{
+				TFBot
+		        {
+				    ClassIcon hellmet_blank
+					Name	"01111111"
+					Health 377777
+					Template	T_TFBot_Demoman_Samurai	
+					Attributes "AlwaysFireWeapon"
+					Attributes "MiniBoss"
+                    Item	"the scotsman's skullcutter"		
+					CharacterAttributes
+					{
+						"damage bonus"	2.5
+						"fire rate bonus" 1
+						"damage force reduction" 0.1
+						"cancel falling damage" 1
+						"turn to gold" 1
+						"melee range multiplier" 3.2
+						"hand scale" 3.2
+						"torso scale" 0.001
+						"head scale" 0.001
+						"move speed bonus" 3
+						"dmg taken increased" 25	
+					}					
+		        }
+		        TFBot
+		        {
+					ClassIcon hellmet_blank
+					Name	"C0R7UP4ED"
+					Health 377777
+					Template	T_TFBot_Demoman_Samurai					
+					Attributes "AlwaysFireWeapon"
+					Attributes "MiniBoss"	
+                    Item	"the persian persuader"				
+					CharacterAttributes
+					{
+						"damage bonus"	2.5
+						"fire rate bonus" 1
+						"damage force reduction" 0.1
+						"cancel falling damage" 1
+						"turn to gold" 1
+						"melee range multiplier" 3.2
+						"hand scale" 3.2
+						"torso scale" 0.001
+						"head scale" 0.001
+						"move speed bonus" 3
+						"dmg taken increased" 25
+					}										
+		        }
+		        TFBot
+	        	{
+                    ClassIcon hellmet_blank
+					Name	"ERRORNAME"
+					Health 377777
+					Template	T_TFBot_Demoman_Samurai
+					Attributes "AlwaysFireWeapon"
+					Attributes "MiniBoss"
+                    Item	"nessie's nine iron"
+					CharacterAttributes
+					{
+						"damage bonus"	2.5
+						"fire rate bonus" 1
+						"damage force reduction" 0.1
+						"cancel falling damage" 1
+						"turn to gold" 1
+						"melee range multiplier" 3.2
+						"hand scale" 3.2
+						"torso scale" 0.001
+						"head scale" 0.001
+						"move speed bonus" 3
+						"dmg taken increased" 25						
+					}							
+		        }
+		        TFBot
+		        {
+				    ClassIcon hellmet_blank
+				    Name	"TFBot"
+				    Health 377777
+				    Template	T_TFBot_Demoman_Samurai
+				    Attributes "AlwaysFireWeapon"
+				    Attributes "MiniBoss"	
+                    Item  "festive eyelander"	
+				    CharacterAttributes
+			        {
+    				    "damage bonus"	2.5
+				        "fire rate bonus" 1
+				        "damage force reduction" 0.1    
+				        "cancel falling damage" 1
+				        "turn to gold" 1
+				        "melee range multiplier" 3.2
+				        "hand scale" 3.2
+				        "torso scale" 0.001
+				        "head scale" 0.001
+	    			    "move speed bonus" 3
+    				    "dmg taken increased" 25	
+				    }				    
+		        }
+			}
+		}
+        WaveSpawn
+		{
+			WaitForalldead "Initial Push"
+            TotalCurrency	0
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting 5
+			WaitBetweenSpawns	30
+			Support	1
+			Where	spawnbot
+            
+			Tank
+	        {
+				Health	4000
+				Name	"Meme Tank"
+				Speed	400
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+        WaveSpawn
+		{
+			WaitForalldead "Initial Push"
+            Name	support3
+			TotalCurrency	0
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	3
+			WaitBetweenSpawns	20
+			Support 1
+			Where	spawnbot
+			Where   spawnbot_upper
+            FirstSpawnWarningSound "vo\mvm\mght\soldier_mvm_m_laughlong01.mp3"
+			TFBot
+			{
+				ClassIcon soldier_crit
+				Health	5200
+				Name	"MB Super Nuclear Soldier"
+				Scale	1.6
+				Class	Soldier
+				Skill	Expert
+				WeaponRestrictions	PrimaryOnly
+				Attributes	"MiniBoss"
+				Attributes	"HoldFireUntilFullReload"
+				Attributes	"AlwaysCrit"				
+                Item	"the original"
+				Item	"stainless pot"
+				Item	"osx item"     
+				ItemAttributes
+				{
+					ItemName	"the original"
+					"damage bonus"	6
+					"damage causes airblast"	1
+					"faster reload rate"	3
+					"fire rate bonus"	2
+					"projectile spread angle penalty"	1
+					"use large smoke explosion"	1
+					"blast radius increased"	3
+					"Projectile speed increased"	1.3
+				}
+				CharacterAttributes
+				{
+					"health regen"	1
+					"damage force reduction"	0.1
+					"airblast vulnerability multiplier"	0.1
+					"airblast vertical vulnerability multiplier"	0.1
+					"move speed bonus" 0.5
+				}
+			}
+		}
+    }
+    Wave //Wave 4: Demoknight, Tank, Nuker, Caber, Hell-Born Heavy
+    {
+        WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay_ironman
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay_ironman
+			Action	Trigger
+		}
+                WaveSpawn
+        {
+            Where spawnbot
+            Totalcount 1
+            Spawncount 1
+            MaxActive 1
+            TFBot
+            {
+                Name "You know the drill by now"
+                Class scout
+                Attributes MiniBoss
+                Classicon h
+                Health 1
+                CharacterAttributes
+                {
+                    "Health regen" -2
+                    "damage force reduction" 0 
+                }
+            }
+        }
+        WaveSpawn
+        {
+            Name "Initial Push"
+            Where spawnbot
+            Totalcount 1
+            Spawncount 1
+            MaxActive 1
+            WaitBeforeStarting 10
+			TotalCurrency 1000
+            TFBot
+            {
+                Name "Life is pain"
+                Template T_TFBot_Giant_Scout_Blaster_Hyper
+                Health 15
+                ClassIcon h
+                CharacterAttributes
+                {
+                    "Health Regen" -1
+                    "damage force reduction" 0 
+					"airblast vulnerability multiplier"	0
+					"airblast vertical vulnerability multiplier" 0
+                    "dmg taken from fire reduced" -0.01
+                    "dmg taken from bullets reduced" -0.01
+                    "dmg taken from blast reduced" -0.01
+                    "dmg from melee increased" -0.01
+                    "cancel falling damage" 1
+                }
+            }
+        }
+        WaveSpawn
+        {
+            Waitforalldead "Initial Push"
+            Where spawnbot
+            Totalcount 1
+            Spawncount 1
+            MaxActive 1
+            FirstSpawnWarningSound "vo\announcer_you_must_not_fail_this_time.mp3"
+            TFBot
+            {
+                Name "What is this? Hour 3? 4?"
+                Class scout
+                Attributes MiniBoss
+                Classicon h
+                Health 2
+                CharacterAttributes
+                {
+                    "Health regen" -3
+                    "damage force reduction" 0 
+                }
+            }
+        }
+        WaveSpawn
+		{
+			WaitForalldead "Initial Push"
+            TotalCurrency	150
+			TotalCount	15
+			MaxActive	15
+			SpawnCount	1
+			WaitBeforeStarting	30
+			WaitBetweenSpawns	5
+			Where	spawnbot
+			Where   spawnbot_upper
+			RandomChoice
+			{
+				TFBot
+		        {
+				    ClassIcon hellmet_blank
+					Name	"01111111"
+					Health 377777
+					Template	T_TFBot_Demoman_Samurai	
+					Attributes "AlwaysFireWeapon"
+					Attributes "MiniBoss"
+                    Item	"the scotsman's skullcutter"		
+					CharacterAttributes
+					{
+						"damage bonus"	2.5
+						"fire rate bonus" 1
+						"damage force reduction" 0.1
+						"cancel falling damage" 1
+						"turn to gold" 1
+						"melee range multiplier" 3.2
+						"hand scale" 3.2
+						"torso scale" 0.001
+						"head scale" 0.001
+						"move speed bonus" 3
+						"dmg taken increased" 25						
+					}				
+		        }
+		        TFBot
+		        {
+					ClassIcon hellmet_blank
+					Name	"C0R7UP4ED"
+					Health 377777
+					Template	T_TFBot_Demoman_Samurai					
+					Attributes "AlwaysFireWeapon"
+					Attributes "MiniBoss"	
+                    Item	"the persian persuader"				
+					CharacterAttributes
+					{
+						"damage bonus"	2.5
+						"fire rate bonus" 1
+						"damage force reduction" 0.1
+						"cancel falling damage" 1
+						"turn to gold" 1
+						"melee range multiplier" 3.2
+						"hand scale" 3.2
+						"torso scale" 0.001
+						"head scale" 0.001
+						"move speed bonus" 3
+						"dmg taken increased" 25
+					}										
+		        }
+		        TFBot
+	        	{
+                    ClassIcon hellmet_blank
+					Name	"ERRORNAME"
+					Health 377777
+					Template	T_TFBot_Demoman_Samurai
+					Attributes "AlwaysFireWeapon"
+					Attributes "MiniBoss"
+                    Item	"nessie's nine iron"
+					CharacterAttributes
+					{
+						"damage bonus"	2.5
+						"fire rate bonus" 1
+						"damage force reduction" 0.1
+						"cancel falling damage" 1
+						"turn to gold" 1
+						"melee range multiplier" 3.2
+						"hand scale" 3.2
+						"torso scale" 0.001
+						"head scale" 0.001
+						"move speed bonus" 3
+						"dmg taken increased" 25						
+					}							
+		        }
+		        TFBot
+		        {
+				    ClassIcon hellmet_blank
+				    Name	"TFBot"
+				    Health 377777
+				    Template	T_TFBot_Demoman_Samurai
+				    Attributes "AlwaysFireWeapon"
+				    Attributes "MiniBoss"	
+                    Item  "festive eyelander"	
+				    CharacterAttributes
+			        {
+    				    "damage bonus"	2.5
+				        "fire rate bonus" 1
+				        "damage force reduction" 0.1    
+				        "cancel falling damage" 1
+				        "turn to gold" 1
+				        "melee range multiplier" 3.2
+				        "hand scale" 3.2
+				        "torso scale" 0.001
+				        "head scale" 0.001
+	    			    "move speed bonus" 3
+    				    "dmg taken increased" 25	
+				    }				    
+		        }
+			}
+		}
+        WaveSpawn
+		{
+			WaitForalldead "Initial Push"
+            TotalCurrency	0
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	30
+			Support	1
+			Where	spawnbot
+			Tank
+			{
+				Health	4000
+				Name	"Meme Tank"
+				Speed	400
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+        WaveSpawn
+		{
+			WaitForalldead "Initial Push"
+            Name	support3
+			TotalCurrency	0
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	20
+			Support 1
+			Where	spawnbot
+			Where   spawnbot_upper
+			TFBot
+			{
+				ClassIcon soldier_crit
+				Health	5200
+				Name	"MB Super Nuclear Soldier"
+				Scale	1.6
+				Class	Soldier
+				Skill	Expert
+				WeaponRestrictions	PrimaryOnly
+				Attributes	"MiniBoss"
+				Attributes	"HoldFireUntilFullReload"
+				Attributes	"AlwaysCrit"				
+                Item	"the original"
+				Item	"stainless pot"
+				Item	"osx item"     
+				ItemAttributes
+				{
+					ItemName	"the original"
+					"damage bonus"	6
+					"damage causes airblast"	1
+					"faster reload rate"	3
+					"fire rate bonus"	2
+					"projectile spread angle penalty"	1
+					"use large smoke explosion"	1
+					"blast radius increased"	3
+					"Projectile speed increased"	1.3
+				}
+				CharacterAttributes
+				{
+					"health regen"	1
+					"damage force reduction"	0.1
+					"airblast vulnerability multiplier"	0.1
+					"airblast vertical vulnerability multiplier"	0.1
+					"move speed bonus" 0.5
+				}
+			}
+		}
+        WaveSpawn
+		{
+			WaitForalldead "Initial Push"
+            Name	support1
+			TotalCurrency	0
+			TotalCount	6
+			MaxActive	6
+			SpawnCount	3
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	8
+			Support 1
+			Where	spawnbot
+			Where   spawnbot_upper
+			TFBot
+			{
+				ClassIcon	demo_caber
+				Health	200
+				Name	"Corrupted Kami-Bot"
+				Class	Demoman
+				Skill	Hard
+				WeaponRestrictions	MeleeOnly
+                  Item	"the ullapool caber"
+				ItemAttributes
+				{
+					ItemName	"the ullapool caber"
+					"blast dmg to self increased"	10
+					"damage bonus"	10
+				}
+				CharacterAttributes
+				{
+					"blast dmg to self increased"	10
+					"move speed bonus"	1.1
+				}
+		    }
+		}
+        WaveSpawn
+		{
+			WaitForalldead "Initial Push"
+            TotalCurrency	0
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	20
+			Support	1
+			Where	spawnbot
+			Where   spawnbot_upper
+			TFBot
+			{		    
+		    	Health	9999
+				AutoJumpMin	0
+				AutoJumpMax	0
+				ClassIcon heavy_heater
+				Name	"Hell-Born Giant"
+				Scale	1.7
+				Template	T_TFBot_Giant_Heavyweapons
+                Item	"the huo long heatmaker"
+				Item	"spine-chilling skull"
+				ItemAttributes
+				{
+					ItemName	"the huo long heatmaker"
+					"damage bonus vs burning"	2.5
+				}
+				ItemAttributes
+				{
+					ItemName	tf_weapon_shotgun_hwg
+					"Attack not cancel charge"	1
+				}
+				ItemAttributes
+				{
+					ItemName	tf_weapon_fists
+					"damage bonus"	2
+				}
+				CharacterAttributes
+				{
+					"move speed bonus"	0.4
+					"damage force reduction"	0.1
+					"airblast vulnerability multiplier"	0.1
+					"voice pitch scale"	0.35
+					"become fireproof on hit by fire"	1
+					"fire retardant"	1
+					"dmg taken from fire reduced"	0.0001
+					"afterburn immunity"	1
+				}
+			}
+        }
+    }
+    Wave //Wave 5: Take a break
+    {
+        StartWaveOutput
+		{
+			Target	wave_start_relay_ironman
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay_ironman
+			Action	Trigger
+		}
+		WaveSpawn
+        {
+            Where spawnbot
+            Totalcount 1
+            Spawncount 1
+            MaxActive 1
+			FirstSpawnWarningSound "items\tf_music_upgrade_machine.wav"
+            TFBot
+            {
+                Name "Take a break. You earned it."
+                Class scout
+                Attributes MiniBoss
+                Classicon h
+                Health 1
+                CharacterAttributes
+                {
+                    "Health regen" -2
+                    "damage force reduction" 0 
+                }
+            }
+        }
+        WaveSpawn
+        {
+            Where spawnbot
+            Totalcount 1
+            Spawncount 1
+            MaxActive 1
+            WaitBeforeStarting 30
+            RandomChoice
+            {
+                Squad
+				{
+					TFBot
+                	{
+        		        Name "Hydration is important ya'know"
+    	        	    Class scout
+	                	Attributes MiniBoss
+                    	Classicon h
+                    	Health 1
+                    	CharacterAttributes
+                    	{
+	                        "Health regen" -2
+                        	"damage force reduction" 0 
+						}
+					}
+                }
+            }
+        }
+        WaveSpawn
+        {
+            Where spawnbot
+            Totalcount 1
+            Spawncount 1
+            MaxActive 1
+            WaitBeforeStarting 45
+            RandomChoice
+            {
+                Squad
+				{
+					TFBot
+                	{
+                    	Name "Oh? You are bored? Hold on.."
+                    	Class scout
+	                    Attributes MiniBoss
+    	                Classicon h
+        	            Health 1
+            	        CharacterAttributes
+                	    {
+                    	    "Health regen" -2
+                        	"damage force reduction" 0 
+                    	}
+					}
+				}
+            }
+        }
+        WaveSpawn
+        {
+            Where spawnbot
+            Totalcount 1
+            Spawncount 1
+            MaxActive 1
+            WaitBeforeStarting 55
+            RandomChoice
+            {
+                Squad
+				{
+					TFBot
+                	{
+                    	Name "Nvm, Wave's Over"
+                    	Class scout
+                    	Attributes MiniBoss
+                    	Classicon h
+                    	Health 1
+                    	CharacterAttributes
+                    	{
+	                        "Health regen" -2
+                        	"damage force reduction" 0 
+                    	}
+					}
+				}
+            }
+        }
+    }
+    Wave //Wave 6: EVERYTHING
+    {
+        WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay_ironman
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay_ironman
+			Action	Trigger
+		}
+        WaveSpawn
+        {
+            Where spawnbot
+            Totalcount 1
+            Spawncount 1
+            MaxActive 1
+            TFBot
+            {
+                Name "This is the entire subwave."
+                Class scout
+                Attributes MiniBoss
+                Classicon h
+                Health 1
+                CharacterAttributes
+                {
+                    "Health regen" -2
+                    "damage force reduction" 0 
+                }
+            }
+        }
+        WaveSpawn
+        {
+            Name "Initial Push"
+            Where spawnbot
+            Totalcount 1
+            Spawncount 1
+            MaxActive 1
+            WaitBeforeStarting 10
+			TotalCurrency 1000
+            TFBot
+            {
+                Name "Prepare your asses"
+                Template T_TFBot_Giant_Scout_Blaster_Hyper
+                Health 15
+                ClassIcon h
+                CharacterAttributes
+                {
+                    "Health Regen" -1
+                    "damage force reduction" 0 
+					"airblast vulnerability multiplier"	0
+					"airblast vertical vulnerability multiplier" 0
+                    "dmg taken from fire reduced" -0.01
+                    "dmg taken from bullets reduced" -0.01
+                    "dmg taken from blast reduced" -0.01
+                    "dmg from melee increased" -0.01
+                    "cancel falling damage" 1
+                }
+            }
+        }
+        WaveSpawn
+        {
+            Waitforalldead "Initial Push"
+            Where spawnbot
+            Totalcount 1
+            Spawncount 1
+            MaxActive 1
+            TFBot
+            {
+                Name "For this is gamer time"
+                Class scout
+                Attributes MiniBoss
+                Classicon h
+                Health 2
+                CharacterAttributes
+                {
+                    "Health regen" -3
+                    "damage force reduction" 0 
+                }
+            }
+        }
+		WaveSpawn
+		{
+			WaitForalldead "Initial Push"
+            TotalCurrency	150
+			TotalCount	15
+			MaxActive	15
+			SpawnCount	1
+			WaitBeforeStarting	30
+			WaitBetweenSpawns	5
+			Where	spawnbot
+			Where   spawnbot_upper
+			RandomChoice
+			{
+				TFBot
+		        {
+				    ClassIcon hellmet_blank
+					Name	"01111111"
+					Health 377777
+					Template	T_TFBot_Demoman_Samurai	
+					Attributes "AlwaysFireWeapon"
+					Attributes "MiniBoss"
+                    Item	"the scotsman's skullcutter"		
+					CharacterAttributes
+					{
+						"damage bonus"	2.5
+						"fire rate bonus" 1
+						"damage force reduction" 0.1
+						"cancel falling damage" 1
+						"turn to gold" 1
+						"melee range multiplier" 3.2
+						"hand scale" 3.2
+						"torso scale" 0.001
+						"head scale" 0.001
+						"move speed bonus" 3
+						"dmg taken increased" 25						
+					}				
+		        }
+		        TFBot
+		        {
+					ClassIcon hellmet_blank
+					Name	"C0R7UP4ED"
+					Health 377777
+					Template	T_TFBot_Demoman_Samurai					
+					Attributes "AlwaysFireWeapon"
+					Attributes "MiniBoss"	
+                    Item	"the persian persuader"				
+					CharacterAttributes
+					{
+						"damage bonus"	2.5
+						"fire rate bonus" 1
+						"damage force reduction" 0.1
+						"cancel falling damage" 1
+						"turn to gold" 1
+						"melee range multiplier" 3.2
+						"hand scale" 3.2
+						"torso scale" 0.001
+						"head scale" 0.001
+						"move speed bonus" 3
+						"dmg taken increased" 25
+					}										
+		        }
+		        TFBot
+	        	{
+                    ClassIcon hellmet_blank
+					Name	"ERRORNAME"
+					Health 377777
+					Template	T_TFBot_Demoman_Samurai
+					Attributes "AlwaysFireWeapon"
+					Attributes "MiniBoss"
+                    Item	"nessie's nine iron"
+					CharacterAttributes
+					{
+						"damage bonus"	2.5
+						"fire rate bonus" 1
+						"damage force reduction" 0.1
+						"cancel falling damage" 1
+						"turn to gold" 1
+						"melee range multiplier" 3.2
+						"hand scale" 3.2
+						"torso scale" 0.001
+						"head scale" 0.001
+						"move speed bonus" 3
+						"dmg taken increased" 25						
+					}							
+		        }
+		        TFBot
+		        {
+				    ClassIcon hellmet_blank
+				    Name	"TFBot"
+				    Health 377777
+				    Template	T_TFBot_Demoman_Samurai
+				    Attributes "AlwaysFireWeapon"
+				    Attributes "MiniBoss"	
+                    Item  "festive eyelander"	
+				    CharacterAttributes
+			        {
+    				    "damage bonus"	2.5
+				        "fire rate bonus" 1
+				        "damage force reduction" 0.1    
+				        "cancel falling damage" 1
+				        "turn to gold" 1
+				        "melee range multiplier" 3.2
+				        "hand scale" 3.2
+				        "torso scale" 0.001
+				        "head scale" 0.001
+	    			    "move speed bonus" 3
+    				    "dmg taken increased" 25	
+				    }				    
+		        }
+			}
+		}
+        WaveSpawn
+		{
+			WaitForalldead "Initial Push"
+            TotalCurrency	0
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	30
+			Support	1
+			Where	spawnbot
+			Tank
+			{
+				Health	4000
+				Name	"Meme Tank"
+				Speed	400
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+        WaveSpawn
+		{
+			WaitForalldead "Initial Push"
+            Name	support3
+			TotalCurrency	0
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	20
+			Support 1
+			Where	spawnbot
+			Where   spawnbot_upper
+			TFBot
+			{
+				ClassIcon soldier_crit
+				Health	5200
+				Name	"MB Super Nuclear Soldier"
+				Scale	1.6
+				Class	Soldier
+				Skill	Expert
+				WeaponRestrictions	PrimaryOnly
+				Attributes	"MiniBoss"
+				Attributes	"HoldFireUntilFullReload"
+				Attributes	"AlwaysCrit"				
+                Item	"the original"
+				Item	"stainless pot"
+				Item	"osx item"     
+				ItemAttributes
+				{
+					ItemName	"the original"
+					"damage bonus"	6
+					"damage causes airblast"	1
+					"faster reload rate"	3
+					"fire rate bonus"	2
+					"projectile spread angle penalty"	1
+					"use large smoke explosion"	1
+					"blast radius increased"	3
+					"Projectile speed increased"	1.3
+				}
+				CharacterAttributes
+				{
+					"health regen"	1
+					"damage force reduction"	0.1
+					"airblast vulnerability multiplier"	0.1
+					"airblast vertical vulnerability multiplier"	0.1
+					"move speed bonus" 0.5
+				}
+			}
+		}
+        WaveSpawn
+		{
+			WaitForalldead "Initial Push"
+            Name	support1
+			TotalCurrency	0
+			TotalCount	6
+			MaxActive	6
+			SpawnCount	3
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	8
+			Support 1
+			Where	spawnbot
+			Where   spawnbot_upper
+			TFBot
+			{
+				ClassIcon	demo_caber
+				Health	200
+				Name	"Corrupted Kami-Bot"
+				Class	Demoman
+				Skill	Hard
+				WeaponRestrictions	MeleeOnly
+                  Item	"the ullapool caber"
+				ItemAttributes
+				{
+					ItemName	"the ullapool caber"
+					"blast dmg to self increased"	10
+					"damage bonus"	10
+				}
+				CharacterAttributes
+				{
+					"blast dmg to self increased"	10
+					"move speed bonus"	1.1
+				}
+		    }
+		}
+        WaveSpawn
+		{
+			WaitForalldead "Initial Push"
+            TotalCurrency	0
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	20
+			Support	1
+			Where	spawnbot
+			Where   spawnbot_upper
+			TFBot
+			{		    
+		    	Health	9999
+				AutoJumpMin	0
+				AutoJumpMax	0
+				ClassIcon heavy_heater
+				Name	"Hell-Born Giant"
+				Scale	1.7
+				Template	T_TFBot_Giant_Heavyweapons
+                Item	"the huo long heatmaker"
+				Item	"spine-chilling skull"
+				ItemAttributes
+				{
+					ItemName	"the huo long heatmaker"
+					"damage bonus vs burning"	2.5
+				}
+				ItemAttributes
+				{
+					ItemName	tf_weapon_shotgun_hwg
+					"Attack not cancel charge"	1
+				}
+				ItemAttributes
+				{
+					ItemName	tf_weapon_fists
+					"damage bonus"	2
+				}
+				CharacterAttributes
+				{
+					"move speed bonus"	0.4
+					"damage force reduction"	0.1
+					"airblast vulnerability multiplier"	0.1
+					"voice pitch scale"	0.35
+					"become fireproof on hit by fire"	1
+					"fire retardant"	1
+					"dmg taken from fire reduced"	0.0001
+					"afterburn immunity"	1
+				}
+			}
+        }
+        WaveSpawn
+		{
+			WaitForalldead "Initial Push"
+			TotalCurrency	0
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting  7
+			WaitBetweenSpawns	40
+			Support 1
+			Where	spawnbot
+			Where   spawnbot_upper
+			TFBot
+			{
+				ClassIcon	demo_d
+				Health	13333
+				AutoJumpMin	10
+				AutoJumpMax	10
+				Name	"N.O.N.E"
+				Scale	1.75
+				Class	Demoman
+				Skill	Expert
+				Attributes	"MiniBoss"
+				Attributes	"AirChargeOnly"
+				Attributes	"AutoJump"				
+                Item	"ali baba's wee booties"
+				Item	"the splendid screen"
+				Item	"the horseless headless horseman's headtaker"
+				Item	"the king of scotland cape"
+				ItemAttributes
+				{
+					ItemName	"the splendid screen"
+					"Attack not cancel charge"	1
+				}
+				ItemAttributes
+				{
+					ItemName	"the horseless headless horseman's headtaker"
+					"damage bonus"	25
+					"heal on hit for rapidfire"	666
+				}
+				CharacterAttributes
+				{
+					"charge time increased"	2
+					"charge recharge rate increased"	7
+					"increased jump height"	2.3
+					"bot custom jump particle"	1
+					"move speed bonus"	0.3
+					"damage force reduction"	0.1
+					"airblast vulnerability multiplier"	0.1
+					"airblast vertical vulnerability multiplier"	0.1
+					"rage giving scale"	0.1
+					"cancel falling damage" 1
+				}
+			}
+		}
+    }
+}

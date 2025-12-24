@@ -1,0 +1,324 @@
+#base Waffle's_custom.pop
+//#base robot_standard.pop
+//#base robot_giant.pop
+//#base robot_click.pop
+//#base robot_click_giant.pop
+#base Nuclear_Powered_Robot_Emporium.pop
+Waveschedule
+{
+    NoThrillerTaunt 1
+    Templates
+    {
+        Damage_Sponge
+        {
+            Class Heavyweapons
+            Name "W.A.L.L."
+            Skill Expert
+            Attributes "Miniboss"
+            Classicon heavy_wall
+            WeaponRestrictions MeleeOnly
+            Health 10000
+            Maxvisionrange 1
+            Item "The Purity Fist"
+            Item "Bone-Cut Belt"          
+            Item "Steel-Toed Stompers"
+            Item "Der Maschinensoldaten-Helm"
+            Item "Employee Badge A"
+            ItemAttributes
+            {
+                Itemname "TF_WEAPON_FISTS"
+                "fire rate bonus" 9999
+                "damage bonus" 2
+            }
+            ItemModel
+            {
+                ItemName "Employee Badge A"
+                Model "models/workshop/player/items/heavy/sbox2014_war_helmet_s1/sbox2014_war_helmet_s1.mdl"
+            }
+            Itemattributes
+            {
+                Itemname "The Purity Fist"
+                "attach particle effect" 3042
+            }
+            CharacterAttributes
+            {
+                //"dmg taken from fire reduced" 0.25
+                //"dmg taken from blast reduced" 0.25
+                //"dmg taken from bullets reduced" 0.25
+                "move speed bonus"	0.25
+				//"damage force reduction" 0
+				//"airblast vulnerability multiplier" 0
+				"override footstep sound set" 2
+                "health regen" 1000
+                //"attach particle effect" 3042
+            }
+        }
+        Hyper_Ultra_Mega_Damage_Sponge
+        {
+            Class Heavyweapons
+            Skill Expert
+            Attributes "Miniboss"
+            Attributes Alwayscrit
+            WeaponRestrictions MeleeOnly
+            Health 1000000
+            Maxvisionrange 1
+            Item "The Killing Gloves of Boxing"
+            Item "The Team Captain"
+            Name "Cheater..."
+            ItemAttributes
+            {
+                Itemname "The Killing Gloves of Boxing"
+                "damage bonus" 9999
+                "attach particle effect" 1
+            }
+            ItemAttributes
+            {
+                Itemname "The Team Captain"
+                "attach particle effect" 13
+            }
+            CharacterAttributes
+            {
+                //"dmg taken from fire reduced" 0.25
+                //"dmg taken from blast reduced" 0.25
+                //"dmg taken from bullets reduced" 0.25
+                "move speed bonus"	0.25
+				//"damage force reduction" 0
+				//"airblast vulnerability multiplier" 0
+				"override footstep sound set" 2
+                "health regen" 100000
+                "attach particle effect" 3045
+            }
+        }
+    }
+    PointTemplates
+    {    
+        Kill_Mannpower
+        {  
+            logic_timer
+            {
+                "targetname" "powerup_kill"
+                "RefireTime" ".1"
+                "OnTimer" "item_powerup_rune,kill,,0,-1"
+            }
+        }
+    }    
+    Spawntemplate
+    {
+        Name "Kill_Mannpower"
+        Origin "0 0 0"
+        Angles "0 0 0"
+    }
+    ForceHoliday 2
+    Respawnwavetime 0
+    Startingcurrency 10000
+    ExtraSpawnPoint  
+    {
+        Name "spawnbot_overbridge"
+        TeamNum 3
+        X    -9.56          
+        Y    -1184.45    
+        Z    600
+    }
+    PlayerAddCond
+    {
+        //Index 51
+        //Index 66
+    }
+    PlayerAttributes  
+    {
+        Engineer
+        {
+        }
+        Soldier
+        {
+        }
+        Demoman
+        {
+        }
+    }
+    ExtendedUpgrades
+    {
+        
+    } 
+    ClassLimit
+    {
+
+    }
+    ItemAttributes
+    {
+        Classname "TF_WEAPON_ROCKETLAUNCHER"
+        "self add cond on hit" 1
+        "self add cond on hit duration" 1
+        "damage penalty" .1
+        //"Set Damagetype ignite" 1
+        //"add cond when active" 38
+    }
+    Wave
+    {
+		StartWaveOutput
+		{
+			Target	wave_start_relay_boss
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        Wavespawn 
+        {
+            Name "The Test"
+            Where spawnbot_overbridge
+            Totalcount 10
+            Spawncount 1
+            Maxactive 1
+            Waitbetweenspawns 1
+            Tfbot
+            {
+                Template Damage_Sponge
+                Skill Expert
+                Action Mobber
+                Attributes DisableDodge
+            }
+        }
+        WaveSpawn // Tank # HP
+        {
+            Name "h"
+            TotalCount 1
+            MaxActive 1
+            SpawnCount 1
+            WaitBeforeStarting 10000
+            WaitBetweenSpawns 10000
+        
+            TotalCurrency 0
+        
+            Tank
+            {
+                Name "tankboss"
+                StartingPathTrackNode "boss_path_1"
+                Health 25000
+                Speed 75
+                Skin 0
+        
+                OnKilledOutput {}
+                OnBombDroppedOutput
+                {
+                    Target boss_deploy_relay
+                    Action Trigger
+                }
+            }
+        }
+        WaveSpawn // Tank # HP
+        {
+            Name "h2"
+            TotalCount 1
+            MaxActive 1
+            SpawnCount 1
+            Waitforalldead "h"
+            WaitBeforeStarting 0
+            WaitBetweenSpawns 0
+        
+            TotalCurrency 0
+        
+            Tank
+            {
+                Name "tankboss"
+                StartingPathTrackNode "boss_path_1"
+                Health 50000
+                Speed 75
+                Skin 0
+        
+                OnKilledOutput {}
+                OnBombDroppedOutput
+                {
+                    Target boss_deploy_relay
+                    Action Trigger
+                }
+            }
+        }
+        WaveSpawn // Tank # HP
+        {
+            Name "h3"
+            TotalCount 1
+            MaxActive 1
+            SpawnCount 1
+            Waitforalldead "h2"
+            WaitBeforeStarting 0
+            WaitBetweenSpawns 0
+        
+            TotalCurrency 0
+        
+            Tank
+            {
+                Name "tankboss"
+                StartingPathTrackNode "boss_path_1"
+                Health 100000
+                Speed 75
+                Skin 0
+        
+                OnKilledOutput {}
+                OnBombDroppedOutput
+                {
+                    Target boss_deploy_relay
+                    Action Trigger
+                }
+            }
+        }
+        WaveSpawn // Tank # HP
+        {
+            Name "h4"
+            TotalCount 1
+            MaxActive 1
+            SpawnCount 1
+            Waitforalldead "h3"
+            WaitBeforeStarting 0
+            WaitBetweenSpawns 0
+        
+            TotalCurrency 0
+        
+            Tank
+            {
+                Name "tankboss"
+                StartingPathTrackNode "boss_path_1"
+                Health 175000
+                Speed 75
+                Skin 0
+        
+                OnKilledOutput {}
+                OnBombDroppedOutput
+                {
+                    Target boss_deploy_relay
+                    Action Trigger
+                }
+            }
+        }
+        WaveSpawn // Tank # HP
+        {
+            Name "h5"
+            TotalCount 1
+            MaxActive 1
+            SpawnCount 1
+            Waitforalldead "h4"
+            WaitBeforeStarting 0
+            WaitBetweenSpawns 0
+        
+            TotalCurrency 0
+        
+            Tank
+            {
+                Name "tankboss"
+                StartingPathTrackNode "boss_path_1"
+                Health 250000
+                Speed 75
+                Skin 1
+        
+                OnKilledOutput {}
+                OnBombDroppedOutput
+                {
+                    Target boss_deploy_relay
+                    Action Trigger
+                }
+            }
+        }
+    }
+}

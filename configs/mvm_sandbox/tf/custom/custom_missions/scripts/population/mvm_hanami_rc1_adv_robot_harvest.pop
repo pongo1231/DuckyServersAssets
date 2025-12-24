@@ -1,0 +1,1569 @@
+// robot harvest (temporary name)
+// monify l4d expert setting
+// all robots have 50% dmg resist
+// all mini-giant cannot be instantly killed by one backstab
+// An AI robot make this 
+
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_hanami.pop
+population
+{
+	StartingCurrency	1600
+	RespawnWaveTime	4
+	CanBotsAttackWhileInSpawnRoom	yes
+	SniperHideLasers 1  
+	RobotLimit 24
+	MaxTotalPlayers 8
+	SentryBusterFriendlyFire 0  
+	NoReanimators 1  
+	SniperHideLasers 1  
+	RespecEnabled 1   
+	RespecLimit 1  
+	ImprovedAirblast 1  
+	FlagCarrierMovementPenalty 0.6  
+	SniperAllowHeadshots 1  
+	BotsRandomCrit 1  
+	SendBotsToSpectatorImmediately 1  
+	PrecacheModel "models/bots/boss_air/boss_tank.mdl"			 
+	PrecacheModel "models/bots/boss_air/boss_tank_damage1.mdl"	 
+	PrecacheModel "models/bots/boss_air/boss_tank_damage2.mdl"	 
+	PrecacheModel "models/bots/boss_air/boss_tank_damage3.mdl"	 
+	DisableSound "Announcer.MVM_Engineer_Teleporter_Activated"   // this is unused sounds let viewers know this sound exist
+	DisableSound "Announcer.MVM_Another_Engineer_Teleport_Spawned"  
+	DisableSound "Announcer.MVM_First_Engineer_Teleport_Spawned"  
+	DisableSound "Announcer.MVM_An_Engineer_Bot_Is_Dead"  
+	DisableSound "Announcer.MVM_An_Engineer_Bot_Is_Dead_But_Not_Teleporter"  
+	CustomUpgradesFile "mvm_upgrades_zombie_canteens.txt"  
+	MedigunShieldDamage 1  
+	ItemBlacklist   //Disallows using specified weapons below
+	{
+		Name "Sapper"
+		Name "Sapper (Renamed/Strange)"
+		Name "The Red-Tape Recorder"
+		Name "The Red-Tape Recorder (Genuine)"
+		Name "The Ap-Sap (Genuine)"
+		Name "The Ap-Sap"
+		Name "Festive Sapper"
+		Name "The Snack Attack"
+	}
+	ClassLimit   //Limits the number of specified classes
+	{
+		Heavyweapons 1
+		Sniper 1
+		Spy 1
+	}
+	PlayerAttributes   //Player attributes appied for the whole mission
+	{
+		
+		Scout //Attributes limited to soldier only
+		{
+			"powerup max charges" -2
+		}
+	}	
+	PlayerAttributes   //Player attributes appied for the whole mission
+	{
+		
+		Soldier //Attributes limited to soldier only
+		{
+			"powerup max charges" -2
+		}
+	}
+	PlayerAttributes   //Player attributes appied for the whole mission
+	{
+		
+		Pyro //Attributes limited to soldier only
+		{
+			"powerup max charges" -2
+		}
+	}	
+	PlayerAttributes   //Player attributes appied for the whole mission
+	{
+		
+		Demoman //Attributes limited to soldier only
+		{
+			"powerup max charges" -2
+		}
+	}
+	PlayerAttributes   //Player attributes appied for the whole mission
+	{
+		
+		Heavyweapons //Attributes limited to soldier only
+		{
+			"powerup max charges" -2
+		}
+	}	
+	PlayerAttributes   //Player attributes appied for the whole mission
+	{
+		
+		Engineer //Attributes limited to soldier only
+		{
+			"powerup max charges" -2
+		}
+	}
+	PlayerAttributes   //Player attributes appied for the whole mission
+	{
+		
+		Medic //Attributes limited to soldier only
+		{
+			"powerup max charges" -2
+		}
+	}	
+	PlayerAttributes   //Player attributes appied for the whole mission
+	{
+		
+		Sniper //Attributes limited to soldier only
+		{
+			"powerup max charges" -2
+		}
+	}
+	PlayerAttributes   //Player attributes appied for the whole mission
+	{
+		
+		Spy //Attributes limited to soldier only
+		{
+			"powerup max charges" -2
+		}
+	}
+	ExtraTankPath  
+	{
+		Name "Kirov"
+		Node "256 -3968 832"
+		Node "256 -2688 832"
+		Node "512 -2112 832"
+		Node "832 -1728 832"
+		Node "1216 -1472 832"
+		Node "1280 512 832"
+		Node "1280 3328 832"
+		Node "1152 4224 832"
+		Node "960 4352 832"
+		Node "640 4800 832"
+	}
+	PointTemplates  
+	{
+	KirovAirship
+		{
+            OnSpawnOutput
+			{
+				Target "!activator"
+				Action "setmodelscale"
+				Param "1"
+				Delay 0.05
+			}
+            OnSpawnOutput
+			{
+				Target "!activator"
+				Action "addoutput"
+				Param "rendermode 0"
+				Delay 0.05
+			}
+            OnSpawnOutput
+			{
+				Target "!activator"
+				Action "alpha"
+				Param "0"
+				Delay 0.06
+			}
+            OnSpawnOutput
+			{
+				Target "tank_turret_shoot_relay"
+				Action "trigger"
+				Param ""
+				Delay 5
+			}
+            OnSpawnOutput
+			{
+				Target "spawntr"
+				Action "trigger"
+				Param ""
+				Delay 1
+			}
+            OnSpawnOutput
+			{
+				Target "!activator"
+				Action "addoutput"
+				Param "OnHealthBelow50Percent tank_turret_shoot_relay_super:trigger::0:-1"
+				Delay 1
+			}
+            OnSpawnOutput
+			{
+				Target "!activator"
+				Action "addoutput"
+				Param "OnHealthBelow40Percent tank_turret_shoot_relay_super:trigger::0:-1"
+				Delay 1
+			}
+			OnSpawnOutput
+			{
+				Target "!activator"
+				Action "addoutput"
+				Param "OnHealthBelow30Percent Volatile_Fuel:trigger::0:-1"
+				Delay 1
+			}
+            tf_point_weapon_mimic
+            {
+                "targetname" "tank_turret_shooter_grenade"
+                "angles" "3 0 0"
+                "origin" "68 0 76"
+                "Damage" "120"
+                "SpeedMax" "170"
+                "SpeedMin" "170"
+                "SplashRadius" "550"
+                "SpreadAngle" "2"
+                "WeaponType" "3"
+                "ModelScale" "1"
+                "Crits" "1"
+                "ModelOverride" "models/weapons/w_models/w_grenade_grenadelauncher.mdl"
+                "onuser1" "!self,fireuser2,,0.3,-1"
+                "onuser2" "tank_turret_shoot_effect_relay,trigger,,5,-1"
+                "onuser2" "!self,fireonce,,0.02,-1" 
+                "onuser2" "!self,DetonateStickies,,2.10,-1" 
+            }
+            logic_relay
+            {
+                "targetname" "tank_turret_shoot_effect_relay"
+                "ontrigger" "!parent,addoutput,solid 1,5,-1"
+                "ontrigger" "!parent,addoutput,solid 2,0.10,-1"
+                "spawnflags" "2"
+            }
+            logic_relay
+            {
+                "targetname" "tank_turret_shoot_relay"            
+                "ontrigger" "tank_turret_shooter_grenade,fireuser1,,5,-1"
+                "ontrigger" "!self,trigger,,3,-1"
+                "spawnflags" "2"
+            }
+            logic_relay
+            {
+                "targetname" "tank_turret_shoot_relay_super"
+                "ontrigger" "tank_turret_shoot_relay,cancelpending,,0,-1"
+                "ontrigger" "tank_turret_shooter_grenade,fireuser1,,2,-1"
+                "ontrigger" "tank_turret_shooter_grenade,fireuser1,,2,-1"
+                "ontrigger" "tank_turret_shooter_grenade,fireuser1,,2,-1"
+                "ontrigger" "tank_turret_shoot_relay,trigger,,2,-1"
+                "spawnflags" "2"
+            }
+			logic_relay
+            {
+                "targetname" "Volatile_Fuel"
+				"OnTrigger"  "!parent,AddOutput,OnHealthBelow30Percent !self:SetSpeed:120:0:-1,0,-1"
+				"OnTrigger"  "!parent,AddOutput,OnHealthBelow20Percent !self:SetSpeed:140:0:-1,0,-1"
+				"OnTrigger"  "!parent,AddOutput,OnHealthBelow10Percent !self:SetSpeed:160:0:-1,0,-1"
+            }
+			
+		}
+	 SmallTankTurretCrit
+		{
+            OnSpawnOutput
+			{
+				Target "!activator"
+				Action "setmodelscale"
+				Param "0.5"
+				Delay 0.05
+			}
+            OnSpawnOutput
+			{
+				Target "!activator"
+				Action "addoutput"
+				Param "rendermode 1"
+				Delay 0.05
+			}
+            OnSpawnOutput
+			{
+				Target "!activator"
+				Action "alpha"
+				Param "0"
+				Delay 0.06
+			}
+            OnSpawnOutput
+			{
+				Target "tank_turret_shoot_relay"
+				Action "trigger"
+				Param ""
+				Delay 5
+			}
+            OnSpawnOutput
+			{
+				Target "spawntr"
+				Action "trigger"
+				Param ""
+				Delay 1
+			}
+            OnSpawnOutput
+			{
+				Target "!activator"
+				Action "addoutput"
+				Param "OnHealthBelow50Percent tank_turret_shoot_relay_super:trigger::0:-1"
+				Delay 1
+			}
+            OnSpawnOutput
+			{
+				Target "!activator"
+				Action "addoutput"
+				Param "OnHealthBelow10Percent tank_turret_shoot_relay_super:trigger::0:-1"
+				Delay 1
+			}
+            prop_dynamic
+            {
+                "targetname" "tank_turret_prop"
+                "model" "models/props_frontline/tank_cart.mdl"
+                "solid" "0"
+                "angles" "0 180 0"
+                "DefaultAnim" "idle"
+                "skin" "2"
+            }
+            tf_point_weapon_mimic
+            {
+                "targetname" "tank_turret_shooter_grenade"
+                "angles" "3 0 0"
+                "origin" "68 0 76"
+                "Damage" "100"
+                "SpeedMax" "170"
+                "SpeedMin" "170"
+                "SplashRadius" "350"
+                "SpreadAngle" "2"
+                "WeaponType" "3"
+                "ModelScale" "1"
+                "Crits" "1"
+                "ModelOverride" "models/weapons/w_models/w_grenade_grenadelauncher.mdl"
+                "onuser1" "tank_turret_prop,setanimation,shoot_N,0,-1"
+                "onuser1" "!self,fireuser2,,0.5,-1"
+                "onuser2" "tank_turret_shoot_effect_relay,trigger,,0,-1"
+                "onuser2" "!self,fireonce,,0.02,-1" 
+                "onuser2" "!self,DetonateStickies,,2.8,-1" 
+            }
+            tf_point_weapon_mimic
+            {
+                "targetname" "tank_turret_shooter_n"
+                "angles" "3 0 0"
+                "origin" "68 0 76"
+                "Damage" "120"
+                "SpeedMax" "1800"
+                "SpeedMin" "1800"
+                "SplashRadius" "180"
+                "SpreadAngle" "2"
+                "WeaponType" "0"
+                "Crits" "1"
+                "onuser1" "tank_turret_prop,setanimation,shoot_N,0,-1"
+                "onuser1" "!self,fireuser2,,0.5,-1"
+                "onuser2" "tank_turret_shoot_effect_relay,trigger,,0,-1"
+                "onuser2" "!self,fireonce,,0.02,-1" 
+            }
+            tf_point_weapon_mimic
+            {
+                "targetname" "tank_turret_shooter_w"
+                "angles" "3 90 0"
+                "origin" "-16 62 76"
+                "Damage" "120"
+                "SpeedMax" "1800"
+                "SpeedMin" "1800"
+                "SplashRadius" "180"
+                "SpreadAngle" "2"
+                "WeaponType" "0"
+                "Crits" "1"
+                "onuser1" "tank_turret_prop,setanimation,shoot_W,0,-1"
+                "onuser1" "!self,fireuser2,,0.5,-1"
+                "onuser2" "tank_turret_shoot_effect_relay,trigger,,0,-1"
+                "onuser2" "!self,fireonce,,0.02,-1" 
+            }
+            tf_point_weapon_mimic
+            {
+                "targetname" "tank_turret_shooter_nw"
+                "angles" "3 45 0"
+                "origin" "40 62 76"
+                "Damage" "120"
+                "SpeedMax" "1800"
+                "SpeedMin" "1800"
+                "SplashRadius" "180"
+                "SpreadAngle" "2"
+                "WeaponType" "0"
+                "Crits" "1"
+                "onuser1" "tank_turret_prop,setanimation,shoot_NW,0,-1"
+                "onuser1" "!self,fireuser2,,0.5,-1"
+                "onuser2" "tank_turret_shoot_effect_relay,trigger,,0,-1"
+                "onuser2" "!self,fireonce,,0.02,-1" 
+            }
+            tf_point_weapon_mimic
+            {
+                "targetname" "tank_turret_shooter_e"
+                "angles" "3 -90 0"
+                "origin" "-16 -62 76"
+                "Damage" "120"
+                "SpeedMax" "1800"
+                "SpeedMin" "1800"
+                "SplashRadius" "180"
+                "SpreadAngle" "2"
+                "WeaponType" "0"
+                "Crits" "1"
+                "onuser1" "tank_turret_prop,setanimation,shoot_E,0,-1"
+                "onuser1" "!self,fireuser2,,0.5,-1"
+                "onuser2" "tank_turret_shoot_effect_relay,trigger,,0,-1"
+                "onuser2" "!self,fireonce,,0.02,-1" 
+            }
+            tf_point_weapon_mimic
+            {
+                "targetname" "tank_turret_shooter_ne"
+                "angles" "3 -45 0"
+                "origin" "40 -62 76"
+                "Damage" "120"
+                "SpeedMax" "1800"
+                "SpeedMin" "1800"
+                "SplashRadius" "180"
+                "SpreadAngle" "2"
+                "WeaponType" "0"
+                "Crits" "1"
+                "onuser1" "tank_turret_prop,setanimation,shoot_NE,0,-1"
+                "onuser1" "!self,fireuser2,,0.5,-1"
+                "onuser2" "tank_turret_shoot_effect_relay,trigger,,0,-1"
+                "onuser2" "!self,fireonce,,0.02,-1" 
+            }
+            logic_relay
+            {
+                "targetname" "tank_turret_shoot_effect_relay"
+                "ontrigger" "!parent,addoutput,solid 1,0,-1"
+                "ontrigger" "!parent,addoutput,solid 2,0.12,-1"
+                "spawnflags" "2"
+            }
+            logic_relay
+            {
+                "targetname" "tank_turret_shoot_relay"
+                "ontrigger" "tank_turret_shooter_n,fireuser1,,0,-1"
+                "ontrigger" "tank_turret_shooter_e,fireuser1,,2,-1"
+                "ontrigger" "tank_turret_shooter_ne,fireuser1,,4,-1"
+                "ontrigger" "tank_turret_shooter_nw,fireuser1,,6,-1"
+                "ontrigger" "tank_turret_shooter_w,fireuser1,,8,-1"
+
+                "ontrigger" "tank_turret_shooter_grenade,fireuser1,,10,-1"
+                "ontrigger" "!self,trigger,,12,-1"
+                "spawnflags" "2"
+            }
+            logic_relay
+            {
+                "targetname" "tank_turret_shoot_relay_super"
+                "ontrigger" "tank_turret_shoot_relay,cancelpending,,0,-1"
+                "ontrigger" "tank_turret_shooter_n,fireuser1,,0,-1"
+                "ontrigger" "tank_turret_shooter_n,fireuser1,,0.5,-1"
+                "ontrigger" "tank_turret_shooter_n,fireuser1,,1,-1"
+                "ontrigger" "tank_turret_shooter_e,fireuser1,,2,-1"
+                "ontrigger" "tank_turret_shooter_e,fireuser1,,2.5,-1"
+                "ontrigger" "tank_turret_shooter_e,fireuser1,,3,-1"
+                "ontrigger" "tank_turret_shooter_ne,fireuser1,,4,-1"
+                "ontrigger" "tank_turret_shooter_ne,fireuser1,,4.5,-1"
+                "ontrigger" "tank_turret_shooter_ne,fireuser1,,5,-1"
+                "ontrigger" "tank_turret_shooter_nw,fireuser1,,6,-1"
+                "ontrigger" "tank_turret_shooter_nw,fireuser1,,6.5,-1"
+                "ontrigger" "tank_turret_shooter_nw,fireuser1,,7,-1"
+                "ontrigger" "tank_turret_shooter_w,fireuser1,,8,-1"
+                "ontrigger" "tank_turret_shooter_w,fireuser1,,8.5,-1"
+                "ontrigger" "tank_turret_shooter_w,fireuser1,,9,-1"
+                "ontrigger" "tank_turret_shooter_grenade,fireuser1,,10,-1"
+                "ontrigger" "tank_turret_shooter_grenade,fireuser1,,10.5,-1"
+                "ontrigger" "tank_turret_shooter_grenade,fireuser1,,11,-1"
+
+                "ontrigger" "tank_turret_shoot_relay,trigger,,12,-1"
+                "spawnflags" "2"
+            }
+		}
+       
+	}
+	
+	Mission // Sentry Busters
+	{
+		Objective	DestroySentries
+		Where	spawnbot_mission_sentrybuster
+		BeginAtWave	1
+		RunForThisManyWaves	7
+		InitialCooldown	24
+		CooldownTime	28
+		DesiredCount	1
+			TFBot
+			{
+				Template	T_TFBot_Zombie_SentryBuster
+			}
+			
+	}
+	Mission //  Engineers no tele in
+	{
+		Objective	Engineer
+		Where	spawnbot
+		BeginAtWave	1
+		RunForThisManyWaves	7
+		InitialCooldown	40
+		CooldownTime	24
+		DesiredCount	2
+		TFBot
+		{
+			Template T_TFBot_Engineer_zombie
+			TeleportWhere spawnbot
+			TeleportWhere spawnbot_flank
+			TeleportWhere spawnbot_river
+			TeleportWhere spawnbot_river_slow
+			TeleportWhere spawnbot_invasion
+		}
+	}
+	Templates
+	{
+		T_TFBot_Engineer_zombie
+		{
+		Class Engineer
+			Name "Teleporter Engineer"
+			Skill Expert
+			Health 800
+			Scale 1.2
+			Attributes IgnoreFlag
+			CharacterAttributes
+			{
+				"engy dispenser radius increased" 10
+				"engy building health bonus" 99999
+				"damage force reduction" 0.2
+				"airblast vulnerability multiplier" 0.001
+				"airblast vertical vulnerability multiplier" 0.001
+				"build rate bonus" 0.5
+				"rage giving scale" 0.001
+				"move speed bonus"	1.3
+			}
+			ExtAttr BuildDispenserAsSentryGun  
+			ClassIcon	engineer
+		
+		}
+		T_TFBot_Engineer_zombie_teletohint
+		{
+		Class Engineer
+			Name "Teleporter Engineer"
+			Skill Expert
+			Health 800
+			Scale 1.2
+			Attributes TeleportToHint
+			Attributes IgnoreFlag
+			CharacterAttributes
+			{
+				"engy dispenser radius increased" 10
+				"engy building health bonus" 99999
+				"damage force reduction" 0.2
+				"airblast vulnerability multiplier" 0.001
+				"airblast vertical vulnerability multiplier" 0.001
+				"build rate bonus" 0.5
+				"rage giving scale" 0.001
+				"move speed bonus"	1.1
+			}
+			ExtAttr BuildDispenserAsSentryGun  
+			ClassIcon	engineer
+		
+		}
+		T_TFBot_Zombie_SentryBuster
+		{
+			Class Demoman
+			Name "Sentry Buster"
+			Skill Expert
+			Health 5000
+			Item "The Ullapool Caber"
+			WeaponRestrictions MeleeOnly
+			ClassIcon sentry_buster
+			Attributes MiniBoss
+			CharacterAttributes
+			{
+				"move speed bonus"	2
+				"damage force reduction" 0.001
+				"airblast vulnerability multiplier" 0.001
+				"airblast vertical vulnerability multiplier" 0.001
+				"override footstep sound set" 7
+				"cannot be backstabbed" 1
+				"rage giving scale" 0.001
+			}
+		}
+		T_TFBot_Medic_Shield_Armored
+		{
+			Name "Armored Shield Medic"
+			Class Medic
+			ClassIcon medic_shield_qf
+			Skill Expert
+			Attributes SpawnWithFullCharge
+			Attributes ProjectileShield
+			Item "The Quick-Fix"
+			WeaponRestrictions SecondaryOnly
+			Item "Das Ubersternmann"
+			ItemAttributes
+			{
+				ItemName "The Quick-Fix"
+				"generate rage on heal" 2
+				"increase buff duration" 99
+				"dmg penalty vs players" 0.01
+			}
+			CharacterAttributes
+			{
+				"bot medic uber deploy delay duration" 0.2
+				"bot medic uber health threshold" 100
+				"dmg taken increased" 0.5
+			}
+		}
+		T_TFBot_DemoMan_Cutter
+		{
+			Class Demoman
+			ClassIcon demoknight
+			Name "Cutter Demoknight"
+			Skill Expert
+			Health 400
+			Scale 1.1
+			Item "The Razor Cut"
+			Item "The Chargin' Targe"
+			Item "The Scotsman's Skullcutter"
+			Item "Ali Baba's Wee Booties"
+			WeaponRestrictions MeleeOnly
+			ItemAttributes
+			{
+				ItemName "The Scotsman's Skullcutter"
+				"critboost on kill" 3
+				
+			}
+			ItemAttributes
+			{
+				ItemName "The Chargin' Targe"
+				"Attack not cancel charge"	1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 1.3
+				"airblast vulnerability multiplier" 0.001
+				"airblast vertical vulnerability multiplier" 0.001
+				"damage force reduction" 0.001
+				"dmg taken increased" 0.5
+		//		"dmg from melee increased" 0.5
+			}
+		}
+		T_TFBot_CaberDemo
+		{
+			Class Demoman
+				Skill Hard
+				WeaponRestrictions MeleeOnly
+				ClassIcon demo_caber_nys
+				Name "Kamikaze Demo"
+				Item "Ali Baba's Wee Booties"
+				Item "The Ullapool Caber"
+				Item "The Chargin' Targe"
+				ItemAttributes
+				{
+					ItemName "The Ullapool Caber"
+					"damage bonus" 1
+					"blast dmg to self increased" 1
+					"regenerate stickbomb" 1
+				}
+				ItemAttributes
+				{
+				ItemName "The Chargin' Targe"
+				"Attack not cancel charge"	1
+				}
+				CharacterAttributes
+				{
+				"move speed bonus" 1.5
+				"airblast vulnerability multiplier" 0.001
+				"airblast vertical vulnerability multiplier" 0.001
+				"damage force reduction" 0.001
+				"dmg taken increased" 0.5
+			//	"dmg from melee increased" 0.5
+				}
+		}
+		T_TFBot_Demoknight_pusher
+		{
+			Class Demoman
+			Name "Demoknight Pusher"
+			ClassIcon demoknight
+			Health 400
+			Scale 1.2
+			WeaponRestrictions MeleeOnly			
+			Skill Expert	
+			Item "Stylish DeGroot"
+			Item "The Chargin' Targe"
+			Item "The Eyelander"
+			ItemAttributes
+			{
+				ItemName "The Eyelander"
+				"damage causes airblast" 1
+				"damage bonus" 1.5
+			}	
+			CharacterAttributes
+			{
+				"move speed bonus" 1.2
+				 "airblast vulnerability multiplier" 0.001
+				"airblast vertical vulnerability multiplier" 0.001
+				"damage force reduction" 0.001
+				"dmg taken increased" 0.5
+		//		"dmg from melee increased" 0.5
+			}			
+		}
+		
+		
+	}
+	
+	Wave //wave 1
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_2bomb_classic_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		Explanation    //Dispayed once the wave is initialized
+		{
+			Line "{0x87CEEB}Weapon Restriction: All Sappers; 1 charge canteens"
+			Line "{0xFF4500}The Teleporter cannot be destroyed! Hold the line!"
+			Line "{0x99CCFF}Maximum 1 refunds allowed for each player in this mission!"
+			Line "{0x38F3AB}Debug mode on! this is beta version!"
+		}
+		
+		WaveSpawn // A - Heavyweight Champs
+		{
+			Name	Wave1a
+			TotalCurrency	900
+			TotalCount	100
+			MaxActive	15
+			SpawnCount	3
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	4
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Heavy_KGB
+				ItemAttributes
+				{
+				ItemName "The Killing Gloves Of Boxing"
+				 "dmg taken increased" 0.5
+				 "fire rate bonus with reduced health" 0.5
+				}
+			}
+		}
+		
+		
+		WaveSpawn // Support - Lightweight Champs
+		{
+			TotalCurrency	300
+			TotalCount	100
+			MaxActive	6
+			SpawnCount	2
+			WaitBeforeStarting	15
+			WaitBetweenSpawns 5
+			Support	1
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Heavy_GRU
+				ItemAttributes
+				{
+				ItemName "Gloves Of Running Urgently MVM"
+				
+				 "mod_maxhealth_drain_rate" 0
+				 "self mark for death" 0
+				 "dmg taken increased" 0.5
+				 "fire rate bonus with reduced health" 0.5
+				
+				}
+				Action Mobber
+			}
+		}
+	}
+	Wave  //wave 2
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_2bomb_classic_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn 
+		{
+			TotalCurrency	400
+			TotalCount	40
+			MaxActive	6
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	4
+			Where	spawnbot
+			TFBot
+			{
+				Class Spy
+				Skill Hard
+				Action FetchFlag   
+				ItemAttributes
+					{
+					ItemName "TF_WEAPON_REVOLVER"
+					"explosive bullets" 100
+					"crit mod disabled" 0.2
+					}
+				CharacterAttributes
+				{
+					 "dmg taken increased" 0.5
+				}
+			}
+			
+		}
+		WaveSpawn
+		{
+			Name	Wave3a
+			TotalCurrency	400
+			TotalCount	40
+			MaxActive	6
+			SpawnCount	2
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	2
+			Where	spawnbot
+			TFBot
+			{
+				Class Spy
+				Skill Hard
+				Action FetchFlag   
+				ItemAttributes
+					{
+					ItemName "TF_WEAPON_REVOLVER"
+					"explosive bullets" 100
+					"crit mod disabled" 0.2
+					}
+				
+				CharacterAttributes
+				{
+					 "dmg taken increased" 0.5
+				}
+			}
+		}
+		WaveSpawn 
+		{
+			TotalCurrency	300
+			TotalCount	20
+			MaxActive	4
+			SpawnCount	2
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	4
+			Where	spawnbot_flank
+			
+				TFBot
+				{
+				Class Spy
+				Name "Spy"
+				Skill Hard
+				Scale 1.1
+				Health 300
+				Action Mobber   
+				AimAt Head  
+				ItemAttributes
+					{
+					ItemName "TF_WEAPON_REVOLVER"
+					"explosive bullets" 140
+					"can headshot" 1
+					"crit mod disabled" 0.1
+					}
+				CharacterAttributes
+				{
+					"airblast vulnerability multiplier" 0.001
+					"airblast vertical vulnerability multiplier" 0.001
+					"damage force reduction" 0.001
+					"dmg taken increased" 0.5
+					"dmg from melee increased" 0.5
+					"wet immunity" 1
+				}
+				}
+				
+		}
+		WaveSpawn // Support - Sandman Scouts
+		{
+			TotalCurrency	300
+			TotalCount	100
+			MaxActive	4
+			SpawnCount	2
+			WaitBeforeStarting	20
+			WaitBetweenSpawns	10
+			Support	1
+			Where	spawnbot
+			TFBot
+			{
+				Class Spy
+				Skill Hard
+				Classicon spy_giant
+				Attributes IgnoreFlag
+				CharacterAttributes
+				{
+					 "dmg taken increased" 0.5
+					 "move speed bonus" 1.1
+				}
+			}
+		}
+	}
+//WAVE 3
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_2bomb_classic_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // B1 - 25 Jumping Scouts
+		{
+			Name	Wave5b1
+			TotalCurrency	1000
+			TotalCount	120
+			MaxActive	14
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	2
+			Where	spawnbot
+			Where	spawnbot_river
+			Randomchoice
+			{
+			
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Scout
+					ClassIcon scout
+					CharacterAttributes
+					{
+					 "dmg taken increased" 0.5
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Scout_Cola
+					ClassIcon scout
+					CharacterAttributes
+					{
+					 "dmg taken increased" 0.5
+					}
+				}
+				TFBot
+				{
+					Class Scout
+					Name "Scout"
+					Health 200
+					Scale 1.1
+					Skill Hard
+					Item "The Soda Popper"
+					ClassIcon scout
+					CharacterAttributes
+					{
+					"dmg taken increased" 0.5
+					}
+				}
+				TFBot
+				{
+				Template	T_TFBot_Hanami_Scout_FaN
+				Health 200
+				Scale 1.1
+				CharacterAttributes
+				{
+					 "dmg taken increased" 0.5
+				}
+				ClassIcon scout
+				}
+			}
+		}
+		
+		WaveSpawn 
+		{
+			Name	Wave2b
+			TotalCurrency	200
+			TotalCount	30
+			MaxActive	3
+			SpawnCount	1
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	4
+			Where	spawnbot_river
+			
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Scout_Shortstop
+					ClassIcon scout
+					CharacterAttributes
+					{
+					"airblast vulnerability multiplier" 0.001
+					"airblast vertical vulnerability multiplier" 0.001
+					"damage force reduction" 0.001
+					"dmg taken increased" 0.5
+					//"dmg from melee increased" 0.5
+					"wet immunity" 1
+					}
+				}
+				
+		}
+		
+		WaveSpawn 
+		{
+			TotalCurrency	200
+			TotalCount	40
+			MaxActive	3
+			SpawnCount	1
+			WaitBeforeStarting	30
+			WaitBetweenSpawns	2
+			Support	1
+			Where	spawnbot
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Scout_Sandman
+					Health 140
+					Action Mobber
+					ItemAttributes
+					{
+					ItemName "The Sandman"
+					"effect bar recharge rate increased"	0.2
+					"dmg taken increased" 0.5
+					}
+				}
+		}
+	} 
+	
+//WAVE 4  
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_2bomb_classic_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // A - 35 Random Spawned Pyros, Bowmen
+		{
+			Name	Wave4a
+			TotalCurrency	400
+			TotalCount	50
+			MaxActive	8
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	2
+			Where	spawnbot
+			
+				TFBot
+				{
+					Class Pyro
+					Skill Hard
+					Name "Mini-crit Pyro"
+					Item "The Phlogistinator"
+					Attributes Spawnwithfullcharge
+					FireWeapon   
+					{
+                    Delay 8 
+					IfSeeTarget 0 
+					Type Secondary
+					}
+					ItemAttributes
+					{
+					ItemName "The Phlogistinator"
+					"mod soldier buff type"	1	//mini crit instead!
+					"increase buff duration" 99
+					"dmg taken increased" 0.5
+					}
+				}
+			
+		}
+		WaveSpawn 
+		{
+			Name	Wave4b
+			TotalCurrency	600
+			TotalCount	30
+			MaxActive	6
+			SpawnCount	2
+			WaitBeforeStarting	2
+			WaitBetweenSpawns	2
+			Where	spawnbot
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Pyro
+					ItemAttributes
+					{
+					ItemName "Upgradeable TF_WEAPON_FLAMETHROWER"
+					"airblast disabled"	1
+					}
+					CharacterAttributes
+					{
+					 "dmg taken increased" 0.5
+					  "airblast vulnerability multiplier" 0.001
+					"airblast vertical vulnerability multiplier" 0.001
+					}
+				}
+		}
+		WaveSpawn 
+		{
+			Name	Wave4b
+			TotalCurrency	300
+			TotalCount	20
+			MaxActive	4
+			SpawnCount	1
+			WaitBeforeStarting	2
+			WaitBetweenSpawns	2
+			Where	spawnbot
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Pyro_HealOnKill
+					ClassIcon pyro
+					Scale 1.2
+					Health 350
+					ItemAttributes
+					{
+					ItemName "Upgradeable TF_WEAPON_FLAMETHROWER"
+					"heal on kill"		50
+					"airblast disabled"	0
+					}
+					CharacterAttributes
+					{
+					 "airblast vulnerability multiplier" 0.001
+					"airblast vertical vulnerability multiplier" 0.001
+					"damage force reduction" 0.001
+					"dmg taken increased" 0.5
+					}
+				}
+		}
+		
+		WaveSpawn
+		{
+			TotalCurrency	200
+			TotalCount	100
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	15
+			WaitBetweenSpawns 10
+			Support	1
+			Where	spawnbot
+			TFBot
+			{
+				Class Pyro
+				Skill Expert
+				Action Mobber
+				Health 250
+				Scale 1.1
+				ClassIcon pyro_reflect_daan
+				Name "Bad Airblast Pyro"
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_FLAMETHROWER"
+					"reverse airblast" 1
+					"mult airblast refire time" 1
+					"deflection size multiplier" 1.1
+					"weapon burn dmg reduced" 0.01
+					"weapon burn time reduced" 5
+					"damage bonus" 0.01
+				}
+				CharacterAttributes
+				{
+					 "airblast vulnerability multiplier" 0.001
+					"airblast vertical vulnerability multiplier" 0.001
+					"damage force reduction" 0.001
+					"dmg taken increased" 0.5
+				}
+			
+			}
+		}
+	}
+//WAVE 5 
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_2bomb_classic_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		
+		WaveSpawn // B1 - 25 Jumping Scouts
+		{
+			Name	Wave5b1
+			TotalCurrency	1000
+			TotalCount	100
+			MaxActive	10
+			SpawnCount	3
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	2
+			Where	spawnbot
+			Randomchoice
+			{
+			
+				TFBot
+				{
+				Template T_TFBot_Hanami_Demoman_Knight
+				Health 225
+				CharacterAttributes
+				{
+				"move speed bonus" 1.2
+				"airblast vulnerability multiplier" 0.001
+				"airblast vertical vulnerability multiplier" 0.001
+				"dmg taken increased" 0.5
+				}
+				}
+				TFBot
+				{
+				Template	T_TFBot_Demoknight_pusher
+				}
+				TFBot
+				{
+				Template	T_TFBot_DemoMan_Cutter
+				}
+			}
+		}
+		
+		
+		WaveSpawn 
+		{
+			TotalCurrency	400
+			TotalCount	30
+			MaxActive	4
+			SpawnCount	2
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	2
+			Support	1
+			Where	spawnbot
+				TFBot
+				{
+				Template	T_TFBot_CaberDemo
+				Action Mobber
+				}
+		}		
+		WaveSpawn 
+		{
+			TotalCurrency	400
+			TotalCount	30
+			MaxActive	4
+			SpawnCount	2
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	1
+			Support	1
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Demoman_Samurai
+				Health 600
+				Action Mobber
+				CharacterAttributes
+				{
+				"charge time increased" 2
+				"charge recharge rate increased" 7
+				"increased jump height" 1.5
+				"damage bonus"	1.5
+				"cancel falling damage" 1
+				"airblast vulnerability multiplier" 0.001
+				"airblast vertical vulnerability multiplier" 0.001
+				"dmg taken increased" 0.5
+				
+				}
+			}
+		}
+	}
+//WAVE 6 
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_2bomb_classic_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn //  Tank
+		{
+			TotalCurrency	500
+			TotalCount	10
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	60
+			Support 1
+			Tank
+			{
+				SpawnTemplate "SmallTankTurretCrit"
+				ClassIcon tank_small_turret_crit
+				DisableSmokestack 1 
+				IsCrit 1
+				Health	30000
+				Name	"tankboss"
+				Speed	75
+				StartingPathTrackNode	tank_start_main
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // kirov ship
+		{
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	20
+			WaitBetweenSpawns	30
+			Support 1
+			Tank
+			{
+				SpawnTemplate "KirovAirship"
+				ClassIcon blimp_lite
+				DisableSmokestack 1 
+				IsCrit 1
+				Health	30000
+				Name	"tankboss"
+				Speed	80
+				Gravity 0  
+				DisableTracks 1  
+				Scale 1.5  
+				Model "models/bots/boss_air/boss_tank.mdl"  
+				EngineLoopSound "npc\combine_gunship\dropship_engine_distant_loop1.wav"  
+                PingSound "npc\combine_gunship\ping_search.wav"  
+				StartingPathTrackNode	"Kirov_1"
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // A - 8 Squads; 1 Booster Heavy, 1 Uber Medic
+		{
+			Name	Wave6a
+			TotalCurrency	500
+			TotalCount	50
+			MaxActive	4
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	1
+			Where	spawnbot
+				
+				TFBot
+				{
+					Class Medic
+					Skill Normal
+					WeaponRestrictions PrimaryOnly
+					ClassIcon medic
+					Action FetchFlag 
+					MaxVisionRange 600
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_SYRINGEGUN_MEDIC"
+						"damage penalty" 1.5
+						"mad milk syringes" 1
+						"faster reload rate" 0.5
+						"dmg taken increased" 0.5
+					}
+					CharacterAttributes
+					{
+					"airblast vulnerability multiplier" 0.001
+					"airblast vertical vulnerability multiplier" 0.001
+				
+					}
+				}
+				
+		}
+		WaveSpawn // A - 8 Squads; 1 Booster Heavy, 1 Uber Medic
+		{
+			Name	Wave6a
+			TotalCurrency	500
+			TotalCount	50
+			MaxActive	6
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	4
+			Where	spawnbot
+			Squad
+			{
+			ShouldPreserveSquad 1
+				TFBot
+				{
+					Class Medic
+					Skill Normal
+					Name "Crossbow Medic"
+					Health 300
+					Scale 1.2
+					Item "The Crusader's Crossbow"
+					WeaponRestrictions PrimaryOnly
+					ItemAttributes
+					{
+					ItemName "The Crusader's Crossbow"
+					"dmg bonus vs buildings" 2
+					"faster reload rate" 0.5
+					"fire rate bonus" 0.9
+					"auto fires when full" 1
+					"auto fires full clip" 1
+					"projectile penetration" 1
+					}
+				}
+				TFBot
+				{
+					Class Medic
+					Name "Infinite Uber Medic"
+					Skill Normal
+					MaxVisionRange 600
+					Health 200
+					Scale 1.1
+					Item "The Quick-Fix"
+					Attributes Spawnwithfullcharge
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_SYRINGEGUN_MEDIC"
+						"damage penalty" 1.5
+						"mad milk syringes" 1
+						"faster reload rate" 0.5
+						
+					}
+					WeaponResist  
+					{
+					"TF_WEAPON_KNIFE" 0.1
+					}
+					ItemAttributes
+					{
+					ItemName "The Quick-Fix"
+					"is_passive_weapon" 1
+					"uber duration bonus"	-10
+					"overheal penalty" 1.5
+					"healing mastery" 4
+					}
+					CharacterAttributes
+					{
+					"bot medic uber health threshold" 202
+					"dmg taken increased" 0.5
+
+					}
+				}
+			}	
+				
+		}
+		WaveSpawn 
+		{
+			TotalCurrency	1000
+			TotalCount	50
+			MaxActive	4
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns 2
+			Where	spawnbot
+			TFBot
+			{
+				Class Heavy
+				Skill Hard
+				Health 450
+				Scale 1.1
+				Name "Softlock Heavy"
+				ClassIcon "heavy_deflector_Push"
+				Attributes Spawnwithfullcharge
+				ExtAttr AlwaysFireWeaponAlt   
+				Item "Natascha"
+				ItemAttributes
+				{
+					ItemName "Natascha"
+					"dmg taken increased" 0.5
+					"generate rage on damage" 1
+					"ring of fire while aiming" 1
+					"dmg penalty vs players" 1
+					"attack projectiles" 2
+					"aiming movespeed increased" 1.5
+				}
+				FireWeapon   //Periodically fires weapon
+					{
+                    Delay 3 //Time before the first fire input starts (Default: 10)
+					IfSeeTarget 1
+					Type Action // Type of fire input, Possible values:
+					}
+				CharacterAttributes
+				{
+					"airblast vulnerability multiplier" 0.001
+					"airblast vertical vulnerability multiplier" 0.001
+					
+				}
+			}
+		}
+		WaveSpawn 
+		{
+			TotalCurrency	1000
+			TotalCount	50
+			MaxActive	4
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns 2
+			Where	spawnbot
+			TFBot
+			{
+				Class Heavy
+				Skill Hard
+				Health 450
+				Scale 1.1
+				Name "Knockback Fire Heavy"
+				ClassIcon "heavy_deflector_Push"
+				ExtAttr AlwaysFireWeaponAlt   
+				Attributes Spawnwithfullcharge
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_MINIGUN"
+					"dmg taken increased" 0.5
+					"generate rage on damage" 1
+					"ring of fire while aiming" 1
+					"damage penalty" 1
+					"Set DamageType Ignite" 1
+					"attack projectiles" 2
+					"aiming movespeed increased" 1.5
+				}
+				FireWeapon   //Periodically fires weapon
+					{
+                    Delay 3 //Time before the first fire input starts (Default: 10)
+					IfSeeTarget 1
+					Type Action // Type of fire input, Possible values:
+					}
+				CharacterAttributes
+				{
+					"airblast vulnerability multiplier" 0.001
+					"airblast vertical vulnerability multiplier" 0.001
+					
+				}
+			}
+		}
+	//	WaveSpawn // Support - Fan O'War Scouts
+	//	{
+	//		TotalCurrency	400
+	//		TotalCount	50
+	//		MaxActive	2
+	//		SpawnCount	1
+	//		WaitBeforeStarting	10
+	//		WaitBetweenSpawns	1
+	//		Support	1
+	//		Where	spawnbot_river
+	//		TFBot
+	//		{
+	//			Template T_TFBot_Medic_Shield_Armored
+	//			AimOffset "0 0 255"
+	//			AimAt Head
+	//			MaxVisionRange 500
+	//			Action Mobber
+	//			FireWeapon   //Periodically fires weapon
+	//				{
+     //               Delay 3 //Time before the first fire input starts (Default: 10)
+	//				IfSeeTarget 0 
+	//				Type Special // Type of fire input, Possible values:
+	//				}
+	//		}
+			
+		//}
+	}
+//WAVE 7 
+}

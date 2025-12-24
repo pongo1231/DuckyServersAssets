@@ -1,0 +1,885 @@
+#base robot_standard.pop
+#base robot_giant.pop
+
+  WaveSchedule
+ {
+ StartingCurrency 750
+ RespawnWaveTime 5
+ CanBotsAttackWhileInSpawnRoom no
+ 
+ ForceHoliday 2
+ 
+ ExtraSpawnPoint
+ {
+ Name "spawnbot_Core"
+ TeamNum 2
+ X "-76"
+ Y "-2022"
+ Z "455"
+ 
+ }
+	
+ 
+ Mission // sentry buster
+ {
+	Objective DestroySentries
+	
+	InitialCooldown 5
+	Where spawnbot
+	BeginAtWave 1
+	RunForThisManyWaves 5
+	
+	CooldownTime 10
+	
+	TFBot
+		{
+			Template T_TFBot_SentryBuster
+	}
+}
+
+  Wave
+  {
+     StartWaveOutput
+	 {
+	     Target wave_start_relay
+		 Action Trigger
+	 }
+	 DoneOutput
+	 {
+	    Target wave_finished_relay
+		Action Trigger
+	 }
+	 
+        WaveSpawn
+        {
+            Name    PROTECT
+            TotalCurrency    0
+            TotalCount    1
+            MaxActive    1
+            SpawnCount    1
+            WaitBeforeStarting    5
+            WaitBetweenSpawns    0
+            Where    spawnbot_Core
+            Support    Limited
+            FirstSpawnOutput
+            {
+                Target anno_intro
+                Action Show
+            }
+            TFBot
+            {
+             Health 100
+			 Class Soldier
+			 WeaponRestrictions SecondaryOnly
+			 Item "The Kritzkrieg"
+			 Action Mobber
+			AddCond
+			{
+			Index 43
+			}
+			CharacterAttributes
+			{
+			"move speed bonus" 0.065
+			}
+            }
+        }
+        
+        WaveSpawn
+        {
+            Name    PROTECT_FAILED
+            WaitForAllDead    PROTECT
+            Support    Limited
+            FirstSpawnOutPut
+            {
+                Target boss_deploy_relay
+                Action Trigger
+            }
+        }
+	 
+	 
+	 WaveSpawn
+	 {
+	 Name "1a"
+	 Where spawnbot
+	 TotalCount 8
+	 MaxActive 4
+	 SpawnCount 2
+	 WaitBeforeStarting 0
+	 WaitBetweenSpawns 5
+	 TotalCurrency 50
+	 TFBot
+	 {
+	 Name "Basic Elf"
+	 Class Heavy
+	 WeaponRestrictions "MeleeOnly"
+	 Skill Hard
+	 ClassIcon heavy_santa
+	 Action Mobber
+	 Item "The Giftcrafter"
+	 Scale 0.8
+	 Health 120
+	 CharacterAttributes
+	 {
+	 "move speed bonus" 1.25
+	 }
+	 }
+	}
+	}
+	
+	  Wave
+  {
+     StartWaveOutput
+	 {
+	     Target wave_start_relay
+		 Action Trigger
+	 }
+	 DoneOutput
+	 {
+	    Target wave_finished_relay
+		Action Trigger
+	 }
+	 
+        WaveSpawn
+        {
+            Name    PROTECT
+            TotalCurrency    0
+            TotalCount    1
+            MaxActive    1
+            SpawnCount    1
+            WaitBeforeStarting    5
+            WaitBetweenSpawns    0
+            Where    spawnbot_Core
+            Support    Limited
+            FirstSpawnOutput
+            {
+                Target anno_intro
+                Action Show
+            }
+            TFBot
+            {
+             Health 200
+			 Class Soldier
+			 WeaponRestrictions SecondaryOnly
+			 Item "The Kritzkrieg"
+			 Action Mobber
+			AddCond
+			{
+			Index 43
+			}
+			CharacterAttributes
+			{
+			"move speed bonus" 0.065
+			}
+            }
+        }
+        
+        WaveSpawn
+        {
+            Name    PROTECT_FAILED
+            WaitForAllDead    PROTECT
+            Support    Limited
+            FirstSpawnOutPut
+            {
+                Target boss_deploy_relay
+                Action Trigger
+            }
+        }
+	 
+	 
+	 WaveSpawn
+	 {
+	 Name "2a"
+	 Where spawnbot
+	 TotalCount 12
+	 MaxActive 6
+	 SpawnCount 3
+	 WaitBeforeStarting 0
+	 WaitBetweenSpawns 5
+	 TotalCurrency 100
+	 TFBot
+	 {
+	 Name "Basic Elf"
+	 Class Heavy
+	 WeaponRestrictions "MeleeOnly"
+	 Skill Hard
+	 ClassIcon heavy_santa
+	 Action Mobber
+	 Item "The Giftcrafter"
+	 Scale 0.8
+	 Health 120
+	 CharacterAttributes
+	 {
+	 "move speed bonus" 1.25
+	 }
+	 }
+	}
+	}
+	
+		  Wave
+  {
+     StartWaveOutput
+	 {
+	     Target wave_start_relay
+		 Action Trigger
+	 }
+	 DoneOutput
+	 {
+	    Target wave_finished_relay
+		Action Trigger
+	 }
+	 
+        WaveSpawn
+        {
+            Name    PROTECT
+            TotalCurrency    0
+            TotalCount    1
+            MaxActive    1
+            SpawnCount    1
+            WaitBeforeStarting    5
+            WaitBetweenSpawns    0
+            Where    spawnbot_Core
+            Support    Limited
+            FirstSpawnOutput
+            {
+                Target anno_intro
+                Action Show
+            }
+            TFBot
+            {
+             Health 300
+			 Class Soldier
+			 WeaponRestrictions SecondaryOnly
+			 Item "The Kritzkrieg"
+			 Action Mobber
+			AddCond
+			{
+			Index 43
+			}
+			CharacterAttributes
+			{
+			"move speed bonus" 0.065
+			}
+            }
+        }
+        
+        WaveSpawn
+        {
+            Name    PROTECT_FAILED
+            WaitForAllDead    PROTECT
+            Support    Limited
+            FirstSpawnOutPut
+            {
+                Target boss_deploy_relay
+                Action Trigger
+            }
+        }
+	 
+	 
+	 WaveSpawn
+	 {
+	 Name "3a"
+	 Where spawnbot
+	 TotalCount 16
+	 MaxActive 8
+	 SpawnCount 4
+	 WaitBeforeStarting 0
+	 WaitBetweenSpawns 5
+	 TotalCurrency 50
+	 TFBot
+	 {
+	 Name "Basic Elf"
+	 Class Heavy
+	 WeaponRestrictions "MeleeOnly"
+	 Skill Hard
+	 ClassIcon heavy_santa
+	 Action Mobber
+	 Item "The Giftcrafter"
+	 Scale 0.8
+	 Health 120
+	 CharacterAttributes
+	 {
+	 "move speed bonus" 1.25
+	 }
+	 }
+	}
+	
+		 WaveSpawn
+	 {
+	 Name "3b"
+	 Where spawnbot
+	 TotalCount 8
+	 MaxActive 4
+	 SpawnCount 1
+	 WaitBeforeStarting 0
+	 WaitBetweenSpawns 5
+	 TotalCurrency 100
+	 TFBot
+	 {
+	 Name "Speedy Elf"
+	 Class Scout
+	 WeaponRestrictions "SecondaryOnly"
+	 Skill Hard
+	 ClassIcon heavy_santa
+	 Action Mobber
+	 Item "The Giftcrafter"
+	 Scale 0.8
+	 Health 200
+	 Item "The Flying Guillotine"
+	 }
+	}
+	}
+	
+			  Wave
+  {
+     StartWaveOutput
+	 {
+	     Target wave_start_relay
+		 Action Trigger
+	 }
+	 DoneOutput
+	 {
+	    Target wave_finished_relay
+		Action Trigger
+	 }
+	 
+        WaveSpawn
+        {
+            Name    PROTECT
+            TotalCurrency    0
+            TotalCount    1
+            MaxActive    1
+            SpawnCount    1
+            WaitBeforeStarting    5
+            WaitBetweenSpawns    0
+            Where    spawnbot_Core
+            Support    Limited
+            FirstSpawnOutput
+            {
+                Target anno_intro
+                Action Show
+            }
+            TFBot
+            {
+             Health 400
+			 Class Soldier
+			 WeaponRestrictions SecondaryOnly
+			 Item "The Kritzkrieg"
+			 Action Mobber
+			AddCond
+			{
+			Index 43
+			}
+			CharacterAttributes
+			{
+			"move speed bonus" 0.065
+			}
+            }
+        }
+        
+        WaveSpawn
+        {
+            Name    PROTECT_FAILED
+            WaitForAllDead    PROTECT
+            Support    Limited
+            FirstSpawnOutPut
+            {
+                Target boss_deploy_relay
+                Action Trigger
+            }
+        }
+	 
+	 
+	 WaveSpawn
+	 {
+	 Name "4a"
+	 Where spawnbot
+	 TotalCount 20
+	 MaxActive 10
+	 SpawnCount 5
+	 WaitBeforeStarting 0
+	 WaitBetweenSpawns 5
+	 TotalCurrency 100
+	 TFBot
+	 {
+	 Name "Basic Elf"
+	 Class Heavy
+	 WeaponRestrictions "MeleeOnly"
+	 Skill Hard
+	 ClassIcon heavy_santa
+	 Action Mobber
+	 Item "The Giftcrafter"
+	 Scale 0.8
+	 Health 120
+	 CharacterAttributes
+	 {
+	 "move speed bonus" 1.25
+	 }
+	 }
+	}
+	
+		 WaveSpawn
+	 {
+	 Name "4b"
+	 Where spawnbot
+	 TotalCount 18
+	 MaxActive 9
+	 SpawnCount 3
+	 WaitBeforeStarting 0
+	 WaitBetweenSpawns 5
+	 TotalCurrency 150
+	 TFBot
+	 {
+	 Name "Speedy Elf"
+	 Class Scout
+	 WeaponRestrictions "SecondaryOnly"
+	 Skill Hard
+	 ClassIcon heavy_santa
+	 Action Mobber
+	 Item "The Giftcrafter"
+	 Scale 0.8
+	 Health 200
+	 Item "The Flying Guillotine"
+	 }
+	}
+	}
+	
+				  Wave
+  {
+     StartWaveOutput
+	 {
+	     Target wave_start_relay
+		 Action Trigger
+	 }
+	 DoneOutput
+	 {
+	    Target wave_finished_relay
+		Action Trigger
+	 }
+	 
+        WaveSpawn
+        {
+            Name    PROTECT
+            TotalCurrency    0
+            TotalCount    1
+            MaxActive    1
+            SpawnCount    1
+            WaitBeforeStarting    5
+            WaitBetweenSpawns    0
+            Where    spawnbot_Core
+            Support    Limited
+            FirstSpawnOutput
+            {
+                Target anno_intro
+                Action Show
+            }
+            TFBot
+            {
+             Health 500
+			 Class Soldier
+			 WeaponRestrictions SecondaryOnly
+			 Item "The Kritzkrieg"
+			 Action Mobber
+			AddCond
+			{
+			Index 43
+			}
+			CharacterAttributes
+			{
+			"move speed bonus" 0.065
+			}
+            }
+        }
+        
+        WaveSpawn
+        {
+            Name    PROTECT_FAILED
+            WaitForAllDead    PROTECT
+            Support    Limited
+            FirstSpawnOutPut
+            {
+                Target boss_deploy_relay
+                Action Trigger
+            }
+        }
+	 
+	 
+	 WaveSpawn
+	 {
+	 Name "5a"
+	 Where spawnbot
+	 TotalCount 20
+	 MaxActive 10
+	 SpawnCount 5
+	 WaitBeforeStarting 0
+	 WaitBetweenSpawns 5
+	 TotalCurrency 50
+	 TFBot
+	 {
+	 Name "Basic Elf"
+	 Class Heavy
+	 WeaponRestrictions "MeleeOnly"
+	 Skill Hard
+	 ClassIcon heavy_santa
+	 Action Mobber
+	 Item "The Giftcrafter"
+	 Scale 0.8
+	 Health 120
+	 CharacterAttributes
+	 {
+	 "move speed bonus" 1.25
+	 }
+	 }
+	}
+	
+		 WaveSpawn
+	 {
+	 Name "5b"
+	 Where spawnbot
+	 TotalCount 25
+	 MaxActive 10
+	 SpawnCount 5
+	 WaitBeforeStarting 0
+	 WaitBetweenSpawns 5
+	 TotalCurrency 100
+	 TFBot
+	 {
+	 Name "Speedy Elf"
+	 Class Scout
+	 WeaponRestrictions "SecondaryOnly"
+	 Skill Hard
+	 ClassIcon heavy_santa
+	 Action Mobber
+	 Item "The Giftcrafter"
+	 Scale 0.8
+	 Health 200
+	 Item "The Flying Guillotine"
+	 }
+	}
+	
+			 WaveSpawn
+	 {
+	 Name "5c"
+	 Where spawnbot
+	 TotalCount 12
+	 MaxActive 4
+	 SpawnCount 2
+	 WaitBeforeStarting 0
+	 WaitBetweenSpawns 5
+	 TotalCurrency 100
+	 TFBot
+	 {
+	 Name "Gingerbread"
+	 Class Soldier
+	 WeaponRestrictions "MeleeOnly"
+	 Skill Hard
+	 ClassIcon heavy_santa
+	 Action Mobber
+	 Item "Candy Crown"
+	 Scale 0.8
+	 Health 500
+	 }
+	}
+	}
+	
+					  Wave
+  {
+     StartWaveOutput
+	 {
+	     Target wave_start_relay
+		 Action Trigger
+	 }
+	 DoneOutput
+	 {
+	    Target wave_finished_relay
+		Action Trigger
+	 }
+	 
+        WaveSpawn
+        {
+            Name    PROTECT
+            TotalCurrency    0
+            TotalCount    1
+            MaxActive    1
+            SpawnCount    1
+            WaitBeforeStarting    5
+            WaitBetweenSpawns    0
+            Where    spawnbot_Core
+            Support    Limited
+            FirstSpawnOutput
+            {
+                Target anno_intro
+                Action Show
+            }
+            TFBot
+            {
+             Health 600
+			 Class Soldier
+			 WeaponRestrictions SecondaryOnly
+			 Item "The Kritzkrieg"
+			 Action Mobber
+			AddCond
+			{
+			Index 43
+			}
+			CharacterAttributes
+			{
+			"move speed bonus" 0.025
+			}
+            }
+        }
+        
+        WaveSpawn
+        {
+            Name    PROTECT_FAILED
+            WaitForAllDead    PROTECT
+            Support    Limited
+            FirstSpawnOutPut
+            {
+                Target boss_deploy_relay
+                Action Trigger
+            }
+        }
+	 
+	 
+	 WaveSpawn
+	 {
+	 Name "6a"
+	 Where spawnbot
+	 TotalCount 20
+	 MaxActive 10
+	 SpawnCount 5
+	 WaitBeforeStarting 0
+	 WaitBetweenSpawns 5
+	 TotalCurrency 50
+	 TFBot
+	 {
+	 Name "Basic Elf"
+	 Class Heavy
+	 WeaponRestrictions "MeleeOnly"
+	 Skill Hard
+	 ClassIcon heavy_santa
+	 Action Mobber
+	 Item "The Giftcrafter"
+	 Scale 0.8
+	 Health 120
+	 CharacterAttributes
+	 {
+	 "move speed bonus" 1.25
+	 }
+	 }
+	}
+	
+		 WaveSpawn
+	 {
+	 Name "6b"
+	 Where spawnbot
+	 TotalCount 30
+	 MaxActive 10
+	 SpawnCount 5
+	 WaitBeforeStarting 0
+	 WaitBetweenSpawns 5
+	 TotalCurrency 50
+	 TFBot
+	 {
+	 Name "Speedy Elf"
+	 Class Scout
+	 WeaponRestrictions "SecondaryOnly"
+	 Skill Hard
+	 ClassIcon heavy_santa
+	 Action Mobber
+	 Item "The Giftcrafter"
+	 Scale 0.8
+	 Health 200
+	 Item "The Flying Guillotine"
+	 }
+	}
+	
+			 WaveSpawn
+	 {
+	 Name "6c"
+	 Where spawnbot
+	 TotalCount 16
+	 MaxActive 8
+	 SpawnCount 4
+	 WaitBeforeStarting 0
+	 WaitBetweenSpawns 5
+	 TotalCurrency 150
+	 TFBot
+	 {
+	 Name "Gingerbread"
+	 Class Soldier
+	 WeaponRestrictions "MeleeOnly"
+	 Skill Hard
+	 ClassIcon heavy_santa
+	 Action Mobber
+	 Item "Candy Crown"
+	 Scale 0.8
+	 Health 500
+	 }
+	}
+	}
+	
+						  Wave
+  {
+     StartWaveOutput
+	 {
+	     Target wave_start_relay
+		 Action Trigger
+	 }
+	 DoneOutput
+	 {
+	    Target wave_finished_relay
+		Action Trigger
+	 }
+	 
+        WaveSpawn
+        {
+            Name    PROTECT
+            TotalCurrency    0
+            TotalCount    1
+            MaxActive    1
+            SpawnCount    1
+            WaitBeforeStarting    5
+            WaitBetweenSpawns    0
+            Where    spawnbot_Core
+            Support    Limited
+            FirstSpawnOutput
+            {
+                Target anno_intro
+                Action Show
+            }
+            TFBot
+            {
+             Health 700
+			 Class Soldier
+			 WeaponRestrictions SecondaryOnly
+			 Item "The Kritzkrieg"
+			 Action Mobber
+			AddCond
+			{
+			Index 43
+			}
+			CharacterAttributes
+			{
+			"move speed bonus" 0.065
+			}
+            }
+        }
+        
+        WaveSpawn
+        {
+            Name    PROTECT_FAILED
+            WaitForAllDead    PROTECT
+            Support    Limited
+            FirstSpawnOutPut
+            {
+                Target boss_deploy_relay
+                Action Trigger
+            }
+        }
+	 
+	 
+	 WaveSpawn
+	 {
+	 Name "7a"
+	 Where spawnbot
+	 TotalCount 15
+	 MaxActive 9
+	 SpawnCount 3
+	 WaitBeforeStarting 0
+	 WaitBetweenSpawns 5
+	 TotalCurrency 100
+	 TFBot
+	 {
+	 Name "Basic Elf"
+	 Class Heavy
+	 WeaponRestrictions "MeleeOnly"
+	 Skill Hard
+	 ClassIcon heavy_santa
+	 Action Mobber
+	 Item "The Giftcrafter"
+	 Scale 0.8
+	 Health 120
+	 CharacterAttributes
+	 {
+	 "move speed bonus" 1.25
+	 }
+	 }
+	}
+	
+		 WaveSpawn
+	 {
+	 Name "7b"
+	 Where spawnbot
+	 TotalCount 30
+	 MaxActive 10
+	 SpawnCount 5
+	 WaitBeforeStarting 0
+	 WaitBetweenSpawns 5
+	 TotalCurrency 150
+	 TFBot
+	 {
+	 Name "Speedy Elf"
+	 Class Scout
+	 WeaponRestrictions "SecondaryOnly"
+	 Skill Hard
+	 ClassIcon heavy_santa
+	 Action Mobber
+	 Item "The Giftcrafter"
+	 Scale 0.8
+	 Health 200
+	 Item "The Flying Guillotine"
+	 }
+	}
+	
+			 WaveSpawn
+	 {
+	 WaitForAllDead "7a"
+	 Name "7c"
+	 Where spawnbot
+	 TotalCount 20
+	 MaxActive 10
+	 SpawnCount 5
+	 WaitBeforeStarting 0
+	 WaitBetweenSpawns 5
+	 TotalCurrency 100
+	 TFBot
+	 {
+	 Name "Gingerbread"
+	 Class Soldier
+	 WeaponRestrictions "MeleeOnly"
+	 Skill Hard
+	 ClassIcon heavy_santa
+	 Action Mobber
+	 Item "Candy Crown"
+	 Scale 0.8
+	 Health 500
+	 }
+	}
+	
+				 WaveSpawn
+	 {
+	 WaitForAllDead "7b"
+	 Name "7d"
+	 Where spawnbot
+	 TotalCount 5
+	 MaxActive 2
+	 SpawnCount 1
+	 WaitBeforeStarting 0
+	 WaitBetweenSpawns 5
+	 TotalCurrency 150
+	 TFBot
+	 {
+	 Name "Snowman"
+	 Class Heavy
+	 WeaponRestrictions "MeleeOnly"
+	 Skill Hard
+	 ClassIcon heavy_santa
+	 Action Mobber
+	 Item "Snowmann"
+	 Scale 0.9
+	 Health 900
+	 }
+	}
+	}
+	}

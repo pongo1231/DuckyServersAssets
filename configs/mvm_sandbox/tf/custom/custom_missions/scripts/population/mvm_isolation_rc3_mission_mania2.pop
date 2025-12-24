@@ -1,0 +1,1072 @@
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_D_I_L.pop
+
+// Mission Mania 2: Uses multiple red bots.
+
+WaveSchedule
+{
+	StartingCurrency 1500
+	RespawnWaveTime 2
+	CanBotsAttackWhileInSpawnRoom no
+	Advanced 1
+
+	Templates
+	{
+		T_TFBot_Giant_Soldier_Homing
+		{
+			Class Soldier
+			Name "Giant Homing Soldier"
+			ClassIcon soldier_homing_nys_giant
+			Skill Normal
+			Health 3800
+			WeaponRestrictions PrimaryOnly
+			Attributes HoldFireUntilFullReload
+			Attributes MiniBoss
+			AddCond   
+			{ 
+				name TF_COND_SODAPOPPER_HYPE 
+			}
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_ROCKETLAUNCHER"
+				"Projectile speed increased" 0.65
+				"Blast radius reduced" 0.6
+				"mod projectile heat seek power" 10 //Sigmo only
+				"mod projectile heat aim error" 360
+				"projectile trail particle" eyeboss_projectile
+				"mod projectile heat aim time" 0.5
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.4
+				"airblast vulnerability multiplier" 0.4
+				"override footstep sound set" 3
+			}
+		}
+
+		DumpFlush
+		{
+			Class Heavyweapons
+			Name "Dump Flusher"
+			Skill Expert
+			Health 450
+			Scale 1.15
+			Action FetchFlag  
+			WeaponRestrictions PrimaryOnly
+			Item "The Brass Beast"
+			Item "Capone's Capper"
+			MaxVisionRange 750
+			ItemAttributes
+			{
+				ItemName "The Brass Beast"
+				"damage bonus" 1.35
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	1.15
+				"damage force reduction" 0.8
+				"airblast vulnerability multiplier" 0.8
+			}
+			AddCond   //Adds conditions to bots // This TFCondition set's robot to be red team and use read team skin.
+			{
+				Name "TF_COND_REPROGRAMMED" // Condition to apply. List of available conditions https://wiki.teamfortress.com/wiki/Cheats#addcond
+			}
+			Action Mobber   // A behavioural override that causes the robot to seek out and defeat nearby enemies.
+			ClassIcon red2_lite //Icon to depict red robot. there are individual red robot icons as well.
+			Attributes IgnoreFlag // Required to prevent red robot picking up the bomb.
+		}
+
+
+		Pipe
+		{
+			Class Demoman
+			Name "Pipe Saint"
+			Skill Expert
+			Health 225
+			WeaponRestrictions PrimaryOnly
+			Item "The Pure Tin Capotain"
+			Attributes HoldFireUntilFullReload
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_GRENADELAUNCHER"
+				"damage penalty" 0.4
+				"clip size upgrade atomic" 4
+				"fire rate bonus" 0.02
+				"projectile spread angle penalty" 4
+				"faster reload rate" 0.75
+			}
+			AddCond   //Adds conditions to bots // This TFCondition set's robot to be red team and use read team skin.
+			{
+				Name "TF_COND_REPROGRAMMED" // Condition to apply. List of available conditions https://wiki.teamfortress.com/wiki/Cheats#addcond
+			}
+			Action Mobber   // A behavioural override that causes the robot to seek out and defeat nearby enemies.
+			ClassIcon red2_lite //Icon to depict red robot. there are individual red robot icons as well.
+			Attributes IgnoreFlag // Required to prevent red robot picking up the bomb.
+		}
+
+		Hothead
+		{
+			Class Pyro
+			Health 270
+			Name "Hothead"
+			Skill Expert
+			Item "The Detonator"
+			Item "Sharpened Volcano Fragment"
+			Attributes DisableDodge
+			WeaponSwitch    //Periodically switches weapon
+                	{
+                    		Delay 0 //Time before the first weapon switch starts (Default: 10)
+                    		Cooldown 3 //Time between each weapon switch (Default: 10)
+                    		Repeats 1 //How many times should bot switch weapons in total (Default: 0 - Infinite)
+					Type "Secondary" // Weapon slot, possible values:
+			}
+			WeaponSwitch    //Periodically switches weapon
+                	{
+                    		Delay 0 //Time before the first weapon switch starts (Default: 10)
+                    		Cooldown 1 //Time between each weapon switch (Default: 10)
+                    		Repeats 1 //How many times should bot switch weapons in total (Default: 0 - Infinite)
+					Type "Melee" // Weapon slot, possible values:
+					IfHealthBelow 161 //When set, the task activates only when the bot health is below specified value
+			}
+			ItemAttributes
+			{
+				ItemName "The Detonator"
+				"damage bonus" 1.2
+				"faster reload rate" 0.5
+			}
+			ItemAttributes
+			{
+				ItemName "Sharpened Volcano Fragment"
+				"damage bonus" 2
+				"fire rate bonus" 0.5
+				"Heal on Kill" 25
+				"provide on active" 1
+				"move speed bonus" 1.4
+				"melee range multiplier" 1.2
+				"deploy time decreased" 0.5
+			}
+			AddCond   //Adds conditions to bots // This TFCondition set's robot to be red team and use read team skin.
+			{
+				Name "TF_COND_REPROGRAMMED" // Condition to apply. List of available conditions https://wiki.teamfortress.com/wiki/Cheats#addcond
+			}
+			Action Mobber   // A behavioural override that causes the robot to seek out and defeat nearby enemies.
+			ClassIcon red2_lite //Icon to depict red robot. there are individual red robot icons as well.
+			Attributes IgnoreFlag // Required to prevent red robot picking up the bomb.
+		}
+
+		Swarm
+		{
+			Class Soldier
+			Name "Swarm Mini"
+			Skill Normal
+			Health 320
+			WeaponRestrictions PrimaryOnly
+			Item "The Liberty Launcher"
+			MaxVisionRange 2000
+			Attributes HoldFireUntilFullReload
+			AimOffset "0 0 90"   //Aim this much higher than normally (default: 0 0 0)
+			AddCond   
+			{ 
+				name TF_COND_SODAPOPPER_HYPE 
+			}
+			ItemAttributes
+			{
+				ItemName "The Liberty Launcher"
+				"faster reload rate" 0.65
+				"projectile spread angle penalty" 55.0
+				"fire rate bonus" 0.6
+				"clip size upgrade atomic" 2.0
+				"Blast radius increased" 0.65
+				"mod projectile heat seek power" 30 //Sigmo only
+				"mod projectile heat aim error" 3000
+				"rocket jump damage reduction" 0.05
+				"projectile trail particle" eyeboss_projectile
+				"Projectile speed increased"	0.6
+			}
+			AddCond   //Adds conditions to bots // This TFCondition set's robot to be red team and use read team skin.
+			{
+				Name "TF_COND_REPROGRAMMED" // Condition to apply. List of available conditions https://wiki.teamfortress.com/wiki/Cheats#addcond
+			}
+			Action Mobber   // A behavioural override that causes the robot to seek out and defeat nearby enemies.
+			ClassIcon red2_lite //Icon to depict red robot. there are individual red robot icons as well.
+			Attributes IgnoreFlag // Required to prevent red robot picking up the bomb.
+		}
+
+		Bowman
+		{
+			Class Sniper
+			Name "Blood Bowman"
+			Skill Expert
+			Health 200
+			WeaponRestrictions PrimaryOnly
+			Item "The Huntsman"
+
+			ItemAttributes
+			{
+				ItemName "The Huntsman"
+				"fire rate bonus" 0.4
+				"faster reload rate" 0.8
+				"bleeding duration" 4
+				"projectile penetration" 1
+			}
+			AddCond   //Adds conditions to bots // This TFCondition set's robot to be red team and use read team skin.
+			{
+				Name "TF_COND_REPROGRAMMED" // Condition to apply. List of available conditions https://wiki.teamfortress.com/wiki/Cheats#addcond
+			}
+			Action Mobber   // A behavioural override that causes the robot to seek out and defeat nearby enemies.
+			ClassIcon red2_lite //Icon to depict red robot. there are individual red robot icons as well.
+			Attributes IgnoreFlag // Required to prevent red robot picking up the bomb.		
+		}
+	}
+
+	ExtraSpawnPoint    //Adds spawn points on specified location // XYZ is in order for cl_showpos
+	{
+        	Name "DumpFlush"
+		// StartDisabled 1 // If the spawn point starts disabled (Default: 0)
+        	TeamNum 2 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        	X	"-1629"                     
+        	Y	"844.5"                  
+        	Z	"101"        
+	}
+
+	ExtraSpawnPoint    //Adds spawn points on specified location // XYZ is in order for cl_showpos
+	{
+        	Name "Pipe"
+		// StartDisabled 1 // If the spawn point starts disabled (Default: 0)
+        	TeamNum 2 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        	X	"-1500"                     
+        	Y	"2320"                  
+        	Z	"34"        
+	}
+
+	ExtraSpawnPoint    //Adds spawn points on specified location // XYZ is in order for cl_showpos
+	{
+        	Name "HotHead"
+		// StartDisabled 1 // If the spawn point starts disabled (Default: 0)
+        	TeamNum 2 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        	X	"-661"                     
+        	Y	"2865"                  
+        	Z	"81"        
+	}
+
+	ExtraSpawnPoint    //Adds spawn points on specified location // XYZ is in order for cl_showpos
+	{
+        	Name "Swarm"
+		// StartDisabled 1 // If the spawn point starts disabled (Default: 0)
+        	TeamNum 2 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        	X	"-791"                     
+        	Y	"1526"                  
+        	Z	"33"        
+	}
+
+	ExtraSpawnPoint    //Adds spawn points on specified location // XYZ is in order for cl_showpos
+	{
+        	Name "Bowman"
+		// StartDisabled 1 // If the spawn point starts disabled (Default: 0)
+        	TeamNum 2 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        	X	"-309"                     
+        	Y	"2204"                  
+        	Z	"-157"        
+	}
+
+
+	Mission
+	{
+		Where spawnbot
+		Objective DestroySentries
+		InitialCooldown 15
+		BeginAtWave 1
+		RunForThisManyWaves 8
+		CooldownTime 42
+		TFBot
+		{
+			Template T_TFBot_SentryBuster
+		}
+	}
+	Mission
+	{
+		Where spawnbot_mission_spy
+		Objective Spy
+		InitialCooldown 10
+		BeginAtWave 2
+		RunForThisManyWaves 1
+		CooldownTime 45
+		DesiredCount 2
+		TFBot
+		{
+			Template T_TFBot_Spy
+		}
+	}
+
+// Wave 1 /////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+// 1 Giant Rapidfire soldier with 4 Pistol Scouts (150)
+// 4 Groups of 5 demomen (150)
+// 4 Groups of 2 Scouts (100)
+// --------------------------------------------------------------
+// 4 Groups of 7 Bison Soldiers (200)
+// 1 Giant Rapidfire soldier with 4 Pistol Scouts (150)
+// Wait For All Spawned
+// 1 Giant Rapidfire soldier with 4 Pistol Scouts (150)
+/////////////////////////////////////////////////////////////////// Worth 900
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		WaitWhenDone 65
+		Checkpoint Yes
+
+		WaveSpawn 
+		{
+			Where Dumpflush
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawnsAfterDeath 6
+			TotalCurrency 0
+			Support 1
+			TFBot
+			{
+				Template DumpFlush
+			}
+		}
+		WaveSpawn 
+		{
+			Where Pipe
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawnsAfterDeath 6
+			TotalCurrency 0
+			Support 1
+			TFBot
+			{
+				Template Pipe
+			}
+		}
+		WaveSpawn 
+		{
+			Where Hothead
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawnsAfterDeath 6
+			TotalCurrency 0
+			Support 1
+			TFBot
+			{
+				Template Hothead
+			}
+		}
+		WaveSpawn 
+		{
+			Where Swarm
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawnsAfterDeath 6
+			TotalCurrency 0
+			Support 1
+			TFBot
+			{
+				Template Swarm
+			}
+		}
+		WaveSpawn 
+		{
+			Where Bowman
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawnsAfterDeath 6
+			TotalCurrency 0
+			Support 1
+			TFBot
+			{
+				Template Bowman
+			}
+		}
+		
+		WaveSpawn // 1 Giant Rapidfire soldier with 4 Pistol Scouts (150)
+		{
+			Where spawnbot
+			Name "A"
+			TotalCount 5
+			MaxActive 5
+			SpawnCount 5
+			TotalCurrency 150
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Spammer
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Pistol
+					Skill Easy
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Pistol
+					Skill Easy
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Pistol
+					Skill Easy
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Pistol
+					Skill Easy
+				}
+			}
+		}
+
+		WaveSpawn // 4 Groups of 5 demomen (150)
+		{
+			Where spawnbot
+			Name "A"
+			TotalCount 15
+			MaxActive 7
+			SpawnCount 5
+			WaitBeforeStarting 15
+			WaitBetweenSpawns 7
+			TotalCurrency 150
+			TFBot
+			{
+				Class Demoman
+				Skill Normal
+			}
+		}
+
+		WaveSpawn // 4 Groups of 2 Scouts (100)
+		{
+			Where spawnbot_house
+			Name "A"
+			TotalCount 12
+			MaxActive 5
+			SpawnCount 3
+			WaitBeforeStarting 20
+			WaitBetweenSpawns 7
+			TotalCurrency 100
+			TFBot
+			{
+				Class Scout
+				Skill Easy
+			}
+		}
+
+		WaveSpawn // 4 Groups of 7 Bison Soldiers (200)
+		{
+			Where spawnbot_house
+			Name "B"
+			TotalCount 28
+			MaxActive 10
+			SpawnCount 7
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 7
+			WaitForAllDead "A"
+			TotalCurrency 200
+			TFBot
+			{
+				Template T_TFBot_Soldier_Bison
+			}
+		}
+		WaveSpawn // 1 Giant Rapidfire soldier with 4 Pistol Scouts (150)
+		{
+			Where spawnbot_house
+			Name "B"
+			TotalCount 5
+			MaxActive 5
+			SpawnCount 5
+			TotalCurrency 150
+			WaitForAllDead "A"
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Spammer
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Pistol
+					Skill Easy
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Pistol
+					Skill Easy
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Pistol
+					Skill Easy
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Pistol
+					Skill Easy
+				}
+			}
+		}
+
+		WaveSpawn // 1 Giant Rapidfire soldier with 4 Pistol Scouts (150)
+		{
+			Where spawnbot
+			Name "C"
+			TotalCount 5
+			MaxActive 5
+			SpawnCount 5
+			TotalCurrency 150
+			WaitForAllSpawned "B"
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Spammer
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Pistol
+					Skill Easy
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Pistol
+					Skill Easy
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Pistol
+					Skill Easy
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Pistol
+					Skill Easy
+				}
+			}
+		}
+	}
+
+// Wave 2 /////////////////////////////////////////////////////////
+// Has 3 Spies
+/////////////////////////////////////////////////////////////////// A+ would have 2500
+// 2 Giant Heavy Shotguns With 2 Quickfix medics (300)
+// 5 Groups of 9 Scout bats (200)
+// ---------------------------------------------------
+// 5 Groups of 9 scout bats (200)
+// 1 Tank (300)
+// 2 Giant Homing Soldiers (200)
+/////////////////////////////////////////////////////////////////// Worth 1200
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		WaitWhenDone 65
+		Checkpoint Yes
+		
+
+		WaveSpawn 
+		{
+			Where Dumpflush
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawnsAfterDeath 6
+			TotalCurrency 0
+			Support 1
+			TFBot
+			{
+				Template DumpFlush
+				Health 580
+				ItemAttributes
+				{
+					ItemName "The Brass Beast"
+					"damage bonus" 1.35
+					"fire rate bonus" 0.85
+				}
+			}
+		}
+		WaveSpawn 
+		{
+			Where Pipe
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawnsAfterDeath 6
+			TotalCurrency 0
+			Support 1
+			TFBot
+			{
+				Template Pipe
+				Health 300
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_GRENADELAUNCHER"
+					"clip size upgrade atomic" 5
+					"faster reload rate" 0.6
+				}
+			}
+		}
+		WaveSpawn 
+		{
+			Where Hothead
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawnsAfterDeath 6
+			TotalCurrency 0
+			Support 1
+			TFBot
+			{
+				Template Hothead
+				ItemAttributes
+				{
+					ItemName "The Detonator"
+					"faster reload rate" 0.35
+				}
+				CharacterAttributes
+				{
+					"dmg taken increased" 0.7
+				}
+			}
+		}
+		WaveSpawn 
+		{
+			Where Swarm
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawnsAfterDeath 6
+			TotalCurrency 0
+			Support 1
+			TFBot
+			{
+				Template Swarm
+				Health 370
+				ItemAttributes
+				{
+					ItemName "The Liberty Launcher"
+					"faster reload rate" 0.5
+					"fire rate bonus" 0.45
+					"clip size upgrade atomic" 5.0
+				}
+			}
+		}
+		WaveSpawn 
+		{
+			Where Bowman
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawnsAfterDeath 6
+			TotalCurrency 0
+			Support 1
+			TFBot
+			{
+				Template Bowman
+				Health 260
+				ItemAttributes
+				{
+					ItemName "The Huntsman"
+					"fire rate bonus" 0.3
+					"faster reload rate" 0.6
+					"bleeding duration" 12
+				}
+			}
+		}
+		WaveSpawn // 2 Giant Heavy Shotguns With 2 Quickfix medics (300)
+		{
+			Where spawnbot
+			Name "A"
+			TotalCount 6
+			MaxActive 3
+			SpawnCount 3
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 20
+			TotalCurrency 300
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons_Shotgun
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickFix
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickFix
+				}
+			}
+			
+		}
+
+		WaveSpawn // 5 Groups of 9 Scout bats (200)
+		{
+			Where spawnbot
+			Name "A"
+			TotalCount 45
+			MaxActive 13
+			SpawnCount 9
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 3
+			TotalCurrency 200
+			TFBot
+			{
+				Template T_TFBot_Scout_Melee
+				ClassIcon scout_bat_nys
+			}
+		}
+
+		WaveSpawn // 5 Groups of 9 scout bats (200)
+		{
+			Where spawnbot_house
+			Name "B"
+			TotalCount 45
+			MaxActive 13
+			SpawnCount 9
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 3
+			TotalCurrency 200
+			WaitForAllDead "A"
+			Support 1
+			TFBot
+			{
+				Template T_TFBot_Scout_Melee
+				ClassIcon scout_bat_nys
+			}
+		}
+
+		WaveSpawn // 1 Tank (300)
+		{
+			Name "B"
+			TotalCount 1
+			TotalCurrency 300
+			WaitForAllDead "A"
+			Tank
+			{
+				Name "tankboss"
+				Health 16000
+				Speed 75
+				StartingPathTrackNode tank_path_a_1
+				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+
+		WaveSpawn // 2 Giant Homing Soldiers (200)
+		{
+			Where spawnbot
+			Name "B"
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 15
+			TotalCurrency 200
+			WaitForAllDead "A"
+			TFBot
+			{
+				Template T_TFBot_Giant_Soldier_Homing
+			}
+		}
+	}
+
+// Wave 3 /////////////////////////////////////////////////////////
+// Has Snipers
+/////////////////////////////////////////////////////////////////// A+ would have 3800
+// 7 Groups of 16 Shotgun Soldiers (200)
+// 4 Gun nuts (250)
+// 3 Samurai Demomen (150)
+// ---------------------------------------------
+// 3 groups of 7 randomchoice bowmen or crossbow medics (100)
+// 3 Giant Demoknights (200)
+// --------------------------------
+// 6 Giant Charged soldiers (250)
+// 1 Samurai Demoman (50)
+///////////////////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		WaitWhenDone 65
+		Checkpoint Yes
+
+
+		WaveSpawn 
+		{
+			Where Dumpflush
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawnsAfterDeath 6
+			TotalCurrency 0
+			Support 1
+			TFBot
+			{
+				Template DumpFlush
+				Health 720
+				ItemAttributes
+				{
+					ItemName "The Brass Beast"
+					"damage bonus" 1.35
+					"fire rate bonus" 0.7
+				}
+			}
+		}
+		WaveSpawn 
+		{
+			Where Pipe
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawnsAfterDeath 6
+			TotalCurrency 0
+			Support 1
+			TFBot
+			{
+				Template Pipe
+				Health 300
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_GRENADELAUNCHER"
+					"clip size upgrade atomic" 6
+					"faster reload rate" 0.45
+				}
+			}
+		}
+		WaveSpawn 
+		{
+			Where Hothead
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawnsAfterDeath 6
+			TotalCurrency 0
+			Support 1
+			TFBot
+			{
+				Template Hothead
+				ItemAttributes
+				{
+					ItemName "The Detonator"
+					"faster reload rate" 0.2
+				}
+				CharacterAttributes
+				{
+					"dmg taken increased" 0.45
+				}
+			}
+		}
+		WaveSpawn 
+		{
+			Where Swarm
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawnsAfterDeath 6
+			TotalCurrency 0
+			Support 1
+			TFBot
+			{
+				Template Swarm
+				Health 370
+				ItemAttributes
+				{
+					ItemName "The Liberty Launcher"
+					"faster reload rate" 0.3
+					"fire rate bonus" 0.3
+					"clip size upgrade atomic" 7.0
+				}
+			}
+		}
+		WaveSpawn 
+		{
+			Where Bowman
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawnsAfterDeath 6
+			TotalCurrency 0
+			Support 1
+			TFBot
+			{
+				Template Bowman
+				Health 260
+				ItemAttributes
+				{
+					ItemName "The Huntsman"
+					"fire rate bonus" 0.2
+					"faster reload rate" 0.35
+					"bleeding duration" 30
+				}
+			}
+		}
+
+		WaveSpawn // 7 Groups of 16 Shotgun Soldiers (200)
+		{
+			Where spawnbot
+			Name "A"
+			TotalCount 108
+			MaxActive 17
+			SpawnCount 8
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 1
+			TotalCurrency 100
+			TFBot
+			{
+				Template T_TFBot_Soldier_Shotgun
+				Skill Normal
+			}
+		}
+
+		WaveSpawn // 4 Gun nuts (250)
+		{
+			Where spawnbot
+			Name "A"
+			TotalCount 4
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 18
+			TotalCurrency 250
+			TFBot
+			{
+				Template T_TFBot_Giant_Heavyweapons_Aimless
+			}
+		}
+
+		WaveSpawn // 3 Samurai Demomen (150)
+		{
+			Where spawnbot_house
+			Name "A"
+			TotalCount 3
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 20
+			WaitBetweenSpawns 12
+			TotalCurrency 150
+			TFBot
+			{
+				Template T_TFBot_Demoman_Samurai
+			}
+		}
+
+
+		WaveSpawn // 3 groups of 7 randomchoice bowmen or crossbow medics (100)
+		{
+			Where spawnbot
+			Name "B"
+			TotalCount 21
+			MaxActive 10
+			SpawnCount 7
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 12
+			TotalCurrency 100
+			WaitForAllDead "A"
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Crossbow
+				}
+			}
+		}
+
+		WaveSpawn // 3 Giant Demoknights (200)
+		{
+			Where spawnbot_house
+			Name "B"
+			TotalCount 3
+			MaxActive 3
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 10
+			TotalCurrency 200
+			WaitForAllDead "A"
+			TFBot
+			{
+				Template T_TFBot_Giant_Demoman_PrinceTavish
+			}
+		}
+
+		WaveSpawn // 6 Giant Charged soldiers (250)
+		{
+			Where spawnbot
+			Name "C"
+			TotalCount 3
+			MaxActive 3
+			SpawnCount 1
+			WaitBeforeStarting 3
+			WaitBetweenSpawns 7
+			TotalCurrency 125
+			WaitForAllSpawned "B"
+			TFBot
+			{
+				Template T_TFBot_Giant_Soldier_Crit
+			}
+		}
+
+		WaveSpawn // 6 Giant Charged soldiers (250)
+		{
+			Where spawnbot_house
+			Name "C"
+			TotalCount 3
+			MaxActive 3
+			SpawnCount 1
+			WaitBeforeStarting 11
+			WaitBetweenSpawns 7
+			TotalCurrency 125
+			WaitForAllSpawned "B"
+			TFBot
+			{
+				Template T_TFBot_Giant_Soldier_Crit
+			}
+		}
+
+		WaveSpawn // 1 Samurai Demoman (50)
+		{
+			Where spawnbot
+			Name "C"
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 22
+			WaitBetweenSpawns 7
+			TotalCurrency 125
+			WaitForAllSpawned "B"
+			TFBot
+			{
+				Template T_TFBot_Demoman_Samurai
+			}
+		}
+	}
+}

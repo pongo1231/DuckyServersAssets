@@ -1,0 +1,235 @@
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_giant_red.pop
+#base robot_standard_red.pop
+population
+{
+	StartingCurrency	1500
+	SniperHideLasers 1
+	SentryBusterFriendlyFire 0
+	RobotLimit 26
+	EnableDominations 1
+	MedigunShieldDamage 1
+	StandableHeads 1
+	FlagCarrierMovementPenalty 1
+	AllowJoinTeamBlue 1
+	AllowJoinTeamBlueMax 6
+	HumansMustJoinTeam blue
+	ReverseWinConditions 1
+	RespawnWaveTimeBlue 5  
+	FixedRespawnWaveTimeBlue 1 
+	SetCreditTeam 3
+	BluHumanFlagCapture 1
+	BluHumanFlagPickup 1
+	BluHumanInfiniteAmmo 1
+	BluHumanInfiniteCloak 1
+	BluHumanTeleportOnSpawn 1
+	AllowBluPlayerReanimators 1
+	RemoveBluVelocityLimit 1
+	BluHumanSpawnNoShoot 1
+	BluPlayersAreRobots 1
+	RedPlayersAreRobots 1
+	TextPrintTime 0
+	WaveStartCountDown 3
+	
+	ExtraSpawnPoint
+    {
+        Name "spawnbot_red_base"
+        TeamNum 3
+        X	"-1744"                     
+        Y	"376"                  
+        Z	"183"        
+    }
+	
+	OverrideSounds  
+	{
+		"MVM.BombWarning"			"combine_bank_alarm.mp3"
+		"MVM.GiantHeavyExplodes"	"ambient/explosions/explode_3.wav"
+		"MVM.GiantCommonExplodes"	"ambient/explosions/explode_3.wav"
+	}	
+	
+	PrecacheSound "combine_bank_alarm.mp3"
+	
+	PrecacheModel "models/mvm/barrier/barrier_spawn_blue1.mdl"
+	
+	DisableSound "Announcer.MVM_Game_Over_Loss"
+	DisableSound "Announcer.MVM_Wave_Lose"
+	DisableSound "music.mvm_lost_wave"
+	
+	DisallowUpgrade	"maxammo primary increased"
+	DisallowUpgrade	"maxammo secondary increased"
+	DisallowUpgrade "maxammo metal increased"
+	DisallowUpgrade "metal regen"
+	DisallowUpgrade "canteen specialist"	
+	
+	ItemBlacklist
+	{
+		Name "Kritz Or Treat Canteen"
+		Name "Default Power Up Canteen (MvM)"
+		Name "Power Up Canteen (MvM)"
+		Name "Battery Canteens"
+		Name "Zombie Scout"
+		Name "Zombie Pyro"
+		Name "Zombie Soldier"
+		Name "Zombie Heavy"
+		Name "Zombie Demo"
+		Name "Zombie Engineer"
+		Name "Zombie Medic"
+		Name "Zombie Spy"
+		Name "Zombie Sniper"
+	}
+	
+	PointTemplates
+	{
+		YouJustLostTheGame 
+		{
+			NoFixup 1
+			game_round_win
+			{
+				"TeamNum" "2"
+				"targetname" "bots_win_red"
+				"switch_teams" "0"
+				"force_map_reset" "1"
+				"classname" "game_round_win"
+			}
+			logic_relay
+			{
+				"targetname" "redwin_relay"
+				"OnTrigger" "bots_win_red,RoundWin,,0,-1"
+			}
+		}
+		maplogic
+		{
+			NoFixup 1
+			logic_auto 
+			{
+				"origin" "0 0 0" 
+				"targetname" "mainrelay"
+				"OnMapSpawn" "item_ammopack*,Kill,,0,-1"
+				"OnMapSpawn" "wave_start_relay*,AddOutput,OnTrigger spawnbarrier:Disable:0:-1,0,-1"
+				"OnMapSpawn" "wave_finished_relay*,AddOutput,OnTrigger spawnbarrier:Enable:0:-1,0,-1"
+			}		
+		}
+		spawnbarrierblocked
+		{
+			NoFixup 1
+			prop_dynamic
+			{
+				"targetname" "spawnbarrier"
+				"angles" "0 90 0"
+				"model" "models/mvm/barrier/barrier_spawn_blue1.mdl"
+				"origin" "1088 1540 -26"
+				"modelscale" "0.5"
+				"disableshadows" "1"
+			}
+			func_forcefield
+			{
+				"targetname" "spawnbarrier"
+				"origin" "1088 1540 -26"
+				"angles" "0 90 0"
+				"TeamNum" "2"
+				"mins" "-100 -100 -100"
+				"maxs" "271 8 184"
+			}
+			prop_dynamic
+			{
+				"targetname" "spawnbarrier"
+				"angles" "0 90 0"
+				"model" "models/mvm/barrier/barrier_spawn_blue1.mdl"
+				"origin" "1264 648 373"
+				"modelscale" "0.72"
+				"disableshadows" "1"
+			}		
+			func_forcefield
+			{
+				"targetname" "spawnbarrier"
+				"origin" "1200 648 373"
+				"angles" "0 90 0"
+				"TeamNum" "2"
+				"mins" "-100 -100 -100"
+				"maxs" "392 12 783"
+			}		
+			prop_dynamic
+			{
+				"targetname" "spawnbarrier"
+				"angles" "0 180 0"
+				"model" "models/mvm/barrier/barrier_spawn_blue1.mdl"
+				"origin" "1535 851 428"
+				"modelscale" "0.72"
+				"disableshadows" "1"
+			}		
+			func_forcefield
+			{
+				"targetname" "spawnbarrier"
+				"origin" "1535 800 428"
+				"angles" "0 90 0"
+				"TeamNum" "2"
+				"mins" "-100 -100 -100"
+				"maxs" "11 390 728"
+			}		
+		}
+	}
+	
+	SpawnTemplate "maplogic"
+	
+	SpawnTemplate "YouJustLostTheGame"
+	
+	SpawnTemplate "spawnbarrierblocked"
+	
+	Templates
+	{
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			Where	spawnbot_red_base
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	heavyweapons
+					Health	1000
+					Name	HeavyWeapons
+					Class	HeavyWeapons
+					Skill	Normal
+					WeaponRestrictions	MeleeOnly
+					Attributes	"IgnoreFlag"
+					ItemAttributes
+					{
+						ItemName	tf_weapon_fists
+						"damage bonus"	69420
+						"ragdolls become ash"	1
+					}
+					CharacterAttributes
+					{
+						"health regen"	10000
+					}
+					AddCond
+					{
+						Name "TF_COND_REPROGRAMMED"
+					}
+				}
+			}
+		}
+	}
+}
+//This file has been generated by http://mvm.tf

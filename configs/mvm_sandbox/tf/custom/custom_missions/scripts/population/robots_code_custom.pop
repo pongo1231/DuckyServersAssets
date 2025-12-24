@@ -1,0 +1,548 @@
+WaveSchedule
+{
+	Templates
+	{
+		// FINAL BOSSES
+		T_TFBot_Chief_Scout_Mayhem
+		{
+			Class Scout
+			Name "Private Mayhem"
+			Health 20000
+			Scale 1.9
+			Skill Expert
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 3000
+			Attributes "AlwaysCrit"
+			Attributes "HoldFireUntilFullReload"
+			Attributes "MiniBoss"
+			Attributes "UseBossHealthBar"
+			Item "Ye Oiled Baker Boy"
+			Item "upgradeable tf_weapon_scattergun"
+			ClassIcon scout_giant_fast
+			CharacterAttributes
+			{
+				"move speed bonus" 1.2
+				"health regen" 100
+				"airblast vulnerability multiplier" 0.1
+				"airblast vertical vulnerability multiplier" 0.1
+				"override footstep sound set" 3
+				"damage force reduction" 0.3
+				"rage giving scale" 0.25
+			}
+			ItemAttributes
+			{
+				ItemName "upgradeable tf_weapon_scattergun"
+				"item style override" 1
+				"is australium item" 1
+				"override projectile type" 2
+				"damage bonus" 1.75
+				"fire rate bonus" 0
+				"projectile spread angle penalty" 9
+				"clip size bonus" 4.5
+				"blast radius increased" 1.35
+				"projectile speed decreased" 0.8
+				"faster reload rate" 0.35
+			}
+		}
+		T_TFBot_Chief_Soldier_Conch
+		{
+			Class Soldier
+			Name "Captain Conch"
+			Health 30000
+			Scale 1.9
+			Skill Expert
+			Attributes "UseBossHealthBar"
+			Attributes "MiniBoss"
+			Attributes "SpawnWithFullCharge"
+			Item "Summer Hat"
+			Item "upgradeable tf_weapon_rocketlauncher"
+			Item "The Concheror"
+			ClassIcon soldier_conch_giant
+			CharacterAttributes
+			{
+				"move speed bonus" 0.4
+				"airblast vulnerability multiplier" 0.1
+				"airblast vertical vulnerability multiplier" 0.1
+				"override footstep sound set" 3
+				"damage force reduction" 0.3
+				"rage giving scale" 0.25
+				"increase buff duration" 9.0
+			}
+			ItemAttributes
+			{
+				ItemName "upgradeable tf_weapon_rocketlauncher"
+				"item style override" 1
+				"is australium item" 1
+				"damage bonus" 1.5
+				"fire rate bonus" 0.5
+				"faster reload rate" -0.8
+				"blast radius increased" 1.4
+				"projectile speed increased" 1.1
+			}
+		}
+		T_TFBot_Chief_Soldier_Banner
+		{
+			Class Soldier
+			Name "Major Banner"
+			Health 30000
+			Scale 1.9
+			Attributes "UseBossHealthBar"
+			Attributes "MiniBoss"
+			Attributes "SpawnWithFullCharge"
+			Attributes "HoldFireUntilFullReload"
+			Item "Soldier's Stash"
+			Item "upgradeable tf_weapon_rocketlauncher"
+			Item "The Buff Banner"
+			ClassIcon soldier_buff_giant
+			CharacterAttributes
+			{
+				"move speed bonus" 0.4
+				"airblast vulnerability multiplier" 0.1
+				"airblast vertical vulnerability multiplier" 0.1
+				"damage force reduction" 0.3
+				"rage giving scale" 0.25
+				"increase buff duration" 9.0
+				"override footstep sound set" 3
+			}
+			ItemAttributes
+			{
+				ItemName "upgradeable tf_weapon_rocketlauncher"
+				"item style override" 1
+				"is australium item" 1
+				"damage bonus" 1.5
+				"fire rate bonus" 0.1
+				"faster reload rate" 0.22
+				"projectile speed decreased" 0.4
+				"projectile spread angle penalty" 5
+				"blast radius increased" 1.4
+				"clip size upgrade atomic" 26.0
+			}
+		}
+		T_TFBot_Chief_Soldier_Backup
+		{
+			Class Soldier
+			Name "Corporal Backup"
+			Health 30000
+			Scale 1.9
+			Skill Expert
+			Attributes "UseBossHealthBar"
+			Attributes "MiniBoss"
+			Attributes "SpawnWithFullCharge"
+			Attributes "HoldFireUntilFullReload"
+			Item "The Hat With No Name"
+			Item "upgradeable tf_weapon_rocketlauncher"
+			Item "The Battalion's Backup"
+			ClassIcon soldier_backup_giant
+			CharacterAttributes
+			{
+				"move speed bonus" 0.4
+				"override footstep sound set" 3
+				"airblast vulnerability multiplier" 0.1
+				"airblast vertical vulnerability multiplier" 0.1
+				"damage force reduction" 0.3
+				"rage giving scale" 0.25
+				"increase buff duration" 9.0
+			}
+			ItemAttributes
+			{
+				ItemName "upgradeable tf_weapon_rocketlauncher"
+				"item style override" 1
+				"is australium item" 1
+				"fire rate bonus" 0.1
+				"faster reload rate" 0.4
+				"projectile speed decreased" 0.65
+				"clip size upgrade atomic" 12.0
+				"damage bonus" 1.5
+				"blast radius increased" 1.3
+			}
+		}
+		T_TFBot_Chief_Soldier_Infinite
+		{
+			Class Soldier
+			Name "Lieutenant Infinite"
+			Health 45000
+			Scale 1.9
+			Skill Expert
+			Attributes "UseBossHealthBar"
+			Attributes "MiniBoss"
+			WeaponRestrictions PrimaryOnly
+			Item "Armored Authority"
+			Item "upgradeable tf_weapon_rocketlauncher"
+			ClassIcon soldier_spammer
+			CharacterAttributes
+			{
+				"move speed bonus" 0.4
+				"airblast vulnerability multiplier" 0.1
+				"airblast vertical vulnerability multiplier" 0.1
+				"damage force reduction" 0.3
+				"rage giving scale" 0.1
+				"health regen" 200
+				"override footstep sound set" 3
+			}
+			ItemAttributes
+			{
+				ItemName "upgradeable tf_weapon_rocketlauncher"
+				"item style override" 1
+				"is australium item" 1
+				"faster reload rate" -0.8
+				"fire rate bonus" 0.5
+				"fire rate bonus with reduced health" 0.1
+				"damage bonus" 1.5
+				"projectile speed increased" 1.1
+				"blast radius increased" 1.3
+			}
+		}
+		T_TFBot_Chief_Pyro_Fury
+		{
+			Class Pyro
+			Name "Major Flash"
+			Health 60000
+			Scale 1.9
+			Skill Expert
+			Attributes "UseBossHealthBar"
+			Attributes "MiniBoss"
+			WeaponRestrictions PrimaryOnly
+			Item "Pyro Helm"
+			Item "Tiny Timber"
+			Item "The Dragon's Fury"
+			ClassIcon pyro_giant
+			CharacterAttributes
+			{
+				"move speed bonus" 0.4
+				"override footstep sound set" 3
+				"airblast vulnerability multiplier" 0.1
+				"airblast vertical vulnerability multiplier" 0.1
+				"damage force reduction" 0.3
+				"rage giving scale" 0.1
+				"health regen" 250
+			}
+			ItemAttributes
+			{
+				ItemName "The Dragon's Fury"
+				"fire rate bonus" 0.6
+				"damage bonus" 2.5
+			}
+		}
+		T_TFBot_Chief_Demo_Burst
+		{
+			Class Demoman
+			Name "Colonel Fleet"
+			Health 75000
+			Scale 1.9
+			Skill Expert
+			Attributes "UseBossHealthBar"
+			Attributes "MiniBoss"
+			Attributes "HoldFireUntilFullReload"
+			Attributes "AlwaysCrit"
+			WeaponRestrictions PrimaryOnly
+			Item "The Broadband Bonnet"
+			Item "The Scrumpy Strongbox"
+			Item "upgradeable tf_weapon_grenadelauncher"
+			ClassIcon demo_burst_giant
+			CharacterAttributes
+			{
+				"move speed bonus" 0.4
+				"override footstep sound set" 3
+				"airblast vulnerability multiplier" 0.1
+				"airblast vertical vulnerability multiplier" 0.1
+				"damage force reduction" 0.3
+				"rage giving scale" 0.1
+				"health regen" 300
+			}
+			ItemAttributes
+			{
+				ItemName "upgradeable tf_weapon_grenadelauncher"
+				"item style override" 1
+				"is australium item" 1
+				"fire rate bonus" 0.1
+				"faster reload rate" 0.4
+				"clip size upgrade atomic" 24.0
+				"projectile spread angle penalty" 5
+				"projectile speed increased" 1.4
+				"blast radius increased" 1.6
+			}
+			
+		}
+		T_TFBot_Chief_Heavy_Code
+		{
+			Class Heavyweapons
+			Name "Sergeant Code"
+			Health 100000
+			Scale 1.9
+			Skill Expert
+			Attributes "UseBossHealthBar"
+			Attributes "MiniBoss"
+			WeaponRestrictions PrimaryOnly
+			Item "The Team Captain"
+			Item "upgradeable tf_weapon_minigun"
+			ClassIcon heavy_deflector_healonkill
+			CharacterAttributes
+			{
+				"move speed bonus" 0.4
+				"override footstep sound set" 3
+				"airblast vulnerability multiplier" 0.1
+				"airblast vertical vulnerability multiplier" 0.1
+				"damage force reduction" 0.3
+				"rage giving scale" 0.1
+				"health regen" 300
+			}
+			ItemAttributes
+			{
+				ItemName "upgradeable tf_weapon_minigun"
+				"item style override" 1
+				"is australium item" 1
+				"fire rate bonus" 0.8
+				"bullets per shot bonus" 1.5
+				"damage bonus" 2
+				"heal on kill" 10000
+				"attack projectiles" 2
+				"weapon spread bonus" 0.85
+				"critboost on kill" 5
+			}
+		}
+		
+		// MINIBOSSES
+		T_TFBot_Chief_Heavy_Garg
+		{
+			Class Heavyweapons
+			Name "The Gargantuar"
+			Health 150000
+			Scale 2
+			Skill Expert
+			Attributes "UseBossHealthBar"
+			Attributes "MiniBoss"
+			WeaponRestrictions MeleeOnly
+			Item "tf_weapon_fists"
+			ClassIcon heavy_giant
+			CharacterAttributes
+			{
+				"move speed bonus" 0.25
+				"airblast vulnerability multiplier" 0
+				"airblast vertical vulnerability multiplier" 0
+				"damage force reduction" 0
+				"rage giving scale" 0.01
+				"override footstep sound set" 3
+				"dmg from melee increased" 3
+			}
+			ItemAttributes
+			{
+				ItemName "tf_weapon_fists"
+				"fire rate bonus" 0.8
+				"melee range multiplier" 1.8
+				"set damagetype ignite" 1
+				"explode_on_ignite" 1
+				"damage bonus" 3
+				"speed_boost_on_kill" 3
+			}
+		}
+		T_TFBot_Chief_Heavy_Giga_Garg
+		{
+			Class Heavyweapons
+			Name "The Giga Gargantuar"
+			Health 300000
+			Scale 2
+			Skill Expert
+			Attributes "UseBossHealthBar"
+			Attributes "MiniBoss"
+			Attributes "AlwaysCrit"
+			WeaponRestrictions PrimaryOnly
+			Item "Graybanns"
+			Item "tf_weapon_minigun"
+			ClassIcon heavy_giant
+			CharacterAttributes
+			{
+				"move speed bonus" 0.1
+				"airblast vulnerability multiplier" 0
+				"airblast vertical vulnerability multiplier" 0
+				"damage force reduction" 0
+				"rage giving scale" 0.01
+				"override footstep sound set" 3
+				"dmg taken from bullets increased" 2
+			}
+			ItemAttributes
+			{
+				ItemName "tf_weapon_minigun"
+				"bullets per shot bonus" 2.5
+				"fire rate bonus" 0.9
+				"weapon spread bonus" 0.8
+				"damage bonus" 2
+				"heal on kill" 10000
+			}
+		}
+		T_TFBot_Chief_Sniper_Crit
+		{
+			Class Sniper
+			Name "Return of the Crit Sniper"
+			Health 40000
+			Scale 1.6
+			Skill Expert
+			Attributes "MiniBoss"
+			Attributes "AlwaysCrit"
+			Attributes "UseBosSHealthBar"
+			WeaponRestrictions SecondaryOnly
+			Item "The Cleaner's Carbine"
+			ClassIcon sniper_d
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"override footstep sound set" 3
+				"airblast vulnerability multiplier" 0.1
+				"airblast vertical vulnerability multiplier" 0.1
+				"damage force reduction" 0.3
+				"rage giving scale" 0.1
+			}
+			ItemAttributes
+			{
+				ItemName "The Cleaner's Carbine"
+				"fire rate bonus" 0.75
+				"clip size bonus" 3.5
+				"bullets per shot bonus" 3
+				"damage bonus" 1.65
+			}
+		}
+		T_TFBot_Chief_Soldier_Bison
+		{
+			Class Soldier
+			Name "Bison Beatdown"
+			Health 25000
+			Scale 1.8
+			Skill Expert
+			Attributes "MiniBoss"
+			Attributes "UseBossHealthBar"
+			WeaponRestrictions SecondaryOnly
+			Item "Stainless Pot"
+			Item "The Righteous Bison"
+			ClassIcon soldier_giant
+			CharacterAttributes
+			{
+				"move speed bonus" 0.4
+				"override footstep sound set" 3
+				"airblast vulnerability multiplier" 0.1
+				"airblast vertical vulnerability multiplier" 0.1
+				"damage force reduction" 0.3
+				"rage giving scale" 0.3
+			}
+			ItemAttributes
+			{
+				ItemName "The Righteous Bison"
+				"fire rate bonus" 0.25
+				"faster reload rate" -0.8
+				"damage bonus" 2
+				"critboost on kill" 6
+				"set damagetype ignite" 1
+				"damage all connected" 1
+				"subtract victim medigun charge on hit" 5
+			}
+		}
+		T_TFBot_Chief_Pyro_Moonman_MKII // DEAR FUCKING GOD RUN FOR THE FUCKING HILLS!!!
+		{
+			Class Pyro
+			Name "Moonman Pyro MKII"
+			Health 5000
+			Scale 1
+			Attributes "UseBossHealthBar"
+			Attributes "AlwaysCrit"
+			Item "The Bubble Pipe"
+			Item "The Moonman Backpack"
+			Item "The Phlogistinator"
+			CharacterAttributes
+			{
+				"move speed bonus" 1.6
+				"cannot be backstabbed" 1
+			}
+			ItemAttributes
+			{
+				ItemName "The Phlogistinator"
+				"damage bonus" 10
+				"speed_boost_on_kill" 3
+			}
+		}
+		T_TFBot_Chief_Demo_Fire
+		{
+			Class Demoman
+			Name "Firey Scrumpy"
+			Health 35000
+			Scale 1.8
+			Skill Expert
+			Attributes "MiniBoss"
+			Attributes "UseBossHealthBar"
+			Attributes "HoldFireUntilFullReload"
+			WeaponRestrictions PrimaryOnly
+			Item "FR-0"
+			Item "tf_weapon_grenadelauncher"
+			ClassIcon demo_giant
+			CharacterAttributes
+			{
+				"move speed bonus" 0.4
+				"override footstep sound set" 3
+				"airblast vulnerability multiplier" 0.1
+				"airblast vertical vulnerability multiplier" 0.1
+				"damage force reduction" 0.3
+				"rage giving scale" 0.3
+			}
+			ItemAttributes
+			{
+				ItemName "tf_weapon_grenadelauncher"
+				"fire rate bonus" 0.2
+				"faster reload rate" 0.4
+				"clip size upgrade atomic" 7.0
+				"set damagetype ignite" 1
+				"damage bonus vs burning" 2.5
+				"damage bonus" 1.25
+				"crit vs burning players" 1
+				"projectile speed increased" 1.4
+			}
+		}
+		T_TFBot_Chief_Demo_Shrimp
+		{
+			Class Demoman
+			Name "Plankton"
+			Health 5000
+			Scale 0.05
+			Skill Expert
+			Attributes "MiniBoss"
+			Attributes "UseBossHealthBar"
+			BehaviorModifiers Mobber
+			WeaponRestrictions MeleeOnly
+			Item "The Persian Persuader"
+			ClassIcon demo_giant
+			CharacterAttributes
+			{
+				"move speed bonus" 2.66
+				"cannot pick up intelligence" 1
+			}
+			ItemAttributes
+			{
+				ItemName "The Persian Persuader"
+				"damage bonus" 20010.0
+			}
+		}
+		
+		//GIANTS
+		T_TFBot_Giant_Heavyweapons_HoK
+		{
+			Class Heavyweapons
+			Name "Giant Heal-on-Kill Heavy"
+			Health 7000
+			Scale 1.8
+			Skill Expert
+			Attributes "MiniBoss"
+			Item "The Tungsten Togue"
+			Item "Deflector"
+			ClassIcon heavy_deflector_healonkill
+			CharacterAttributes
+			{
+				"move speed bonus" 0.35
+				"damage force reduction" 0.3
+				"airblast vulnerability multiplier" 0.3
+				"override footstep sound set" 2
+			}
+			ItemAttributes
+			{
+				ItemName "Deflector"
+				"damage bonus" 1.2
+				"attack projectiles" 2
+				"heal on kill" 7000
+			}
+	}
+}

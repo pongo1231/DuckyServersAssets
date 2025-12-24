@@ -1,0 +1,791 @@
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_d_i_l.pop
+
+//Dylan_Is_Legend/WizzardII
+
+WaveSchedule
+{
+
+	StartingCurrency 3000
+	RespawnWaveTime 3
+	CanBotsAttackWhileInSpawnRoom no
+	MaxRedPlayers 1
+	AllowBotExtraSlots 1
+	RobotLimit 44
+	ForceRedMoney 1
+	FlagResetTime   //Overrides default bomb reset time
+	{
+		Name "intel" //Name of flag entity on the map
+		ResetTime 25
+	}
+	
+	PlayerAttributes
+	{
+		"damage bonus hidden" 1.5
+		Heavyweapons
+		{
+			"damage penalty hidden" 0.75
+		}
+	}
+
+	// Templates
+	Templates
+	{
+		T_Wavespawn_SectionOne
+		{
+			Squad
+			{
+				NoFormation 1
+            			TFBot
+           			{
+					Template T_TFBot_Giant_Pyro_Flare_Spammer
+            			}
+			}
+		}
+
+		T_Wavespawn_SectionTwo
+		{
+			Squad
+			{
+				NoFormation 1
+            			TFBot
+           			{
+					Template T_TFBot_Giant_Demo_RapidFire
+            			}
+			}
+		}
+
+		T_Wavespawn_SectionThree
+		{
+			Squad
+			{
+				NoFormation 1
+            			TFBot
+           			{
+					Template T_TFBot_Giant_Soldier
+            			}
+			}
+		}
+
+		T_Wavespawn_SectionFour
+		{
+			Squad
+			{
+            			TFBot
+           			{
+					Template T_TFBot_Giant_Pyro
+					Attributes AlwaysFireWeapon
+            			}
+            			TFBot
+           			{
+					Template T_TFBot_Medic_Bigheal
+					NoBombUpgrades 1
+            			}
+            			TFBot
+           			{
+					Template T_TFBot_Medic_Bigheal
+					NoBombUpgrades 1
+            			}
+            			TFBot
+           			{
+					Template T_TFBot_Medic_Bigheal
+					NoBombUpgrades 1
+            			}
+			}
+		}
+
+		T_Wavespawn_SectionFive
+		{
+			Squad
+			{
+				NoFormation 1
+            			TFBot
+           			{
+					Template T_TFBot_Giant_Scout
+					WeaponRestrictions MeleeOnly
+					NoBombUpgrades 1
+            			}
+			}
+		}
+
+		T_Wavespawn_SectionSix
+		{
+			Squad
+			{
+				NoFormation 1
+            			TFBot
+           			{
+					Template T_TFBot_Giant_Demoman_PrinceTavish
+            			}
+			}
+		}
+
+		T_Wavespawn_SectionSeven
+		{
+			Squad
+			{
+				NoFormation 1
+            			TFBot
+           			{
+					Template T_TFBot_Giant_Heavyweapons_Aimless
+            			}
+			}
+		}
+
+		T_Wavespawn_SectionEight
+		{
+			Squad
+			{
+				NoFormation 1
+            			TFBot
+           			{
+					Template T_TFBot_Giant_Soldier_Extended_Buff_Banner
+            			}
+			}
+		}
+
+		T_Wavespawn_SectionNine
+		{
+			Squad
+			{
+				NoFormation 1
+            			TFBot
+           			{
+					Template T_TFBot_Giant_Demoman
+            			}
+            			TFBot
+           			{
+					Template T_TFBot_Medic
+            			}
+			}
+		}
+
+		T_Wavespawn_SectionTen
+		{
+			Squad
+			{
+				NoFormation 1
+            			TFBot
+           			{
+					Template T_TFBot_Giant_Heavyweapons
+            			}
+			}
+		}
+
+		T_Wavespawn_SectionEleven
+		{
+			Squad
+			{
+				NoFormation 1
+            			TFBot
+           			{
+					Template T_TFBot_Giant_Demo_Burst
+					NoBombUpgrades 1
+            			}
+			}
+		}
+
+		T_Wavespawn_SectionTwelve
+		{
+			Squad
+			{
+				NoFormation 1
+            			TFBot
+           			{
+					Template T_TFBot_Giant_Soldier
+            			}
+			}
+		}
+
+		T_Wavespawn_SectionThirteen
+		{
+			Squad
+			{
+            			NoFormation 1
+            			TFBot
+           			{
+					Template T_TFBot_Giant_Heavyweapons_Shotgun
+            			}
+			}
+		}
+
+		T_Wavespawn_SectionFourteen
+		{
+			Squad
+			{
+				NoFormation 1
+            			TFBot
+           			{
+					Template T_TFBot_Giant_Soldier_Spammer_Spread
+            			}
+			}
+		}
+
+		T_Wavespawn_SectionFifteen
+		{
+			Squad
+			{
+				NoFormation 1
+            			TFBot
+           			{
+					Template T_TFBot_Giant_Scout_Fast
+            			}
+			}
+		}
+
+		T_Wavespawn_SectionSixteen
+		{
+			Squad
+			{
+				NoFormation 1
+            			TFBot
+           			{
+					Template T_TFBot_Giant_Soldier_RocketShotgun
+            			}
+			}
+		}
+
+		T_Wavespawn_SectionSeventeen
+		{
+			Squad
+			{
+				NoFormation 1
+            			TFBot
+           			{
+					Template T_TFBot_Giant_Demo_Burst
+					Attributes AlwaysCrit
+            			}
+			}
+		}
+
+		T_Wavespawn_SectionEighteen
+		{
+			Squad
+			{
+				NoFormation 1
+            			TFBot
+           			{
+					Template T_TFBot_Soldier_Burstfire
+            			}
+			}
+		}
+
+		T_Wavespawn_SectionNineteen
+		{
+			Squad
+			{
+				NoFormation 1
+            			TFBot
+           			{
+					Template T_TFBot_Giant_Scout_FAN
+            			}
+			}
+		}
+
+		T_Wavespawn_SectionTwenty
+		{
+			Squad
+			{
+            			TFBot
+           			{
+					Template T_TFBot_Giant_Demoman_Loads_of_Bombs
+					Attributes AlwaysCrit
+            			}
+            			TFBot
+           			{
+					Template T_TFBot_Giant_Medic
+					Attributes AlwaysCrit
+            			}
+			}
+		}
+	}
+
+    // Missions
+
+    	Mission
+	{
+		Objective DestroySentries
+
+		InitialCooldown 25
+		Where "spawnbot_mission_sentry_buster"
+		BeginAtWave 1
+		RunForThisManyWaves 9
+		CooldownTime 32
+
+        	TFBot
+	    	{
+		    Template T_TFBot_SentryBuster
+        	}
+	}
+
+	// Sniper 1
+	Mission
+	{
+		Objective Sniper
+
+		InitialCooldown 40
+		Where "spawnbot_mission_sniper"
+		Where "spawnbot_flank_left"
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		CooldownTime 40
+		DesiredCount 1
+	    TFBot
+	    {
+	        Template T_TFBot_Sniper
+	        Skill Expert
+	    }
+	}
+
+	// Spy 3
+	Mission
+	{
+		Objective Spy
+
+		InitialCooldown 120
+		Where "spawnbot_mission_spy"
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		CooldownTime 70
+		DesiredCount 1
+	    TFBot
+	    {
+	        Template T_TFBot_Spy
+	        Skill expert
+	    }
+	}
+
+	// Engineer 6
+	Mission
+	{
+	    Objective Engineer
+
+	    InitialCooldown 480
+	    Where spawnbot
+	    BeginAtWave 1
+	    RunForThisManyWaves 1
+	    CoolDownTime 180
+	    DesiredCount 1
+	    TFBot
+	    {
+	        Template T_TFBot_Engineer_Sentry_Teleporter
+	        TeleportWhere spawnbot
+		TeleportWhere spawnbot_giant
+		TeleportWhere spawnbot_all
+		TeleportWhere spawnbot_flank_right
+		TeleportWhere spawnbot_flank_left
+		Attributes TeleportToHint
+		Attributes IgnoreFlag
+		Health 500
+	    }
+	}
+
+	Wave
+	{
+        	StartWaveOutput
+        	{
+            		Target wave_start_relay
+            		Action Trigger
+        	}
+        	DoneOutput
+        	{
+            		Target wave_finished_relay
+            		Action Trigger
+        	}
+
+		Explanation    //Dispayed once the wave is initialized
+		{
+			Line "{green}This is a practice mission involving holding out against increasingly tougher robots."
+			Line "{green}Let's see how many sections you can clear. My record as Pyro is 5."
+		}
+
+		
+		WaveSpawn // Support Scout
+		{
+            
+			Where spawnbot
+			TotalCount 10
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawns 10
+			WaitBeforeStarting 5
+			TotalCurrency 0
+			Support 1
+			RandomSpawn 1
+			TFBot
+			{
+				Class Scout
+				Skill Easy
+			}
+        	}
+
+		WaveSpawn // Support Scout
+		{
+            
+			Where spawnbot
+			TotalCount 10
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawns 10
+			WaitBeforeStarting 9
+			TotalCurrency 0
+			Support 1
+			RandomSpawn 1
+			TFBot
+			{
+				Class Scout
+				Skill Easy
+			}
+        	}
+
+		WaveSpawn // Section 1
+		{
+            
+			Name "1"
+			Where spawnbot_all
+			TotalCount 3
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 16.5
+			WaitBeforeStarting 0
+			TotalCurrency 350
+			RandomSpawn 1
+			Template T_Wavespawn_SectionOne
+			DoneMessage "Section1 Done"
+        	}
+
+
+		WaveSpawn // Section 2
+		{
+            
+			Name "2"
+			Where spawnbot_all
+			TotalCount 3
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 16.5
+			WaitBeforeStarting 0
+			TotalCurrency 350
+			RandomSpawn 1
+			WaitForAllDead "1"
+			Template T_Wavespawn_SectionTwo
+			DoneMessage "Section2 Done"
+        	}
+
+
+		WaveSpawn // Section 3
+		{
+            
+			Name "3"
+			Where spawnbot_all
+			TotalCount 3
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 16.5
+			WaitBeforeStarting 0
+			TotalCurrency 350
+			RandomSpawn 1
+			WaitForAllDead "2"
+			Template T_Wavespawn_SectionThree
+			DoneMessage "Section3 Done"
+        	}
+
+
+		WaveSpawn // Section 4
+		{
+            
+			Name "4"
+			Where spawnbot_all
+			TotalCount 12
+			MaxActive 5
+			SpawnCount 4
+			WaitBetweenSpawns 18
+			WaitBeforeStarting 0
+			TotalCurrency 350
+			RandomSpawn 1
+			WaitForAllDead "3"
+			Template T_Wavespawn_SectionFour
+			DoneMessage "Section4 Done"
+        	}
+
+
+		WaveSpawn // Section 5
+		{
+            
+			Name "5"
+			Where spawnbot_all
+			TotalCount 4
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 12.5
+			WaitBeforeStarting 0
+			TotalCurrency 350
+			RandomSpawn 1
+			WaitForAllDead "4"
+			Template T_Wavespawn_SectionFive
+			DoneMessage "Section5 Done"
+        	}
+
+
+		WaveSpawn // Section 6
+		{
+            
+			Name "6"
+			Where spawnbot_all
+			TotalCount 3
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 16.5
+			WaitBeforeStarting 0
+			TotalCurrency 275
+			RandomSpawn 1
+			WaitForAllDead "5"
+			Template T_Wavespawn_SectionSix
+			DoneMessage "Section6 Done"
+        	}
+
+		WaveSpawn // Section 7
+		{
+            
+			Name "7"
+			Where spawnbot_all
+			TotalCount 3
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 16.5
+			WaitBeforeStarting 0
+			TotalCurrency 275
+			RandomSpawn 1
+			WaitForAllDead "6"
+			Template T_Wavespawn_SectionSeven
+			DoneMessage "Section7 Done"
+        	}
+
+
+		WaveSpawn // Section 8
+		{
+            
+			Name "8"
+			Where spawnbot_all
+			TotalCount 3
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 16.5
+			WaitBeforeStarting 0
+			TotalCurrency 275
+			RandomSpawn 1
+			WaitForAllDead "7"
+			Template T_Wavespawn_SectionEight
+			DoneMessage "Section8 Done"
+        	}
+
+		WaveSpawn // Section 9
+		{
+            
+			Name "9"
+			Where spawnbot_all
+			TotalCount 6
+			MaxActive 4
+			SpawnCount 2
+			WaitBetweenSpawns 16.5
+			WaitBeforeStarting 0
+			TotalCurrency 275
+			RandomSpawn 1
+			WaitForAllDead "8"
+			Template T_Wavespawn_SectionNine
+			DoneMessage "Section9 Done"
+        	}
+
+		WaveSpawn // Section 10
+		{
+            
+			Name "10"
+			Where spawnbot_all
+			TotalCount 3
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 16.5
+			WaitBeforeStarting 0
+			TotalCurrency 275
+			RandomSpawn 1
+			WaitForAllDead "9"
+			Template T_Wavespawn_SectionTen
+			DoneMessage "Section10 Done"
+        	}
+
+		WaveSpawn // Section 11
+		{
+            
+			Name "11"
+			Where spawnbot_all
+			TotalCount 3
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 16.5
+			WaitBeforeStarting 0
+			TotalCurrency 225
+			RandomSpawn 1
+			WaitForAllDead "10"
+			Template T_Wavespawn_SectionEleven
+			DoneMessage "Section11 Done"
+        	}
+
+
+		WaveSpawn // Section 12
+		{
+            
+			Name "12"
+			Where spawnbot_all
+			TotalCount 3
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 16.5
+			WaitBeforeStarting 0
+			TotalCurrency 225
+			RandomSpawn 1
+			WaitForAllDead "11"
+			Template T_Wavespawn_SectionTwelve
+			DoneMessage "Section12 Done"
+        	}
+
+
+		WaveSpawn // Section 13
+		{
+            
+			Name "13"
+			Where spawnbot_all
+			TotalCount 3
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 16.5
+			WaitBeforeStarting 0
+			TotalCurrency 225
+			RandomSpawn 1
+			WaitForAllDead "12"
+			Template T_Wavespawn_SectionThirteen
+			DoneMessage "Section13 Done"
+        	}
+
+
+		WaveSpawn // Section 14
+		{
+            
+			Name "14"
+			Where spawnbot_all
+			TotalCount 3
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 16.5
+			WaitBeforeStarting 0
+			TotalCurrency 225
+			RandomSpawn 1
+			WaitForAllDead "13"
+			Template T_Wavespawn_SectionFourteen
+			DoneMessage "Section14 Done"
+        	}
+
+		WaveSpawn // Section 15
+		{
+            
+			Name "15"
+			Where spawnbot_all
+			TotalCount 3
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 16.5
+			WaitBeforeStarting 0
+			TotalCurrency 225
+			RandomSpawn 1
+			WaitForAllDead "14"
+			Template T_Wavespawn_SectionFifteen
+			DoneMessage "Section15 Done"
+        	}
+
+		WaveSpawn // Section 16
+		{
+            
+			Name "16"
+			Where spawnbot_all
+			TotalCount 3
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 16.5
+			WaitBeforeStarting 0
+			TotalCurrency 175
+			RandomSpawn 1
+			WaitForAllDead "15"
+			Template T_Wavespawn_SectionSixteen
+			DoneMessage "Section16 Done"
+        	}
+
+		WaveSpawn // Section 17
+		{
+            
+			Name "17"
+			Where spawnbot_all
+			TotalCount 3
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 16.5
+			WaitBeforeStarting 0
+			TotalCurrency 175
+			RandomSpawn 1
+			WaitForAllDead "16"
+			Template T_Wavespawn_SectionSeventeen
+			DoneMessage "Section17 Done"
+        	}
+
+		WaveSpawn // Section 18
+		{
+            
+			Name "18"
+			Where spawnbot_all
+			TotalCount 3
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 16.5
+			WaitBeforeStarting 0
+			TotalCurrency 175
+			RandomSpawn 1
+			WaitForAllDead "17"
+			Template T_Wavespawn_SectionEighteen
+			DoneMessage "Section18 Done"
+        	}
+
+		WaveSpawn // Section 19
+		{
+            
+			Name "19"
+			Where spawnbot_all
+			TotalCount 4
+			MaxActive 3
+			SpawnCount 1
+			WaitBetweenSpawns 12.5
+			WaitBeforeStarting 0
+			TotalCurrency 175
+			RandomSpawn 1
+			WaitForAllDead "18"
+			Template T_Wavespawn_SectionNineteen
+			DoneMessage "Section19 Done"
+        	}
+
+		WaveSpawn // Section 20
+		{
+            
+			Name "20"
+			Where spawnbot_all
+			TotalCount 6
+			MaxActive 4
+			SpawnCount 2
+			WaitBetweenSpawns 20
+			WaitBeforeStarting 0
+			TotalCurrency 175
+			RandomSpawn 1
+			WaitForAllDead "19"
+			Template T_Wavespawn_SectionTwenty
+			DoneMessage "Section20 Done!!!"
+        	}
+
+	}
+}

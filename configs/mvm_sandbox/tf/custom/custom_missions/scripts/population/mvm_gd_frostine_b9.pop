@@ -1,0 +1,540 @@
+#base robot_standard.pop
+#base robot_giant.pop
+#base robot_gatebot.pop
+
+WaveSchedule
+{
+	StartingCurrency 1000
+	CanBotsAttackWhileInSpawnRoom No
+	RespawnWaveTime 0
+	Advanced 1
+        MaxRedPlayers 2 [$SIGSEGV]
+
+	Templates
+	{
+	Scout_festivied
+		{
+			Class Scout
+			Name "Scout"
+			Skill Normal
+			ClassIcon scout
+
+			EventChangeAttributes
+			{
+				Default
+				{
+					Tag bot_gatebot
+					Tag nav_prefer_gate1_flank
+					BehaviorModifiers push
+					Attributes IgnoreFlag
+					Item "Festive Scattergun 2011"
+					Item "The Bootie Time"
+				}
+			}
+		}
+		Soldier_festivied
+		{
+			Class Soldier
+			Name "Soldier"
+			ClassIcon soldier
+					Tag bot_gatebot
+					Tag nav_prefer_gate1_flank
+					BehaviorModifiers push
+					Attributes IgnoreFlag
+					Item "Festive Rocket Launcher 2011"
+				ItemAttributes
+				{
+					ItemName "Festive Rocket Launcher 2011"
+					"damage bonus" 0.4
+				}
+		}
+		Soldier_shotgun_festivied
+		{
+			Class Soldier
+			Name "Soldier"
+			ClassIcon soldier
+			Item "Festive Shotgun 2014"
+
+					Tag bot_gatebot
+					Tag nav_prefer_gate1_flank
+					BehaviorModifiers		push
+					Attributes			IgnoreFlag
+					WeaponRestrictions		SecondaryOnly
+					ClassIcon			heavy_shotgun
+		}
+		Pyro_festivied
+		{
+			Class Pyro
+			Name "Pyro"
+			ClassIcon pyro
+			Skill Expert
+			EventChangeAttributes
+			{
+				Default
+				{
+					Tag bot_gatebot
+					Tag nav_prefer_gate1_flank
+					BehaviorModifiers push
+					Attributes IgnoreFlag
+					Item "Festive Flamethrower 2011"
+					Item "The Jingle Belt"
+					Item "Firewall Helmet"  
+					Item "The Scrap Sack"
+				}
+			}
+		}
+		Giant_Mitten
+		{
+			Class heavyweapons
+			Name "Big Mittens"
+			ClassIcon heavy_mittens_giant
+               		BehaviorModifiers	Push
+			Attributes		IgnoreFlag
+			Tag bot_gatebot
+			Tag			nav_prefer_gate1_flank
+			Skill expert
+			Health 7500
+			Item "The Holiday Punch"
+			Item "The Tungsten Toque"
+
+			WeaponRestrictions MeleeOnly
+			Attributes MiniBoss
+			Attributes UseBossHealthBar
+			Attributes AlwaysCrit
+			CharacterAttributes
+
+			{
+				"move speed bonus"	0.55
+				"damage force reduction" 0.1
+				"airblast vulnerability multiplier" 0.1
+				"override footstep sound set" 2
+			}
+		}
+	}
+    Wave
+	 {
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        InitWaveOutput
+		{
+			Target wave_reset_relay
+			Action Trigger
+		}
+
+        WaveSpawn
+        {
+            Name "wave01_a"
+            TotalCount 30
+            SpawnCount 3
+            MaxActive 6
+            WaitBetweenSpawns 9
+            Where spawnbot
+            TotalCurrency 600
+
+            TFBot
+            {
+                Template T_TFBot_Scout_Melee
+                BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot
+				Item "The Wrap Assassin"
+				Item "The Bootie Time"
+				ClassIcon scout_wrapassassin_noball
+            }
+        }
+    }
+    Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        InitWaveOutput
+		{
+			Target wave_reset_relay
+			Action Trigger
+		}
+        WaveSpawn
+        {
+            Name "wave02_a"
+            TotalCount 18
+            SpawnCount 3
+            MaxActive 6
+            WaitBetweenSpawns 15
+            Where spawnbot
+            TotalCurrency 198
+            TFBot
+            {
+                Template T_TFBot_Scout_Melee
+                BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				Attributes AlwaysCrit
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot	 
+				Item "The Wrap Assassin"
+				Item "The Bootie Time"
+				ClassIcon scout_wrapassassin_noball
+            }
+        }
+        WaveSpawn
+         {
+            Name "wave02_a"
+            TotalCount 10
+            SpawnCount 2
+            MaxActive 3
+            WaitBetweenSpawns 12
+            Where spawnbot
+            TotalCurrency 220
+            TFBot
+            {
+                Template Scout_festivied
+		Skill Easy
+            }
+        }
+        WaveSpawn
+        {
+            Name "wave02_b"
+            TotalCount 12
+            SpawnCount 3
+            MaxActive 3
+            WaitForAllDead "wave02_a"
+            WaitBetweenSpawns 14
+            Where spawnbot
+            TotalCurrency 132
+
+            TFBot
+            {
+                Template T_TFBot_Demoman
+		Skill Easy
+                BehaviorModifiers	Push
+
+				Attributes			IgnoreFlag
+			        Health 70
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot	
+				Item "Festive Grenade Launcher"
+		    Item "The Brown Bomber"
+                    ItemModel [$SIGSEGV]
+                {
+                    ItemName "The Brown Bomber"
+                    Model "models/workshop/player/items/all_class/bolted_bomber/bolted_bomber_demo.mdl"
+                }
+
+            }
+        }
+    }
+    Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        InitWaveOutput
+		{
+			Target wave_reset_relay
+			Action Trigger
+		}
+
+        WaveSpawn
+        {
+            Name "wave03_a"
+            TotalCount 12
+            SpawnCount 4
+            MaxActive 4
+            WaitBetweenSpawns 12
+            Where spawnbot
+            Where spawnbot_right
+            TotalCurrency 72
+
+            TFBot
+            {
+                Template	Pyro_festivied
+		Health 125
+            }
+        }
+        WaveSpawn
+        {
+            Name "wave03_a"
+            TotalCount 10
+            SpawnCount 2
+            MaxActive 4
+            WaitBetweenSpawns 10
+            Where spawnbot
+            TotalCurrency 90
+            TFBot
+            {
+                Template Scout_festivied
+		Skill Easy
+            }
+        }
+        WaveSpawn
+        {
+            Name "wave03_b"
+            TotalCount 8
+            SpawnCount 2
+            MaxActive 4
+            WaitBetweenSpawns 10
+            Where spawnbot
+            TotalCurrency 64
+            TFBot
+            {
+                Template T_TFBot_Scout_Melee
+                BehaviorModifiers	Push
+			        Health 100
+				Attributes			IgnoreFlag
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot	 
+				Item "The Wrap Assassin"
+				Item "The Bootie Time"
+				ClassIcon scout_wrapassassin_noball
+            }
+        }
+        WaveSpawn
+        {
+            Name "wave03_c"
+            TotalCount 9
+            SpawnCount 3
+            MaxActive 3
+            WaitBetweenSpawns 12
+            WaitForAllSpawned "wave03_a"
+            Where spawnbot
+            TotalCurrency 72
+
+            TFBot
+            {
+                Template	Soldier_festivied
+                Health 75
+		Skill Easy
+		Item "Exquisite Rack"
+
+            }
+        }
+        WaveSpawn
+        {
+            Name "wave03_c"
+            TotalCount 9
+            SpawnCount 3
+            MaxActive 3
+            WaitBetweenSpawns 12
+            WaitForAllSpawned "wave03_a"
+            Where spawnbot
+            TotalCurrency 72
+
+            TFBot
+            {
+                Template	Soldier_festivied
+                Health 75
+		Skill Easy
+		Item "Exquisite Rack"
+
+            }
+        }
+        WaveSpawn
+        {
+            Name "wave03_d"
+            TotalCount 4
+            SpawnCount 4
+            WaitForAllDead "wave03_c"
+            Where spawnbot
+            TotalCurrency 80
+
+            TFBot
+            {
+                Template T_TFBot_Heavyweapons_Gnome
+                Health 450
+                BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot
+				Item "The Tungsten Toque"
+
+            }
+        }
+    }
+    Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        InitWaveOutput
+		{
+			Target wave_reset_relay
+			Action Trigger
+		}
+        WaveSpawn
+        {
+            Name "wave04_a"
+            TotalCount 1
+            SpawnCount 1
+            Where spawnbot_right
+            TotalCurrency 450
+
+            TFBot
+            {
+                Template Giant_Mitten
+            }
+        }
+}
+    Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        InitWaveOutput
+		{
+			Target wave_reset_relay
+			Action Trigger
+		}
+        WaveSpawn
+        {
+            Name "wave05_a"
+            TotalCount 20
+            SpawnCount 2
+            MaxActive 4
+            WaitBetweenSpawns 10
+            Where spawnbot
+            TotalCurrency 80
+
+            TFBot
+            {
+                Template Soldier_festivied
+		Skill Normal 
+            }
+}
+        WaveSpawn
+        {
+            Name "wave05_a"
+            TotalCount 20
+            SpawnCount 2
+            MaxActive 4
+            WaitBeforeStarting 6
+            WaitBetweenSpawns 8
+            Where spawnbot
+            TotalCurrency 100
+            TFBot
+            {
+                Template T_TFBot_Demoman_Knight
+                		BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot
+				Item "Festive Eyelander"
+				Item "Festive Targe 2014"
+				Item "The Brown Bomber"
+		    Item "The Brown Bomber"
+                    ItemModel [$SIGSEGV]
+                {
+                    ItemName "The Brown Bomber"
+                    Model "models/workshop/player/items/all_class/bolted_bomber/bolted_bomber_demo.mdl"
+                }
+            }
+        }
+        WaveSpawn
+        {
+            Name "wave05_b"
+            TotalCount 2
+            SpawnCount 2
+            WaitBeforeStarting 6
+            WaitForAllDead "wave05_a"
+            Where spawnbot
+            TotalCurrency 200
+
+            Squad
+            {
+                TFBot
+                {
+                Template T_TFBot_Giant_Soldier
+                Health 1500
+                BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot	 
+				Item "Exquisite Rack"
+				Item "Festive Rocket Launcher 2011"
+				Item "Festive Buff Banner"
+                }
+                TFBot
+                {
+                    Template T_TFBot_Medic_QuickFix
+				Item "Festive Medigun 2011"
+				Item "Practitioner's Processing Mask"
+				Item "Titanium Tyrolean"
+                }
+            }
+        }
+        WaveSpawn
+        {
+            Name "wave05_c"
+            TotalCount 20
+            SpawnCount 1
+            MaxActive 4
+            WaitBeforeStarting 12
+            WaitForAllDead "wave05_b"
+            Where spawnbot
+            TotalCurrency 60
+
+            TFBot
+            {
+                Template	Soldier_shotgun_festivied
+            }
+        }
+        WaveSpawn
+        {
+            Name "wave05_d"
+            TotalCount 12
+            SpawnCount 2
+            MaxActive 4
+            WaitBetweenSpawns 16
+            WaitForAllSpawned "wave05_b"
+            Where spawnbot
+            TotalCurrency 60
+
+            TFBot
+            {
+                Template	Soldier_festivied
+		Skill Normal
+		Item "Exquisite Rack"
+            }
+        }
+    }
+}

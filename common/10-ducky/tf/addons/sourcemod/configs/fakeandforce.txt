@@ -1,0 +1,190 @@
+"FakeAndForce"
+{
+//  FAKE AND FORCE UNLIMITED CONFIG
+//
+//  Fill this with commands that you want your admins and/or donators to use.
+//  
+//  Following is an example command, demonstrating all possible "types" of commands.
+//  If this example is overwhelming, I apologize; it doesn't do a very good job of looking easy. But it looks much easier when you scroll down to the real config c:
+//  Each command should have all of the top keys in it (type, override, override_admin, and cooldown)
+//  along with ONE extra group of keys, depending on what you choose for type.
+//  Also, do NOT place // in front of your custom commands; this will comment them out (disable them).
+//
+//	"sm_fakeexample" // The name of the command.
+//	{
+//		"type"				"announce" // "Type" of fake/force event to perform.
+//									   // There's "announce" which announces item drops, achievements, etc., basic printy-to-chatty stuff;
+//									   // "command" to fake or force (yes, there's a difference, see below) a command;
+//									   // aaaand that's currently it. "event" type to be added Soon(tm).
+//		"override"			"faf_fake" // The override that donators need to use this command.
+//		"override_admin"	"faf_fake_admin" // The override that admins need to use this command on other players.
+//		"cooldown"			"30" // After using this command, donators must wait this long, in seconds, before using FaF again. Admins can always use commands that they have override_admin access to.
+//
+//
+//		// "ANNOUNCE" KEYS //
+//		"items"				"1" // How many "item" arguments the command will take. Normally, this should be 1.
+//								// Set this to more than 1, and you can specfiy more arguments than {ITEM1}, such as: {ITEM2}, {ITEM3}, {ITEM4}......you get the idea.
+//								// However, if you want to just use 1, you can leave this key out.
+//		"text"				"{PLAYER} has been chosen to demonstrate the example {ITEM1}!"
+//									   // Text to print to the chat. You can use {PLAYER} (the target's name),
+//									   // {ITEM1} (item names, e.g. /fakeexample sometarget Item Name),
+//									   // any More Colours colour (e.g. {RED}) or a hexidecimal colour (e.g. {FF4040}),
+//									   // {UNIQUE}, {VINTAGE}, {STRANGE}, {GENUINE}, {UNUSUAL}, {HAUNTED}, {VALVE}, {COMMUNITY}, or {COLLECTOR} for a quality colour.
+//		"quality"			"1" // If 1, item names will be coloured yellow (Unique colour). If an item name begins
+//								// with a quality word, e.g. "Strange ", "Unusual ", etc., it will be stripped from the item name,
+//								// and the appropriate quality colour will be applied instead.
+//		"case"				"1" // If 1, makes item names ALWAYS ALLCAPS. If 0, always lowercase. *Don't specify "case" to ignore capitalization.*
+//		"noteam"			"1" // DON'T apply team-colouring to {PLAYER}'s name.
+//		"particle"			"set_taunt_saharan_spy" // Particle effect to apply to the target.
+//		"particle_life"		"10.0" // How long the particle effect should last/stay parented to the player.
+//		"particle_offs"		"0.0 0.0 60.0" // Amount, in Hammer units, to offset the particle's position.
+//		"emit"				"vo/spy_sf12_goodmagic04.wav" // Sound to play from the target.
+//		"sound"				"vo/announcer_success.wav" // Sound to play to all players.
+//		"playgamesound"		"Announcer.TrKillTargetRandom" // Same as "sound" but uses the playgamesound console command instead of using EmitSoundToAll. Follows sound scripts.
+//
+//
+//		// "COMMAND" KEYS //
+//		"cmd"				"{PARAMS}" // The command to force. ...Yeah. You can put stuff before or after {PARAMS} to customize it a bit.
+//									  // Currently, the only other variable is {PLAYER} and {PLAYERUID}; to fake most SourceMod commands,
+//									  // you'll want to target them using their user id, for example "sm_noclip #{PLAYERUID}"
+//		"force"				"1" // Most commands should be faked (0, default), but for some, you'll need to enable force on the command (1).
+//								// 0 uses FakeClientCommand() -- the server *pretends* that the client used the command. For commands like say, taunt, SourceMod commands, etc.
+//								// 1 uses ClientCommand() and attempts to *force* it on the client. Most commands will be blocked and warn the client, but there are a few that work,
+//								// such as retry, play, and playgamesound. Type "findflags server_can_execute" into your client console for a list.
+//		
+//	
+//	
+//	
+//	
+//	
+//	
+//	
+//	
+//	
+	"sm_fakeach"
+	{
+		"type"				"announce"
+		"text"				"{PLAYER} has earned the achievement {OLIVE}{ITEM1}"
+		"override"			"faf_fake"
+		"override_admin"	"faf_fake_admin"
+		"cooldown"			"40"
+		"particle"			"achieved"
+		"particle_life"		"10.0"
+		"particle_offs"		"0.0 0.0 60.0"
+		"emit"				"misc/achievement_earned.wav"
+	}
+	"sm_fakebuy"
+	{
+		"type"				"announce"
+		"text"				"{PLAYER} has purchased: {ITEM1}"
+		"quality"			"1"
+		"override"			"faf_fake"
+		"override_admin"	"faf_fake_admin"
+		"cooldown"			"30"
+	}
+	"sm_fakecanteen"
+	{
+		"type"				"announce"
+		"text"				"{PLAYER} has used their {OLIVE}{ITEM1}{DEFAULT} Power Up Canteen!"
+		"case"				"1"
+		"override"			"faf_fake"
+		"override_admin"	"faf_fake_admin"
+		"cooldown"			"45"
+		"playgamesound"		"MVM.PlayerUsedPowerup"
+	}
+	"sm_fakecraft"
+	{
+		"type"				"announce"
+		"text"				"{PLAYER} has crafted: {ITEM1}"
+		"quality"			"1"
+		"override"			"faf_fake"
+		"override_admin"	"faf_fake_admin"
+		"cooldown"			"30"
+	}
+	"sm_fakeearn"
+	{
+		"type"				"announce"
+		"text"				"{PLAYER} has earned: {ITEM1}"
+		"quality"			"1"
+		"override"			"faf_fake"
+		"override_admin"	"faf_fake_admin"
+		"cooldown"			"30"
+	}
+	"sm_fakefind"
+	{
+		"type"				"announce"
+		"text"				"{PLAYER} has found: {ITEM1}"
+		"quality"			"1"
+		"override"			"faf_fake"
+		"override_admin"	"faf_fake_admin"
+		"cooldown"			"30"
+	}
+	"sm_fakereceive"
+	{
+		"type"				"announce"
+		"text"				"{PLAYER} has received a gift: {ITEM1}"
+		"quality"			"1"
+		"override"			"faf_fake"
+		"override_admin"	"faf_fake_admin"
+		"cooldown"			"30"
+	}
+	"sm_fakerenameitem"
+	{
+		"type"				"announce"
+		"items"				"2"
+		"text"				"{LIGHTGREEN}{PLAYER}{DEFAULT} has renamed their {UNIQUE}{ITEM1}{DEFAULT} to {UNIQUE}{ITEM2}{DEFAULT}"
+		"noteam"			"1"
+		"override"			"faf_fake"
+		"override_admin"	"faf_fake_admin"
+		"cooldown"			"30"
+	}
+	"sm_faketrade"
+	{
+		"type"				"announce"
+		"text"				"{PLAYER} has traded for: {ITEM1}"
+		"quality"			"1"
+		"override"			"faf_fake"
+		"override_admin"	"faf_fake_admin"
+		"cooldown"			"30"
+	}
+	"sm_fakeunbox"
+	{
+		"type"				"announce"
+		"text"				"{PLAYER} has unboxed: {ITEM1}"
+		"quality"			"1"
+		"override"			"faf_fake"
+		"override_admin"	"faf_fake_admin"
+		"cooldown"			"30"
+	}
+	"sm_fakecmd"
+	{
+		"type"				"command"
+		"cmd"				"{PARAMS}"
+		"override_admin"	"faf_force_admin"
+	}
+	"sm_forcecmd"
+	{
+		"type"				"command"
+		"cmd"				"{PARAMS}"
+		"force"				"1"
+		"override_admin"	"faf_force_admin"
+	}
+	"sm_fakesay"
+	{
+		"type"				"command"
+		"cmd"				"say {PARAMS}"
+		"override_admin"	"faf_force_admin"
+	}
+	"sm_fakesayteam"
+	{
+		"type"				"command"
+		"cmd"				"say_team {PARAMS}"
+		"override_admin"	"faf_force_admin"
+	}
+	"sm_forcetaunt"
+	{
+		"type"				"command"
+		"cmd"				"taunt"
+		"override_admin"	"faf_force_admin"
+	}
+}

@@ -1,0 +1,949 @@
+#base robots_code_custom.pop
+#base robots_chaos.pop
+#base robot_giant.pop
+#base robot_standard.pop
+
+WaveSchedule
+{
+	StartingCurrency 4000
+	RespawnWaveTime 15
+	CanBotsAttackWhileInSpawnRoom no
+	Advanced 1
+	EventPopfile Halloween
+	
+	Mission // Sentry Buster
+	{
+		Objective DestroySentries
+		
+		InitialCooldown 35
+		CooldownTime 40
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		Where spawnbot
+		TFBot
+		{
+			Template T_TFBot_SentryBuster
+		}
+	}
+	Mission // Sniper, 75% Damage bonus
+	{
+		Objective Sniper
+		
+		InitialCooldown 65
+		CooldownTime 60
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		Where spawnbot_mission_sniper
+		DesiredCount 2
+		TFBot
+		{
+			Class Sniper
+			Skill Expert
+			MaxVisionRange 2000
+			CharacterAttributes
+			{
+				"damage bonus" 1.75
+			}
+		}
+	}
+	Mission // Spy
+	{
+		Objective Spy
+		
+		InitialCooldown 80
+		CooldownTime 80
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		Where spawnbot_mission_spy
+		DesiredCount 6
+		TFBot
+		{
+			Class Spy
+			Skill Expert
+		}
+	}
+	
+	//Wave 666: 7000 Currency
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_666
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaitWhenDone 65
+		
+		WaveSpawn //Wave666a: The Gargantuar, 1 Total, 1 Active
+		{
+			Name subwave666chiefa
+			TotalCount 1
+			SpawnCount 1
+			WaitBeforeStarting 10
+			Where spawnbot
+			TotalCurrency 300
+			TFBot
+			{
+				Template T_TFBot_Chief_Heavy_Garg
+			}
+		}
+		WaveSpawn //Wave666b: Super Scouts, 30 Total, 10 Active
+		{
+			Name subwave666a
+			TotalCount 30
+			SpawnCount 10
+			MaxActive 10
+			WaitBeforeStarting 20
+			WaitBetweenSpawns 15
+			WaitForAllDead subwave666chiefa
+			Where spawnbot_giant
+			TotalCurrency 200
+			TFBot
+			{
+				Template T_TFBot_Giant_Scout_Fast
+			}
+		}
+		WaveSpawn //Wave666c: Bowmen, 60 Total, 12 Active
+		{
+			Name subwave666a
+			TotalCount 60
+			SpawnCount 6
+			MaxActive 12
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 7
+			WaitForAllDead subwave666chiefa
+			Where spawnbot
+			TotalCurrency 200
+			TFBot
+			{
+				Template T_TFBot_Sniper_Huntsman
+			}
+		}
+		WaveSpawn //Wave666d: Moonman Pyro MK II, 3 Total, 3 Active
+		{
+			Name subwave666b
+			TotalCount 3
+			SpawnCount 3
+			MaxActive 3
+			WaitBeforeStarting 0
+			WaitForAllDead subwave666a
+			Where spawnbot_giant
+			TotalCurrency 300
+			TFBot
+			{
+				Template T_TFBot_Chief_Pyro_Moonman_MKII
+			}
+		}
+		WaveSpawn //Wave666e: Pyros, 54 Total, 18 Active
+		{
+			Name subwave666b
+			TotalCount 54
+			SpawnCount 9
+			MaxActive 18
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 6
+			WaitForAllDead subwave666a
+			Where spawnbot
+			TotalCurrency 200
+			TFBot
+			{
+				Class Pyro
+				Skill Expert
+				Attributes "AlwaysFireWeapon"
+			}
+		}
+		WaveSpawn //Wave666f: Tank, 1 Total, 1 Active
+		{
+			Name subwave666b
+			TotalCount 1
+			SpawnCount 1
+			WaitBeforeStarting 45
+			WaitForAllDead subwave666a
+			TotalCurrency 200
+			FirstSpawnOutput
+			{
+				Target boss_spawn_relay
+				Action Trigger
+			}
+			Tank
+			{
+				Health 37500
+				Name "Tank"
+				Speed 75
+				StartingPathTrackNode boss_path_1
+				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn //Wave666g: Giant Heal-on-Kill Heavies, 12 Total, 8 Active
+		{
+			Name subwave666c
+			TotalCount 14
+			SpawnCount 2
+			MaxActive 8
+			WaitBeforeStarting 12
+			WaitBetweenSpawns 16
+			WaitForAllDead subwave666b
+			Where spawnbot_giant
+			TotalCurrency 200
+			TFBot
+			{
+				Template T_TFBot_Giant_Heavyweapons_HoK
+			}
+		}
+		WaveSpawn //Wave666h: Concheror Soldiers, 70 Total, 14 Active
+		{
+			Name subwave666c
+			TotalCount 70
+			SpawnCount 7
+			MaxActive 14
+			WaitBeforeStarting 8
+			WaitBetweenSpawns 8
+			WaitForAllDead subwave666b
+			Where spawnbot
+			TotalCurrency 200
+			TFBot
+			{
+				Template T_TFBot_Soldier_Extended_Concheror
+			}
+		}
+		WaveSpawn //Wave666i: Heavies, 72 Total, 12 Active
+		{
+			Name subwave666d
+			TotalCount 72
+			SpawnCount 6
+			MaxActive 12
+			WaitBeforeStarting 7
+			WaitBetweenSpawns 7
+			WaitForAllDead subwave666c
+			Where spawnbot
+			TotalCurrency 200
+			TFBot
+			{
+				Class Heavy
+				Skill Expert
+			}
+		}
+		WaveSpawn //Wave666j: Concheror Soldiers, 64 Total, 8 Active
+		{
+			Name subwave666d
+			TotalCount 64
+			SpawnCount 8
+			MaxActive 8
+			WaitBeforeStarting 14
+			WaitBetweenSpawns 9
+			WaitForAllDead subwave666c
+			Where spawnbot_giant
+			TotalCurrency 200
+			TFBot
+			{
+				Template T_TFBot_Soldier_Extended_Concheror
+				Attributes "AlwaysCrit"
+			}
+		}
+		WaveSpawn //Wave666k: Giant Burst Fire Soldiers, 8 Total, 2 Active
+		{
+			Name subwave666d
+			TotalCount 8
+			SpawnCount 1
+			MaxActive 2
+			WaitBeforeStarting 14
+			WaitBetweenSpawns 16
+			WaitForAllDead subwave666c
+			Where spawnbot
+			TotalCurrency 200
+			TFBot
+			{
+				Template T_TFBot_Giant_Soldier_Spammer_Reload
+			}
+		}
+		WaveSpawn //Wave666l: Tanks, 4 Total, 4 Active
+		{
+			Name subwave666e
+			TotalCount 4
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 30
+			WaitForAllDead subwave666d
+			TotalCurrency 800
+			Tank
+			{
+				Health 38000
+				Name "Tank"
+				Speed 75
+				StartingPathTrackNode boss_path_1
+				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn //Wave666m: Super Scouts, 16 Total, 16 Active
+		{
+			Name subwave666e
+			TotalCount 16
+			SpawnCount 8
+			WaitBeforeStarting 60
+			WaitBetweenSpawns 60
+			WaitForAllDead subwave666d
+			Where spawnbot_giant
+			TotalCurrency 200
+			TFBot
+			{
+				Template T_TFBot_Giant_Scout_Fast
+			}
+		}
+		WaveSpawn //Wave666n: The Giga Gargantuar, 1 Total, 1 Active
+		{
+			Name subwave666chiefb
+			TotalCount 1
+			SpawnCount 1
+			WaitBeforeStarting 61
+			WaitForAllDead subwave666e
+			Where spawnbot
+			TotalCurrency 300
+			TFBot
+			{
+				Template T_TFBot_Chief_Heavy_Giga_Garg
+			}
+		}
+		WaveSpawn //Wave666o: Hyper League Scouts, 108 Total, 18 Active
+		{
+			Name subwave666f
+			TotalCount 108
+			SpawnCount 9
+			MaxActive 18
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 6
+			WaitForAllDead subwave666chiefb
+			Where spawnbot
+			TotalCurrency 200
+			TFBot
+			{
+				Template T_TFBot_Scout_Sandman_FastCharge
+				Attributes "AlwaysCrit"
+			}
+		}
+		WaveSpawn //Wave666p: Giant Black Box Soldiers, 24 Total, 4 Active
+		{
+			Name subwave666f
+			TotalCount 24
+			SpawnCount 4
+			MaxActive 4
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 14
+			WaitForAllDead subwave666chiefb
+			Where spawnbot_giant
+			TotalCurrency 200
+			TFBot
+			{
+				Template T_TFBot_Giant_Soldier_RocketShotgun
+			}
+		}
+		WaveSpawn //Wave666q: CHAOS BOSS, 1 Total, 1 Active
+		{
+			Name subwave666chaos
+			TotalCount 1
+			SpawnCount 1
+			WaitBeforeStarting 61
+			WaitForAllDead subwave666f
+			Where spawnbot
+			TotalCurrency 300
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Chaos_Popshot
+				}
+				TFBot
+				{
+					Template T_TFBot_Chaos_Butchery
+				}
+				TFBot
+				{
+					Template T_TFBot_Chaos_Homerun
+				}
+				TFBot
+				{
+					Template T_TFBot_Chaos_Crash
+				}
+				TFBot
+				{
+					Template T_TFBot_Chaos_Sarge
+				}
+				TFBot
+				{
+					Template T_TFBot_Chaos_Blast
+				}
+				TFBot
+				{
+					Template T_TFBot_Chaos_Vacuum
+				}
+				TFBot
+				{
+					Template T_TFBot_Chaos_Clock
+				}
+				TFBot
+				{
+					Template T_TFBot_Chaos_Life
+				}
+				TFBot
+				{
+					Template T_TFBot_Chaos_Bust
+				}
+				TFBot
+				{
+					Template T_TFBot_Chaos_Knightly
+				}
+				TFBot
+				{
+					Template T_TFBot_Chaos_Boom
+				}
+				TFBot
+				{
+					Template T_TFBot_Chaos_Crackshot
+				}
+				TFBot
+				{
+					Template T_TFBot_Chaos_Heat
+				}
+				TFBot
+				{
+					Template T_TFBot_Chaos_Shred
+				}
+			}
+		}
+		WaveSpawn //Wave666r: Tanks, 5 total, 5 Active
+		{
+			Name subwave666g
+			TotalCount 5
+			SpawnCount 1
+			MaxActive 5
+			WaitBeforeStarting 3
+			WaitBetweenSpawns 40
+			WaitForAllDead subwave666chaos
+			TotalCurrency 1000
+			Tank
+			{
+				Health 40000
+				Name "Tank"
+				Speed 75
+				StartingPathTrackNode boss_path_1
+				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn //Wave666s: Giant Burst Fire Demos + Giant Medics, 10(5 Each), 10(5 Each) Active
+		{
+			Name subwave666g
+			TotalCount 10
+			SpawnCount 1
+			MaxActive 10
+			WaitBeforeStarting 3
+			WaitBetweenSpawns 30
+			WaitForALlDead subwave666chaos
+			Where spawnbot
+			TotalCurrency 200
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Demo_Burst
+					Attributes "AlwaysCrit"
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic
+				}
+			}
+		}
+		WaveSpawn //Wave666t: Burst Fire Demos, 50 Total, 10 Active
+		{
+			Name subwave666h
+			TotalCount 50
+			SpawnCount 5
+			MaxActive 10
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 8
+			WaitForAllDead subwave666g
+			Where spawnbot
+			TotalCurrency 200
+			TFBot
+			{
+				Template T_TFBot_Demo_Burst
+				Attributes "AlwaysCrit"
+			}
+		}
+		WaveSpawn //Wave666u: Demomen, 60 Total, 10 Active
+		{
+			Name subwave666h
+			TotalCount 60
+			SpawnCount 5
+			MaxActive 10
+			WaitBeforeStarting 2
+			WaitBetweenSpawns 7
+			WaitForAllDead subwave666g
+			Where spawnbot
+			TotalCurrency 200
+			TFBot
+			{
+				Class Demoman
+				Skill Expert
+				Attributes "AlwaysCrit"
+			}
+		}
+		WaveSpawn //Wave666v: Colonel Fleet, 1 Total, 1 Active
+		{
+			Name subwave666h
+			TotalCount 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitForAllDead subwave666g
+			Where spawnbot_giant
+			TotalCurrency 300
+			TFBot
+			{
+				Template T_TFBot_Chief_Demo_Burst
+			}
+		}
+		WaveSpawn //Wave666w: Moonman Pyros MKII, 3 Total, 3 Active
+		{
+			Name subwave666i
+			TotalCount 3
+			SpawnCount 3
+			WaitBeforeStarting 5
+			WaitForAllDead subwave666h
+			Where spawnbot_giant
+			TotalCurrency 200
+			TFBot
+			{
+				Template T_TFBot_Chief_Pyro_Moonman_MKII
+			}
+		}
+		WaveSpawn //Wave666x: Pyros, 108 Total, 18 Active
+		{
+			Name subwave666i
+			TotalCount 108
+			SpawnCount 9
+			MaxActive 18
+			WaitBeforeStarting 25
+			WaitBetweenSpawns 5
+			WaitForAllDead subwave666h
+			Where spawnbot
+			TotalCurrency 200
+			TFBot
+			{
+				Class Pyro
+				Skill Expert
+				Attributes "AlwaysFireWeapon"
+				Attributes "AlwaysCrit"
+			}
+		}
+		WaveSpawn //Wave666y: Chief Heal-on-Kill Heavy, 1 Total, 1 Active
+		{
+			Name subwave666i
+			TotalCount 1
+			SpawnCount 1
+			WaitBeforeStarting 60
+			WaitForAllDead subwave666h
+			Where spawnbot
+			TotalCurrency 300
+			TFBot
+			{
+				Template T_TFBot_Chief_Heavyweapons_HealOnKill
+				Name "Chief Heal-on-Kill Heavy"
+			}
+		}
+		WaveSpawn //Wave666finala: Pyros, Burst Fire Demos, Black Box Soldiers, Heavies + Uber Medics, 320(40 each pocket, 160 Medics) Total, 20(4 Each, 16 Medics) Active
+		{
+			Name final1
+			TotalCount 80
+			SpawnCount 1
+			MaxActive 6
+			WaitBeforeStarting 15
+			WaitBetweenSpawns 1
+			WaitForAllDead subwave666i
+			Where spawnbot_giant
+			Squad
+			{
+				TFBot
+				{
+					Class Pyro
+					Skill Expert
+					Attributes "AlwaysCrit"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Quickuber
+				}
+			}
+		}
+		WaveSpawn //Wave666finala:
+		{
+			Name final1
+			TotalCount 80
+			SpawnCount 1
+			MaxActive 4
+			WaitBeforeStarting 15
+			WaitBetweenSpawns 1
+			WaitForAllDead subwave666i
+			Where spawnbot_giant
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Demo_Burst
+					Attributes "AlwaysCrit"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Quickuber
+				}
+			}
+		}
+		WaveSpawn //Wave666finala:
+		{
+			Name final1
+			TotalCount 80
+			SpawnCount 1
+			MaxActive 4
+			WaitBeforeStarting 15
+			WaitBetweenSpawns 1
+			WaitForAllDead subwave666i
+			Where spawnbot_giant
+			Squad
+			{
+				TFBot
+				{
+					Class Heavyweapons
+					Skill Expert
+					Attributes "AlwaysCrit"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Quickuber
+				}
+			}
+		}
+		WaveSpawn //Wave666finala
+		{
+			Name final1
+			TotalCount 80
+			SpawnCount 1
+			MaxActive 4
+			WaitBeforeStarting 15
+			WaitBetweenSpawns 1
+			WaitForAllDead subwave666i
+			Where spawnbot_giant
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Soldier_RocketShotgun
+					Attributes "AlwaysCrit"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Quickuber
+				}
+			}
+		}
+		WaveSpawn //Wave666finalb: Tank, 1 Total, 1 Active
+		{
+			Name final1
+			TotalCount 1
+			SpawnCount 1
+			WaitBeforeStarting 1
+			WaitForAllDead subwave666i
+			Tank
+			{
+				Health 45000
+				Name "Tank"
+				Speed 75
+				StartingPathTrackNode boss_path_1
+				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn //Wave666finalc: Bowman, 70 Total, 10 Active
+		{
+			Name final2
+			TotalCount 70
+			SpawnCount 5
+			MaxActive 10
+			WaitBeforeStarting 15
+			WaitBetweenSpawns 6
+			WaitForAllDead final1
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Sniper_Huntsman
+				Attributes "AlwaysCrit"
+			}
+		}
+		WaveSpawn //Wave666finald: Super Scouts, 30 Total, 10 Active
+		{
+			Name final2
+			TotalCount 50
+			SpawnCount 10
+			MaxActive 10
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 20
+			WaitForAllDead final1
+			Where spawnbot_giant
+			TFBot
+			{
+				Template T_TFBot_Giant_Scout_Fast
+			}
+		}
+		WaveSpawn //Wave666finale: Tank, 1 Total, 1 Active
+		{
+			Name final2
+			TotalCount 1
+			SpawnCount 1
+			WaitBeforeStarting 3
+			WaitForAllDead final1
+			Tank
+			{
+				Health 50000
+				Name "Tank"
+				Speed 75
+				StartingPathTrackNode boss_path_1
+				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn //Wave666finalf: Giant Burst Fire Demos + Uber Medics, 6(5 Giants, 25 Medics), 6(1 Giant, 5 Medics) Active
+		{
+			Name final3
+			TotalCount 60
+			SpawnCount 1
+			MaxActive 6
+			WaitBeforeStarting 15
+			WaitBetweenSpawns 16
+			WaitForAllDead final2
+			Where spawnbot_giant
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Demo_Burst
+					Attributes "AlwaysCrit"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Quickuber
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Quickuber
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Quickuber
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Quickuber
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Quickuber
+				}
+			}
+		}
+		WaveSpawn //Wave666finalg: Giant Burst Fire Soldiers + Uber Medics, 6(5 Giants, 25 Medics), 6(1 Giant, 5 Medics) Active
+		{
+			Name final3
+			TotalCount 60
+			SpawnCount 1
+			MaxActive 6
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 12
+			WaitForAllDead final2
+			Where spawnbot_giant
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Spammer_Reload
+					Attributes "AlwaysCrit"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Quickuber
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Quickuber
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Quickuber
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Quickuber
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Quickuber
+				}
+			}
+		}
+		WaveSpawn //Wave666finalh: Giant-Heal-On-Kill Heavies + Giant Medics, 10(5 Each) Total, 2(1 Each) Active
+		{
+			Name final3
+			TotalCount 10
+			SpawnCount 1
+			MaxActive 2
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 20
+			WaitForAllDead final2
+			Where spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons_HoK
+					Attributes "AlwaysCrit"
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic
+				}
+			}
+		}
+		WaveSpawn //Wave666finali: Tank, 1 Total, 1 Active
+		{
+			Name final3
+			TotalCount 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitForAllDead final2
+			Tank
+			{
+				Health 55000
+				Name "Tank"
+				Speed 75
+				StartingPathTrackNode boss_path_1
+				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn //WAve666FINALBOSS: Sergeant Code, 1 Total, 1 Active
+		{
+			Name final4
+			TotalCount 1
+			SpawnCount 1
+			WaitBeforeStarting 61
+			WaitForAllDead final3
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Chief_Heavy_Code
+			}
+		}
+		WaveSpawn //Wave666FINALBOSS: Tank, 1 Total, 1 Active
+		{
+			Name final4
+			TotalCount 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitForAllDead final3
+			Tank
+			{
+				Health 60000
+				Name "Tank"
+				Speed 75
+				StartingPathTrackNode boss_path_1
+				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn //Wave666FINALBOSS: Tank, 1 Total, 1 Active
+		{
+			Name final4
+			TotalCount 1
+			SpawnCount 1
+			WaitBeforeStarting 90
+			WaitForAllDead final3
+			Tank
+			{
+				Health 60000
+				Name "FINAL TANK"
+				Speed 75
+				StartingPathTrackNode boss_path_1
+				Skin 1
+				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+	}
+}

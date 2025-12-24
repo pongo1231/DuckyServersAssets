@@ -1,0 +1,487 @@
+//Downtown Reverse by Skin King
+// Difficulty (?)
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_standard_red.pop
+#base robot_giant_red.pop
+#base robot_gatebot.pop
+
+WaveSchedule
+{
+	StartingCurrency				800
+	CanBotsAttackWhileInSpawnRoom 	yes
+	WaveStartCountdown              5
+	RespawnWaveTimeBlue 			1
+	FixedRespawnWaveTimeBlue 		1
+	AddSentryBusterWhenDamageDealtExceeds 0
+
+	RobotLimit 26 					 
+	ForceHoliday 2 					 
+	NoHolidayPickups 1				 
+	MaxTotalPlayers 6 				 
+	DisplayRobotDeathNotice 0 			 
+	NoReanimators 1					 
+	NoMvMDeathTune 1 
+	TextPrintTime 0				 
+	SniperAllowHeadshots 1				 
+	SentryBusterFriendlyFire 0 			 
+	StandableHeads 1 				 
+
+	//For reverse only
+	ReverseWinConditions 1 				 
+	BluHumanFlagCapture 0
+	BluHumanFlagPickup 1 					 
+	BluHumanInfiniteAmmo 1 					 
+	FlagCarrierMovementPenalty 0.5		 
+	AllowJoinTeamBlueMax 6 				 
+	AllowJoinTeamBlue 1 				 
+	HumansMustJoinTeam blue 			 
+	BluPlayersAreRobots 1
+	
+	PrecacheModel "models/props_tumb/mvm/tank_shield.mdl" 
+	PrecacheModel "models/bots/sniper_boss/bot_sniper_boss.mdl"
+	PrecacheModel "models/bots/demo/red_sentry_buster.mdl"		 
+	PrecacheModel "models/props_mvm/mvm_upgrade_blu.mdl"	 
+	PrecacheModel "models/props_mvm/robot_spawnpoint.mdl"
+	PrecacheModel "models/props_mvm/no_entry.mdl"
+	PrecacheModel "models/bots/boss_bot/boss_tankred.mdl"
+	PrecacheModel "models/bots/boss_bot/boss_tankred_damage1.mdl"
+	PrecacheModel "models/bots/boss_bot/boss_tankred_damage2.mdl"
+	PrecacheModel "models/bots/boss_bot/boss_tankred_damage3.mdl"	
+	PrecacheModel "models/bots/boss_bot/boss_tankred_part1_destruction.mdl"
+	PrecacheModel "models\bots\boss_bot\boss_blimpred.mdl"	//This is the older blimp model using it because why not.
+	PrecacheModel "models\bots\boss_bot\boss_blimpred_damage1.mdl"	
+	PrecacheModel "models\bots\boss_bot\boss_blimpred_damage2.mdl"	
+	PrecacheModel "models\bots\boss_bot\boss_blimpred_damage3.mdl"	 
+	PrecacheModel "models/bots/boss_bot/boss_blimp.mdl"		 
+	PrecacheModel "models/bots/boss_bot/boss_blimp_damage1.mdl"	 
+	PrecacheModel "models/bots/boss_bot/boss_blimp_damage2.mdl"	 
+	PrecacheModel "models/bots/boss_bot/boss_blimp_damage3.mdl"
+        PrecacheModel "models/bots/boss_bot/boss_blimp_damage_explode.mdl"
+	PrecacheModel "models/bots/boss_bot/boss_blimp_explode.mdl"
+	OverrideSounds   
+	{
+		"MVM.GiantCommonExplodes"	"ambient/explosions/explode_3.wav"
+		"MVM.BombWarning"			"combine_bank_alarm.mp3"	 
+	}							   
+	DisableSound "Announcer.MVM_Spy_Alert" 						   
+	DisableSound "Announcer.mvm_spybot_death"					   
+	DisableSound "Announcer.mvm_spybot_death_all"				   
+	DisableSound "Announcer.MVM_First_Wave_Start"				   
+	DisableSound "Announcer.MVM_Wave_Start"						   
+	DisableSound "Announcer.MVM_Wave_End"						   
+	DisableSound "Announcer.MVM_Wave_Lose"						   
+	DisableSound "Announcer.MVM_Final_Wave_Start"				   
+	DisableSound "Announcer.MVM_Final_Wave_End"					   
+	DisableSound "Announcer.MVM_Robots_Planted"					   
+	DisableSound "Announcer.MVM_All_Dead"						   
+	DisableSound "Announcer.MVM_Bomb_Alert_Entered"				   
+	DisableSound "Announcer.MVM_Bomb_Alert_Near_Hatch"			   
+	DisableSound "Announcer.MVM_Bomb_Alert_Deploying"			   
+	DisableSound "Announcer.MVM_Sentry_Buster_Alert"			   
+	DisableSound "Announcer.MVM_Sentry_Buster_Alert_Another"	   
+	DisableSound "Announcer.MVM_General_Wave_Start"				   
+	DisableSound "Announcer.MVM_Game_Over_Loss"					   
+	DisableSound "Announcer.MVM_Tank_Planted"					   
+	DisableSound "Announcer.MVM_Tank_Alert_Spawn"					
+	DisableSound "Announcer.MVM_Tank_Alert_Another"				   
+	DisableSound "Announcer.MVM_Tank_Alert_Multiple"	 		   		 
+	DisableSound "Announcer.MVM_Tank_Alert_Halfway"	 			   			 
+	DisableSound "Announcer.MVM_Tank_Alert_Halfway_Multiple" 	   	 
+	DisableSound "Announcer.MVM_Tank_Alert_Near_Hatch" 			   		 
+	DisableSound "Announcer.MVM_Tank_Alert_Deploying"
+	
+	PlayerAttributes
+    {
+        Engineer
+        {
+			"maxammo metal increased" 5
+			"metal regen" 500
+			"Health" 275
+		}
+		
+		Spy
+        {
+			"cannot pick up intelligence" 1
+		}
+		
+		Scout
+		{
+			"is miniboss" 1
+			"max health additive bonus" 1475
+		}	
+		
+		Heavyweapons
+		{
+			"is miniboss" 1
+			"max health additive bonus" 4700
+		}
+	}
+
+	SpawnTemplate "main"
+	PointTemplates   
+	{
+		main
+		{
+			NoFixup 1
+			logic_relay
+			{
+				"onspawn" "spawnbot_support,kill,,0,-1"
+				"onspawn" "spawnbot_elevator,kill,,0,-1"
+				"onspawn" "spawnbot_upper,kill,,0,-1"
+				"onspawn" "spawntele,kill,,0.1,-1"
+				"onspawn" "wave_start_relay,addoutput,ontrigger spawnbarrier:disable::0:-1,0.1,-1"
+				"onspawn" "wave_finished_relay,addoutput,ontrigger spawnbarrier:enable::0:-1,0.1,-1"
+			}
+			trigger_teleport
+			{
+				"mins" "-9999 -9999 -9999"
+				"maxs" "9999 9999 9999"
+				"targetname" "spawntele"
+				"spawnflags" "1"
+				"target" "spawnteleto"
+			}
+			info_teleport_destination
+			{
+				"origin" "3900 508 29"
+				"angles" "0 270 0"
+				"targetname" "spawnteleto"
+			}
+			info_player_teamspawn
+			{
+				"origin" "2239 -31 -119"
+				"angles" "0 90 0"
+				"targetname" "spawnbot_support2"
+				"teamnum" "2"
+			}
+			info_player_teamspawn
+			{
+				"origin" "2100 -473 -198"
+				"angles" "0 270 0"
+				"targetname" "spawnbot_elevator2"
+				"teamnum" "2"
+			}
+			info_player_teamspawn
+			{
+				"origin" "3190 -773 -86"
+				"angles" "0 180 0"
+				"targetname" "spawnbot_upper2"
+				"teamnum" "2"
+			}
+			func_forcefield
+			{
+				"origin" "3261 -224 -8"
+				"mins" "-49 -350 -120"
+				"maxs" "49 350 120"
+				"targetname" "spawnbarrier"
+				"teamnum" "2"
+			}
+			prop_dynamic
+			{
+				"origin" "3320 -224 -32"
+				"targetname" "spawnbarrier"
+				"model" "models/props_mvm/no_entry.mdl"
+				"disableshadows" "1"
+			}
+
+			prop_dynamic
+			{
+				"origin" "4088 -416 -128"
+				"angles" "0 180 0"
+				"model" "models/props_mvm/mvm_upgrade_blu.mdl"
+				"disableshadows" "1"
+			}
+			func_upgradestation
+			{
+				"origin" "4040 -416 -48"
+				"mins" "-48 -152 -80"
+				"maxs" "48 152 80"
+			}
+			func_forcefield
+			{
+				"origin" "4072 -416 -48"
+				"mins" "-48 -152 -80"
+				"maxs" "48 152 80"
+				"teamnum" "2"
+			}
+
+			prop_dynamic
+			{
+				"origin" "-1320 768 0"
+				"targetname" "barrier1"
+				"model" "models/props_mvm/no_entry.mdl"
+				"disableshadows" "1"
+			}
+			prop_dynamic
+			{
+				"origin" "-808 1028 0"
+				"angles" "0 270 0"
+				"targetname" "barrier1"
+				"model" "models/props_mvm/no_entry.mdl"
+				"disableshadows" "1"
+			}
+			prop_dynamic
+			{
+				"origin" "-1320 -500 -40"
+				"targetname" "barrier1"
+				"modelscale" "0.75"
+				"model" "models/props_mvm/no_entry.mdl"
+				"disableshadows" "1"
+			}
+			prop_dynamic
+			{
+				"origin" "-1320 -1312 0"
+				"targetname" "barrier1"
+				"model" "models/props_mvm/no_entry.mdl"
+				"disableshadows" "1"
+			}
+			prop_dynamic
+			{
+				"origin" "-1320 -2048 0"
+				"targetname" "barrier1"
+				"model" "models/props_mvm/no_entry.mdl"
+				"disableshadows" "1"
+			}
+			prop_dynamic
+			{
+				"origin" "-1320 174 156"
+				"targetname" "barrier1"
+				"modelscale" "0.75"
+				"model" "models/props_mvm/no_entry.mdl"
+				"disableshadows" "1"
+			}
+			func_forcefield
+			{
+				"origin" "-1372 -374 702"
+				"mins" "-52 -2137 -830"
+				"maxs" "52 2137 830"
+				"targetname" "barrier1"
+				"teamnum" "2"
+			}
+			func_forcefield
+			{
+				"origin" "-820 1074 702"
+				"mins" "-192 -46 -830"
+				"maxs" "192 46 830"
+				"targetname" "barrier1"
+				"teamnum" "2"
+			}
+		}
+		upgradetemplate
+		{  
+			func_upgradestation
+			{
+				"mins" "3956.315917 -1008.968750 -68.902702"
+				"maxs" "3983.908935 -742.968750 -14.218750"
+			}
+		
+		}
+		
+		playercap
+		{
+			NoFixup 1
+			math_remap
+			{
+				"in1" "0"
+				"in2" "5"
+				"out1" "0"
+				"out2" "5"
+				"spawnflags" "3"
+				"targetname" "cap_remap"
+				"OutValue" "capturearea_case,InValue,,0,-1"
+				"origin" "-5840 -556.63 288"
+			}
+		}
+	}
+	
+	ItemAttributes
+	{
+		ItemName	"The Short Circuit"
+		"provide on active" 1
+		"metal_pickup_decreased" 1
+		"single wep deploy time increased" 3
+		"single wep holster time increased" 3
+		"fire rate penalty" 3
+	}	
+	
+	ClassLimit //Limiting these to 1 cause these are giant
+    {
+        Scout 1
+        Heavyweapons 1
+    }
+	
+	//copied giant stuff from gettysburg because i couldnt be bothered to type this all out//
+	//Besides Natascha and Brass beast//
+	
+	//Heavy
+	
+	ItemAttributes //Giant Natascha Heavy
+    {
+        ItemName "Natascha"
+        "damage bonus" 1.5
+        "mod minigun can holster while spinning" 1
+        "special item description" "Giant Heavy mimic. Can be holstered while firing."
+    }
+	
+	ItemAttributes //Giant Brass Heavy
+    {
+        ItemName "Natascha"
+        "damage bonus" 1.7
+        "mod minigun can holster while spinning" 1
+        "special item description" "Giant Heavy mimic. Can be holstered while firing."
+    }
+	
+    ItemAttributes //Giant Tomislav
+    {
+        ItemName "Tomislav"
+        "weapon spread bonus" 0.5
+        "damage bonus" 1.2
+        "projectile penetration heavy" 1
+        "special item description" "50% more accurate, 20% more damage, +1 penetration."
+    }
+
+    ItemAttributes //Giant Heater
+    {
+        ItemName "The Huo Long Heatmaker"
+        "damage penalty" 1
+        "damage bonus vs burning" 1.6
+        "ring of fire while aiming" 50
+        "special item description" "Large damage bonus vs. burning. Increased Ring of Fire damage."
+    }
+
+    ItemAttributes //Giant Heavy Minigun
+    {
+        ClassName "TF_WEAPON_MINIGUN"
+        "damage bonus" 1.5
+        "mod minigun can holster while spinning" 1
+        "special item description" "Giant Heavy mimic. Can be holstered while firing."
+    }
+
+    ItemAttributes //Giant Heavy Shotgun
+    {
+        ItemName "TF_WEAPON_SHOTGUN_HWG"
+        "provide on active" 1
+        "move speed bonus" 1.2
+        "fire rate penalty" 2.5
+        "bullets per shot bonus" 10
+        "damage penalty" 0.5
+        "reload time increased hidden" 0.05
+        "mod no reload display only" 1
+        "crit on hard hit" 1
+        "special item description" "Giant Shotgun Heavy mimic."
+    }
+
+    ItemAttributes //Giant Heavy Shotgun
+    {
+        ItemName "The Family Business"
+        "provide on active" 1
+        "move speed bonus" 1.2
+        "fire rate penalty" 2.5
+        "bullets per shot bonus" 10
+        "damage penalty" 0.5
+        "reload time increased hidden" 0.05
+        "mod no reload display only" 1
+        "crit on hard hit" 1
+        "special item description" "Giant Shotgun Heavy mimic."
+    }
+
+    ItemAttributes //GRU with higher max hp drain
+    {
+        ItemName "Gloves of Running Urgently"
+        "provide on active" 1
+        "mod_maxhealth_drain_rate" 50
+        "move speed bonus" 1.4
+    }
+
+    ItemAttributes //GRU with higher max hp drain
+    {
+        ItemName "Festive Gloves of Running Urgently"
+        "provide on active" 1
+        "mod_maxhealth_drain_rate" 50
+        "move speed bonus" 1.4
+    }
+	
+	//scout//
+	ItemAttributes //Force-a-Nature Super Scout
+    {
+        ItemName "The Force-a-Nature"
+        "fire rate bonus" 0.5
+        "reload time increased" 1.7
+        "scattergun knockback mult" 6
+        "weapon spread bonus" 0.4
+        "move speed bonus" 1.1
+        "bullets per shot bonus" 2
+        "damage penalty" 0.6
+        "special item description" "Giant Force-a-Nature Scout mimic."
+    }
+
+    ItemAttributes //Giant Jumping Sandman
+    {
+        ItemName "The Sandman"
+        "provide on active" 1
+        "max health additive penalty" 0
+        "effect bar recharge rate increased" 0.2
+        "increased jump height" 2
+        "cancel falling damage" 1
+        "head scale" 1.5
+        "special item description" "Giant Jumping Sandman mimic."
+    }
+	
+	
+    ItemAttributes //Super Scout
+    {
+        ItemName "The Holy Mackerel"
+        //"provide on active" 1
+        "max health additive penalty" -400
+        "move speed bonus" 1.3
+        //"no double jump" 1
+        //"no_duck" 1
+        //"override footstep sound set" 7
+        "special item description" "Super Scout speed bonus and health penalty."
+    }
+
+    ItemAttributes //Super Scout
+    {
+        ItemName "Festive Holy Mackerel"
+        //"provide on active" 1
+        "max health additive penalty" -400
+        "move speed bonus" 1.3
+        //"no double jump" 1
+        //"no_duck" 1
+        //"override footstep sound set" 7
+        "special item description" "Super Scout speed bonus and health penalty."
+    }
+	
+	ItemAttributes //Super Scout
+    {
+        ItemName "Unarmed Combat"
+        //"provide on active" 1
+        "max health additive penalty" -400
+        "move speed bonus" 1.3
+        //"no double jump" 1
+        //"no_duck" 1
+        //"override footstep sound set" 7
+        "special item description" "Super Scout speed bonus and health penalty."
+    }
+	
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 1
+			WaitBeforeStarting 9999
+			TFBot { Class Scout ClassIcon hellmet_blank }
+		}
+	}
+}	

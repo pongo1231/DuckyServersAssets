@@ -1,0 +1,8 @@
+/common/00-base/
+/run/
+/overrides/
+/updater/
+secrets/
+__pycache__
+*.cache
+*.old

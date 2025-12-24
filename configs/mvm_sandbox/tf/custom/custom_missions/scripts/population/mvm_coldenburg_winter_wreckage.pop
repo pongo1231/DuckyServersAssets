@@ -1,0 +1,537 @@
+#base Waffle's_Custom.pop
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_click_giant.pop
+#base robot_click.pop
+
+Waveschedule
+{
+    Startingcurrency 1750
+    Canbotsattackwhileinspawnroom no
+    respawnwavetime 0
+
+    Mission
+    {
+        Objective DestroySentries
+        Where spawnbot
+        Cooldowntime 30
+        Beginatwave 1
+        Runforthismanywaves 3
+        Tfbot
+        {
+            Template T_TFBot_SentryBuster
+        }
+    }
+    Wave
+    {
+        StartWaveOutput
+		{
+			Target	wave_start_relay_ironman
+			Action	Trigger
+		}
+        DoneOutput
+        {
+            Target wave_finished_relay
+            Action Trigger
+        }  
+        Wavespawn
+        {
+            Name "h"
+            Where spawnbot
+            Totalcount 25
+            Spawncount 5
+            Maxactive 7
+            WaitBetweenSpawns 5
+            Totalcurrency 100
+            Tfbot
+            {
+                Template Waffle_Soldier_Direct
+                Skill Normal
+            }
+        }
+        Wavespawn
+        {
+            Name "a"
+            Where flankers
+            Totalcount 12
+            Spawncount 3
+            Maxactive 4
+            WaitBetweenSpawns 5
+            Totalcurrency 50
+            Tfbot
+            {
+                Template Waffle_Pyro_Powerjack
+                Skill Expert
+            }
+        }
+        Wavespawn
+        {
+            Name "y"
+            Randomspawn 1
+            Where spawnbot
+            Where flankers
+            Totalcount 30
+            Spawncount 7
+            Maxactive 10
+            WaitBetweenSpawns 5
+            Totalcurrency 75
+            Tfbot
+            {
+                Template Waffle_Demo_1001
+                Skill Hard
+            }
+        }
+        Wavespawn
+        {
+            Name "s"
+            Where spawnbot
+            Totalcount 9
+            Spawncount 1
+            Maxactive 3
+            Waitforalldead "y"
+            WaitBetweenSpawns 3
+            Totalcurrency 100
+            Tfbot
+            {
+                Template T_TFBot_Giant_Soldier
+                Skill Hard
+            }
+        }
+        Wavespawn
+        {
+            Support Limited
+            Name "o"
+            Randomspawn 1
+            Where spawnbot
+            Where flankers
+            Totalcount 90
+            Spawncount 1
+            WaitBetweenSpawns 1
+            Waitforalldead "y"
+            Totalcurrency 90
+            Tfbot
+            {
+                Template Waffle_Scout_Fast_Small
+                Skill Expert
+            }
+        }
+        Wavespawn
+        {
+            Support Limited
+            Randomspawn 1
+            Where spawnbot
+            Where flankers
+            Totalcount 100
+            Spawncount 1
+            MaxActive 5
+            WaitBetweenSpawns 8
+            Waitforallspawned "o"
+            Totalcurrency 50
+            Tfbot
+            {
+                Template Waffle_Scout_Fast_Small
+                Skill Expert
+            }
+        }
+        Wavespawn
+        {
+            Name "q"
+            Where spawnbot
+            Totalcount 60
+            Spawncount 3
+            MaxActive 6
+            WaitBetweenSpawns 5
+            Waitforalldead "h"
+            Waitforalldead "a"
+            Waitforalldead "y"
+            Totalcurrency 100
+            Squad
+            {
+                Tfbot
+                {
+                    Template Waffle's_Soldier_Burst
+                    Skill Normal
+                }
+                Tfbot
+                {
+                    Template Waffle's_Soldier_Burst
+                    Skill Normal
+                }
+                Tfbot
+                {
+                    Template Waffle's_Soldier_Burst
+                    Skill Normal
+                }
+            }
+        }
+        Wavespawn
+        {
+            Name "p"
+            Where flankers
+            Totalcount 40
+            Spawncount 2
+            Maxactive 6
+            WaitBetweenSpawns 4
+            Waitforalldead "s"
+            Totalcurrency 75
+            Squad
+            {
+                Tfbot
+                {
+                    Template T_TFBot_Sniper_Huntsman_Spammer
+                    Skill Hard
+                    Classicon Sniper_bow_multi
+                }
+                Tfbot
+                {
+                    Template T_TFBot_Pyro
+                    Skill Hard
+                    Attributes AlwaysFireWeapon
+                }
+            }
+        }
+        Wavespawn
+        {
+            Name "i"
+            Where spawnbot
+            Totalcount 8
+            Spawncount 4
+            Maxactive 4
+            WaitBetweenSpawns 20
+            Waitforalldead "o"
+            Waitforalldead "s"
+            Totalcurrency 75
+            Squad
+            {
+                Tfbot
+                {
+                    Template T_TFBot_Giant_Heavyweapons
+                    Skill Normal
+                }
+                Tfbot
+                {
+                    Template T_TFBot_Soldier_Extended_Concheror
+                    Skill Hard
+                    Classicon banner_conch_backup
+                }
+                Tfbot
+                {
+                    Template T_TFBot_Soldier_Extended_Concheror
+                    Skill Hard
+                    Classicon banner_conch_backup
+                }
+                Tfbot
+                {
+                    Template T_TFBot_Soldier_Extended_Battalion
+                    Skill Hard
+                    Classicon banner_conch_backup
+                }
+            }
+        }
+        Wavespawn
+        {
+            Name "l"
+            Where spawnbot
+            Totalcount 8
+            Spawncount 4
+            Maxactive 4
+            WaitBetweenSpawns 20
+            Waitforalldead "o"
+            Waitforalldead "s"
+            waitforalldead "i"
+            Totalcurrency 50
+            Squad
+            {
+                Tfbot
+                {
+                    Template T_TFBot_Giant_Heavyweapons
+                    Skill Normal
+                }
+                Tfbot
+                {
+                    Template T_TFBot_Soldier_Extended_Concheror
+                    Skill Hard
+                    Classicon banner_conch_backup
+                }
+                Tfbot
+                {
+                    Template T_TFBot_Soldier_Extended_Concheror
+                    Skill Hard
+                    Classicon banner_conch_backup
+                }
+                Tfbot
+                {
+                    Template T_TFBot_Soldier_Extended_Battalion
+                    Skill Hard
+                    Classicon banner_conch_backup
+                }
+            }
+        }
+        Wavespawn
+        {
+            Name "g"
+            Where spawnbot
+            Totalcount 60
+            Spawncount 3
+            Maxactive 6
+            WaitBetweenSpawns 4
+            Waitforalldead "s"
+            Waitforalldead "p"
+            waitforalldead "i"
+            Totalcurrency 50
+            Squad
+            {
+                Tfbot
+                {
+                    Template T_TFBot_Soldier_Extended_Concheror
+                    Skill Hard
+                    Classicon banner_conch_backup
+                }
+                Tfbot
+                {
+                    Template Waffle_Demo_Scatter
+                    Skill Normal
+                }
+                Tfbot
+                {
+                    Template Waffle_Demo_Scatter
+                    Skill Normal
+                }
+            }
+        }
+        Wavespawn
+        {
+            Name "j"
+            Where flankers
+            Totalcount 8
+            Spawncount 1
+            Maxactive 2
+            WaitBetweenSpawns 15
+            Waitforallspawned "q"
+            Waitforalldead "p"
+            Waitforalldead "i"
+            Totalcurrency 50
+            Tfbot
+            {
+                Template T_TFBot_Giant_Scout_Fast
+                Classicon Scout_giant_fast
+                Skill Expert
+            }
+        }
+        Wavespawn
+        {
+            Name "k"
+            Where spawnbot
+            Totalcount 10
+            Spawncount 5
+            Maxactive 5
+            WaitBetweenSpawns 20
+            Waitforalldead "l"
+            Totalcurrency 60
+            Squad
+            {
+                Tfbot
+                {
+                    Template T_TFBot_Giant_Soldier_Spammer
+                    Skill Hard
+                    Classicon soldier_giant
+                }
+                Tfbot
+                {
+                    Template Waffle's_Giant_Shield_Medic
+                    Skill Expert
+                }
+                Tfbot
+                {
+                    Template T_TFBot_Soldier_Extended_Battalion
+                    Skill Normal
+                    Classicon banner_conch_backup
+                }
+                Tfbot
+                {
+                    Template T_TFBot_Soldier_Extended_Battalion
+                    Skill Normal
+                    Classicon banner_conch_backup
+                }
+                Tfbot
+                {
+                    Template T_TFBot_Soldier_Extended_Battalion
+                    Skill Normal
+                    Classicon banner_conch_backup
+                }
+            }
+        }
+        Wavespawn
+        {
+            Support Limited
+            Name "m"
+            Randomspawn 1
+            Where spawnbot
+            Where flankers
+            Totalcount 75
+            Spawncount 3
+            MaxActive 3
+            WaitBetweenSpawns 6
+            Waitforallspawned "j"
+            Totalcurrency 50
+            Tfbot
+            {
+                Template T_TFBot_Scout_Bonk
+                Name "Bonk Scout"
+                Skill Expert            
+                ItemAttributes
+                {
+                    Itemname "Bonk! Atomic Punch"
+                    "effect bar recharge rate increased" .65
+                }
+            }
+        }
+        Wavespawn
+        {
+            Name "f"
+            Where spawnbot
+            Totalcount 9
+            Spawncount 3
+            MaxActive 6
+            WaitBetweenSpawns 15
+            Waitforalldead "m"
+            Waitforalldead "k"
+            Waitforalldead "g"
+            Totalcurrency 50
+            Squad
+            {
+                Tfbot
+                {
+                    Template Waffle_Giant_Heavy_Booster
+                    Skill Normal
+                }
+                Tfbot
+                {
+                    Template T_TFBot_Soldier_Extended_Battalion
+                    Classicon banner_conch_backup
+                    Skill Hard
+                }
+                Tfbot
+                {
+                    Template T_TFBot_Soldier_Extended_Battalion
+                    Classicon banner_conch_backup
+                    Skill Hard
+                }
+            }
+        }
+        Wavespawn
+        {
+            Name "d"
+            Where flankers
+            Totalcount 9
+            Spawncount 3
+            MaxActive 6
+            WaitBetweenSpawns 15
+            Waitforalldead "m"
+            Waitforalldead "k"
+            Waitforalldead "g"
+            Totalcurrency 50
+            Squad
+            {
+                Tfbot
+                {
+                    Template T_TFBot_Giant_Pyro_Dragon_Easy
+                    Skill Hard
+                }
+                Tfbot
+                {
+                    Template T_TFBot_Soldier_Extended_Concheror
+                    Classicon banner_conch_backup
+                    Skill Hard
+                }
+                Tfbot
+                {
+                    Template T_TFBot_Soldier_Extended_Concheror
+                    Classicon banner_conch_backup
+                    Skill Hard
+                }
+            }
+        }
+        Wavespawn
+        {
+            Name "t"
+            Where spawnbot
+            Totalcount 5
+            Spawncount 1
+            MaxActive 2
+            WaitBetweenSpawns 15
+            Waitbeforestarting 8
+            Waitforallspawned "f"
+            Waitforallspawned "d"
+            Totalcurrency 50
+            Tfbot
+            {
+                Template Waffle_Giant_Demo_Scatter
+                Classicon DEmo_scatter
+                Skill Hard
+                Attributes AlwaysCrit
+            }
+        }
+        Wavespawn
+        {
+            Name "c"
+            Randomspawn 1
+            Where spawnbot
+            Where flankers
+            Totalcount 25
+            Spawncount 1
+            MaxActive 5
+            WaitBetweenSpawns 5
+            Waitbeforestarting 8
+            Waitforallspawned "f"
+            Waitforallspawned "d"
+            Totalcurrency 25
+            Tfbot
+            {
+                Template Waffle_Pyro_Powerjack
+                Skill Expert
+            }
+        }
+        Wavespawn
+        {
+            Name "w"
+            Where flankers
+            Totalcount 5
+            Spawncount 1
+            MaxActive 2
+            WaitBetweenSpawns 15
+            Waitbeforestarting 8
+            Waitforallspawned "f"
+            Waitforallspawned "d"
+            Totalcurrency 50
+            Tfbot
+            {
+                Template Waffle_Giant_Soldier_Scatter
+                Skill Hard
+                Attributes Alwayscrit
+            }
+        }
+        Wavespawn
+        {
+            Support 1
+            Name "u"
+            Randomspawn 1
+            Where spawnbot
+            Where flankers
+            Totalcount 80
+            Spawncount 4
+            MaxActive 8
+            WaitBetweenSpawns 10
+            Waitforalldead "m"
+            Waitforalldead "k"
+            Waitforalldead "g"
+            Totalcurrency 50
+            Tfbot
+            {
+                Template T_TFBot_Medic_Blinking
+                Classicon medic_battery
+                Skill Expert
+            }
+        }
+    }
+}

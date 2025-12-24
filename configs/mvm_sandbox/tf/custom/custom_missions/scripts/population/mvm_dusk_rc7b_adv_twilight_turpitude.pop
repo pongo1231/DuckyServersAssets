@@ -1,0 +1,182 @@
+// Twilight Turpitude - adv mission for Dusk by Perper
+
+#base robot_standard.pop
+#base robot_giant.pop
+
+WaveSchedule
+{
+
+	StartingCurrency		600
+	RespawnWaveTime 		2
+	CanBotsAttackWhileInSpawnRoom no
+    
+	Templates
+	{
+	    T_TFBot_Scout_Pistol
+		{
+		    Class Scout
+			Name "Pistol Scout"
+			ClassIcon scout_pistol_nys
+			Skill Normal
+			Item "tf_weapon_pistol_scout"
+			WeaponRestrictions SecondaryOnly
+		}	
+		
+		T_TFBot_Pyrom
+		{
+		    Class Pyro
+			Name "Pyro"
+			Skill Hard
+			Health 525
+			Scale 1.4
+			Item "The Flamethrower"
+			CLassIcon pyro_armored
+			CharacterAttributes
+			{
+			    "airblast disabled" 1
+				"head scale" 0.8
+				"move speed bonus" 0.8
+			}
+		}
+		
+	}
+	
+
+	Mission // sentry buster
+	{
+		Objective DestroySentries
+
+		InitialCooldown 20
+		Where spawnbot
+		BeginAtWave 1
+		RunForThisManyWaves 5
+	
+		CooldownTime 30            
+
+            TFBot
+			{
+		        Template T_TFBot_SentryBuster
+            }
+	}
+  
+  
+	Wave // Wave 1
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		
+		
+		WaveSpawn
+		{
+			Name 1A
+			Where spawnbot
+			TotalCount 14
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 4
+			TotalCurrency 100
+			
+				TFBot
+				{
+				    Template T_TFBot_Scout_Pistol
+				}
+			
+		}
+		
+	WaveSpawn
+		{
+			Name 1B
+			Where spawnbot_right
+			TotalCount 14
+			MaxActive 2
+			SpawnCount 2
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			TotalCurrency 100
+			
+			     TFBot
+			    {
+			        Template T_TFBot_Pyro_Flaregun
+		        }
+				
+			
+		}
+		
+		WaveSpawn
+		{
+			Name 1C
+			Where spawnbot_left
+			TotalCount 12
+			MaxActive 4
+			SpawnCount 2
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 10
+			TotalCurrency 120
+			Squad
+			{
+				TFBot
+				{
+				    Template T_TFBot_Pyrom
+				}
+
+				TFBot
+				{
+				    Template T_TFBot_Medic_QuickFix
+				}
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name 1D
+			WaitForAllDead 1C
+			Where spawnbot_left
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 20
+			TotalCurrency 100
+			
+				TFBot
+				{
+				  Template T_TFBot_Giant_Pyro
+					CharacterAttributes
+			        {
+			          "airblast disabled" 1
+				    }
+				}
+			
+		}
+		
+		WaveSpawn
+		{
+			Name 1D
+			WaitForAllDead 1D
+			Where spawnbot
+			TotalCount 14
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 6
+			TotalCurrency 100
+			
+				TFBot
+				{
+				   Class Heavyweapons
+				   Skill Easy
+				}
+			
+		}
+		
+	}
+}

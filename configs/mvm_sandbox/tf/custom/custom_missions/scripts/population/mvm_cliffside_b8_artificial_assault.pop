@@ -1,0 +1,1240 @@
+// Made using JMP's custom mission generator.
+#base robot_giant.pop
+#base robot_jmp.pop
+#base robot_pda.pop
+#base robot_standard.pop
+WaveSchedule
+{
+	StartingCurrency 2000
+	RespawnWaveTime 6
+	CanBotsAttackWhileInSpawnRoom yes
+ 	Mission
+	{
+		Objective DestroySentries
+		InitialCooldown 15
+		CooldownTime 38
+		BeginAtWave 1
+		RunForThisManyWaves 999
+		Where spawnbot_giant
+ 		TFBot
+		{
+			Template T_TFBot_SentryBuster
+ 		}
+	}
+ 	Wave
+	{
+ 		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+ 		}
+ 		DoneOutput
+		{
+			Target wave_finished_relay
+			Action Trigger
+ 		}
+ 		WaveSpawn
+		{
+			TotalCurrency 200
+			TotalCount 100
+			MaxActive 20
+			SpawnCount 2
+			WaitBetweenSpawns 2
+			WaitBeforeStarting 4
+			Where spawnbot_flank_left
+			Name w1_0
+ 			TFBot
+			{
+				Template T_TFBot_Heavyweapons_Heavyweight_Champ_Fast
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 70
+			TotalCount 30
+			MaxActive 6
+			SpawnCount 2
+			WaitBetweenSpawns 2
+			WaitBeforeStarting 4
+			Where spawnbot
+			WaitForAllDead w1_0
+			Name w1_1
+ 			TFBot
+			{
+				Template T_TFBot_Soldier_InstantBanner
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 60
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 3
+			Where spawnbot_giant
+			WaitForAllDead w1_0
+			Name w1_1
+ 			TFBot
+			{
+				Template T_TFBot_Giant_Scout_Bonk
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 70
+			TotalCount 35
+			MaxActive 7
+			SpawnCount 5
+			WaitBetweenSpawns 5
+			WaitBeforeStarting 3
+			Where spawnbot_flank_left
+			WaitForAllDead w1_0
+			Name w1_1
+ 			TFBot
+			{
+				Template T_TFBot_Pyro_Dragon
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 70
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 4
+			Where spawnbot_giant
+			WaitForAllDead w1_1
+			Name w1_2
+ 			TFBot
+			{
+				Template T_TFBot_Giant_Pyro_Pusher
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 60
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 5
+			Where spawnbot_flank_left
+			WaitForAllDead w1_1
+			Name w1_2
+ 			TFBot
+			{
+				Template T_TFBot_Giant_Demo_RapidFire
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 70
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 4
+			WaitBeforeStarting 3
+			Where spawnbot_flank_right
+			WaitForAllDead w1_1
+			Name w1_2
+ 			TFBot
+			{
+				Item "the shahanshah"
+				Attributes MiniBoss
+				Class sniper
+				ClassIcon random_lite_giant
+				Skill hard
+				Health 3000
+				WeaponRestrictions MeleeOnly
+				Name "Level 2 Giant Sniper"
+ 				CharacterAttributes
+				{
+					"override footstep sound set" 3
+					"move speed bonus" 0.5
+					"damage force reduction" 0.25
+					"airblast vulnerability multiplier" 0.25
+ 				}
+			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 100
+			TotalCount 70
+			MaxActive 10
+			SpawnCount 2
+			WaitBetweenSpawns 2
+			WaitBeforeStarting 4
+			Where spawnbot_flank_left
+			WaitForAllDead w1_2
+			Name w1_3
+ 			TFBot
+			{
+				Template T_TFBot_Scout_FAN
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 100
+			TotalCount 7
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 4
+			WaitBeforeStarting 5
+			Where spawnbot_flank_left
+			WaitForAllDead w1_2
+			Name w1_3
+ 			TFBot
+			{
+				Template T_TFBot_Giant_Scout
+ 			}
+		}
+	}
+ 	Wave
+	{
+ 		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+ 		}
+ 		DoneOutput
+		{
+			Target wave_finished_relay
+			Action Trigger
+ 		}
+ 		WaveSpawn
+		{
+			TotalCurrency 120
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 3
+			Where spawnbot_flank_right
+			Name w2_0
+ 			TFBot
+			{
+				Template T_TFBot_Giant_Pyro_Flare_Spammer
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 110
+			TotalCount 30
+			MaxActive 6
+			SpawnCount 2
+			WaitBetweenSpawns 1
+			WaitBeforeStarting 2
+			Where spawnbot_flank_left
+			Name w2_0
+ 			Squad
+			{
+ 				TFBot
+				{
+					Template T_TFBot_Heavyweapons_Shotgun
+ 				}
+ 				TFBot
+				{
+					Template T_TFBot_Medic_Crossbow
+ 				}
+			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 120
+			TotalCount 35
+			MaxActive 7
+			SpawnCount 2
+			WaitBetweenSpawns 2
+			WaitBeforeStarting 5
+			Where spawnbot_flank_left
+			Name w2_0
+ 			TFBot
+			{
+				Template T_TFBot_Scout_Sandman_FastCharge
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 100
+			TotalCount 30
+			MaxActive 6
+			SpawnCount 1
+			WaitBetweenSpawns 1
+			WaitBeforeStarting 5
+			Where spawnbot
+			WaitForAllDead w2_0
+			Name w2_1
+ 			TFBot
+			{
+				Template T_TFBot_Soldier_Buff_Banner
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 100
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 3
+			Where spawnbot_giant
+			WaitForAllDead w2_0
+			Name w2_1
+ 			TFBot
+			{
+				Template T_TFBot_Giant_Scout
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 100
+			TotalCount 35
+			MaxActive 7
+			SpawnCount 2
+			WaitBetweenSpawns 2
+			WaitBeforeStarting 2
+			Where spawnbot_flank_left
+			WaitForAllDead w2_0
+			Name w2_1
+ 			TFBot
+			{
+				Template T_TFBot_Scout_Shortstop
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 120
+			TotalCount 42
+			MaxActive 6
+			SpawnCount 2
+			WaitBetweenSpawns 2
+			WaitBeforeStarting 3
+			Where spawnbot_flank_right
+			WaitForAllDead w2_1
+			Name w2_2
+ 			TFBot
+			{
+				Template T_TFBot_Soldier_BBox
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 110
+			TotalCount 7
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 5
+			Where spawnbot_flank_left
+			WaitForAllDead w2_1
+			Name w2_2
+ 			TFBot
+			{
+				Template T_TFBot_Giant_Scout_Bonk
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 120
+			TotalCount 7
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawns 4
+			WaitBeforeStarting 3
+			Where spawnbot_flank_left
+			WaitForAllDead w2_1
+			Name w2_2
+ 			TFBot
+			{
+				Template T_TFBot_Giant_DemoMan_PrinceTavish
+ 			}
+		}
+	}
+ 	Wave
+	{
+ 		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+ 		}
+ 		DoneOutput
+		{
+			Target wave_finished_relay
+			Action Trigger
+ 		}
+ 		WaveSpawn
+		{
+			TotalCurrency 100
+			TotalCount 50
+			MaxActive 10
+			SpawnCount 2
+			WaitBetweenSpawns 1
+			WaitBeforeStarting 2
+			Where spawnbot_flank_right
+			Name w3_0
+ 			Squad
+			{
+ 				TFBot
+				{
+					Template T_TFBot_Soldier_Charged
+ 				}
+ 				TFBot
+				{
+					Template T_TFBot_Medic_SuperHeal
+ 				}
+			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 100
+			TotalCount 50
+			MaxActive 10
+			SpawnCount 1
+			WaitBetweenSpawns 1
+			WaitBeforeStarting 3
+			Where spawnbot_flank_right
+			Name w3_0
+ 			TFBot
+			{
+				Template T_TFBot_Heavyweapons_Heavyweight_Champ_Fast
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 120
+			TotalCount 40
+			MaxActive 10
+			SpawnCount 1
+			WaitBetweenSpawns 1
+			WaitBeforeStarting 5
+			Where spawnbot_flank_right
+			WaitForAllDead w3_0
+			Name w3_1
+ 			TFBot
+			{
+				Template T_TFBot_Pyro_Fury
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 130
+			TotalCount 40
+			MaxActive 10
+			SpawnCount 9
+			WaitBetweenSpawns 9
+			WaitBeforeStarting 4
+			Where spawnbot_flank_right
+			WaitForAllDead w3_0
+			Name w3_1
+ 			TFBot
+			{
+				Template T_TFBot_Heavy_Champion
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 70
+			TotalCount 3
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 1
+			Where spawnbot_giant
+			WaitForAllDead w3_1
+			Name w3_2
+ 			TFBot
+			{
+				Template T_TFBot_Giant_Scout_RapidFire
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 60
+			TotalCount 6
+			MaxActive 2
+			SpawnCount 2
+			WaitBetweenSpawns 12
+			WaitBeforeStarting 5
+			Where spawnbot_giant
+			WaitForAllDead w3_1
+			Name w3_2
+ 			Squad
+			{
+ 				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Spammer
+ 				}
+ 				TFBot
+				{
+					Template T_TFBot_Giant_Medic_Regen
+ 				}
+			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 70
+			TotalCount 3
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 4
+			WaitBeforeStarting 5
+			Where spawnbot_flank_left
+			WaitForAllDead w3_1
+			Name w3_2
+ 			TFBot
+			{
+				Template T_TFBot_Giant_Scout_FAN
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 250
+			TotalCount 10
+			MaxActive 4
+			SpawnCount 2
+			WaitBetweenSpawns 8
+			WaitBeforeStarting 3
+			Where spawnbot_giant
+			WaitForAllDead w3_2
+			Name w3_3
+ 			TFBot
+			{
+				Template T_TFBot_Heavyweapons_Heater
+ 			}
+		}
+	}
+ 	Wave
+	{
+ 		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+ 		}
+ 		DoneOutput
+		{
+			Target wave_finished_relay
+			Action Trigger
+ 		}
+ 		WaveSpawn
+		{
+			TotalCurrency 140
+			TotalCount 12
+			MaxActive 4
+			SpawnCount 2
+			WaitBetweenSpawns 1
+			WaitBeforeStarting 1
+			Where spawnbot_flank_left
+			Name w4_0
+ 			Squad
+			{
+ 				TFBot
+				{
+					Template T_TFBot_Pyro_Dragon_Rapid
+ 				}
+ 				TFBot
+				{
+					Item "the quick-fix"
+					Attributes SpawnWithFullCharge
+					Class medic
+					ClassIcon random_lite
+					Skill hard
+					Health 150
+					WeaponRestrictions SecondaryOnly
+					Name "Level 3 Medic"
+ 					ItemAttributes
+					{
+						ItemName "the quick-fix"
+						"heal rate bonus" 3.5
+						"ubercharge rate bonus" 1.75
+ 					}
+				}
+			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 140
+			TotalCount 15
+			MaxActive 5
+			SpawnCount 2
+			WaitBetweenSpawns 2
+			WaitBeforeStarting 2
+			Where spawnbot_flank_left
+			Name w4_0
+ 			RandomChoice
+			{
+ 				TFBot
+				{
+					Template T_TFBot_Soldier_RocketShotgun
+ 				}
+ 				TFBot
+				{
+					Template T_TFBot_Soldier_RocketPush
+ 				}
+			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 130
+			TotalCount 15
+			MaxActive 5
+			SpawnCount 2
+			WaitBetweenSpawns 2
+			WaitBeforeStarting 4
+			Where spawnbot_flank_left
+			Name w4_0
+ 			TFBot
+			{
+				Template T_TFBot_Soldier_ManglerBison
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 140
+			TotalCount 3
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawns 4
+			WaitBeforeStarting 5
+			Where spawnbot_giant
+			Name w4_0
+ 			TFBot
+			{
+				Template T_TFBot_Giant_Demoman
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 270
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawns 1
+			WaitBeforeStarting 2
+			WaitForAllSpawned w4_0
+			Name w4_1
+ 			Tank
+			{
+				Name tankboss
+				Health 28000
+				Speed 75
+				StartingPathTrackNode "boss_path_wbomb"
+ 				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+ 				}
+ 				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+ 				}
+			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 280
+			TotalCount 40
+			MaxActive 10
+			SpawnCount 1
+			WaitBetweenSpawns 1
+			WaitBeforeStarting 5
+			Where spawnbot_flank_left
+			WaitForAllDead w4_0
+			Name w4_1
+ 			TFBot
+			{
+				Template T_TFBot_Scout_Sandman_FastCharge
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 150
+			TotalCount 6
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 3
+			Where spawnbot_flank_right
+			WaitForAllDead w4_1
+			Name w4_2
+ 			TFBot
+			{
+				Template T_TFBot_Giant_Scout
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 150
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawns 1
+			WaitBeforeStarting 5
+			WaitForAllSpawned w4_1
+			Name w4_2
+ 			Tank
+			{
+				Name tankboss
+				Health 28000
+				Speed 75
+				StartingPathTrackNode "boss_path_wbomb"
+ 				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+ 				}
+ 				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+ 				}
+			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 150
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawns 1
+			WaitBeforeStarting 2
+			WaitForAllSpawned w4_1
+			Name w4_2
+ 			Tank
+			{
+				Name tankboss
+				Health 28000
+				Speed 75
+				StartingPathTrackNode "boss_path_abomb"
+ 				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+ 				}
+ 				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+ 				}
+			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 150
+			TotalCount 30
+			MaxActive 5
+			SpawnCount 2
+			WaitBetweenSpawns 2
+			WaitBeforeStarting 4
+			Where spawnbot_flank_right
+			WaitForAllDead w4_1
+			Name w4_2
+ 			TFBot
+			{
+				Template T_TFBot_Heavyweapons_Fist
+ 			}
+		}
+	}
+ 	Wave
+	{
+ 		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+ 		}
+ 		DoneOutput
+		{
+			Target wave_finished_relay
+			Action Trigger
+ 		}
+ 		WaveSpawn
+		{
+			TotalCurrency 220
+			TotalCount 4
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 4
+			Where spawnbot_giant
+			Name w5_0
+ 			TFBot
+			{
+				Item "the liberty launcher"
+				Attributes MiniBoss
+				Attributes HoldFireUntilFullReload
+				Attributes SpawnWithFullCharge
+				Class soldier
+				ClassIcon random_lite_giant
+				Skill expert
+				Health 4200
+				WeaponRestrictions PrimaryOnly
+				Name "Level 20 Giant Soldier"
+ 				ItemAttributes
+				{
+					ItemName "the liberty launcher"
+					"damage bonus" 3.75
+					"fire rate bonus" 0.6
+					"clip size bonus" 2.0
+ 				}
+ 				CharacterAttributes
+				{
+					"override footstep sound set" 3
+					"move speed bonus" 0.5
+					"damage force reduction" 0.25
+					"airblast vulnerability multiplier" 0.25
+ 				}
+			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 230
+			TotalCount 40
+			MaxActive 10
+			SpawnCount 1
+			WaitBetweenSpawns 1
+			WaitBeforeStarting 1
+			Where spawnbot
+			Name w5_0
+ 			RandomChoice
+			{
+ 				TFBot
+				{
+					Item "tf_weapon_grenadelauncher"
+					Attributes HoldFireUntilFullReload
+					Class demoman
+					ClassIcon random_lite
+					Skill hard
+					Health 175
+					WeaponRestrictions PrimaryOnly
+					Name "Level 1 Demoman"
+ 				}
+			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 170
+			TotalCount 60
+			MaxActive 6
+			SpawnCount 2
+			WaitBetweenSpawns 2
+			WaitBeforeStarting 4
+			Where spawnbot_flank_left
+			WaitForAllDead w5_0
+			Name w5_1
+ 			TFBot
+			{
+				Item "tf_weapon_flamethrower"
+				Class pyro
+				ClassIcon random_lite
+				Skill hard
+				Health 175
+				WeaponRestrictions PrimaryOnly
+				Name "Level 3 Pyro"
+ 				ItemAttributes
+				{
+					ItemName "tf_weapon_flamethrower"
+					"damage bonus" 1.0
+ 				}
+			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 160
+			TotalCount 10
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 5
+			Where spawnbot_flank_left
+			WaitForAllDead w5_0
+			Name w5_1
+ 			TFBot
+			{
+				Item "tf_weapon_rocketlauncher"
+				Attributes MiniBoss
+				Attributes HoldFireUntilFullReload
+				Attributes SpawnWithFullCharge
+				Class soldier
+				ClassIcon random_lite_giant
+				Skill expert
+				Health 4200
+				WeaponRestrictions PrimaryOnly
+				Name "Level 4 Giant Soldier"
+ 				ItemAttributes
+				{
+					ItemName "tf_weapon_rocketlauncher"
+					"fire rate bonus" 0.2
+					"damage bonus" 2.0
+ 				}
+ 				CharacterAttributes
+				{
+					"override footstep sound set" 3
+					"move speed bonus" 0.5
+					"damage force reduction" 0.25
+					"airblast vulnerability multiplier" 0.25
+ 				}
+			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 170
+			TotalCount 70
+			MaxActive 7
+			SpawnCount 4
+			WaitBetweenSpawns 4
+			WaitBeforeStarting 3
+			Where spawnbot_flank_left
+			WaitForAllDead w5_0
+			Name w5_1
+ 			TFBot
+			{
+				Item "tf_weapon_grenadelauncher"
+				Attributes HoldFireUntilFullReload
+				Class demoman
+				ClassIcon random_lite
+				Skill normal
+				Health 175
+				WeaponRestrictions PrimaryOnly
+				Name "Level 4 Demoman"
+ 				ItemAttributes
+				{
+					ItemName "tf_weapon_grenadelauncher"
+					"clip size bonus" 2.0
+ 				}
+			}
+		}
+	}
+ 	Wave
+	{
+ 		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+ 		}
+ 		DoneOutput
+		{
+			Target wave_finished_relay
+			Action Trigger
+ 		}
+ 		WaveSpawn
+		{
+			TotalCurrency 150
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawns 1
+			WaitBeforeStarting 4
+			Where spawnbot_giant
+			Name w6_0
+ 			TFBot
+            {
+                Item "the original"
+                Attributes UseBossHealthBar
+                Attributes MiniBoss
+                Attributes AlwaysCrit
+                Attributes HoldFireUntilFullReload
+                Attributes SpawnWithFullCharge
+                Class soldier
+                ClassIcon random_lite_giant
+                Skill expert
+                Health 44000
+                WeaponRestrictions PrimaryOnly
+                Scale 1.9
+                Name "Level 12 Boss Soldier"
+                ItemAttributes
+                {
+                    ItemName "the original"
+                    "fire rate bonus" 0.1
+                    "faster reload rate" 0.5
+                    "clip size bonus" 1.5
+                    "Blast radius increased" 1.4
+                    "Projectile speed increased" 2.0
+                }
+                CharacterAttributes
+                {
+                    "override footstep sound set" 3
+                    "move speed bonus" 0.5
+                    "damage force reduction" 0.1
+                    "airblast vulnerability multiplier" 0.05
+                }
+            }
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 150
+			TotalCount 50
+			MaxActive 10
+			SpawnCount 2
+			WaitBetweenSpawns 2
+			WaitBeforeStarting 1
+			Where spawnbot
+			Name w6_0
+ 			TFBot
+			{
+				Template T_TFBot_Demoknight_Persian
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 70
+			TotalCount 4
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 5
+			Where spawnbot_giant
+			WaitForAllDead w6_0
+			Name w6_1
+ 			RandomChoice
+			{
+ 				TFBot
+				{
+					Template T_TFBot_Giant_Pyro_FlareGun_Spammer
+ 				}
+			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 80
+			TotalCount 20
+			MaxActive 5
+			SpawnCount 1
+			WaitBetweenSpawns 1
+			WaitBeforeStarting 5
+			Where spawnbot_flank_right
+			WaitForAllDead w6_0
+			Name w6_1
+ 			TFBot
+			{
+				Template T_TFBot_Demoman_Knight
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 70
+			TotalCount 12
+			MaxActive 6
+			SpawnCount 3
+			WaitBetweenSpawns 18
+			WaitBeforeStarting 5
+			Where spawnbot_giant
+			WaitForAllDead w6_0
+			Name w6_1
+ 			TFBot
+			{
+				Template T_TFBot_Giant_Scout_Fast
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 80
+			TotalCount 4
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawns 4
+			WaitBeforeStarting 5
+			Where spawnbot_flank_right
+			WaitForAllDead w6_0
+			Name w6_1
+ 			TFBot
+			{
+				Template T_TFBot_Giant_Soldier_RocketRain
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 100
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawns 1
+			WaitBeforeStarting 5
+			WaitForAllSpawned w6_1
+			Name w6_2
+ 			Tank
+			{
+				Name tankboss
+				Health 44000
+				Speed 75
+				StartingPathTrackNode "boss_path_wbomb"
+ 				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+ 				}
+ 				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+ 				}
+			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 100
+			TotalCount 49
+			MaxActive 7
+			SpawnCount 2
+			WaitBetweenSpawns 2
+			WaitBeforeStarting 5
+			Where spawnbot
+			WaitForAllDead w6_1
+			Name w6_2
+ 			TFBot
+			{
+				Template T_TFBot_Demoknight_Caber_Crazy
+ 			}
+		}
+ 		WaveSpawn
+		{
+			TotalCurrency 100
+			TotalCount 49
+			MaxActive 7
+			SpawnCount 6
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 1
+			Where spawnbot
+			WaitForAllDead w6_1
+			Name w6_2
+ 			TFBot
+			{
+				Template T_TFBot_Soldier_Tau_Cannon
+ 			}
+		}
+	}
+ 	Templates
+	{
+ 		T_TFBot_Level_2_Giant_Sniper_0
+		{
+			Item "the shahanshah"
+			Attributes MiniBoss
+			Class sniper
+			ClassIcon random_lite_giant
+			Skill hard
+			Health 3000
+			WeaponRestrictions MeleeOnly
+			Name "Level 2 Giant Sniper"
+ 			CharacterAttributes
+			{
+				"override footstep sound set" 3
+				"move speed bonus" 0.5
+				"damage force reduction" 0.25
+				"airblast vulnerability multiplier" 0.25
+ 			}
+		}
+ 		T_TFBot_Level_3_Medic_1
+		{
+			Item "the quick-fix"
+			Attributes SpawnWithFullCharge
+			Class medic
+			ClassIcon random_lite
+			Skill hard
+			Health 150
+			WeaponRestrictions SecondaryOnly
+			Name "Level 3 Medic"
+ 			ItemAttributes
+			{
+				ItemName "the quick-fix"
+				"heal rate bonus" 3.5
+				"ubercharge rate bonus" 1.75
+ 			}
+		}
+ 		T_TFBot_Level_20_Giant_Soldier_2
+		{
+			Item "the liberty launcher"
+			Attributes MiniBoss
+			Attributes HoldFireUntilFullReload
+			Attributes SpawnWithFullCharge
+			Class soldier
+			ClassIcon random_lite_giant
+			Skill expert
+			Health 4200
+			WeaponRestrictions PrimaryOnly
+			Name "Level 20 Giant Soldier"
+ 			ItemAttributes
+			{
+				ItemName "the liberty launcher"
+				"damage bonus" 3.75
+				"fire rate bonus" 0.6
+				"clip size bonus" 2.0
+ 			}
+ 			CharacterAttributes
+			{
+				"override footstep sound set" 3
+				"move speed bonus" 0.5
+				"damage force reduction" 0.25
+				"airblast vulnerability multiplier" 0.25
+ 			}
+		}
+ 		T_TFBot_Level_1_Demoman_3
+		{
+			Item "tf_weapon_grenadelauncher"
+			Attributes HoldFireUntilFullReload
+			Class demoman
+			ClassIcon random_lite
+			Skill hard
+			Health 175
+			WeaponRestrictions PrimaryOnly
+			Name "Level 1 Demoman"
+ 		}
+ 		T_TFBot_Level_3_Pyro_4
+		{
+			Item "tf_weapon_flamethrower"
+			Class pyro
+			ClassIcon random_lite
+			Skill hard
+			Health 175
+			WeaponRestrictions PrimaryOnly
+			Name "Level 3 Pyro"
+ 			ItemAttributes
+			{
+				ItemName "tf_weapon_flamethrower"
+				"damage bonus" 1.0
+ 			}
+		}
+ 		T_TFBot_Level_4_Giant_Soldier_5
+		{
+			Item "tf_weapon_rocketlauncher"
+			Attributes MiniBoss
+			Attributes HoldFireUntilFullReload
+			Attributes SpawnWithFullCharge
+			Class soldier
+			ClassIcon random_lite_giant
+			Skill expert
+			Health 4200
+			WeaponRestrictions PrimaryOnly
+			Name "Level 4 Giant Soldier"
+ 			ItemAttributes
+			{
+				ItemName "tf_weapon_rocketlauncher"
+				"fire rate bonus" 0.2
+				"damage bonus" 2.0
+ 			}
+ 			CharacterAttributes
+			{
+				"override footstep sound set" 3
+				"move speed bonus" 0.5
+				"damage force reduction" 0.25
+				"airblast vulnerability multiplier" 0.25
+ 			}
+		}
+ 		T_TFBot_Level_4_Demoman_6
+		{
+			Item "tf_weapon_grenadelauncher"
+			Attributes HoldFireUntilFullReload
+			Class demoman
+			ClassIcon random_lite
+			Skill normal
+			Health 175
+			WeaponRestrictions PrimaryOnly
+			Name "Level 4 Demoman"
+ 			ItemAttributes
+			{
+				ItemName "tf_weapon_grenadelauncher"
+				"clip size bonus" 2.0
+ 			}
+		}
+	}
+}

@@ -1,0 +1,261 @@
+#base robots_chaos.pop
+WaveSchedule
+{
+	StartingCurrency 10000
+	RespawnWaveTime 15
+	CanBotsAttackWhileInSpawnRoom No
+	Advanced 1
+	
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			Name popshot
+			TotalCount 1
+			SpawnCount 1
+			WaitBeforeStarting 8
+			TotalCurrency 500
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Chaos_Popshot
+			}
+		}
+		WaveSpawn
+		{
+			Name butchery
+			WaitForAllDead popshot
+			WaitBeforeStarting 7
+			TotalCount 1
+			SpawnCount 1
+			TotalCurrency 500
+			Where spawnbot			
+			TFBot
+			{
+				Template T_TFBot_Chaos_Butchery
+			}
+		}
+		WaveSpawn
+		{
+			Name homerun
+			WaitForAllDead butchery
+			WaitBeforeStarting 7
+			TotalCount 1
+			SpawnCount 1
+			TotalCurrency 500
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Chaos_Homerun
+			}
+		}
+		WaveSpawn
+		{
+			Name crasher
+			WaitForAllDead homerun
+			WaitBeforeStarting 7
+			TotalCount 1
+			SpawnCount 1
+			TotalCurrency 500
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Chaos_Crash
+			}
+		}
+		WaveSpawn
+		{
+			Name sarge
+			WaitForAllDead crasher
+			WaitBeforeStarting 7
+			TotalCount 1
+			SpawnCount 1
+			TotalCurrency 500
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Chaos_Instruct
+			}
+		}
+		WaveSpawn
+		{
+			Name buster
+			WaitForAllDead sarge
+			WaitBeforeStarting 7
+			TotalCount 1
+			SpawnCount 1
+			TotalCurrency 500
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Chaos_Blast
+			}
+		}
+		WaveSpawn
+		{
+			Name vacuum
+			WaitForallDead buster
+			WaitBeforeStarting 7
+			TotalCount 1
+			SpawnCount 1
+			TotalCurrency 500
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Chaos_Vacuum
+			}
+		}
+		WaveSpawn
+		{
+			Name clock
+			WaitForAllDead vacuum
+			WaitBeforeStarting 7
+			TotalCount 1
+			SpawnCount 1
+			TotalCurrency 1000
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Chaos_Clock
+			}
+		}
+		WaveSpawn
+		{
+			Name leech
+			WaitForAllDead clock
+			WaitBeforeStarting 7
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			TotalCurrency 500
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Chaos_Scorch
+			}
+		}
+		WaveSpawn
+		{
+			Name bust
+			WaitForAllDead leech
+			WaitBeforeStarting 7
+			TotalCount 1
+			SpawnCount 1
+			TotalCurrency 500
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Chaos_Bust
+			}
+		}
+		WaveSpawn
+		{
+			Name knightly
+			WaitForAllDead bust
+			WaitBeforeStarting 7
+			TotalCount 1
+			SpawnCount 1
+			TotalCurrency 500
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Chaos_Knightley
+			}
+		}
+		WaveSpawn
+		{
+			Name boom
+			WaitForAllDead knightly
+			WaitBeforeStarting 7
+			TotalCount 1
+			SpawnCount 1
+			TotalCurrency 500
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Chaos_Boom
+			}
+		}
+		WaveSpawn
+		{
+			Name crackshot
+			WaitForAllDead boom
+			WaitBeforeStarting 7
+			TotalCount 1
+			SpawnCount 1
+			TotalCurrency 500
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Chaos_Crackshot
+			}
+		}
+		WaveSpawn
+		{
+			Name heat
+			WaitForAllDead crackshot
+			WaitBeforeStarting 7
+			TotalCount 1
+			SpawnCount 1
+			TotalCurrency 500
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Chaos_Heat
+			}
+		}
+		WaveSpawn
+		{
+			Name shred
+			WaitForAllDead heat
+			WaitBeforestarting 7
+			TotalCount 1
+			SpawnCount 1
+			TotalCurrency 500
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Chaos_Compact
+			}
+		}
+	}
+	Wave // Wave 2: GENERAL ILLUSION
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		Checkpoint Yes
+		
+		WaveSpawn // GENERAL ILLUSION
+		{
+			Name general
+			TotalCount 1
+			SpawnCount 1
+			WaitBeforeStarting 10
+			WaitForAllDead rev
+			Where spawnbot
+			TotalCurrency 1000
+			TFBot
+			{
+				Template T_TFBot_Chief_Pyro_InvasionC
+			}
+		}
+	}
+}

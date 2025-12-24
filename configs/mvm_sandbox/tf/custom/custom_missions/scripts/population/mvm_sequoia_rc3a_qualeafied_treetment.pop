@@ -1,0 +1,1340 @@
+//Wonder's Note: PLEASE DON'T FUCKING READ THIS POPFILE, JUST PLAY THE FUCKING THING
+
+
+
+//is made by nuke
+//fucking memer he is
+//plez don't steal
+//i don like wen pepel steal my shitty missions
+//why would you even do that, it's meme and shit
+
+//[AMvM]The One Of Wonders: madman
+//Sntr: the names on the mission already are bordering on shitpost-levels
+// are they just bordering or already are though? kek 
+
+#base robot_standard.pop
+#base robot_giant.pop
+#base robot_gatebot.pop
+
+//Proposed names:
+//Qualeafied Treetment
+//Sequoyard Supremacy (nah that's not meme)
+//The White Stripes (not meme enough)
+
+WaveSchedule
+{
+	StartingCurrency 1750 //1100
+	RespawnWaveTime	2
+	FixedRespawnWaveTime Yes
+	CanBotsAttackWhileInSpawnRoom	no
+	Advanced 1
+	//EventPopfile Halloween
+	
+	//Seriously valve why this doesn't force halloween on top, please?
+	
+	Mission
+	{
+		Objective DestroySentries
+		Where spawnbot
+
+		CooldownTime 30
+		BeginAtWave 1
+		RunForThisManyWaves 3
+		TFBot
+		{
+			Template T_TFBot_SentryBuster
+			Tag bot_sentrybuster
+			Name "Bustin'"
+		}
+	}
+	
+	Mission // Sniper 
+	{
+		Objective Sniper
+
+		InitialCooldown 90
+		Where spawnbot_mission_sniper
+		BeginAtWave 1
+		RunForThisManyWaves 3
+		CooldownTime 90
+		DesiredCount 2
+
+		TFBot
+		{
+			Class Sniper
+			Skill Expert
+			MaxVisionRange 4000
+			Name "VAC-Proof Sniper"
+			Item "The Machina"
+		}
+	}
+	
+	Mission // Spy - wave 3
+	{
+		Objective Spy  
+
+		InitialCooldown 60
+		Where spawnbot_mission_spy
+		BeginAtWave 1
+		RunForThisManyWaves 3
+		CooldownTime 120
+		DesiredCount 3
+
+		TFBot
+		{
+			Class Spy
+			Skill Expert
+			Name "Souprice" //not big
+		}
+	}	
+	
+	Wave
+	{
+		WaitWhenDone 60
+		Checkpoint Yes
+
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		
+
+		// Gate support
+		// except wave 1
+		// apparently W1 is 2hard
+		// blest soliders 
+		// runs all day, every day
+		
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 50
+			MaxActive 1
+			SpawnCount 1
+			Support 1
+			WaitBetweenSpawns 3
+			WaitBeforeStarting 0
+			
+			TotalCurrency 50
+			
+			TFBot 
+			{
+				Template T_TFBot_Soldier_RocketPush
+				Name "Pushy Boi"
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name "w1"
+			Where spawnbot
+			TotalCount 32
+			MaxActive 10
+			SpawnCount 1
+			WaitBetweenSpawns 2
+			WaitBeforeStarting 0
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFGateBot_Scout_Fan
+				Name "Dat FaNboy"
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name "w1"
+			Where spawnbot
+			TotalCount 18
+			MaxActive 5
+			SpawnCount 1
+			WaitBetweenSpawns 2
+			WaitBeforeStarting 10
+			TotalCurrency 100
+			TFBot
+			{
+				Template T_TFBot_Demo_Burst
+				Name "Burstin' Pills' Here"
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name "w1"
+			Where spawnbot
+			TotalCount 7
+			MaxActive 4
+			SpawnCount 1 
+			WaitBetweenSpawns 10
+			WaitBeforeStarting 0
+			TotalCurrency 100
+			TFBot
+			{
+				Template T_TFBot_Giant_Soldier
+				Name "Giant Solder"
+				Tag bot_giant
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name "w2"
+			WaitForAllSpawned "w1"
+			Where spawnbot
+			TotalCount 24
+			MaxActive 8
+			SpawnCount 4
+			WaitBetweenSpawns 0
+			WaitBeforeStarting 10
+			TotalCurrency 300
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons_Shotgun
+					Name "Giant Shotgun Bastard"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Name "Quickie Uber Medic"
+				}
+				TFBot
+				{
+					Class Pyro
+					Skill Expert
+					Name "Reflecting Bastard"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Name "Quickie Uber Medic"
+				}
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name "w3"
+			WaitForAllDead "w2"
+			Where spawnbot
+			TotalCount 30
+			MaxActive 10
+			SpawnCount 2
+			WaitBetweenSpawns 2.5
+			WaitBeforeStarting 20
+			TotalCurrency 200
+			
+			Squad
+			{
+				TFBot
+				{
+					Class Heavyweapons
+					Skill Normal
+					Item "Tomislav"
+					Name "Tommy Heavvy"
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Extended_Concheror
+					Name "Pseudo-Medic Soldier"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "w3"
+			WaitForAllDead "w2"
+			Where spawnbot
+			TotalCount 10
+			MaxActive 8
+			SpawnCount 1
+			WaitBetweenSpawns 9
+			WaitBeforeStarting 0
+			TotalCurrency 400
+			
+			TFBot
+			{
+				Template T_TFGateBot_Giant_Scout_FAN
+				Name "Dat Giant FaNboy"
+				
+				Tag bot_giant
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name "w4"
+			WaitForAllSpawned "w3"
+			Where spawnbot
+			TotalCount 8
+			MaxActive 8
+			SpawnCount 1
+			WaitBetweenSpawns 15
+			WaitBeforeStarting 30
+			TotalCurrency 200		
+			FirstSpawnOutput                                                                                                                                                            
+			{
+				Target boss_spawn_relay                                            
+				Action Trigger                         
+			}
+				//Titanium Turmoil steal detected
+				//no but really
+				// https://www.youtube.com/watch?v=BJ0xBCwkg3E
+				// R U N N I N G   I N   T H E   N I N E T I E S
+				// I S   A   N E W   W A Y   I   L I K E   T O   B E 
+				// I ' M   J U S T   R U N N I N G   I N   T H E   N I N E T I E S
+				// C O M E   O N ,   B A B Y ,   R U N   T O   M E
+				// W E   A R E   R U N N I N G   I N   T H E   N I N E T I E S
+				// I T ' S   A   N E W   W A Y   T O   S E T   M E   F R E E
+				// I ' M   J U S T   R U N N I N G   I N   T H E   N I N E T I E S
+				// Y E S ,   I   W A N N A   K N O W 
+				// Y E S ,   I   W A N N A   S E E 
+			Tank
+			{
+				Health 5000
+				Speed 180
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}		
+		}
+		WaveSpawn
+		{
+			Name "w4"
+			WaitForAllSpawned "w3"
+			Where spawnbot
+			TotalCount 45
+			MaxActive 9
+			SpawnCount 3
+			WaitBetweenSpawns 5
+			WaitBeforeStarting 30
+			TotalCurrency 300
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Scout_Fast
+					Tag bot_giant
+					Name "Super Scooty Booty"
+					
+					Tag bot_giant
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Melee
+					Item "Bonk Boy"
+					Item "The Holy Mackerel"
+					Name "Almost Super Scooty Booty"
+					CharacterAttributes
+					{
+						"move speed bonus"	2
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Melee
+					Item "Bonk Boy"
+					Item "The Holy Mackerel"
+					Name "Almost Super Scooty Booty"
+					CharacterAttributes
+					{
+						"move speed bonus"	2
+					}
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone 60
+		Checkpoint Yes
+
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 50
+			MaxActive 1
+			SpawnCount 1
+			Support 1
+			WaitBetweenSpawns 3
+			WaitBeforeStarting 0
+			
+			TotalCurrency 50
+			
+			TFBot 
+			{
+				Template T_TFGateBot_Soldier_RocketPush
+				Name "Pushy Gate Boi"
+			}
+		}
+		WaveSpawn
+		{
+			Name "w5"
+			Where spawnbot
+			TotalCount 4
+			SpawnCount 4
+			MaxActive 4
+			WaitBeforeStarting 50
+			TotalCurrency 225
+			
+			Squad
+			{
+				TFBot
+				{
+					Class Soldier
+					ClassIcon soldier_libertylauncher_giant
+					Name "Chief Skybox"
+					Health 40000
+					Scale 1.8
+					Skill Expert
+					
+					Tag bot_giant
+					EventChangeAttributes
+					{
+						Default
+						{
+							Tag nav_prefer_gate1_flank	// having these will cause bots to run towards gates
+							Tag bot_gatebot				// having these will cause bots to run towards gates
+							BehaviorModifiers push		// having these will cause bots to run towards gates
+							Attributes IgnoreFlag		// having these will cause bots to run towards gates
+
+							Item "MvM GateBot Light Soldier"
+			
+							Tag bot_giant
+							WeaponRestrictions PrimaryOnly
+							Item "The Liberty Launcher"
+							Attributes MiniBoss
+							Attributes UseBossHealthBar
+							Attributes HoldFireUntilFullReload
+							ItemAttributes
+							{
+								ItemName "The Liberty Launcher"
+								"damage causes airblast" 1
+								"damage bonus" 1
+								"fire rate bonus" 0.25
+								"clip size upgrade atomic" 5
+								"faster reload rate" 0.4
+								"Blast radius decreased" 1.2
+								"projectile spread angle penalty" 4
+								"Projectile speed increased" 0.7 //maybe
+							}
+							CharacterAttributes
+							{
+								"move speed bonus"	0.3
+								"override footstep sound set" 3
+								"damage force reduction" 0.4
+								"airblast vulnerability multiplier" 0.4
+								"airblast vertical vulnerability multiplier" 0.1
+								"rage giving scale"	0.15
+							}
+						}
+						RevertGateBotsBehavior
+						{
+							Item "MvM GateBot Light Soldier"
+							ItemAttributes               // turn off light hat
+							{
+								ItemName "MvM GateBot Light Soldier"
+								"item style override" 1
+							}
+							
+							Tag bot_giant
+							WeaponRestrictions PrimaryOnly
+							Item "The Liberty Launcher"
+							Attributes MiniBoss
+							Attributes UseBossHealthBar
+							Attributes HoldFireUntilFullReload
+							ItemAttributes
+							{
+								ItemName "The Liberty Launcher"
+								"damage causes airblast" 1
+								"damage bonus" 1
+								"fire rate bonus" 0.25
+								"clip size upgrade atomic" 5
+								"faster reload rate" 0.4
+								"Blast radius decreased" 1.2
+								"projectile spread angle penalty" 4
+								"Projectile speed increased" 0.7
+							}
+							CharacterAttributes
+							{
+								"move speed bonus"	0.3
+								"override footstep sound set" 3
+								"damage force reduction" 0.4
+								"airblast vulnerability multiplier" 0.4
+								"airblast vertical vulnerability multiplier" 0.1
+								"rage giving scale"	0.15
+							}
+						}
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic_Regen
+					Name "Giant Regen Medic"
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic_Regen
+					Name "Giant Regen Medic"
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic_Regen
+					Name "Giant Regen Medic"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "w5"
+			Where spawnbot
+			TotalCount 50
+			SpawnCount 2
+			MaxActive 10
+			WaitBetweenSpawns 5
+			WaitBeforeStarting 0
+			TotalCurrency 75
+			
+			TFBot
+			{
+				Class Heavyweapons
+				Skill Normal
+				Item "Tomislav"
+				Name "Tommy Heavy"
+			}
+		}
+		
+		
+		WaveSpawn
+		{
+			Name "w6"
+			WaitForAllDead "w5" //wait for boss ded a must
+			Where spawnbot
+			TotalCount 24
+			SpawnCount 4
+			MaxActive 14
+			WaitBetweenSpawns 8
+			WaitBeforeStarting 0
+			TotalCurrency 200
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFGateBot_Giant_Soldier_Spammer
+					
+					Tag bot_giant
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Name "Quickie Uber Medic"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "w6"
+			WaitForAllDead "w5" //wait for boss ded a must
+			Where spawnbot
+			TotalCount 65
+			Where spawnbot
+			SpawnCount 1
+			MaxActive 8
+			WaitBetweenSpawns 1
+			WaitBeforeStarting 10
+			TotalCurrency 200
+			
+			TFBot
+			{
+					// I was almost to name them tide-pods related
+					// But I did that in other mission so n0pe
+				Template T_TFBot_Demoman_Knight
+				Item "The Tide Turner"
+				Name "Tide's Turner"
+				Attributes AlwaysCrit
+			}
+		}
+		WaveSpawn
+		{
+			Name "w6"
+			WaitForAllDead "w5"
+			Where spawnbot
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 1
+			WaitBetweenSpawns 30
+			WaitBeforeStarting 10
+			TotalCurrency 150
+			FirstSpawnOutput                                                                                                                                                            
+			{
+				Target boss_spawn_relay                                            
+				Action Trigger                         
+			}
+				// Not fast tank?
+				// Well fuck no jokes
+				// rip all that
+			Tank
+			{
+				Health 20000
+				Speed 60
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name "w7"
+			WaitForAllSpawned "w6"
+			Where spawnbot
+			TotalCount 11
+			SpawnCount 11
+			WaitBeforeStarting 60
+			TotalCurrency 100
+			Squad
+			{
+				TFBot
+				{
+						// Furry jokes
+						// Oooooh boy
+						// are you ready for that?
+						// also furries please don't get offended I didn't mean it
+					Class Pyro
+					Name "O w O"
+					Skill Expert
+					WeaponRestrictions PrimaryOnly
+					ClassIcon pyro_dragon_fury_swordstone
+						//I know it should be _giant
+						//and no I won't make it _giant
+					Health 40000
+					Scale 1.9
+					Attributes MiniBoss
+					Attributes UseBossHealthBar
+					Attributes AlwaysCrit
+					Item "The Head Prize"
+					Item "The Dragon's Fury"
+					Item "Pop-eyes"
+					CharacterAttributes
+					{
+						"move speed bonus"	0.3
+						"health regen" 200
+						"damage force reduction" 0.3
+						"airblast vulnerability multiplier" 0.3
+						"override footstep sound set" 2
+						"airblast vertical vulnerability multiplier" 0.1
+					}
+					
+					Tag bot_giant
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Name "What's this?"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Name "What's this?"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Name "What's this?"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Name "What's this?"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Name "What's this?"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Name "What's this?"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Name "What's this?"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Name "What's this?"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Name "What's this?"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Name "What's this?"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "w7"
+			WaitForAllSpawned "w6"
+			Where spawnbot
+			TotalCount 80
+			SpawnCount 1
+			MaxActive 15
+			WaitBetweenSpawns 1
+			WaitBeforeStarting 0
+			TotalCurrency 150
+			
+			TFBot
+			{
+				Class Pyro
+				Name "Bad Dragon Furry"
+				Item "The Head Prize"
+				Item "The Dragon's Fury"
+				Item "Pop-eyes"
+				ClassIcon pyro_dragon_fury_swordstone_giant
+				//yes
+				//giant icon
+				//deal with it
+				MaxVisionRange 350
+			}
+		}
+		WaveSpawn //courtesy of one and only Quenquent 
+		{
+			Name "w7"
+			WaitForAllSpawned "w6"
+			Where spawnbot
+			TotalCount 20
+			SpawnCount 1
+			MaxActive 2
+			WaitBetweenSpawns 0
+			WaitBeforeStarting 15
+			TotalCurrency 50
+			
+			TFBot
+			{
+				Name "Average MvM Pyro Player"	//Jungle Inferno ruined MvM, iknowrite? lul
+				Class Pyro
+				Skill Expert
+				ClassIcon pyro_gas_jaka
+				//MaxVisionRange 1000		//that is about to get so much worse w/o vision range
+				WeaponRestrictions SecondaryOnly
+				Attributes AlwaysFireWeapon
+				Item "The Gas Passer"
+				Item "Ghastly Gibus"
+				ItemAttributes
+				{
+					ItemName "The Gas Passer"
+					"explode_on_ignite" 1		//"valve nerf this shit please" (c)
+					"mult_item_meter_charge_rate" 0.01
+				}
+			}
+		}
+		
+		WaveSpawn
+		{
+			Where spawnbot
+			Name "w8_1"
+			WaitForAllDead "w7"
+			TotalCount 50
+			SpawnCount 1
+			MaxActive 18
+			WaitBetweenSpawns 1
+			WaitBeforeStarting 10
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFBot_Soldier_Extended_Concheror
+				Item "The Direct Hit"
+				Name "Die-rekt Hit Conck Soldier"
+				Skill Expert
+				ItemAttributes
+				{
+					ItemName "The Direct Hit"
+					"apply z velocity on damage" 150  	// F L Y I N G   I N   T H E   N I N E T I E S
+														// wait no
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			Name "w8_2"
+			WaitForAllSpawned "w8_1"
+			TotalCount 15
+			SpawnCount 3 
+			MaxActive 6
+			WaitBetweenSpawns 15
+			WaitBeforeStarting 0
+			TotalCurrency 300
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons_Shotgun
+					Attributes AlwaysCrit
+					Name "Crit Giant Shotgun Bastard"
+					
+					Tag bot_giant
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic_Regen
+					Name "Giant Regen Medic"
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic_Regen
+					Name "Giant Regen Medic"
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone 60
+		Checkpoint Yes
+
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 50
+			MaxActive 1
+			SpawnCount 1
+			Support 1
+			WaitBetweenSpawns 3
+			WaitBeforeStarting 0
+			
+			TotalCurrency 50
+			
+			TFBot 
+			{
+				Template T_TFGateBot_Soldier_RocketPush
+				Name "Pushy Gate Boi"
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			Name "w9"
+			TotalCount 24
+			SpawnCount 2
+			MaxActive 10
+			WaitBetweenSpawns 4
+			WaitBeforeStarting 0
+			TotalCurrency 100
+			TFBot
+			{
+				Template T_TFBot_Demo_Burst
+				Attributes AlwaysCrit
+				Name "Critty Burstin' Pills' Here"
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			Name "w9"
+			TotalCount 3
+			SpawnCount 3
+			MaxActive 3
+			TotalCurrency 300
+			WaitBeforeStarting 30
+			
+			Squad
+			{
+					// I don't think you had enough of those bosses did you?
+					// (^:
+				TFBot
+				{
+					Template T_TFGateBot_Chief_Heavyweapons_HealOnKill
+					Health 50000
+					
+					Tag bot_giant
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic_Regen
+					Name "Giant Regen Medic"
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic_Regen
+					Name "Giant Regen Medic"
+				}
+			}
+		}
+		//	tank spy shitfest?
+		// well this is a joke by itself, I don't even need to intervene with nineties jokes
+		WaveSpawn
+		{
+			Name "w10"
+			WaitForAllDead "w9"
+			TotalCount 5
+			SpawnCount 1
+			MaxActive 5
+			WaitBetweenSpawns 20
+			WaitBeforeStarting 10
+			TotalCurrency 1000
+			FirstSpawnOutput                                                                                                                                                            
+			{
+				Target boss_spawn_relay                                            
+				Action Trigger                         
+			}
+
+			Tank
+			{
+				Health 13000
+				Speed 90
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			Name "w10"
+			WaitForAllDead "w9"
+			TotalCount 75
+			SpawnCount 1
+			MaxActive 10
+			WaitBetweenSpawns 1
+			WaitBeforeStarting 30
+			TotalCurrency 100
+			TFBot
+			{
+				Class Spy
+				Skill Expert
+				Attributes AlwaysCrit
+				ClassIcon spy_d
+				Name "P.A.R.A.N.O.I.A."
+			}
+		}
+		
+		//I hope you were smart enough to buy crit res
+		//or bring battalions
+		//or... something
+		//you'll die anyways
+		
+		
+		//heard ya like making out with that skybox
+		//jk
+		WaveSpawn
+		{
+			Where spawnbot
+			Name "w11_1"
+			WaitForAllDead "w10"
+			TotalCount 30
+			SpawnCount 1
+			MaxActive 5
+			WaitBeforeStarting 10
+			TotalCurrency 90
+			TFBot
+			{
+				Template T_TFBot_Scout_FAN
+				Attributes AlwaysCrit
+				Skill Expert
+				Name "What-The-Knockback Scout"
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			Name "w11_1_2"
+			WaitForAllDead "w11_1"
+			TotalCount 20
+			SpawnCount 10
+			MaxActive 20
+			WaitBeforeStarting 0
+			TotalCurrency 60
+			RandomSpawn 1
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Scout_FAN
+					Attributes AlwaysCrit
+					Skill Expert
+					Name "What-The-Knockback Scout"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_BigHeal
+					Name "Zuper Heal Medic"
+				}
+			}
+		}
+		
+		// 0/10 no uber meds to be a flashback
+		// what a dumbass mission creator --IGN
+		WaveSpawn
+		{
+			Where spawnbot
+			Name "w11_2"
+			WaitForAllSpawned "w11_1_2"
+			TotalCount 30
+			SpawnCount 1
+			MaxActive 5
+			WaitBeforeStarting 10
+			TotalCurrency 90
+			RandomSpawn 1
+			TFBot
+			{
+				Template T_TFBot_Sniper_Huntsman_Spammer
+				Attributes AlwaysCrit
+				ClassIcon sniper_bow_multi
+				Skill Expert
+				Name "Empire Escalation Flashbacks"
+				
+				Tag bot_giant
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			Name "w11_2_2"
+			WaitForAllDead "w11_2"
+			TotalCount 20
+			SpawnCount 10
+			MaxActive 20
+			WaitBeforeStarting 0
+			TotalCurrency 60
+			RandomSpawn 1
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman_Spammer
+					Attributes AlwaysCrit
+					ClassIcon sniper_bow_multi
+					Skill Expert
+					Name "Empire Escalation Flashbacks"
+					
+					Tag bot_giant
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_BigHeal
+					Name "Zuper Heal Medic"
+				}
+			}
+		}
+		
+		//If your mission isn't hard enough
+		// (1) Crits				[   ]
+		// (2) Battalions           [   ]
+		// (3) All of the above     [ X ]
+		WaveSpawn
+		{
+			Where spawnbot
+			Name "w11_3"
+			WaitForAllSpawned "w11_2_2"
+			TotalCount 30
+			SpawnCount 1
+			MaxActive 5
+			WaitBeforeStarting 10
+			TotalCurrency 90
+			TFBot
+			{
+				Template T_TFBot_Soldier_Extended_Battalion
+				Skill Expert
+				Name "Fucking Battalions"
+				Attributes AlwaysCrit
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			Name "w11_3_2"
+			WaitForAllDead "w11_3"
+			TotalCount 20
+			SpawnCount 10
+			MaxActive 20
+			WaitBeforeStarting 0
+			TotalCurrency 60
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Soldier_Extended_Battalion
+					Skill Expert
+					Name "Fucking Battalions"
+					Attributes AlwaysCrit
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_BigHeal
+					Name "Zuper Heal Medic"
+				}
+			}
+		}
+		
+		
+		//Oh no
+		//not again
+		WaveSpawn
+		{
+			Where spawnbot
+			Name "w11_4"
+			WaitForAllSpawned "w11_3_2"
+			TotalCount 30
+			SpawnCount 1
+			MaxActive 5
+			WaitBeforeStarting 10
+			TotalCurrency 90
+			RandomSpawn 1
+			TFBot
+			{
+				Name "O w O"
+				Class Pyro
+				Item "The Head Prize"
+				Item "The Dragon's Fury"
+				Item "Pop-eyes"
+				ClassIcon pyro_dragon_fury_swordstone
+				Attributes AlwaysCrit
+				MaxVisionRange 500 //350
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			Name "w11_4_2"
+			WaitForAllDead "w11_4"
+			TotalCount 20
+			SpawnCount 10
+			MaxActive 20
+			WaitBeforeStarting 0
+			TotalCurrency 60
+			RandomSpawn 1
+			Squad
+			{
+				TFBot
+				{
+					Name "O w O"
+					Class Pyro
+					Item "The Head Prize"
+					Item "The Dragon's Fury"
+					Item "Pop-eyes"
+					ClassIcon pyro_dragon_fury_swordstone
+					Attributes AlwaysCrit
+					MaxVisionRange 500 //350
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_BigHeal
+					Name "Zuper Hea---  What's this?"
+				}
+			}
+		}
+		
+		WaveSpawn
+		{
+			Where spawnbot
+			Name "w12_supports"
+			WaitForAllDead "w11_4_2"
+			TotalCount 10
+			SpawnCount 1
+			MaxActive 5
+			TotalCurrency 200
+			WaitBetweenSpawns 3
+			WaitBeforeStarting 5
+			RandomSpawn 1
+			Support 1
+			TFBot
+			{
+				Name "U w U"
+				Class Pyro
+				Item "The Head Prize"
+				Item "The Dragon's Fury"
+				Item "Pop-eyes"
+				ClassIcon pyro_dragon_fury_swordstone
+				MaxVisionRange 500 //350
+			}
+		}
+		WaveSpawn
+		{
+			
+			//Name "w11_tank"
+			WaitForAllDead "w10"
+			TotalCount 1
+			SpawnCount 1
+			WaitBeforeStarting 20
+			
+			
+			
+			// OH
+			// IT'S A SLOW TANK
+			// Y'A'LL KNOW WHAT THIS MEANS
+			
+			// V A P O R W A V E   R U N N I N G   I N   T H E  N I N E T I E S
+			// H E C K  Y E A H 
+			// https://www.youtube.com/watch?v=Uhy_e5wIX44
+			Tank
+			{
+				Health 100000
+				Speed 36
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}	
+		}
+		
+		WaveSpawn
+		{
+			Where spawnbot
+			Name "w12"
+			WaitForAllDead "w11_4_2"
+			TotalCount 1
+			SpawnCount 1
+			WaitBeforeStarting 10
+			TFBot
+			{
+				Template T_TFBot_Giant_Demo_Spammer_Reload_Chief
+				ClassIcon demo_metalbeard			//bombardier icon
+				Name "Chief Bad Pipes"
+				Item "Melody Of Misery"
+				Item "Demoman Hallmark"
+				Item "The Bolted Bombardier"
+				//ClassIcon demo_burst_giant //Nuke's a massive cock and didn't comment this out.
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_GRENADELAUNCHER"
+					"faster reload rate" 0.55 //35% faster reload
+					"fire rate bonus" 0.1
+					"clip size upgrade atomic" 10.0
+					"projectile spread angle penalty" 2
+					"Projectile speed increased"	1.5
+						//Sntr: you gave "use large smoke explosion" to a fucking burst chief
+						//ekuN: Yes
+						//ekuN: xd
+						//Sntr: oh my god					
+					//"use large smoke explosion" 1
+					//rip 2018-2018
+				}
+				
+				Tag bot_giant
+			}
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllSpawned "w12"
+			TotalCount 1
+			Support 1
+			StartWaveWarningSound "items/taunts/badpipes/badpipes5.mp3"
+			TFBot
+			{
+				Class Soldier
+				ClassIcon soldier_libertylauncher
+			}
+		}
+		WaveSpawn
+		{
+			WaitForAllSpawned "w12"
+			TotalCount 1
+			Support 1
+			StartWaveWarningSound "items/taunts/badpipes/badpipes3.mp3"
+			TFBot
+			{
+				Class Soldier
+				ClassIcon soldier_libertylauncher
+			}
+		}
+		WaveSpawn //decoy bots 4 music
+		{
+			WaitForAllSpawned "w12"
+			TotalCount 1
+			Support 1
+			StartWaveWarningSound "items/taunts/badpipes/badpipes4.mp3"
+			TFBot
+			{
+				Class Soldier
+				ClassIcon soldier_libertylauncher
+			}
+		}
+	}
+	// you better be like this guy after all of this :
+	// https://www.youtube.com/watch?v=2k0SmqbBIpQ
+}

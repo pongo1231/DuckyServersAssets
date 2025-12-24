@@ -1,0 +1,592 @@
+WaveSchedule
+{
+	Templates
+	{
+		T_TFBot_Chaos_Popshot
+		{
+			Class Scout
+			Name "Popshot"
+			Health 5500
+			Skill Expert
+			Scale 1.9
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 2500
+			Attributes "UseBossHealthBar"
+			Attributes "MiniBoss"
+			Item "Herald's Helm"
+			Item "The Soda Popper"
+			ClassIcon scout_giant_fast
+			CharacterAttributes
+			{
+				"move speed bonus" 1.5
+				"airblast vulnerability multiplier" 0.25
+				"damage force reduction" 0.25
+				"override footstep sound set" 3
+				"airblast vertical vulnerability multiplier" 0.25
+			}
+			ItemAttributes
+			{
+				ItemName "The Soda Popper"
+				"fire rate penalty" 2.7
+				"damage bonus" 1.75
+				"weapon spread bonus" 0
+				"bullets per shot bonus" 10
+				"critboost on kill" 30
+			}
+		}
+		T_TFBot_Chaos_Butchery
+		{
+			Class Scout
+			Health 10000
+			Name "Fine Butchery"
+			Skill Expert
+			Scale 1.9
+			WeaponRestrictions SecondaryOnly
+			Attributes "UseBossHealthBar"
+			Attributes "AlwaysCrit"
+			Attributes "MiniBoss"
+			Attributes "AlwaysFireWeapon"
+			Item "Horrific Headsplitter"
+			Item "The Byte'd Beak"
+			Item "Practitioner's Processing Mask"
+			Item "The Flying Guillotine"
+			ClassIcon scout_giant
+			CharacterAttributes
+			{
+				"move speed bonus" 1.1
+				"airblast vulnerability multiplier" 0.25
+				"damage force reduction" 0.25
+				"override footstep sound set" 3
+				"airblast vertical vulnerability multiplier" 0.25
+			}
+			ItemAttributes
+			{
+				ItemName "The Flying Guillotine"
+				"fire rate penalty" 1.75
+				"effect bar recharge rate increased" 0.01
+				"heal on kill" 10000
+				"damage bonus" 5
+				"bleeding duration" 300
+				"heal on hit for rapidfire" 100
+			}
+		}
+		T_TFBot_Chaos_Homerun
+		{
+			Class Scout
+			Health 9360
+			Name "Homerun Demon"
+			Skill Expert
+			Scale 1.9
+			Attributes "MiniBoss"
+			Attributes "UseBossHealthBar"
+			WeaponRestrictions MeleeOnly
+			Item "The Wraith Wrap"
+			Item "The Sandman"
+			ClassIcon scout_stun_armored
+			CharacterAttributes
+			{
+				"move speed penalty" .9
+				"airblast vulnerability multiplier" 0.4
+				"airblast vertical vulnerability multiplier" 0.4
+				"damage force reduction" 0.25
+				"override footstep sound set" 3
+			}
+			ItemAttributes
+			{
+				ItemName "The Sandman"
+				"effect bar recharge rate increased" 0.01
+				"dmg penalty vs nonstunned" 0.4
+				"damage bonus" 1.5
+				"crit vs stunned players" 1
+				"set damagetype ignite" 1
+				"weapon burn time increased" 2.5
+				"weapon burn dmg increased" 5
+				"damage all connected" 1
+				"subtract victim medigun charge on hit" 25
+				"subtract victim cloak on hit" 25
+				"damage causes airblast" 1
+			}	
+		}
+		T_TFBot_Chaos_Crash
+		{
+			Class Soldier
+			Health 28400
+			Name "Crasher"
+			Skill Expert
+			Scale 1.9
+			Attributes "MiniBoss"
+			Attributes "UseBossHealthBar"
+			Attributes "HoldFireUntilFullReload"
+			Item "The War Pig"
+			Item "The Original"
+			ClassIcon soldier_libertylauncher_giant
+			CharacterAttributes
+			{
+				"move speed penalty" 0.4
+				"airblast vulnerability multiplier" 0.1
+				"airblast vertical vulnerability multiplier" 0.1
+				"damage force reduction" 0.4
+				"rage giving scale" 0.25
+				"override footstep sound set" 3
+			}
+			ItemAttributes
+			{
+				ItemName "The Original"
+				"damage bonus" 1.25
+				"damage causes airblast" 1
+				"mod stun waist high airborne" 6
+				"slow enemy on hit major" 20
+				"clip size penalty" 0.5
+				"projectile speed increased" 1.8
+				"fire rate penalty" 1.7
+				"faster reload rate" 1.35
+				"bleeding duration" 1
+				"blast radius increased" 7
+			}
+		}
+		T_TFBot_Chaos_Instruct
+		{
+			Class Soldier
+			Health 32670
+			Name "Drill Instructor"
+			Skill Expert
+			Scale 1.9
+			Attributes "MiniBoss"
+			Attributes "HoldFireUntilFullReload"
+			Attributes "UseBossHealthBar"
+			Attributes "SpawnWithFullCharge"
+			WeaponRestrictions PrimaryOnly
+			Item "Full Metal Drill Hat"
+			Item "Festive Rocket Launcher 2011"
+			Item "The Buff Banner"
+			ClassIcon soldier_barrage
+			CharacterAttributes
+			{
+				"move speed penalty" 0.4
+				"airblast vulnerability multiplier" 0.1
+				"airblast vertical vulnerability multiplier" 0.1
+				"rage giving scale" 0.3
+				"damage force reduction" 0.5
+				"override footstep sound set" 3
+				"increase buff duration" 9
+			}
+			ItemAttributes
+			{
+				ItemName "Festive Rocket Launcher 2011"
+				"damage penalty" 0.5
+				"heal on hit for rapidfire" 100
+				"fire rate bonus" 0
+				"projectile spread angle penalty" 9
+				"projectile speed decreased" 0.5
+				"faster reload rate" 0.1
+				"clip size bonus" 9
+			}
+		}
+		T_TFBot_Chaos_Blast
+		{
+			Class Soldier
+			Health 31730
+			Name "Buster Blast"
+			Skill Expert
+			Scale 1.9
+			Attributes "MiniBoss"
+			Attributes "HoldFireUntilFullReload"
+			Attributes "UseBossHealthBar"
+			WeaponRestrictions PrimaryOnly
+			Item "The Toy Soldier"
+			Item "The Soldier's Stogie"
+			Item "The Black Box"
+			ClassIcon soldier_blackbox_giant
+			CharacterAttributes
+			{
+				"move speed penalty" 0.5
+				"airblast vulnerability multiplier" 0.1
+				"airblast vertical vulnerability multiplier" 0.1
+				"override footstep sound set" 3
+				"damage force reduction" 0.4
+				"rage giving scale" 0.3
+				
+			}
+			ItemAttributes
+			{
+				ItemName "The Black Box"
+				"fire rate bonus" 0.5
+				"faster reload rate" 0.35
+				"fire rate bonus with reduced health" 0.1
+ 				"damage bonus" 2
+				"dmg bonus while half dead" 5
+				"clip size upgrade atomic" 26.0
+				"slow enemy on hit" 30
+				"heal on hit for rapidfire" 150
+				"blast radius increased" 2
+			}
+		}
+		T_TFBot_Chaos_Vacuum
+		{
+			Class Pyro
+			Health 29360
+			Name "Vacuum"
+			Skill Expert
+			Scale 1.9
+			Attributes "MiniBoss"
+			Attributes "UseBossHealthBar"
+			Attributes "AlwaysFireWeapon"
+			Attributes "AlwaysCrit"
+			WeaponRestrictions PrimaryOnly
+			Item "The Toy Tailor"
+			Item "The Nostromo Napalmer"
+			ClassIcon pyro_giant
+			CharacterAttributes
+			{
+				"move speed penalty" 0.45
+				"airblast vulnerability multiplier" 0.1
+				"airblast vertical vulnerability multiplier" 0.1
+				"rage giving scale" 0.3
+				"damage force reduction" 0.5
+				"override footstep sound set" 3
+				"dmg taken from bullets reduced" 0.25
+			}
+			ItemAttributes
+			{
+				ItemName "The Nostromo Napalmer"
+				"apply z velocity on damage" -900
+				"apply look velocity on damage" -900
+				"flame_drag" 3
+				"heal on kill" 2000
+				"damage bonus" 1.5
+			}
+		}
+		T_TFBot_Chaos_Clock
+		{
+			Class Pyro
+			Health 17210
+			Name "Clock-ro"
+			Skill Expert
+			Scale 1.9
+			Attributes "MiniBoss"
+			Attributes "UseBossHealthBar"
+			WeaponRestrictions PrimaryOnly
+			Item "Trail-Blazer"
+			Item "The Anger"
+			Item "The Backburner"
+			ClassIcon pyro_giant
+			CharacterAttributes
+			{
+				"move speed penalty" 0.45
+				"airblast vulnerability multiplier" 0.1
+				"airblast vertical vulnerability multiplier" 0.1
+				"rage giving scale" 0.3
+				"damage force reduction" 0.5
+				"override footstep sound set" 3
+				"dmg taken from crit reduced" 0
+				"dmg taken from bullets reduced" 0.6
+				"dmg taken from blast reduced" 0.8
+				"dmg taken from fire reduced" 2
+			}
+			ItemAttributes
+			{
+				ItemName "The Backburner"
+				"mark for death" 1
+				"damage bonus" 1.75
+				"flame size bonus" 4
+				"flame life bonus" 4
+				"heal on kill" 2000
+				"damage all connected" 1
+				"critboost on kill" 1
+				"dmg pierces resists absorbs" 1
+				"subtract victim medigun charge on hit" 5
+				
+			}
+		}
+		T_TFBot_Chaos_Scorch
+		{
+			Class Pyro
+			Name "The Scorch Leech"
+			Health 27940
+			Skill Expert
+			Scale 1.9
+			Attributes "UseBossHealthBar"
+			Attributes "AlwaysCrit"
+			Attributes "MiniBoss"
+			WeaponRestrictions SecondaryOnly
+			Item "The Head Warmer"
+			Item "The Scorch Shot"
+			ClassIcon pyro_flare_giant
+			CharacterAttributes
+			{
+				"move speed penalty" 0.45
+				"airblast vulnerability multiplier" 0.1
+				"airblast vertical vulnerability multiplier" 0.1
+				"damage force reduction" 0.3
+				"rage giving scale" 0.3
+				"override footstep sound set" 3
+			}
+			ItemAttributes
+			{
+				ItemName "The Scorch Shot"
+				"fire rate bonus" 0.9
+				"faster reload rate" 0.35
+				"blast radius increased" 2
+				"heal on hit for rapidfire" 100
+				"damage bonus" 1.5
+				"weapon burn dmg increased" 3
+				"weapon burn time increased" 3
+				"subtract victim medigun charge on hit" 2
+				"fire rate bonus with reduced health" 0.1
+			}
+		}
+		T_TFBot_Chaos_Bust
+		{
+			Class Demoman
+			Name "Blaster Bust"
+			Health 32560
+			Skill Expert
+			Scale 1.9
+			Attributes "MiniBoss"
+			Attributes "UseBossHealthBar"
+			Attributes "HoldFireUntilFullReload"
+			Item "Glengarry Bonnet"
+			Item tf_weapon_grenadelauncher
+			ClassIcon demo_burst_giant
+			CharacterAttributes
+			{
+				"move speed penalty" 0.45
+				"airblast vulnerability multiplier" 0.1
+				"airblast vertical vulnerability multiplier" 0.1
+				"damage force reduction" 0.3
+				"rage giving scale" 0.3
+				"override footstep sound set" 3
+			}
+			ItemAttributes
+			{
+				ItemName tf_weapon_grenadelauncher
+				"fire rate bonus" 0.05
+				"faster reload rate" 1.6
+				"blast radius increased" 2.3
+				"projectile spread angle penalty" 5
+				"clip size upgrade atomic" 4.0
+				"bleeding duration" 15
+				"heal on hit for rapidfire" 150
+				"damage bonus" 1.25
+				"slow enemy on hit" 25
+			}
+		}
+		T_TFBot_Chaos_Knightley
+		{
+			Class Demoman
+			Name "Knightley"
+			Health 29580
+			Skill Expert
+			Scale 1.9
+			Attributes "MiniBoss"
+			Attributes "UseBossHealthBar"
+			WeaponRestrictions MeleeOnly
+			Item "The Tartan Shade"
+			Item "The Chargin' Targe"
+			Item "The Persian Persuader"
+			ClassIcon demoknight
+			CharacterAttributes
+			{
+				"move speed penalty" 0.65
+				"airblast vulnerability multiplier" 0.1
+				"airblast vertical vulnerability multiplier" 0.1
+				"damage force reduction" 0.3
+				"rage giving scale" 0.3
+				"override footstep sound set" 3
+				"dmg taken from bullets increased" 0.75
+			}
+			ItemAttributes
+			{
+				ItemName "The Persian Persuader"
+				"fire rate bonus" 0.6
+				"damage bonus" 2.5
+				"heal on kill" 2500
+				"applies snare effect" 5
+				"damage all connected" 1
+				"critboost on kill" 4
+				"speed_boost_on_kill" 4
+				"charge recharge rate increased" 2.5
+			}
+		}
+		T_TFBot_Chaos_Boom
+		{
+			Class Demoman
+			Name "Bewn Boom"
+			Health 31550
+			Skill Expert
+			Scale 1.9
+			Attributes "MiniBoss"
+			Attributes "UseBossHealthBar"
+			Attributes "AlwaysCrit"
+			Attributes "HoldFireUntilFullReload"
+			Item "Scotch Bonnet"
+			Item "The Iron Bomber"
+			CharacterAttributes
+			{
+				"move speed penalty" 0.45
+				"airblast vulnerability multiplier" 0.1
+				"airblast vertical vulnerability multiplier" 0.1
+				"damage force reduction" 0.3
+				"rage giving scale" 0.3
+				"override footstep sound set" 3
+			}
+			ItemAttributes
+			{
+				ItemName "The Iron Bomber"
+				"fire rate bonus" 0.05
+				"damage penalty" .85
+				"faster reload rate" 1.4
+				"projectile spread angle penalty" 5
+				"blast radius increased" 3
+				"damage bonus vs burning" 3
+				"set damagetype ignite" 1
+				"use large smoke explosion" 1
+				"restore health on kill" 5
+			}
+		}
+		T_TFBot_Chaos_Crackshot
+		{
+			Class Heavyweapons
+			Name "Crackshot"
+			Health 32510
+			Skill Expert
+			Scale 1.9
+			Attributes "MiniBoss"
+			Attributes "UseBossHealthBar"
+			WeaponRestrictions SecondaryOnly
+			Item "Security Shades"
+			Item tf_weapon_shotgun_hwg
+			ClassIcon heavy_shotgun_giant
+			CharacterAttributes
+			{
+				"move speed penalty" 0.45
+				"airblast vulnerability multiplier" 0.1
+				"airblast vertical vulnerability multiplier" 0.1
+				"damage force reduction" 0.3
+				"rage giving scale" 0.3
+				"override footstep sound set" 3
+			}
+			ItemAttributes
+			{
+				ItemName tf_weapon_shotgun_hwg
+				"fire rate penalty" 3
+				"faster reload rate" 0.8
+				"bullets per shot bonus" 50
+				"spread penalty" 5
+				"damage penalty" 0.75
+				"restore health on kill" 10
+				"attack projectiles" 2
+				"speed_boost_on_kill" 4
+				"apply z velocity on damage" -400
+				"apply look velocity on damage" -400
+			}
+		}
+		T_TFBot_Chaos_Heat
+		{
+			Class Heavyweapons
+			Name "Baron Von Heat"
+			Health 33830
+			Skill Expert
+			Scale 1.9
+			Attributes "MiniBoss"
+			Attributes "UseBossHealthBar"
+			Item "The Wilson Weave"
+			Item "The Huo Long Heatmaker"
+			ClassIcon heavy_heater
+			CharacterAttributes
+			{
+				"move speed penalty" 0.45
+				"airblast vulnerability multiplier" 0.1
+				"airblast vertical vulnerability multiplier" 0.1
+				"damage force reduction" 0.3
+				"rage giving scale" 0.3
+				"override footstep sound set" 3
+			}
+			ItemAttributes
+			{
+				ItemName "The Huo Long Heatmaker"
+				"fire rate penalty" 1.1
+				"set damagetype ignite" 1
+				"damage bonus vs burning" 2.5
+				"apply z velocity on damage" -250
+				"apply look velocity on damage" -250
+				"projectile penetration" 2
+				"dmg penalty vs nonburning" 0.5
+				"crit vs burning players" 1
+				"override projectile type" 6
+			}
+		}
+		T_TFBot_Chaos_Compact
+		{
+			Class Heavyweapons
+			Name "Compaction"
+			Health 30520
+			Skill Expert
+			Scale 1.9
+			Attributes "MiniBoss"
+			Attributes "UseBossHealthBar"
+			Item "The Trash Man"
+			Item "Iron Curtain"
+			ClassIcon heavy_deflector_push
+			CharacterAttributes
+			{
+				"move speed penalty" 0.45
+				"airblast vulnerability multiplier" 0.1
+				"airblast vertical vulnerability multiplier" 0.1
+				"damage force reduction" 0.3
+				"rage giving scale" 0.3
+				"override footstep sound set" 3
+				"jarate backstabber" 1
+			}
+			ItemAttributes
+			{
+				ItemName "Iron Curtain"
+				"bullets per shot bonus" 2.5
+				"fire rate bonus" 0.75
+				"damage bonus" 1.25
+				"heal on kill" 2500
+				"bleeding duration" 6
+				"projectile penetration" 2
+				"energy weapon penetration" 1
+				"attack projectiles" 2
+				"spunup_damage_resistance" .5
+				"apply z velocity on damage" 200
+				"apply look velocity on damage" 200
+			}
+		}
+		T_TFBot_Chief_Pyro_InvasionC
+		{
+			Class Pyro
+			Health 45000
+			Name "? ? ?"
+			Scale 1.9
+			Skill Expert
+			Attributes "MiniBoss"
+			Attributes "UseBossHealthBar"
+			Item "The Dragon's Fury"
+			Item "The Triclops"
+			ClassIcon pyro_giant
+			CharacterAttributes
+			{
+				"dmg taken from bullets reduced" 0
+				"dmg taken from fire reduced" 0
+				"dmg taken from blast reduced" 0
+				"dmg from melee increased" 0
+				"dmg taken from crit increased" 1.25
+				"move speed bonus" 0.45
+				"airblast vulnerability multiplier" 0.4
+				"airblast vertical vulnerability multiplier" 0.4
+				"damage force reduction" 0.6
+				"rage giving scale" 0.1
+				"override footstep sound set" 3
+			}
+			ItemAttributes
+			{
+				ItemName "The Dragon's Fury"
+				"is_festivized" 1
+				"mult_item_meter_charge_rate" 0.7
+				"damage bonus" 2.6
+			}
+		}
+	}
+}

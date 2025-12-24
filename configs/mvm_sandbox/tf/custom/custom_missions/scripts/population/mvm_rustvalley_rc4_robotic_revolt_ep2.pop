@@ -1,0 +1,2663 @@
+#base robot_standard.pop
+#base robot_gatebot.pop 
+#base robot_giant.pop
+WaveSchedule
+{
+	StartingCurrency 1200
+	RespawnWaveTime 3
+	FixedRespawnWaveTime 1
+	CanBotsAttackWhileInSpawnRoom no
+	
+	TextPrintTime 0  
+	MaxSpectators 0  
+	RobotLimit 26  
+	NoMissionInfo 1  
+	WaveStartCountdown 3  
+	
+	OverrideSounds  
+	{
+		"music.mvm_lost_wave"					"music\stingers\hl1_stinger_song8.mp3"
+		"MVM.GiantHeavyExplodes"				"ambient\explosions\explode_7.wav"
+		"MVM.GiantCommonExplodes"				"ambient\explosions\explode_7.wav"
+	}
+	
+	PlayerAttributes  
+	{	
+		Scout
+		{
+			"increase player capture value" -1
+		}
+	}
+	
+	ExtraSpawnPoint  
+	{
+		Name "spawn_red" //-3225 -703 -194
+		TeamNum 3
+		X "-3225"
+		Y "-703"
+		Z "-194"
+	}
+	ExtraSpawnPoint  
+	{
+		Name "spawn_barricade" //-4216 456 -303
+		TeamNum 3
+		X "-4216"
+		Y "456"
+		Z "-303"
+	}
+	ExtraSpawnPoint  
+	{
+		Name "spawn_hatch1" //-2898 456 -159
+		TeamNum 3
+		X "-2898"
+		Y "456"
+		Z "-159"
+	}
+	ExtraSpawnPoint  
+	{
+		Name "spawn_hatch2" //-3361 1358 -253
+		TeamNum 3
+		X "-3361"
+		Y "1358"
+		Z "-253"
+	}
+	ExtraSpawnPoint
+	{
+		Name "spawn_gateA" //-400 -276 -123
+		TeamNum 3
+		X "-400"
+		Y "-276"
+		Z "-123"
+	}
+	ExtraSpawnPoint
+	{
+		Name "spawn_gateB" //-1335 2428 -199
+		TeamNum 3
+		X "-1335"
+		Y "2428"
+		Z "-199"
+	}
+	Templates
+	{
+		T_TFBot_Titanium_Tyrant
+		{
+			Name "Titanium Tyrant"
+			Class Soldier
+			Skill Expert
+			Health 20000
+			ClassIcon soldier_barrage
+			Attributes UseBossHealthBar
+			Attributes MiniBoss
+			Attributes AlwaysCrit
+			Attributes HoldFireUntilFullReload
+			Item	"Big Steel Jaw of Summer Fun"
+			Item	"The Dark Age Defender"
+			Item	"Full Metal Drill Hat"
+			Tag	bot_giant
+			ItemAttributes
+			{
+				ItemName	"Full Metal Drill Hat"
+				"set item tint RGB" 5801378
+			}
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_ROCKETLAUNCHER"
+				"projectile spread angle penalty" 5
+				"clip size upgrade atomic" 26.0
+				"faster reload rate" 0.22
+				"fire rate bonus" 0.2
+			}
+			CharacterAttributes
+			{
+				"airblast vertical vulnerability multiplier" 0.1
+				"airblast vulnerability multiplier" 0.1
+				"damage force reduction" 0.1
+				"move speed bonus" 0.5
+				"override footstep sound set" 3
+				"Projectile speed increased" 0.65
+				"rage giving scale" 0.1
+			}
+		}
+		GateCapture
+		{
+			Class	Scout
+			Name "The Robots"
+			Health	15
+			
+			BehaviorModifiers push
+			Attributes IgnoreFlag
+			Tag nav_prefer_gate1_flank
+			Tag bot_gatebot
+			WeaponRestrictions	MeleeOnly
+			
+			CharacterAttributes
+			{
+				"increase player capture value" 100
+				"is suicide counter" 1
+				"voice pitch scale" 0
+				"move speed penalty" 0.000000000001
+				"increased jump height" 0.000000000001
+			}
+			Taunt  
+			{
+				Delay 0
+				Cooldown 0
+				Repeats 0
+			}
+		}
+		T_TFBot_Soldier_RocketPush_Fixed
+		{
+			Class	Soldier
+			Name "Blast Soldier"
+			Skill Expert
+			ClassIcon	soldier_libertylauncher
+			Attributes	HoldFireUntilFullReload
+			Item	"The Liberty Launcher"
+			Item	"Jumper's Jeepcap"
+			ItemAttributes
+			{
+				ItemName	"The Liberty Launcher"
+				"projectile spread angle penalty" 2
+				"projectile speed decreased" 0.5
+				"Blast radius decreased" 1.2
+				"damage causes airblast" 1
+				"reload time decreased" 1.5
+				"clip size penalty" 0.75
+				"clip size bonus" 1
+				"fire rate bonus" 0.001
+				"damage penalty" 0.45
+			}
+		}
+		T_TFBot_Engineer_Shotgun_Mobber
+		{
+			Class Engineer
+			Name "Shotgun Engineer"
+			Skill Normal
+			ClassIcon	heavy_shotgun
+			Attributes	IgnoreFlag
+			Action Mobber
+			Health	275
+		}
+		T_TFBot_Engineer_Shotgun_Bomb
+		{
+			Class Engineer
+			Name "Shotgun Engineer"
+			Skill Normal
+			ClassIcon	heavy_shotgun
+			Action	FetchFlag
+			Health	275
+		}
+		T_TFBot_Soldier_Bison
+		{
+			Class Soldier
+			Name "Bison Soldier"
+			WeaponRestrictions SecondaryOnly
+			Skill Normal
+			ClassIcon	soldier_bison
+			Item	"Lord Cockswain's Pith Helmet"
+			Item	"The Righteous Bison"
+		}
+		Yoovy_Scout_Sandman_Armored
+		{
+			Class Scout
+			Health 900
+			Scale 1.5
+			Name "Armored Minor League Scout"
+			WeaponRestrictions MeleeOnly
+			Skill Hard
+			ClassIcon	scout_stun_armored
+			Item	"Das Metalmeatencasen"
+			Item	"Batter's Helmet"
+			Item	"The Sandman"
+			ItemAttributes
+			{
+				ItemName	"The Sandman"
+				"max health additive penalty" -0
+			}
+			CharacterAttributes
+			{
+				"move speed penalty" 0.75 
+				"head scale" 0.7
+			}
+		}
+		T_TFBot_Heavy_Melee
+		{
+			Class HeavyWeapons
+			Name "Brawler Heavy"
+			WeaponRestrictions MeleeOnly
+			ClassIcon heavy_fist_nys
+			Item "Der Maschinensoldaten-Helm"
+		}
+		T_TFBot_Heavy_Lightweight
+		{
+			Class	HeavyWeapons
+			WeaponRestrictions	MeleeOnly
+			ClassIcon heavy_gru
+			Name "Lightweight Champ"
+			Item "Gloves of Running Urgently MvM"
+			Item "Pugilist's Protector"
+			ItemAttributes
+			{
+				ItemName "Pugilist's Protector"
+				"set item tint RGB"	15185211
+			}
+		}
+		T_TFBot_Pyro_VolcanoFragment
+		{
+			Class Pyro
+			Name "Volcano Fragment Pyro"
+			WeaponRestrictions MeleeOnly
+			Skill Hard
+			ClassIcon pyro_jug_volcanofrag
+			Item "Sharpened Volcano Fragment"
+			Item "Firewall Helmet"
+			ItemAttributes
+			{
+				ItemName "Sharpened Volcano Fragment"
+				"attach particle effect" 13
+			}
+			ItemAttributes
+			{
+				ItemName "Firewall Helmet"
+				"set item tint RGB" 13595446
+			}
+		}
+		T_TFBot_Pyro_Axtinguisher
+		{
+			Class Pyro
+			Name "Axtinguisher Pyro"
+			WeaponRestrictions MeleeOnly
+			Skill Hard
+			ClassIcon pyro_jug_axtinguisher
+			Item "The Axtinguisher"
+			Item "Firewall Helmet"
+			ItemAttributes
+			{
+				ItemName "Firewall Helmet"
+				"set item tint RGB" 8289918
+			}
+		}
+		T_TFBot_Heavy_Mittens
+		{
+			Class HeavyWeapons
+			Name "Mittens Heavy"
+			WeaponRestrictions	MeleeOnly
+			ClassIcon	heavy_mittens
+			Item	"The Holiday Punch"
+			CharacterAttributes
+			{
+				"move speed bonus" 1.2
+				"always crit" 1
+			}
+		}
+		T_TFBot_Sniper_Melee
+		{
+			Class Sniper
+			Name "Kukri Sniper"
+			WeaponRestrictions MeleeOnly
+			Skill Hard
+			ClassIcon sniper_kukri_lite
+			Item "Shooter's Tin Topi"
+		}
+		T_TFBot_Heavy_Heater
+		{
+			Class HeavyWeapons
+			Name "Heater Heavy"
+			ClassIcon heavy_heater
+			Item "The Huo Long Heatmaker"
+		}
+		T_TFBot_Heavy_Tomislav
+		{
+			Class HeavyWeapons
+			Name "Tomislav Heavy"
+			ClassIcon heavy
+			Item "Capone's Capper"
+			Item "Tomislav"
+		}
+		T_TFBot_Heavy_FamilyBusiness
+		{
+			Class HeavyWeapons
+			Name "Family Business Heavy"
+			ClassIcon heavy
+			Skill	Hard
+			WeaponRestrictions SecondaryOnly
+			Item "The Family Business"
+			Item "Capone's Capper"
+		}
+		T_TFBot_Scout_Milk
+		{
+			Class Scout
+			Name "Milk Master"
+			Skill Normal
+			ClassIcon	scout_milk
+			MaxVisionRange	500
+			WeaponRestrictions SecondaryOnly
+			Item	"The Milkman"
+			Item	"Mad Milk"
+			ItemAttributes
+			{
+				ItemName	"Mad Milk"
+				"effect bar recharge rate increased" -2
+				"fire rate penalty" 3
+			}
+		}
+		T_TFBot_Scout_Cleaver
+		{
+			Class Scout
+			Name "Cleaver Scout"
+			Skill Expert
+			ClassIcon	scout_cleaver
+			MaxVisionRange	500
+			WeaponRestrictions SecondaryOnly
+			Item	"The Flying Guillotine"
+			Item	"The Airdog"
+			ItemAttributes
+			{
+				ItemName	"The Flying Guillotine"
+				"effect bar recharge rate increased" -2
+				"fire rate penalty" 2.5
+			}
+		}
+		T_TFBot_Scout_Bonk_Fixed
+		{
+			Class Scout
+			Name "Bonk Scout"
+			Skill Hard
+			ClassIcon	scout_bonk_nys
+			WeaponRestrictions MeleeOnly
+			Item	"Bonk! Atomic Punch"
+			Item	"Bonk Leadwear"
+			Item	"The Atomizer"
+			ItemAttributes
+			{
+				ItemName	"The Atomizer"
+				"single wep deploy time increased" 1
+				"dmg penalty vs players" 1
+				"air dash count" 0
+			}
+		}
+		T_TFBot_Scout_WrapAssassin
+		{
+			Class Scout
+			Name "Ornament Scout"
+			Skill Hard
+			ClassIcon	scout_wrap_lite
+			WeaponRestrictions MeleeOnly
+			Item	"The Wrap Assassin"
+			Item	"Summer Hat"
+			ItemAttributes
+			{
+				ItemName	"Summer Hat"
+				"set item tint RGB"	5801378
+			}
+		}
+		T_TFBot_Scout_Fast
+		{
+			Class Scout
+			Health 100
+			Name "Not so Super Scout"
+			WeaponRestrictions MeleeOnly
+			ClassIcon	scout_fast
+			Item	"The Holy Mackerel"
+			Item	"Bonk Boy"
+			CharacterAttributes
+			{
+				"move speed bonus"	1.2
+			}
+		}
+		T_TFBot_Scout_Sandman_Fixed
+		{
+			Class Scout
+			Name "Minor League Scout"
+			WeaponRestrictions MeleeOnly
+			Skill Hard
+			ClassIcon	scout_stun
+			Item	"Batter's Helmet"
+			Item	"The Sandman"
+			ItemAttributes
+			{
+				ItemName	"The Sandman"
+				"max health additive penalty" -0
+			}
+		}
+		T_TFBot_Scout_FAN_Fixed
+		{
+			Class Scout
+			Name "Force-a-Nature Scout"
+			Skill Expert
+			ClassIcon	scout_fan
+			MaxVisionRange 500
+			Item	"The Force-a-Nature"
+			Item	"The Boly Boy"
+		}
+		Red_Medic
+		{
+			Name "Red Medic"
+			Class Medic
+			Skill Expert
+			ClassIcon	red2_lite
+			Attributes	SpawnWithFullCharge
+			Attributes	IgnoreFlag
+			Tag	bot_giant
+			
+			Item	"The Surgical Survivalist"
+			Item	"Coldfront Carapace"
+			Item	"Berlin Brain Bowl"
+			
+			CharacterAttributes
+			{
+				"collect currency on kill" 1
+			}
+			VoiceCommand  
+			{
+				Delay 0
+				Repeats 1
+				Type "Medic"
+				IfHealthBelow 75
+			}
+			UseHumanModel 1  
+			UseBestWeapon 1  
+			Addcond  
+			{
+				Index 43
+			}
+		}
+		Red_Engineer
+		{
+			Name "Red Engineer"
+			Class Engineer
+			Skill Expert
+			ClassIcon	red2_lite
+			Attributes	IgnoreFlag
+			Action	Mobber
+			Tag	bot_giant
+			
+			Item	"Head Mounted Double Observatory"
+			Item	"Wild West Waistcoat"
+			Item	"Texas Ten Gallon"
+			Item	"The Widowmaker"
+			Item	"The Gunslinger"
+			Item	"Roboot"
+			
+			CharacterAttributes
+			{
+				"collect currency on kill" 1
+			}
+			VoiceCommand  
+			{
+				Delay 0
+				Repeats 1
+				Type "Medic"
+				IfHealthBelow 63
+			}
+			UseBestWeapon 1  
+			UseHumanModel 1  
+			Addcond  
+			{
+				Index 43
+			}
+		}
+		Red_Scout_Scared
+		{
+			Name "Red Scout"
+			Class Scout
+			Skill Expert
+			ClassIcon	red2_lite
+			Attributes	IgnoreFlag
+			Action	Mobber
+			Tag	bot_giant
+			
+			Item	"EOTL_blinks_breeches"
+			Item	"Transparent Trousers"
+			Item	"The Airdog"
+			Item	"Flak Jack"
+			
+			CharacterAttributes
+			{
+				"collect currency on kill" 1
+			}
+			NoCrouchButtonRelease 1  
+			VoiceCommand  
+			{
+				Delay 0
+				Repeats 1
+				Type "Medic"
+				IfHealthBelow 63
+			}
+			UseBestWeapon 1  
+			UseHumanModel 1  
+			Addcond  
+			{
+				Index 43
+			}
+			FireWeapon  
+            {
+				Delay 5
+				Repeats 1
+                Duration 3
+				Type "Crouch"
+			}
+		}
+		Red_Scout
+		{
+			Name "Red Scout"
+			Class Scout
+			Skill Expert
+			ClassIcon	red2_lite
+			Attributes	IgnoreFlag
+			Action	Mobber
+			Tag	bot_giant
+			
+			Item	"EOTL_blinks_breeches"
+			Item	"Transparent Trousers"
+			Item	"The Airdog"
+			Item	"Flak Jack"
+			
+			CharacterAttributes
+			{
+				"collect currency on kill" 1
+			}
+			VoiceCommand  
+			{
+				Delay 0
+				Repeats 1
+				Type "Medic"
+				IfHealthBelow 63
+			}
+			UseBestWeapon 1  
+			UseHumanModel 1  
+			Addcond  
+			{
+				Index 43
+			}
+		}
+		Red_Soldier
+		{	
+			Name "Red Soldier"
+			Class Soldier
+			Skill Expert
+			ClassIcon	red2_lite
+			Attributes	IgnoreFlag
+			Action	Mobber
+			Tag	bot_giant
+			
+			Item	"The Cuban Bristle Crisis"
+			Item	"The Team Captain"
+			Item	"Veterans Attire"
+			
+			CharacterAttributes
+			{
+				"collect currency on kill" 1
+			}
+			VoiceCommand  
+			{
+				Delay 0
+				Repeats 1
+				Type "Medic"
+				IfHealthBelow 101
+			}
+			UseBestWeapon 1  
+			UseHumanModel 1  
+			Addcond  
+			{
+				Index 43
+			}
+		}
+		Red_Heavy
+		{
+			Name "Red Heavy"
+			Class Heavy
+			Skill Expert
+			ClassIcon	red2_lite
+			Attributes	IgnoreFlag
+			Action	Mobber
+			Tag	bot_giant
+			
+			Item	"Officer's Ushanka"
+			Item	"The Heavy Lifter"
+			Item	"Iron Curtain"
+			Item	"Jungle Booty"
+			
+			CharacterAttributes
+			{
+				"collect currency on kill" 1
+			}
+			VoiceCommand  
+			{
+				Delay 0
+				Repeats 1
+				Type "Medic"
+				IfHealthBelow 150
+			}
+			UseBestWeapon 1  
+			UseHumanModel 1  
+			Addcond  
+			{
+				Index 43
+			}
+		}
+		Red_Sniper
+		{	
+			Name "Red Sniper"
+			Class Sniper
+			Skill Expert
+			ClassIcon	red2_lite
+			Attributes	IgnoreFlag
+			Action	Mobber
+			Tag	bot_giant
+			
+			Item	"The Birdman of Australiacatraz"
+			Item	"The Huntsman's Essentials"
+			Item	"The Huntsman"
+			Item	"Trophy Belt"
+			
+			CharacterAttributes
+			{
+				"collect currency on kill" 1
+			}
+			AimAt Head  
+			VoiceCommand  
+			{
+				Delay 0
+				Repeats 1
+				Type "Medic"
+				IfHealthBelow 63
+			}
+			UseBestWeapon 1  
+			UseHumanModel 1  
+			Addcond  
+			{
+				Index 43
+			}
+		}
+	}
+	PointTemplates  
+	{
+		zones
+		{ 
+			NoFixup 1
+			training_annotation
+			{
+			  "targetname" "anno_area_b"
+			  "display_text" "Area B is open!"
+			  "lifetime" "5"
+			  "origin" "-4220 718 -203"
+			}
+			NoFixup 1
+			training_annotation
+			{
+			  "targetname" "anno_area_c"
+			  "display_text" "Area C is open!"
+			  "lifetime" "5"
+			  "origin" "1486 -419 -190"
+			}
+			NoFixup 1
+			training_annotation
+			{
+			  "targetname" "anno_gates"
+			  "display_text" "Recapture these gates push the robots back!"
+			  "lifetime" "5"
+			  "origin" "-1372 2421 -99"
+			}
+			NoFixup 1
+			training_annotation
+			{
+			  "targetname" "anno_forward"
+			  "display_text" "The Forward Upgrade Station is open for 30 seconds!"
+			  "lifetime" "5"
+			  "origin" "440 557 -9"
+			}
+		}
+		intro_relay
+        {
+            NoFixup 1
+            logic_relay
+            {
+                "OnTrigger" "intro_barricade,kill,,0,-1"
+                "targetname" "barricade_kill_relay"
+            }
+			env_shake
+            {
+                "targetname" "shaker"
+                "amplitude" "16"
+                "spawnflags" "5"
+                "duration" "4"
+                "frequency" "255"
+                "origin" "0 0 0"
+            }
+			env_shake
+            {
+                "targetname" "shaker_small1"
+                "amplitude" "8"
+                "spawnflags" "5"
+                "duration" "2"
+                "frequency" "255"
+                "origin" "0 0 0"
+            }
+			env_shake
+            {
+                "targetname" "shaker_small2"
+                "amplitude" "8"
+                "spawnflags" "5"
+                "duration" "2"
+                "frequency" "255"
+                "origin" "0 0 0"
+            }
+        }
+		intro_props
+        {     
+            NoFixup 1
+            prop_dynamic
+            {
+                "targetname" "intro_barricade"
+				"model" "models\props_2fort\sniper_fence01.mdl"
+				"disableshadows" "1"
+				"origin" "-4371 348 -337"
+				"angles" "0 -90 0"
+				"modelscale" "2"
+				"solid" "6"
+            }
+            NoFixup 1
+            prop_dynamic
+            {
+                "targetname" "intro_barricade"
+				"model" "models\props_2fort\sniper_fence02.mdl"
+				"disableshadows" "1"
+				"origin" "-4171 355 -337"
+				"angles" "0 -90 0"
+				"modelscale" "2"
+				"solid" "6"
+            }
+            prop_dynamic
+            {
+                "targetname" "intro_barricade"
+				"model" "models/props_vehicles/train_flatcar_container.mdl"
+				"origin" "-4229 376 -307"
+				"angles" "0 0 0"
+				"disableshadows" "1"
+				"renderamt" "110"
+				"rendermode" "1"
+				"solid" "6"
+            }
+        }
+		props
+		{ 	
+			//UPGRADE DEMOMAN
+			prop_dynamic
+            {
+				"targetname" "demoupgrade"
+                "model" "models\player\demo.mdl"
+                "origin" "-4201 -1105 -281"
+                "angles" "0 0 0"
+                "defaultanim" "competitive_loserstate_idle"
+                "disableshadows" "1"
+                "disablebonefollowers" "1"
+				"body" "4"
+            }
+			prop_dynamic_ornament
+			{
+				"model" "models/workshop/player/items/demo/hwn2018_gaelic_glutton/hwn2018_gaelic_glutton.mdl"
+                "origin" "-4201 -1105 -281"
+                "angles" "0 0 0"
+                "disableshadows" "1"
+                "disablebonefollowers" "1"
+				"InitialOwner" "demoupgrade"
+			} 
+			prop_dynamic_ornament
+			{
+				"model" "models/workshop/player/items/demo/sum20_hazard_headgear/sum20_hazard_headgear.mdl"
+                "origin" "-4201 -1105 -281"
+                "angles" "0 0 0"
+                "disableshadows" "1"
+                "disablebonefollowers" "1"
+				"InitialOwner" "demoupgrade"
+			}
+			prop_dynamic_ornament
+			{
+				"model" "models/workshop/player/items/demo/sbox2014_juggernaut_jacket/sbox2014_juggernaut_jacket.mdl"
+                "origin" "-4201 -1105 -281"
+                "angles" "0 0 0"
+                "disableshadows" "1"
+                "disablebonefollowers" "1"
+				"InitialOwner" "demoupgrade"
+			}
+			//FORWARD UPGRADE SPY
+			prop_dynamic
+            {
+                "model" "models\player\spy.mdl"
+                "origin" "522 741 -109"
+                "angles" "0 -90 0"
+                "defaultanim" "competitive_loserstate_idle"
+                "disableshadows" "1"
+                "disablebonefollowers" "1"
+				"body" "1"
+            }
+			//LEFT DOOR PROPS
+			prop_dynamic
+			{
+				"model" "models\props_coalmines\wood_debris2.mdl"
+				"disableshadows" "1"
+				"origin" "-2882 281 -123"
+				"angles" "0 0 0"
+			}
+			prop_dynamic
+			{
+				"model" "models\props_2fort\corrugated_metal006.mdl"
+				"disableshadows" "1"
+				"origin" "-2800 281 -123"
+				"angles" "0 -90 0"
+				"modelscale" "0.55"
+			} 
+			prop_dynamic
+			{
+				"model" "models\props_badlands\barrel02.mdl"
+				"disableshadows" "1"
+				"origin" "-2793 227 -183"
+				"angles" "0 0 0"
+				"solid" "6"
+			}
+			prop_dynamic
+			{
+				"model" "models\props_badlands\barrel02.mdl"
+				"disableshadows" "1"
+				"origin" "-2863 241 -183"
+				"angles" "0 -45 0"
+				"solid" "6"
+			}
+			//BIG WINDOW PROPS
+			prop_dynamic
+			{
+				"model" "models\props_2fort\corrugated_metal003.mdl"
+				"disableshadows" "1"
+				"origin" "-3502 270 -180"
+				"angles" "0 -90 90"
+				"modelscale" "3"
+			}
+		}
+		main
+		{
+			NoFixup 1
+			logic_relay
+			{
+				"onspawn" "door_red_large_win_4,lock,,0,-1"
+				"onspawn" "initwaverelay,addoutput,ontrigger field1:enable::0:-1,0,-1"
+			}
+			logic_relay
+			{
+				"targetname" "opendoors_relay"
+				"ontrigger" "door_red_large_win_4,unlock,,0,-1"
+				"ontrigger" "door_red_large_win_4,open,,0.01,-1"
+			}
+			prop_dynamic
+			{
+				"targetname" "prop_locker_red_1"
+				"model" "models/props_gameplay/resupply_locker.mdl"
+				"disableshadows" "1"
+				"origin" "-3585 -954 -281"
+				"angles" "0 -90 0"
+				"solid" "6"
+			}
+			func_regenerate
+			{
+				"associatedmodel" "prop_locker_red_1"
+				"teamnum" "2"
+				"origin" "-3585 -954 -281"
+				"mins" "-48 -48 -64"
+				"maxs" "48 48 64"
+			}
+			prop_dynamic
+			{
+				"targetname" "field1"
+				"model" "models/props_vehicles/train_flatcar_container.mdl"
+				"origin" "-4229 376 -307"
+				"angles" "0 180 0"
+				"disableshadows" "1"
+				"renderamt" "110"
+				"rendermode" "1"
+			}
+			func_forcefield
+			{
+				"targetname" "field1"
+				"teamnum" "3"
+				"origin" "-4229 376 -307"
+				"mins" "-1760 -80 -1280"
+				"maxs" "1760 80 1280"
+			}
+			logic_relay
+			{
+				"targetname" "field1disable_relay"
+				"ontrigger" "field1,disable,,0,-1"
+			}
+			prop_dynamic
+			{
+				"targetname" "field2"
+				"model" "models/props_vehicles/train_flatcar_container.mdl"
+				"origin" "785 303 -167"
+				"angles" "0 90 0"
+				"disableshadows" "1"
+				"renderamt" "110"
+				"rendermode" "1"
+				"modelscale" "2"
+			}
+			func_forcefield
+			{
+				"targetname" "field2"
+				"teamnum" "3"
+				"origin" "785 203 220"
+				"mins" "-137 -168 -379"
+				"maxs" "981 255 1333"
+			}
+			func_forcefield
+			{
+				"targetname" "field2"
+				"teamnum" "3"
+				"origin" "755 570 -90"
+				"mins" "-100 -100 -100"
+				"maxs" "100 100 100"
+			}
+			logic_relay
+			{
+				"targetname" "field2disable_relay"
+				"ontrigger" "field2,disable,,0,-1"
+			}
+		}
+	}
+	//Sentrybuster
+	Mission
+	{
+		Where spawnbot_mid_slow0
+		Where spawnbot_main_slow1
+		Objective DestroySentries
+		InitialCooldown	30
+		CooldownTime 30
+		DesiredCount	1
+		BeginAtWave 1
+		RunForThisManyWaves 7
+		TFBot
+		{
+			Template	T_TFBot_Sentrybuster
+			Tag bot_giant
+		}
+	}
+	SpawnTemplate "intro_relay"  
+	SpawnTemplate "intro_props"  
+	SpawnTemplate "zones"  
+	SpawnTemplate "props"  
+	SpawnTemplate "main"  
+	//WAVE 1
+	Wave
+	{
+		Explanation  
+		{
+			Line "Welcome to {blue}Robotic Revolt: Episode 2"
+			Line "{ffbdbd}The mercenaries are in their hideout preparing for their next move."
+			Line "{ffbdbd}However it seems the robots are already one step ahead..."
+		}
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay_endurance
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	RED_SCOUT_SCARED
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBetweenSpawns	0
+			Where	spawn_red
+			Support Limited
+			TFBot
+			{
+				Template	Red_Scout_Scared
+			}
+			FirstSpawnWarningSound "vo\compmode\cm_scout_pregamefirst_rare_05.mp3"
+			FirstSpawnMessage "{red}Red Scout: {reset}Here's the plan, Bat. I'll run around fast, being da best and you be in my hand and bash heads! Got it?"  
+			
+			WaitBeforeStarting	0
+		}
+		WaveSpawn
+		{
+			Name	RED_SCOUT
+			WaitForAllDead	RED_SCOUT_SCARED
+			TotalCurrency	0
+			TotalCount	2
+			MaxActive	1
+			SpawnCount	1
+			WaitBetweenSpawns	0
+			Where	spawn_red
+			Support 1
+			TFBot
+			{
+				Template	Red_Scout
+			}
+			
+			WaitBeforeStarting	6
+		}
+		WaveSpawn
+		{
+			FirstSpawnWarningSound "vo\compmode\cm_scout_pregamefirst_rare_05.mp3"
+		}
+		WaveSpawn
+		{
+			FirstSpawnWarningSound "vo\compmode\cm_scout_pregamefirst_rare_05.mp3"
+		}
+		WaveSpawn
+		{
+			FirstSpawnWarningSound "ambient\alarms\doomsday_lift_alarm.wav"
+			
+			WaitBeforeStarting	5
+		}
+		WaveSpawn
+		{
+			FirstSpawnWarningSound "vo\scout_painsevere03.mp3"
+			FirstSpawnMessage "{red}Red Scout: {reset}Ahh!"  
+			
+			WaitBeforeStarting	5
+		}
+		WaveSpawn
+		{
+			FirstSpawnWarningSound "vo\scout_painsevere03.mp3"
+			
+			WaitBeforeStarting	5
+		}
+		WaveSpawn
+		{
+			FirstSpawnWarningSound "vo\mvm_wave_start08.mp3"
+			FirstSpawnMessage "{yellow}Administrator: {reset}The robots are here! Protect Mann Co!"  
+			
+			WaitBeforeStarting	6
+		}
+		WaveSpawn
+		{
+			Name	RED_SOLDIER
+			TotalCurrency	0
+			TotalCount	2
+			MaxActive	1
+			SpawnCount	1
+			WaitBetweenSpawns	6
+			Where	spawn_red
+			Support 1
+			TFBot
+			{
+				Template	Red_Soldier
+			}
+			FirstSpawnWarningSound "vo\soldier_mvm_ask_ready01.mp3"
+			FirstSpawnMessage "{red}Red Soldier: {reset}Fall in, men!"  
+			
+			WaitBeforeStarting	9
+		}
+		WaveSpawn
+		{
+			Name	RED_SNIPER
+			TotalCurrency	0
+			TotalCount	2
+			MaxActive	1
+			SpawnCount	1
+			WaitBetweenSpawns	6
+			Where	spawn_red
+			Support 1
+			TFBot
+			{
+				Template	Red_Sniper
+			}
+			FirstSpawnWarningSound "vo\sniper_mvm_mannhattan_gate_atk01.mp3"
+			FirstSpawnMessage "{red}Red Sniper: {reset}The robots are poundin' the bloody gate!"  
+			
+			WaitBeforeStarting	10
+		}
+		WaveSpawn
+		{
+			FirstSpawnWarningSound "ambient\explosions\explode_3.wav"
+			
+			WaitBeforeStarting	10
+			FirstSpawnOutput
+			{
+				Target	shaker_small1
+				Action  StartShake
+			}
+		}
+		WaveSpawn
+		{
+			Name	RED_HEAVY
+			TotalCurrency	0
+			TotalCount	2
+			MaxActive	1
+			SpawnCount	1
+			WaitBetweenSpawns	6
+			Where	spawn_red
+			Support 1
+			TFBot
+			{
+				Template	Red_Heavy
+			}
+			FirstSpawnWarningSound "vo\heavy_mvm_taunt01.mp3"
+			FirstSpawnMessage "{red}Red Heavy: {reset}I am destroyer of metal men!"  
+			
+			WaitBeforeStarting	14
+		}
+		WaveSpawn
+		{
+			FirstSpawnWarningSound "ambient\explosions\explode_1.wav"
+			
+			WaitBeforeStarting	15
+			FirstSpawnOutput
+			{
+				Target	shaker_small2
+				Action  StartShake
+			}
+		}
+		WaveSpawn
+		{
+			FirstSpawnWarningSound "vo\mvm_general_wav_start02.mp3"
+			FirstSpawnMessage "{yellow}Administrator: {reset}Incoming robot battalion in three... two... one..."  
+			
+			WaitBeforeStarting	16
+		}
+		WaveSpawn
+		{
+			FirstSpawnWarningSound "ui\gamestartup18.mp3"
+			
+			WaitBeforeStarting	19
+		}
+		WaveSpawn
+		{
+			Name	KILLBARRICADE
+			FirstSpawnWarningSound	"mvm\mvm_tank_smash.wav"
+			FirstSpawnMessage "{blue}Giant Robot Heavy: {reset}All of you are {red}DEAD!"  
+			WaitBeforeStarting	21
+			FirstSpawnOutput
+			{
+				Target	barricade_kill_relay
+				Action	Trigger
+			}
+		}
+		WaveSpawn
+		{
+			FirstSpawnWarningSound "vo\mvm\mght\taunts\heavy_mvm_m_taunts01.mp3"
+			
+			WaitBeforeStarting	21
+			FirstSpawnOutput
+			{
+				Target	shaker
+				Action  StartShake
+			}
+		}
+		WaveSpawn
+		{
+			Name	GATEA
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	21
+			WaitBetweenSpawns	0
+			Where	spawn_gateA
+			Support	Limited
+			Squad
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template	GateCapture
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	GATEB
+			WaitForAllDead	GATEA
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			Where	spawn_gateB
+			Support	Limited
+			Squad
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template	GateCapture
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	BARRICADEBREAK
+			TotalCurrency	50
+			TotalCount	6
+			MaxActive	6
+			SpawnCount	6
+			WaitBeforeStarting	21
+			WaitBetweenSpawns	0
+			Where	spawn_barricade
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Heavyweapons
+					ClassIcon	sign_A
+					Attributes	IgnoreFlag
+					Action	Mobber
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_Bigheal
+					Name	"Big-Heal Medic"
+					Item	"The Surgeon's Stahlhelm"
+					ClassIcon	sign_a
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_Bigheal
+					Name	"Big-Heal Medic"
+					Item	"The Surgeon's Stahlhelm"
+					ClassIcon	sign_a
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_Bigheal
+					Name	"Big-Heal Medic"
+					Item	"The Surgeon's Stahlhelm"
+					ClassIcon	sign_a
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_Bigheal
+					Name	"Big-Heal Medic"
+					Item	"The Surgeon's Stahlhelm"
+					ClassIcon	sign_a
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_Bigheal
+					Name	"Big-Heal Medic"
+					Item	"The Surgeon's Stahlhelm"
+					ClassIcon	sign_a
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	HATCH
+			WaitForAllDead	BARRICADEBREAK
+			TotalCurrency	250
+			TotalCount	150
+			MaxActive	15
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0.5
+			Where	spawn_hatch2
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Soldier_RocketPush_Fixed
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Attributes IgnoreFlag
+					Action Mobber
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Engineer_Shotgun_Mobber
+					ClassIcon	sign_a
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavy_FamilyBusiness
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Attributes IgnoreFlag
+					Action Mobber
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavy_Tomislav
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Attributes IgnoreFlag
+					Action Mobber
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Sniper_Melee
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Attributes IgnoreFlag
+					Action Mobber
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Soldier_Bison
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Attributes IgnoreFlag
+					Action Mobber
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Pyro
+					WeaponRestrictions	MeleeOnly
+					Item	"Firewall Helmet"
+					Name "Fireaxe Pyro"
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Attributes IgnoreFlag
+					Action Mobber
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Pyro_VolcanoFragment
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Attributes IgnoreFlag
+					Action Mobber
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Pyro_Axtinguisher
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Attributes IgnoreFlag
+					Action Mobber
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavy_Mittens
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Attributes IgnoreFlag
+					Action Mobber
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavy_Melee
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Attributes IgnoreFlag
+					Action Mobber
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Fist
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Attributes IgnoreFlag
+					Action Mobber
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavy_Lightweight
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Attributes IgnoreFlag
+					Action Mobber
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavy_Heater
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Attributes IgnoreFlag
+					Action Mobber
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_WrapAssassin
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Attributes IgnoreFlag
+					Action Mobber
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_Milk
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Attributes IgnoreFlag
+					Action Mobber
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_Fast
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Attributes IgnoreFlag
+					Action Mobber
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_Cleaver
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Attributes IgnoreFlag
+					Action Mobber
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_Bonk_Fixed
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Attributes IgnoreFlag
+					Action Mobber
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_FAN_Fixed
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Attributes IgnoreFlag
+					Action Mobber
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_Sandman_Fixed
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Attributes IgnoreFlag
+					Action Mobber
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_Melee
+					Name	"Bat Scout"
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Attributes IgnoreFlag
+					Action Mobber
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Class	Scout
+					Attributes IgnoreFlag
+					Action Mobber
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Skill Normal
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Class	Scout
+					Attributes IgnoreFlag
+					Action Mobber
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Skill Normal
+					WeaponRestrictions	SecondaryOnly
+					Name	"Pistol Scout"
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Class	Sniper
+					Attributes IgnoreFlag
+					Action Mobber
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Skill Normal
+					WeaponRestrictions	SecondaryOnly
+					Name	"SMG Sniper"
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Class	Pyro
+					Attributes IgnoreFlag
+					Action Mobber
+					ClassIcon	sign_a
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Class	Demoman
+					Attributes IgnoreFlag
+					Action Mobber
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Skill Normal
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Demoman_Knight
+					Attributes IgnoreFlag
+					Action Mobber
+					ClassIcon	sign_a
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Class	Soldier
+					Attributes IgnoreFlag
+					Action Mobber
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Skill Normal
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Class	Soldier
+					Attributes IgnoreFlag
+					Action Mobber
+					WeaponRestrictions SecondaryOnly
+					Name "Shotgun Soldier"
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Skill Normal
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Class	Soldier
+					Attributes IgnoreFlag
+					Action Mobber
+					ClassIcon	sign_a
+					Tag	bot_giant
+					Skill Normal
+					Item	"The Direct Hit"
+					Name	"Direct Hit Soldier"
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Class	Heavy
+					Attributes IgnoreFlag
+					Action Mobber
+					ClassIcon	sign_a
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Shotgun
+					Name "Shotgun Heavy"
+					Attributes IgnoreFlag
+					Action Mobber
+					ClassIcon	sign_a
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Heavyweight_Champ
+					Attributes IgnoreFlag
+					Action Mobber
+					Skill Hard
+					ClassIcon	sign_a
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Sniper_Huntsman
+					Attributes IgnoreFlag
+					BehaviorModifiers Push
+					Action Mobber
+					ClassIcon	sign_a
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	HATCH
+			WaitForAllDead	BARRICADEBREAK
+			TotalCurrency	250
+			TotalCount	4
+			MaxActive	4
+			SpawnCount	1
+			WaitBeforeStarting	30
+			WaitBetweenSpawns	30
+			Where	spawn_hatch2
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Heavyweapons_Shotgun
+					Attributes IgnoreFlag
+					BehaviorModifiers Push
+					Action Mobber
+					ClassIcon	sign_A
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Giant_Soldier
+					Attributes IgnoreFlag
+					BehaviorModifiers Push
+					Action Mobber
+					ClassIcon	sign_A
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Giant_Soldier_RocketShotgun
+					Attributes IgnoreFlag
+					BehaviorModifiers Push
+					Action Mobber
+					ClassIcon	sign_A
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Giant_Pyro
+					Attributes IgnoreFlag
+					BehaviorModifiers Push
+					Action Mobber
+					ClassIcon	sign_A
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Giant_Pyro_Flare_Spammer
+					Name	"Giant Rapid Fire Detonator Pyro"
+					Attributes IgnoreFlag
+					BehaviorModifiers Push
+					Action Mobber
+					ClassIcon	sign_A
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Giant_Demo_Rapidfire
+					Name	"Giant Demoman"
+					Attributes IgnoreFlag
+					BehaviorModifiers Push
+					Action Mobber
+					ClassIcon	sign_A
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	TRIGGER_FIELD1_OFF
+			WaitForAllDead	HATCH
+			FirstSpawnWarningSound	"music\hl2_song12_long.mp3"
+			FirstSpawnOutput
+			{
+				Target field1disable_relay
+				Action Trigger
+			}
+		}
+		WaveSpawn
+		{
+			Name	TRIGGER_FIELD1_OFF
+			WaitForAllDead	HATCH
+			FirstSpawnOutput
+			{
+				Target anno_area_b
+				Action Show
+			}
+		}
+		WaveSpawn
+		{
+			Name	TRIGGER_FIELD1_OFF
+			WaitForAllDead	HATCH
+			WaitBeforeStarting	6
+			FirstSpawnOutput
+			{
+				Target anno_gates
+				Action Show
+			}
+		}
+		WaveSpawn
+		{
+			Name	FRONTLINES
+			WaitForAllDead	HATCH
+			TotalCurrency	250
+			TotalCount	170
+			MaxActive	15
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	1
+			Where	spawnbot_mid0
+			Where	spawnbot_main1
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Soldier_RocketPush_Fixed
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Engineer_Shotgun_Bomb
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavy_FamilyBusiness
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavy_Tomislav
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_Bigheal
+					Tag	bot_giant
+					Name	"Big-Heal Medic"
+					Item	"The Surgeon's Stahlhelm"
+					ClassIcon	sign_B
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_Quickfix
+					Tag	bot_giant
+					ClassIcon	sign_B
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Sniper_Melee
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Soldier_Bison
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Soldier_Bison
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+						"always crit" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Pyro
+					WeaponRestrictions	MeleeOnly
+					Item	"Firewall Helmet"
+					Name "Fireaxe Pyro"
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Pyro
+					WeaponRestrictions	MeleeOnly
+					Item	"Firewall Helmet"
+					Name "Fireaxe Pyro"
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+						"always crit" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Pyro_VolcanoFragment
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Pyro_Axtinguisher
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavy_Mittens
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavy_Melee
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavy_Melee
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+						"always crit" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Fist
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavy_Lightweight
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavy_Lightweight
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+						"always crit" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavy_Heater
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_WrapAssassin
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_Milk
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_Fast
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_Cleaver
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_Bonk_Fixed
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_FAN_Fixed
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_Sandman_Fixed
+					ClassIcon	sign_B
+					Tag	bot_giant
+					Action Mobber
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_Melee
+					Name	"Bat Scout"
+					ClassIcon	sign_B
+					Tag	bot_giant
+					Attributes IgnoreFlag
+					Action Mobber
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_Melee
+					Name	"Bat Scout"
+					ClassIcon	sign_B
+					Tag	bot_giant
+					Attributes IgnoreFlag
+					Action Mobber
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+						"always crit" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFGateBot_Scout_Hard
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Class	Scout
+					ClassIcon	sign_B
+					Tag	bot_giant
+					Skill Normal
+					WeaponRestrictions	SecondaryOnly
+					Name	"Pistol Scout"
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Class	Sniper
+					ClassIcon	sign_B
+					Tag	bot_giant
+					Skill Normal
+					WeaponRestrictions	SecondaryOnly
+					Name	"SMG Sniper"
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFGateBot_Pyro_Normal
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFGateBot_Pyro_AlwaysFireWeapon
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFGateBot_Demoman_Hard
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Demoman_Knight
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFGateBot_Soldier_Normal
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Class	Soldier
+					WeaponRestrictions SecondaryOnly
+					Name "Shotgun Soldier"
+					ClassIcon	sign_B
+					Tag	bot_giant
+					Skill Normal
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Class	Soldier
+					ClassIcon	sign_B
+					Tag	bot_giant
+					Skill Normal
+					Item	"The Direct Hit"
+					Name	"Direct Hit Soldier"
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Class	Heavy
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFGateBot_Heavyweapons_Shotgun
+					Name "Shotgun Heavy"
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Heavyweight_Champ
+					Skill Hard
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Sniper_Huntsman
+					ClassIcon	sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	FRONTLINES
+			WaitForAllDead	HATCH
+			TotalCurrency	250
+			TotalCount	6
+			MaxActive	3
+			SpawnCount	1
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	30
+			Where	spawnbot_mid0
+			Where	spawnbot_main1
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Pyro
+					Attributes	AlwaysFireWeapon
+					ClassIcon	Sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Giant_Soldier
+					ClassIcon	Sign_B
+					Tag	bot_giant
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFGateBot_Giant_Soldier
+					ClassIcon	Sign_B
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+				TFBot
+				{
+					Template	T_TFGateBot_Giant_Pyro_AlwaysFire
+					ClassIcon	Sign_B
+					CharacterAttributes
+					{
+						"force distribute currency on death" 1
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	TRIGGER_FIELD2_OFF
+			WaitForAllDead	FRONTLINES
+			FirstSpawnOutput
+			{
+				Target anno_area_c
+				Action Show
+			}
+		}
+		WaveSpawn
+		{
+			Name	TRIGGER_FIELD1_OFF
+			WaitForAllDead	FRONTLINES
+			FirstSpawnOutput
+			{
+				Target field2disable_relay
+				Action Trigger
+			}
+		}
+		WaveSpawn
+		{
+			Name	TRIGGER_FIELD1_OFF
+			WaitForAllDead	FRONTLINES
+			FirstSpawnOutput
+			{
+				Target forward_station_enable
+				Action Trigger
+			}
+		}
+		WaveSpawn
+		{
+			Name	TRIGGER_FIELD1_OFF1
+			WaitForAllDead	FRONTLINES
+			FirstSpawnOutput
+			{
+				Target anno_forward
+				Action Show
+			}
+			WaitBeforeStarting	5
+		}
+		WaveSpawn
+		{
+			Name	TRIGGER_FIELD1_OFF2
+			WaitForAllDead	FRONTLINES
+			FirstSpawnWarningSound	"vo\mvm_get_to_upgrade01.mp3"
+			FirstSpawnMessage "{yellow}Administrator: {reset}Get to an upgrade station before they return."  
+			
+			FirstSpawnOutput
+			{
+				Target anno_forward
+				Action Trigger
+			}
+		}
+		WaveSpawn
+		{
+			Name	DIALOGUE
+			WaitForAllDead	FRONTLINES
+			FirstSpawnWarningSound	"vo\compmode\cm_spy_pregamefirst_07.mp3"
+			FirstSpawnMessage "{red}Red Spy (Forward Upgrade Station): {reset}Let's push them back."  
+			
+			WaitBeforeStarting	8
+		}
+		WaveSpawn
+		{
+			Name	DIALOGUE
+			WaitForAllDead	FRONTLINES
+			FirstSpawnWarningSound	"vo\announcer_begins_30sec.mp3"
+			FirstSpawnMessage "{yellow}Administrator: {reset}Mission begins in 30 seconds."  
+			
+			WaitBeforeStarting	10
+		}
+		WaveSpawn
+		{
+			Name	DIALOGUE
+			WaitForAllDead	FRONTLINES
+			FirstSpawnWarningSound	"vo\announcer_begins_20sec.mp3"
+			FirstSpawnMessage "{yellow}Administrator: {reset}Mission begins in 20 seconds."  
+			
+			WaitBeforeStarting	20
+		}
+		WaveSpawn
+		{
+			Name	DIALOGUE
+			WaitForAllDead	FRONTLINES
+			FirstSpawnWarningSound	"vo\announcer_begins_10sec.mp3"
+			FirstSpawnMessage "{yellow}Administrator: {reset}Mission begins in 10 seconds."  
+			
+			WaitBeforeStarting	30
+		}
+		WaveSpawn
+		{
+			Name	DIALOGUE
+			WaitForAllDead	FRONTLINES
+			FirstSpawnWarningSound	"vo\mvm_final_wave_start10.mp3"
+			FirstSpawnMessage "{yellow}Administrator: {reset}This is the final wave, do NOT fail me!"  
+			
+			WaitBeforeStarting	34
+		}
+		WaveSpawn
+		{
+			Name	DIALOGUE
+			WaitForAllDead	FRONTLINES
+			FirstSpawnWarningSound	"vo\announcer_begins_5sec.mp3"
+			FirstSpawnMessage "{yellow}Administrator: {reset}Five..."  
+			
+			WaitBeforeStarting	40
+		}
+		WaveSpawn
+		{
+			Name	DIALOGUE
+			WaitForAllDead	FRONTLINES
+			FirstSpawnWarningSound	"vo\announcer_begins_4sec.mp3"
+			FirstSpawnMessage "{yellow}Administrator: {reset}Four..."  
+			
+			WaitBeforeStarting	41
+		}
+		WaveSpawn
+		{
+			Name	DIALOGUE
+			WaitForAllDead	FRONTLINES
+			FirstSpawnWarningSound	"vo\announcer_begins_3sec.mp3"
+			FirstSpawnMessage "{yellow}Administrator: {reset}Three..."  
+			
+			WaitBeforeStarting	42
+		}
+		WaveSpawn
+		{
+			Name	DIALOGUE
+			WaitForAllDead	FRONTLINES
+			FirstSpawnWarningSound	"vo\announcer_begins_2sec.mp3"
+			FirstSpawnMessage "{yellow}Administrator: {reset}Two..."  
+			
+			WaitBeforeStarting	43
+		}
+		WaveSpawn
+		{
+			Name	DIALOGUE
+			WaitForAllDead	FRONTLINES
+			FirstSpawnWarningSound	"vo\announcer_begins_1sec.mp3"
+			FirstSpawnMessage "{yellow}Administrator: {reset}One..."  
+			
+			WaitBeforeStarting	44
+		}
+		WaveSpawn
+		{
+			Name	DIALOGUE
+			WaitForAllDead	FRONTLINES
+			FirstSpawnWarningSound	"ui\gamestartup5.mp3"
+			
+			WaitBeforeStarting	29
+		}
+		WaveSpawn
+		{
+			Name	BOSS
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	45
+			WaitBetweenSpawns	0
+			WaitForAllDead	FRONTLINES
+			Where	spawnbot_left0
+			Where	spawnbot_main1
+			FirstSpawnWarningSound	"vo\mvm\mght\taunts\soldier_mvm_m_taunts05.mp3"
+			LastSpawnWarningSound	"mvm\giant_heavy\giant_heavy_entrance.wav"
+			DoneWarningSound	"vo\mvm\mght\soldier_mvm_m_paincrticialdeath03.mp3"
+			
+			FirstSpawnMessage "{blue}Titanium Tyrant: {reset}I am going to enjoy {red}KILLING {reset}each, and every one of you sorry sacks of scum!"  
+			TFBot
+			{
+				Template	T_TFBot_Titanium_Tyrant
+			}
+			FirstSpawnOutput
+			{
+				Target forward_station_disable
+				Action Trigger
+			}
+		}
+		WaveSpawn
+		{
+			Name	DAMAGETYPES
+			TotalCurrency	0
+			TotalCount	6
+			MaxActive	6
+			SpawnCount	6
+			WaitBeforeStarting	100000000000000000
+			WaitBetweenSpawns	0
+			Where	spawnbot_main1
+			Support	Limited
+			Squad
+			{
+				TFBot
+				{
+					Class	Heavy
+				}
+				TFBot
+				{
+					Class	Pyro
+				}
+				TFBot
+				{
+					Class	Soldier
+				}
+				TFBot
+				{
+					Class	Heavy
+					ClassIcon	heavy_champ
+				}
+				TFBot
+				{
+					Class	Medic
+					ClassIcon	medic
+				}
+				TFBot
+				{
+					Class	Scout
+					ClassIcon	dead
+					Attributes	AlwaysCrit
+				}
+			}
+		}
+	}
+}

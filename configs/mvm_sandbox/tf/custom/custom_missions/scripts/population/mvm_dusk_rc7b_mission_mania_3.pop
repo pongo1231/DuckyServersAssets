@@ -1,0 +1,506 @@
+
+WaveSchedule
+{
+	StartingCurrency 				5000
+	RespawnWaveTime 		3
+	FixedRespawnWaveTime 1
+	CanBotsAttackWhileInSpawnRoom 	no
+
+// The Bomber, The Fountain, The Elusive, The Boiler
+
+// Wave 1 /////////////////////////////////////
+///////////////////////////////////////////////
+// The Bomber
+///////////////////////////////////////////////
+
+    Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay_endurance
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+
+		RedTeamWipeCausesWaveLoss 1   //If red team is wiped, it loses
+		Explanation    //Dispayed once the wave is initialized
+		{
+			Line "{red}Don't die."
+		}
+
+		WaveSpawn // The Bomber
+		{
+			Where spawnbot
+			TotalCount 1
+			TFBot
+			{
+				Class Soldier
+				Name "The Bomber"
+				Skill Expert
+				Health 14000
+				Scale 1.85
+				Attributes UseBossHealthBar
+				Attributes HoldFireUntilFullReload
+				Attributes IgnoreFlag
+				Attributes Miniboss
+				Action Mobber  
+				RocketJump 2
+				ClassIcon soldier_airstrike_lite
+				Item "The B.A.S.E. Jumper"
+				Item "The Air Strike"
+				Item "Jumper's Jeepcap"
+				ItemAttributes
+				{
+					ItemName "The Air Strike"
+					"projectile speed increased" 0.75
+					"fire rate bonus" 0.2
+					"damage bonus" 0.7
+					"Blast radius decreased" 0.7
+					"faster reload rate" 0.15
+					"fire rate bonus with reduced health" 0.35
+					"clip size upgrade atomic" 16.0
+					"projectile spread angle penalty" 2.3
+				}
+				CharacterAttributes
+				{
+					"move speed penalty" 0.65
+					"damage force reduction" 0.5
+					"increased jump height" 2.5
+					"health regen" 2
+					"dmg taken increased" 0.05 
+   		 			"dmg from melee increased" 20
+   					"dmg from ranged reduced" 20
+					"airblast vulnerability multiplier" 0.4
+				}
+			}	
+		}
+	}
+
+// Wave 2 /////////////////////////////////////
+///////////////////////////////////////////////
+// The Fountain
+///////////////////////////////////////////////
+
+    Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay_endurance
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+
+		RedTeamWipeCausesWaveLoss 1   //If red team is wiped, it loses
+		Explanation    //Dispayed once the wave is initialized
+		{
+			Line "{red}Don't die."
+		}
+
+		WaveSpawn // The Fountain
+		{
+			Where spawnbot
+			TotalCount 1
+			TFBot
+			{
+				Class Demoman
+				Name "The Fountain"
+				Health 17000
+				Item "The Strontium Stove Pipe"
+				Scale 1.85
+				ClassIcon demo_unload
+				Attributes UseBossHealthBar
+				Attributes HoldFireUntilFullReload
+				Attributes IgnoreFlag
+				Attributes Miniboss
+				Action Mobber  
+				ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+				{
+				    	Delay 1 //Time before the first bot attribute change (Default: 10)
+				    	Cooldown 10 //Time between each bot attribute change (Default: 10)
+				    	Repeats 1 //How many times should bot change attributes in total (Default: 0 - Infinite)
+					IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+					//IfHealthBelow 100 //When set, the task activates only when the bot health is below specified value
+				    	Name "Attr1" // Name of the bot attributes listed in EventChangeAttributes
+				}
+				ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+				{
+				    	Delay 1 //Time before the first bot attribute change (Default: 10)
+				    	Cooldown 10 //Time between each bot attribute change (Default: 10)
+				    	Repeats 1 //How many times should bot change attributes in total (Default: 0 - Infinite)
+					IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+					IfHealthBelow 12000 //When set, the task activates only when the bot health is below specified value
+				    	Name "Attr2" // Name of the bot attributes listed in EventChangeAttributes
+				}
+				ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+				{
+				    	Delay 1 //Time before the first bot attribute change (Default: 10)
+				    	Cooldown 10 //Time between each bot attribute change (Default: 10)
+				    	Repeats 1 //How many times should bot change attributes in total (Default: 0 - Infinite)
+					IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+					IfHealthBelow 9800 //When set, the task activates only when the bot health is below specified value
+				    	Name "Attr3" // Name of the bot attributes listed in EventChangeAttributes
+				}
+				ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+				{
+				    	Delay 1 //Time before the first bot attribute change (Default: 10)
+				    	Cooldown 10 //Time between each bot attribute change (Default: 10)
+				    	Repeats 1 //How many times should bot change attributes in total (Default: 0 - Infinite)
+					IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+					IfHealthBelow 7600 //When set, the task activates only when the bot health is below specified value
+				    	Name "Attr4" // Name of the bot attributes listed in EventChangeAttributes
+				}
+				ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+				{
+				    	Delay 1 //Time before the first bot attribute change (Default: 10)
+				    	Cooldown 10 //Time between each bot attribute change (Default: 10)
+				    	Repeats 1 //How many times should bot change attributes in total (Default: 0 - Infinite)
+					IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+					IfHealthBelow 5400 //When set, the task activates only when the bot health is below specified value
+				    	Name "Attr5" // Name of the bot attributes listed in EventChangeAttributes
+				}
+				ChangeAttributes    //Periodically changes bot attributes, defined in EventChangeAttributes
+				{
+				    	Delay 1 //Time before the first bot attribute change (Default: 10)
+				    	Cooldown 10 //Time between each bot attribute change (Default: 10)
+				    	Repeats 1 //How many times should bot change attributes in total (Default: 0 - Infinite)
+					IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default 0 - Always activate)
+					IfHealthBelow 3200 //When set, the task activates only when the bot health is below specified value
+				    	Name "Attr6" // Name of the bot attributes listed in EventChangeAttributes
+				}
+				EventChangeAttributes //Do not attempt to put any of custom keys here. ExtAttr is the only exception
+				{
+					Attr1
+					{
+						Skill Expert
+						WeaponRestrictions PrimaryOnly
+						ItemAttributes
+						{
+							ItemName "TF_WEAPON_GRENADELAUNCHER"
+							"fire rate bonus" 0.4
+							"damage penalty" 0.7
+							"faster reload rate" -0.8
+							"projectile spread angle penalty" 2.3
+						}
+						CharacterAttributes
+						{
+							"move speed penalty" 0.65
+							"rocket jump damage reduction" 0.01
+							"damage force reduction" 0.5
+							"health regen" 2
+							"dmg taken increased" 0.05 
+   		 					"dmg from melee increased" 20
+   							"dmg from ranged reduced" 20
+							"airblast vulnerability multiplier" 0.4
+						}
+					}
+					Attr2
+					{
+						Skill Expert
+						
+						WeaponRestrictions PrimaryOnly
+						ItemAttributes
+						{
+							ItemName "TF_WEAPON_GRENADELAUNCHER"
+							"fire rate bonus" 0.5
+							"damage penalty" 0.7
+							"faster reload rate" -0.8
+							"projectile spread angle penalty" 100
+							"mult projectile count" 3
+						}
+						CharacterAttributes
+						{
+							"move speed penalty" 0.67
+							"rocket jump damage reduction" 0.01
+							"damage force reduction" 0.5
+							"health regen" 2
+							"dmg taken increased" 0.05 
+   		 					"dmg from melee increased" 20
+   							"dmg from ranged reduced" 20
+							"airblast vulnerability multiplier" 0.4
+						}
+					}
+					Attr3
+					{
+						Skill Expert
+						WeaponRestrictions PrimaryOnly
+						ItemAttributes
+						{
+							ItemName "TF_WEAPON_GRENADELAUNCHER"
+							"fire rate bonus" 0.5
+							"damage penalty" 0.7
+							"faster reload rate" -0.8
+							"projectile spread angle penalty" 100
+							"mult projectile count" 4
+						}
+						CharacterAttributes
+						{
+							"move speed penalty" 0.69
+							"rocket jump damage reduction" 0.01
+							"damage force reduction" 0.5
+							"health regen" 2
+							"dmg taken increased" 0.05 
+   		 					"dmg from melee increased" 20
+   							"dmg from ranged reduced" 20
+							"airblast vulnerability multiplier" 0.4
+						}
+					}
+					Attr4
+					{
+						Skill Expert
+						WeaponRestrictions PrimaryOnly
+						ItemAttributes
+						{
+							ItemName "TF_WEAPON_GRENADELAUNCHER"
+							"fire rate bonus" 0.5
+							"damage penalty" 0.7
+							"faster reload rate" -0.8
+							"projectile spread angle penalty" 100
+							"mult projectile count" 5
+						}
+						CharacterAttributes
+						{
+							"move speed penalty" 0.71
+							"rocket jump damage reduction" 0.01
+							"damage force reduction" 0.5
+							"health regen" 2
+							"dmg taken increased" 0.05 
+   		 					"dmg from melee increased" 20
+   							"dmg from ranged reduced" 20
+							"airblast vulnerability multiplier" 0.4
+						}
+					}
+					Attr5
+					{
+						Skill Expert
+						WeaponRestrictions PrimaryOnly
+						ItemAttributes
+						{
+							ItemName "TF_WEAPON_GRENADELAUNCHER"
+							"fire rate bonus" 0.5
+							"damage penalty" 0.7
+							"faster reload rate" -0.8
+							"projectile spread angle penalty" 100
+							"mult projectile count" 6
+						}
+						CharacterAttributes
+						{
+							"move speed penalty" 0.73
+							"rocket jump damage reduction" 0.01
+							"damage force reduction" 0.5
+							"health regen" 2
+							"dmg taken increased" 0.05 
+   		 					"dmg from melee increased" 20
+   							"dmg from ranged reduced" 20
+							"airblast vulnerability multiplier" 0.4
+						}
+					}
+					Attr6
+					{
+						Skill Expert
+						WeaponRestrictions PrimaryOnly
+						ItemAttributes
+						{
+							ItemName "TF_WEAPON_GRENADELAUNCHER"
+							"fire rate bonus" 0.5
+							"damage penalty" 0.7
+							"faster reload rate" -0.8
+							"projectile spread angle penalty" 100
+							"mult projectile count" 7
+						}
+						CharacterAttributes
+						{
+							"move speed penalty" 0.75
+							"rocket jump damage reduction" 0.01
+							"damage force reduction" 0.5
+							"health regen" 2
+							"dmg taken increased" 0.05 
+   		 					"dmg from melee increased" 20
+   							"dmg from ranged reduced" 20
+							"airblast vulnerability multiplier" 0.4
+						}
+					}
+				}
+			}	
+		}
+	}
+
+// Wave 3 /////////////////////////////////////
+///////////////////////////////////////////////
+// The Elusive
+///////////////////////////////////////////////
+
+    Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay_endurance
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+
+		RedTeamWipeCausesWaveLoss 1   //If red team is wiped, it loses
+		Explanation    //Dispayed once the wave is initialized
+		{
+			Line "{red}Don't die."
+		}
+
+		WaveSpawn // The Elusive
+		{
+			Where spawnbot
+			TotalCount 1
+			TotalCurrency 1000
+			TFBot
+			{
+				Class Spy
+				Name "The Elusive"
+				Health 11000
+				Scale 1.85
+				Skill Expert
+				Attributes UseBossHealthBar
+				Attributes IgnoreFlag
+				Attributes Miniboss
+				Item "TF_WEAPON_SPELLBOOK"
+				Item "Bootleg Base Metal Billycock"
+				Action Mobber  
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_REVOLVER"
+					"fire rate bonus with reduced health" 0.6
+					"fire rate bonus" 0.85
+				}
+				Spell   //Gives specified spell to bots.
+				{
+					Delay 8 //Time before the first spell charges are given (Default: 10)
+                    			Cooldown 4 //Time between each spell changes (Default: 10)
+                    			Repeats 0 //How many times should spell charges be given in total (Default: 0 - Infinite)
+					IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default: 0 - Always activate)
+					Charges 1 //How many spell charges to give every time the spell is given (Default: 1)
+					Limit 1 //How many spell charges the bot can store (Default: Same as charges given)
+					//IfHealthBelow 100 //When set, the task activates only when the bot health is below specified value
+					Type "Teleport" //Spell name. Possible values:
+				}
+
+				Spell   //Gives specified spell to bots.
+				{
+					Delay 3 //Time before the first spell charges are given (Default: 10)
+                    			Cooldown 4 //Time between each spell changes (Default: 10)
+                    			Repeats 0 //How many times should spell charges be given in total (Default: 0 - Infinite)
+					IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default: 0 - Always activate)
+					Charges 1 //How many spell charges to give every time the spell is given (Default: 1)
+					Limit 1 //How many spell charges the bot can store (Default: Same as charges given)
+					IfHealthBelow 2700 //When set, the task activates only when the bot health is below specified value
+					Type "Teleport" //Spell name. Possible values:
+				}
+			}
+		}
+	}
+
+// Wave 4 /////////////////////////////////////
+///////////////////////////////////////////////
+// The Boiler
+///////////////////////////////////////////////
+
+    Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay_endurance
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		RedTeamWipeCausesWaveLoss 1   //If red team is wiped, it loses
+		Explanation    //Dispayed once the wave is initialized
+		{
+			Line "{red}Don't die."
+			Line "{red}Also run."
+		}
+
+		WaveSpawn // The Boiler
+		{
+			Where spawnbot
+			TotalCount 1
+			TFBot
+			{
+				Class Pyro
+				Name "The Boiler"
+				Health 12500
+				ClassIcon spellbook_lite
+				Scale 1.9
+				Skill Easy
+				Attributes UseBossHealthBar
+				Attributes IgnoreFlag
+				Attributes Miniboss
+				Attributes AlwaysFireWeapon
+				Item "TF_WEAPON_SPELLBOOK"
+				MaxVisionRange 10
+				Action Mobber  
+				Item "Upgradeable TF_WEAPON_FLAMETHROWER"
+				Item "Firewall Helmet"
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_FLAMETHROWER"
+					"damage bonus" 4
+					"fire rate bonus" 1
+					"flame_gravity" 0
+					"flame_drag" 4
+					"flame_up_speed" 65
+					"flame_speed" 1250
+					"flame_spread_degree" 150
+					"flame_lifetime" 0.7
+					"flame_random_life_time_offset" 0.12
+					"is_passive_weapon" 1
+				}
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_SPELLBOOK"
+				}
+				Spell   //Gives specified spell to bots.
+				{
+					Delay 8 //Time before the first spell charges are given (Default: 10)
+                    			Cooldown 20 //Time between each spell changes (Default: 10)
+                    			Repeats 0 //How many times should spell charges be given in total (Default: 0 - Infinite)
+					IfSeeTarget 0 //When set to 1, this task activates only when the bot can see the target player (Default: 0 - Always activate)
+					Charges 10 //How many spell charges to give every time the spell is given (Default: 1)
+					Limit 10 //How many spell charges the bot can store (Default: Same as charges given)
+					//IfHealthBelow 10000 //When set, the task activates only when the bot health is below specified value
+					Type "Meteor Shower" //Spell name. Possible values:
+				}
+				CharacterAttributes
+				{
+					"move speed penalty" 0.65
+					"rocket jump damage reduction" 0.01
+					"damage force reduction" 0.5
+					"health regen" 2
+					"dmg taken increased" 0.05 
+   		 			"dmg from melee increased" 20
+   					"dmg from ranged reduced" 20
+					"airblast vulnerability multiplier" 0.4
+				}
+			}
+		}
+	}
+}

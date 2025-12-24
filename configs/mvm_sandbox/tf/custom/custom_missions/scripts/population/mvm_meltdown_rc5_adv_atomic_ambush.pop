@@ -1,0 +1,1830 @@
+#base robot_standard.pop
+#base robot_giant.pop
+
+// Advanced Meltdown : Atomic Ambush \\
+//        Made by PDA Expert         \\
+// Gonna use a lot less templates now.
+// All Waves : +1 Metal Assembally Lines
+// Wave 1 : 2 Super Scouts , 12 Steel Gauntlets , 24 Pyros (Shotgun or Flame) , 2 Giant Charged Soldiers , 40 Breadcrab Zombies 
+// Wave 2 : 1 Fun Ruiner Pyro With 2 Heavies , 4 Giant Winger Scouts , 32 Pistol Scouts , 8 Steel Gauntlet Pushers with 8 Uber Medics , 2 Giant Pyros. Support : Bat Scouts 
+// Wave 3 : 2 Tanks , 120 Random Demoknights , 3 Giant Heavies with 2 Uber Medics for each. Support : Batsaber Scout
+// Wave 4 : Shockmaster (BOSS) , 33 Shock's Minions , 4 Breadcrab Giants , 40 Iron Demomen , 24 Crit Scatter Scouts , 3 Giant Super Blast Soldiers , 30 Breadcrab Zombies. Support : Camper Scouts.
+// Wave 5 : 80 Random Scouts , Scout Leader (Boss) , 3 Giant Intoxicated Heavies , 2 Tanks , 32 Soldiers , 30 Basher-Men , 6 Berzerking Heavies . Support : Giant Camper Scouts.
+// Wave 6 : 1 Zombine Captain. Support : Zombines , Breadcrab Zombies (Both giant and normal)
+
+WaveSchedule
+{
+    StartingCurrency 600
+    RespawnWaveTime 6
+    CanBotsAttackWhileInSpawnRoom No
+	Advanced 1
+	
+	Templates
+	{
+	br_testers_hate_him // damn he really do!
+	{
+	Health 3800
+	Name "Metal Assembally Line"
+	Skill Expert
+	Class Soldier
+	Attributes MiniBoss
+	ClassIcon soldier_mangler
+	Item "The Cow Mangler 5000"
+	Item "The Nuke"
+	CharacterAttributes
+	{
+	"move speed bonus" 0.4
+	"damage force reduction" 0.1
+	"airblast vulnerability multiplier" 0.1
+	"airblast vertical pushback scale" 0.1
+	"rage giving scale" 0.1
+	"override footstep sound set" 3
+	}
+	ItemAttributes
+	{
+	ItemName "The Cow Mangler 5000"
+	//"damage penalty" 0.5
+	"fire rate bonus" 0.6
+	"faster reload rate" -2
+	"reload time increased hidden" 0.001
+	"set item tint RGB" 15185211
+	"dmg bonus vs buildings" 5.0
+	}
+	ItemAttributes
+	{
+	ItemName "The Nuke"
+	"set item tint RGB" 15185211
+	}
+	}
+	br_breadcrab_giant // Fuck your heavy and sentry.
+	{
+	Health 4000
+	Name "Breadcrab Giant"
+	Skill Expert
+	Attributes MiniBoss
+	Class Heavy
+	ClassIcon breadcrab_zombie_giant
+	WeaponRestrictions MeleeOnly
+	Item "Bread Biter"
+	Item "Breadcrab"
+	Item "Upgradeable TF_WEAPON_FISTS"
+	CharacterAttributes
+	{
+	"move speed bonus" 0.6
+	"damage force reduction" 0.3
+	"airblast vulnerability multiplier" 0.3
+	"override footstep sound set" 2
+	"head scale" 1.25
+	"voice pitch scale" 0
+	}
+	ItemAttributes
+	{
+	ItemName "Upgradeable TF_WEAPON_FISTS"
+	"damage bonus" 2.0
+	"heal on kill" 3000
+	"dmg pierces resists absorbs" 1
+	}
+	}
+	br_breadcrab_zombie // fuck your heavy and sentry slightly less
+	{
+	Name "Breadcrab Zombie"
+	Class Heavy
+	Skill Hard
+	ClassIcon breadcrab_zombie
+	WeaponRestrictions MeleeOnly
+	Item "Bread Biter"
+	Item "Breadcrab"
+	Item "Upgradeable TF_WEAPON_FISTS"
+	CharacterAttributes
+	{
+	"move speed bonus" 1.3
+	"head scale" 1.25
+	"voice pitch scale" 0
+	}
+	ItemAttributes
+	{
+	ItemName "Upgradeable TF_WEAPON_FISTS"
+	"damage bonus" 1.5
+	"heal on kill" 300
+	"dmg pierces resists absorbs" 1
+	}
+	}
+	br_scout_camper // Scout with Cozy Camper and Soda Popper
+	{
+	Name "Camper Scout"
+	Class Scout
+	//BehaviorModifiers Push // re-enable these for actual camping.	
+	//Attributes IgnoreFlag
+	ClassIcon scout_pop
+	WeaponRestrictions PrimaryOnly
+	MaxVisionRange 800
+	Item "The Soda Popper"
+	Item "The Cozy Camper"
+	Item "Death Racer's Helmet"
+	ItemAttributes
+	{
+	ItemName "Death Racer's Helmet"
+	"set item tint RGB" 8208497
+	}
+	}
+	
+	}
+	
+	Mission
+	{
+		Where spawnbot
+		Objective DestroySentries
+		InitialCooldown 0
+		CooldownTime 24
+		TFBot
+		{
+			Template T_TFBot_SentryBuster
+		}
+	}
+	
+	Mission
+	{
+		Where spawnbot_flank
+		Objective Sniper
+		InitialCooldown 30
+		BeginAtWave 2
+		DesiredCount 1
+		RunForThisManyWaves 2
+		CooldownTime 25
+		Squad
+		{
+		TFBot
+		{
+			Template T_TFBot_Sniper
+			Name "Bodyshot Machine" // Better name tbh. Was "Headshots? Who needs that!"
+			Item "The Machina"
+			Item "The Purity Fist"
+		}
+		TFBot
+		{
+			Template T_TFBot_Medic
+			ClassIcon sniper
+			Name "Kritz Medic"
+			Item "The Kritzkrieg"
+			ItemAttributes
+			{
+			ItemName "The Kritzkrieg"
+			"bot medic uber health threshold" 9999
+			"uber duration bonus" 99
+			}
+			Attributes SpawnWithFullCharge
+		}
+		}
+	}
+	
+	Mission
+	{
+		Where spawnbot_flank
+		Objective Sniper
+		InitialCooldown 30
+		BeginAtWave 4
+		DesiredCount 2
+		RunForThisManyWaves 2
+		CooldownTime 25
+		Squad
+		{
+		ShouldPreserveSquad 1
+		TFBot
+		{
+			Template T_TFBot_Sniper
+			ClassIcon sniper_flame
+			Name "Lock-Down Friend"
+			Item "Point and Shoot"
+			Item "The Bazaar Bargain"
+			Item "Darwin's Danger Shield"
+			ItemAttributes
+			{
+			ItemName "The Bazaar Bargain"
+			"Set DamageType Ignite" 1
+			"damage penalty" 0.5
+			}
+		}
+		TFBot
+		{
+			Class Pyro
+			ClassIcon sniper_flame
+			Skill Expert
+			WeaponRestrictions PrimaryOnly
+			Name "Airblast Buddy"
+			Item "Killer Exclusive"
+			Item "The Degreaser"
+			Item "Darwin's Danger Shield"
+			ItemAttributes
+			{
+			ItemName "The Degreaser"	
+			"airblast pushback scale" 3.0
+			"mult airblast refire time" 0.25
+			}
+		}
+		}
+	}
+	
+	Mission
+	{
+		Where spawnbot_flank
+		Objective Spy
+		InitialCooldown 30
+		BeginAtWave 3
+		DesiredCount 2
+		RunForThisManyWaves 3
+		CooldownTime 25
+		TFBot
+		{
+			Template T_TFBot_Spy
+			Scale 0.8
+			Health 90
+			Name Mini-Spy
+			CharacterAttributes
+			{
+			"kill forces attacker to laugh" 1
+			}
+		}
+	}
+	
+	Mission // For wavebar
+	{
+		Where spawnbot_flank
+		Objective Sniper
+		InitialCooldown 99999
+		BeginAtWave 2
+		DesiredCount 0
+		RunForThisManyWaves 2
+		CooldownTime 99999
+		TFBot
+		{
+			Template T_TFBot_Sniper
+			//Attributes AlwaysCrit // Mission bots can't show crits
+		}
+	}
+	
+	Mission // For wavebar
+	{
+		Where spawnbot_flank
+		Objective Sniper
+		InitialCooldown 99999
+		BeginAtWave 4
+		DesiredCount 0
+		RunForThisManyWaves 2
+		CooldownTime 99999
+		TFBot
+		{
+			Template T_TFBot_Sniper
+			ClassIcon sniper_flame
+		}
+	}
+	
+	Wave // Wave 1 : $600
+	{
+	StartWaveOutput
+	{
+		Target wave_start_relay
+		Action Trigger
+	}
+	DoneOutput
+	{
+		Target wave_finished_relay
+		Action Trigger
+	}
+	WaitWhenDone 65
+	Checkpoint Yes
+	
+	WaveSpawn
+	{
+	Name "LINE"
+	Where spawnbot
+	TotalCount 1
+	SpawnCount 1
+	MaxActive 1
+	WaitBeforeStarting 2
+	WaitBetweenSpawns 2
+	TFBot
+	{
+	Template br_testers_hate_him
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "wave01"
+	WaitForAllDead "LINE"
+	Where spawnbot
+	TotalCount 2
+	SpawnCount 1
+	MaxActive 2
+	WaitBeforeStarting 15
+	WaitBetweenSpawns 25
+	TotalCurrency 50
+	TFBot
+	{
+	Template T_TFBot_Giant_Scout_Fast
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "wave01"
+	WaitForAllDead "LINE"
+	Where spawnbot
+	TotalCount 12
+	SpawnCount 1
+	MaxActive 6
+	WaitBeforeStarting 5
+	WaitBetweenSpawns 2
+	TotalCurrency 100
+	TFBot
+	{
+	Template T_TFBot_Heavyweapons_Fist
+	}
+	}
+
+	WaveSpawn
+	{
+	Name "wave01"
+	WaitForAllDead "LINE"
+	Where spawnbot_flank
+	Where spawnbot
+	TotalCount 24
+	SpawnCount 6
+	MaxActive 12
+	WaitBeforeStarting 8
+	WaitBetweenSpawns 12
+	TotalCurrency 150
+	RandomChoice
+	{
+	TFBot
+	{
+	Class Pyro
+	Skill Normal // bazooks will whine about this.
+	}
+	TFBot
+	{
+	Name "Shotgun Pyro"
+	ClassIcon heavy_shotgun
+	WeaponRestrictions SecondaryOnly
+	Class Pyro
+	Skill Normal
+	Item "Upgradeable TF_WEAPON_SHOTGUN_PYRO"
+	ItemAttributes
+	{
+		ItemName "Upgradeable TF_WEAPON_SHOTGUN_PYRO"
+		"faster reload rate" 0.1
+		"fire rate bonus" 2.5
+		"bullets per shot bonus" 3
+		"damage bonus" 0.5
+	}
+	}
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "wave02"
+	WaitForAllDead "wave01"
+	Where spawnbot
+	TotalCount 2
+	SpawnCount 1
+	MaxActive 2
+	WaitBeforeStarting 0
+	WaitBetweenSpawns 25
+	TotalCurrency 100
+	TFBot
+	{
+    Template T_TFBot_Giant_Soldier_Crit
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "wave02"
+	WaitForAllDead "wave01"
+	Where spawnbot
+	TotalCount 40
+	SpawnCount 2
+	MaxActive 15
+	Support 1
+	WaitBeforeStarting 15
+	WaitBetweenSpawns 3
+	TotalCurrency 200
+	TFBot
+	{
+    Template br_breadcrab_zombie
+	}
+	}
+
+    WaveSpawn
+	{
+	Name "Support"
+	WaitForAllDead "LINE"
+	Where spawnbot_flank
+	TotalCount 24
+	SpawnCount 3
+	MaxActive 3
+	Support 1
+	WaitBeforeStarting 30
+	WaitBetweenSpawns 40
+		TFBot
+		{
+			Template T_TFBot_Sniper
+			Skill Normal
+			Name "SMG Sniper"
+			ClassIcon sniper_smg_tind
+			WeaponRestrictions SecondaryOnly
+		}
+	}
+	
+	}
+	Wave // $600
+	{
+	StartWaveOutput
+	{
+		Target wave_start_relay
+		Action Trigger
+	}
+	DoneOutput
+	{
+		Target wave_finished_relay
+		Action Trigger
+	}
+	WaitWhenDone 65
+	Checkpoint Yes
+	
+	WaveSpawn
+	{
+	Name "LINE"
+	Where spawnbot
+	TotalCount 2
+	SpawnCount 1
+	MaxActive 2
+	WaitBeforeStarting 2
+	WaitBetweenSpawns 4
+	TFBot
+	{
+	Template br_testers_hate_him
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "wave01"
+	WaitForAllDead "LINE"
+	Where spawnbot
+	TotalCount 3
+	SpawnCount 3
+	MaxActive 3
+	WaitBeforeStarting 0
+	WaitBetweenSpawns 10
+	TotalCurrency 50
+	Squad
+	{
+	TFBot
+	{
+	    Class Pyro
+	    Name "Fun Ruiner Pyro"
+		Health 400
+		Scale 1.25
+		WeaponRestrictions SecondaryOnly
+		Attributes AlwaysFireWeapon
+        Item "Ghostly Gibus"
+        Item "pyrovision_goggles"
+        Item "The Gas Passer"
+        ItemAttributes
+        {
+		ItemName "The Gas Passer"
+		"item_meter_charge_rate" 1.015
+		"explode_on_ignite" 1
+		"dmg penalty vs players" 0.45
+		"fire rate bonus" 0.75
+		"projectile spread angle penalty" 4
+        }
+        ClassIcon pyro_giant
+	}
+	TFBot
+	{
+	    Class Heavy
+		Name Heavy
+	    Skill Normal
+	}
+	TFBot
+	{
+	    Class Heavy
+		Name Heavy
+	    Skill Normal
+	}
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "wave02"
+	WaitForAllDead "wave01"
+	Where spawnbot
+	TotalCount 4
+	SpawnCount 1
+	MaxActive 2
+	TotalCurrency 150
+	WaitBeforeStarting 5
+	WaitBetweenSpawns 18
+	TFBot
+	{
+	Template T_TFBot_Giant_Scout
+	ClassIcon scout_pistol_giant
+	Name "Giant Winger Scout"
+	Item "The Winger"
+	Item "Bonk Boy"
+    WeaponRestrictions SecondaryOnly
+	ItemAttributes
+	{
+	ItemName "The Winger"
+	"clip size penalty" 1
+	"clip size bonus" 1.75
+	}
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "wave02"
+	WaitForAllSpawned "wave01"
+	Where spawnbot_flank
+	TotalCount 33
+	SpawnCount 3
+	MaxActive 12
+	WaitBeforeStarting 20
+	WaitBetweenSpawns 4
+	TotalCurrency 100
+	TFBot
+	{
+	Class Scout
+	ClassIcon scout_pistol
+	WeaponRestrictions SecondaryOnly
+	Name "Pistol Scout"
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "wave03"
+	WaitForAllDead "wave02"
+	Where spawnbot
+	TotalCount 16
+	SpawnCount 2
+	MaxActive 8
+	WaitBeforeStarting 0
+	WaitBetweenSpawns 10
+	TotalCurrency 200
+	Squad
+	{
+	TFBot
+	{
+    Template T_TFBot_Heavy_IronFist_Airblast
+	}
+	TFBot
+	{
+    Template T_TFBot_Medic_QuickUber
+	Name "Quick Uber Medic"
+	}
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "wave03"
+	WaitForAllDead "wave02"
+	Where spawnbot
+	TotalCount 2
+	SpawnCount 1
+	MaxActive 2
+	WaitBeforeStarting 5
+	WaitBetweenSpawns 25
+	TotalCurrency 100
+	TFBot
+	{
+    Template T_TFBot_Giant_Pyro
+	}
+	}
+	
+    WaveSpawn
+	{
+	Name "Support"
+	WaitForAllDead "wave01"
+	Where spawnbot_flank
+	TotalCount 30
+	SpawnCount 2
+	MaxActive 8
+	Support 1
+	WaitBeforeStarting 15
+	WaitBetweenSpawns 6
+		TFBot
+		{
+			Template T_TFBot_Scout_Melee
+			ClassIcon scout_bat
+		}
+	}
+	
+	}
+	
+	Wave // $700
+	{
+	StartWaveOutput
+	{
+		Target wave_start_relay
+		Action Trigger
+	}
+	DoneOutput
+	{
+		Target wave_finished_relay
+		Action Trigger
+	}
+	WaitWhenDone 65
+	Checkpoint Yes
+	
+	WaveSpawn
+	{
+	Name "LINE"
+	Where spawnbot
+	TotalCount 3
+	SpawnCount 1
+	MaxActive 3
+	WaitBeforeStarting 2
+	WaitBetweenSpawns 4
+	TFBot
+	{
+	Template br_testers_hate_him
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "wave01_tanks"
+	WaitForAllDead "LINE"
+	Where spawnbot
+	TotalCount 2
+	SpawnCount 1
+	MaxActive 2
+	WaitBeforeStarting 4
+	WaitBetweenSpawns 5
+	TotalCurrency 200
+	Tank
+	{
+	Health 12000
+	Name Tank
+	Speed 75
+	OnKilledOutput
+	{
+	Target	boss_dead_relay
+	Action	Trigger
+	}
+	OnBombDroppedOutput
+	{
+	Target	boss_deploy_relay
+	Action	Trigger
+	}
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "wave01"
+	WaitForAllDead "LINE"
+	Where spawnbot
+	Where spawnbot_flank
+	TotalCount 100
+	SpawnCount 1
+	MaxActive 20
+	StartWaveWarningSound "vo\mvm\norm\demoman_mvm_battlecry02.mp3"
+	FirstSpawnWarningSound "ambient_mp3\medieval_dooropen.mp3"
+	WaitBeforeStarting 12
+	WaitBetweenSpawns 0.8
+	TotalCurrency 100
+	RandomChoice
+	{
+    TFBot
+	{
+	Template T_TFBot_Demoman_Knight
+	}
+    TFBot
+	{
+	Template T_TFBot_Demoman_Knight
+	Name "Festive Knight"
+	Item "Festive Eyelander"
+	Item "Festive Targe 2014"
+	Item "The Sub Zero Suit"
+	Item "The Polar Pullover"
+	ItemAttributes
+	{
+		ItemName "Festive Eyelander"
+		"critboost on kill" 3
+	}
+	}
+    TFBot
+	{
+	Template T_TFBot_Demoman_Knight
+	Name "Samurai Demoman"
+	Item "The Half-Zatoichi"	
+	Item "The Splendid Screen" 
+	Item "Demo Kabuto"
+	ItemAttributes
+	{
+		ItemName "The Half-Zatoichi"	
+		"critboost on kill" 3
+	}
+	}
+    TFBot
+	{
+	Template T_TFBot_Demoman_Knight
+	Name "Cutter Knight"
+	Item "The Scotsman's Skullcutter"
+	Item "Carouser's Capotain"
+	ItemAttributes
+	{
+		ItemName "The Scotsman's Skullcutter"
+		"critboost on kill" 3
+	}
+	}
+    TFBot
+	{
+	Template T_TFBot_Demoman_Knight
+	Name "Horsemann"
+	Item "The Horseless Headless Horseman's Headtaker"
+	Item "Horseless Headless Horseman's Head"
+	Item "The Horsemann's Hand-Me-Down"
+	ItemAttributes
+	{
+		ItemName "The Horseless Headless Horseman's Headtaker"
+		"critboost on kill" 3
+	}
+	}
+    TFBot
+	{
+	Template T_TFBot_Demoman_Knight
+	Name "Claid Knight"
+	Item "The Claidheamohmor"
+	Item "The Tide Turner"
+	Item "The Tartan Shade"
+	ItemAttributes
+	{
+		ItemName "The Claidheamohmor"
+		"critboost on kill" 3
+	}
+	}
+    TFBot
+	{
+	Template T_TFBot_Demoman_Knight
+	Name "Persian Knight"
+	Item "The Persian Persuader"
+	Item "The Splendid Screen" 
+	Item "Ali Baba's Wee Booties"
+	Item "Sultan's Ceremonial"
+	ItemAttributes
+	{
+		ItemName "The Persian Persuader"
+		"critboost on kill" 3
+	}
+	}
+    TFBot
+	{
+	Template T_TFBot_Demoman_Knight
+	Name "Bottle Knight"
+	Item "Upgradeable TF_WEAPON_BOTTLE"
+	ItemAttributes
+	{
+		ItemName "Upgradeable TF_WEAPON_BOTTLE"
+		"is_a_sword" 72
+		"kill eater score type" 6
+		"kill eater kill type" 6
+		"special taunt" 1
+		"critboost on kill" 3
+		"max health additive penalty" -25
+	}
+	}
+    TFBot
+	{
+	Template T_TFBot_Demoman_Knight
+	Name "Casual Golfer"
+	ItemAttributes
+	{
+		ItemName "Nessie's Nine Iron"
+		"critboost on kill" 3
+	}
+	Item "Tam O'Shanter"
+	Item "Nessie's Nine Iron"
+	}
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "wave01a"
+	WaitForAllDead "wave01_tanks"
+	Where spawnbot
+	Where spawnbot_flank
+	TotalCount 40
+	SpawnCount 2
+	MaxActive 10
+	FirstSpawnWarningSound "vo\mvm\norm\sniper_mvm_battlecry01.mp3"
+	WaitBeforeStarting 5 // tank dummy thicc
+	WaitBetweenSpawns 0.8
+	TotalCurrency 100
+	RandomChoice
+	{
+	TFBot
+	{
+	Template T_TFBot_Sniper_Huntsman
+	}
+	TFBot
+	{
+	Template T_TFBot_Sniper_Huntsman
+	Name "The COOLER Bowman"
+	Item "The Fortified Compound"
+	Item "The Dread Hiding Hood"
+	ItemAttributes
+	{
+	ItemName "The Fortified Compound"
+	"damage bonus" 1.0 // haha fuck you!!!
+	}
+	}
+	TFBot
+	{
+	ItemAttributes
+	{
+	ItemName "The Anger"
+	"set item tint rgb" 12073019
+	}
+	Template T_TFBot_Sniper_Huntsman
+	Name Bleedman
+	Item "The Anger"
+	ItemAttributes
+	{
+	ItemName "The Huntsman"
+	"damage bonus" 0.5
+	"bleeding duration" 4
+	}
+	}
+	TFBot
+	{
+	ItemAttributes
+	{
+	ItemName "The Fruit Shoot"
+	"set item tint rgb" 12073019
+	}
+	Template T_TFBot_Sniper_Huntsman
+	Name "Hungry Bowman"
+	Item "The Fruit Shoot"
+	ItemAttributes
+	{
+	ItemName "The Huntsman"
+	"damage bonus" 0.5
+	"heal on hit for rapidfire" 50
+	}
+	}
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "Wave02"
+	WaitForAllDead "wave01"
+	Where spawnbot
+	TotalCount 3
+	SpawnCount 3
+	MaxActive 3
+	WaitBeforeStarting 5
+	TotalCurrency 100
+	Squad
+	{
+	TFBot
+	{
+	Template T_TFBot_Giant_Heavyweapons
+	}
+	TFBot
+	{
+	Template T_TFBot_Medic
+	}
+	TFBot
+	{
+	Template T_TFBot_Medic
+	}
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "Wave02"
+	WaitForAllDead "wave01"
+	Where spawnbot
+	TotalCount 3
+	SpawnCount 3
+	MaxActive 3
+	WaitBeforeStarting 15
+	TotalCurrency 100
+	Squad
+	{
+	TFBot
+	{
+	Template T_TFBot_Giant_Heavyweapons
+	ClassIcon heavy_accurate
+	Name "Giant Tommy Gunner"
+	Item "Tomislav"
+	Item "The Siberian Sophisticate"
+	Item "Capone's Capper"
+	ItemAttributes
+	{
+	ItemName "Tomislav"
+	"damage bonus" 1.10
+	}
+	}
+	TFBot
+	{
+	Template T_TFBot_Medic
+	}
+	TFBot
+	{
+	Template T_TFBot_Medic
+	}
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "Wave02"
+	WaitForAllDead "wave01"
+	Where spawnbot
+	TotalCount 3
+	SpawnCount 3
+	MaxActive 3
+	WaitBeforeStarting 25
+	TotalCurrency 100
+	Squad
+	{
+	TFBot
+	{
+	Template T_TFBot_Heavyweapons_Heater
+	Item "The Bunsen Brave"
+	Name "Giant Heater Heavy"
+	ItemAttributes
+	{
+		ItemName "The Huo Long Heatmaker"
+		"damage bonus"	1.25
+		"ring of fire while aiming" 36
+	}
+	}
+	TFBot
+	{
+	Template T_TFBot_Medic
+	}
+	TFBot
+	{
+	Template T_TFBot_Medic
+	}
+	}
+	}
+	
+    WaveSpawn
+	{
+	Name "Support"
+	WaitForAllDead "wave01"
+	Where spawnbot_flank
+	TotalCount 30
+	SpawnCount 2
+	MaxActive 8
+	Support 1
+	WaitBeforeStarting 15
+	WaitBetweenSpawns 6
+	RandomChoice
+	{
+		TFBot
+		{
+			Template T_TFBot_Scout_Melee
+			Name "Lime Saber"
+			Item "Batsaber"
+			Item "Scout Beanie"
+			Attributes AlwaysCrit
+			ItemAttributes
+			{
+			ItemName "Batsaber"
+			"set item tint RGB" 3329330
+			}
+			ItemAttributes
+			{
+			ItemName "Scout Beanie"
+			"set item tint RGB" 3329330
+			}
+			ClassIcon scout_bat
+		}
+		TFBot
+		{
+			Template T_TFBot_Scout_Melee
+			Name "Pink Saber"
+			Item "Batsaber"
+			Item "Scout Beanie"
+			Attributes AlwaysCrit
+			ItemAttributes
+			{
+			ItemName "Batsaber"
+			"set item tint RGB" 16738740
+			}
+			ItemAttributes
+			{
+			ItemName "Scout Beanie"
+			"set item tint RGB" 16738740
+			}
+			ClassIcon scout_bat
+		}
+	}
+	}
+	
+	}
+	
+	Wave // $700
+	{
+	StartWaveOutput
+	{
+		Target wave_start_relay
+		Action Trigger
+	}
+	DoneOutput
+	{
+		Target wave_finished_relay
+		Action Trigger
+	}
+	WaitWhenDone 65
+	Checkpoint Yes
+	
+	WaveSpawn
+	{
+	Name "LINE"
+	Where spawnbot
+	TotalCount 4
+	SpawnCount 1
+	MaxActive 4
+	WaitBeforeStarting 2
+	WaitBetweenSpawns 4
+	TFBot
+	{
+	Template br_testers_hate_him
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "wave01_boss_sound"
+	WaitForAllDead "LINE"
+	FirstSpawnWarningSound "vo\mvm\norm\engineer_mvm_meleedare01.mp3"
+	WaitBeforeStarting 2.5
+	}
+	
+	WaveSpawn
+	{
+	Name "wave01_boss"
+	WaitForAllDead "LINE"
+	Where spawnbot
+	TotalCount 2
+	SpawnCount 2
+	MaxActive 2
+	FirstSpawnOutput 
+	{
+	  Target boss_pit_close_door
+	  Action Trigger
+	}
+	DoneOutput
+	{
+	    Target boss_pit_open_door
+	    Action Trigger
+	}
+	FirstSpawnWarningSound "misc\killstreak.wav"
+	WaitBeforeStarting 1
+	WaitBetweenSpawns 4
+	Squad
+	{
+	ShouldPreserveSquad 1
+	TFBot
+	{
+	Class Soldier
+	Name "Bison Soldier"
+	Item "The Righteous Bison"
+	ItemAttributes
+	{
+	ItemName "The Righteous Bison"
+	"faster reload rate" -2
+	"fire rate penalty" 1.5
+	}
+	ClassIcon soldier_bison
+	WeaponRestrictions SecondaryOnly
+	}
+	TFBot
+	{
+	Class Engineer
+	Skill Expert
+	Name "The Shockmaster"
+	WeaponRestrictions SecondaryOnly
+	ClassIcon scout_capper_nys
+	Attributes MiniBoss
+	Attributes UseBossHealthBar
+	Attributes HoldFireUntilFullReload
+	BehaviorModifiers Push
+	Health 20000
+	Scale 1.8
+	Item "The C.A.P.P.E.R"
+	Item "The Heavy Lifter"
+	Item "Jungle Booty"
+	Item "Coldfront Commander"
+	CharacterAttributes
+	{
+	"move speed bonus" 0.3
+	"damage force reduction" 0.1
+	"airblast vulnerability multiplier" 0.1
+	"airblast vertical pushback scale" 0.1
+	"rage giving scale" 0.1
+	"override footstep sound set" 3
+	}
+	ItemAttributes
+	{
+	ItemName "The C.A.P.P.E.R"
+	"damage bonus" 2.0
+	"fire rate bonus" 0.6
+	"faster reload rate" -2
+	"energy weapon penetration" 1
+	"ragdolls become ash" 0
+	"ragdolls plasma effect" 1
+	}
+	}
+	}
+	}
+
+	WaveSpawn
+	{
+	Name "wave01"
+	WaitForAllDead "LINE"
+	Where spawnbot
+	TotalCount 32
+	SpawnCount 1
+	MaxActive 20
+	WaitBeforeStarting 5
+	WaitBetweenSpawns 0.8
+	TFBot
+	{
+	Class Soldier
+	Name "Bison Soldier"
+	Item "The Righteous Bison"
+	ItemAttributes
+	{
+	ItemName "The Righteous Bison"
+	"faster reload rate" -2
+	"fire rate penalty" 1.5
+	}
+	ClassIcon soldier_bison
+	WeaponRestrictions SecondaryOnly
+	}
+	}	
+
+	WaveSpawn
+	{
+	Name "wave02"
+	WaitForAllDead "wave01_boss"
+	Where spawnbot
+	TotalCount 4
+	SpawnCount 1
+	MaxActive 2
+	WaitBeforeStarting 0
+	WaitBetweenSpawns 20
+	FirstSpawnWarningSound "npc\ichthyosaur\attack_growl1.wav"
+	TotalCurrency 100
+	TFBot
+	{
+    Template br_breadcrab_giant
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "wave02"
+	WaitForAllDead "wave01_boss"
+	Where spawnbot
+	TotalCount 40
+	SpawnCount 5
+	MaxActive 10
+	WaitBeforeStarting 5
+	WaitBetweenSpawns 10
+	TotalCurrency 200
+	TFBot
+	{
+    Class Demoman
+	Skill Hard
+	Name "Iron Demoman"
+	Attributes HoldFireUntilFullReload
+	Item "The Iron Bomber"
+	Item "Civilian Grade JACK Hat"
+	ClassIcon demo_ironbomber_lite
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "wave02_scouts"
+	WaitForAllDead "wave01_boss"
+	Where spawnbot_flank
+	TotalCount 24
+	SpawnCount 6
+	MaxActive 12
+	WaitBeforeStarting 25
+	WaitBetweenSpawns 10
+	TotalCurrency 100
+	TFBot
+	{
+    Class Scout
+	Skill Normal
+	MaxVisionRange 900
+	Attributes AlwaysCrit
+	Attributes HoldFireUntilFullReload
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "wave03"
+	WaitForAllDead "wave02"
+	Where spawnbot
+	TotalCount 3
+	SpawnCount 1
+	MaxActive 3
+	WaitBetweenSpawns 8
+	TotalCurrency 150
+	TFBot
+	{
+    Template T_TFBot_Giant_Soldier_Crit
+	Name "Super-Blast Soldier"
+	ClassIcon soldier_nuker
+	Item "The Lucky Shot"
+	ItemAttributes
+	{
+		ItemName "The Original"
+		"faster reload rate" 0.2
+		"fire rate bonus" 3.5
+		"Blast radius increased" 1.6
+		"Projectile speed increased" 1.35
+	}
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "wave03"
+	WaitForAllDead "wave02"
+	Where spawnbot
+	TotalCount 30
+	SpawnCount 5
+	MaxActive 15
+	WaitBeforeStarting 5
+	WaitBetweenSpawns 5
+	TotalCurrency 150
+	TFBot
+	{
+    Template br_breadcrab_zombie
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "support"
+	WaitForAllDead "wave02_scouts"
+	Where spawnbot
+	TotalCount 24
+	SpawnCount 3
+	MaxActive 6
+	Support 1
+	WaitBeforeStarting 10
+	WaitBetweenSpawns 4
+	TFBot
+	{
+    Template br_scout_camper
+	}
+	}
+	
+	}
+	
+	Wave // $800
+	{
+	StartWaveOutput
+	{
+		Target wave_start_relay
+		Action Trigger
+	}
+	DoneOutput
+	{
+		Target wave_finished_relay
+		Action Trigger
+	}
+	WaitWhenDone 65
+	Checkpoint Yes
+	
+	WaveSpawn
+	{
+	Name "LINE"
+	Where spawnbot
+	TotalCount 5
+	SpawnCount 1
+	MaxActive 5
+	WaitBeforeStarting 2
+	WaitBetweenSpawns 4
+	TFBot
+	{
+	Template br_testers_hate_him
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "wave01"
+	WaitForAllDead "LINE"
+	Where spawnbot
+	TotalCount 80
+	SpawnCount 2
+	MaxActive 20
+	WaitBeforeStarting 15
+	StartWaveWarningSound "ui\gamestartup5.mp3"
+	WaitBetweenSpawns 0.7
+	TotalCurrency 100
+	RandomChoice
+	{
+	TFBot // Scatter
+	{
+    Class Scout
+	WeaponRestrictions PrimaryOnly
+	Attributes HoldFireUntilFullReload
+	Skill Hard
+	MaxVisionRange 1200
+	Item "Upgradeable TF_WEAPON_SCATTERGUN"
+	ItemAttributes
+	{
+	ItemName "Upgradeable TF_WEAPON_SCATTERGUN"
+	"damage bonus" 1.25
+	}
+	}
+	TFBot // Popper
+	{
+    Class Scout
+	WeaponRestrictions PrimaryOnly
+	Item "The Soda Popper" 
+	Skill Hard
+	MaxVisionRange 1200
+	ItemAttributes
+	{
+	ItemName "The Soda Popper" 
+	"damage bonus" 1.25
+	}
+	}
+	TFBot // F-A-N
+	{
+    Class Scout
+	WeaponRestrictions PrimaryOnly
+	Item "The Force-a-Nature"
+	Skill Hard
+	MaxVisionRange 1200
+	ItemAttributes
+	{
+	ItemName "The Force-a-Nature"
+	"damage bonus" 1.25
+	}
+	}
+	TFBot // Backscatter
+	{
+    Class Scout
+	WeaponRestrictions PrimaryOnly
+	Attributes HoldFireUntilFullReload
+	Item "The Back Scatter"
+	Skill Hard
+	MaxVisionRange 1200
+	ItemAttributes
+	{
+	ItemName "The Back Scatter"
+	"damage bonus" 1.25
+	}
+	}
+	TFBot // Baby Face
+	{
+    Class Scout
+	WeaponRestrictions PrimaryOnly
+	Attributes HoldFireUntilFullReload
+	Item "Baby Face's Blaster"
+	Skill Hard
+	MaxVisionRange 1200
+	ItemAttributes
+	{
+	ItemName "Baby Face's Blaster"
+	"damage bonus" 1.25
+	}
+	}
+	TFBot // Shortstop
+	{
+    Class Scout
+	WeaponRestrictions PrimaryOnly
+	Item "The Shortstop" 
+	Skill Normal
+	ItemAttributes
+	{
+	ItemName "The Shortstop" 
+	"damage bonus" 1.15
+	}
+	}
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "wave01"
+	WaitForAllDead "LINE"
+	Where spawnbot
+	TotalCount 1
+	SpawnCount 1
+	FirstSpawnOutput 
+	{
+	  Target boss_pit_close_door
+	  Action Trigger
+	}
+	DoneOutput
+	{
+	    Target boss_pit_open_door
+	    Action Trigger
+	}
+	MaxActive 1
+	WaitBeforeStarting 45
+	FirstSpawnWarningSound "vo\mvm\mght\scout_mvm_m_dominationsol06.mp3"
+	WaitBetweenSpawns 5
+    TotalCurrency 50
+	TFBot
+	{
+	Class Scout
+	Health 20000
+	Scale 1.8
+	Skill Expert
+	Name "King O' Scouts"
+	ClassIcon scout_leader
+	Attributes MiniBoss
+	Attributes UseBossHealthBar
+	Attributes HoldFireUntilFullReload
+	WeaponRestrictions PrimaryOnly
+	Item "Class Crown"
+	Item "Silver Botkiller Scattergun Mk.II"
+	ItemAttributes
+	{
+	ItemName "Silver Botkiller Scattergun Mk.II"
+	//"custom name attr" "Force-A-Short-Baby To Scatter Pop" // Thanks to DaMeister For Weapon Name
+	// Doesnt work :((((
+	"fire rate bonus" 0.4
+	"bullets per shot bonus" 1.2
+	"clip size penalty" 0.25
+	"Reload time decreased" 0.75
+	"spread penalty" 1.20
+	"hype on damage" 1
+	"closerange backattack minicrits" 1
+	"scattergun has knockback" 1
+	"damage force increase hidden" 1.2
+	"airblast vulnerability multiplier hidden" 1.2
+	"boost on damage" 1
+	"damage bonus" 1.75
+	}
+	CharacterAttributes
+	{
+	"move speed bonus" 0.4
+	"damage force reduction" 0.2
+	"airblast vulnerability multiplier" 0.2
+	"airblast vertical pushback scale" 0.1
+	"rage giving scale" 0.1
+	"override footstep sound set" 3
+	}
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "wave02"
+	WaitForAllDead "wave01"
+	Where spawnbot
+	TotalCount 3
+	SpawnCount 1
+	MaxActive 3
+	WaitBeforeStarting 5
+	WaitBetweenSpawns 15
+	TotalCurrency 150
+	TFBot
+	{
+	Template T_TFBot_Giant_Heavyweapons
+	Name "Giant Booster Heavy"
+	Item "Upgradeable TF_WEAPON_MINIGUN"
+	ClassIcon heavy_booster
+	Item "The Bolt Action Blitzer"
+	ItemAttributes
+	{
+	ItemName "Upgradeable TF_WEAPON_MINIGUN"
+	"damage bonus" 1.35
+	"critboost on kill" 5
+	"crit vs burning players" 4096 // Destroys critboosted players.
+	}
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "wave02"
+	WaitForAllDead "wave01"
+	Where spawnbot
+	TotalCount 1
+	SpawnCount 1
+	MaxActive 1
+	WaitBeforeStarting 2
+	WaitBetweenSpawns 0.9
+	TotalCurrency 100
+	Tank
+	{
+	Health 16000
+	Skin 1
+	Name Tank
+	Speed 75
+	OnKilledOutput
+	{
+	Target	boss_dead_relay
+	Action	Trigger
+	}
+	OnBombDroppedOutput
+	{
+	Target	boss_deploy_relay
+	Action	Trigger
+	}
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "wave02"
+	WaitForAllDead "wave01"
+	Where spawnbot
+	Where spawnbot_flank
+	TotalCount 32
+	SpawnCount 2
+	MaxActive 12
+	WaitBeforeStarting 3
+	WaitBetweenSpawns 1
+	TotalCurrency 100
+	TFBot
+	{
+	Class Soldier
+	Skill Normal
+	Name Bluecoat
+	Attributes HoldFireUntilFullReload
+	Item "The Valley Forge"
+	Item "The Liberty Launcher" 
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "wave03"
+	WaitForAllDead "wave02"
+	Where spawnbot
+	Where spawnbot_flank
+	TotalCount 30
+	SpawnCount 10
+	MaxActive 20
+	WaitBeforeStarting 3
+	WaitBetweenSpawns 4
+	TotalCurrency 100
+	TFBot
+	{
+	Class Demoman
+	Skill Normal
+	Name Basher-Man
+	Attributes HoldFireUntilFullReload
+	ClassIcon demo_charger
+	Item "The Frag Proof Fragger"
+	Item "The Iron Bomber"
+	Item "The Chargin' Targe"
+	ItemAttributes
+	{
+	ItemName "The Chargin' Targe"
+	"charge impact damage increased" 1.45
+	"charge recharge rate increased" 1.25
+	}
+	}
+    }
+	
+	WaveSpawn
+	{
+	Name "wave03"
+	WaitForAllDead "wave02"
+	Where spawnbot
+	TotalCount 6
+	SpawnCount 1
+	MaxActive 6
+	WaitBeforeStarting 0
+	WaitBetweenSpawns 10
+	TotalCurrency 200
+	TFBot
+	{
+    Template T_TFBot_Giant_Boxing_Heavy
+	Name "Bezerking Heavy"
+	Health 4250
+	ClassIcon heavy_dwarf
+	Item "Warrior's Spirit"
+	Item "Mad Mask"
+	CharacterAttributes
+	{
+	"move speed bonus" 0.9
+	}
+	ItemAttributes
+	{
+	ItemName "Warrior's Spirit"
+	"damage bonus" 2.5
+	"heal on kill" 1000
+	}
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "support"
+	WaitForAllDead "wave01"
+	Where spawnbot
+	TotalCount 8
+	SpawnCount 1
+	MaxActive 2
+	Support Limited
+	WaitBeforeStarting 20
+	WaitBetweenSpawns 25
+	TFBot
+	{
+    Template br_scout_camper
+	Health 600
+	Scale 1.5
+	}
+	}
+	
+	}
+	
+	Wave
+	{
+	StartWaveOutput
+	{
+		Target wave_start_relay
+		Action Trigger
+	}
+	DoneOutput
+	{
+		Target wave_finished_relay
+		Action Trigger
+	}
+	WaitWhenDone 65
+	Checkpoint Yes
+	
+	WaveSpawn
+	{
+	Name "LINE"
+	Where spawnbot
+	TotalCount 6
+	SpawnCount 1
+	MaxActive 6
+	WaitBeforeStarting 2
+	WaitBetweenSpawns 2
+    TFBot
+	{
+	Template br_testers_hate_him
+	Name "Bread Assembally Line"
+	Item "Bread Biter"
+	Item "Breadcrab"
+	CharacterAttributes
+	{
+	"head scale" 1.25
+	}
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "support3"
+	WaitForAllDead "LINE"
+	Where spawnbot
+	TotalCount 6
+	SpawnCount 1
+	MaxActive 2
+	Support Limited
+	WaitBeforeStarting 10
+	WaitBetweenSpawns 15
+    TFBot
+	{
+	Template br_breadcrab_giant
+	ClassIcon breadcrab_zombie
+	}
+	}
+
+	WaveSpawn
+	{
+	Name "support2"
+	WaitForAllDead "LINE"
+	Where spawnbot
+	TotalCount 32
+	SpawnCount 2
+	MaxActive 6
+	WaitBeforeStarting 15
+	WaitBetweenSpawns 8
+	Support 1
+    TFBot
+	{
+	Template br_breadcrab_zombie
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "wave02"
+	WaitForAllDead "LINE"
+	Where spawnbot
+	TotalCount 1
+	SpawnCount 1
+	MaxActive 1
+	FirstSpawnWarningSound "npc\strider\striderx_alert2.wav"
+	WaitBeforeStarting 10
+	WaitBetweenSpawns 15
+	TotalCurrency 69
+    TFBot
+	{
+			Class Heavyweapons
+			Name "Zombine Captain"
+			ClassIcon heavy_grapple
+			Skill Expert
+			Health 32000
+			Scale 1.9
+			Item "Apoco-Fists"
+	        Item "Benefactor's Bowl"
+	        Item "Breadcrab"
+			WeaponRestrictions PrimaryOnly
+			Attributes UseBossHealthBar
+			Attributes MiniBoss
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_MINIGUN"
+				"damage bonus"	0.000001
+				"apply look velocity on damage" -200
+				"apply z velocity on damage" 1
+				"weapon spread bonus"	0.001
+				"fire rate bonus" 0.4
+			}
+			ItemAttributes
+			{
+			   ItemName "Apoco-Fists"
+			   "damage bonus" 2.0
+			   "melee attack rate bonus" 0.3
+               "melee range multiplier" 2.5
+				is_passive_weapon 1
+			   "heal on kill" 5000
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.3
+				"damage force reduction" 0.2
+				"airblast vulnerability multiplier" 0.2
+				"override footstep sound set" 2
+				"rage giving scale" 0.1
+			}
+	}
+	}
+	
+	WaveSpawn
+	{
+	Name "wave02_support"
+	WaitForAllDead "LINE"
+	Where spawnbot_flank
+	TotalCount 60
+	SpawnCount 2
+	MaxActive 12
+	Support 1
+	WaitBeforeStarting 0
+	WaitBetweenSpawns 4
+    TFBot
+	{
+	Class Pyro
+	Name Zombine
+	WeaponRestrictions SecondaryOnly
+	Health 200
+	ClassIcon thumper_lite
+	Item "Benefactor's Bowl"
+	Item "Breadcrab"
+	Item "Antifreeze Ulster"
+	Item "Upgradeable TF_WEAPON_SHOTGUN_PYRO"
+	ItemAttributes
+	{
+		ItemName "Upgradeable TF_WEAPON_SHOTGUN_PYRO" // thumper stats, remade for vanilla testing.
+		"faster reload rate" 0.3
+		"fire rate bonus" 2.9
+		"bullets per shot bonus" 0.5
+		"weapon spread bonus" 1.15
+		"damage bonus" 2.3
+	}
+	}
+	}
+	
+	}
+}

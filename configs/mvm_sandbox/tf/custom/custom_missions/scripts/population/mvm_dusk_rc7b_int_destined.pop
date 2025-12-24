@@ -1,0 +1,1891 @@
+#base robot_standard.pop
+#base robot_giant.pop
+
+//Where:
+//spawnbot
+//spawnbot_invasion
+//spawnbot_right
+//spawnbot_all
+//spawnbot_left
+//spawnbot_mission_sniper
+//spawnbot_mission_spy
+//spawnbot_mission_sentrybuster
+
+//Tank:
+//tankpath_left
+//tankpath_right
+//tankpath_same
+//tankpath_alt
+
+WaveSchedule
+{
+	StartingCurrency 				400
+	RespawnWaveTime 				3
+	CanBotsAttackWhileInSpawnRoom 	no
+
+	Templates
+	{
+		T_TFBot_Scout_Pistol
+		{
+			Class Scout
+			Health 125
+			ClassIcon scout_pistol
+			Name "Pistol Scout"
+			WeaponRestrictions SecondaryOnly
+			MaxVisionRange 2000
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_PISTOL"
+				"damage penalty" 0.75
+				"clip size upgrade atomic" -2.0
+				"faster reload rate" 3.0
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.85
+			}
+		}
+
+		T_TFBot_Soldier_Spread
+		{
+			Class Soldier
+			Name "Bazooka Soldier"
+			ClassIcon soldier_bazooka
+			Scale 1.2
+			Health 400
+			Skill Expert
+			WeaponRestrictions PrimaryOnly
+			Item "The Beggar's Bazooka"
+			Attributes HoldFireUntilFullReload
+			ItemAttributes
+			{
+				ItemName "The Beggar's Bazooka"
+				"faster reload rate" 0.5
+				"fire rate bonus" 0.05
+				"projectile spread angle penalty" 7.0
+				"Projectile speed increased" 0.5
+				"damage bonus"	0.85
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.88
+				"health regen" 1
+				"can overload" -1
+				"auto fires full clip" -1
+			}
+		}
+
+		T_TFBot_Soldier_Shotgun
+		{
+			Class Soldier
+			Name "Shotgun Soldier"
+			Health 160
+			ClassIcon heavy_shotgun
+			Item "Soldier's Sparkplug"
+			WeaponRestrictions SecondaryOnly
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_SHOTGUN_SOLDIER"
+				"damage bonus" 0.5
+				"projectile penetration" 1.0
+				"bullets per shot bonus" 0.4
+				"faster reload rate" -0.8
+				"fire rate bonus" 0.85
+				"projectile spread angle penalty" 3.5
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 1.2
+			}
+		}
+
+		T_TFBot_Soldier_Bison
+		{
+			Class Soldier
+			Name "Beam Soldier"
+			Skill Normal
+			ClassIcon soldier_bison
+			WeaponRestrictions SecondaryOnly
+			Item "The Righteous Bison"
+			Item "Space Bracers"
+			Item "Jupiter Jumpers"
+			Item "Hardium Helm"
+			ItemAttributes
+			{
+				ItemName "The Righteous Bison"
+				"faster reload rate" -0.8
+				"fire rate bonus" 1.15
+				"Projectile speed increased"	1.15
+			}	
+		}
+
+		T_TFBot_Soldier_Mangle_Rapidfire
+		{
+			Class Soldier
+			Name "Rapid-Fire Laser Soldier"
+			Skill Normal
+			ClassIcon soldier_mangler_spammer
+			WeaponRestrictions PrimaryOnly
+			Item "The Cow Mangler 5000"
+			Item "Space Bracers"
+			Item "Jupiter Jumpers"
+			Item "Hardium Helm"
+			ItemAttributes
+			{
+				ItemName "The Cow Mangler 5000"
+				"faster reload rate" -0.8
+				"fire rate bonus" 0.45
+				"damage penalty" 0.4
+				"Blast radius decreased" 0.05
+				"Projectile speed increased"	1.5
+			}	
+		}
+
+		T_TFBot_Medic_Crossbow
+		{
+			Class Medic
+			Name "Crossbow Medic"
+			ClassIcon medic_crossbow
+			Health 200
+			Item "The Crusader's Crossbow"
+			Item "Berliner's Bucket Helm"
+			Attributes Aggressive
+			WeaponRestrictions PrimaryOnly
+			ItemAttributes
+			{
+				ItemName "The Crusader's Crossbow"
+				"clip size upgrade atomic" 4
+				"damage penalty" 0.75
+				"faster reload rate" 0.65
+				"fire rate bonus" 0.001
+				"projectile spread angle penalty" 4.0
+				"heal on hit for rapidfire" 20
+			}
+		}
+
+		T_TFBot_Sniper_SMG
+		{
+			Class Sniper
+			Name "Sniper SMG"
+			ClassIcon sniper_smg_tind
+			Health 125
+			WeaponRestrictions SecondaryOnly
+			ItemAttributes
+			{
+				ItemName "TF_Weapon_SMG"
+				"fire rate bonus" 1.25
+				"faster reload rate" 3.0
+				"clip size upgrade atomic" 12
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.85
+			}
+		}
+
+T_TFBot_Giant_Scout_Pistol
+		{
+			Class Scout
+			Skill Expert
+			Health 1600
+			Attributes Miniboss
+			ClassIcon scout_pistol_giant
+			Name "Giant Pistol Scout"
+			WeaponRestrictions SecondaryOnly
+			MaxVisionRange 2200
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_PISTOL"
+				"fire rate bonus" 0.75
+				"damage penalty" 0.25
+				"faster reload rate" -0.8
+			}
+			CharacterAttributes
+			{
+				"damage force reduction" 0.7
+				"move speed bonus" 0.85
+				"airblast vulnerability multiplier" 0.7
+				"override footstep sound set" 5
+			}
+		}
+		
+		T_TFBot_Giant_Scout_Guillotine
+		{
+			Class Scout
+			Skill Expert
+			Health 1200
+			ClassIcon scout_cleaver_giant
+			Attributes Miniboss
+			Name "Giant Butcher Scout"
+			Item "The Flying Guillotine"
+			Item "Ye Oiled Baker Boy"
+			WeaponRestrictions SecondaryOnly
+			MaxVisionRange 2500
+			ItemAttributes
+			{
+				ItemName "The Flying Guillotine"
+				"effect bar recharge rate increased" 0.075
+				"projectile spread angle penalty" 6.0
+				"Projectile speed increased" 0.65
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	1.15
+				"damage force reduction" 0.8
+				"airblast vulnerability multiplier" 0.8
+				"override footstep sound set" 5
+			}
+		}
+
+		T_TFBot_Giant_Soldier_Bison
+		{
+			Class Soldier
+			Name "Giant Beam Soldier"
+			Skill Expert
+			Health 3800
+			ClassIcon soldier_bison_giant
+			WeaponRestrictions SecondaryOnly
+			Attributes MiniBoss
+			Item "The Righteous Bison"
+			Item "Space Bracers"
+			Item "Jupiter Jumpers"
+			Item "Hardium Helm"
+			ItemAttributes
+			{
+				ItemName "The Righteous Bison"
+				"faster reload rate" -0.8
+				"fire rate bonus" 0.65
+				"projectile spread angle penalty" 1.5
+				"Projectile speed increased"	1.25
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.65
+				"override footstep sound set" 3
+				"damage force reduction" 0.4
+				"airblast vulnerability multiplier" 0.4
+				"airblast vertical vulnerability multiplier" 0.1
+			}	
+		}
+
+		T_TFBot_Giant_Soldier_Spammer_Spread
+		{
+			Class Soldier
+			Name "Giant Bazooka Soldier"
+			ClassIcon soldier_bazooka_giant
+			Health 4000
+			Skill Expert
+			WeaponRestrictions PrimaryOnly
+			Item "The Beggar's Bazooka"
+			Attributes MiniBoss
+			Attributes HoldFireUntilFullReload
+			ItemAttributes
+			{
+				ItemName "The Beggar's Bazooka"
+				"faster reload rate" 0.25
+				"fire rate bonus" 0.03
+				"clip size upgrade atomic" 2.0
+				"projectile spread angle penalty" 8.5
+				"Projectile speed increased" 0.5
+				"Blast radius increased" 0.8
+				"damage penalty" 0.9
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"can overload" -1
+				"auto fires full clip" -1
+				"damage force reduction" 0.4
+				"airblast vulnerability multiplier" 0.4
+				"override footstep sound set" 3
+			}
+		}
+
+		T_TFBot_Giant_Sniper_SMG
+		{
+			Class Sniper
+			Name "Giant Sniper SMG"
+			Skill Expert
+			ClassIcon sniper_smg_tind_giant
+			Attributes MiniBoss
+			Health 2000
+			WeaponRestrictions SecondaryOnly
+			ItemAttributes
+			{
+				ItemName "TF_Weapon_SMG"
+				"fire rate bonus" 0.75
+				"damage penalty" 0.75
+				"faster reload rate" 0.5
+				"projectile penetration" 2.0
+				"weapon spread bonus" 0.65
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.8
+				"damage force reduction" 0.75
+				"airblast vulnerability multiplier" 0.75
+				"head scale" 0.7
+				"override footstep sound set" 2
+			}
+		}
+		
+		T_TFBot_Giant_Sniper_Huntsman
+		{
+			Class Sniper
+			Name "Giant Bowman"
+			Skill Expert
+			ClassIcon sniper_bow_multi
+			Health 2000
+			Attributes MiniBoss
+			WeaponRestrictions PrimaryOnly
+			Item "The Huntsman"
+
+			ItemAttributes
+			{
+				ItemName "The Huntsman"
+				"damage bonus" 1.2
+				"fire rate bonus" 0.2
+				"dmg bonus vs buildings" 1.1
+				"projectile penetration" 1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.6
+				"airblast vulnerability multiplier" 0.6	
+				"head scale" 0.7
+				"override footstep sound set" 2
+			}			
+		}
+
+		T_TFBot_Giant_Pyro_Powerjack
+		{
+			Class Pyro
+			Name "Giant Mallet Pyro"
+			Skill Expert
+			Health 2750
+			ClassIcon pyro_powerjack_giant
+			Attributes MiniBoss
+			WeaponRestrictions MeleeOnly
+			Item "The Powerjack"
+			Item "The Rusty Reaper"
+			ItemAttributes
+			{
+				ItemName "The Powerjack"
+				"damage bonus" 2.15
+				"fire rate bonus" 0.85
+				"damage causes airblast" 1
+				"gesture speed increase" 1.1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.7
+				"damage force reduction" 0.5
+				"airblast vulnerability multiplier" 0.5
+				"override footstep sound set" 6
+			}
+		}
+
+		T_TFBot_Giant_Heavyweapons_Aimless
+		{
+			Class Heavyweapons
+			Name "Giant Gun-Nut Heavy"
+			ClassIcon heavy_accurate
+			Skill Expert
+			Health 4500
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 120
+			Attributes MiniBoss
+			Attributes AlwaysFireWeapon
+			Item "Tomislav"
+			Item "The Titanium Towel"
+			Item "War Head"
+			ItemAttributes
+			{
+				ItemName "Tomislav"
+				"damage penalty"	0.7
+				"fire rate bonus" 0.3
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.6
+				"damage force reduction" 0.3
+				"airblast vulnerability multiplier" 0.3
+				"override footstep sound set" 2
+			}
+		}
+	}
+
+    Mission
+	{
+		Objective DestroySentries
+		InitialCooldown 2
+		Where spawnbot_mission_sentrybuster
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		CooldownTime 35
+		DesiredCount 1
+		TFBot
+		{
+			Template 	T_TFBot_SentryBuster
+		}
+	}
+
+    Mission
+	{
+		Objective DestroySentries
+		InitialCooldown 2
+		Where spawnbot_mission_sentrybuster
+		BeginAtWave 2
+		RunForThisManyWaves 1
+		CooldownTime 28
+		DesiredCount 1
+		TFBot
+		{
+			Template 	T_TFBot_SentryBuster
+		}
+	}
+
+    Mission
+	{
+		Objective DestroySentries
+		InitialCooldown 2
+		Where spawnbot_mission_sentrybuster
+		BeginAtWave 3
+		RunForThisManyWaves 4
+		CooldownTime 35
+		DesiredCount 1
+		TFBot
+		{
+			Template 	T_TFBot_SentryBuster
+		}
+	}
+
+	Mission
+	{
+		Objective Sniper
+		InitialCooldown 55
+		Where spawnbot_mission_sniper
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		CooldownTime 25
+		DesiredCount 1
+		TFBot
+		{
+			Template 	T_TFBot_Sniper
+		}
+	}
+
+	Mission
+	{
+		Objective Sniper
+		InitialCooldown 5
+		Where spawnbot_mission_sniper
+		BeginAtWave 4
+		RunForThisManyWaves 1
+		CooldownTime 65
+		DesiredCount 2
+		TFBot
+		{
+			Template 	T_TFBot_Sniper_Razorback
+		}
+	}
+	Mission
+	{
+		Objective Spy
+		InitialCooldown 45
+		Where spawnbot_mission_spy
+		BeginAtWave 2
+		RunForThisManyWaves 1
+		CooldownTime 40
+		DesiredCount 1
+		TFBot
+		{
+			Template 	T_TFBot_Spy
+		}
+	}
+
+	Mission
+	{
+		Objective Spy
+		InitialCooldown 65
+		Where spawnbot_mission_spy
+		BeginAtWave 6
+		RunForThisManyWaves 1
+		CooldownTime 45
+		DesiredCount 1
+		TFBot
+		{
+			Template 	T_TFBot_Spy
+		}
+	}
+
+// Wave 1 /////////////////////////////////////
+///////////////////////////////////////////////
+// 7 Groups of 3 MLS (200)
+// 3 Groups of 3 heavies (250)
+// 6 Bazooka Soldiers throughout wave (200)
+// -------------------------------------------
+// 4 Groups of 6 Flare pyros (200)
+///////////////////////////////////////////////
+
+    Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+
+		WaveSpawn // 7 Groups of 3 MLS (200)
+		{
+            		Name "A"
+			Where spawnbot_left
+			TotalCount 21
+			MaxActive 7
+			SpawnCount 3
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 3
+			TotalCurrency 	200
+			TFBot
+			{
+				Template T_TFBot_Scout_Sandman
+				Skill Normal
+			}	
+		}
+
+		WaveSpawn // 3 Groups of 3 heavies (250)
+		{
+            		Name "A"
+			Where spawnbot_right
+			TotalCount 12
+			MaxActive 4
+			SpawnCount 3
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 6
+			TotalCurrency 	200
+			TFBot
+			{
+				Class Heavy
+				Skill Easy
+			}	
+		}
+
+
+		WaveSpawn // 6 Bazooka Soldiers throughout wave (200)
+		{
+			Where spawnbot_right
+			TotalCount 9
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 7
+			WaitBetweenSpawns 10
+			TotalCurrency 	150
+			TFBot
+			{
+				Template T_TFBot_Soldier_Spread
+				Skill Easy
+			}	
+		}
+
+		WaveSpawn // 4 Groups of 6 Flare pyros (200)
+		{
+			Where spawnbot
+			TotalCount 32
+			Name "B"
+			MaxActive 13
+			SpawnCount 8
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 3
+			TotalCurrency 	200
+			WaitForAllSpawned "A"
+			TFBot
+			{
+				Template T_TFBot_Pyro_Flaregun
+				Item "The Detonator"
+				Skill Normal
+				ClassIcon pyro_detonator
+			}	
+		}
+
+		WaveSpawn // 6 Bazooka Soldiers throughout wave (200)
+		{
+			Where spawnbot_right
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 2
+			WaitBetweenSpawns 1.5
+			TotalCurrency 	50
+			WaitForAllSpawned "B"
+			TFBot
+			{
+				Template T_TFBot_Soldier_Spread
+				Skill Easy
+			}	
+		}
+	}
+
+// Wave 2 /////////////////////////////////////
+///////////////////////////////////////////////
+// 4 Groups of 8 Bison Soldiers (250)
+// 2 Steelfists (100)
+// -------------------------------------
+// 5 Groups of 9 Bat Scouts (150)
+// 1 Steelfist (50)
+// Support 2 Fan Scouts (100)
+///////////////////////////////////////////////
+
+    Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+
+		WaveSpawn // 4 Groups of 8 Bison Soldiers (250)
+		{
+            		Name "A"
+			Where spawnbot_right
+			TotalCount 32
+			MaxActive 12
+			SpawnCount 9
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 	100
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Soldier_Bison
+					Skill Normal
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Bison
+					Skill Normal
+				}
+				TFBot
+				{
+					Class Soldier
+					Skill Normal
+				}
+			}	
+		}
+
+		WaveSpawn // 2 Steelfists (100)
+		{
+            		Name "A"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 5.5
+			WaitBetweenSpawns 15
+			TotalCurrency 	100
+			TFBot
+			{
+				Template T_TFBot_Giant_Soldier
+			}	
+		}
+
+		WaveSpawn // 2 Steelfists (100)
+		{
+            		Name "A"
+			Where spawnbot_right
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 15
+			TotalCurrency 	100
+			TFBot
+			{
+				Template T_TFBot_Heavyweapons_Fist
+			}	
+		}
+
+		WaveSpawn // 5 Groups of 9 Bat Scouts (150)
+		{
+			Name "B"
+			Where spawnbot_left
+			TotalCount 30
+			MaxActive 14
+			SpawnCount 10
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			WaitForAllDead "A"
+			Support Limited
+			TotalCurrency 	100
+			Randomchoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Scout_Pistol
+					Skill Easy
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Melee
+					ClassIcon scout_bat_nys
+				}
+			}
+		}
+
+		WaveSpawn // 5 Groups of 9 Bat Scouts (150)
+		{
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 8
+			WaitBetweenSpawns 5
+			WaitForAllDead "A"
+			TotalCurrency 	150
+			TFBot
+			{
+				Template T_TFBot_Giant_Pyro_Powerjack
+			}	
+		}
+
+		WaveSpawn // 5 Groups of 9 Bat Scouts (150)
+		{
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			WaitForAllSpawned "B"
+			TotalCurrency 	150
+			TFBot
+			{
+				Template T_TFBot_Giant_Pyro_Powerjack
+			}	
+		}
+
+		WaveSpawn // 1 Steelfist (50)
+		{
+			Where spawnbot_right
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 20
+			WaitBetweenSpawns 5
+			WaitForAllDead "A"
+			TotalCurrency 	75
+			TFBot
+			{
+				Template T_TFBot_Heavyweapons_Fist
+			}	
+		}
+
+
+		WaveSpawn // Support 2 Fan Scouts (100)
+		{
+			Where spawnbot_right
+			TotalCount 18
+			MaxActive 2
+			SpawnCount 2
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 13
+			WaitForAllSpawned "A"
+			Support 1
+			TotalCurrency 	125
+			TFBot
+			{
+				Template T_TFBot_Scout_Pistol
+				Skill Easy
+			}	
+		}
+	}
+
+// Wave 3 /////////////////////////////////////
+///////////////////////////////////////////////
+// 1 Giant Heavy with 2 quickfix medics (200)
+// 1 Tank (200)
+// 4 Groups of 4 soldier shotguns (100)
+// -----------------------------------------
+// 1 Giant Demoknight with 2 quickfix medics (150)
+// 4 Groups of 5 Mangler Spammer soldiers (150)
+// WaitForAllSpawned 
+// 1 Giant Demoknight with 2 quickfix medics (150)
+///////////////////////////////////////////////
+
+    Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+
+		WaveSpawn // 1 Giant Heavy with 2 quickfix medics (300)
+		{
+            		Name "A"
+			Where spawnbot
+			TotalCount 3
+			MaxActive 3
+			SpawnCount 3
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 	200
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Heavyweapons_Heater
+					Name "Giant Heater Heavy"
+					Skill Normal
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickFix
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Quickfix
+				}
+			}
+		}
+
+		WaveSpawn // 1 Tank (200)
+		{
+			TotalCurrency 200
+			TotalCount 1
+			SpawnCount 1
+			
+			FirstSpawnOutput                                                                                                                                                            
+			{
+				Target boss_spawn_relay                                            
+				Action Trigger                         
+			}
+		
+			Tank
+			{
+				Health	15000
+				Name	tankboss
+				Speed	75
+				StartingPathTrackNode "tankpath_alt"
+				
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+
+		WaveSpawn // 4 Groups of 4 soldier shotguns (100)
+		{
+            		Name "A"
+			Where spawnbot
+			TotalCount 15
+			MaxActive 8
+			SpawnCount 5
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 4
+			TotalCurrency 	100
+			TFBot
+			{
+				Template T_TFBot_Soldier_Shotgun
+				Skill Hard
+			}
+		}
+
+		WaveSpawn // 1 Giant Demoknight with 2 quickfix medics (150)
+		{
+            		Name "B"
+			Where spawnbot_right
+			TotalCount 6
+			MaxActive 3
+			SpawnCount 3
+			TotalCurrency 	150
+			WaitBeforeStarting 10
+			WaitForAllDead "A"
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Demoman_PrinceTavish
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_BigHeal
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_BigHeal
+				}
+			}
+		}
+
+		WaveSpawn // 4 Groups of 5 Mangler Spammer soldiers (250)
+		{
+            		Name "B"
+			Where spawnbot
+			TotalCount 16
+			MaxActive 5
+			SpawnCount 4
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 6
+			TotalCurrency 	150
+			WaitForAllDead "A"
+			RandomChoice
+			{
+				TFBot
+				{
+					Class Demoman
+					Skill Normal
+				}
+				TFBot
+				{
+					Class Demoman
+					Skill Normal
+				}
+				TFBot
+				{
+					Class Demoman
+					Skill Normal
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Mangle_Rapidfire
+					Skill Normal
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Mangle_Rapidfire
+					Skill Normal
+				}
+			}
+		}
+
+
+
+		WaveSpawn // 1 Giant Demoknight with 2 quickfix medics (250)
+		{
+            		Name "C"
+			Where spawnbot_right
+			TotalCount 5
+			MaxActive 5
+			SpawnCount 5
+			TotalCurrency 	150
+			WaitForAllSpawned "B"
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Demoman_PrinceTavish
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickFix
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickFix
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickFix
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickFix
+				}
+			}
+		}
+
+		WaveSpawn // 4 Groups of 5 Mangler Spammer soldiers (250)
+		{
+            		Name "C"
+			Where spawnbot
+			TotalCount 16
+			MaxActive 4
+			SpawnCount 3
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 6
+			TotalCurrency 	0
+			WaitForAllSpawned "B"
+			Support 1
+			RandomChoice
+			{
+				TFBot
+				{
+					Class Demoman
+					Skill Normal
+				}
+				TFBot
+				{
+					Class Demoman
+					Skill Normal
+				}
+				TFBot
+				{
+					Class Demoman
+					Skill Normal
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Mangle_Rapidfire
+					Skill Normal
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Mangle_Rapidfire
+					Skill Normal
+				}
+			}
+		}
+	}
+
+// Wave 4 /////////////////////////////////////
+///////////////////////////////////////////////
+// 4 Giant Pistol Scouts (250)
+// Support groups of 4 SMG snipers (250)
+// Support groups of 3 bowmen (250)
+// --------------------------------------
+// 2 Giant Bowmen (150)
+// 2 Giant SMG Snipers (100)
+// WaitFor All Dead 1 giant Charged Soldier with 4 ubermedics (300)
+///////////////////////////////////////////////
+
+    Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+
+		WaveSpawn // 4 Giant Pistol Scouts (250)
+		{
+            		Name "A"
+			Where spawnbot_right
+			TotalCount 6
+			MaxActive 4
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 8.5
+			TotalCurrency 	200
+			TFBot
+			{
+				Template T_TFBot_Giant_Scout_Pistol
+			}
+		}
+
+		WaveSpawn // Support groups of 4 SMG snipers (250)
+		{
+			Where spawnbot
+			TotalCount 45
+			MaxActive 6
+			SpawnCount 3
+			WaitBetweenSpawns 4.5
+			TotalCurrency 	200
+			Support 1
+			TFBot
+			{
+				Template T_TFBot_Sniper_SMG
+				Skill Easy
+			}
+		}
+
+		WaveSpawn // Support groups of 3 bowmen (250)
+		{
+			Where spawnbot
+			TotalCount 40
+			MaxActive 3
+			SpawnCount 3
+			WaitBetweenSpawns 6
+			TotalCurrency 	200
+			Support 1
+			TFBot
+			{
+				Class Demoman
+				Skill Normal
+			}
+		}
+
+		WaveSpawn // 2 Giant Bowmen (150)
+		{
+			Name "B"
+			Where spawnbot
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 25
+			TotalCurrency 	100
+			WaitForAllSpawned "A"
+			TFBot
+			{
+				Template T_TFBot_Giant_Sniper_Huntsman
+				ClassIcon sniper_bow_multi
+			}
+		}
+
+
+		WaveSpawn // 2 Giant SMG Snipers (100)
+		{
+			Name "B"
+			Where spawnbot
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 12
+			WaitBetweenSpawns 25
+			TotalCurrency 	100
+			WaitForAllSpawned "A"
+			TFBot
+			{
+				Template T_TFBot_Giant_Sniper_SMG
+			}
+		}
+
+		WaveSpawn // WaitFor All Dead 1 giant Charged Soldier with 4 ubermedics (300)
+		{
+			Name "C"
+			Where spawnbot
+			TotalCount 5
+			MaxActive 5
+			SpawnCount 5
+			WaitBeforeStarting 6
+			WaitBetweenSpawns 0
+			TotalCurrency 	300
+			WaitForAllSpawned "B"
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Crit
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_MEDIGUN"
+						"uber duration bonus" -5
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_MEDIGUN"
+						"uber duration bonus" -5
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_MEDIGUN"
+						"uber duration bonus" -5
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_MEDIGUN"
+						"uber duration bonus" -5
+					}
+				}
+			}
+		}
+	}
+
+// Wave 5 /////////////////////////////////////
+///////////////////////////////////////////////
+// 170 scouts (350)
+// --------------------------
+// 4 Giant Bison Soldiers with 3 quickfixes (150)
+///////////////////////////////////////////////
+
+    Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+
+		WaveSpawn // 170 scouts (350)
+		{
+            		Name "A"
+			Where spawnbot_all
+			TotalCount 160
+			MaxActive 20
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0.05
+			TotalCurrency 	350
+			RandomSpawn 1
+			RandomChoice
+			{
+				TFBot
+				{
+					Class Scout
+					Skill Easy
+				}
+				TFBot
+				{
+					Class Scout
+					Skill Easy
+				}
+				TFBot
+				{
+					Class Scout
+					Skill Normal
+				}
+			}
+		}
+
+		WaveSpawn // 4 Giant Bison Soldiers with 3 quickfixes (150)
+		{
+			Where spawnbot
+			TotalCount 4
+			MaxActive 4
+			SpawnCount 1
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 20
+			TotalCurrency 	150
+			RandomSpawn 1
+			TFBot
+			{
+				Template T_TFBot_Giant_Demoman
+				ClassIcon demo_rapid_giant
+			}
+		}
+
+		WaveSpawn // 4 Giant Bison Soldiers with 3 quickfixes (150)
+		{
+            		Name "B"
+			Where spawnbot_all
+			TotalCount 20
+			MaxActive 10
+			SpawnCount 5
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 12
+			TotalCurrency 	400
+			RandomSpawn 1
+			WaitForAllSpawned "A"
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons_Aimless
+					ClassIcon heavy_accurate
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickFix
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickFix
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickFix
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickFix
+				}
+			}
+		}
+
+
+		WaveSpawn // 4 Giant Bison Soldiers with 3 quickfixes (150)
+		{
+            		Name "B"
+			Where spawnbot
+			TotalCount 10
+			MaxActive 4
+			SpawnCount 2
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 5.5
+			TotalCurrency 50
+			RandomSpawn 1
+			Support 1
+			WaitForAllSpawned "A"
+			TFBot
+			{
+				Class Soldier
+				Skill Normal
+			}
+		}
+	}
+
+// Wave 6 /////////////////////////////////////
+///////////////////////////////////////////////
+// 1 Giant Heavy with 4 Ubermedics (200)
+// 1 Tank (100)
+// 4 Groups of 3 soldiers (50)
+// --------------------------
+// 3 Giant Bazooka soldiers with 2 bowmen (200)
+// 4 Giant Guilotine Scouts (100)
+// 5 Groups of 5 pyros (100)
+// 4 Groups of 4 Heavies (150)
+// ---------------------------
+// 1 Giant Heavy with 6 bowmen (100)
+// Final Tank (100)
+// 1 Giant Bazooka Soldier with 6 Bowmen (100)
+///////////////////////////////////////////////
+
+    Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+
+		WaveSpawn // 1 Tank (100)
+		{
+			TotalCurrency 100
+			TotalCount 1
+			SpawnCount 1
+			
+			FirstSpawnOutput                                                                                                                                                            
+			{
+				Target boss_spawn_relay                                            
+				Action Trigger                         
+			}
+		
+			Tank
+			{
+				Health	17000
+				Name	tankboss
+				Speed	75
+				StartingPathTrackNode "tankpath_alt"
+				
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+
+		WaveSpawn // 1 Giant Heavy with 4 Ubermedics (200)
+		{
+            		Name "A"
+			Where spawnbot
+			TotalCount 5
+			MaxActive 5
+			SpawnCount 5
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 	150
+			RandomSpawn 1
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_HeavyWeapons
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_MEDIGUN"
+						"uber duration bonus" -5
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_MEDIGUN"
+						"uber duration bonus" -5
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_MEDIGUN"
+						"uber duration bonus" -5
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_MEDIGUN"
+						"uber duration bonus" -5
+					}
+				}
+			}
+		}
+
+		WaveSpawn // 4 Groups of 3 soldiers (50)
+		{
+            		Name "A"
+			Where spawnbot
+			TotalCount 12
+			MaxActive 5
+			SpawnCount 3
+			WaitBeforeStarting 6
+			WaitBetweenSpawns 4
+			TotalCurrency 	50
+			RandomSpawn 1
+			TFBot
+			{
+				Class Soldier
+				Skill Normal
+			}
+		}
+
+		WaveSpawn // 3 Giant Bazooka soldiers with 2 bowmen (200)
+		{
+            		Name "B"
+			Where spawnbot
+			TotalCount 9
+			MaxActive 3
+			SpawnCount 3
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 0
+			TotalCurrency 	50
+			WaitForAllSpawned "A"
+			RandomSpawn 1
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Spammer_Spread
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+					Skill Normal
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+					Skill Normal
+				}
+			}
+		}
+
+		WaveSpawn // 4 Giant Guilotine Scouts (100)
+		{
+            		Name "B"
+			Where spawnbot
+			TotalCount 3
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 2
+			WaitBetweenSpawns 22
+			TotalCurrency 	100
+			WaitForAllSpawned "A"
+			RandomSpawn 1
+			TFBot
+			{
+				Template T_TFBot_Giant_Scout_Guillotine
+			}
+		}
+
+		WaveSpawn // 5 Groups of 5 pyros (100)
+		{
+            		Name "B"
+			Where spawnbot_right
+			TotalCount 25
+			MaxActive 6
+			SpawnCount 5
+			WaitBeforeStarting 2
+			WaitBetweenSpawns 2
+			TotalCurrency 	100
+			WaitForAllSpawned "A"
+			RandomSpawn 1
+			TFBot
+			{
+				Class Pyro
+				Skill Easy
+			}
+		}
+
+
+		WaveSpawn // 4 Groups of 4 Heavies (150)
+		{
+            		Name "B"
+			Where spawnbot_right
+			TotalCount 16
+			MaxActive 5
+			SpawnCount 4
+			WaitBeforeStarting 2
+			WaitBetweenSpawns 2
+			TotalCurrency 	100
+			WaitForAllSpawned "A"
+			RandomSpawn 1
+			TFBot
+			{
+				Class Heavyweapons
+				Skill Easy
+			}
+		}
+
+
+		WaveSpawn // 1 Giant Heavy with 6 bowmen (100)
+		{
+            		Name "C"
+			Where spawnbot
+			TotalCount 7
+			MaxActive 7
+			SpawnCount 7
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 2
+			TotalCurrency 	50
+			WaitForAllSpawned "B"
+			RandomSpawn 1
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+					Skill Normal
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+					Skill Normal
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+					Skill Normal
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+					Skill Normal
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+					Skill Normal
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+					Skill Normal
+				}
+			}
+		}
+
+		WaveSpawn // 1 Giant Bazooka Soldier with 6 Bowmen (100)
+		{
+            		Name "C"
+			Where spawnbot_right
+			TotalCount 7
+			MaxActive 7
+			SpawnCount 7
+			WaitBeforeStarting 20
+			WaitBetweenSpawns 2
+			TotalCurrency 	50
+			WaitForAllSpawned "B"
+			RandomSpawn 1
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Spammer_Spread
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+				}
+			}
+		}
+
+		WaveSpawn // Final Tank (100)
+		{
+			TotalCurrency 50
+			TotalCount 1
+			SpawnCount 1
+			WaitForAllSpawned "B"
+			
+			FirstSpawnOutput                                                                                                                                                            
+			{
+				Target boss_spawn_relay                                            
+				Action Trigger                         
+			}
+		
+			Tank
+			{
+				Health	20000
+				Name	tankboss
+				Speed	75
+				Skin 1
+				StartingPathTrackNode "tankpath_alt"
+				
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+	}
+
+
+// Wave 7 /////////////////////////////////////
+///////////////////////////////////////////////
+// Projectile Patriot (0)
+// Support 2 scouts (20)
+// Support 1 soldier (20)
+// Support crossbow medics with a pyro (50)
+// support 1 demoman (20)
+// support 1 heavy (20)
+// support 1 huntsman (20)
+///////////////////////////////////////////////
+
+    Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+
+
+		
+		WaveSpawn // Aimless
+		{
+			Name "A"
+			Where spawnbot
+			TotalCount 3
+			MaxActive 3
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 20
+			TotalCurrency 	60
+			RandomSpawn 1
+			TFBot
+			{
+				Template T_TFBot_Giant_Heavyweapons_Aimless
+			}
+		}
+
+		WaveSpawn // Aimless
+		{
+			Name "A"
+			Where spawnbot
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 20
+			TotalCurrency 	40
+			RandomSpawn 1
+			TFBot
+			{
+				Template T_TFBot_Heavyweapons_Heater
+				Name "Giant Heater Heavy"
+			}
+		}
+
+		WaveSpawn // Aimless
+		{
+			Name "A"
+			Where spawnbot_right
+			TotalCount 21
+			MaxActive 6
+			SpawnCount 3
+			WaitBeforeStarting 2
+			WaitBetweenSpawns 7
+			TotalCurrency 	50
+			RandomSpawn 1
+			TFBot
+			{
+				Class Soldier
+				Skill Normal
+			}
+		}
+
+		WaveSpawn // Aimless
+		{
+			Name "A"
+			Where spawnbot_right
+			TotalCount 21
+			MaxActive 6
+			SpawnCount 3
+			WaitBeforeStarting 2
+			WaitBetweenSpawns 7
+			TotalCurrency 	50
+			RandomSpawn 1
+			TFBot
+			{
+				Class Demoman
+				Skill Normal
+			}
+		}
+
+
+		WaveSpawn // Projectile Patriot (0)
+		{
+			Where spawnbot
+			TotalCount 1
+			SpawnCount 1
+			WaitBeforeStarting 3
+			TotalCurrency 	0
+			RandomSpawn 1
+			WaitForAllDead "A"
+
+			TFBot
+			{
+				Template T_TFBot_Giant_Soldier_Spammer_Spread				
+				Name "Chief Bazooka Soldier"
+				Health 28500
+				Scale 1.9
+				ClassIcon soldier_rocketrain_giant
+				Attributes UseBossHealthBar
+				Item "Helmet Without a Home"
+				ItemAttributes
+				{
+					ItemName "The Beggar's Bazooka"
+					"faster reload rate" 0.35
+					"fire rate bonus" 0.02
+					"clip size upgrade atomic" 9.0
+					"projectile spread angle penalty" 15
+					"Projectile speed increased" 0.35
+					"Blast radius increased" 1
+				}
+				CharacterAttributes
+				{
+					"move speed bonus"	0.35
+					"increased jump height" 1.65
+					"health regen"	20
+					"can overload" -1
+					"auto fires full clip" -1
+					"damage force reduction" 0.2
+					"airblast vulnerability multiplier" 0.2
+					"override footstep sound set" 3
+					"airblast vertical vulnerability multiplier" 0.1
+					"rage giving scale" 0.1
+				}
+			}
+		}
+
+		WaveSpawn // Support 2 scouts (20)
+		{
+			Where spawnbot
+			TotalCount 20
+			MaxActive 3
+			SpawnCount 1
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 4
+			TotalCurrency 100
+			Support 1
+			WaitForAllSpawned "A"
+			TFBot
+			{
+				Template T_TFBot_Soldier_Spread
+				Skill Hard
+			}
+		}
+	}
+}

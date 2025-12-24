@@ -1,0 +1,5514 @@
+// Internal Conflict by Tindall Berry
+// Hanami Advanced 2 (Black Mesa names)
+#base robot_giant.pop
+#base robot_standard.pop
+population
+{
+	StartingCurrency	1100
+	RespawnWaveTime	3
+	CanBotsAttackWhileInSpawnRoom	no
+	FixedRespawnWaveTime	Yes
+	Advanced	1
+	TextPrintTime	0  
+	ExtraSpawnPoint  
+    {
+        Name	"spawnbot_dialogue"	// Spawn bots in the courtyard before hatch
+        TeamNum	3
+        X	"980"
+        Y	"2300"
+        Z	"-96"
+    }
+	Templates
+	{
+		T_TFBot_Tind_Scout // w5
+		{
+			Class Scout
+			Name "Scout"
+			ClassIcon scout
+			Skill Easy
+			Health 125
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 1200
+			Attributes AlwaysCrit
+			Item "Upgradeable TF_WEAPON_SCATTERGUN"
+		}
+		T_TFBot_Tind_Scout_FaN // w2
+		{
+			Class Scout
+			Name "Force-a-Nature Scout"
+			ClassIcon scout_fan
+			Skill Easy
+			Health 125
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 600
+			Item "The Force-a-Nature"
+			Item "The Fed-Fightin' Fedora"
+		}
+		T_TFBot_Tind_Scout_Melee // w4
+		{
+			Class Scout
+			Name "Bat Scout"
+			ClassIcon scout_bat_nys
+			Skill Hard
+			Health 125
+			WeaponRestrictions MeleeOnly
+			Attributes AlwaysCrit
+			Item "Upgradeable TF_WEAPON_BAT"
+		}
+		T_TFBot_Tind_Scout_Sandman_Armoured // w2
+		{
+			Class Scout
+			Name "Armoured Scout"
+			ClassIcon scout_stun_giant_armored
+			Skill Hard
+			Health 900
+			Scale 1.5
+			WeaponRestrictions MeleeOnly
+			MaxVisionRange 1200
+			Attributes AlwaysCrit
+			Item "The Sandman"
+			Item "Batter's Helmet"
+			Item "EOTL_Demopants"
+			ItemAttributes
+			{
+				ItemName "The Sandman"
+				"effect bar recharge rate increased"	0.2
+			}
+			CharacterAttributes
+			{
+				"health regen"		1
+				"move speed bonus"	0.75
+			}
+		}
+		T_TFBot_Tind_Scout_FanOWar // w2
+		{
+			Class Scout
+			Name "Fan O'War Scout"
+			ClassIcon scout_fanowar
+			Skill Hard
+			Health 125
+			WeaponRestrictions MeleeOnly
+			Item "The Fan O'War"
+			Item "Benefactor's Kanmuri"
+			ItemAttributes
+			{
+				ItemName "The Fan O'War"
+				"damage penalty"	1
+				"fire rate penalty"	1.6
+			}
+		}
+		T_TFBot_Tind_Scout_Giant_FaN // w6
+		{
+			Class Scout
+			Name "Force-a-Nature Super Scout"
+			ClassIcon scout_fan_giant
+			Skill Expert
+			Health 1600
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 900
+			Attributes MiniBoss
+			Item "The Force-a-Nature"
+			Item "The Fed-Fightin' Fedora"
+			ItemAttributes
+			{
+				ItemName "The Force-a-Nature"
+				"scattergun knockback mult" 1.2
+				"bullets per shot bonus"	1.5
+				"damage penalty"			1
+			}
+			CharacterAttributes
+			{
+				"damage force reduction"			0.6
+				"airblast vulnerability multiplier"	0.6
+				"override footstep sound set"		5
+			}
+		}
+		T_TFBot_Tind_Scout_Giant_Shortstop // w6
+		{
+			Class Scout
+			Name "Giant Shortstop Scout"
+			ClassIcon scout_shortstop
+			Skill Expert
+			Health 1600
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 1500
+			Attributes MiniBoss
+			Item "The Shortstop"
+			Item "The Milkman"
+			ItemAttributes
+			{
+				ItemName "The Shortstop"
+				"faster reload rate"	-0.8
+				"fire rate penalty"		1.25
+			}
+			CharacterAttributes
+			{
+				"damage force reduction"			0.6
+				"airblast vulnerability multiplier"	0.6
+				"override footstep sound set"		5
+			}
+		}
+		T_TFBot_Tind_Scout_Giant_Sandman_Armoured // w1
+		{
+			Class Scout
+			Name "Giant Armoured Scout"
+			ClassIcon scout_stun_giant_armored
+			Skill Expert
+			Health 3000
+			WeaponRestrictions MeleeOnly
+			MaxVisionRange 1200
+			Attributes MiniBoss
+			Item "The Sandman"
+			Item "Batter's Helmet"
+			Item "EOTL_Demopants"
+			ItemAttributes
+			{
+				ItemName "The Sandman"
+				"effect bar recharge rate increased"	0.1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"						0.75
+				"damage force reduction"				0.5
+				"airblast vulnerability multiplier"		0.5
+				"override footstep sound set"			5
+			}
+		}
+		T_TFBot_Tind_Scout_Giant_Jump // w6
+		{
+			Class Scout
+			Name "Monarch League Scout"
+			ClassIcon scout_jumping_nys_giant
+			Skill Expert
+			Health 1600
+			WeaponRestrictions MeleeOnly
+			MaxVisionRange 1200
+			Attributes MiniBoss
+			Attributes AlwaysCrit
+			Attributes AutoJump
+				AutoJumpMin 3
+				AutoJumpMax 5
+			Item "The Sandman"
+			Item "The Hanger-on Hood"
+			Item "The Flight of the Monarch"
+			ItemAttributes
+			{
+				ItemName "The Sandman"
+				"effect bar recharge rate increased"	0.25
+				"damage bonus"							2
+			}
+			CharacterAttributes
+			{
+				"head scale"						1.5
+				"increased jump height"				2
+				"damage force reduction"			0.6
+				"airblast vulnerability multiplier"	0.6
+				"override footstep sound set"		5
+			}
+		}
+		T_TFBot_Tind_Scout_Giant_Fast // w7
+		{
+			Class Scout
+			Name "Super Scout"
+			ClassIcon scout_giant_fast
+			Skill Expert
+			Health 1200
+			WeaponRestrictions MeleeOnly
+			Attributes MiniBoss
+			Item "The Holy Mackerel"
+			Item "Bonk Boy"
+			CharacterAttributes
+			{
+				"move speed bonus"						1.3
+				"damage force reduction"				0.7
+				"airblast vulnerability multiplier"		0.7
+				"override footstep sound set"			5
+			}
+		}
+		T_TFBot_Tind_Soldier // w1,7
+		{
+			Class Soldier
+			Name "Soldier"
+			ClassIcon soldier
+			Skill Normal
+			Health 200
+			WeaponRestrictions PrimaryOnly
+			Attributes HoldFireUntilFullReload
+			Item "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+		}
+		T_TFBot_Tind_Soldier_BlackBox // w2
+		{
+			Class Soldier
+			Name "Black Box Soldier"
+			ClassIcon soldier_blackbox
+			Skill Hard
+			Health 200
+			WeaponRestrictions PrimaryOnly
+			Attributes HoldFireUntilFullReload
+			Item "The Black Box"
+			Item "The War Pig"
+			ItemAttributes
+			{
+				ItemName "The Black Box"
+				"damage penalty"					0.33
+				"fire rate bonus"					0.01
+				"projectile spread angle penalty"	3
+				"heal on hit for rapidfire"			60
+			}
+		}
+		T_TFBot_Tind_Soldier_Conch // w3,7
+		{
+			Class Soldier
+			Name "Conch Soldier"
+			ClassIcon soldier_conch
+			Skill Normal
+			Health 200
+			Attributes HoldFireUntilFullReload
+			Attributes SpawnWithFullCharge
+			Item "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+			Item "The Concheror"
+			Item "Furious Fukaamigasa"
+			ItemAttributes
+			{
+				ItemName "The Concheror"
+				"increase buff duration"	420
+				"deploy time decreased"		0.67
+			}
+		}
+		T_TFBot_Tind_Soldier_Giant_Charged // w2
+		{
+			Class Soldier
+			Name "Giant Charged Soldier"
+			ClassIcon soldier_crit
+			Skill Expert
+			Health 4000
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			Attributes AlwaysCrit
+			Item "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+			Item "The Slo-Poke"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+				"faster reload rate"			-0.8
+				"fire rate penalty"				2
+				"Projectile speed decreased"	0.5
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"					0.5
+				"damage force reduction"			0.4
+				"airblast vulnerability multiplier"	0.4
+				"override footstep sound set"		3
+			}
+		}
+		T_TFBot_Tind_Soldier_Giant_BurstFire // w7
+		{
+			Class Soldier
+			Name "Giant Burst Fire Soldier"
+			ClassIcon soldier_burstfire
+			Skill Expert
+			Health 4200
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			Attributes HoldFireUntilFullReload
+			Attributes AlwaysCrit
+			Item "warbird_rocketlauncher_warhawk"
+			Item "Soldier Samurai Hat"
+			ItemAttributes
+			{
+				ItemName "warbird_rocketlauncher_warhawk"
+				"set_item_texture_wear"			0	// factory new
+				"attach particle effect"		704	// energy orb
+				"damage bonus"					2
+				"faster reload rate"			0.4
+				"fire rate bonus"				0.2
+				"clip size upgrade atomic"		6
+				"Projectile speed decreased"	0.75
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"					0.5
+				"damage force reduction"			0.4
+				"airblast vulnerability multiplier"	0.4
+				"override footstep sound set"		3
+			}
+		}
+		T_TFBot_Tind_Soldier_Giant_Barrage // w5
+		{
+			Class Soldier
+			Name "Giant Barrage Soldier"
+			ClassIcon soldier_barrage
+			Skill Expert
+			Health 4000
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			Attributes HoldFireUntilFullReload
+			Item "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+			Item "Soldier Drill Hat"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+				"clip size upgrade atomic"			26
+				"faster reload rate"				0.3
+				"fire rate bonus"					0.2
+				"projectile spread angle penalty"	4
+				"Projectile speed decreased"		0.5
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"					0.5
+				"damage force reduction"			0.4
+				"airblast vulnerability multiplier"	0.4
+				"override footstep sound set"		3
+			}
+		}
+		T_TFBot_Tind_Pyro // w4
+		{
+			Class Pyro
+			Name "Pyro"
+			ClassIcon pyro
+			Skill Easy
+			Health 175
+			WeaponRestrictions PrimaryOnly
+			Item "Upgradeable TF_WEAPON_FLAMETHROWER"
+		}
+		T_TFBot_Tind_Pyro_Fury // w7
+		{
+			Class Pyro
+			Name "Dragon's Fury Pyro"
+			ClassIcon pyro_dragon_fury_swordstone
+			Skill Hard
+			Health 175
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 600
+			Item "The Dragon's Fury"
+			Item "Pyromancer's Mask"
+			ItemAttributes
+			{
+				ItemName "The Dragon's Fury"
+				"airblast disabled"	1
+			}
+		}
+		T_TFBot_Tind_Pyro_Giant_AirBlast // w3
+		{
+			Class Pyro
+			Name "Giant Airblast Pyro"
+			ClassIcon pyro_reflect_daan_giant
+			Skill Expert
+			Health 3300
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			Item "Upgradeable TF_WEAPON_FLAMETHROWER"
+			Item "Pyro Helm"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_FLAMETHROWER"
+				"damage penalty"			0.75
+				"airblast pushback scale"	1.5
+				"mult airblast refire time"	0.01
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"					0.5
+				"damage force reduction"			0.5
+				"airblast vulnerability multiplier"	0.5
+				"override footstep sound set"		6
+			}
+		}
+		T_TFBot_Tind_Demoman // w5,6
+		{
+			Class Demoman
+			Name "Demoman"
+			ClassIcon demo
+			Skill Hard
+			Health 175
+			WeaponRestrictions PrimaryOnly
+			Attributes HoldFireUntilFullReload
+			Item "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+		}
+		T_TFBot_Tind_Demoman_Knight_Samurai_Light // w6
+		{
+			Class Demoman
+			Name "Samurai Demoknight"
+			ClassIcon demoknight_samurai
+			Skill Hard
+			Health 175
+			WeaponRestrictions MeleeOnly
+			Item "Ali Baba's Wee Booties"
+			Item "The Splendid Screen"
+			Item "The Half-Zatoichi"
+			Item "Demo Kabuto"
+			ItemAttributes
+			{
+				ItemName "The Splendid Screen"
+				"Attack not cancel charge"	1
+			}
+		}
+		T_TFBot_Tind_Demoman_Giant // w6
+		{
+			Class Demoman
+			Name "Giant Demoman"
+			ClassIcon demo_giant
+			Skill Expert
+			Health 3300
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			Attributes HoldFireUntilFullReload
+			Item "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+				"fire rate bonus"	0.5
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"						0.5
+				"damage force reduction"				0.5
+				"airblast vulnerability multiplier" 	0.5
+				"override footstep sound set"			4
+			}
+		}
+		T_TFBot_Tind_Demoman_Giant_RapidFire // w4
+		{
+			Class Demoman
+			Name "Giant Rapid Fire Demoman"
+			ClassIcon demo_spammer_giant
+			Skill Expert
+			Health 3300
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			Item "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+			Item "The Tavish Degroot Experience"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+				"fire rate bonus"		0.75
+				"faster reload rate"	-0.8
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"						0.5
+				"damage force reduction"				0.5
+				"airblast vulnerability multiplier" 	0.5
+				"override footstep sound set"			4
+			}
+		}
+		T_TFBot_Tind_Demoman_Giant_BurstFire // w7
+		{
+			Class Demoman
+			Name "Giant Burst Fire Demoman"
+			ClassIcon demo_burst_giant
+			Skill Expert
+			Health 3300
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			Attributes HoldFireUntilFullReload
+			Item "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+			Item "Scotch Bonnet"
+			Item "The Juggernaut Jacket"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+				"faster reload rate"				0.6
+				"fire rate bonus"					0.1
+				"clip size upgrade atomic"			8
+				"Projectile speed increased"		1.2
+				"projectile spread angle penalty"	3
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"					0.5
+				"damage force reduction"			0.5
+				"airblast vulnerability multiplier"	0.5
+				"override footstep sound set"		4
+			}
+		}
+		T_TFBot_Tind_Demoman_Giant_Bomber // w5
+		{
+			Class Demoman
+			Name "Giant Bomber Demoman"
+			ClassIcon demo_clusterbomb_giant
+			Skill Expert
+			Health 3300
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			Attributes HoldFireUntilFullReload
+			Item "The Iron Bomber"
+			Item "Conjurer's Cowl"
+			ItemAttributes
+			{
+				ItemName "The Iron Bomber"
+				"faster reload rate"				0.4
+				"fire rate bonus"					0.15
+				"clip size upgrade atomic"			14
+				"projectile spread angle penalty"	5
+				"projectile speed decreased"		0.4
+				"no self blast dmg"					2
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"						0.5
+				"damage force reduction"				0.5
+				"airblast vulnerability multiplier" 	0.5
+				"override footstep sound set"			4
+			}
+		}
+		T_TFBot_Tind_Demoman_Giant_Knight // w2
+		{
+			Class Demoman
+			Name "Giant Demoknight"
+			ClassIcon demoknight_giant
+			Skill Expert
+			Health 3000
+			WeaponRestrictions MeleeOnly
+			Attributes MiniBoss
+			Item "The Chargin' Targe"
+			Item "The Eyelander"
+			Item "Prince Tavish's Crown"
+			ItemAttributes
+			{
+				ItemName "The Eyelander"
+				"critboost on kill"	5
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"						0.5
+				"damage force reduction"				0.5
+				"airblast vulnerability multiplier" 	0.5
+				"override footstep sound set"			4
+			}
+		}
+		T_TFBot_Tind_Heavy // w1,7
+		{
+			Class Heavyweapons
+			Name "Heavy"
+			ClassIcon heavy
+			Skill Easy
+			Health 300
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 1200
+			Item "Upgradeable TF_WEAPON_MINIGUN"
+		}
+		T_TFBot_Tind_Heavy_Deflector // w6
+		{
+			Class Heavyweapons
+			Name "Deflector Heavy"
+			ClassIcon heavy_deflector
+			Skill Hard
+			Health 300
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 1000
+			Item "Deflector"
+			Item "The U-Clank-A"
+			ItemAttributes
+			{
+				ItemName "Deflector"
+				"attack projectiles"	1
+			}
+		}
+		T_TFBot_Tind_Heavy_GRU // w3
+		{
+			Class Heavyweapons
+			Name "Lightweight Champ"
+			ClassIcon heavy_gru
+			Skill Hard
+			Health 300
+			WeaponRestrictions MeleeOnly
+			Item "Gloves Of Running Urgently MVM"
+			Item "Football Helmet"
+		}
+		T_TFBot_Tind_Heavy_Giant_Heater // w4
+		{
+			Class Heavyweapons
+			Name "Giant Heater Heavy"
+			ClassIcon heavy_heater_nys_giant
+			Skill Expert
+			Health 5000
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 1500
+			Attributes MiniBoss
+			Item "The Huo Long Heatmaker"
+			Item "The Bunsen Brave"
+			ItemAttributes
+			{
+				ItemName "The Huo Long Heatmaker"
+				"damage penalty"	1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"					0.5
+				"damage force reduction"			0.4
+				"airblast vulnerability multiplier"	0.4
+				"override footstep sound set"		2
+			}
+		}
+		T_TFBot_Tind_Heavy_Giant_Deflector // w7
+		{
+			Class Heavyweapons
+			Name "Giant Deflector Heavy"
+			ClassIcon heavy_deflector
+			Skill Expert
+			Health 5000
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 1200
+			Attributes MiniBoss
+			Item "Deflector"
+			Item "The U-Clank-A"
+			Item "Batter's Bracers"
+			ItemAttributes
+			{
+				ItemName "Deflector"
+				"damage bonus"			1.2
+				"attack projectiles"	2
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"					0.5
+				"damage force reduction"			0.4
+				"airblast vulnerability multiplier"	0.4
+				"override footstep sound set"		2
+			}
+		}
+		T_TFBot_Tind_Engineer_Teleport1 // w2
+		{
+			Class Engineer
+			Name "Engineer"
+			ClassIcon engineer_telein
+			Skill Expert
+			Health 600
+			Attributes TeleportToHint
+			Item "Upgradeable TF_WEAPON_WRENCH"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_WRENCH"
+				"damage bonus"	21
+			}
+			CharacterAttributes
+			{
+				"health regen"					1
+				"cannot pick up intelligence"	1
+			}
+			Message  
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  That Engie will bring in others. Wipe him out."
+				Delay	0
+				Repeats	1
+			}
+		}
+		T_TFBot_Tind_Engineer_Teleport2 // w4
+		{
+			Class Engineer
+			Name "Engineer"
+			ClassIcon engineer_telein
+			Skill Expert
+			Health 600
+			Attributes TeleportToHint
+			Item "Upgradeable TF_WEAPON_WRENCH"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_WRENCH"
+				"damage bonus"	21
+			}
+			CharacterAttributes
+			{
+				"health regen"					1
+				"cannot pick up intelligence"	1
+			}
+			Message  
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  That Engie is going to call in more robots if you don't kill him."
+				Delay	0
+				Repeats	1
+			}
+		}
+		T_TFBot_Tind_Engineer_Teleport3 // w7
+		{
+			Class Engineer
+			Name "Engineer"
+			ClassIcon engineer_telein
+			Skill Expert
+			Health 600
+			Attributes TeleportToHint
+			Item "Upgradeable TF_WEAPON_WRENCH"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_WRENCH"
+				"damage bonus"	21
+			}
+			CharacterAttributes
+			{
+				"health regen"					1
+				"cannot pick up intelligence"	1
+			}
+			Message  
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  Blast that Engie before he calls in reinforcements!"
+				Delay	0
+				Repeats	1
+			}
+		}
+		T_TFBot_Tind_Medic_Uber_Quick // w2,3,7
+		{
+			Class Medic
+			Name "Quick Uber Medic"
+			ClassIcon medic_uber
+			Skill Hard
+			Health 150
+			Attributes SpawnWithFullCharge
+			Item "Upgradeable TF_WEAPON_SYRINGEGUN_MEDIC"
+			Item "Upgradeable TF_WEAPON_MEDIGUN"
+			Item "Das Naggenvatcher"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_MEDIGUN"
+				"ubercharge rate bonus"	5
+				"uber duration bonus"	-3
+				"heal rate bonus"		0.01
+			}
+		}
+		T_TFBot_Tind_Medic_Giant_Kritzkrieg // w5
+		{
+			Class Medic
+			Name "Giant Kritzkrieg Medic"
+			ClassIcon medic_kritz_giant
+			Skill Expert
+			Health 3000
+			Attributes MiniBoss
+			Attributes SpawnWithFullCharge
+			Item "Upgradeable TF_WEAPON_SYRINGEGUN_MEDIC"
+			Item "The Kritzkrieg"
+			Item "The Weather Master"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_SYRINGEGUN_MEDIC"
+				"damage bonus"	1.5
+			}
+			ItemAttributes
+			{
+				ItemName "The Kritzkrieg"
+				"ubercharge rate bonus"	100
+				"uber duration bonus"	200 
+				"heal rate bonus"		200
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"					0.5
+				"bot medic uber health threshold"	5000
+				"damage force reduction"			0.5
+				"airblast vulnerability multiplier"	0.5
+			}
+		}
+		T_TFBot_Tind_Medic_Giant_Regen // w7
+		{
+			Class Medic
+			Name "Giant Regen Medic"
+			ClassIcon medic_giant
+			Skill Expert
+			Health 4000
+			Attributes MiniBoss
+			Item "Upgradeable TF_WEAPON_SYRINGEGUN_MEDIC"
+			Item "The Quick-Fix"
+			Item "The Surgeon's Stahlhelm"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_SYRINGEGUN_MEDIC"
+				"damage bonus"	2
+			}
+			ItemAttributes
+			{
+				ItemName "The Quick-Fix"
+				"ubercharge rate bonus"	0.01
+				"heal rate bonus"		200
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"					0.5
+				"health regen"						50
+				"damage force reduction"			0.4
+				"airblast vulnerability multiplier"	0.4
+			}
+		}
+		T_TFBot_Tind_Sniper // w2,7
+		{
+			Class Sniper
+			Name "Sniper"
+			ClassIcon sniper
+			Skill Hard
+			Health 125
+			MaxVisionRange 3000
+			Item "Upgradeable TF_WEAPON_SNIPERRIFLE"
+			Item "Upgradeable TF_WEAPON_CLUB"
+		}
+		T_TFBot_Tind_Sniper_Sleeper // w4,6
+		{
+			Class Sniper
+			Name "Sydney Sniper"
+			ClassIcon sniper_sydneysleeper
+			Skill Hard
+			Health 125
+			MaxVisionRange 2000
+			Item "The Sydney Sleeper"
+			Item "Upgradeable TF_WEAPON_CLUB"
+			Item "Ol' Snaggletooth"
+		}
+		T_TFBot_Tind_Sniper_Bow // w5
+		{
+			Class Sniper
+			Name "Bowman"
+			ClassIcon sniper_bow
+			Skill Hard
+			Health 150
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 2000
+			Attributes AlwaysCrit
+			Item "The Huntsman"
+			ItemAttributes
+			{
+				ItemName "The Huntsman"
+				"damage penalty"	0.5
+			}
+		}
+		T_TFBot_Tind_Spy // w3
+		{
+			Class Spy
+			Name "Spy"
+			ClassIcon spy
+			Skill Expert
+			Health 125
+			Item "Upgradeable TF_WEAPON_REVOLVER"
+			Item "Upgradeable TF_WEAPON_KNIFE"
+			CharacterAttributes
+			{
+				"cannot pick up intelligence"	1
+			}
+		}
+		T_TFBot_Tind_Spy_Kunai // w5,6
+		{
+			Class Spy
+			Name "Kunai Spy"
+			ClassIcon spy_kunai
+			Skill Expert
+			Health 125
+			Item "Upgradeable TF_WEAPON_REVOLVER"
+			Item "Conniver's Kunai"
+			Item "Spy Oni Mask"
+			CharacterAttributes
+			{
+				"cannot pick up intelligence"	1
+			}
+		}
+		T_TFBot_Tind_SentryBuster
+		{
+			Class Demoman
+			Name "Sentry Buster"
+			ClassIcon sentry_buster
+			Skill Expert
+			Health 2500
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			Attributes IgnoreEnemies
+			Attributes DisableDodge
+			Item "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+			CharacterAttributes
+			{
+				"move speed bonus"					1.85
+				"damage force reduction"			0.5
+				"airblast vulnerability multiplier"	0.5
+				"override footstep sound set"		7
+				"cannot be backstabbed"				1
+			}
+		}
+		T_TFBot_Dialogue_Overseer_BattleCry1  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  If you get through this, I'm buying you all a round of drinks!"
+				Delay	0
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		2
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_BattleCry2  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  Here's a fresh batch of them!"
+				Delay	0
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		2
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_BattleCry3  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  I'd be sweating this one if I was down there."
+				Delay	0
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		2
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_BattleCry4  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  This lot don't seem to be as tough as they look."
+				Delay	0
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		2
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_NewBot1  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  There's something new coming."
+				Delay	0
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		2
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_NewBot2  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  Something new coming in."
+				Delay	0
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		2
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_NewBot3  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  Hang on, we haven't seen these before."
+				Delay	0
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		2
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_FanOWarScout  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  Added robot information to Database."
+				Delay	0
+				Repeats	1
+			}
+			Message  
+			{
+				Name	"{5885A2}Database {839FA3}:  Fan O'War Scouts lack a damage penalty and instead swing at a slower rate. I advise keeping away from them."
+				Delay	4
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		5
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_GiantAirblastPyro  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  Added robot information to Database."
+				Delay	0
+				Repeats	1
+			}
+			Message  
+			{
+				Name	"{5885A2}Database {839FA3}:  Giant Airblast Pyros will reflect projectiles far more rapidly than normal and will send anyone nearby flying when they do."
+				Delay	4
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		5
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_GiantBomberDemo  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  Added robot information to Database."
+				Delay	0
+				Repeats	1
+			}
+			Message  
+			{
+				Name	"{5885A2}Database {839FA3}:  Giant Bomber Demos fire a carpet of short range bombs in front of them. Be sure to keep a safe distance when engaging."
+				Delay	4
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		5
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_GiantKritzkriegMedic  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  Added robot information to Database."
+				Delay	0
+				Repeats	1
+			}
+			Message  
+			{
+				Name	"{5885A2}Database {839FA3}:  Giant Kritzkrieg Medics will make their patient near-unkillable and will grant them a crit boost so long as they are healing them."
+				Delay	4
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		5
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_SamuraiDemoknight  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  Added robot information to Database."
+				Delay	0
+				Repeats	1
+			}
+			Message  
+			{
+				Name	"{5885A2}Database {839FA3}:  These Samurai Demoknights behave more like regular Demoknights, though they can charge more often and gain back health on kill."
+				Delay	4
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		5
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_Tank1  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  That one on wheels is strong but stupid. Lay into it!"
+				Delay	0
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		2
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_Tank2  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  That big one is made of tough stuff, give it hell!"
+				Delay	0
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		2
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_Crits1  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  Watch those, they've got crits!"
+				Delay	0
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		2
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_Crits2  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  The crits are coming."
+				Delay	0
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		2
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_Crits3  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  Crits heading your way!"
+				Delay	0
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		2
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_Crits4  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  On top of everything else, they have crits!"
+				Delay	0
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		2
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_GiantScout1  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  They're trying to snatch and run with the big one!"
+				Delay	0
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		2
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_GiantScout2  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  These guys are all smash-and-grab."
+				Delay	0
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		2
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_GiantScout3  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  Careful, that big one's going for a quick strike."
+				Delay	0
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		2
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_SuperScout1  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  Super Scouts incoming, they're like speed demons."
+				Delay	0
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		2
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_SuperScout2  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  Those things are bloody fast!"
+				Delay	0
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		2
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_BigrockBurst1  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  That big one's made of tough stuff, be careful."
+				Delay	0
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		2
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_BigrockBurst2  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  These guys don't mess about, steady now!"
+				Delay	0
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		2
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_GiantHeavy1  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  They're bringing in the tough guys."
+				Delay	0
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		2
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_GiantHeavy2  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  Confirming a Giant Heavy on the field."
+				Delay	0
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		2
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_GiantHeavy3  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  Good god those are some tough, tough bastards."
+				Delay	0
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		2
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_UberMedic1  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  That small one will make himself and his friend invulnerable if you don't take it out fast."
+				Delay	0
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		2
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_UberMedic2  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  If that Medic or his patient take enough damage they'll both become invulnerable."
+				Delay	0
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		2
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_GiantMedic1  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  He's protecting his buddy, take them both out!"
+				Delay	0
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		2
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_GiantMedic2  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Health 1000
+			Scale 0.01
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+			Message
+			{
+				Name	"{EE82EE}The Overseer {FFB1C7}:  The sooner you can take out that Giant Medic, the sooner you can take out his patient."
+				Delay	0
+				Repeats	1
+			}
+			ChangeAttributes
+			{
+				Delay		0
+				Repeats		1
+				Cooldown	999
+				Name		"Default"
+			}
+			ChangeAttributes
+			{
+				Delay		2
+				Repeats		1
+				Cooldown	999
+				Name		"Kill"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"move speed bonus"			0.01
+						"health regen"				500
+						"dmg from ranged reduced"	0.01
+						"dmg from melee increased"	0.01
+					}
+				}
+				Kill
+				{
+					Skill Easy
+					WeaponRestrictions MeleeOnly
+					Item "Upgradeable TF_WEAPON_BAT"
+					CharacterAttributes
+					{
+						"health regen"	-5000
+					}
+				}
+			}
+		}
+		T_TFBot_Dialogue_Overseer_Null  
+		{
+			Class Scout
+			Name "Dialogue Bot"
+			ClassIcon scout
+			Skill Easy
+			Health 1000
+			Scale 0.01
+			WeaponRestrictions MeleeOnly
+			Attributes IgnoreFlag
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Attributes DisableDodge
+			Item "Upgradeable TF_WEAPON_BAT"
+			CharacterAttributes
+			{
+				"health regen"	-5000
+			}
+			AddCond
+			{
+				Index	43	// reprogrammed
+			}
+		}
+	}
+	Mission // Sentry Busters
+	{
+		Objective	DestroySentries
+		Where	spawnbot_mission_sentrybuster
+		BeginAtWave	1
+		RunForThisManyWaves	7
+		InitialCooldown	30
+		CooldownTime	30
+		DesiredCount	1
+		TFBot
+		{
+			Template	T_TFBot_Tind_SentryBuster
+		}
+	}
+	Mission // Wave 2 Snipers
+	{
+		Objective	Sniper
+		Where	spawnbot_mission_sniper
+		BeginAtWave	2
+		RunForThisManyWaves	1
+		InitialCooldown	40
+		CooldownTime	40
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Tind_Sniper
+		}
+	}
+	Mission // Wave 4 Sleeper Snipers
+	{
+		Objective	Sniper
+		Where	spawnbot_mission_sniper
+		BeginAtWave	4
+		RunForThisManyWaves	1
+		InitialCooldown	20
+		CooldownTime	20
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Tind_Sniper_Sleeper
+		}
+	}
+	Mission // Wave 6 Sleeper Snipers
+	{
+		Objective	Sniper
+		Where	spawnbot_mission_sniper
+		BeginAtWave	6
+		RunForThisManyWaves	1
+		InitialCooldown	60
+		CooldownTime	30
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Tind_Sniper_Sleeper
+		}
+	}
+	Mission // Wave 7 Snipers
+	{
+		Objective	Sniper
+		Where	spawnbot_mission_sniper
+		BeginAtWave	7
+		RunForThisManyWaves	1
+		InitialCooldown	75
+		CooldownTime	15
+		DesiredCount	4
+		TFBot
+		{
+			Template	T_TFBot_Tind_Sniper
+		}
+	}
+	Mission // Wave 3 Spies
+	{
+		Objective	Spy
+		Where	spawnbot_mission_spy
+		BeginAtWave	3
+		RunForThisManyWaves	1
+		InitialCooldown	10
+		CooldownTime	20
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Tind_Spy
+		}
+	}
+	Mission // Wave 5 Kunai Spies
+	{
+		Objective	Spy
+		Where	spawnbot_mission_spy
+		BeginAtWave	5
+		RunForThisManyWaves	1
+		InitialCooldown	20
+		CooldownTime	30
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Tind_Spy_Kunai
+		}
+	}
+	Mission // Wave 6 Kunai Spies
+	{
+		Objective	Spy
+		Where	spawnbot_mission_spy
+		BeginAtWave	6
+		RunForThisManyWaves	1
+		InitialCooldown	90
+		CooldownTime	45
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Tind_Spy_Kunai
+		}
+	}
+	Mission // Wave 2 Engineers
+	{
+		Objective	Engineer
+		Where	spawnbot
+		BeginAtWave	2
+		RunForThisManyWaves	1
+		InitialCooldown	90
+		CooldownTime	90
+		DesiredCount	1
+		TFBot
+		{
+			Template	T_TFBot_Tind_Engineer_Teleport1
+			TeleportWhere	spawnbot
+			TeleportWhere	spawnbot_river
+		}
+	}
+	Mission // Wave 4 Engineers
+	{
+		Objective	Engineer
+		Where	spawnbot
+		BeginAtWave	4
+		RunForThisManyWaves	1
+		InitialCooldown	60
+		CooldownTime	60
+		DesiredCount	1
+		TFBot
+		{
+			Template	T_TFBot_Tind_Engineer_Teleport2
+			TeleportWhere	spawnbot
+			TeleportWhere	spawnbot_flank
+			TeleportWhere	spawnbot_river
+			TeleportWhere	spawnbot_invasion
+		}
+	}
+	Mission // Wave 7 Engineers
+	{
+		Objective	Engineer
+		Where	spawnbot
+		BeginAtWave	7
+		RunForThisManyWaves	1
+		InitialCooldown	60
+		CooldownTime	60
+		DesiredCount	1
+		TFBot
+		{
+			Template	T_TFBot_Tind_Engineer_Teleport3
+			TeleportWhere	spawnbot
+			TeleportWhere	spawnbot_flank
+			TeleportWhere	spawnbot_river
+			TeleportWhere	spawnbot_river_slow
+		}
+	}
+/////////////////
+//WAVES
+//POPFILE PAYOUT
+//START $1100
+//DROP W1 $1100 / W2 $1050 / W3 $1100 / W4 $800 / W5 $1250 / W6 $1500 / W7 $1200
+//START: $1100 / DROP: $8000 / TOTAL: $9100 / TOTAL PLUS BONUS: $9700
+/////////////////	
+
+// WAVE 1/7 ///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// A - 1 Tank, (150)
+// A - 1 Tank, (150)
+// A - 1 Tank, (150)
+// A - 1 Tank, (150)
+// A - 16 Soldiers, (80)
+// A - 8 Soldiers, (40)
+// A - 4 Soldiers, (20)
+// A - 1 Giant Armoured Scout, (75)
+// B - 1 Giant Armoured Scout, (75)
+// B Support - 21 Heavies, (210)
+// Total cash in this wave is $1100
+///////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_1bomb_classic_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		Explanation  
+		{
+			Line	"{EE82EE}The Overseer {FFB1C7}:  Greetings, Mercenaries. Now that I am free from the meme menace, I will be your mission control for today."
+		}
+		WaveSpawn // A - 1 Tank
+		{
+			Name	Wave1a
+			TotalCurrency	150
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health	8000
+				Name	"tankboss"
+				Speed	75
+				StartingPathTrackNode	tank_start_main
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // A - 1 Tank
+		{
+			Name	Wave1a
+			TotalCurrency	150
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	20
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health	8000
+				Name	"tankboss"
+				Speed	75
+				StartingPathTrackNode	tank_start_main
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // A - 1 Tank
+		{
+			Name	Wave1a
+			TotalCurrency	150
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	40
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health	8000
+				Name	"tankboss"
+				Speed	75
+				StartingPathTrackNode	tank_start_main
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // A - 1 Tank
+		{
+			Name	Wave1a
+			TotalCurrency	150
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	60
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health	8000
+				Name	"tankboss"
+				Speed	75
+				StartingPathTrackNode	tank_start_main
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // A - 16 Soldiers
+		{
+			Name	Wave1a
+			TotalCurrency	80
+			TotalCount	16
+			MaxActive	6
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	5
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Tind_Soldier
+			}
+		}
+		WaveSpawn // A - 8 Soldiers
+		{
+			Name	Wave1a
+			TotalCurrency	40
+			TotalCount	8
+			MaxActive	4
+			SpawnCount	1
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	10
+			Where	spawnbot_river
+			TFBot
+			{
+				Template	T_TFBot_Tind_Soldier
+			}
+		}
+		WaveSpawn // A - 4 Soldiers
+		{
+			Name	Wave1a
+			TotalCurrency	20
+			TotalCount	4
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	15
+			Where	spawnbot_flank
+			TFBot
+			{
+				Template	T_TFBot_Tind_Soldier
+			}
+		}
+		WaveSpawn // A - 1 Giant Armoured Scout
+		{
+			Name	Wave1a
+			TotalCurrency	75
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	48
+			WaitBetweenSpawns	0
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Tind_Scout_Giant_Sandman_Armoured
+			}
+		}
+		WaveSpawn // B - 1 Giant Armoured Scout
+		{
+			Name	Wave1b
+			WaitForAllSpawned	Wave1a
+			TotalCurrency	75
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	32
+			WaitBetweenSpawns	0
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Tind_Scout_Giant_Sandman_Armoured
+			}
+		}
+		WaveSpawn // B Support - 21 Heavies
+		{
+			WaitForAllSpawned	Wave1a
+			TotalCurrency	210
+			TotalCount	21
+			MaxActive	14
+			SpawnCount	7
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	20
+			Where	spawnbot_river
+			Support	Limited
+			TFBot
+			{
+				Template	T_TFBot_Tind_Heavy
+			}
+		}
+		WaveSpawn   // Dialogue - Overseer Tank Callout
+		{
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0.5
+			WaitBetweenSpawns	0
+			Where	spawnbot_dialogue
+			Support	Limited
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Tank1
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Tank2
+					}
+				}
+			}
+		}
+		WaveSpawn   // Dialogue - Overseer Battle Cry
+		{
+			WaitForAllSpawned	Wave1a
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	0
+			Where	spawnbot_dialogue
+			Support	Limited
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_BattleCry1
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_BattleCry2
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_BattleCry3
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_BattleCry4
+					}
+				}
+			}
+		}
+		WaveSpawn   // Dialogue - Overseer Giant Scout Callout
+		{
+			WaitForAllSpawned	Wave1a
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	32
+			WaitBetweenSpawns	0
+			Where	spawnbot_dialogue
+			Support	Limited
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_GiantScout1
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_GiantScout2
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_GiantScout3
+					}
+				}
+			}
+		}
+	}
+// WAVE 2/7 ///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// A1 - 2 Giant Demoknights, (50)
+// A1 - 44 Force-a-Nature Scouts, (130)
+// A2 - 30 Black Box Soldiers, (150)
+// B1 - 12 Crit Armoured Scouts, (120)
+// B2 - 1 Giant Demoknight, (25)
+// C - 3 Squads; 1 Giant Charged Soldier, 1 Quick Uber Medic, (300)
+// C - 2 Giant Demoknights, (50)
+// B Support - Fan O'War Scouts, (225)
+// Sniper mission active
+// Engineer mission active
+// Total cash in this wave is $1050
+///////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_1bomb_classic_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // A1 - 2 Giant Demoknights
+		{
+			Name	Wave2a1
+			TotalCurrency	50
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	45
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Tind_Demoman_Giant_Knight
+			}
+		}
+		WaveSpawn // A1 - 44 Force-a-Nature Scouts
+		{
+			Name	Wave2a1
+			TotalCurrency	130
+			TotalCount	44
+			MaxActive	8
+			SpawnCount	4
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	6
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Tind_Scout_FaN
+			}
+		}
+		WaveSpawn // A2 - 30 Black Box Soldiers
+		{
+			Name	Wave2a2
+			TotalCurrency	150
+			TotalCount	30
+			MaxActive	10
+			SpawnCount	5
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	9
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Tind_Soldier_BlackBox
+			}
+		}
+		WaveSpawn // B1 - 12 Crit Armoured Scouts
+		{
+			Name	Wave2b1
+			WaitForAllDead	Wave2a1
+			TotalCurrency	120
+			TotalCount	12
+			MaxActive	8
+			SpawnCount	4
+			WaitBeforeStarting	2
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Tind_Scout_Sandman_Armoured
+			}
+		}
+		WaveSpawn // B2 - 1 Giant Demoknight
+		{
+			Name	Wave2b2
+			WaitForAllDead	Wave2a1
+			TotalCurrency	25
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	13
+			WaitBetweenSpawns	0
+			Where	spawnbot_river
+			TFBot
+			{
+				Template	T_TFBot_Tind_Demoman_Giant_Knight
+			}
+		}
+		WaveSpawn // C - 3 Squads; 1 Giant Charged Soldier, 1 Quick Uber Medic
+		{
+			Name	Wave2c
+			WaitForAllDead	Wave2b2
+			TotalCurrency	300
+			TotalCount	6
+			MaxActive	6
+			SpawnCount	2
+			WaitBeforeStarting	3
+			WaitBetweenSpawns	20
+			Where	spawnbot_river
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Tind_Soldier_Giant_Charged
+				}
+				TFBot
+				{
+					Template	T_TFBot_Tind_Medic_Uber_Quick
+				}
+			}
+		}
+		WaveSpawn // C - 2 Giant Demoknights
+		{
+			Name	Wave2c
+			WaitForAllDead	Wave2b2
+			TotalCurrency	50
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	18
+			WaitBetweenSpawns	20
+			Where	spawnbot_river
+			TFBot
+			{
+				Template	T_TFBot_Tind_Demoman_Giant_Knight
+			}
+		}
+		WaveSpawn // B Support - Fan O'War Scouts
+		{
+			WaitForAllDead	Wave2a2
+			TotalCurrency	225
+			TotalCount	56
+			MaxActive	6
+			SpawnCount	4
+			WaitBeforeStarting	2
+			WaitBetweenSpawns	10
+			Support	1
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Tind_Scout_FanOWar
+			}
+		}
+		WaveSpawn   // Dialogue - Overseer New Bot Callout
+		{
+			WaitForAllDead	Wave2a2
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	2
+			WaitBetweenSpawns	0
+			Where	spawnbot_dialogue
+			Support	Limited
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_NewBot1
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_NewBot2
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_NewBot3
+					}
+				}
+			}
+		}
+		WaveSpawn   // Dialogue - Overseer Fan O'War Scout Intro
+		{
+			WaitForAllDead	Wave2a2
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	0
+			Where	spawnbot_dialogue
+			Support	Limited
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_FanOWarScout
+					}
+				}
+			}
+		}
+		WaveSpawn   // Dialogue - Overseer Uber Medic Callout
+		{
+			WaitForAllDead	Wave2b2
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	3
+			WaitBetweenSpawns	0
+			Where	spawnbot_dialogue
+			Support	Limited
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_UberMedic1
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_UberMedic2
+					}
+				}
+			}
+		}
+	}
+// WAVE 3/7 ///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// 1 Tank, (275)
+// 8 Conch Soldiers, (80)
+// 8 Conch Soldiers, (80)
+// 1 Tank, (275)
+// 2 Squads; 1 Giant Airblast Pyro, 4 Quick Uber Medics, (250)
+// Support - Lightweight Champs, (140)
+// Spy mission active
+// Total cash in this wave is $1100
+///////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_1bomb_classic_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // 1 Tank
+		{
+			TotalCurrency	275
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health	21000
+				Name	"tankboss"
+				Speed	75
+				StartingPathTrackNode	tank_start_main
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // 8 Conch Soldiers
+		{
+			TotalCurrency	80
+			TotalCount	8
+			MaxActive	4
+			SpawnCount	4
+			WaitBeforeStarting	33
+			WaitBetweenSpawns	22
+			Where	spawnbot_flank
+			TFBot
+			{
+				Template	T_TFBot_Tind_Soldier_Conch
+			}
+		}
+		WaveSpawn // 8 Conch Soldiers
+		{
+			TotalCurrency	80
+			TotalCount	8
+			MaxActive	4
+			SpawnCount	4
+			WaitBeforeStarting	44
+			WaitBetweenSpawns	22
+			Where	spawnbot_river
+			TFBot
+			{
+				Template	T_TFBot_Tind_Soldier_Conch
+			}
+		}
+		WaveSpawn // 1 Tank
+		{
+			TotalCurrency	275
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	60
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health	21000
+				Name	"tankboss"
+				Speed	75
+				StartingPathTrackNode	tank_start_main
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // 2 Squads; 1 Giant Airblast Pyro, 4 Quick Uber Medics
+		{
+			TotalCurrency	250
+			TotalCount	10
+			MaxActive	10
+			SpawnCount	5
+			WaitBeforeStarting	75
+			WaitBetweenSpawns	20
+			Where	spawnbot_river_slow
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Tind_Pyro_Giant_AirBlast
+				}
+				TFBot
+				{
+					Template	T_TFBot_Tind_Medic_Uber_Quick
+				}
+				TFBot
+				{
+					Template	T_TFBot_Tind_Medic_Uber_Quick
+				}
+				TFBot
+				{
+					Template	T_TFBot_Tind_Medic_Uber_Quick
+				}
+				TFBot
+				{
+					Template	T_TFBot_Tind_Medic_Uber_Quick
+				}
+			}
+		}
+		WaveSpawn // Support - Lightweight Champs
+		{
+			TotalCurrency	140
+			TotalCount	35
+			MaxActive	10
+			SpawnCount	5
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	9
+			Support	1
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Tind_Heavy_GRU
+			}
+		}
+		WaveSpawn   // Dialogue - Overseer Tank Callout
+		{
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0.5
+			WaitBetweenSpawns	0
+			Where	spawnbot_dialogue
+			Support	Limited
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Null
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Null
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Tank1
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Tank2
+					}
+				}
+			}
+		}
+		WaveSpawn   // Dialogue - Overseer Battle Cry
+		{
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	33
+			WaitBetweenSpawns	0
+			Where	spawnbot_dialogue
+			Support	Limited
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_BattleCry1
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_BattleCry2
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_BattleCry3
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_BattleCry4
+					}
+				}
+			}
+		}
+		WaveSpawn   // Dialogue - Overseer New Bot Callout
+		{
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	75
+			WaitBetweenSpawns	0
+			Where	spawnbot_dialogue
+			Support	Limited
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_NewBot1
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_NewBot2
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_NewBot3
+					}
+				}
+			}
+		}
+		WaveSpawn   // Dialogue - Overseer Giant Airblast Pyro Intro
+		{
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	83
+			WaitBetweenSpawns	0
+			Where	spawnbot_dialogue
+			Support	Limited
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_GiantAirblastPyro
+					}
+				}
+			}
+		}
+	}
+// WAVE 4/7 ///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// A - 1 Giant Heater Heavy, (50)
+// A - 25 Crit Bat Scouts, (75)
+// A - 1 Giant Heater Heavy, (50)
+// B - 75 Crit Bat Scouts, (225)
+// B - 5 Giant Rapid Fire Demos, (125)
+// B - 1 Giant Heater Heavy, (50)
+// Support - Pyros, (225)
+// Sleeper Sniper mission active
+// Engineer mission active
+// Total cash in this wave is $800
+///////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_1bomb_classic_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // A - 1 Giant Heater Heavy
+		{
+			Name	Wave4a
+			TotalCurrency	50
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	0
+			Where	spawnbot_flank
+			TFBot
+			{
+				Template	T_TFBot_Tind_Heavy_Giant_Heater
+			}
+		}
+		WaveSpawn // A - 25 Crit Bat Scouts
+		{
+			Name	Wave4a
+			TotalCurrency	75
+			TotalCount	25
+			MaxActive	10
+			SpawnCount	5
+			WaitBeforeStarting	25
+			WaitBetweenSpawns	6
+			RandomSpawn	1
+			Where	spawnbot_invasion
+			TFBot
+			{
+				Template	T_TFBot_Tind_Scout_Melee
+			}
+		}
+		WaveSpawn // A - 1 Giant Heater Heavy
+		{
+			Name	Wave4a
+			TotalCurrency	50
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	30
+			WaitBetweenSpawns	0
+			Where	spawnbot_river
+			TFBot
+			{
+				Template	T_TFBot_Tind_Heavy_Giant_Heater
+			}
+		}
+		WaveSpawn // B - 75 Crit Bat Scouts
+		{
+			Name	Wave4b
+			WaitForAllSpawned	Wave4a
+			TotalCurrency	225
+			TotalCount	75
+			MaxActive	10
+			SpawnCount	5
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	5
+			RandomSpawn	1
+			Where	spawnbot_invasion
+			TFBot
+			{
+				Template	T_TFBot_Tind_Scout_Melee
+			}
+		}
+		WaveSpawn // B - 5 Giant Rapid Fire Demos
+		{
+			Name	Wave4b
+			WaitForAllSpawned	Wave4a
+			TotalCurrency	125
+			TotalCount	5
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	24
+			WaitBetweenSpawns	16
+			Where	spawnbot_river
+			TFBot
+			{
+				Template	T_TFBot_Tind_Demoman_Giant_RapidFire
+			}
+		}
+		WaveSpawn // B - 1 Giant Heater Heavy
+		{
+			Name	Wave4b
+			WaitForAllSpawned	Wave4a
+			TotalCurrency	50
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	64
+			WaitBetweenSpawns	0
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Tind_Heavy_Giant_Heater
+			}
+		}
+		WaveSpawn // Support - Pyros
+		{
+			TotalCurrency	225
+			TotalCount	45
+			MaxActive	7
+			SpawnCount	5
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	15
+			Support	1
+			Where	spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Tind_Pyro
+				}
+				TFBot
+				{
+					Template	T_TFBot_Tind_Pyro
+				}
+				TFBot
+				{
+					Template	T_TFBot_Tind_Pyro
+					Skill	Hard
+					Attributes	AlwaysFireWeapon
+				}
+			}
+		}
+		WaveSpawn   // Dialogue - Overseer Giant Heavy Callout
+		{
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	0
+			Where	spawnbot_dialogue
+			Support	Limited
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Null
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Null
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Null
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_GiantHeavy1
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_GiantHeavy2
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_GiantHeavy3
+					}
+				}
+			}
+		}
+		WaveSpawn   // Dialogue - Overseer Crits Callout
+		{
+			WaitForAllSpawned	Wave4a
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	0
+			Where	spawnbot_dialogue
+			Support	Limited
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Null
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Null
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Null
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Null
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Crits1
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Crits2
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Crits3
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Crits4
+					}
+				}
+			}
+		}
+	}
+// WAVE 5/7 ///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// A1 - 40 Crit Bowmen, (200)
+// A2 - 3 Giant Bomber Demos, (90)
+// B - 1 Tank, (300)
+// B - 2 Giant Barrage Soldiers, (100)
+// B - 45 Crit Scouts, (180)
+// C - 36 Demos, (180)
+// C - 1 Squad; 1 Giant Barrage Soldier, 1 Giant Kritzkrieg Medic, (200)
+// Kunai Spy mission active
+// Total cash in this wave is $1250
+///////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_1bomb_classic_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // A1 - 40 Crit Bowmen
+		{
+			Name	Wave5a1
+			TotalCurrency	200
+			TotalCount	40
+			MaxActive	15
+			SpawnCount	5
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	3
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Tind_Sniper_Bow
+			}
+		}
+		WaveSpawn // A2 - 3 Giant Bomber Demos
+		{
+			Name	Wave5a2
+			TotalCurrency	90
+			TotalCount	3
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	12
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Tind_Demoman_Giant_Bomber
+			}
+		}
+		WaveSpawn // B - 1 Tank
+		{
+			Name	Wave5b
+			WaitForAllSpawned	Wave5a1
+			TotalCurrency	300
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health	38000
+				Name	"tankboss"
+				Speed	75
+				StartingPathTrackNode	tank_start_main
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // B - 2 Giant Barrage Soldiers
+		{
+			Name	Wave5b
+			WaitForAllSpawned	Wave5a1
+			TotalCurrency	100
+			TotalCount	2
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	30
+			Where	spawnbot_river_slow
+			TFBot
+			{
+				Template	T_TFBot_Tind_Soldier_Giant_Barrage
+			}
+		}
+		WaveSpawn // B - 45 Crit Scouts
+		{
+			Name	Wave5b
+			WaitForAllSpawned	Wave5a1
+			TotalCurrency	180
+			TotalCount	45
+			MaxActive	10
+			SpawnCount	5
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	5
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Tind_Scout
+			}
+		}
+		WaveSpawn // C - 36 Demos
+		{
+			Name	Wave5c
+			WaitForAllSpawned	Wave5b
+			TotalCurrency	180
+			TotalCount	36
+			MaxActive	18
+			SpawnCount	6
+			WaitBeforeStarting	3
+			WaitBetweenSpawns	8
+			Where	spawnbot_river
+			TFBot
+			{
+				Template	T_TFBot_Tind_Demoman
+			}
+		}
+		WaveSpawn // C - 1 Squad; 1 Giant Barrage Soldier, 1 Giant Kritzkrieg Medic
+		{
+			Name	Wave5c
+			WaitForAllSpawned	Wave5b
+			TotalCurrency	200
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	2
+			WaitBeforeStarting	22
+			WaitBetweenSpawns	0
+			Where	spawnbot_river_slow
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Tind_Soldier_Giant_Barrage
+				}
+				TFBot
+				{
+					Template	T_TFBot_Tind_Medic_Giant_Kritzkrieg
+				}
+			}
+		}
+		WaveSpawn   // Dialogue - Overseer New Bot Callout
+		{
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	0
+			Where	spawnbot_dialogue
+			Support	Limited
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_NewBot1
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_NewBot2
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_NewBot3
+					}
+				}
+			}
+		}
+		WaveSpawn   // Dialogue - Overseer Giant Bomber Demo Intro
+		{
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	13
+			WaitBetweenSpawns	0
+			Where	spawnbot_dialogue
+			Support	Limited
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_GiantBomberDemo
+					}
+				}
+			}
+		}
+		WaveSpawn   // Dialogue - Overseer Tank/Crits Callout
+		{
+			WaitForAllSpawned	Wave5a1
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	0
+			Where	spawnbot_dialogue
+			Support	Limited
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Null
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Null
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Null
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Null
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Tank1
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Tank1
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Tank2
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Tank2
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Crits1
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Crits2
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Crits3
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Crits4
+					}
+				}
+			}
+		}
+		WaveSpawn   // Dialogue - Overseer New Bot Callout
+		{
+			WaitForAllSpawned	Wave5b
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	22
+			WaitBetweenSpawns	0
+			Where	spawnbot_dialogue
+			Support	Limited
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_NewBot1
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_NewBot2
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_NewBot3
+					}
+				}
+			}
+		}
+		WaveSpawn   // Dialogue - Overseer Giant Kritzkrieg Medic Intro
+		{
+			WaitForAllSpawned	Wave5b
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	30
+			WaitBetweenSpawns	0
+			Where	spawnbot_dialogue
+			Support	Limited
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_GiantKritzkriegMedic
+					}
+				}
+			}
+		}
+	}
+// WAVE 6/7 ///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// A1 - 1 Tank, (125)
+// A1 - 1 Tank, (125)
+// A1 - 1 Tank, (125)
+// A2 - 6 Force-a-Nature Super Scouts, (90)
+// A2 - 36 Crit Demos, (145)
+// B - 4 Giant Shortstop Scouts, (60)
+// B - 28 Samurai Demoknights, (85)
+// C - 2 Giant Jumping Scouts, (30)
+// C - 18 Deflector Heavies, (90)
+// D - Final Tank, (225)
+// D - 20 Giant Demos, (400)
+// Sleeper Sniper mission active
+// Kunai Spy mission active
+// Total cash in this wave is $1500
+///////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_1bomb_classic_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // A1 - 1 Tank
+		{
+			Name	Wave6a1
+			TotalCurrency	125
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health	20000
+				Name	"tankboss"
+				Speed	75
+				StartingPathTrackNode	tank_start_main
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // A1 - 1 Tank
+		{
+			Name	Wave6a1
+			TotalCurrency	125
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	50
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health	20000
+				Name	"tankboss"
+				Speed	75
+				StartingPathTrackNode	tank_start_main
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // A1 - 1 Tank
+		{
+			Name	Wave6a1
+			TotalCurrency	125
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	100
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health	20000
+				Name	"tankboss"
+				Speed	75
+				StartingPathTrackNode	tank_start_main
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // A2 - 6 Force-a-Nature Super Scouts
+		{
+			Name	Wave6a2
+			TotalCurrency	90
+			TotalCount	6
+			MaxActive	3
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	9
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Tind_Scout_Giant_FaN
+			}
+		}
+		WaveSpawn // A2 - 36 Crit Demos
+		{
+			Name	Wave6a1
+			TotalCurrency	145
+			TotalCount	36
+			MaxActive	12
+			SpawnCount	6
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	8
+			Where	spawnbot_flank
+			TFBot
+			{
+				Template	T_TFBot_Tind_Demoman
+				Attributes	AlwaysCrit
+			}
+		}
+		WaveSpawn // B - 4 Giant Shortstop Scouts
+		{
+			Name	Wave6b
+			WaitForAllSpawned	Wave6a2
+			TotalCurrency	60
+			TotalCount	4
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	12
+			WaitBetweenSpawns	12
+			Where	spawnbot_river
+			TFBot
+			{
+				Template	T_TFBot_Tind_Scout_Giant_Shortstop
+			}
+		}
+		WaveSpawn // B - 28 Samurai Demoknights
+		{
+			Name	Wave6b
+			WaitForAllSpawned	Wave6a2
+			TotalCurrency	85
+			TotalCount	28
+			MaxActive	14
+			SpawnCount	7
+			WaitBeforeStarting	16
+			WaitBetweenSpawns	10
+			Where	spawnbot_river
+			TFBot
+			{
+				Template	T_TFBot_Tind_Demoman_Knight_Samurai_Light
+			}
+		}
+		WaveSpawn // C - 2 Giant Jumping Scouts
+		{
+			Name	Wave6c
+			WaitForAllSpawned	Wave6b
+			TotalCurrency	30
+			TotalCount	2
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	15
+			Where	spawnbot_river
+			TFBot
+			{
+				Template	T_TFBot_Tind_Scout_Giant_Jump
+			}
+		}
+		WaveSpawn // C - 18 Deflector Heavies
+		{
+			Name	Wave6c
+			WaitForAllSpawned	Wave6b
+			TotalCurrency	90
+			TotalCount	18
+			MaxActive	18
+			SpawnCount	9
+			WaitBeforeStarting	20
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Tind_Heavy_Deflector
+			}
+		}
+		WaveSpawn // D - Final Tank
+		{
+			Name	Wave6d
+			WaitForAllSpawned	Wave6c
+			TotalCurrency	225
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health	33000
+				Name	"tankboss"
+				Speed	75
+				Skin	1
+				StartingPathTrackNode	tank_start_main
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // D - 20 Giant Demos
+		{
+			Name	Wave6d
+			WaitForAllSpawned	Wave6c
+			TotalCurrency	400
+			TotalCount	20
+			MaxActive	20
+			SpawnCount	5
+			WaitBeforeStarting	12
+			WaitBetweenSpawns	12
+			Where	spawnbot_river_slow
+			TFBot
+			{
+				Template	T_TFBot_Tind_Demoman_Giant
+			}
+		}
+		WaveSpawn   // Dialogue - Overseer Tank/Giant Scout Callout
+		{
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0.5
+			WaitBetweenSpawns	0
+			Where	spawnbot_dialogue
+			Support	Limited
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Null
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Null
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Null
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Tank1
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Tank2
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_GiantScout1
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_GiantScout2
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_GiantScout3
+					}
+				}
+			}
+		}
+		WaveSpawn   // Dialogue - Overseer New Bot Callout
+		{
+			WaitForAllSpawned	Wave6a2
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	16
+			WaitBetweenSpawns	0
+			Where	spawnbot_dialogue
+			Support	Limited
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_NewBot1
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_NewBot2
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_NewBot3
+					}
+				}
+			}
+		}
+		WaveSpawn   // Dialogue - Overseer Samurai Demoknight Intro
+		{
+			WaitForAllSpawned	Wave6a2
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	24
+			WaitBetweenSpawns	0
+			Where	spawnbot_dialogue
+			Support	Limited
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_SamuraiDemoknight
+					}
+				}
+			}
+		}
+	}
+// WAVE 7/7 ///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// A1 - 8 Super Scouts, (80)
+// A2 - 18 Crit Soldiers, (90)
+// A3 - 1 Squad; 1 Giant Deflector Heavy, 2 Giant Regen Medics, (150)
+// B1 - 2 Squads; 1 Giant Burst Fire Demo, 2 Giant Regen Medics, (180)
+// B1 - 40 Dragon's Fury Pyros, (120)
+// B2 - 12 Super Scouts, (120)
+// C - 24 Conch Soldiers, (95)
+// D - 7 Squads; 1 Crit Heavy, 1 Quick Uber Medic, (140)
+// D - 1 Squad; 1 Giant Burst Fire Soldier, 2 Giant Regen Medics, (225)
+// Sniper mission active
+// Engineer mission active
+// Total cash in this wave is $1200
+///////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_1bomb_classic_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // A1 - 8 Super Scouts
+		{
+			Name	Wave7a1
+			TotalCurrency	80
+			TotalCount	8
+			MaxActive	4
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	21
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Tind_Scout_Giant_Fast
+			}
+		}
+		WaveSpawn // A2 - 18 Crit Soldiers
+		{
+			Name	Wave7a2
+			TotalCurrency	90
+			TotalCount	18
+			MaxActive	14
+			SpawnCount	9
+			WaitBeforeStarting	3
+			WaitBetweenSpawns	10
+			Where	spawnbot_flank
+			TFBot
+			{
+				Template	T_TFBot_Tind_Soldier
+				Skill	Hard
+				Attributes	AlwaysCrit
+			}
+		}
+		WaveSpawn // A3 - 1 Squad; 1 Giant Deflector Heavy, 2 Giant Regen Medics
+		{
+			Name	Wave7a3
+			TotalCurrency	150
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	0
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Tind_Heavy_Giant_Deflector
+				}
+				TFBot
+				{
+					Template	T_TFBot_Tind_Medic_Giant_Regen
+				}
+				TFBot
+				{
+					Template	T_TFBot_Tind_Medic_Giant_Regen
+				}
+			}
+		}
+		WaveSpawn // B1 - 2 Squads; 1 Giant Burst Fire Demo, 2 Giant Regen Medics
+		{
+			Name	Wave7b1
+			WaitForAllDead	Wave7a3
+			WaitForAllSpawned	Wave7a2
+			TotalCurrency	180
+			TotalCount	6
+			MaxActive	4
+			SpawnCount	3
+			WaitBeforeStarting	3
+			WaitBetweenSpawns	31
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Tind_Demoman_Giant_BurstFire
+				}
+				TFBot
+				{
+					Template	T_TFBot_Tind_Medic_Giant_Regen
+				}
+				TFBot
+				{
+					Template	T_TFBot_Tind_Medic_Giant_Regen
+				}
+			}
+		}
+		WaveSpawn // B1 - 40 Dragon's Fury Pyros
+		{
+			Name	Wave7b1
+			WaitForAllDead	Wave7a3
+			WaitForAllSpawned	Wave7a2
+			TotalCurrency	120
+			TotalCount	40
+			MaxActive	12
+			SpawnCount	8
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	10
+			Where	spawnbot_river
+			TFBot
+			{
+				Template	T_TFBot_Tind_Pyro_Fury
+			}
+		}
+		WaveSpawn // B2 - 12 Super Scouts
+		{
+			Name	Wave7b2
+			WaitForAllSpawned	Wave7a1
+			TotalCurrency	120
+			TotalCount	12
+			MaxActive	6
+			SpawnCount	3
+			WaitBeforeStarting	21
+			WaitBetweenSpawns	21
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Tind_Scout_Giant_Fast
+			}
+		}
+		WaveSpawn // C - 24 Conch Soldiers
+		{
+			Name	Wave7c
+			WaitForAllSpawned	Wave7b1
+			TotalCurrency	95
+			TotalCount	24
+			MaxActive	16
+			SpawnCount	12
+			WaitBeforeStarting	8
+			WaitBetweenSpawns	0
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Tind_Soldier_Conch
+			}
+		}
+		WaveSpawn // D - 7 Squads; 1 Crit Heavy, 1 Quick Uber Medic
+		{
+			Name	Wave7d
+			WaitForAllSpawned	Wave7c
+			TotalCurrency	140
+			TotalCount	14
+			MaxActive	14
+			SpawnCount	2
+			WaitBeforeStarting	4
+			WaitBetweenSpawns	4
+			Where	spawnbot_river
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Tind_Heavy
+					Attributes	AlwaysCrit
+				}
+				TFBot
+				{
+					Template	T_TFBot_Tind_Medic_Uber_Quick
+				}
+			}
+		}
+		WaveSpawn // D - 1 Squad; 1 Giant Burst Fire Soldier, 2 Giant Regen Medics
+		{
+			Name	Wave7d
+			WaitForAllSpawned	Wave7c
+			TotalCurrency	225
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	0
+			Where	spawnbot_river_slow
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Tind_Soldier_Giant_BurstFire
+				}
+				TFBot
+				{
+					Template	T_TFBot_Tind_Medic_Giant_Regen
+				}
+				TFBot
+				{
+					Template	T_TFBot_Tind_Medic_Giant_Regen
+				}
+			}
+		}
+		WaveSpawn   // Dialogue - Overseer Super Scout/Giant Heavy Callout
+		{
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0.5
+			WaitBetweenSpawns	0
+			Where	spawnbot_dialogue
+			Support	Limited
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Null
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Null
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Null
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Null
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Null
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_SuperScout1
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_SuperScout2
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_GiantHeavy1
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_GiantHeavy2
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_GiantHeavy3
+					}
+				}
+			}
+		}
+		WaveSpawn   // Dialogue - Overseer Giant Medic Callout
+		{
+			WaitForAllDead	Wave7a3
+			WaitForAllSpawned	Wave7a2
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	3
+			WaitBetweenSpawns	0
+			Where	spawnbot_dialogue
+			Support	Limited
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Null
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Null
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_GiantMedic1
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_GiantMedic2
+					}
+				}
+			}
+		}
+		WaveSpawn   // Dialogue - Overseer Battle Cry
+		{
+			WaitForAllSpawned	Wave7a1
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	21
+			WaitBetweenSpawns	0
+			Where	spawnbot_dialogue
+			Support	Limited
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Null
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Null
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Null
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Null
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_BattleCry1
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_BattleCry2
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_BattleCry3
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_BattleCry4
+					}
+				}
+			}
+		}
+		WaveSpawn   // Dialogue - Overseer Bigrock Burst/Crits Callout
+		{
+			WaitForAllSpawned	Wave7c
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	4
+			WaitBetweenSpawns	0
+			Where	spawnbot_dialogue
+			Support	Limited
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_BigrockBurst1
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_BigrockBurst1
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_BigrockBurst2
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_BigrockBurst2
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Crits1
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Crits2
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Crits3
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Dialogue_Overseer_Crits4
+					}
+				}
+			}
+		}
+	}
+}

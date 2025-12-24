@@ -1,0 +1,1105 @@
+#base robot_standard.pop
+#base robot_giant.pop
+
+// Darkness Falls by PDA Expert
+// Mission made for fun, no actual difficulty planned so i might need to label waves as their own difficulty lmao
+
+WaveSchedule
+{
+    StartingCurrency 200
+	CanBotsAttackWhileInSpawnRoom Yes
+	RespawnWaveTime	5
+	NoRomevisionCosmetics 1
+	MedievalMode 0  	
+	NoReanimators 1 
+	ForceHoliday 2
+	WaveStartCountdown 3
+	
+	SpawnTemplate fog
+	SpawnTemplate AmbinetSounds
+	SpawnTemplate anticheese
+	
+	OverrideSounds  
+	{
+		"music.mvm_lost_wave"					"#music\radio1.mp3"
+		"MVM.PlayerDied"						"npc\zombie\zo_attack1.wav"
+	}
+	
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_new"
+        TeamNum 3 // -2975.500488 995.994995 -403.968750
+        X -2975
+        Y 995
+        Z -403
+    }	
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_new"
+        TeamNum 3 // -2975.500488 995.994995 -403.968750
+        X -2975
+        Y 236
+        Z -403
+    }		
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_right"
+        TeamNum 3 // -2975.500488 995.994995 -403.968750
+        X -2975
+        Y 995
+        Z -403
+    }		
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_left"
+        TeamNum 3 // -2975.500488 995.994995 -403.968750
+        X -2975
+        Y 236
+        Z -403
+    }	
+	
+	PlayerAttributes  
+	{
+		Engineer // makes engi somewhat more useful, but also nerfs his movement potetional
+		{
+			"engy sentry fire rate increased" 3
+			"mult teleporter recharge rate" 0.5
+			"building max level" 2
+			"mvm sentry ammo" 0.75
+			"engy building health bonus" 0.5
+			"major increased jump height" 0.75
+		}
+	}
+	
+	CustomWeapon
+	{
+	    "Sawblade Shooter"
+		{
+		    OriginalItemName "The Rescue Ranger"
+			"fire rate penalty" 1.5
+			"Reload time increased" 2.0
+			"damage bonus" 2.0
+			"engineer building teleporting pickup" 999
+			"arrow heals buildings" 0
+			"maxammo primary reduced" 0.75
+			"mark for death on building pickup" 0
+			"projectile penetration" 1
+			"custom weapon fire sound" "=80|weapons/crossbow/fire1.wav"
+			"custom weapon reload sound" "=80|weapons/crossbow/reload1.wav"
+			"reload full clip at once" 1
+			//"custom projectile model" "models/props_forest/saw_blade.mdl"
+			"Set_item_texture_wear" 0
+			"Paintkit_proto_def_index" 296
+		}
+	}
+	
+	ExtraLoadoutItems
+	{
+	    Engineer
+		{
+		    Primary
+			{
+			    Item "Sawblade Shooter"
+				Cost 600
+			}
+		}
+	}
+	
+	Templates
+	{
+	    T_TFBot_Brute
+		{
+		    Health 3000
+			Name "Brute"
+			Class Heavy
+			Skill Expert
+			ClassIcon heavy_apocofist
+			
+			UseHumanModel 1
+			WeaponRestrictions MeleeOnly
+			Scale 1.75
+			
+			Action Mobber
+			
+			Attributes MiniBoss
+			Attributes DisableDodge
+			NoIdleSound 1
+			
+			Item "Mad Mask"
+			Item "The Tyurtlenek"
+			Item "The Mann of the House"
+			Item "Apoco-Fists"
+			Item "Hexadecimal Horrors Macabre Memento 2021"
+			
+			ItemModel
+			{
+				ItemName "Hexadecimal Horrors Macabre Memento 2021"
+				Model "models/player/items/heavy/heavy_zombie.mdl"
+			}
+			Skin 5
+			
+			ItemAttributes
+			{
+			    ItemName "Apoco-Fists"
+				"fire rate penalty" 1.25
+				"damage bonus" 1.5
+				"damage causes airblast" 1
+				"custom hit sound" "npc/antlion_guard/shove1.wav"
+			}
+			
+			CharacterAttributes
+			{
+			    "move speed penalty" 0.65
+				"mult stun resistance" 0
+				"damage force reduction" 0
+				"airblast vulnerability multiplier" 0
+				"airblast vertical vulnerability multiplier" 0
+				"voice pitch scale" 0.0
+			}
+			
+			//PainSound  =80|physics/flesh/flesh_bloody_impact_hard1.wav
+			DeathSound "npc/zombie_poison/pz_warn2.wav"
+		}
+		T_TFBot_Undead_Knight
+		{
+		    Class Demoman
+			Skill Normal
+			Name "Undead Knight"
+			Health 225
+			ClassIcon demoknight
+			
+			UseHumanModel 1
+			WeaponRestrictions MeleeOnly
+			
+			Attributes DisableDodge
+			
+			Item "The Eyelander"
+			Item "The Dark Falkirk Helm"
+			Item "The Dark Age Defender"
+			Item "The Sole Saviors"
+			
+			ItemAttributes
+			{
+			    ItemName "The Eyelander"
+				"fire rate penalty" 1.33
+				"damage bonus" 1.8
+				"custom hit sound" "ambient/machines/slicer1.wav"
+			}
+			
+			CharacterAttributes
+			{
+			    "move speed penalty" 0.7
+				"damage force reduction" 0
+				"voice pitch scale" 0.0
+				"dmg from ranged reduced" 0.75
+			}
+			
+			DeathSound "physics/flesh/flesh_squishy_impact_hard3.wav"
+		}
+	}
+	
+	ItemWhitelist  
+	{
+		Allowed		"saxxy"
+		Allowed		"tf_weapon_lunchbox_drink"
+		Allowed		"tf_weapon_jar_milk"
+		Allowed		"tf_weapon_cleaver"
+		Allowed		"tf_weapon_bat"
+		Allowed		"tf_weapon_bat_wood"
+		Allowed		"tf_weapon_bat_fish"
+	    Allowed		"tf_weapon_bat_giftwrap"
+		Allowed		"tf_weapon_buff_item"
+		Allowed		"tf_weapon_parachute"
+		Allowed		"tf_weapon_shovel"
+		Allowed		"tf_weapon_katana"
+		Allowed		"tf_weapon_fireaxe"
+		Allowed		"tf_weapon_breakable_sign"
+		Allowed		"tf_weapon_slap"
+		Allowed		"tf_wearable_demoshield"
+		Allowed		"tf_weapon_bottle"
+		Allowed		"tf_weapon_sword"
+		Allowed		"tf_weapon_stickbomb"
+		Allowed		"tf_weapon_lunchbox"
+		Allowed		"tf_weapon_fists"
+		Allowed		"tf_weapon_wrench"
+		Allowed		"tf_weapon_robot_arm"
+		Allowed		"tf_weapon_crossbow"
+		Allowed		"tf_weapon_bonesaw"
+		Allowed		"tf_weapon_compound_bow"
+		Allowed		"tf_weapon_jar"
+		Allowed		"tf_weapon_club"
+		Allowed		"tf_weapon_knife"
+		Allowed		"tf_weapon_invis"
+		Allowed		"tf_wearable"
+		Allowed		"tf_powerup_bottle"
+		Allowed		"tf_weapon_flaregun"
+		Allowed		"tf_weapon_shotgun_building_rescue"
+		Allowed		"tf_weapon_pda_engineer_build"
+		Allowed		"tf_weapon_builder"
+	}
+	
+	ItemBlacklist  
+	{
+	    DefIndex	735		//Sapper
+		DefIndex	736		//Sapper
+		DefIndex	810		//Sapper
+		DefIndex	831		//Sapper
+		DefIndex	933		//Sapper
+		DefIndex	1080	//Sapper
+		DefIndex	1102	//Sapper
+		Name		"The Scorch Shot"
+	}
+	
+	PointTemplates
+	{
+	    anticheese
+		{
+		    NoFixup 1
+			OnSpawnOutput
+			{
+				Target "func_respawnroomvisualizer"
+				Action "kill"
+			}	
+			OnSpawnOutput
+			{
+				Target "redspawn"
+				Action "kill"
+			}	
+			OnSpawnOutput
+			{
+				Target "new_nav_interface"
+				Action "RecomputeBlockers"
+				Delay "0.1"
+			}	
+			tf_point_nav_interface
+			{
+		    	"targetname" "new_nav_interface"
+			}
+			OnSpawnOutput
+			{
+				Target "func_respawnroomvisualizer"
+				Action "kill"
+			}	
+			func_forcefield
+			{		
+                "disablereceiveshadows" "0"
+                "origin" "-2118 771 -185"
+                "renderfx" "0"
+                "rendermode" "10"
+                "TeamNum" "3"
+                "targetname" "spawnbarrierA1"
+                "parentname" "spawnbarrierA"
+                "mins" "-24 -500 -240"
+                "maxs" "24 500 240"
+				"StartDisabled" "0"
+			}
+			func_forcefield
+			{		
+                "disablereceiveshadows" "0"
+                "origin" "-2118 390 -185"
+                "renderfx" "0"
+                "rendermode" "10"
+                "TeamNum" "3"
+                "targetname" "spawnbarrierA1"
+                "parentname" "spawnbarrierA"
+                "mins" "-24 -500 -240"
+                "maxs" "24 500 240"
+				"StartDisabled" "0"
+			}
+			logic_auto 
+			{
+				"origin" "0 0 0" 
+				"targetname" "misc_stuff_to_disable"
+                //resupply
+				"OnMapSpawn" "wave_start_relay,AddOutput,OnTrigger givemelife:Disable:0:-1,0,-1"
+				"OnMapSpawn" "wave_finished_relay,AddOutput,OnTrigger givemelife:Enable:0:-1,0,-1"
+				"OnMapSpawn" "wave_start_relay,AddOutput,OnTrigger donottouchme:Enable:0:-1,0,-1"
+				"OnMapSpawn" "wave_finished_relay,AddOutput,OnTrigger donottouchme:Disable:0:-1,0,-1"
+			}
+		}
+        fog
+		{
+		    NoFixup 1
+            env_fog_controller
+            {
+                "farz"          "-1"
+                "fogblend"      "1"
+                "fogcolor"      "44 44 44"
+                "fogcolor2"     "44 44 44"
+                "fogdir"        "1 0 0"
+                "fogenable"     "1"
+                "fogend"        "1400"
+                "foglerptime"   "2"
+                "fogmaxdensity" "1"
+                "fogstart"      "400"
+				"spawnflags" 	"1"
+                "targetname"    "new_fog"
+            }
+            sky_camera
+            {
+                "fogmaxdensity" "1"
+				"origin" "3788 845 -284"
+                "fogcolor"      "44 44 44"
+                "fogcolor2"     "44 44 44"
+                "fogdir"        "1 0 0"
+                "fogenable"     "1"
+                "fogend"        "1"
+                "fogstart"      "1"
+                "scale"         "16"       
+                "targetname"    "camera_new" 
+            }
+            prop_dynamic
+            {
+				"model" "models\props_2fort\sniper_fence01.mdl"
+				"disableshadows" "1"
+				"origin" "3988 845 -200"
+				"angles" "-90 0 0"
+				"skin" "1"
+				"solid" "6"
+				"modelscale" "1.5"
+            }
+            prop_dynamic
+            {
+				"model" "models\props_2fort\sniper_fence01.mdl"
+				"disableshadows" "1"
+				"origin" "3788 845 -200"
+				"angles" "-90 180 0"
+				"skin" "1"
+				"solid" "6"
+				"modelscale" "1.5"
+            }
+            trigger_multiple
+            {
+                "targetname"    "fog_giver"
+                "origin"        "3266 835 14"
+                "mins"          "-512 -512 -512"
+                "maxs"          "512 512 512"
+                "spawnflags"    "1"
+                "OnStartTouch"  "!activator,SetFogController,new_fog,0,-1"
+            }
+            trigger_multiple
+            {
+                "targetname"    "fog_giver"
+                "origin"        "1683 597 -255"
+                "mins"          "-512 -512 -512"
+                "maxs"          "512 512 512"
+                "spawnflags"    "1"
+                "OnStartTouch"  "!activator,SetFogController,new_fog,0,-1"
+            }
+            trigger_multiple
+            {
+                "targetname"    "fog_giver"
+                "origin"        "3451 846 20"
+                "mins"          "-512 -512 -512"
+                "maxs"          "512 512 512"
+                "spawnflags"    "1"
+                "OnStartTouch"  "!activator,SetFogController,new_fog,0,-1"
+            }
+            trigger_multiple
+            {
+                "targetname"    "fog_giver"
+                "origin"        "3252 1225 14"
+                "mins"          "-512 -512 -512"
+                "maxs"          "512 512 512"
+                "spawnflags"    "1"
+                "OnStartTouch"  "!activator,SetFogController,new_fog,0,-1"
+            }
+            trigger_multiple
+            {
+                "targetname"    "fog_giver"
+                "origin"        "3477 839 14"
+                "mins"          "-512 -512 -512"
+                "maxs"          "512 512 512"
+                "spawnflags"    "1"
+                "OnStartTouch"  "!activator,SetFogController,new_fog,0,-1"
+            }
+		}
+		AmbinetSounds
+		{
+            
+            ambient_generic
+			{
+				"targetname"            "zombie_moan"
+				"health"                "10"
+				"message"               "ambient/creatures/town_moan1.wav"
+				"pitch"                 "100"
+				"spawnflags"            "49"
+			}
+            ambient_generic
+			{
+				"targetname"            "zombie_moan"
+				"health"                "10"
+				"message"               "ambient/creatures/town_moan1.wav"
+				"pitch"                 "100"
+				"spawnflags"            "49"
+			}
+            
+            ambient_generic
+			{
+				"targetname"            "zombie_call"
+				"health"                "10"
+				"message"               "ambient/creatures/town_zombie_call1.wav"
+				"pitch"                 "100"
+				"spawnflags"            "49"
+			}
+            ambient_generic
+			{
+				"targetname"            "zombie_call2"
+				"health"                "10"
+				"message"               "ambient/creatures/town_zombie_call1.wav"
+				"pitch"                 "90"
+				"spawnflags"            "49"
+			}
+            ambient_generic
+			{
+				"targetname"            "zombie_call3"
+				"health"                "10"
+				"message"               "ambient/creatures/town_zombie_call1.wav"
+				"pitch"                 "80"
+				"spawnflags"            "49"
+			}
+            logic_case
+            {
+                "targetname"            "zombiecall"
+
+                "OnCase01"              "zombie_call,PlaySound,,0,-1"
+                "OnCase01"              "zombie_moan,PlaySound,,6,-1"
+                
+                "OnCase02"              "zombie_call2,PlaySound,,0,-1"
+                "OnCase02"              "zombie_moan,PlaySound,,6,-1"
+
+                "OnCase03"              "zombie_call3,PlaySound,,0,-1"
+                "OnCase03"              "zombie_moan,PlaySound,,6,-1"
+				
+                "OnCase04"              "zombie_moan,PlaySound,,0,-1"
+            }
+            logic_timer
+            {
+                "targetname"            "zombiecall_ambient"
+                "UseRandomTime"         "1"
+                "LowerRandomBound"      "35"
+                "UpperRandomBound"      "55"
+                "spawnflags"            "0"
+
+                "OnTimer"               "zombiecall,PickRandom,,0,-1"
+            }
+		}
+		sawblade_projectile
+		{
+			prop_dynamic
+			{
+				"origin" "0 0 0"
+				"angles" "0 0 90"
+				"model"  "models/props_forest/saw_blade.mdl"
+				"disableshadows" "1"
+				"skin" "1"
+				"solid" "0"
+				"DisableBoneFollowers" "1"
+			}
+		}	
+		resupply_locker
+		{  
+			NoFixup 1
+			prop_dynamic
+			{
+				"targetname" "locker_model"
+				"model""models/props_medieval/medieval_resupply.mdl"
+				"solid" "6"
+				"disableshadows" "1"
+
+			}
+			func_regenerate
+            {
+                "targetname" "givemelife"
+                "associatedmodel" "locker_model"
+                "TeamNum" "2"
+				"mins" "-40 -96 -40"
+				"maxs" "80 96 168"
+                "OnStartTouchAll" "locker_model,SetAnimation,open,0,-1"
+                "OnEndTouchAll" "locker_model,SetAnimation,close,0,-1"
+            }
+			trigger_push
+            {
+                "targetname" "donottouchme"
+				"filtername" "filter_redteam"
+				"origin" "0 0 120"
+				"mins" "-64 -64 -24"
+				"maxs" "64 64 64"
+				"pushdir" "0 0 0"
+				"spawnflags" "1"
+				"speed" "500"
+				"StartDisabled" "1"
+            }
+		}
+	}
+	
+	SpawnTemplate
+	{
+	    Name resupply_locker
+		Origin "3019 605 14"
+	}
+	
+	PlayerShootTemplate
+	{
+		Name sawblade_projectile //Name of the template
+		AttachToProjectile 1 //If set, the template is spawned as a child of the projectile being fired. Incompatible with overrideshoot
+		ItemName "Sawblade Shooter" //Can be specified to limit to a specific weapon
+	}
+	
+    // Wave 1, regular zombos
+	Wave
+	{
+    	StartWaveOutput
+		{
+	    	Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+    		Target wave_finished_relay
+			Action trigger
+		}
+		Explanation
+		{
+		    Line "{7A06A1}Welcome to Darkness Falls!"
+			Line "{7A06A1}A Plague has swept through the area..."
+			Line "{red}NOTE : Switching mission from this one will cause a server crash."
+			Line "{red}Hiding won't do good for you, your spawn isn't safe anymore."
+		}
+		RedTeamWipeCausesWaveLoss 1
+		
+		WaveSpawn
+		{
+		    Name "wave01"
+		    TotalCount 40
+			SpawnCount 1
+			MaxActive 10
+			
+			Where spawnbot_new
+			
+			WaitBetweenSpawns 0.5
+			
+			TotalCurrency 200
+			FirstSpawnWarningSound "#music/hl2_song8.mp3"
+			
+			RandomChoice
+			{
+			    TFBot
+				{
+		    	    Class Scout
+					Skill Expert
+					ClassIcon heavy_zombie_lite
+					Name "Zombie"
+					
+					Action Mobber
+					
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					
+					UseHumanModel 1
+					Item "Zombie Scout"
+					Item "Baseball Bill's Sports Shine"
+					Item "The Bat Outta Hell"
+					
+					ItemAttributes
+					{
+			    		ItemName "The Bat Outta Hell"
+						"custom kill icon" "unarmed_combat"
+						"custom hit sound" "npc/zombie/claw_strike1.wav"
+						"is invisible" 1
+						"damage penalty" 0.44
+					}
+					
+					CharacterAttributes
+					{
+				        "move speed penalty" 0.75
+						"voice pitch scale" 0
+					}
+					
+					PainSound "=80|physics/flesh/flesh_squishy_impact_hard3.wav"
+					DeathSound "npc/zombie/zombie_die3.wav"
+				}
+				TFBot
+				{
+				    Class Heavy
+					Skill Expert
+					ClassIcon heavy_zombie_lite
+					Name "Zombie"
+					
+					Action Mobber
+					
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					
+					UseHumanModel 1
+					Item "Zombie Heavy"
+					Item "The Bat Outta Hell"
+					
+					ItemAttributes
+					{
+			    		ItemName "The Bat Outta Hell"
+						"custom kill icon" "unarmed_combat"
+						"custom hit sound" "npc/zombie/claw_strike1.wav"
+						"is invisible" 1
+						"damage penalty" 0.44
+					}
+					
+					CharacterAttributes
+					{
+				        "move speed penalty" 0.75
+						"voice pitch scale" 0
+					}
+					
+					PainSound "=80|physics/flesh/flesh_squishy_impact_hard2.wav"
+					DeathSound "npc/zombie/zombie_die1.wav"
+				}
+				TFBot
+				{
+				    Class Pyro
+					Skill Expert
+					ClassIcon heavy_zombie_lite
+					Name "Zombie"
+					
+					Action Mobber
+					
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					
+					UseHumanModel 1
+					Item "Zombie Pyro"
+					Item "The Bat Outta Hell"
+					
+					ItemAttributes
+					{
+			    		ItemName "The Bat Outta Hell"
+						"custom kill icon" "unarmed_combat"
+						"custom hit sound" "npc/zombie/claw_strike1.wav"
+						"is invisible" 1
+						"damage penalty" 0.44
+					}
+					
+					CharacterAttributes
+					{
+				        "move speed penalty" 0.75
+						"voice pitch scale" 0
+					}
+					
+					PainSound "=80|physics/flesh/flesh_squishy_impact_hard1.wav"
+					DeathSound "npc/zombie/zombie_die2.wav"
+				}
+				TFBot
+				{
+				    Class Soldier
+					Skill Expert
+					ClassIcon heavy_zombie_lite
+					Name "Zombie"
+					
+					Action Mobber
+					
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					
+					UseHumanModel 1
+					Item "Zombie Soldier"
+					Item "The Bat Outta Hell"
+					
+					ItemAttributes
+					{
+			    		ItemName "The Bat Outta Hell"
+						"custom kill icon" "unarmed_combat"
+						"custom hit sound" "npc/zombie/claw_strike1.wav"
+						"is invisible" 1
+						"damage penalty" 0.44
+					}
+					
+					CharacterAttributes
+					{
+				        "move speed penalty" 0.75
+						"voice pitch scale" 0
+					}
+					
+					PainSound "=80|physics/flesh/flesh_squishy_impact_hard3.wav"
+					DeathSound "npc/zombie/zombie_die2.wav"
+				}
+				TFBot
+				{
+				    Class Sniper
+					Skill Expert
+					ClassIcon heavy_zombie_lite
+					Name "Zombie"
+					
+					Action Mobber
+					
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					
+					UseHumanModel 1
+					Item "Zombie Sniper"
+					Item "The Bat Outta Hell"
+					
+					ItemAttributes
+					{
+			    		ItemName "The Bat Outta Hell"
+						"custom kill icon" "unarmed_combat"
+						"custom hit sound" "npc/zombie/claw_strike1.wav"
+						"is invisible" 1
+						"damage penalty" 0.44
+					}
+					
+					CharacterAttributes
+					{
+				        "move speed penalty" 0.75
+						"voice pitch scale" 0
+					}
+					
+					PainSound "=80|physics/flesh/flesh_squishy_impact_hard1.wav"
+					DeathSound "npc/zombie/zombie_die1.wav"
+				}
+			}
+		}
+		
+		WaveSpawn
+		{
+		    Name "wave02_intro"
+		    TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			
+			Where spawnbot_left
+			
+			TotalCurrency 50
+			
+			WaitForAllSpawned "wave01"
+			StartWaveWarningSound "#music/hl2_song7.mp3"
+			
+			TFBot
+			{
+			    Template T_TFBot_Brute
+			}
+		}
+		
+		WaveSpawn
+		{
+		    Name "wave02_intro"
+		    TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			
+			Where spawnbot_right
+			
+			TotalCurrency 50
+			
+			WaitForAllSpawned "wave01"
+			
+			TFBot
+			{
+			    Template T_TFBot_Brute
+			}
+		}
+		
+		WaveSpawn
+		{
+		    Name "wave02"
+		    TotalCount 3
+			MaxActive 3
+			SpawnCount 1
+			
+			Where spawnbot_new
+			
+			TotalCurrency 150
+			
+			WaitForAllSpawned "wave02_intro"
+			WaitBeforeStarting 20
+			WaitBetweenSpawns 10
+			
+			TFBot
+			{
+			    Template T_TFBot_Brute
+			}
+		}
+		
+		WaveSpawn
+		{
+		    Name "wave02"
+			TotalCount 40
+			MaxActive 10
+			SpawnCount 1
+			
+			Where spawnbot_new
+			
+			WaitForAllSpawned "wave02_intro"
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 0.75
+			TotalCurrency 100
+			
+			RandomChoice
+			{
+			    TFBot
+				{
+		    	    Class Scout
+					Skill Expert
+					ClassIcon heavy_zombie_lite
+					Name "Zombie"
+					
+					Action Mobber
+					
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					
+					UseHumanModel 1
+					Item "Zombie Scout"
+					Item "Baseball Bill's Sports Shine"
+					Item "The Bat Outta Hell"
+					
+					ItemAttributes
+					{
+			    		ItemName "The Bat Outta Hell"
+						"custom kill icon" "unarmed_combat"
+						"custom hit sound" "npc/zombie/claw_strike1.wav"
+						"is invisible" 1
+						"damage penalty" 0.44
+					}
+					
+					CharacterAttributes
+					{
+				        "move speed penalty" 0.75
+						"voice pitch scale" 0
+					}
+					
+					PainSound "=80|physics/flesh/flesh_squishy_impact_hard3.wav"
+					DeathSound "npc/zombie/zombie_die3.wav"
+				}
+				TFBot
+				{
+				    Class Heavy
+					Skill Expert
+					ClassIcon heavy_zombie_lite
+					Name "Zombie"
+					
+					Action Mobber
+					
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					
+					UseHumanModel 1
+					Item "Zombie Heavy"
+					Item "The Bat Outta Hell"
+					
+					ItemAttributes
+					{
+			    		ItemName "The Bat Outta Hell"
+						"custom kill icon" "unarmed_combat"
+						"custom hit sound" "npc/zombie/claw_strike1.wav"
+						"is invisible" 1
+						"damage penalty" 0.44
+					}
+					
+					CharacterAttributes
+					{
+				        "move speed penalty" 0.75
+						"voice pitch scale" 0
+					}
+					
+					PainSound "=80|physics/flesh/flesh_squishy_impact_hard2.wav"
+					DeathSound "npc/zombie/zombie_die1.wav"
+				}
+				TFBot
+				{
+				    Class Pyro
+					Skill Expert
+					ClassIcon heavy_zombie_lite
+					Name "Zombie"
+					
+					Action Mobber
+					
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					
+					UseHumanModel 1
+					Item "Zombie Pyro"
+					Item "The Bat Outta Hell"
+					
+					ItemAttributes
+					{
+			    		ItemName "The Bat Outta Hell"
+						"custom kill icon" "unarmed_combat"
+						"custom hit sound" "npc/zombie/claw_strike1.wav"
+						"is invisible" 1
+						"damage penalty" 0.44
+					}
+					
+					CharacterAttributes
+					{
+				        "move speed penalty" 0.75
+						"voice pitch scale" 0
+					}
+					
+					PainSound "=80|physics/flesh/flesh_squishy_impact_hard1.wav"
+					DeathSound "npc/zombie/zombie_die2.wav"
+				}
+				TFBot
+				{
+				    Class Soldier
+					Skill Expert
+					ClassIcon heavy_zombie_lite
+					Name "Zombie"
+					
+					Action Mobber
+					
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					
+					UseHumanModel 1
+					Item "Zombie Soldier"
+					Item "The Bat Outta Hell"
+					
+					ItemAttributes
+					{
+			    		ItemName "The Bat Outta Hell"
+						"custom kill icon" "unarmed_combat"
+						"custom hit sound" "npc/zombie/claw_strike1.wav"
+						"is invisible" 1
+						"damage penalty" 0.44
+					}
+					
+					CharacterAttributes
+					{
+				        "move speed penalty" 0.75
+						"voice pitch scale" 0
+					}
+					
+					PainSound "=80|physics/flesh/flesh_squishy_impact_hard3.wav"
+					DeathSound "npc/zombie/zombie_die2.wav"
+				}
+				TFBot
+				{
+				    Class Sniper
+					Skill Expert
+					ClassIcon heavy_zombie_lite
+					Name "Zombie"
+					
+					Action Mobber
+					
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					
+					UseHumanModel 1
+					Item "Zombie Sniper"
+					Item "The Bat Outta Hell"
+					
+					ItemAttributes
+					{
+			    		ItemName "The Bat Outta Hell"
+						"custom kill icon" "unarmed_combat"
+						"custom hit sound" "npc/zombie/claw_strike1.wav"
+						"is invisible" 1
+						"damage penalty" 0.44
+					}
+					
+					CharacterAttributes
+					{
+				        "move speed penalty" 0.75
+						"voice pitch scale" 0
+					}
+					
+					PainSound "=80|physics/flesh/flesh_squishy_impact_hard1.wav"
+					DeathSound "npc/zombie/zombie_die1.wav"
+				}
+			}
+		}
+		
+		WaveSpawn
+		{
+		    Name "wave02"
+			TotalCount 30
+			MaxActive 8
+			SpawnCount 1
+			
+			Where spawnbot_wall_left
+			Where spawnbot_right
+			
+			WaitForAllSpawned "wave02_intro"			
+			WaitBeforeStarting 15
+			WaitBetweenSpawns 1
+			TotalCurrency 150
+			
+			RandomChoice
+			{
+			    TFBot
+				{
+				    Class Sniper
+					Skill Hard
+					ClassIcon heavy_zombie_lite
+					Name "Armed Zombie"
+					
+					Action Mobber
+					
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					
+					UseHumanModel 1
+					Item "Zombie Sniper"
+					
+					CharacterAttributes
+					{
+				        "move speed penalty" 0.75
+						"voice pitch scale" 0
+					}
+					
+					PainSound "=80|physics/flesh/flesh_squishy_impact_hard1.wav"
+					DeathSound "npc/zombie/zombie_die1.wav"				    
+				}
+				TFBot
+				{
+				    Class Pyro
+					Skill Hard
+					ClassIcon heavy_zombie_lite
+					Name "Armed Zombie"
+					
+					Action Mobber
+					
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					
+					UseHumanModel 1
+					Item "Zombie Pyro"
+					
+					CharacterAttributes
+					{
+				        "move speed penalty" 0.75
+						"voice pitch scale" 0
+					}
+					
+					PainSound "=80|physics/flesh/flesh_squishy_impact_hard1.wav"
+					DeathSound "npc/zombie/zombie_die2.wav"
+				}
+			    TFBot
+				{
+		    	    Class Scout
+					Skill Expert
+					ClassIcon heavy_zombie_lite
+					Name "Armed Zombie"
+					
+					Action Mobber
+					
+					WeaponRestrictions MeleeOnly
+					Attributes DisableDodge
+					
+					UseHumanModel 1
+					Item "Zombie Scout"
+					Item "Baseball Bill's Sports Shine"
+					
+					CharacterAttributes
+					{
+				        "move speed penalty" 0.75
+						"voice pitch scale" 0
+					}
+					
+					PainSound "=80|physics/flesh/flesh_squishy_impact_hard3.wav"
+					DeathSound "npc/zombie/zombie_die3.wav"
+				}
+			}
+		}
+	
+	}
+}

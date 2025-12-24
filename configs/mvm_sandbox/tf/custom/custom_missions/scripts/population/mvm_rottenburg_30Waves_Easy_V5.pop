@@ -1,0 +1,5615 @@
+#base robot_30waves.pop
+#base robot_giant.pop
+WaveSchedule
+{
+	StartingCurrency 1000
+	RespawnWaveTime 5
+	CanBotsAttackWhileInSpawnRoom No
+	Advanced 1
+	//MISSION: Sapper Spy
+	Mission
+	{
+		Objective Spy
+		InitialCooldown 30
+		CooldownTime 5
+		DesiredCount 1
+		Where spawnbot
+		TFBot
+		{
+			Template T_TFBot_Spy_Sapper
+		}
+	}
+	//MISSION: Snipers
+	Mission
+	{
+		Objective Sniper
+		InitialCooldown 30
+		CooldownTime 30
+		BeginAtWave 10
+		RunForThisManyWaves 21
+		DesiredCount 1
+		Where spawnbot
+		RandomChoice
+		{
+			TFBot
+			{
+				Template T_TFBot_Sniper_Accurate
+			}
+			TFBot
+			{
+				Template T_TFBot_Sniper_Piss
+			}
+			TFBot
+			{
+				Template T_TFBot_Sniper_Magnum
+			}
+			TFBot
+			{
+				Template T_TFBot_Sniper_RapidFire
+			}
+			TFBot
+			{
+				Template T_TFBot_Sniper_Hitman
+			}
+		}
+	}
+	//Wave 1
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 25
+			MaxActive 19
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			TotalCurrency 2000
+			Where spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Scout_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Base
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Basic
+				}
+			}
+		}
+	}
+	//Wave 2
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 35
+			MaxActive 19
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			TotalCurrency 2000
+			Where spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Scout_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Baseball
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Base
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Minicrit
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Cook
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Caber
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Boxer
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Uber
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Bleeder
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Deadringer
+				}
+			}
+		}
+	}
+	//Wave 3 = Miniboss: Indian Chief
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 500
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Chief_Heavyweapons_Indian
+			}
+		}
+	}
+	//Wave 4
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 180
+			TotalCurrency 500
+			Support 1
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 45
+			MaxActive 19
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			TotalCurrency 2000
+			Where spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Scout_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Baseball
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Force
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Fast
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Base
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Minicrit
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Cook
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_FireLover
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Caber
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Axe
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Boxer
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Wrestler
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Uber
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Kritzkrieg
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Bleeder
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Jarate
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Deadringer
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Ninja
+				}
+			}
+		}
+	}
+	//Wave 5 = Miniboss: Fastest Super Scout
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 180
+			TotalCurrency 500
+			Support 1
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 500
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Chief_Scout_Fast
+			}
+		}
+	}
+	//Wave 6
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 180
+			TotalCurrency 500
+			Support 1
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 180
+			WaitBetweenSpawns 180
+			TotalCurrency 2000
+			Where spawnbot
+			Support 1
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Scout_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoknight_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_CopyPlayer
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 55
+			MaxActive 19
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			TotalCurrency 2000
+			Where spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Scout_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Baseball
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Force
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Fast
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Elf
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Flying
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Base
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Minicrit
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Rocket
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Aura
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Samurai
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Cook
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_FireLover
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_AntiSentry
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Vacuum
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Caber
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Axe
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoknight
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Launcher
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Boxer
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Wrestler
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Gangster
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Iron
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Uber
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Kritzkrieg
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Bonus
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Healer
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Bleeder
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Jarate
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_India
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Deadringer
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Ninja
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Sahara
+				}
+			}
+		}
+	}
+	//Wave 7
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 180
+			TotalCurrency 500
+			Support 1
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 180
+			WaitBetweenSpawns 180
+			TotalCurrency 2000
+			Where spawnbot
+			Support 1
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Scout_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoknight_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_CopyPlayer
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 65
+			MaxActive 19
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			TotalCurrency 2000
+			Where spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Scout_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Baseball
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Force
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Fast
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Elf
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Flying
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Annoying
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Milk
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Fan
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Base
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Minicrit
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Rocket
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Aura
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Samurai
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Nuke
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Cook
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_FireLover
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_AntiSentry
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Vacuum
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Neon
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Caber
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Axe
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoknight
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Launcher
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Boxer
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Wrestler
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Gangster
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Iron
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_LOL
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Armor
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Uber
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Kritzkrieg
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Bonus
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Healer
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Syringe
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Bleeder
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Jarate
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_India
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Crocodile
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_SMG
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Deadringer
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Ninja
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Sahara
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Mage
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Icicle
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Resistant
+				}
+			}
+		}
+	}
+	//Wave 8 = Miniboss: The King Knight
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 180
+			TotalCurrency 500
+			Support 1
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 180
+			WaitBetweenSpawns 180
+			TotalCurrency 2000
+			Where spawnbot
+			Support 1
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Scout_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoknight_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_CopyPlayer
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 2000
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Chief_Demoknight
+			}
+		}
+	}
+	//Wave 9
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 180
+			TotalCurrency 500
+			Support 1
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 180
+			WaitBetweenSpawns 180
+			TotalCurrency 2000
+			Where spawnbot
+			Support 1
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Scout_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoknight_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_CopyPlayer
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 75
+			MaxActive 19
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			TotalCurrency 2000
+			Where spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Scout_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Baseball
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Force
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Fast
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Elf
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Flying
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Annoying
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Milk
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Fan
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Guillotine
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Bonk_Annoying
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Thief
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Base
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Minicrit
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Rocket
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Aura
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Samurai
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Nuke
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Shotgun
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Cook
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_FireLover
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_AntiSentry
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Vacuum
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Neon
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Chaos
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Deflector
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Firework
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Caber
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Axe
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoknight
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Launcher
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Pirate
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Boxer
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Wrestler
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Gangster
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Iron
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_LOL
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Armor
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Shotgun
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Uber
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Kritzkrieg
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Bonus
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Healer
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Syringe
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Regen
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Bleeder
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Jarate
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_India
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Crocodile
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_SMG
+				}
+				TFBot
+				{
+					Template T_TFBot_Bowman
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Deadringer
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Ninja
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Sahara
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Mage
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Icicle
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Gunslinger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 10
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 40
+			TotalCurrency 1000
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Giant_Heavyweapons_Indian
+			}
+		}
+	}
+	//Wave 10
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 180
+			TotalCurrency 500
+			Support 1
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 180
+			WaitBetweenSpawns 180
+			TotalCurrency 2000
+			Where spawnbot
+			Support 1
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Scout_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoknight_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_CopyPlayer
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 85
+			MaxActive 19
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			TotalCurrency 2000
+			Where spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Scout_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Baseball
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Force
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Fast
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Elf
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Flying
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Annoying
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Milk
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Fan
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Guillotine
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Bonk_Annoying
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Thief
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Base
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Minicrit
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Rocket
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Aura
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Samurai
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Nuke
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Shotgun
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Lunar
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Cook
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_FireLover
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_AntiSentry
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Vacuum
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Neon
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Chaos
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Deflector
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Firework
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Astro
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Pusher
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Caber
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Axe
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoknight
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Launcher
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Pirate
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoknight_Jet
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Stickybomb_Marker
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Boxer
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Wrestler
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Gangster
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Iron
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_LOL
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Armor
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Shotgun
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Slowdown
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Uber
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Kritzkrieg
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Bonus
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Healer
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Syringe
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Regen
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Overdose
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Bleeder
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Jarate
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_India
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Crocodile
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_SMG
+				}
+				TFBot
+				{
+					Template T_TFBot_Bowman
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Deadringer
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Ninja
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Sahara
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Mage
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Icicle
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Gunslinger
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Sapper_Super
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Necromancer
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 10
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 40
+			TotalCurrency 1000
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Giant_Heavyweapons_Indian
+			}
+		}
+	}
+	//Wave 11
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 180
+			TotalCurrency 500
+			Support 1
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			TotalCurrency 300
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Giant_Scout_Fast
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			TotalCurrency 300
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Giant_Soldier_Crit
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			TotalCurrency 300
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Giant_Soldier_Spammer
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			TotalCurrency 300
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Giant_Pyro_Flare_Spammer
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			TotalCurrency 300
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Giant_Pyro
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			TotalCurrency 300
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Giant_Demoman
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			TotalCurrency 300
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Giant_Heavyweapons
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			TotalCurrency 300
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Giant_Heavyweapons_Deflector
+			}
+		}
+	}
+	//Wave 12
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 180
+			TotalCurrency 500
+			Support 1
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 180
+			WaitBetweenSpawns 180
+			TotalCurrency 2000
+			Where spawnbot
+			Support 1
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Scout_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoknight_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_CopyPlayer
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 95
+			MaxActive 19
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			TotalCurrency 2000
+			Where spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Scout_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Baseball
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Force
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Fast
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Elf
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Flying
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Annoying
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Milk
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Fan
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Guillotine
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Bonk_Annoying
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Thief
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Pistol
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Base
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Minicrit
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Rocket
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Aura
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Samurai
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Nuke
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Shotgun
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Lunar
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Samurai_Advanced
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_RocketShotgun_30Waves
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Cook
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_FireLover
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_AntiSentry
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Vacuum
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Neon
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Chaos
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Deflector
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Firework
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Astro
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Pusher
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Hell
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Caber
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Axe
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoknight
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Launcher
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Pirate
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoknight_Jet
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Stickybomb_Marker
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Stickybomb
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Boxer
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Wrestler
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Gangster
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Iron
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_LOL
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Armor
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Shotgun
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Slowdown
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Minigun
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Uber
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Kritzkrieg
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Bonus
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Healer
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Syringe
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Regen
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Overdose
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Bleeder
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Jarate
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_India
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Crocodile
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_SMG
+				}
+				TFBot
+				{
+					Template T_TFBot_Bowman
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Deadringer
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Ninja
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Sahara
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Mage
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Icicle
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Gunslinger
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Sapper_Super
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Necromancer
+				}
+			}
+		}
+	}
+	//Wave 13
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 180
+			TotalCurrency 0
+			Support 1
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 180
+			WaitBetweenSpawns 180
+			TotalCurrency 0
+			Where spawnbot
+			Support 1
+			TFBot
+			{
+				Template T_TFBot_Scout_CopyPlayer
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 10
+			MaxActive 10
+			SpawnCount 10
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Scout_Basic
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 0
+			TotalCurrency 10000
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Chief_Scout_Legendary
+				Health 9500
+			}
+		}
+	}
+	//Wave 14
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 180
+			TotalCurrency 500
+			Support 1
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 180
+			WaitBetweenSpawns 180
+			TotalCurrency 2000
+			Where spawnbot
+			Support 1
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Scout_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoknight_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_CopyPlayer
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 100
+			MaxActive 19
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			TotalCurrency 2000
+			Where spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Scout_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Baseball
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Force
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Fast
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Elf
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Flying
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Annoying
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Milk
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Fan
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Guillotine
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Bonk_Annoying
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Thief
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Pistol
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Scattergun
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Base
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Minicrit
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Rocket
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Aura
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Samurai
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Nuke
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Shotgun
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Lunar
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Samurai_Advanced
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_RocketShotgun_30Waves
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Painis
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Heal
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Unknown
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Curse
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Bison
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Cook
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_FireLover
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_AntiSentry
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Vacuum
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Neon
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Chaos
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Deflector
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Firework
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Astro
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Pusher
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Hell
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Backburner
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_LongBurn
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Caber
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Axe
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoknight
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Launcher
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Pirate
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoknight_Jet
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Stickybomb_Marker
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Stickybomb
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Boxer
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Wrestler
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Gangster
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Iron
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_LOL
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Armor
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Shotgun
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Slowdown
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Minigun
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Goldengun
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Fast
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Dragon
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Uber
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Kritzkrieg
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Bonus
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Healer
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Syringe
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Regen
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Overdose
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Bleeder
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Jarate
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_India
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Crocodile
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_SMG
+				}
+				TFBot
+				{
+					Template T_TFBot_Bowman
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Deadringer
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Ninja
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Sahara
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Mage
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Icicle
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Gunslinger
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Sapper_Super
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Necromancer
+				}
+			}
+		}
+	}
+	//Wave 15
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 180
+			TotalCurrency 0
+			Support 1
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 180
+			WaitBetweenSpawns 180
+			TotalCurrency 0
+			Where spawnbot
+			Support 1
+			TFBot
+			{
+				Template T_TFBot_Sniper_CopyPlayer
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 10
+			MaxActive 10
+			SpawnCount 10
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Sniper_Basic
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 0
+			TotalCurrency 10000
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Chief_Sniper_Legendary
+				Health 16000
+			}
+		}
+	}
+	//Wave 16
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 180
+			TotalCurrency 500
+			Support 1
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 180
+			WaitBetweenSpawns 180
+			TotalCurrency 2000
+			Where spawnbot
+			Support 1
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Scout_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoknight_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_CopyPlayer
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 110
+			MaxActive 19
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			TotalCurrency 2000
+			Where spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Scout_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Baseball
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Force
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Fast
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Elf
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Flying
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Annoying
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Milk
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Fan
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Guillotine
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Bonk_Annoying
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Thief
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Pistol
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Scattergun
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Stunner
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Scout_Fast
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Shinobi
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Base
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Minicrit
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Rocket
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Aura
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Samurai
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Nuke
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Shotgun
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Lunar
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Samurai_Advanced
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_RocketShotgun_30Waves
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Painis
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Heal
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Unknown
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Curse
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Bison
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Crit
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Cook
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_FireLover
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_AntiSentry
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Vacuum
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Neon
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Chaos
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Deflector
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Firework
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Astro
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Pusher
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Hell
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Backburner
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_LongBurn
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Pyro
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Caber
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Axe
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoknight
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Launcher
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Pirate
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoknight_Jet
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Stickybomb_Marker
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Stickybomb
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Demoman
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_LochNLoad
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Shadow
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Boxer
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Wrestler
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Gangster
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Iron
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_LOL
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Armor
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Shotgun
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Slowdown
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Minigun
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Goldengun
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Fast
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Dragon
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Uber
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Kritzkrieg
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Bonus
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Healer
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Syringe
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Regen
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Overdose
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Bleeder
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Jarate
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_India
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Crocodile
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_SMG
+				}
+				TFBot
+				{
+					Template T_TFBot_Bowman
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Sniper
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Deadringer
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Ninja
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Sahara
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Mage
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Icicle
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Gunslinger
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Sapper_Super
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Necromancer
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Spy
+				}
+			}
+		}
+	}
+	//Wave 17
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 180
+			TotalCurrency 0
+			Support 1
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 180
+			WaitBetweenSpawns 180
+			TotalCurrency 0
+			Where spawnbot
+			Support 1
+			TFBot
+			{
+				Template T_TFBot_Pyro_CopyPlayer
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 10
+			MaxActive 10
+			SpawnCount 10
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Pyro_Basic
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 0
+			TotalCurrency 10000
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Chief_Pyro_Legendary
+				Health 40000
+			}
+		}
+	}
+	//Wave 18
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 180
+			TotalCurrency 500
+			Support 1
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 180
+			WaitBetweenSpawns 180
+			TotalCurrency 2000
+			Where spawnbot
+			Support 1
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Scout_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoknight_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_CopyPlayer
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 120
+			MaxActive 19
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			TotalCurrency 2000
+			Where spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Scout_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Baseball
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Force
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Fast
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Elf
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Flying
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Annoying
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Milk
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Fan
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Guillotine
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Bonk_Annoying
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Thief
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Pistol
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Scattergun
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Stunner
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Shinobi
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Scout_Fast
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Base
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Minicrit
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Rocket
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Aura
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Samurai
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Nuke
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Shotgun
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Lunar
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Samurai_Advanced
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_RocketShotgun_30Waves
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Painis
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Heal
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Unknown
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Curse
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Bison
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Crit
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Cook
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_FireLover
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_AntiSentry
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Vacuum
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Neon
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Chaos
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Deflector
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Firework
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Astro
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Pusher
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Hell
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Backburner
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_LongBurn
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Pyro
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Solar
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Caber
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Axe
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoknight
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Launcher
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Pirate
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoknight_Jet
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Stickybomb_Marker
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Stickybomb
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Demoman
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_LochNLoad
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Shadow
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Boxer
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Wrestler
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Gangster
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Iron
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_LOL
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Armor
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Shotgun
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Slowdown
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Minigun
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Goldengun
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Fast
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Dragon
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Uber
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Kritzkrieg
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Bonus
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Healer
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Syringe
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Regen
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Overdose
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Bleeder
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Jarate
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_India
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Crocodile
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_SMG
+				}
+				TFBot
+				{
+					Template T_TFBot_Bowman
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Sniper
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Christian
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Deadringer
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Ninja
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Sahara
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Mage
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Icicle
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Gunslinger
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Sapper_Super
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Necromancer
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Spy
+				}
+			}
+		}
+	}
+	//Wave 19
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 180
+			TotalCurrency 0
+			Support 1
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 180
+			WaitBetweenSpawns 180
+			TotalCurrency 0
+			Where spawnbot
+			Support 1
+			TFBot
+			{
+				Template T_TFBot_Spy_CopyPlayer
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 10
+			MaxActive 10
+			SpawnCount 10
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Spy_Basic
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 0
+			TotalCurrency 10000
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Chief_Spy_Legendary
+				Health 2000
+			}
+		}
+	}
+	//Wave 20
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 180
+			TotalCurrency 500
+			Support 1
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 180
+			WaitBetweenSpawns 180
+			TotalCurrency 2000
+			Where spawnbot
+			Support 1
+			TFBot
+			{
+				Template T_TFBot_Scout_CopyPlayer
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 125
+			MaxActive 19
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			TotalCurrency 5000
+			Where spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Scout_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Baseball
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Force
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Fast
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Elf
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Flying
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Annoying
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Milk
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Fan
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Guillotine
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Bonk_Annoying
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Thief
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Pistol
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Scattergun
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Stunner
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Shinobi
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Scout_Fast
+				}
+			}
+		}
+	}
+	//Wave 21
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 180
+			TotalCurrency 0
+			Support 1
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 180
+			WaitBetweenSpawns 180
+			TotalCurrency 0
+			Where spawnbot
+			Support 1
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Demoman_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoknight_CopyPlayer
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 10
+			MaxActive 10
+			SpawnCount 10
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Demoman_Basic
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 0
+			TotalCurrency 10000
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Chief_Demoman_Legendary
+				Health 40000
+			}
+		}
+	}
+	//Wave 22
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 180
+			TotalCurrency 500
+			Support 1
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 180
+			WaitBetweenSpawns 180
+			TotalCurrency 2000
+			Where spawnbot
+			Support 1
+			TFBot
+			{
+				Template T_TFBot_Sniper_CopyPlayer
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 125
+			MaxActive 19
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			TotalCurrency 5000
+			Where spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Sniper_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Bleeder
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Jarate
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_India
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Crocodile
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_SMG
+				}
+				TFBot
+				{
+					Template T_TFBot_Bowman
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Sniper
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Christian
+				}
+			}
+		}
+	}
+	//Wave 23
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 180
+			TotalCurrency 0
+			Support 1
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 180
+			WaitBetweenSpawns 180
+			TotalCurrency 0
+			Where spawnbot
+			Support 1
+			TFBot
+			{
+				Template T_TFBot_Heavy_CopyPlayer
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 10
+			MaxActive 10
+			SpawnCount 10
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Heavy_Basic
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 0
+			TotalCurrency 10000
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Chief_Heavyweapons_Legendary
+				Health 55000
+			}
+		}
+	}
+	//Wave 24
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 180
+			TotalCurrency 500
+			Support 1
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 180
+			WaitBetweenSpawns 180
+			TotalCurrency 2000
+			Where spawnbot
+			Support 1
+			TFBot
+			{
+				Template T_TFBot_Spy_CopyPlayer
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 125
+			MaxActive 19
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			TotalCurrency 5000
+			Where spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Spy_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Deadringer
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Ninja
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Sahara
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Mage
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Icicle
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Gunslinger
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Sapper_Super
+				}
+				TFBot
+				{
+					Template T_TFBot_Spy_Necromancer
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Spy
+				}
+			}
+		}
+	}
+	//Wave 25
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 180
+			TotalCurrency 500
+			Support 1
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 180
+			WaitBetweenSpawns 180
+			TotalCurrency 2000
+			Where spawnbot
+			Support 1
+			TFBot
+			{
+				Template T_TFBot_Medic_CopyPlayer
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 125
+			MaxActive 19
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			TotalCurrency 5000
+			Where spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Medic_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Uber
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Kritzkrieg
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Bonus
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Healer
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Syringe
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Regen
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Overdose
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic
+				}
+			}
+		}
+	}
+	//Wave 26
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 180
+			TotalCurrency 0
+			Support 1
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 180
+			WaitBetweenSpawns 180
+			TotalCurrency 0
+			Where spawnbot
+			Support 1
+			TFBot
+			{
+				Template T_TFBot_Medic_CopyPlayer
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 2
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 10000
+			Where spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Heavy_TestSubject
+				}
+				TFBot
+				{
+					Template T_TFBot_Chief_Medic_Legendary
+					Health 5000
+				}
+			}
+		}
+	}
+	//Wave 28
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 180
+			TotalCurrency 500
+			Support 1
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 180
+			WaitBetweenSpawns 180
+			TotalCurrency 2000
+			Where spawnbot
+			Support 1
+			TFBot
+			{
+				Template T_TFBot_Pyro_CopyPlayer
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 125
+			MaxActive 19
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			TotalCurrency 5000
+			Where spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Pyro_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Cook
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_FireLover
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_AntiSentry
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Vacuum
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Neon
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Chaos
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Deflector
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Firework
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Astro
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Pusher
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Hell
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Backburner
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_LongBurn
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Pyro
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Solar
+				}
+			}
+		}
+	}
+	//Wave 28
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 180
+			TotalCurrency 500
+			Support 1
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 180
+			WaitBetweenSpawns 180
+			TotalCurrency 2000
+			Where spawnbot
+			Support 1
+			TFBot
+			{
+				Template T_TFBot_Heavy_CopyPlayer
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 125
+			MaxActive 19
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			TotalCurrency 5000
+			Where spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Heavy_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Boxer
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Wrestler
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Gangster
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Iron
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_LOL
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Armor
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Shotgun
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Slowdown
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Minigun
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Goldengun
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Fast
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Dragon
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons
+				}
+			}
+		}
+	}
+	//Wave 29
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 180
+			TotalCurrency 500
+			Support 1
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 180
+			WaitBetweenSpawns 180
+			TotalCurrency 2000
+			Where spawnbot
+			Support 1
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Demoman_CopyPlayer
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoknight_CopyPlayer
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 125
+			MaxActive 19
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			TotalCurrency 5000
+			Where spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Demoman_Basic
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Caber
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Axe
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoknight
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Launcher
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Pirate
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoknight_Jet
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Stickybomb_Marker
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Stickybomb
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Demoman
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_LochNLoad
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Shadow
+				}
+			}
+		}
+	}
+	//Wave 30
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 180
+			TotalCurrency 0
+			Support 1
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 180
+			WaitBetweenSpawns 180
+			TotalCurrency 0
+			Where spawnbot
+			Support 1
+			TFBot
+			{
+				Template T_TFBot_Soldier_CopyPlayer
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 125
+			MaxActive 19
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			TotalCurrency 0
+			Where spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Soldier_Base
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Minicrit
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Resistant
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Rocket
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Aura
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Samurai
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Nuke
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Shotgun
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Lunar
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Samurai_Advanced
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_RocketShotgun_30Waves
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Painis
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Heal
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Unknown
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Curse
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Bison
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Crit
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+			Where spawnbot
+			TFBot
+			{
+				Template T_TFBot_Chief_Soldier_Legendary
+				Health 250000
+			}
+		}
+	}
+}

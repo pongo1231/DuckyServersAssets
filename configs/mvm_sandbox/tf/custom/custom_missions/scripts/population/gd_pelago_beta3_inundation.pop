@@ -1,0 +1,847 @@
+//Beta 2
+
+WaveSchedule
+{
+	StartingCurrency 2000
+	CanBotsAttackWhileInSpawnRoom No
+	RespawnWaveTime 3
+	FixedRespawnWaveTime Yes
+	//AddSentryBusterWhenDamageDealtExceeds 500
+	//AddSentryBusterWhenKillCountExceeds 2
+
+//###############
+//## TEMPLATES ##
+//###############
+	Templates
+	{
+	
+		Unworthy_Sniper		////////////////////////////////////////////////////////[ Unworthy_Sniper ]//////////////
+		{
+			Class Sniper
+			Name "Unworthy Sniper"
+			ClassIcon sniper_bow
+			WeaponRestrictions PrimaryOnly
+			Scale 0.75
+			BehaviorModifiers push
+			
+			Item "The Huntsman"
+			ItemAttributes
+			{
+				ItemName "The Huntsman"
+				"damage bonus" 0.5
+			}
+			
+			CharacterAttributes
+			{
+				"head scale" 1.5
+				"move speed bonus" 0.5
+			}
+		}
+		
+		Scout_Simple		////////////////////////////////////////////////////////[ Scout_Simple ]//////////////
+		{
+			Class Scout
+			Name "Scout"
+			Skill Easy
+			Health 100
+			BehaviorModifiers push
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+			}
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_SCATTERGUN"
+				"fire rate bonus" 1.5 //fire slower
+			}
+		}
+		
+		Heavy_Melee		////////////////////////////////////////////////////////[ Heavy_Melee ]//////////////
+		{
+			Class Heavyweapons
+			Name "Heavy Fists Guy"
+			Skill Expert
+			Health 300
+			BehaviorModifiers push
+			ClassIcon heavy_steelfist
+			WeaponRestrictions MeleeOnly
+			Item "Fists of Steel"
+		}
+		
+		Demolitor		////////////////////////////////////////////////////////[ Demolitor ]//////////////
+		{
+			Class Demoman
+			Name "Demolitor"
+			Health 700
+			ClassIcon demo_burst
+			WeaponRestrictions PrimaryOnly
+			Attributes HoldFireUntilFullReload
+			Attributes AirChargeOnly
+			BehaviorModifiers push
+			Scale 1.25
+			Item "Scotch Bonnet"
+			CharacterAttributes
+			{
+				"charge time increased" 2
+				"charge recharge rate increased" 0.5
+				"increased jump height" 1.5
+				"move speed bonus" 0.25
+			}
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_GRENADELAUNCHER"
+				"faster reload rate" 3
+				"fire rate bonus" 0.05
+				"clip size penalty" 0.5
+				"projectile spread angle penalty" 3
+				"Projectile speed increased"	0.5
+			}
+			Item "The Splendid Screen"
+			ItemAttributes
+			{
+				ItemName "The Splendid Screen"
+				"Attack not cancel charge" 1
+			}
+			
+		}
+		
+		Pyro_Flaregun		////////////////////////////////////////////////////////[ Pyro_Flaregun ]//////////////
+		{
+			Class Pyro
+			Name "Flare Pyro"
+			Skill Normal
+			BehaviorModifiers push
+			ClassIcon pyro_flare
+			Item "The Flare Gun"
+			ItemAttributes
+			{
+				ItemName "The Flare Gun"
+				"faster reload rate" 0.6
+				"damage bonus" 0.5
+			}
+			WeaponRestrictions SecondaryOnly
+		}
+		
+		Pyro_Simple		////////////////////////////////////////////////////////[ Pyro_Simple ]//////////////
+		{
+			Class Pyro
+			Skill Normal
+			BehaviorModifiers push
+			WeaponRestrictions PrimaryOnly
+		}
+		
+		Pyro_Giant		////////////////////////////////////////////////////////[ Pyro_Giant ]//////////////
+		{
+			Class Pyro
+			Skill Normal
+			BehaviorModifiers push
+			WeaponRestrictions PrimaryOnly
+			ClassIcon pyro_giant
+			Skill Expert
+			Health 3000
+			Scale 2.5
+			Attributes AlwaysFireWeapon
+			Attributes Miniboss
+			Attributes UseBossHealthBar
+			Tag "Giant"
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"override footstep sound set" 4
+			}
+		}
+		
+		Demoknight_Giant //T_TFBot_Giant_DemoMan_PrinceTavish // Fast Moving DemoKnight ** // Modified to be slower
+		{
+			Class Demoman
+			ClassIcon demoknight_giant
+			Name "Giant Demoknight"
+			Skill Expert
+			Health 3500
+			Item "Prince Tavish's Crown"
+			Item "The Chargin' Targe"
+			Item "The Eyelander"
+			Item "Ali Baba's Wee Booties"
+			WeaponRestrictions MeleeOnly
+			Attributes Miniboss
+			Attributes UseBossHealthBar
+			BehaviorModifiers push
+			Tag "Giant"
+			ItemAttributes
+			{
+				ItemName "The Eyelander"
+				"critboost on kill" 3
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.3
+				"damage force reduction" 0.5
+				"airblast vulnerability multiplier" 0.5
+				"override footstep sound set" 4
+			}
+		}
+		
+		Soldier_Liberty		////////////////////////////////////////////////////////[ Soldier_Liberty ]//////////////
+		{
+			Class Soldier
+			Skill Easy
+			Health 200
+			BehaviorModifiers push
+			WeaponRestrictions PrimaryOnly
+			ClassIcon soldier
+			Item "The Liberty Launcher"
+			ItemAttributes
+			{
+				ItemName "The Liberty Launcher"
+				"damage bonus" 0.5
+				"faster reload rate" 2
+				"dmg bonus vs buildings" 2
+				"fire rate bonus" 2
+			}
+		}
+		
+		Heavy_Gun		////////////////////////////////////////////////////////[ Heavy_Gun ]//////////////
+		{
+			Class Heavyweapons
+			BehaviorModifiers push
+			Name "Heavy"
+			Health 300
+			Skill Normal
+			Item "The Purity Fist"
+			Item "The Brass Beast"
+			ItemAttributes
+			{
+				ItemName "The Brass Beast"
+				"damage bonus"	0.9
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.75
+			}
+		}
+		
+		Father_Demolitor	////////////////////////////////////////////////////////[ Father_Demolitor ]//////////////
+		{
+			Class Demoman
+			Name "Father Demolitor"
+			Health 6000
+			Skill Normal
+			ClassIcon demo_bomber
+			WeaponRestrictions PrimaryOnly
+			Attributes HoldFireUntilFullReload
+			Attributes AlwaysCrit
+			Attributes Miniboss
+			Attributes UseBossHealthBar
+			Scale 5
+			MaxVisionRange 5000
+			Item "Scotch Bonnet"
+			Tag "Giant"
+			CharacterAttributes
+			{
+				"move speed bonus" 0.001
+			}
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_GRENADELAUNCHER"
+				"faster reload rate" 0.3
+				"fire rate bonus" 0.1
+				"clip size penalty" 5
+				"projectile spread angle penalty" 1
+				"Projectile speed increased"	5
+				"fuse bonus" 3
+				"blast radius increased" 2
+				"grenade no bounce" 1
+			}
+		}
+		
+	}
+	
+	
+
+
+
+	Wave
+	{
+	
+//##############
+//## WAVE (1) ##
+//##############
+		
+		WaveSpawn		////////////////////////////////////////////////////////[ wave1_snipers ]//////////////
+		{
+			TotalCurrency 200
+			Name "wave1_snipers"
+			TFBot
+			{
+				Template Unworthy_Sniper
+				Tag "scrappable"
+			}
+			
+			TotalCount 10
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			
+			Where spawnbot_a
+		}
+		
+		WaveSpawn		////////////////////////////////////////////////////////[ wave1_demolitors ]//////////////
+		{
+			TotalCurrency 300
+			Name "wave1_demolitors"
+			TFBot
+			{
+				Template Demolitor
+			}
+			
+			TotalCount 5
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			
+			Where spawnbot_a
+		}
+		
+		WaveSpawn		////////////////////////////////////////////////////////[ wave1_heavies ]//////////////
+		{
+			TotalCurrency 200
+			Name "wave1_heavies"
+			WaitForAllSpawned "wave1_snipers"			//--- Wait Spawned wave1_snipers ---
+			TFBot
+			{
+				Template Heavy_Melee
+			}
+			
+			TotalCount 5
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			
+			Where spawnbot_a
+			FirstSpawnOutput								//## Trigger Rocket A
+			{
+				Target rocket_resistance_spawner_a
+				Action PickRandom
+			}
+			DoneOutput										//## Trigger Alarm B,C
+			{
+				Target alarm_preparation_trigger_b_c
+				Action Trigger
+			}
+		}
+		
+//##############
+//## WAVE (2) ##
+//##############
+		
+				
+		WaveSpawn		////////////////////////////////////////////////////////[ wave2_scouts ]//////////////
+		{
+			TotalCurrency 200
+			Name "wave2_scouts"
+			WaitForAllDead "wave1_heavies"				//--- Wait Dead wave1_heavies ---
+			WaitBeforeStarting 30						// Pause 30 sec
+			MaxActive 4
+			TFBot
+			{
+				Template Scout_Simple
+			}
+			
+			TotalCount 15
+			WaitBetweenSpawns 3
+			
+			Where spawnbot_b
+		}
+		
+		WaveSpawn		////////////////////////////////////////////////////////[ wave2_demolitors ]//////////////
+		{
+			TotalCurrency 200
+			Name "wave2_p"
+			WaitForAllSpawned "wave2_pyros"				//--- Wait Spawned wave2_pyros ---
+			TFBot
+			{
+				Template Demolitor
+			}
+			
+			TotalCount 2
+			WaitBetweenSpawns 0
+			
+			Where spawnbot_b
+		}
+		
+		WaveSpawn		////////////////////////////////////////////////////////[ wave2_pyros ]//////////////
+		{
+			TotalCurrency 300
+			Name "wave2_pyros"
+			WaitForAllDead "wave1_heavies"				//--- Wait Dead wave1_heavies ---
+			WaitBeforeStarting 30						// Pause 30 sec
+			MaxActive 9
+			Squad
+			{
+				TFBot
+				{
+					Template Pyro_Simple
+				}
+				TFBot
+				{
+					Template Pyro_Flaregun
+					Tag "scrappable"
+				}
+				TFBot
+				{
+					Template Pyro_Flaregun
+					Tag "scrappable"
+				}
+			}
+			
+			TotalCount 15
+			WaitBetweenSpawns 8
+			
+			Where spawnbot_c
+		}
+		
+		WaveSpawn		////////////////////////////////////////////////////////[ wave2_pyro_boss ]//////////////
+		{
+			TotalCurrency 200
+			Name "wave2_pyro_boss"
+			WaitForAllSpawned "wave2_pyros"				//--- Wait Spawned wave2_pyros ---
+			TFBot
+			{
+				Template Pyro_Giant
+			}
+			
+			TotalCount 1
+			WaitBetweenSpawns 0
+			
+			Where spawnbot_c
+			DoneOutput										//## Trigger Alarm A,B
+			{
+				Target alarm_preparation_trigger_a_b
+				Action Trigger
+			}
+		}
+
+//##############
+//## WAVE (3) ##
+//##############
+				
+		WaveSpawn		////////////////////////////////////////////////////////[ wave3_tank ]//////////////
+		{
+			TotalCount 1
+			WaitForAllDead "wave2_pyro_boss"				//--- Wait Dead wave2_pyro_boss ---
+			WaitBeforeStarting 45							// Pause 45 sec
+			Name "wave3_tank"
+			
+			Tank
+			{	
+				Health 3500
+				Name "wave3_tank"
+				Speed 150
+				Skin 0
+				StartingPathTrackNode "path_track_b_1"
+				
+				OnKilledOutput
+				{
+					Target tank_resistance_destroyed_b
+					Action Trigger
+				}
+				
+			}
+		}
+		
+		WaveSpawn		////////////////////////////////////////////////////////[ wave3_snipers_soldiers ]//////////////
+		{
+			TotalCurrency 200
+			Name "wave3_snipers_soldiers"
+			WaitForAllSpawned "wave3_tank"				//--- Wait Spawned wave3_tank ---
+			Squad
+			{
+				TFBot
+				{
+					Template Unworthy_Sniper
+				}
+				TFBot
+				{
+					Template Soldier_Liberty
+				}
+				TFBot
+				{
+					Template Soldier_Liberty
+				}
+			}
+			
+			TotalCount 12
+			WaitBetweenSpawns 15
+			
+			Where spawnbot_a
+		}
+		
+		WaveSpawn		////////////////////////////////////////////////////////[ wave3_heavies_gun ]//////////////
+		{
+			TotalCurrency 200
+			Name "wave3_heavies_gun"
+			WaitForAllSpawned "wave3_tank"				//--- Wait Spawned wave3_tank ---
+			TFBot
+			{
+				Template Heavy_Gun
+				Tag "scrappable"
+			}
+			
+//			FirstSpawnOutput								//## Trigger Rocket B
+//			{
+//				Target rocket_resistance_spawner_b
+//				Action PickRandom
+//			}
+			
+			TotalCount 5
+			WaitBetweenSpawns 5
+			
+			Where spawnbot_b
+		}
+		
+		WaveSpawn		////////////////////////////////////////////////////////[ wave3_heavy_boss ]//////////////
+		{
+			TotalCurrency 200
+			Name "wave3_heavy_boss"
+			WaitForAllSpawned "wave3_heavies_gun"				//--- Wait Spawned wave3_heavies_gun ---
+			TFBot
+			{
+				Template Heavy_Gun
+				Health 4500
+				Scale 3
+				ClassIcon heavy_giant
+				Attributes AlwaysFireWeapon
+				Attributes Miniboss
+				Attributes UseBossHealthBar
+				Tag "Giant"
+				CharacterAttributes
+				{
+					"move speed bonus" 0.3
+					"override footstep sound set" 4
+				}
+			}
+			
+			TotalCount 1
+			WaitBetweenSpawns 0
+			
+			Where spawnbot_b
+			DoneOutput										//## Trigger Alarm A,B,C
+			{
+				Target alarm_preparation_trigger_a_b_c
+				Action Trigger
+			}
+		}
+		
+//##############
+//## WAVE (4) ##
+//##############
+
+		WaveSpawn		////////////////////////////////////////////////////////[ wave4_demoknight_boss_a ]//////////////
+		{
+			TotalCurrency 150
+			WaitForAllDead "wave3_heavy_boss"				//--- Wait Dead wave3_heavy_boss ---
+			WaitBeforeStarting 45							// Pause 45 sec
+			Name "wave4_demoknight_boss_a"
+			
+			TFBot
+			{
+				Template Demoknight_Giant
+			}
+			
+			FirstSpawnOutput								//## Trigger Rocket A
+			{
+				Target rocket_resistance_spawner_a
+				Action PickRandom
+			}
+			
+			TotalCount 1
+			WaitBetweenSpawns 0
+			
+			Where spawnbot_a
+		}
+
+		WaveSpawn		////////////////////////////////////////////////////////[ wave4_demoknight_boss_b ]//////////////
+		{
+			TotalCurrency 150
+			WaitForAllDead "wave3_heavy_boss"				//--- Wait Dead wave3_heavy_boss ---
+			WaitBeforeStarting 45							// Pause 45 sec
+			Name "wave4_demoknight_boss_b"
+			
+			TFBot
+			{
+				Template Demoknight_Giant
+			}
+			
+			FirstSpawnOutput								//## Trigger Rocket B
+			{
+				Target rocket_resistance_spawner_b
+				Action PickRandom
+			}
+			
+			TotalCount 1
+			WaitBetweenSpawns 0
+			
+			Where spawnbot_b
+		}
+
+		WaveSpawn		////////////////////////////////////////////////////////[ wave4_demoknight_boss_c ]//////////////
+		{
+			TotalCurrency 150
+			WaitForAllDead "wave3_heavy_boss"				//--- Wait Dead wave3_heavy_boss ---
+			WaitBeforeStarting 45							// Pause 45 sec
+			Name "wave4_demoknight_boss_c"
+			
+			TFBot
+			{
+				Template Demoknight_Giant
+			}
+			
+			FirstSpawnOutput								//## Trigger Rocket C
+			{
+				Target rocket_resistance_spawner_c
+				Action PickRandom
+			}
+			
+			TotalCount 1
+			WaitBetweenSpawns 0
+			
+			Where spawnbot_c
+		}
+
+		WaveSpawn		////////////////////////////////////////////////////////[ wave4_support_soldiers_a ]//////////////
+		{
+			TotalCurrency 200
+			Name "wave4_support_soldiers_a"
+			WaitForAllSpawned "wave4_demoknight_boss_a"				//--- Wait Spawned wave4_demoknight_boss_a ---
+			TFBot
+			{
+				Template Soldier_Liberty
+				Tag "scrappable"
+			}
+			
+			TotalCount 7
+			WaitBetweenSpawns 10
+			
+			Where spawnbot_a
+		}
+
+		WaveSpawn		////////////////////////////////////////////////////////[ wave4_support_soldiers_b ]//////////////
+		{
+			TotalCurrency 200
+			Name "wave4_support_soldiers_b"
+			WaitForAllSpawned "wave4_demoknight_boss_b"				//--- Wait Spawned wave4_demoknight_boss_b ---
+			TFBot
+			{
+				Template Soldier_Liberty
+				Tag "scrappable"
+			}
+			
+			TotalCount 7
+			WaitBetweenSpawns 10
+			
+			Where spawnbot_b
+		}
+		
+		WaveSpawn		////////////////////////////////////////////////////////[ wave4_support_soldiers_c ]//////////////
+		{
+			TotalCurrency 200
+			Name "wave4_support_soldiers_c"
+			WaitForAllSpawned "wave4_demoknight_boss_c"				//--- Wait Spawned wave4_demoknight_boss_c ---
+			TFBot
+			{
+				Template Soldier_Liberty
+				Tag "scrappable"
+			}
+			
+			TotalCount 7
+			WaitBetweenSpawns 10
+			
+			Where spawnbot_c
+		}
+
+		WaveSpawn							//Dummy, used to have multiple WaitForAllDead
+		{
+			Name "wave4_over_part"
+			WaitForAllDead "wave4_demoknight_boss_a"
+		}
+		WaveSpawn							//Dummy, used to have multiple WaitForAllDead
+		{
+			Name "wave4_over_part"
+			WaitForAllDead "wave4_demoknight_boss_b"
+		}
+		WaveSpawn							//Dummy, used to have multiple WaitForAllDead
+		{
+			Name "wave4_over_part"
+			WaitForAllDead "wave4_demoknight_boss_c"
+		}
+		WaveSpawn							//Dummy, used to have multiple WaitForAllDead
+		{
+			Name "wave4_over"
+			WaitForAllDead "wave4_over_part"
+			
+			DoneOutput										//## Trigger Alarm None
+			{
+				Target alarm_preparation_trigger_none
+				Action Trigger
+			}
+			
+		}
+
+//##############
+//## WAVE (5) ##
+//##############
+
+		WaveSpawn		////////////////////////////////////////////////////////[ wave5_final_boss ]//////////////
+		{
+			TotalCurrency 0
+			Name "wave5_final_boss"
+			WaitBeforeStarting 45
+			WaitForAllDead "wave4_over"					//--- Wait Finished wave4_over ---
+			
+			TFBot
+			{
+				Template Father_Demolitor
+				Tag "FinalBoss"
+			}
+			
+			DoneOutput										//## Trigger Kill Every Enemy
+			{
+				Target kill_all_enemy_relay
+				Action Trigger
+			}
+			
+			TotalCount 1
+			Where spawnbot_boss
+			
+		}
+
+		WaveSpawn		////////////////////////////////////////////////////////[ wave5_tank ]//////////////
+		{
+			TotalCount 1
+			WaitForAllSpawned "wave5_final_boss"					//--- Wait Spawned wave5_final_boss ---
+			WaitBeforeStarting 10
+			Name "wave5_tank"
+			
+			Tank
+			{	
+				Health 4000
+				Name "wave3_tank"
+				Speed 100
+				Skin 1
+				StartingPathTrackNode "path_track_c_1"
+				
+				OnKilledOutput
+				{
+					Target tank_resistance_destroyed_c
+					Action Trigger
+				}
+				
+			}
+		}
+
+		WaveSpawn		////////////////////////////////////////////////////////[ wave5_support_demolitors_a ]//////////////
+		{
+			TotalCurrency 0
+			Name "wave5_support_demolitors_a"
+			WaitBetweenSpawns 30
+			WaitForAllSpawned "wave5_final_boss"					//--- Wait Spawned wave5_final_boss ---
+			Support 1
+			
+			TFBot
+			{
+				Template Demolitor
+			}
+			
+			Where spawnbot_a
+		}
+		
+		WaveSpawn		////////////////////////////////////////////////////////[ wave5_support_demolitors_b ]//////////////
+		{
+			TotalCurrency 0
+			Name "wave5_support_demolitors_b"
+			WaitBetweenSpawns 30
+			WaitForAllSpawned "wave5_final_boss"					//--- Wait Spawned wave5_final_boss ---
+			Support 1
+			
+			TFBot
+			{
+				Template Demolitor
+			}
+			
+			Where spawnbot_b
+		}
+		
+		WaveSpawn		////////////////////////////////////////////////////////[ wave5_support_demolitors_c ]//////////////
+		{
+			TotalCurrency 0
+			Name "wave5_support_demolitors_c"
+			WaitBetweenSpawns 30
+			WaitForAllSpawned "wave5_final_boss"					//--- Wait Spawned wave5_final_boss ---
+			Support 1
+			
+			TFBot
+			{
+				Template Demolitor
+			}
+			
+			Where spawnbot_c
+		}
+		
+		WaveSpawn		////////////////////////////////////////////////////////[ wave5_support_a ]//////////////
+		{
+			TotalCurrency 0
+			Name "wave5_support_a"
+			WaitBetweenSpawns 27
+			WaitForAllSpawned "wave5_final_boss"					//--- Wait Spawned wave5_final_boss ---
+			Support 1
+			
+			TFBot
+			{	
+				Template Unworthy_Sniper
+				Health 100
+				Tag "scrappable"
+			}
+			
+			Where spawnbot_a
+		}
+		
+		WaveSpawn		////////////////////////////////////////////////////////[ wave5_support_b ]//////////////
+		{
+			TotalCurrency 0
+			Name "wave5_support_b"
+			WaitBetweenSpawns 27
+			WaitForAllSpawned "wave5_final_boss"					//--- Wait Spawned wave5_final_boss ---
+			Support 1
+			
+			TFBot
+			{	
+				Template Heavy_Gun
+				Health 100
+				Tag "scrappable"
+			}	
+		
+			
+			Where spawnbot_b
+		}
+		
+		WaveSpawn		////////////////////////////////////////////////////////[ wave5_support_c ]//////////////
+		{
+			TotalCurrency 0
+			Name "wave5_support_c"
+			WaitBetweenSpawns 27
+			WaitForAllSpawned "wave5_final_boss"					//--- Wait Spawned wave5_final_boss ---
+			Support 1
+			
+			TFBot
+			{	
+				Template Pyro_Flaregun
+				Health 100
+				Tag "scrappable"
+			}	
+			
+			Where spawnbot_c
+		}
+		
+
+	}
+}
+//WaveSchedule
+	//Wave
+		//WaveSpawns

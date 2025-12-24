@@ -1,0 +1,760 @@
+#base robot_standard.pop
+#base robot_giant.pop
+
+  WaveSchedule
+ {
+ StartingCurrency 1000
+ RespawnWaveTime 10
+ CanBotsAttackWhileInSpawnRoom no
+ 
+ Mission // Sniper 
+	{
+		Objective Sniper
+
+		InitialCooldown 15
+		Where spawnbot_mission_sniper
+		BeginAtWave 1
+		RunForThisManyWaves 4
+		CooldownTime 35
+		DesiredCount 2
+
+		TFBot
+		{
+			Class Sniper
+			Skill Expert
+			Name Sniper
+		}
+	}	
+ 
+ Mission // sentry buster
+ {
+	Objective DestroySentries
+	
+	InitialCooldown 5
+	Where spawnbot
+	BeginAtWave 1
+	RunForThisManyWaves 5
+	
+	CooldownTime 25
+	
+	TFBot
+		{
+			Template T_TFBot_SentryBuster
+	}
+}
+ 
+ 
+  Wave
+  {
+     StartWaveOutput
+	 {
+	     Target wave_start_relay
+		 Action Trigger
+	 }
+	 DoneOutput
+	 {
+	    Target wave_finished_relay
+		Action Trigger
+	 }
+	 
+	 	 WaveSpawn
+	 {
+	 Where spawnbot
+	 TotalCount 10
+	 MaxActive 5
+	 SpawnCount 1
+	 WaitBeforeStarting 0
+	 WaitBetweenSpawns 10
+	 TotalCurrency 250
+	 TFBot
+		{
+			Class Soldier
+			Name "Extended Conch Soldier"
+			Skill Normal
+			ClassIcon soldier_banner_trio
+			Attributes SpawnWithFullCharge
+			Item "The Concheror"
+			CharacterAttributes
+			{
+				"increase buff duration"	9.0
+			}
+		}
+		}
+	 
+	 WaveSpawn
+	 {
+	 Where spawnbot_upper
+	 TotalCount 10
+	 MaxActive 5
+	 SpawnCount 1
+	 WaitBeforeStarting 0
+	 WaitBetweenSpawns 10
+	 TotalCurrency 250
+	 TFBot
+	 {
+			Class Soldier
+			Name "Buffer Soldier"
+			Skill Normal
+			ClassIcon soldier_banner_trio
+			Attributes SpawnWithFullCharge
+			Item "The Buff Banner"
+			CharacterAttributes
+			{
+				"increase buff duration"	9.0
+			}
+		}
+		}
+		
+	 WaveSpawn
+	 {
+	 Where spawnbot
+	 TotalCount 10
+	 MaxActive 5
+	 SpawnCount 1
+	 WaitBeforeStarting 0
+	 WaitBetweenSpawns 10
+	 TotalCurrency 250
+	 TFBot
+{
+			Class Soldier
+			Name "Backup Soldier"
+			Skill Normal
+			ClassIcon soldier_banner_trio
+			Attributes SpawnWithFullCharge
+			Item "The Battalion's Backup"
+			CharacterAttributes
+			{
+				"increase buff duration"	9.0
+			}
+		}
+		}
+	 
+	 WaveSpawn
+	 {
+	WaitForAllSpawned wave1_AG
+	 Where spawnbot
+	 TotalCount 1
+	 MaxActive 1
+	 SpawnCount 1
+	 WaitBeforeStarting 30
+	 WaitBetweenSpawns 10
+	 TotalCurrency 100
+	 TFBot
+		{
+			Class Soldier
+			ClassIcon soldier_blackbox_giant
+			Name "Giant Black Box Soldier"
+			Health 4200
+			Item "The Black Box"
+			Skill Expert
+			Attributes MiniBoss
+			WeaponRestrictions PrimaryOnly
+			Attributes HoldFireUntilFullReload
+			ItemAttributes
+			{
+				ItemName "The Black Box"
+				"damage bonus" 0.45
+				"fire rate bonus" 0.001
+				"clip size upgrade atomic" 0
+				"faster reload rate" 1.6
+				"blast radius increased" 1.25
+				"projectile spread angle penalty" 4
+				"heal on hit for rapidfire" 1000
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.4
+				"airblast vulnerability multiplier" 0.4
+				"override footstep sound set" 3
+				"Projectile speed increased" 0.9
+			}
+	 }
+	 }
+	 
+	 	 WaveSpawn
+	 {
+	 Name wave1_AG
+	 Where spawnbot_upper
+	 TotalCount 2
+	 MaxActive 2
+	 SpawnCount 1
+	 WaitBeforeStarting 30
+	 WaitBetweenSpawns 20
+	 TotalCurrency 300
+	 TFBot
+		{
+			Class Soldier
+			Name "Giant Soldier"
+			ClassIcon soldier_giant
+			Skill Expert
+			Health 3800
+			WeaponRestrictions PrimaryOnly
+			Attributes HoldFireUntilFullReload
+			Attributes MiniBoss
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.4
+				"airblast vulnerability multiplier" 0.4
+				"override footstep sound set" 3
+			}
+	 }
+	 }
+	 
+	 
+	WaveSpawn
+	 {
+	 Name wave1_B
+	 Where spawnbot_upper
+	 TotalCount 32
+	 MaxActive 8
+	 SpawnCount 4
+	 WaitBeforeStarting 5
+	 WaitBetweenSpawns 2
+	 TotalCurrency 200
+	 TFBot
+	 {
+		ClassIcon scout_bat_nys
+		WeaponRestrictions "MeleeOnly"
+		Class Scout
+		Skill Normal
+	 }
+	}
+	 
+	 	WaveSpawn
+	 {
+	 Name wave1_C
+	 Where spawnbot
+	 TotalCount 24
+	 MaxActive 4
+	 SpawnCount 2
+	 WaitBeforeStarting 5
+	 WaitBetweenSpawns 2
+	 TotalCurrency 100
+	 TFBot
+	 {
+		Class Demoman
+		Skill Normal
+	 }
+	}
+	}
+	
+	Wave
+  {
+     StartWaveOutput
+	 {
+	     Target wave_start_relay
+		 Action Trigger
+	 }
+	 DoneOutput
+	 {
+	    Target wave_finished_relay
+		Action Trigger
+	 }
+	 
+	 WaveSpawn
+	 {
+	 Name "wave2_A"
+	 Where spawnbot
+	 TotalCount 30
+	 MaxActive 10
+	 SpawnCount 10
+	 WaitBeforeStarting 0
+	 WaitBetweenSpawns 3
+	 TotalCurrency 300
+	 TFBot
+	 {
+		Class Heavy
+		Skill Normal
+	 }
+	}
+	
+	WaveSpawn
+	{
+	WaitForAllSpawned "wave2_A"
+	Where spawnbot
+	TotalCount 16
+	MaxActive 4
+	SpawnCount 4
+	WaitBeforeStarting 0
+	WaitBetweenSpawns 15
+	TotalCurrency 200
+	TFBot
+	{
+	Template "T_TFBot_Scout_Fish"
+	}
+	}
+	
+		WaveSpawn
+	{
+	WaitForAllSpawned "wave2_A"
+	Where spawnbot
+	TotalCount 20
+	MaxActive 8
+	SpawnCount 4
+	WaitBeforeStarting 0
+	WaitBetweenSpawns 20
+	TotalCurrency 200
+	TFBot
+	{
+	Template "T_TFBot_Demoman_Knight"
+	}
+	}
+	
+	
+			WaveSpawn
+	{
+	WaitForAllSpawned "wave2_A"
+	Where spawnbot
+	TotalCount 20
+	MaxActive 8
+	SpawnCount 4
+	WaitBeforeStarting 0
+	WaitBetweenSpawns 20
+	TotalCurrency 200
+	TFBot
+	{
+	Template "T_TFBot_ScorchShot"
+	}
+	}
+	
+		 	 WaveSpawn
+	 {
+	 Name "wave2_BG"
+	 WaitForAllSpawned "wave2_A"
+	 Where spawnbot_upper
+	 TotalCount 6
+	 MaxActive 2
+	 SpawnCount 1
+	 WaitBeforeStarting 15
+	 WaitBetweenSpawns 2
+	 TotalCurrency 300
+	 TFBot
+		{
+			Class Soldier
+			Name "Giant Soldier"
+			ClassIcon soldier_giant
+			Skill Expert
+			Health 3800
+			WeaponRestrictions PrimaryOnly
+			Attributes HoldFireUntilFullReload
+			Attributes MiniBoss
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.4
+				"airblast vulnerability multiplier" 0.4
+				"override footstep sound set" 3
+			}
+	 }
+	 }
+	
+	 WaveSpawn
+	 {
+	 Name "wave2_AG"
+	 WaitForAllDead "wave2_A"
+	 Where spawnbot
+	 TotalCount 3
+	 MaxActive 1y
+	 SpawnCount 1
+	 WaitBeforeStarting 0
+	 WaitBetweenSpawns 5
+	 TotalCurrency 300
+	 TFBot
+	{
+			Class Scout
+			Name "Super Scout"
+			ClassIcon scout_giant_fast
+			Skill Easy
+			Item "Bonk Boy"
+			Item "The Holy Mackerel"
+			Health 1200
+			WeaponRestrictions MeleeOnly
+			Attributes MiniBoss
+			CharacterAttributes
+			{
+				"move speed bonus"	2
+				"damage force reduction" 0.7
+				"airblast vulnerability multiplier" 0.7
+				"override footstep sound set" 5
+			}
+	}
+	}
+	
+	WaveSpawn
+	 {
+	 Name "wave2_A"
+	 Where spawnbot_upper
+	 TotalCount 30
+	 MaxActive 10
+	 SpawnCount 5
+	 WaitBeforeStarting 10
+	 WaitBetweenSpawns 4
+	 TotalCurrency 300
+	 TFBot
+	 {
+		Class Scout
+		Skill Normal
+	 }
+	 }
+	 }
+	 
+	  Wave
+  {
+     StartWaveOutput
+	 {
+	     Target wave_start_relay
+		 Action Trigger
+	 }
+	 DoneOutput
+	 {
+	    Target wave_finished_relay
+		Action Trigger
+	 }
+	 
+	 	 	 WaveSpawn
+	 {
+	 Where spawnbot
+	 TotalCount 25
+	 MaxActive 5
+	 SpawnCount 5
+	 WaitBeforeStarting 0
+	 WaitBetweenSpawns 20
+	 TotalCurrency 250
+	 TFBot
+		{
+			Class Soldier
+			Name "Extended Conch Soldier"
+			Skill Normal
+			ClassIcon soldier_banner_trio
+			Attributes SpawnWithFullCharge
+			Item "The Concheror"
+			CharacterAttributes
+			{
+				"increase buff duration"	9.0
+			}
+		}
+		}
+	 
+	 WaveSpawn
+	 {
+	 Where spawnbot_upper
+	 TotalCount 25
+	 MaxActive 5
+	 SpawnCount 5
+	 WaitBeforeStarting 0
+	 WaitBetweenSpawns 20
+	 TotalCurrency 250
+	 TFBot
+	 {
+			Class Soldier
+			Name "Buffer Soldier"
+			Skill Normal
+			ClassIcon soldier_banner_trio
+			Attributes SpawnWithFullCharge
+			Item "The Buff Banner"
+			CharacterAttributes
+			{
+				"increase buff duration"	9.0
+			}
+		}
+		}
+		
+	 WaveSpawn
+	 {
+	 Where spawnbot
+	 TotalCount 25
+	 MaxActive 5
+	 SpawnCount 5
+	 WaitBeforeStarting 0
+	 WaitBetweenSpawns 20
+	 TotalCurrency 250
+	 TFBot
+{
+			Class Soldier
+			Name "Backup Soldier"
+			Skill Normal
+			ClassIcon soldier_banner_trio
+			Attributes SpawnWithFullCharge
+			Item "The Battalion's Backup"
+			CharacterAttributes
+			{
+				"increase buff duration"	9.0
+			}
+		}
+		}
+	 
+	 WaveSpawn
+	 {
+	 Where spawnbot
+	 TotalCount 6
+	 MaxActive 2
+	 SpawnCount 1
+	 WaitBeforeStarting 0
+	 WaitBetweenSpawns 10
+	 TotalCurrency 300
+	 TFBot
+	 {
+			Class Soldier
+			Name "Giant Rapid Fire Soldier"
+			ClassIcon soldier_spammer
+			Health 3800
+			Skill Expert
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_ROCKETLAUNCHER"
+				"faster reload rate" -0.8
+				"fire rate bonus" 0.5
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.4
+				"airblast vulnerability multiplier" 0.4
+				"override footstep sound set" 3
+				"Projectile speed increased" 0.65
+			}
+			}
+			}
+	 
+	 WaveSpawn
+	 {
+	 Name "wave3_A"
+	 Where spawnbot_upper
+	 TotalCount 24
+	 MaxActive 8
+	 SpawnCount 4
+	 WaitBeforeStarting 5
+	 WaitBetweenSpawns 2
+	 TotalCurrency 200
+	 TFBot
+	 {
+		Class Soldier
+		Skill Normal
+	 }
+	}
+	 
+	 WaveSpawn
+	 {
+	 Name "wave3_AG"
+	 Where spawnbot
+	 TotalCount 8
+	 MaxActive 4
+	 SpawnCount 2
+	 WaitBeforeStarting 15
+	 WaitBetweenSpawns 10
+	 TotalCurrency 600
+	 TFBot
+		{
+			Class Soldier
+			ClassIcon soldier_blackbox_giant
+			Name "Giant Black Box Soldier"
+			Health 4200
+			Item "The Black Box"
+			Skill Expert
+			Attributes MiniBoss
+			WeaponRestrictions PrimaryOnly
+			Attributes HoldFireUntilFullReload
+			ItemAttributes
+			{
+				ItemName "The Black Box"
+				"damage bonus" 0.45
+				"fire rate bonus" 0.001
+				"clip size upgrade atomic" 0
+				"faster reload rate" 1.6
+				"blast radius increased" 1.25
+				"projectile spread angle penalty" 4
+				"heal on hit for rapidfire" 1000
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.4
+				"airblast vulnerability multiplier" 0.4
+				"override footstep sound set" 3
+				"Projectile speed increased" 0.9
+			}
+	}
+	}
+	
+	WaveSpawn
+	 {
+	 Name "wave3_C"
+	 Where spawnbot
+	 TotalCount 36
+	 MaxActive 16
+	 SpawnCount 8
+	 WaitBeforeStarting 0
+	 WaitBetweenSpawns 5
+	 TotalCurrency 400
+	 TFBot
+	 {
+		ClassIcon "scout_bat_nys"
+		WeaponRestrictions "MeleeOnly"
+		Class Scout
+		Skill Normal
+	 }
+	}
+	 
+	  WaveSpawn
+	 {
+	 Where spawnbot_upper
+	 TotalCount 2
+	 MaxActive 2
+	 SpawnCount 1
+	 WaitBeforeStarting 30
+	 WaitBetweenSpawns 15
+	 TotalCurrency 300
+	 TFBot
+		{
+			Class Demoman
+			Name "Giant Caber Demoman"
+			Skill Expert
+			Health 2500
+			Item "The Ullapool Caber"
+			WeaponRestrictions MeleeOnly
+			ClassIcon demo_caber_nys
+			Attributes MiniBoss
+			CharacterAttributes
+			{
+				"move speed penalty" 0.5
+				"damage force reduction" 0.5
+				"airblast vulnerability multiplier" 0.5
+				"override footstep sound set" 7
+			}
+	 }
+	 }
+	 }
+	 
+	 
+	   Wave
+  {
+     StartWaveOutput
+	 {
+	     Target wave_start_relay
+		 Action Trigger
+	 }
+	 DoneOutput
+	 {
+	    Target wave_finished_relay
+		Action Trigger
+	 }
+	
+	 WaveSpawn
+	 {
+	 WaitForAllSpawned "wave4_A"
+	 Name "wave4_AG"
+	 Where spawnbot_upper
+	 TotalCount 4
+	 MaxActive 2
+	 SpawnCount 1
+	 WaitBeforeStarting 45
+	 WaitBetweenSpawns 15
+	 TotalCurrency 240
+	 TFBot
+		{
+			Class Soldier
+			Name "Giant Burst Fire Soldier"
+			ClassIcon soldier_burstfire
+			Health 4200
+			Skill Expert
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			Attributes HoldFireUntilFullReload
+			Attributes AlwaysCrit
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_ROCKETLAUNCHER"
+				"damage bonus" 2.0
+				"faster reload rate" 0.4
+				"fire rate bonus" 0.2
+				"clip size upgrade atomic" 5.0
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.4
+				"airblast vulnerability multiplier" 0.4
+				"override footstep sound set" 3
+				"Projectile speed increased" 0.9
+			}
+	 }
+	}
+	
+	
+	  	WaveSpawn
+	{
+	Name "wave4_A"
+	Where spawnbot
+	TotalCount 30
+	MaxActive 8 
+	SpawnCount 4
+	WaitBeforeStarting 0
+	WaitBetweenSpawns 10
+	TotalCurrency 400
+	TFBot
+	{
+		Class Heavy
+		Skill Hard
+		
+	   }
+	  }
+	  
+	  
+	  	  	WaveSpawn
+	{
+	Name "wave4_B"
+	Where spawnbot_upper
+	TotalCount 30
+	MaxActive 8 
+	SpawnCount 4
+	WaitBeforeStarting 0
+	WaitBetweenSpawns 5
+	TotalCurrency 400
+	TFBot
+	{
+		Name "tiny problem"
+		Health 100
+		Scale 0.75
+		Class Soldier
+		Skill Hard
+		
+	   }
+	  }
+	  
+	  		 WaveSpawn
+	 {
+	 Name "wave4_AT"
+	 TotalCurrency 6000
+	 TotalCount 6
+	 MaxActive 6
+	 SpawnCount 1
+	 WaitBeforeStarting 0
+	 WaitBetweenSpawns 15
+	 
+	 Tank
+	 {
+	 Health 15000
+	 Name "tankboss"
+	 Speed 100
+	 // Skin 1
+	 StartingPathTrackNode "tank_path_a_1"
+	 
+	 OnKilledOutput
+	 {
+		Target boss_dead_relay
+		Action Trigger
+	 }
+	 
+	 OnBombDroppedOutput
+	 {
+		Target boss_deploy_relay
+		Action Trigger
+	 }
+	}
+	}
+	}
+	}

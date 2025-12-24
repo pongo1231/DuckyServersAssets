@@ -1,0 +1,399 @@
+//mvm silentsky
+//Expert skill
+
+///////////////////////////////////////////////////////////////////////////
+// BEGIN POP FILE
+///////////////////////////////////////////////////////////////////////////
+
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_D_I_L.pop
+
+WaveSchedule
+{
+
+	StartingCurrency 20000
+	FixedRespawnWaveTime 2
+	CanBotsAttackWhileInSpawnRoom no
+	
+/////////////////
+//MISSIONS
+/////////////////
+
+
+///////////////////////////////////////////////////////////////////////////
+//SENTRY BUSTER MISSIONS
+///////////////////////////////////////////////////////////////////////////
+
+Mission	// Sentry Busters - All
+	{
+		Objective DestroySentries
+
+		InitialCooldown 40
+		Where spawnbot
+		BeginAtWave 1
+		RunForThisManyWaves 21
+		CooldownTime 60
+
+            	TFBot
+		{
+			Template T_TFBot_SentryBuster
+			Tag bot_sentrybuster
+           	}
+	}
+	
+///////////////////////////////////////////////////////////////////////////
+//SNIPER MISSIONS
+///////////////////////////////////////////////////////////////////////////
+
+	Mission // Sniper
+	{
+		Objective Sniper
+
+		InitialCooldown 35
+		Where spawnbot_mission_sniper
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		CooldownTime 35
+		DesiredCount 3
+
+		TFBot
+		{
+			Class Sniper
+			Skill Expert
+			Name Sniper
+			MaxVisionRange 2500
+		}
+	}
+
+
+
+///////////////////////////////////////////////////////////////////////////
+//SPY MISSIONS
+///////////////////////////////////////////////////////////////////////////
+
+	Mission // Spy
+	{
+		Objective Spy  
+
+		InitialCooldown 45
+		Where spawnbot_mission_spy
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		CooldownTime 45
+		DesiredCount 4
+
+		TFBot
+		{
+			Class Spy
+			Skill Expert
+			Name Spy
+		}
+	}
+
+
+	
+///////////////////////////////////////////////////////////////////////////
+//ENGINEER MISSIONS
+///////////////////////////////////////////////////////////////////////////	
+	
+	Mission // Engineer
+	{
+		Objective Engineer  
+
+		InitialCooldown 50
+		Where spawnbot
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		CooldownTime 60
+		DesiredCount 1
+
+		TFBot
+		{
+			Template T_TFBot_Engineer_Sentry_Teleporter
+			Tag botcontrol_block
+			TeleportWhere spawnbot_mission_engineer
+			Attributes TeleportToHint
+			Health 500
+		}
+	}
+	
+
+// Wave 1 /////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// The BEAST (4000)
+// Support Gun Nut Heavy Airdrop (300)
+///////////////////////////////////////////////////////////////////////////
+
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}	
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+
+		Checkpoint Yes
+
+		WaveSpawn
+		{
+			TotalCount 0
+			TotalCurrency 0
+			WaitBeforeStarting 10
+			FirstSpawnOutput
+			{
+				Target bot_attributes_random10_relay
+				Action Trigger
+			}
+		}
+		
+		WaveSpawn // The BEAST (4000)
+		{
+			Where spawnbot	
+			Name "W1_A"
+			TotalCount 1	
+			MaxActive 1						
+			SpawnCount 1									
+			WaitBetweenSpawns 0
+			WaitBeforeStarting 0
+			TotalCurrency 4000
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Emperor
+					Tag botcontrol_block
+					Tag giant
+					Health 285000
+					EventChangeAttributes
+					{
+						Default
+						{
+							Skill Expert
+							Tag attrbot
+							Skill Expert
+							MaxVisionRange 3500
+							WeaponRestrictions PrimaryOnly
+							Attributes MiniBoss
+							Attributes UseBossHealthBar
+							Attributes HoldFireUntilFullReload
+							Item "The Eyelander"
+							Item "The King of Scotland Cape"
+							Item "Bruce's Bonnet"
+							ItemAttributes
+							{
+								ItemName "TF_WEAPON_GRENADELAUNCHER"
+								"faster reload rate" 0.85
+								"fire rate bonus" 0.001
+								"Projectile speed increased" 1.25
+								"projectile spread angle penalty" 20
+								"damage bonus" 2.5
+								"clip size upgrade atomic" 4
+							}
+							CharacterAttributes
+							{
+								"move speed bonus"	0.23
+								"damage force reduction" 0.1
+								"airblast vulnerability multiplier" 0.05
+								"override footstep sound set" 3
+								"health regen"	95
+								"airblast vertical vulnerability multiplier" 0.05
+								"rage giving scale" 0.03
+								"increased jump height" 2
+								"head scale" 1.2
+								"boots falling stomp" 1
+								"health from healers reduced" 0.1
+							}
+						}
+
+						BotAttributes1
+						{
+							Skill Expert
+							Tag attrbot
+							Skill Expert
+							MaxVisionRange 3500
+							WeaponRestrictions PrimaryOnly
+							Attributes MiniBoss
+							Attributes UseBossHealthBar
+							Item "The Eyelander"
+							Item "The King of Scotland Cape"
+							Item "Bruce's Bonnet"
+							ItemAttributes
+							{
+								ItemName "TF_WEAPON_GRENADELAUNCHER"
+								"clip size upgrade atomic" 86.0
+								"damage penalty" 0.4
+								"fire rate bonus" 0.14
+								"Projectile speed increased" 1.8
+								"projectile spread angle penalty" 2.5
+								"faster reload rate" -0.4
+								"blast radius increased" 1.5
+								"heal on hit for rapidfire" 5
+								"fire rate bonus with reduced health" 0.2
+							}
+							CharacterAttributes
+							{
+								"move speed bonus"	0.23
+								"damage force reduction" 0.1
+								"airblast vulnerability multiplier" 0.05
+								"override footstep sound set" 3
+								"health regen"	50
+								"airblast vertical vulnerability multiplier" 0.05
+								"rage giving scale" 0.03
+								"increased jump height" 2
+								"head scale" 1.2
+								"boots falling stomp" 1
+								"health from healers reduced" 0.1
+							}
+						}
+						BotAttributes2
+						{
+											Skill Expert
+							Tag attrbot
+							Skill Expert
+							MaxVisionRange 3500
+							WeaponRestrictions PrimaryOnly
+							Attributes MiniBoss
+							Attributes UseBossHealthBar
+							Attributes HoldFireUntilFullReload
+							Item "The Eyelander"
+							Item "The King of Scotland Cape"
+							Item "Bruce's Bonnet"
+							ItemAttributes
+							{
+								ItemName "TF_WEAPON_GRENADELAUNCHER"
+								"clip size upgrade atomic" 16.0
+								"damage bonus" 1.9
+								"fire rate bonus" -1
+								"Projectile speed increased" 1
+								"projectile spread angle penalty" 360
+								"faster reload rate" 0.001
+								"blast radius increased" 2.2
+								"heal on hit for rapidfire" 2
+							}
+							CharacterAttributes
+							{
+								"move speed bonus"	0.23
+								"damage force reduction" 0.1
+								"airblast vulnerability multiplier" 0.05
+								"override footstep sound set" 3
+								"health regen"	95
+								"airblast vertical vulnerability multiplier" 0.05
+								"rage giving scale" 0.03
+								"increased jump height" 2
+								"head scale" 1.2
+								"boots falling stomp" 1
+								"health from healers reduced" 0.1
+							}
+						}
+
+						BotAttributes3
+						{
+							Skill Expert
+							Tag attrbot
+							Skill Expert
+							MaxVisionRange 3500
+							WeaponRestrictions MeleeOnly
+							Attributes MiniBoss
+							Attributes UseBossHealthBar
+							Attributes HoldFireUntilFullReload
+							Item "The Eyelander"
+							Item "The King of Scotland Cape"
+							Item "Bruce's Bonnet"
+							ItemAttributes
+							{
+								ItemName "The Eyelander"
+								"move speed bonus"	1.2
+								"damage bonus" 1.2
+								"fire rate bonus with reduced health" 0.6
+								"set item tint rgb" #E6E6E6
+								"dmg taken increased" 0.05 
+   		 						"dmg from melee increased" 120
+   								"dmg from ranged reduced" 25
+							}
+							CharacterAttributes
+							{
+								"move speed bonus"	0.23
+								"damage force reduction" 0.1
+								"airblast vulnerability multiplier" 0.05
+								"override footstep sound set" 3
+								"health regen"	95
+								"airblast vertical vulnerability multiplier" 0.05
+								"rage giving scale" 0.03
+								"increased jump height" 2
+								"head scale" 1.2
+								"boots falling stomp" 1
+								"health from healers reduced" 0.1
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		WaveSpawn // Support Aidropped Gun Nut Heavies (200)
+		{
+			Where spawnbot_airdrop0
+			Name "W3_B"
+			TotalCount 3	
+			MaxActive 2						
+			SpawnCount 2									
+			WaitBetweenSpawns 60
+			WaitBeforeStarting 90
+			TotalCurrency 100
+			
+			Support 1
+			TFBot
+			{
+				Template T_TFBot_Demoman_Samurai
+				Item "The B.A.S.E. Jumper"
+			}
+		}
+
+		WaveSpawn // Support Aidropped Gun Nut Heavies (200)
+		{
+			Where spawnbot_airdrop1
+			Name "W3_B"
+			TotalCount 3	
+			MaxActive 2						
+			SpawnCount 2									
+			WaitBetweenSpawns 60
+			WaitBeforeStarting 90
+			TotalCurrency 100
+			
+			Support 1
+			TFBot
+			{
+				Template T_TFBot_Demoman_Samurai
+				Item "The B.A.S.E. Jumper"
+				Tag giant
+			}
+		}
+
+		WaveSpawn // Support Aidropped Gun Nut Heavies (200)
+		{
+			Where spawnbot_airdrop2
+			Name "W3_B"
+			TotalCount 3	
+			MaxActive 2						
+			SpawnCount 2								
+			WaitBetweenSpawns 60
+			WaitBeforeStarting 90
+			TotalCurrency 100
+			
+			Support 1
+			TFBot
+			{
+				Template T_TFBot_Demoman_Samurai
+				Item "The B.A.S.E. Jumper"
+				Tag giant
+			}
+		}
+
+	}
+}

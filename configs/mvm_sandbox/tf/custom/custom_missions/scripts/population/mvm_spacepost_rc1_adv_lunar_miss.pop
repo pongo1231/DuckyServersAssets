@@ -1,0 +1,2943 @@
+// This is the official campaign .pop file. Don't modify it, unless it's needed.
+
+#base point_templates_lunar_miss.pop
+#base robot_standard.pop
+#base robot_giant.pop
+WaveSchedule
+{
+	//LuaScriptFile "scripts/pea.lua"  
+	StartingCurrency 1000
+	RespawnWaveTimeBlue 3  
+	//PlayerRobotsUsePlayerAnimation 1  
+	HumansMustJoinTeam blue  
+	BluPlayersAreRobots 1  
+	ReverseWinConditions 1  
+	//WaveStartCountdown 0  
+	NoRomevisionCosmetics 1  
+	BluHumanInfiniteAmmo 0  
+	BluHumanInfiniteCloak 0  
+	SniperAllowHeadshots 1  
+	SniperHideLasers 1  
+	SpawnTemplate "Filters"  
+	SpawnTemplate "Tutorials"  
+	SpawnTemplate "BombOverride"  
+	SpawnTemplate "LoseCondition"  
+	SpawnTemplate "SetupBlockade"  
+	//SpawnTemplate "FacilityBlockade"  
+	SpawnTemplate "BloodExtractionSound"  
+	SpawnTemplate "TankBloodLevel"  
+	//SpawnTemplate "NavAreas"  
+	SpawnTemplate "BombAlerts"  
+	//SpawnTemplate "Gravity_Control"  
+	SpawnTemplate "BloodBox_Track"  
+	SpawnTemplate "Gravity_Test"  
+	//SpawnTemplate "Testant"  
+	SpawnTemplate "REDBot_Engineer_Hints"  
+	SendBotsToSpectatorImmediately 1  
+	CustomScriptSoundFile "scripts/pea_soundscript.txt"  
+	ScriptSoundOverrides "scripts/pea_soundoverrides.txt"  
+	AllowBluPlayerReanimators 1  
+	RemoveBluVelocityLimit 1  
+	BluHumanSpawnNoShoot 0  
+	BluHumanSpawnProtection 0  
+	NoRedBotsRandomCrit 1  
+	NoRedSniperBotHeadshots 1  
+	OverrideSounds  
+	{
+		"MVM.MoneyPickup" "Slimey.Money"
+	}
+	DisableSound "Announcer.MVM_Robots_Planted"  
+	DisableSound "Announcer.MVM_All_Dead"  
+	DisableSound "Announcer.MVM_Bomb_Alert_Entered"  
+	DisableSound "Announcer.MVM_Bomb_Alert_Near_Hatch"  
+	DisableSound "Announcer.MVM_Bomb_Alert_Deploying"  
+	DisableSound "Announcer.MVM_General_Destruction"  
+	DisableSound "Announcer.MVM_Game_Over_Loss"  
+	DisableSound "Announcer.MVM_Tank_Planted"  
+	DisableSound "Announcer.MVM_Tank_Alert_Spawn"  
+	DisableSound "Announcer.MVM_Tank_Alert_Another"  
+	DisableSound "Announcer.MVM_Tank_Alert_Multiple"  
+	DisableSound "Announcer.MVM_Tank_Alert_Halfway"  
+	DisableSound "Announcer.MVM_Tank_Alert_Halfway_Multiple"  
+	DisableSound "Announcer.MVM_Tank_Alert_Near_Hatch"  
+	DisableSound "Announcer.MVM_Tank_Alert_Deploying"  
+	//CustomWeapon  
+	//{
+		//"TF_WEAPON_WRENCH_REDBOT"
+		//{
+			//OriginalItemName "TF_WEAPON_WRENCH"
+		//}
+	//}
+	//BuildingSpawnTemplate  
+	//{
+		//Name REDBot_Engineer_DispenserEffect
+		//ItemName "TF_WEAPON_WRENCH_REDBOT"
+		//BuildingType "Dispenser"
+		//AllowBots 1
+	//}
+	//ClassLimit   // testing
+	//{
+		//Engineer 0
+	//}
+	ExtraTankPath  
+	{
+		Name "bomb_path_a12"
+		Node "3360 -64 -416" // a_12 (-32 y)
+		Node "3360 -500 -416"
+	}
+	ExtraTankPath  
+	{
+		Name "bomb_path_a59"
+		Node "4096 1264 -96" // a_59 (-32 y)
+		Node "4096 1000 -96"
+	}
+	ExtraTankPath  
+	{
+		Name "bomb_path_a7"
+		Node "1152 -768 -416" // a_7 (+32 y)
+		Node "1152 -168 -416"
+	}
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_cash"
+        TeamNum 2
+		StartDisabled 1
+        X "0"
+        Y "0"
+        Z "0"
+    }
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_r_p1_middle_old" // next to pit
+        TeamNum 2
+        X "2290"
+        Y "-270"
+        Z "-444"
+    }
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_r_p1_middle" // by the wall next to hologram thingy
+        TeamNum 2
+        X "2430"
+        Y "-1337"
+        Z "-400"
+    }
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_r_p1_flank_old" // in small flank room next to exterior corridor
+        TeamNum 2
+        X "755"
+        Y "-1372"
+        Z "-277"
+    }
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_r_p1_upper" // next to the giant "02" on the wall, for robots coming from the left exterior door
+        TeamNum 2
+        X "2910"
+        Y "-287"
+        Z "-60"
+    }
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_r_p1_upper_right" // just next to "upper_left", except placed in a way to make robots choose the right flank
+        TeamNum 2
+        X "2200"
+        Y "-950"
+        Z "-179"
+    }
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_r_p1_behind" // just slightly behind the stage 3 trigger path point
+        TeamNum 2
+        X "4000"
+        Y "134"
+        Z "-380"
+    }
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_r_p1_behind_panel" // behind a rectangular wall with 02, next to the area where the tank performs a 180-degree turn
+        TeamNum 2
+        X "5366"
+        Y "244"
+        Z "-60"
+    }
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_r_p2_upper" // same as p1_upper
+        TeamNum 2
+		StartDisabled 1
+        X "2910"
+        Y "-287"
+        Z "-60"
+    }
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_r_p2_upper_back_ramp" // in the back at the end of the right-most ramp leading upward
+        TeamNum 2
+		StartDisabled 1
+        X "4333"
+        Y "-1222"
+        Z "-60"
+    }
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_r_p2_upper_flank" // the RED-exclusive flank path leading from hatch area to the middle
+        TeamNum 2
+		StartDisabled 1
+        X "2700"
+        Y "561"
+        Z "4"
+    }
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_r_p2_upper_catwalk" // upper at middle, next to barrier, make robots jump down through it on spawn
+        TeamNum 2
+		StartDisabled 1
+        X "2650"
+        Y "-641"
+        Z "-108"
+    }
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_r_p2_upper_hologram" // next to hologram, make robots immediately jump down through it on spawn
+        TeamNum 2
+		StartDisabled 1
+        X "3465"
+        Y "-1303"
+        Z "-60"
+    }
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_r_p2_behind" // same as p1_behind
+        TeamNum 2
+		StartDisabled 1
+        X "4000"
+        Y "134"
+        Z "-380"
+    }
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_r_p2_hatch" // at the hatch
+        TeamNum 2
+		StartDisabled 1
+        X "4096"
+        Y "1482"
+        Z "-60"
+    }
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_r_p2_behind_panel" // same as p1_behind_panel
+        TeamNum 2
+		StartDisabled 1
+        X "5366"
+        Y "244"
+        Z "-60"
+    }
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_r_p3_redspawn_right" // RED spawn, next to right entrance
+        TeamNum 2
+		StartDisabled 1
+        X "4752"
+        Y "1634"
+        Z "68"
+    }
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_r_p3_redspawn_left" // RED spawn, next to left entrance
+        TeamNum 2
+		StartDisabled 1
+        X "3500"
+        Y "1656"
+        Z "68"
+    }
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_r_p3_right" // next to a red wall between the right-most ramp and the hatch area
+        TeamNum 2
+		StartDisabled 1
+        X "4350"
+        Y "-563"
+        Z "-60"
+    }
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_r_p3_behind" // same as p1_behind_panel
+        TeamNum 2
+		StartDisabled 1
+        X "5366"
+        Y "244"
+        Z "-60"
+    }
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_r_p3_hatch" // same as p2_hatch
+        TeamNum 2
+		StartDisabled 1
+        X "4096"
+        Y "1482"
+        Z "-60"
+    }
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_r_p3_behind_hatch" // behind the hatch
+        TeamNum 2
+		StartDisabled 1
+        X "4096"
+        Y "1920"
+        Z "45"
+    }
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_r_p3_upper_flank" // the same RED-exclusive flank path as in p2, but located further to the front
+        TeamNum 2
+		StartDisabled 1
+        X "2300"
+        Y "561"
+        Z "4"
+    }
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_r_p3_middle" // same as p1_middle
+		StartDisabled 1
+        TeamNum 2
+        X "2430"
+        Y "-1337"
+        Z "-400"
+    }
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_r_p3_upper_back_ramp" // same as p2_upper_back_ramp
+        TeamNum 2
+		StartDisabled 1
+        X "4333"
+        Y "-1222"
+        Z "-60"
+    }
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_r_p3_upper_front_ramp" // at the lower front of the right-most ramp leading upward
+        TeamNum 2
+		StartDisabled 1
+        X "3450"
+        Y "-1222"
+        Z "-400"
+    }
+	ExtraSpawnPoint  
+    {
+        Name "spawnbot_r_p3_upper" // same as p1_upper
+        TeamNum 2
+		StartDisabled 1
+        X "2910"
+        Y "-287"
+        Z "-60"
+    }
+	PlayerSpawnTemplate  
+	{
+		Name "PersonalBloodCount_Global"
+	}
+	PlayerSpawnTemplate  
+	{
+		Name "PersonalBloodCount_Scout"
+		Class Scout
+	}
+	PlayerSpawnTemplate  
+	{
+		Name "PersonalBloodCount_SoldierPyroDemoSpy"
+		Class Soldier
+	}
+	PlayerSpawnTemplate  
+	{
+		Name "PersonalBloodCount_SoldierPyroDemoSpy"
+		Class Pyro
+	}
+	PlayerSpawnTemplate  
+	{
+		Name "PersonalBloodCount_SoldierPyroDemoSpy"
+		Class Demoman
+	}
+	PlayerSpawnTemplate  
+	{
+		Name "PersonalBloodCount_Heavy"
+		Class Heavyweapons
+	}
+	PlayerSpawnTemplate  
+	{
+		Name "PersonalBloodCount_EngineerMedicSniper"
+		Class Engineer
+	}
+	PlayerSpawnTemplate  
+	{
+		Name "PersonalBloodCount_EngineerMedicSniper"
+		Class Medic
+	}
+	PlayerSpawnTemplate  
+	{
+		Name "PersonalBloodCount_EngineerMedicSniper"
+		Class Sniper
+	}
+	PlayerSpawnTemplate  
+	{
+		Name "PersonalBloodCount_SoldierPyroDemoSpy"
+		Class Spy
+	}
+	CustomNavFile "mvm_spacepost_rc1_peanav.nav"  
+	Templates
+	{
+		T_TFBot_Sniper_SMG
+		{
+			Class Sniper
+			Name "SMG Sniper"
+			Skill Normal
+			ClassIcon sniper_smg
+			WeaponRestrictions SecondaryOnly
+			FireSound "=70|weapons/smg_shoot.wav" // really loud when in groups
+		}
+		T_TFTemplate_REDBot
+		{
+			//ExtAttr IgnoreRealPlayers   // testing
+			FireInput   
+			{
+				Target !self
+				Action $SetData$m_flGravity
+				Param 1
+				Delay 0.1
+				Cooldown 3600
+				Repeats 0
+			}
+			AddCond  
+			{
+				Name "TF_COND_REPROGRAMMED"
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					UseHumanModel 1  
+					InterruptAction  
+					{
+						Target "blood_tank*"
+						Delay 0.1
+						Repeats 1
+						Cooldown 3600
+						Duration 0
+						WaitUntilDone 1
+					}
+				}
+				WhenNearTank_Behavior
+				{
+					InterruptAction  
+					{
+						Target "blood_tank*"
+						AimTarget "blood_tank*"
+						KillAimTarget 1
+						Delay 0.1
+						Cooldown 3600
+					}
+					UseHumanModel 1  
+					ExtAttr IgnoreBuildings  
+					ExtAttr IgnorePlayers  
+					ExtAttr IgnoreBots  
+					ExtAttr IgnoreRealPlayers  
+				}
+			}
+			CharacterAttributes
+			{
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFTemplate_REDBot_NoChaseTank
+		{
+			//ExtAttr IgnoreRealPlayers   // testing
+			UseHumanModel 1  
+			FireInput   
+			{
+				Target !self
+				Action $SetData$m_flGravity
+				Param 1
+				Delay 0.1
+				Cooldown 3600
+				Repeats 0
+			}
+			AddCond  
+			{
+				Name "TF_COND_REPROGRAMMED"
+			}
+			CharacterAttributes
+			{
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFTemplate_REDBot_MeleeNearTank
+		{
+			//ExtAttr IgnoreRealPlayers   // testing
+			InterruptAction  
+			{
+				Target "blood_tank*"
+				Delay 0.1
+				Repeats 1
+				Cooldown 3600
+				Duration 0
+				WaitUntilDone 1
+			}
+			FireInput   
+			{
+				Target !self
+				Action $SetData$m_flGravity
+				Param 1
+				Delay 0.1
+				Cooldown 3600
+				Repeats 0
+			}
+			AddCond  
+			{
+				Name "TF_COND_REPROGRAMMED"
+			}
+			ItemAttributes
+			{
+				ItemName "The Huntsman"
+				"cannot headshot" 1
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					UseHumanModel 1  
+					InterruptAction  
+					{
+						Target "blood_tank*"
+						Delay 0.1
+						Repeats 1
+						Cooldown 3600
+						Duration 0
+						WaitUntilDone 1
+					}
+				}
+				WhenNearTank_Behavior
+				{
+					InterruptAction  
+					{
+						Target "blood_tank*"
+						AimTarget "blood_tank*"
+						KillAimTarget 1
+						Delay 0.1
+						Cooldown 3600
+					}
+					UseHumanModel 1  
+					WeaponRestrictions MeleeOnly
+					ExtAttr IgnoreBuildings  
+					ExtAttr IgnorePlayers  
+					ExtAttr IgnoreBots  
+					ExtAttr IgnoreRealPlayers  
+				}
+			}
+			CharacterAttributes
+			{
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFTemplate_REDBot_SquadMember
+		{
+			//ExtAttr IgnoreRealPlayers   // testing
+			FireInput   
+			{
+				Target !self
+				Action $SetData$m_flGravity
+				Param 1
+				Delay 0.1
+				Cooldown 3600
+				Repeats 0
+			}
+			AddCond  
+			{
+				Name "TF_COND_REPROGRAMMED"
+			}
+			ItemAttributes
+			{
+				ItemName "The Huntsman"
+				"cannot headshot" 1
+			}
+			EventChangeAttributes
+			{
+				Default
+				{
+					UseHumanModel 1  
+				}
+				WhenNearTank_Behavior
+				{
+					InterruptAction  
+					{
+						Target "blood_tank*"
+						AimTarget "blood_tank*"
+						KillAimTarget 1
+						Delay 0.1
+						Cooldown 3600
+					}
+					UseHumanModel 1  
+					ExtAttr IgnoreBuildings  
+					ExtAttr IgnorePlayers  
+					ExtAttr IgnoreBots  
+					ExtAttr IgnoreRealPlayers  
+				}
+			}
+			CharacterAttributes
+			{
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFTemplate_REDBot_Medic
+		{
+			UseHumanModel 1  
+			FireInput   
+			{
+				Target !self
+				Action $SetData$m_flGravity
+				Param 1
+				Delay 0.1
+				Cooldown 3600
+				Repeats 0
+			}
+			AddCond  
+			{
+				Name "TF_COND_REPROGRAMMED"
+			}
+			CharacterAttributes
+			{
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFTemplate_REDBot_Giant
+		{
+			Tag bot_giant
+			SpawnTemplate CogDrop  
+			AlwaysGlow 1  
+			AddCond  
+			{
+				Name "TF_COND_REPROGRAMMED"
+			}
+			InterruptAction  
+			{
+				Target "blood_tank*"
+				Delay 0.1
+				Repeats 1
+				Cooldown 3600
+				Duration 0
+				WaitUntilDone 1
+			}
+			FireInput   
+			{
+				Target !self
+				Action $SetData$m_flGravity
+				Param 1
+				Delay 0.1
+				Cooldown 3600
+				Repeats 0
+			}
+			CharacterAttributes
+			{
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFTemplate_REDBot_GiantMedic
+		{
+			Tag bot_giant
+			SpawnTemplate CogDrop  
+			AlwaysGlow 1  
+			FireInput  
+			{
+				Target !self
+				Action $SetData$m_flGravity
+				Param 1
+				Delay 0.1
+				Cooldown 3600
+				Repeats 0
+			}
+			AddCond  
+			{
+				Name "TF_COND_REPROGRAMMED"
+			}
+			CharacterAttributes
+			{
+				"cannot pick up intelligence" 1
+			}
+		}
+		T_TFTemplate_REDBot_GiantScout
+		{
+			Tag bot_giant
+			Tag bot_bomb_carrier
+			AlwaysGlow 1  
+			SpawnTemplate CogDrop  
+			SpawnTemplate BombRunner  
+			AddCond  
+			{
+				Name "TF_COND_REPROGRAMMED"
+			}
+			InterruptAction  
+			{
+				Target "blood_tank*"
+				Delay 0.1
+				Repeats 1
+				Cooldown 3600
+				Duration 3600
+			}
+			FireInput   
+			{
+				Target !self
+				Action $SetData$m_flGravity
+				Param 1
+				Delay 0.1
+				Cooldown 3600
+				Repeats 0
+			}
+		}
+		T_WaveSpawn_BloodBoxes_Roamers
+		{
+			Name "BloodBoxes"
+			Where spawnbot
+			SpawnCount 3
+			MaxActive 12
+			TotalCount 75
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 7
+			TotalCurrency 0
+			Support Limited
+			PointTemplate  
+			{
+				SpawnAtEntity Where
+				Name "BloodBox"
+				SpawnCurrencyPack "blood_box"
+			}
+		}
+		T_WaveSpawn_BloodBoxes_MoneyDroppers_PT
+		{
+			Name "BloodBoxes"
+			Where spawnbot_cash
+			SpawnCount 2
+			MaxActive 150
+			TotalCount 150
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0.05
+			TotalCurrency 150
+			Support Limited
+			PointTemplate  
+			{
+				SpawnAtEntity Where
+				Origin "0 0 25"
+				Name "MoneyDrop"
+				SpawnCurrencyPack "money_drop"
+			}
+		}
+		T_WaveSpawn_BloodBoxes_MoneyDroppers
+		{
+			Name "BloodBoxes"
+			Where spawnbot_cash
+			SpawnCount 1
+			MaxActive 22
+			TotalCount 100
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0.1
+			TotalCurrency 100
+			Support Limited
+			TFBot
+			{
+				Class Scout
+				Name "Blood-Bot"
+				Tag "is_cashbot"
+				SpawnTemplate "CashBot"   
+				UseCustomModel "models/empty.mdl"  
+				AddCond  
+				{
+					Name "TF_COND_REPROGRAMMED"
+				}
+				CharacterAttributes
+				{
+					"voice pitch scale" 0
+				}
+			}
+		}
+		T_TFTemplate_BackUpperRampTags
+		{
+			Tag bot_prefer_back_lower_right_ramp
+			Tag bot_avoid_middle_upper_hologram_intolower
+			Tag bot_avoid_middle_upper_center_corridor
+			Tag bot_avoid_back_upper_behind_barrier
+		}
+		T_TFTankBoss_BloodTank
+		{
+			Health 30000 // proper
+			//Health 300000 // testing
+			Speed 50
+			Name "blood_tank"
+			StartingPathTrackNode "tank_path_a_1"
+			SpawnTemplate Tank_BloodSystem  
+			NoCrushDamage 1  
+			OnKilledOutput
+			{
+				Target boss_dead_relay
+				Action Trigger
+			}
+			OnBombDroppedOutput
+			{
+				Target boss_deploy_relay
+				Action Trigger
+			}
+		}
+		T_TFTankBoss_Barricade
+		{
+			Speed 0
+			Model  
+			{
+				Default "models/props_td/atom_bomb.mdl"
+				Damage1 "models/props_td/atom_bomb.mdl"
+				Damage2 "models/props_td/atom_bomb.mdl"
+				Damage3 "models/props_td/atom_bomb.mdl"
+				Destruction "models/props_mvm/mann_hatch_destruction_mvm_deathpit.mdl"
+				LeftTrack "models/empty.mdl"
+				RightTrack "models/empty.mdl"
+				Bomb "models/empty.mdl"
+			}
+			TeamNum 2  
+			PingSound "misc/null.wav"  
+			StartSound "misc/null.wav"  
+			DeploySound "misc/null.wav"  
+			EngineLoopSound "pl_hoodoo/alarm_clock_ticking_3.wav"  
+			ReplaceModelCollisions 1  
+			ClassIcon scout_bombrunner  
+			NoScreenShake 1  
+			DisableSmokestack 1  
+			OnKilledOutput
+			{
+				Target boss_dead_relay
+				Action Trigger
+			}
+			OnBombDroppedOutput
+			{
+				Target boss_deploy_relay
+				Action Trigger
+			}
+		}
+		T_TFBehavior_S1_MainPath
+		{
+			InterruptAction  
+			{
+				Target "400 -400 -400"
+				Delay 0.1
+				Repeats 1
+				Cooldown 3600
+				Duration 0
+				WaitUntilDone 1
+			}
+		}
+		T_TFBehavior_S1_RightFlankSquad
+		{
+			InterruptAction  
+			{
+				Target "364 -1000 -284"
+				Delay 0.1
+				Repeats 1
+				Cooldown 3600
+				Duration 0
+				WaitUntilDone 1
+				OnDoneChangeAttributes "GoToTank"
+			}
+			EventChangeAttributes
+			{
+				GoToTank
+				{
+					InterruptAction  
+					{
+						Target "blood_tank*"
+						Delay 0.1
+						Repeats 1
+						Cooldown 3600
+						Duration 3600
+					}
+				}
+			}
+		}
+		T_WaveSpawn_Stage2_Initiator
+		{
+			Name "S2_Begin"
+			Support Limited
+			FirstSpawnOutput
+			{
+				Target test_stage2_branch*
+				Action Toggle
+			}
+		}
+		T_WaveSpawn_Stage2_BeginSpawns
+		{
+			Name "S2_Init"
+			Where spawnbot_r_p2_behind
+			Support Limited
+			WaitBeforeStarting 3
+			WaitForAllDead "S2_Begin"
+			PointTemplate  
+			{
+				SpawnAtEntity Where
+				Name "StageBeginDummy"
+			}
+		}
+		T_WaveSpawn_Stage3_Initiator
+		{
+			Name "S3_Begin"
+			Support Limited
+			FirstSpawnOutput
+			{
+				Target test_stage3_branch*
+				Action Toggle
+			}
+		}
+		T_WaveSpawn_Stage3_BeginSpawns
+		{
+			Name "S3_Init"
+			Where spawnbot_r_p3_hatch
+			Support Limited
+			WaitBeforeStarting 3
+			WaitForAllDead "S3_Begin"
+			PointTemplate  
+			{
+				SpawnAtEntity Where
+				Name "StageBeginDummy"
+			}
+		}
+		T_WaveSpawn_WavePerpetuation // keep wave going until the tank deploys bomb
+		{
+			TotalCurrency 0
+			Where spawnbot_r_p3_hatch
+			SpawnCount 1
+			MaxActive 1
+			TotalCount 1
+			WaitBeforeStarting 3600
+			WaitBetweenSpawns 0
+		}
+	}
+	Mission // WAVE 1 MISSIONS
+	{
+		Objective Sniper
+		InitialCooldown 125
+		Where spawnbot_r_p1_middle
+		Where spawnbot_r_p1_upper
+		Where spawnbot_r_p3_redspawn_right
+		Where spawnbot_r_p3_upper_back_ramp
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		CooldownTime 60
+		DesiredCount 2
+		TFBot
+		{
+			Template T_TFBot_Sniper
+			Tag bot_mission_support
+			AddTemplate T_TFTemplate_REDBot_NoChaseTank  
+		}
+	}
+	Wave // WAVE 1
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		CustomMaxWaveNumber 3  
+		SpawnTemplate  
+		{
+			Name "NavAreas"
+		}
+		WaitWhenDone 65
+		Checkpoint Yes
+		WaveSpawn
+		{
+			Name "BloodTank"
+			WaitBeforeStarting 0
+			TotalCurrency 0
+			TotalCount 1
+			Support Limited
+			FirstSpawnOutput
+			{
+				Target boss_spawn_relay
+				Action Trigger
+			}
+			Tank
+			{
+				Template "T_TFTankBoss_BloodTank"  
+				ClassIcon scout  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W1_S1"
+			TotalCurrency 50
+			Where spawnbot_r_p1_middle
+			SpawnCount 6
+			MaxActive 18
+			TotalCount 18
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 3
+			RandomChoice
+			{
+				TFBot
+				{
+					Class Scout
+					Skill Hard
+					AddTemplate T_TFTemplate_REDBot  
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Melee
+					AddTemplate T_TFTemplate_REDBot  
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Melee
+					AddTemplate T_TFTemplate_REDBot  
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Melee
+					AddTemplate T_TFTemplate_REDBot  
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "W1_S1"
+			TotalCurrency 75
+			Where spawnbot_r_p1_upper
+			SpawnCount 10
+			MaxActive 20
+			TotalCount 20
+			WaitBeforeStarting 20
+			WaitBetweenSpawns 8
+			Squad
+			{
+				TFBot
+				{
+					Class Soldier
+					Skill Easy
+					Tag bot_avoid_front_lower_center_gate
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+				}
+				TFBot
+				{
+					Class Soldier
+					Skill Easy
+					Tag bot_avoid_front_lower_center_gate
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+				}
+				TFBot
+				{
+					Class Soldier
+					Skill Easy
+					Tag bot_avoid_front_lower_center_gate
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+				}
+				TFBot
+				{
+					Class Soldier
+					Skill Easy
+					Tag bot_avoid_front_lower_center_gate
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+				}
+				TFBot
+				{
+					Class Soldier
+					Skill Easy
+					Tag bot_avoid_front_lower_center_gate
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Flaregun
+					Tag bot_avoid_front_lower_center_gate
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Flaregun
+					Tag bot_avoid_front_lower_center_gate
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Flaregun
+					Tag bot_avoid_front_lower_center_gate
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Flaregun
+					Tag bot_avoid_front_lower_center_gate
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Flaregun
+					Tag bot_avoid_front_lower_center_gate
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "W1_S1"
+			TotalCurrency 75
+			Where spawnbot_r_p1_middle
+			SpawnCount 3
+			MaxActive 9
+			TotalCount 21
+			WaitBeforeStarting 40
+			WaitBetweenSpawns 6
+			TFBot
+			{
+				Class Soldier
+				Skill Easy
+				AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W1_S1"
+			TotalCurrency 100
+			Where spawnbot_r_p1_middle
+			SpawnCount 3
+			MaxActive 12
+			TotalCount 30
+			WaitBeforeStarting 40
+			WaitBetweenSpawns 4
+			TFBot
+			{
+				Template T_TFBot_Scout_Melee
+				Tag bot_avoid_front_lower_center_gate
+				Tag bot_avoid_front_upper_left_door
+				AddTemplate T_TFTemplate_REDBot  
+			}
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_Stage2_Initiator
+			WaitForAllDead "W1_S1"
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_Stage2_BeginSpawns
+		}
+		WaveSpawn
+		{
+			Name "W1_S2"
+			TotalCurrency 75
+			Where spawnbot_r_p2_upper_flank
+			SpawnCount 3
+			MaxActive 12
+			TotalCount 24
+			WaitForAllDead "S2_Init"
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 4
+			TFBot
+			{
+				Template T_TFBot_Demoman_Knight
+				AddTemplate T_TFTemplate_REDBot  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W1_S2"
+			TotalCurrency 50
+			Where spawnbot_r_p2_upper_back_ramp
+			SpawnCount 6
+			MaxActive 6
+			TotalCount 24
+			WaitForAllDead "S2_Init"
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 20
+			TFBot
+			{
+				Class Pyro
+				Skill Easy
+				Attributes AlwaysFireWeapon
+				AddTemplate T_TFTemplate_REDBot  
+				AddTemplate T_TFTemplate_BackUpperRampTags  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W1_S2_1"
+			TotalCurrency 0
+			Where spawnbot_r_p2_upper_back_ramp
+			SpawnCount 4
+			MaxActive 4
+			TotalCount 8
+			WaitForAllDead "S2_Init"
+			WaitBeforeStarting 40
+			WaitBetweenSpawns 20
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier
+					AddTemplate T_TFTemplate_REDBot_Giant  
+					AddTemplate T_TFTemplate_BackUpperRampTags  
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Flaregun
+					AddTemplate T_TFTemplate_REDBot_SquadMember  
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Flaregun
+					AddTemplate T_TFTemplate_REDBot_SquadMember  
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Flaregun
+					AddTemplate T_TFTemplate_REDBot_SquadMember  
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "W1_S2_2"
+			TotalCurrency 50
+			Where spawnbot_r_p2_upper_back_ramp
+			SpawnCount 1
+			MaxActive 12
+			TotalCount 12
+			WaitForAllSpawned "W1_S2_1"
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 2.5
+			TFBot
+			{
+				Class Pyro
+				Skill Easy
+				Attributes AlwaysFireWeapon
+				AddTemplate T_TFTemplate_REDBot  
+				AddTemplate T_TFTemplate_BackUpperRampTags  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W1_S2_FinishCheck"
+			WaitForAllDead "W1_S2"
+		}
+		WaveSpawn
+		{
+			Name "W1_S2_FinishCheck"
+			WaitForAllDead "W1_S2_1"
+		}
+		WaveSpawn
+		{
+			Name "W1_S2_FinishCheck"
+			WaitForAllDead "W1_S2_2"
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_Stage3_Initiator
+			WaitForAllDead "W1_S2_FinishCheck"
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_Stage3_BeginSpawns
+		}
+		WaveSpawn
+		{
+			Name "W1_S3"
+			TotalCurrency 75
+			Where spawnbot_r_p3_upper_flank
+			SpawnCount 11
+			MaxActive 11
+			TotalCount 11
+			WaitForAllDead "S3_Init"
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TFBot
+			{
+				Class Soldier
+				Skill Normal
+				Tag bot_avoid_middle_upper_left_corridor
+				AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W1_S3_1"
+			TotalCurrency 50
+			Where spawnbot_r_p3_redspawn_left
+			Where spawnbot_r_p3_redspawn_right
+			Where spawnbot_r_p3_upper_flank
+			SpawnCount 2
+			MaxActive 16
+			TotalCount 22
+			WaitForAllDead "S3_Init"
+			WaitBeforeStarting 12
+			WaitBetweenSpawns 2
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Pyro_Flaregun
+					Tag bot_avoid_middle_upper_left_corridor
+					AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Knight
+					Tag bot_avoid_middle_upper_left_corridor
+					AddTemplate T_TFTemplate_REDBot  
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "W1_S3_2"
+			TotalCurrency 0
+			Where spawnbot_r_p3_upper_back_ramp
+			SpawnCount 2
+			MaxActive 2
+			TotalCount 2
+			WaitForAllSpawned "W1_S3_1"
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TFBot
+			{
+				Template T_TFBot_Giant_Soldier
+				Tag bot_avoid_back_upper_behind_barrier
+				Tag bot_avoid_back_lower_right_ramp
+				AddTemplate T_TFTemplate_REDBot_Giant  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W1_Support"
+			TotalCurrency 50
+			Where spawnbot_r_p3_redspawn_left
+			Where spawnbot_r_p3_redspawn_right
+			SpawnCount 3
+			MaxActive 15
+			TotalCount 50
+			WaitForAllDead "S3_Init"
+			WaitBeforeStarting 45
+			WaitBetweenSpawns 4
+			Support Limited
+			TFBot
+			{
+				Template T_TFBot_Scout_Melee
+				AddTemplate T_TFTemplate_REDBot  
+			}
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_BloodBoxes_Roamers
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_BloodBoxes_MoneyDroppers_PT
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_WavePerpetuation
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template T_TFBot_Scout_Melee
+						AddTemplate T_TFTemplate_REDBot  
+					}
+				}
+			}
+		}
+	}
+	Mission // WAVE 2 MISSIONS
+	{
+		Objective Spy
+		InitialCooldown 30
+		Where spawnbot_r_p1_middle
+		BeginAtWave 2
+		RunForThisManyWaves 1
+		CooldownTime 75
+		DesiredCount 2
+		TFBot
+		{
+			Template T_TFBot_Spy
+			Tag bot_mission_support
+			AddTemplate T_TFTemplate_REDBot_NoChaseTank  
+		}
+	}
+	Wave // WAVE 2
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		CustomMaxWaveNumber 3  
+		SpawnTemplate  
+		{
+			Name "NavAreas"
+		}
+		WaitWhenDone 65
+		Checkpoint Yes
+		WaveSpawn
+		{
+			Name "BloodTank"
+			WaitBeforeStarting 0
+			TotalCurrency 0
+			TotalCount 1
+			Support Limited
+			Tank
+			{
+				Template "T_TFTankBoss_BloodTank"  
+				ClassIcon scout  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W2_S1_1"
+			TotalCurrency 0
+			Where spawnbot_r_p1_behind
+			SpawnCount 4
+			MaxActive 4
+			TotalCount 4
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Pyro
+					Tag bot_avoid_back_upper_infrontof_barrier
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_Giant  
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic
+					Tag bot_avoid_back_upper_infrontof_barrier
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_Medic  
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic
+					Tag bot_avoid_back_upper_infrontof_barrier
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_Medic  
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic
+					Tag bot_avoid_back_upper_infrontof_barrier
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_Medic  
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "W2_S1_2"
+			TotalCurrency 0
+			Where spawnbot_r_p1_behind_panel
+			SpawnCount 4
+			MaxActive 8
+			TotalCount 8
+			WaitForAllDead "W2_S1_1"
+			WaitBeforeStarting 3
+			WaitBetweenSpawns 21
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Pyro
+					Attributes AlwaysFireWeapon
+					Tag bot_avoid_back_upper_infrontof_barrier
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_Giant  
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Tag bot_avoid_back_upper_infrontof_barrier
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_Medic  
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Tag bot_avoid_back_upper_infrontof_barrier
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_Medic  
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Tag bot_avoid_back_upper_infrontof_barrier
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_Medic  
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "W2_S1"
+			TotalCurrency 75
+			Where spawnbot_r_p1_upper
+			SpawnCount 4
+			MaxActive 20
+			TotalCount 20
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 2
+			TFBot
+			{
+				Template T_TFBot_Sniper_Huntsman
+				Tag bot_avoid_front_lower_center_gate
+				Tag bot_avoid_middle_upper_railing_dropdown
+				AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W2_S1"
+			TotalCurrency 50
+			Where spawnbot_r_p1_flank_old
+			SpawnCount 3
+			MaxActive 6
+			TotalCount 18
+			WaitBeforeStarting 40
+			WaitBetweenSpawns 10
+			TFBot
+			{
+				Template T_TFBot_Sniper_Huntsman
+				Tag bot_avoid_front_lower_center_gate
+				Tag bot_avoid_front_upper_left_door
+				AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W2_S1"
+			TotalCurrency 75
+			Where spawnbot_r_p1_flank_old
+			SpawnCount 4
+			MaxActive 8
+			TotalCount 24
+			WaitBeforeStarting 40
+			WaitBetweenSpawns 8
+			TFBot
+			{
+				Template T_TFBot_Heavyweapons_Heavyweight_Champ
+				Tag bot_avoid_front_lower_center_gate
+				Tag bot_avoid_front_upper_left_door
+				AddTemplate T_TFTemplate_REDBot  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W2_S1_FinishCheck"
+			WaitForAllDead "W2_S1"
+		}
+		WaveSpawn
+		{
+			Name "W2_S1_FinishCheck"
+			WaitForAllDead "W2_S1_1"
+		}
+		WaveSpawn
+		{
+			Name "W2_S1_FinishCheck"
+			WaitForAllDead "W2_S1_2"
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_Stage2_Initiator
+			WaitForAllDead "W2_S1_FinishCheck"
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_Stage2_BeginSpawns
+		}
+		WaveSpawn
+		{
+			Name "W2_S2"
+			WaitBeforeStarting 0
+			TotalCurrency 0
+			TotalCount 1
+			WaitForAllDead "S2_Init"
+			FirstSpawnOutput
+			{
+				Target first_bomb_sound*
+				Action PickRandomShuffle
+			}
+			Tank
+			{
+				Template "T_TFTankBoss_Barricade"  
+				Name "p12_barricade"
+				Health 8000
+				StartingPathTrackNode "bomb_path_a12_1"
+				SpawnTemplate P12_Bomb  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W2_S2_1"
+			TotalCurrency 0
+			Where spawnbot_r_p2_upper
+			SpawnCount 1
+			MaxActive 2
+			TotalCount 2
+			WaitForAllDead "S2_Init"
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 20
+			TFBot
+			{
+				Template T_TFBot_Giant_Demoman
+				Tag bot_avoid_middle_upper_railing_dropdown
+				Tag bot_avoid_middle_upper_hologram_intolower
+				Tag bot_avoid_back_lower_right_ramp
+				AddTemplate T_TFTemplate_REDBot_Giant  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W2_S2"
+			TotalCurrency 50
+			Where spawnbot_r_p2_upper_hologram
+			Where spawnbot_r_p2_upper_catwalk
+			SpawnCount 3
+			MaxActive 6
+			TotalCount 12
+			WaitForAllDead "S2_Init"
+			WaitBeforeStarting 15
+			WaitBetweenSpawns 15
+			TFBot
+			{
+				Template T_TFBot_Heavyweapons_Heavyweight_Champ
+				Tag bot_avoid_back_upper_infrontof_barrier
+				AddTemplate T_TFTemplate_REDBot  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W2_S2"
+			TotalCurrency 50
+			Where spawnbot_r_p2_upper_flank
+			SpawnCount 6
+			MaxActive 12
+			TotalCount 18
+			WaitForAllDead "S2_Init"
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 20
+			TFBot
+			{
+				Template T_TFBot_Heavyweapons_Shotgun
+				Tag bot_avoid_back_upper_enterhatchfrom_leftflank
+				Tag bot_avoid_back_upper_infrontof_barrier
+				AddTemplate T_TFTemplate_REDBot  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W2_S2"
+			TotalCurrency 0
+			Where spawnbot_r_p2_upper_back_ramp
+			SpawnCount 4
+			MaxActive 4
+			TotalCount 4
+			WaitForAllDead "W2_S2_1"
+			WaitBeforeStarting 3
+			WaitBetweenSpawns 0
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Demoman
+					AddTemplate T_TFTemplate_REDBot_Giant  
+					AddTemplate T_TFTemplate_BackUpperRampTags  
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					AddTemplate T_TFTemplate_REDBot_Medic  
+					AddTemplate T_TFTemplate_BackUpperRampTags  
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					AddTemplate T_TFTemplate_REDBot_Medic  
+					AddTemplate T_TFTemplate_BackUpperRampTags  
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					AddTemplate T_TFTemplate_REDBot_Medic  
+					AddTemplate T_TFTemplate_BackUpperRampTags  
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "W2_S2_FinishCheck"
+			WaitForAllDead "W2_S2"
+		}
+		WaveSpawn
+		{
+			Name "W2_S2_FinishCheck"
+			WaitForAllDead "W2_S2_1"
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_Stage3_Initiator
+			WaitForAllDead "W2_S2_FinishCheck"
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_Stage3_BeginSpawns
+		}
+		WaveSpawn
+		{
+			Name "W2_S3"
+			WaitBeforeStarting 0
+			TotalCurrency 0
+			TotalCount 1
+			WaitForAllDead "S3_Init"
+			FirstSpawnOutput
+			{
+				Target another_bomb_sound*
+				Action PickRandomShuffle
+			}
+			Tank
+			{
+				Template "T_TFTankBoss_Barricade"  
+				Name "p59_barricade"
+				Health 10000
+				StartingPathTrackNode "bomb_path_a59_1"
+				SpawnTemplate Hatch_Bomb  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W2_S3"
+			TotalCurrency 75
+			Where spawnbot_r_p3_redspawn_left
+			Where spawnbot_r_p3_redspawn_right
+			SpawnCount 5
+			MaxActive 5
+			TotalCount 24
+			WaitForAllDead "S3_Init"
+			WaitBeforeStarting 15
+			WaitBetweenSpawns 15
+			TFBot
+			{
+				Template T_TFBot_Heavyweapons_Shotgun
+				AddTemplate T_TFTemplate_REDBot  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W2_S3"
+			TotalCurrency 75
+			Where spawnbot_r_p3_redspawn_left
+			Where spawnbot_r_p3_redspawn_right
+			SpawnCount 4
+			MaxActive 8
+			TotalCount 16
+			WaitForAllDead "S3_Init"
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 10
+			TFBot
+			{
+				Class Heavyweapons
+				Skill Easy
+				AddTemplate T_TFTemplate_REDBot  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W2_S3"
+			TotalCurrency 0
+			Where spawnbot_r_p3_upper_back_ramp
+			SpawnCount 6
+			MaxActive 6
+			TotalCount 6
+			WaitForAllDead "S3_Init"
+			WaitBeforeStarting 40
+			WaitBetweenSpawns 0
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Demoman
+					Tag bot_avoid_back_upper_behind_barrier
+					Tag bot_avoid_back_lower_right_ramp
+					AddTemplate T_TFTemplate_REDBot_Giant  
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+					AddTemplate T_TFTemplate_REDBot_SquadMember  
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+					AddTemplate T_TFTemplate_REDBot_SquadMember  
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+					AddTemplate T_TFTemplate_REDBot_SquadMember  
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+					AddTemplate T_TFTemplate_REDBot_SquadMember  
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+					AddTemplate T_TFTemplate_REDBot_SquadMember  
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "W2_S3"
+			TotalCurrency 0
+			Where spawnbot_r_p3_upper_back_ramp
+			SpawnCount 6
+			MaxActive 6
+			TotalCount 6
+			WaitForAllDead "S3_Init"
+			WaitBeforeStarting 60
+			WaitBetweenSpawns 0
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Pyro
+					Tag bot_avoid_back_upper_behind_barrier
+					Tag bot_avoid_back_lower_right_ramp
+					AddTemplate T_TFTemplate_REDBot_Giant  
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+					AddTemplate T_TFTemplate_REDBot_SquadMember  
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+					AddTemplate T_TFTemplate_REDBot_SquadMember  
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+					AddTemplate T_TFTemplate_REDBot_SquadMember  
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+					AddTemplate T_TFTemplate_REDBot_SquadMember  
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+					AddTemplate T_TFTemplate_REDBot_SquadMember  
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_BloodBoxes_Roamers
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_BloodBoxes_MoneyDroppers_PT
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_WavePerpetuation
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template T_TFBot_Scout_Melee
+						AddTemplate T_TFTemplate_REDBot  
+					}
+				}
+			}
+		}
+	}
+	Mission // WAVE 3 MISSIONS
+	{
+		Objective Engineer
+		InitialCooldown 45
+		Where spawnbot_r_p1_middle
+		Where spawnbot_r_p1_upper
+		Where spawnbot_r_p3_redspawn_right
+		Where spawnbot_r_p3_upper_back_ramp
+		BeginAtWave 3
+		RunForThisManyWaves 1
+		CooldownTime 75
+		DesiredCount 1
+		TFBot
+		{
+			Template T_TFBot_Engineer_Sentry_Tele_Battle
+			Tag bot_mission_support
+			Item "TF_WEAPON_WRENCH_REDBOT"
+			ExtAttr BuildDispenserAsTeleporter  
+			AddTemplate T_TFTemplate_REDBot_NoChaseTank  
+		}
+	}
+	Wave // WAVE 3
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		CustomMaxWaveNumber 3  
+		SpawnTemplate  
+		{
+			Name "NavAreas"
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		WaitWhenDone 65
+		Checkpoint Yes
+		WaveSpawn
+		{
+			Name "BloodTank"
+			WaitBeforeStarting 0
+			TotalCurrency 0
+			TotalCount 1
+			Support Limited
+			Tank
+			{
+				Template "T_TFTankBoss_BloodTank"  
+				ClassIcon scout  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W3_S1_1"
+			TotalCurrency 50
+			Where spawnbot_r_p1_upper_right
+			SpawnCount 3
+			MaxActive 12
+			TotalCount 12
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 2
+			TFBot
+			{
+				Template T_TFBot_Demo_Burst
+				Tag bot_avoid_middle_upper_hologram_intolower
+				Tag bot_avoid_front_lower_right_flank
+				Tag bot_avoid_front_lower_center_gate
+				Tag bot_prefer_front_upper_left_door
+				Tag bot_avoid_middle_upper_left_corridor
+				AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W3_S1"
+			TotalCurrency 25
+			Where spawnbot_r_p1_middle
+			SpawnCount 8
+			MaxActive 8
+			TotalCount 8
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 0
+			TFBot
+			{
+				Template T_TFBot_Sniper_SMG
+				AddTemplate T_TFTemplate_REDBot  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W3_S1"
+			TotalCurrency 100
+			Where spawnbot_r_p1_upper
+			SpawnCount 5
+			MaxActive 10
+			TotalCount 25
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 10
+			TFBot
+			{
+				Class Scout
+				Skill Normal
+				AddTemplate T_TFTemplate_REDBot  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W3_S1"
+			WaitBeforeStarting 3
+			TotalCurrency 0
+			TotalCount 1
+			WaitForAllDead "W3_S1_1"
+			FirstSpawnOutput
+			{
+				Target first_bomb_sound*
+				Action PickRandomShuffle
+			}
+			Tank
+			{
+				Template "T_TFTankBoss_Barricade"  
+				Name "p7_barricade"
+				Health 8000
+				StartingPathTrackNode "bomb_path_a7_1"
+				SpawnTemplate P7_Bomb  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W3_S1_2"
+			TotalCurrency 0
+			Where spawnbot_r_p1_upper_right
+			SpawnCount 1
+			MaxActive 1
+			TotalCount 1
+			WaitForAllDead "W3_S1_1"
+			WaitBeforeStarting 8
+			WaitBetweenSpawns 0
+			TFBot
+			{
+				Template T_TFBot_Giant_Heavyweapons
+				Tag bot_avoid_middle_upper_hologram_intolower
+				Tag bot_avoid_front_lower_right_flank
+				Tag bot_avoid_front_lower_center_gate
+				Tag bot_prefer_front_upper_left_door
+				Tag bot_avoid_middle_upper_left_corridor
+				AddTemplate T_TFTemplate_REDBot_Giant  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W3_S1_3"
+			TotalCurrency 0
+			Where spawnbot_r_p1_upper_right
+			SpawnCount 1
+			MaxActive 1
+			TotalCount 1
+			WaitForAllDead "W3_S1_2"
+			WaitBeforeStarting 3
+			WaitBetweenSpawns 0
+			TFBot
+			{
+				Template T_TFBot_Giant_Heavyweapons
+				Tag bot_avoid_middle_upper_hologram_intolower
+				Tag bot_avoid_back_upper_infrontof_barrier
+				Tag bot_avoid_front_lower_center_gate
+				AddTemplate T_TFTemplate_REDBot_Giant  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W3_S1_3"
+			TotalCurrency 50
+			Where spawnbot_r_p1_middle
+			SpawnCount 4
+			MaxActive 8
+			TotalCount 8
+			WaitForAllDead "W3_S1_2"
+			WaitBeforeStarting 3
+			WaitBetweenSpawns 12
+			TFBot
+			{
+				Template T_TFBot_Demo_Burst
+				AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W3_S1_FinishCheck"
+			WaitForAllDead "W3_S1"
+		}
+		WaveSpawn
+		{
+			Name "W3_S1_FinishCheck"
+			WaitForAllDead "W3_S1_1"
+		}
+		WaveSpawn
+		{
+			Name "W3_S1_FinishCheck"
+			WaitForAllDead "W3_S1_2"
+		}
+		WaveSpawn
+		{
+			Name "W3_S1_FinishCheck"
+			WaitForAllDead "W3_S1_3"
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_Stage2_Initiator
+			WaitForAllDead "W3_S1_FinishCheck"
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_Stage2_BeginSpawns
+		}
+		WaveSpawn
+		{
+			Name "W3_S2_1"
+			TotalCurrency 0
+			Where spawnbot_r_p2_hatch
+			SpawnCount 1
+			MaxActive 1
+			TotalCount 1
+			WaitForAllDead "S2_Init"
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TFBot
+			{
+				Template T_TFBot_Giant_Scout_Fast
+				AddTemplate T_TFTemplate_REDBot_GiantScout  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W3_S2"
+			TotalCurrency 100
+			Where spawnbot_r_p2_upper_back_ramp
+			SpawnCount 4
+			MaxActive 12
+			TotalCount 32
+			WaitForAllDead "S2_Init"
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 10
+			TFBot
+			{
+				Template T_TFBot_Sniper_SMG
+				AddTemplate T_TFTemplate_REDBot  
+				AddTemplate T_TFTemplate_BackUpperRampTags  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W3_S2"
+			WaitBeforeStarting 3
+			TotalCurrency 0
+			TotalCount 1
+			WaitForAllDead "S2_Init"
+			FirstSpawnOutput
+			{
+				Target another_bomb_sound*
+				Action PickRandomShuffle
+			}
+			Tank
+			{
+				Template "T_TFTankBoss_Barricade"  
+				Name "p12_barricade"
+				Health 8000
+				StartingPathTrackNode "bomb_path_a12_1"
+				SpawnTemplate P12_Bomb  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W3_S2_2"
+			TotalCurrency 0
+			Where spawnbot_r_p2_hatch
+			SpawnCount 1
+			MaxActive 2
+			TotalCount 2
+			WaitForAllDead "W3_S2_1"
+			WaitBeforeStarting 12
+			WaitBetweenSpawns 8
+			TFBot
+			{
+				Template T_TFBot_Giant_Scout_Fast
+				AddTemplate T_TFTemplate_REDBot_GiantScout  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W3_S2_3"
+			TotalCurrency 0
+			Where spawnbot_r_p2_hatch
+			SpawnCount 1
+			MaxActive 1
+			TotalCount 1
+			WaitForAllDead "W3_S2_2"
+			WaitBeforeStarting 8
+			WaitBetweenSpawns 0
+			TFBot
+			{
+				Template T_TFBot_Giant_Scout_Baseball
+				AddTemplate T_TFTemplate_REDBot_GiantScout  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W3_S2_FinishCheck"
+			WaitForAllDead "W3_S2"
+		}
+		WaveSpawn
+		{
+			Name "W3_S2_FinishCheck"
+			WaitForAllDead "W3_S2_1"
+		}
+		WaveSpawn
+		{
+			Name "W3_S2_FinishCheck"
+			WaitForAllDead "W3_S2_2"
+		}
+		WaveSpawn
+		{
+			Name "W3_S2_FinishCheck"
+			WaitForAllDead "W3_S2_3"
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_Stage3_Initiator
+			WaitForAllDead "W3_S2_FinishCheck"
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_Stage3_BeginSpawns
+		}
+		WaveSpawn
+		{
+			Name "W3_S3"
+			TotalCurrency 0
+			Where spawnbot_r_p3_upper_back_ramp
+			SpawnCount 6
+			MaxActive 6
+			TotalCount 6
+			WaitForAllDead "S3_Init"
+			WaitBeforeStarting 3
+			WaitBetweenSpawns 0
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons
+					Tag bot_prefer_back_upper_behind_barrier
+					Tag bot_avoid_back_lower_right_ramp
+					AddTemplate T_TFTemplate_REDBot_Giant  
+				}
+				TFBot
+				{
+					Template T_TFBot_Demo_Burst
+					AddTemplate T_TFTemplate_REDBot_SquadMember  
+				}
+				TFBot
+				{
+					Template T_TFBot_Demo_Burst
+					AddTemplate T_TFTemplate_REDBot_SquadMember  
+				}
+				TFBot
+				{
+					Template T_TFBot_Demo_Burst
+					AddTemplate T_TFTemplate_REDBot_SquadMember  
+				}
+				TFBot
+				{
+					Template T_TFBot_Demo_Burst
+					AddTemplate T_TFTemplate_REDBot_SquadMember  
+				}
+				TFBot
+				{
+					Template T_TFBot_Demo_Burst
+					AddTemplate T_TFTemplate_REDBot_SquadMember  
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "W3_S3"
+			TotalCurrency 75
+			Where spawnbot_r_p3_redspawn_left
+			Where spawnbot_r_p3_redspawn_right
+			SpawnCount 3
+			MaxActive 9
+			TotalCount 15
+			WaitForAllDead "S3_Init"
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 10
+			TFBot
+			{
+				Class Scout
+				Skill Normal
+				AddTemplate T_TFTemplate_REDBot  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W3_S3_1"
+			TotalCurrency 0
+			Where spawnbot_r_p3_upper
+			SpawnCount 6
+			MaxActive 6
+			TotalCount 6
+			WaitForAllDead "S3_Init"
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 0
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons
+					Tag bot_avoid_middle_upper_left_corridor
+					Tag bot_avoid_back_upper_infrontof_barrier
+					Tag bot_avoid_back_upper_behind_barrier
+					AddTemplate T_TFTemplate_REDBot_Giant  
+				}
+				TFBot
+				{
+					Template T_TFBot_Demo_Burst
+					AddTemplate T_TFTemplate_REDBot_SquadMember  
+				}
+				TFBot
+				{
+					Template T_TFBot_Demo_Burst
+					AddTemplate T_TFTemplate_REDBot_SquadMember  
+				}
+				TFBot
+				{
+					Template T_TFBot_Demo_Burst
+					AddTemplate T_TFTemplate_REDBot_SquadMember  
+				}
+				TFBot
+				{
+					Template T_TFBot_Demo_Burst
+					AddTemplate T_TFTemplate_REDBot_SquadMember  
+				}
+				TFBot
+				{
+					Template T_TFBot_Demo_Burst
+					AddTemplate T_TFTemplate_REDBot_SquadMember  
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "W3_S3"
+			TotalCurrency 50
+			Where spawnbot_r_p3_redspawn_left
+			Where spawnbot_r_p3_redspawn_right
+			SpawnCount 6
+			MaxActive 12
+			TotalCount 16
+			WaitForAllDead "S3_Init"
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 15
+			Squad
+			{
+				NoFormation 1  
+				TFBot
+				{
+					Template T_TFBot_Sniper_SMG
+					AddTemplate T_TFTemplate_REDBot  
+				}
+				TFBot
+				{
+					Class Scout
+					Skill Normal
+					AddTemplate T_TFTemplate_REDBot  
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "W3_S3_2"
+			TotalCurrency 0
+			Where spawnbot_r_p3_upper
+			SpawnCount 1
+			MaxActive 1
+			TotalCount 1
+			WaitForAllDead "W3_S3_1"
+			WaitBeforeStarting 3
+			WaitBetweenSpawns 0
+			TFBot
+			{
+				Template T_TFBot_Giant_Scout_Baseball
+				AddTemplate T_TFTemplate_REDBot_GiantScout  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W3_Support"
+			TotalCurrency 50
+			Where spawnbot_r_p3_redspawn_left
+			Where spawnbot_r_p3_redspawn_right
+			SpawnCount 3
+			MaxActive 12
+			TotalCount 50
+			WaitForAllDead "W3_S3_1"
+			WaitBeforeStarting 3
+			WaitBetweenSpawns 4
+			Support Limited
+			TFBot
+			{
+				Template T_TFBot_Scout_Melee
+				AddTemplate T_TFTemplate_REDBot  
+			}
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_BloodBoxes_Roamers
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_BloodBoxes_MoneyDroppers_PT
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_WavePerpetuation
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template T_TFBot_Scout_Melee
+						AddTemplate T_TFTemplate_REDBot  
+					}
+				}
+			}
+		}
+	}
+	Mission // WAVE 4 MISSIONS
+	{
+		Objective Sniper
+		InitialCooldown 125
+		Where spawnbot_r_p1_middle
+		Where spawnbot_r_p1_upper
+		Where spawnbot_r_p3_redspawn_right
+		Where spawnbot_r_p3_upper_back_ramp
+		BeginAtWave 4
+		RunForThisManyWaves 1
+		CooldownTime 60
+		DesiredCount 2
+		TFBot
+		{
+			Template T_TFBot_Sniper
+			Tag bot_mission_support
+			AddTemplate T_TFTemplate_REDBot_NoChaseTank  
+		}
+	}
+	Wave // WAVE 4
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		CustomWaveNumber 1  
+		CustomMaxWaveNumber 3  
+		SpawnTemplate  
+		{
+			Name "NavAreas"
+		}
+		WaitWhenDone 65
+		Checkpoint Yes
+		WaveSpawn
+		{
+			Name "BloodTank"
+			WaitBeforeStarting 0
+			TotalCurrency 0
+			TotalCount 1
+			Support Limited
+			FirstSpawnOutput
+			{
+				Target boss_spawn_relay
+				Action Trigger
+			}
+			Tank
+			{
+				Template "T_TFTankBoss_BloodTank"  
+				ClassIcon scout  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W1_S1"
+			TotalCurrency 50
+			Where spawnbot_r_p1_middle
+			SpawnCount 6
+			MaxActive 18
+			TotalCount 18
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 3
+			RandomChoice
+			{
+				TFBot
+				{
+					Class Scout
+					Skill Hard
+					AddTemplate T_TFTemplate_REDBot  
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Melee
+					AddTemplate T_TFTemplate_REDBot  
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Melee
+					AddTemplate T_TFTemplate_REDBot  
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Melee
+					AddTemplate T_TFTemplate_REDBot  
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "W1_S1"
+			TotalCurrency 75
+			Where spawnbot_r_p1_upper
+			SpawnCount 10
+			MaxActive 20
+			TotalCount 20
+			WaitBeforeStarting 20
+			WaitBetweenSpawns 8
+			Squad
+			{
+				TFBot
+				{
+					Class Soldier
+					Skill Easy
+					Tag bot_avoid_front_lower_center_gate
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+				}
+				TFBot
+				{
+					Class Soldier
+					Skill Easy
+					Tag bot_avoid_front_lower_center_gate
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+				}
+				TFBot
+				{
+					Class Soldier
+					Skill Easy
+					Tag bot_avoid_front_lower_center_gate
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+				}
+				TFBot
+				{
+					Class Soldier
+					Skill Easy
+					Tag bot_avoid_front_lower_center_gate
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+				}
+				TFBot
+				{
+					Class Soldier
+					Skill Easy
+					Tag bot_avoid_front_lower_center_gate
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Flaregun
+					Tag bot_avoid_front_lower_center_gate
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Flaregun
+					Tag bot_avoid_front_lower_center_gate
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Flaregun
+					Tag bot_avoid_front_lower_center_gate
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Flaregun
+					Tag bot_avoid_front_lower_center_gate
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Flaregun
+					Tag bot_avoid_front_lower_center_gate
+					Tag bot_avoid_front_lower_right_flank
+					AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "W1_S1"
+			TotalCurrency 50
+			Where spawnbot_r_p1_middle
+			SpawnCount 3
+			MaxActive 9
+			TotalCount 21
+			WaitBeforeStarting 40
+			WaitBetweenSpawns 6
+			TFBot
+			{
+				Class Soldier
+				Skill Easy
+				AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W1_S1"
+			TotalCurrency 100
+			Where spawnbot_r_p1_middle
+			SpawnCount 3
+			MaxActive 12
+			TotalCount 30
+			WaitBeforeStarting 40
+			WaitBetweenSpawns 4
+			TFBot
+			{
+				Template T_TFBot_Scout_Melee
+				Tag bot_avoid_front_lower_center_gate
+				Tag bot_avoid_front_upper_left_door
+				AddTemplate T_TFTemplate_REDBot  
+			}
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_Stage2_Initiator
+			WaitForAllDead "W1_S1"
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_Stage2_BeginSpawns
+		}
+		WaveSpawn
+		{
+			Name "W1_S2"
+			TotalCurrency 50
+			Where spawnbot_r_p2_upper_flank
+			SpawnCount 3
+			MaxActive 12
+			TotalCount 24
+			WaitForAllDead "S2_Init"
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 4
+			TFBot
+			{
+				Template T_TFBot_Demoman_Knight
+				Tag bot_avoid_back_upper_enterhatchfrom_leftflank
+				AddTemplate T_TFTemplate_REDBot  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W1_S2"
+			TotalCurrency 50
+			Where spawnbot_r_p2_upper_back_ramp
+			SpawnCount 6
+			MaxActive 6
+			TotalCount 24
+			WaitForAllDead "S2_Init"
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 20
+			TFBot
+			{
+				Class Pyro
+				Skill Easy
+				Attributes AlwaysFireWeapon
+				AddTemplate T_TFTemplate_REDBot  
+				AddTemplate T_TFTemplate_BackUpperRampTags  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W1_S2_1"
+			TotalCurrency 0
+			Where spawnbot_r_p2_upper_back_ramp
+			SpawnCount 4
+			MaxActive 4
+			TotalCount 8
+			WaitForAllDead "S2_Init"
+			WaitBeforeStarting 40
+			WaitBetweenSpawns 20
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier
+					AddTemplate T_TFTemplate_REDBot_Giant  
+					AddTemplate T_TFTemplate_BackUpperRampTags  
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Flaregun
+					AddTemplate T_TFTemplate_REDBot_SquadMember  
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Flaregun
+					AddTemplate T_TFTemplate_REDBot_SquadMember  
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Flaregun
+					AddTemplate T_TFTemplate_REDBot_SquadMember  
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "W1_S2_2"
+			TotalCurrency 50
+			Where spawnbot_r_p2_upper_back_ramp
+			SpawnCount 1
+			MaxActive 12
+			TotalCount 12
+			WaitForAllSpawned "W1_S2_1"
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 2.5
+			TFBot
+			{
+				Class Pyro
+				Skill Easy
+				Attributes AlwaysFireWeapon
+				AddTemplate T_TFTemplate_REDBot  
+				AddTemplate T_TFTemplate_BackUpperRampTags  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W1_S2_FinishCheck"
+			WaitForAllDead "W1_S2"
+		}
+		WaveSpawn
+		{
+			Name "W1_S2_FinishCheck"
+			WaitForAllDead "W1_S2_1"
+		}
+		WaveSpawn
+		{
+			Name "W1_S2_FinishCheck"
+			WaitForAllDead "W1_S2_2"
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_Stage3_Initiator
+			WaitForAllDead "W1_S2_FinishCheck"
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_Stage3_BeginSpawns
+		}
+		WaveSpawn
+		{
+			Name "W1_S3"
+			TotalCurrency 50
+			Where spawnbot_r_p3_upper_flank
+			SpawnCount 11
+			MaxActive 11
+			TotalCount 11
+			WaitForAllDead "S3_Init"
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TFBot
+			{
+				Class Soldier
+				Skill Normal
+				Tag bot_avoid_middle_upper_left_corridor
+				AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W1_S3_1"
+			TotalCurrency 75
+			Where spawnbot_r_p3_redspawn_left
+			Where spawnbot_r_p3_redspawn_right
+			Where spawnbot_r_p3_upper_flank
+			SpawnCount 2
+			MaxActive 16
+			TotalCount 22
+			WaitForAllDead "S3_Init"
+			WaitBeforeStarting 12
+			WaitBetweenSpawns 2
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Pyro_Flaregun
+					Tag bot_avoid_middle_upper_left_corridor
+					AddTemplate T_TFTemplate_REDBot_MeleeNearTank  
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Knight
+					Tag bot_avoid_middle_upper_left_corridor
+					AddTemplate T_TFTemplate_REDBot  
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "W1_S3_2"
+			TotalCurrency 0
+			Where spawnbot_r_p3_upper_back_ramp
+			SpawnCount 2
+			MaxActive 2
+			TotalCount 2
+			WaitForAllSpawned "W1_S3_1"
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TFBot
+			{
+				Template T_TFBot_Giant_Soldier
+				Tag bot_avoid_back_upper_behind_barrier
+				Tag bot_avoid_back_lower_right_ramp
+				AddTemplate T_TFTemplate_REDBot_Giant  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W1_Support"
+			TotalCurrency 50
+			Where spawnbot_r_p3_redspawn_left
+			Where spawnbot_r_p3_redspawn_right
+			SpawnCount 3
+			MaxActive 15
+			TotalCount 50
+			WaitForAllDead "S3_Init"
+			WaitBeforeStarting 45
+			WaitBetweenSpawns 4
+			Support Limited
+			TFBot
+			{
+				Template T_TFBot_Scout_Melee
+				AddTemplate T_TFTemplate_REDBot  
+			}
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_BloodBoxes_Roamers
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_BloodBoxes_MoneyDroppers_PT
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_WavePerpetuation
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template T_TFBot_Scout_Melee
+						AddTemplate T_TFTemplate_REDBot  
+					}
+				}
+			}
+		}
+	}
+	Wave // DEBUG
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		CustomWaveNumber 42  
+		CustomMaxWaveNumber 0  
+		SpawnTemplate  
+		{
+			Name "NavAreas"
+		}
+		WaitWhenDone 65
+		Checkpoint Yes
+		WaveSpawn
+		{
+			Name "BloodTank"
+			WaitBeforeStarting 0
+			TotalCurrency 0
+			TotalCount 1
+			Support Limited
+			Tank
+			{
+				Template "T_TFTankBoss_BloodTank"  
+				ClassIcon scout_bonk  
+			}
+		}
+		WaveSpawn
+		{
+			Name "W3_S2_1"
+			TotalCurrency 0
+			Where spawnbot_r_p3_upper
+			SpawnCount 1
+			MaxActive 1
+			TotalCount 100
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TFBot
+			{
+				Template T_TFBot_Giant_Heavyweapons
+				Tag bot_avoid_middle_upper_left_corridor
+				Tag bot_avoid_back_upper_infrontof_barrier
+				Tag bot_avoid_back_upper_behind_barrier
+				AddTemplate T_TFTemplate_REDBot_Giant  
+			}
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_BloodBoxes_Roamers
+		}
+		WaveSpawn
+		{
+			Template T_WaveSpawn_BloodBoxes_MoneyDroppers_PT
+		}
+	}
+}

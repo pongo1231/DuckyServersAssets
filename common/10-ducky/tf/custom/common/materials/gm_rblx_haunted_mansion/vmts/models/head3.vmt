@@ -1,0 +1,5 @@
+VertexLitGeneric
+{
+	$basetexture gm_rblx_haunted_mansion\colors\plastic_196_40_28
+	$surfaceprop plastic
+}

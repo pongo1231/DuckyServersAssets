@@ -1,0 +1,1405 @@
+#base waffle's_custom.pop
+#base robot_standard.pop
+//#base robot_giant.pop
+//#base robot_click.pop
+//#base robot_click_giant.pop
+//#base Nuclear_Powered_Robot_Emporium.pop
+Waveschedule
+{
+    NoThrillerTaunt 1
+    ExtendedUpgrades 0
+    Templates
+    {
+        Observer
+        {
+            Class Spy
+            Weaponrestrictions Secondaryonly
+            Item "The Red-Tape Recorder"
+            Item "Shutterbug"
+            Item "The Megapixel Beard"
+            Health 99999
+            Attributes Miniboss
+            Scale 1
+            ItemAttributes
+            {
+                Itemname "The Red-Tape Recorder"
+                "cannot disguise" 1
+            }
+        }
+        Master_Bison
+        {
+            Class Soldier
+            Classicon soldier_bison_rng
+            Name "The Master Bison"
+            Health 100000
+            Weaponrestrictions SecondaryOnly
+            Attributes Miniboss
+            Attributes Usebosshealthbar
+            Item "The Righteous Bison"
+            ItemAttributes
+            {
+                Itemname "The Righteous Bison"
+				"fire rate bonus" -1
+				"faster reload rate" -1
+                "mult projectile count" 5
+                "projectile spread angle penalty" 10
+                "projectile speed decreased" .35
+                "set item tint rgb" 15132390
+            }
+            CharacterAttributes
+			{
+				"move speed bonus"	0.2
+				"damage force reduction" 0.2
+				"airblast vulnerability multiplier" 0.2
+				"override footstep sound set" 3
+			}
+        }
+        T_TFBot_Meme_SentryBuster_Bomber_Spam
+		{
+			Class Demoman
+			Name "A+Drew Buster"
+			ClassIcon sentry_buster
+			Skill Expert
+			Health 2500
+			WeaponRestrictions PrimaryOnly
+			Tag	bot_giant
+			Attributes "MiniBoss"
+			Attributes "AlwaysCrit"
+			Attributes "DisableDodge"
+			Attributes "AlwaysFireWeapon"
+			//Item "The Iron Bomber"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_GRENADELAUNCHER"
+				"damage penalty"					2.5
+				"fire rate bonus"					-1
+				"faster reload rate"				-1
+				"projectile spread angle penalty"	100
+				"blast dmg to self increased"		-30
+				"dmg bonus vs buildings"			10
+                "projectile speed increased"        .1
+                "fuse bonus"                        -1
+                "blast radius increased"            2.5
+			}
+ 	     	CharacterAttributes
+			{
+				"move speed bonus"					2
+				"damage force reduction"			0
+				"airblast vulnerability multiplier"	0
+				"override footstep sound set"		7
+				"cannot be backstabbed"				1
+			}
+		}
+        Damage_Sponge
+        {
+            Class Heavyweapons
+            Name "W.A.L.L."
+            Skill Expert
+            Attributes "Miniboss"
+            Classicon heavy_wall
+            WeaponRestrictions MeleeOnly
+            Health 10000
+            Maxvisionrange 1
+            Item "The Purity Fist"
+            Item "Bone-Cut Belt"          
+            Item "Steel-Toed Stompers"
+            Item "Der Maschinensoldaten-Helm"
+            Item "Employee Badge A"
+            ItemAttributes
+            {
+                Itemname "TF_WEAPON_FISTS"
+                "fire rate bonus" 9999
+            }
+            ItemModel
+            {
+                ItemName "Employee Badge A"
+                Model "models/workshop/player/items/heavy/sbox2014_war_helmet_s1/sbox2014_war_helmet_s1.mdl"
+            }
+            Itemattributes
+            {
+                Itemname "The Purity Fist"
+               // "attach particle effect" 3042
+            }
+            CharacterAttributes
+            {
+                //"dmg taken from fire reduced" 0.25
+                //"dmg taken from blast reduced" 0.25
+                //"dmg taken from bullets reduced" 0.25
+                "move speed bonus"	0.2
+				//"damage force reduction" 0
+				//"airblast vulnerability multiplier" 0
+				"override footstep sound set" 2
+                "health regen" 1000
+                "no_jump" 1
+                //"attach particle effect" 3042
+            }
+        }
+        Hyper_Ultra_Mega_Damage_Sponge
+        {
+            Class Heavyweapons
+            Skill Expert
+            Attributes "Miniboss"
+            Attributes Alwayscrit
+            WeaponRestrictions MeleeOnly
+            Health 1000000
+            Maxvisionrange 1
+            Item "The Killing Gloves of Boxing"
+            Item "The Team Captain"
+            Name "Cheater..."
+            ItemAttributes
+            {
+                Itemname "The Killing Gloves of Boxing"
+                "damage bonus" 9999
+                "attach particle effect" 1
+            }
+            ItemAttributes
+            {
+                Itemname "The Team Captain"
+                "attach particle effect" 13
+            }
+            CharacterAttributes
+            {
+                //"dmg taken from fire reduced" 0.25
+                //"dmg taken from blast reduced" 0.25
+                //"dmg taken from bullets reduced" 0.25
+                "move speed bonus"	0.25
+				//"damage force reduction" 0
+				//"airblast vulnerability multiplier" 0
+				"override footstep sound set" 2
+                "health regen" 100000
+                "attach particle effect" 3045
+            }
+        }
+        FaN_Scout
+        {
+            Class Soldier
+            Skill Expert
+            Item "The Concheror"
+            Item "The Team Captain"
+            Item "The Diplomat"
+            Item "Private Maggot Muncher"
+            Item "The Mantreads"
+            Item "The Black Box"
+            Maxvisionrange 1000
+            Classicon soldier_barrage_chief
+            ItemAttributes
+            {
+                Itemname "The Team Captain"
+                "attach particle effect" 13
+            }
+            ItemAttributes
+            {
+                Itemname "The Black Box"
+                "attach particle effect" 1
+                "is australium item" 1
+                "item style override" 1
+                "turn to gold" 1
+            }
+
+        }
+        FaN_Scout_Giant
+        {
+            Class Soldier
+            Skill Expert
+            Attributes "Miniboss"
+            Health 1000000
+            Item "The Concheror"
+            Item "The Team Captain"
+            Item "The Diplomat"
+            Item "Private Maggot Muncher"
+            Item "The Mantreads"
+            Item "The Black Box"
+            Classicon soldier_barrage_chief
+            ItemAttributes
+            {
+                Itemname "The Black Box"
+                "attach particle effect" 1
+                "is australium item" 1
+                "item style override" 1
+                "turn to gold" 1
+                "blast radius increased" 99
+                "damage bonus" 9999
+                "fire rate bonus" 9999
+            }
+            ItemAttributes
+            {
+                Itemname "The Team Captain"
+                "attach particle effect" 13
+            }
+            CharacterAttributes
+            {
+                //"dmg taken from fire reduced" 0.25
+                //"dmg taken from blast reduced" 0.25
+                //"dmg taken from bullets reduced" 0.25
+                "move speed bonus"	0.25
+				//"damage force reduction" 0
+				//"airblast vulnerability multiplier" 0
+				"override footstep sound set" 2
+                "health regen" 100000
+            }
+        }
+        GuyIncognito
+        {
+                Class Scout
+                Item "Griffin's Gog"
+                Item "Under Cover"
+                Item "Intangible Ascot"
+                Item "Chicago Overcoat"
+                Item "Medic Gatsby"
+                //Attributes Miniboss
+                Weaponrestrictions Meleeonly
+                Attributes DisableDodge
+                Skill Expert
+                Action Mobber
+        }
+        PirateLord
+        {
+                Class Demoman
+                Scale 1.8
+                Health 50000
+                Name "The Pirate Lord"
+                Item "The Caribbean Conqueror"
+                Item "The Brawling Buccaneer"
+                Item "Mann of the Seven Sees"
+                Item "A Whiff of the Old Brimstone"
+                Item "The Scottish Handshake"
+                Item "The Tide Turner"
+                Item "The Bootlegger"
+                Attributes Miniboss
+                Weaponrestrictions Meleeonly
+                Skill Expert
+                Action Mobber
+                CharacterAttributes
+                {
+                    "move speed bonus" 1.4
+                    "charge recharge rate increased" 2
+                    "charge time increased" 2
+                    "damage bonus" 1.54
+                    "critboost on kill" 5
+                    "attack not cancel charge" 1
+                }
+        }
+        Robot_Emporium
+        {
+            Class Soldier
+            Weaponrestrictions Primaryonly
+            Skill Hard
+            Name "Black Box Soldier"
+            Item "The Black Box"
+            Item "The Buccaneer's Bicorne"
+            Classicon soldier_blackbox
+            ItemAttributes
+            {
+                Itemname "The Loose Cannon"
+                "grenade launcher mortar mode" 0
+            }
+        }
+        Lockon_Rockets
+        {
+            Class Soldier
+            HomingRockets   
+			{
+				IgnoreDisguisedSpies 1 // Default: 1
+				IgnoreStealthedSpies 1 // Default: 1
+				RocketSpeed 0.01 // Multiplier of rocket speed. (Default: 1)
+				TurnPower 500 //How fast should the rocket rotate to face the target (Default: 10)
+				MaxAimError 360 //Max angle between rocket and the target (Default: 105)
+				AimTime 3 //How long should the rocket be aiming (Default: 9999)
+				Acceleration 10000 //Acceleration in hu (Default: 0)
+				AccelerationTime 3 //How long should the rocket accelerate (Default: 9999)
+				AccelerationStartTime 3 //Time before rockets start accelerating (Default: 0)
+				//Gravity 355 // Gravity of the rocket (Default: 0)
+				//FollowCrosshair 1 // Follow crosshair instead of enemies (Default: 0)
+			}
+        }
+    }
+    PointTemplates
+    {    
+        Kill_Mannpower
+        {  
+            logic_timer
+            {
+                "targetname" "powerup_kill"
+                "RefireTime" ".1"
+                "OnTimer" "item_powerup_rune,kill,,0,-1"
+            }
+        }
+    }    
+    Spawntemplate
+    {
+        Name "Kill_Mannpower"
+        Origin "0 0 0"
+        Angles "0 0 0"
+    }
+    ForceHoliday 2
+    Respawnwavetime 0
+    Startingcurrency 10000
+    ExtraSpawnPoint  
+    {
+        Name "spawnbot_overbridge"
+        TeamNum 3
+        X    -9.56          
+        Y    -1184.45    
+        Z    600
+    }
+    ExtraSpawnPoint  
+    {
+        Name "spawnbot_overbridge2"
+        TeamNum 3
+        X    -9.56          
+        Y    -900    
+        Z    600
+    }
+    PlayerAddCond
+    {
+        //Index 51
+        //Index 66
+    }
+    PlayerAttributes  
+    {
+        Engineer
+        {
+        }
+        Soldier
+        {
+            "maxammo primary increased" 100
+        }
+        Demoman
+        {
+            "maxammo primary increased" 100
+        }
+        Scout
+        {
+        }
+    }
+
+    ItemBlacklist
+    {
+      //  Itemname "Battery Canteens"
+      //  Itemname "Default Power Up Canteen (MvM)"
+      //  Itemname "Krtiz Or Treat Canteen"
+      //  Itemname "Power Up Canteen (MvM)"
+    }
+
+    DisallowUpgrade
+    {
+        Upgrade "Generate Rage on Heal"
+        Maxlevel 0  
+    }
+
+    ClassLimit
+    {
+    }
+    Itemattributes
+    {
+        Itemname "TF_WEAPON_SCATTERGUN"
+        "add attributes on hit" "model scale|.25|5"
+    }
+    Wave
+    {
+		StartWaveOutput
+		{
+			Target	wave_start_relay_boss
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        Wavespawn 
+        {
+            Name "The Test"
+            Where spawnbot_overbridge
+            Totalcount 10
+            Spawncount 1
+            Maxactive 1
+            Waitbetweenspawns 10
+            Tfbot
+            {
+                Class Soldier
+                Item "The Black Box"
+                Item "The Dumb Bell"
+                ItemAttributes
+                {
+                    Itemname "The Black Box"
+                    "paintkit_proto_def_index" 417
+                    "set_item_texture_wear" 0
+                    "fire rate bonus" 651
+                }
+                ItemAttributes
+                {
+                    Itemname "The Dumb Bell"
+                    //"attach particle effect" 13
+                }
+                CharacterAttributes
+                {
+                    "attach particle effect" 3034
+                }
+                Action Mobber
+                Attributes DisableDodge
+            }
+        }
+        WaveSpawn // Tank # HP
+        {
+            Name "h"
+            TotalCount 1
+            MaxActive 1
+            SpawnCount 1
+            WaitBeforeStarting 1000000000
+            WaitBetweenSpawns 100000000
+        
+            TotalCurrency 0
+        
+            Tank
+            {
+                Name "tankboss"
+                StartingPathTrackNode "boss_path_1"
+                Health 25000
+                Speed 75
+                Skin 0
+        
+                OnKilledOutput {}
+                OnBombDroppedOutput
+                {
+                    Target boss_deploy_relay
+                    Action Trigger
+                }
+            }
+        }
+        WaveSpawn // Tank # HP
+        {
+            Name "h2"
+            TotalCount 1
+            MaxActive 1
+            SpawnCount 1
+            Waitforalldead "h"
+            WaitBeforeStarting 7
+            WaitBetweenSpawns 0
+        
+            TotalCurrency 0
+        
+            Tank
+            {
+                Name "tankboss"
+                StartingPathTrackNode "boss_path_1"
+                Health 50000
+                Speed 75
+                Skin 0
+        
+                OnKilledOutput {}
+                OnBombDroppedOutput
+                {
+                    Target boss_deploy_relay
+                    Action Trigger
+                }
+            }
+        }
+        WaveSpawn // Tank # HP
+        {
+            Name "h3"
+            TotalCount 1
+            MaxActive 1
+            SpawnCount 1
+            Waitforalldead "h2"
+            WaitBeforeStarting 15
+            WaitBetweenSpawns 0
+        
+            TotalCurrency 0
+        
+            Tank
+            {
+                Name "tankboss"
+                StartingPathTrackNode "boss_path_1"
+                Health 100000
+                Speed 75
+                Skin 0
+        
+                OnKilledOutput {}
+                OnBombDroppedOutput
+                {
+                    Target boss_deploy_relay
+                    Action Trigger
+                }
+            }
+        }
+        WaveSpawn // Tank # HP
+        {
+            Name "h4"
+            TotalCount 1
+            MaxActive 1
+            SpawnCount 1
+            Waitforalldead "h3"
+            WaitBeforeStarting 23
+            WaitBetweenSpawns 0
+        
+            TotalCurrency 0
+        
+            Tank
+            {
+                Name "tankboss"
+                StartingPathTrackNode "boss_path_1"
+                Health 175000
+                Speed 75
+                Skin 0
+        
+                OnKilledOutput {}
+                OnBombDroppedOutput
+                {
+                    Target boss_deploy_relay
+                    Action Trigger
+                }
+            }
+        }
+        WaveSpawn // Tank # HP
+        {
+            Name "h5"
+            TotalCount 1
+            MaxActive 1
+            SpawnCount 1
+            Waitforalldead "h4"
+            WaitBeforeStarting 30
+            WaitBetweenSpawns 0
+        
+            TotalCurrency 0
+        
+            Tank
+            {
+                Name "tankboss"
+                StartingPathTrackNode "boss_path_1"
+                Health 250000
+                Speed 75
+                Skin 1
+        
+                OnKilledOutput {}
+                OnBombDroppedOutput
+                {
+                    Target boss_deploy_relay
+                    Action Trigger
+                }
+            }
+        }
+    }
+   CustomWeapon
+    {
+        "Testing Thing"
+        {
+            OriginalItemName "Tf_weapon_rocketlauncher"
+            "add cond on hit" 43
+            "allow friendly fire" 1
+            "reload time increased" 10
+            "fire rate penalty" 10
+            "clip size penalty" 0.25
+            "maxammo primary increased" .2
+        }
+        "Saved Thing"
+        {
+            OriginalItemName "The Loose Cannon"
+            //"override projectile type" 3
+            "stickybomb stick to enemies" 1
+            "projectile gravity" 0.1
+            "maxammo primary increased" 100
+            "fuse bonus" .5
+            "projectile speed increased" 10
+            "mult projectile scale" 3
+            "custom projectile size" 3
+            "clip size bonus" 10
+        }
+        "Floating STRIKE Missiles"
+        {
+                    OriginalItemname "TF_WEAPON_ROCKETLAUNCHER"
+        "mod projectile heat seek power" 5000
+        "mod projectile heat aim time" 30
+        "mod projectile heat aim error" 400
+        "mod projectile heat aim start time" 5
+        "projectile gravity" -100
+            "projectile speed decreased" 0.01
+            "projectile acceleration" 2500
+            "projectile acceleration time" 30
+            "projectile acceleration start time" 5
+        }
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////               Actual Weapons                  //////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//--------------------------------------------------------------------------------------------------//
+//                                              Scout                                               //
+//--------------------------------------------------------------------------------------------------//
+        "The Corkscrew"
+        {
+            OriginalItemName "The Force-a-Nature"
+            "set damagetype ignite" 1
+            "clip size penalty" .2
+            "damage bonus vs burning" 1.5
+            "dmg penalty vs nonburning" .5
+            "afterburn duration bonus" 3
+            "damage penalty" .8
+            "custom item model" "models/weapons/c_models/c_corkscrew/c_corkscrew.mdl"
+        }       
+        "The Flamehammer"
+        {
+            OriginalItemName "Sun-on-a-Stick"
+            "dmg taken from fire reduced on active" 1
+            "attack_minicrits_and_consumes_burning" 1
+            "crit mod disabled" 0
+            "dmg penalty vs nonburning" .5
+            "damage penalty" 1
+            "deploy time decreased" .75
+        }
+
+
+//--------------------------------------------------------------------------------------------------//
+//                                              Soldier                                             //
+//--------------------------------------------------------------------------------------------------//        
+        "The Frost Launcher"
+        {
+            OriginalItemName "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+            "paintkit_proto_def_index" 279
+            "set_item_texture_wear" 0
+            "slow enemy on hit major" 2.5
+            "fire rate penalty" 1.25
+            "reload time increased" 1.25
+            "projectile speed decreased" .75
+            "attach particle effect" 703
+        }
+        "The Team Captain"
+        {
+            OriginalItemName "Upgradeable TF_Weapon_RocketLauncher"
+            "paintkit_proto_def_index" 210
+            "set_item_texture_wear" .5
+            "increase buff duration" 2.5
+            "move speed penalty" .833
+            "damage penalty" .65
+            "self dmg push force decreased" .75
+            "mod rage on hit bonus" 10
+            "mod soldier buff range" 1.5
+        }        
+        "The Soldier's Warcry"
+        {
+            OriginalItemName "The Buff Banner"
+            "effect cond override" 113
+            "special item description" "Provides an offensive attack/reload speed buff"
+        }
+        "The Vampire's Call"
+        {
+            OriginalItemName "The Concheror"
+            "effect cond override" 94
+            "special item description" "Provides a supportive lifesteal/defense/max health buff"
+        }
+        "The Return To Sender"
+        {
+            OriginalItemName "The Battalion's Backup"
+            "effect cond override" 95
+            "special item description" "Provides a defensive damage reflect/max health buff"
+        }        
+        "Standard Issue RL"
+        {
+            OriginalItemName "Tf_weapon_rocketlauncher"
+        }
+        "Upgraded Missile Silo"
+        {
+            OriginalItemName "Tf_weapon_rocketlauncher"
+            "paintkit_proto_def_index"
+            "set_item_texture_wear"
+            "fire rate bonus" .8
+            "reload time decreased" .8
+            "maxammo primary increased" 1.25
+            "clip size upgrade atomic" 2
+            "damage bonus" 1.15
+        }
+//--------------------------------------------------------------------------------------------------//
+//                                              Pyro                                                //
+//--------------------------------------------------------------------------------------------------//
+        "The Flying Phoenix"
+        {
+            OriginalItemName "The Degreaser"
+            "airblast dashes" 1
+            "damage penalty" .75
+            "airblast cost increased" 1
+            "paintkit_proto_def_index" 256
+            "set_item_texture_wear" 0
+        }
+        "The Reflector"
+        {
+            OriginalItemName "The Degreaser"
+            "rocket specialist" 1
+            "blast radius increased" 1.35
+            "damage penalty" .35
+            "mult airblast refire time" .5
+            "airblast cost increased" .5
+            "weapon burn dmg reduced" 0
+            "airblast pushback scale" 2
+        }
+//--------------------------------------------------------------------------------------------------//
+//                                              Demoman                                             //
+//--------------------------------------------------------------------------------------------------//
+        "The Clusterbomber"
+        {
+            OriginalItemName "The Iron Bomber"
+            "paintkit_proto_def_index" 104
+            "set_item_texture_wear" 0
+            "auto fires full clip" 1
+            "projectile spread angle penalty" 10
+            "clip size bonus" 1.5
+            "fire rate bonus" .2
+            "damage penalty" .35
+            "mult projectile count" 3
+            "fuse bonus" 2
+            "blast radius increased" 1.35
+            "no damage falloff" 1
+        }
+        "The Last Resort"
+        {
+            OriginalItemName "The Ullapool Caber"
+            "blast dmg to self increased" 100
+            "damage bonus" 10
+            "hit self on miss" 1
+            "mod stun waist high airborne" 1
+            "damage causes airblast" 1
+            "bleeding duration" 2.5
+            "fire rate penalty" 25
+            "attach particle effect" 44
+        }
+//--------------------------------------------------------------------------------------------------//
+//                                              Heavyweapons                                        //
+//--------------------------------------------------------------------------------------------------//
+        "The Leviathan"
+        {
+            OriginalItemName "Upgradeable TF_WEAPON_MINIGUN"
+            "paintkit_proto_def_index" 204
+            "set_item_texture_wear" 0
+            "damage bonus" 1.75
+            "crit mod disabled" 0
+            "crits_become_minicrits" 1
+            "aiming movespeed decreased" 0.01
+            "minigun spinup time increased" 5
+            "mod ammo per shot" 2
+            "hand scale" 1.25
+        }       
+        "Mister Cuddles"
+        {
+            OriginalItemName "pyroland_minigun_mistercuddles"
+            "damage penalty" .8
+            "aiming movespeed increased" 2.1
+            "set_item_texture_wear" 0
+        }        
+        "The Soviet Flight Program"
+        {
+            OriginalItemName "gentlemanne_shotgun_dressedtokill"
+            "override projectile type" 2
+            "self dmg push force increased" 10
+            "blast dmg to self increased" 11
+            "projectile speed increased" 1
+            "switch from wep deploy time decreased" .5
+            "set_item_texture_wear" 0
+        }        
+//--------------------------------------------------------------------------------------------------//
+//                                              Engineer                                            //
+//--------------------------------------------------------------------------------------------------//    
+        "The Point-Blank Texan"
+        {
+            OriginalItemName "The Widowmaker"
+            "max bullet range" 400
+            "damage bonus" 2
+            "mod ammo per shot" 50
+            "spread penalty" 2
+            "fire rate penalty" 2
+        }
+        "Whack-a-Mole"
+        {
+            OriginalItemName "Necro Smasher"
+            "fire rate penalty" 3
+            "damage bonus" 2.31
+            "construction rate increased" 5.5
+            "building max level" 2
+            "upgrade rate decrease" 4
+        }
+//--------------------------------------------------------------------------------------------------//
+//                                              Medic                                               //
+//--------------------------------------------------------------------------------------------------//
+        "The Overhealer"
+        {
+            OriginalItemName "TF_WEAPON_MEDIGUN"
+            "overheal fill rate reduced" .25
+            "heal rate penalty" .75
+            "overheal bonus" 5
+            "overheal decay penalty" .4
+            "increase buff duration" .75
+        }
+        "The Fixer-Upper"
+        {
+            OriginalItemName "The Quick-Fix"
+            "overheal penalty" 0
+            "heal rate bonus" 2
+            "dmg taken increased" 1.25
+            "damage force increase" 1.5
+            "increase buff duration" .5
+        }
+        "The Invigorator"
+        {
+            OriginalItemName "The Kritzkrieg"
+            "effect cond override" 91
+            "heal rate penalty" .5
+            "overheal penalty" .5
+            "uber duration bonus" -7.8
+            "special item description" "Uber massively increases attack/reload speed"
+        }
+//--------------------------------------------------------------------------------------------------//
+//                                              Sniper                                              //
+//--------------------------------------------------------------------------------------------------//
+        "Choice and Focus"
+        {
+            OriginalItemName "Shooting Star"
+            "sniper full charge damage bonus" 20
+            "sniper no headshot without full charge" 1
+            "damage penalty" .25
+            "mod ammo per shot" 5
+            "damage penalty on bodyshot" .09
+            "sniper charge per sec" .25
+            "mult sniper charge per sec with enemy under crosshair" 2
+            "sniper beep with enemy under crosshair" 1
+            "attach particle effect" 121
+        }
+//--------------------------------------------------------------------------------------------------//
+//                                              Spy                                                 //
+//--------------------------------------------------------------------------------------------------//                                             
+        "The Tranquilizer"
+        {
+            OriginalItemName "TF_WEAPON_REVOLVER"
+            "mark for death" 1
+            "damage penalty" .10
+            "clip size penalty" .15
+            "fire rate penalty" 3
+            "minicrits become crits" 1
+            "slow enemy on hit major" 5
+            "keep disguise on attack" 1
+            "custom item model" "models/weapons/c_models/c_tranquilizer/c_revolver.mdl"
+            "add cond on hit" 43
+        }
+        "The Goliath Slayer"
+        {
+            OriginalItemName "Upgradeable TF_WEAPON_KNIFE"
+            "is australium item" 1
+            "Item style override" 1
+            "mult dmg vs giants" 3
+            "fire rate penalty" 8
+            "custom weapon fire sound" "player\spy_shield_break.wav"
+            "attach particle effect" 17
+        }
+//--------------------------------------------------------------------------------------------------//
+//                                              Multi-Class                                         //
+//--------------------------------------------------------------------------------------------------//
+        "Spray and Pray"
+        {
+            OriginalItemName "Panic Attack Shotgun"
+            "panic_attack" 1
+            "damage penalty" .35
+            "fire rate bonus" .2
+            "auto fires full clip" 1
+        }
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////               Joke Weapons                  ////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//--------------------------------------------------------------------------------------------------//
+//                                              Scout                                               //
+//--------------------------------------------------------------------------------------------------//
+
+//--------------------------------------------------------------------------------------------------//
+//                                              Soldier                                             //
+//--------------------------------------------------------------------------------------------------//
+
+//--------------------------------------------------------------------------------------------------//
+//                                              Pyro                                                //
+//--------------------------------------------------------------------------------------------------//
+        "The Living Bullet"
+        {
+            OriginalItemName "The Degreaser"
+            "airblast dashes" 1
+            "damage penalty" 0
+            "airblast cost increased" 0
+            "paintkit_proto_def_index" 256
+            "set_item_texture_wear" 0
+            "airblast pushback scale" 10
+            "stomp player damage" 1000
+            "stomp player force" 1000
+            "move speed bonus" 0.1
+        }
+//--------------------------------------------------------------------------------------------------//
+//                                              Demoman                                             //
+//--------------------------------------------------------------------------------------------------//
+
+//--------------------------------------------------------------------------------------------------//
+//                                              Heavyweapons                                        //
+//--------------------------------------------------------------------------------------------------//
+        "The Soviet Space Program"
+        {
+            OriginalItemName "The Scorch Shot"
+            "paintkit_proto_def_index" 217
+            "set_item_texture_wear" 0
+            "override projectile type" 2
+            "self dmg push force increased" 15
+            "blast dmg to self increased" 20
+            "projectile speed increased" 3
+            "switch from wep deploy time decreased" .5
+            "attach particle effect" 1
+            "cancel falling damage" 1
+            "use large smoke explosion" 1
+            "weapon burn dmg increased" 0.1
+            "set damagetype ignite" 1
+            "projectile speed increased" 3
+        }
+//--------------------------------------------------------------------------------------------------//
+//                                              Engineer                                            //
+//--------------------------------------------------------------------------------------------------//
+
+//--------------------------------------------------------------------------------------------------//
+//                                              Medic                                               //
+//--------------------------------------------------------------------------------------------------//
+
+//--------------------------------------------------------------------------------------------------//
+//                                              Sniper                                              //
+//--------------------------------------------------------------------------------------------------//
+        "Robin Hood"
+        {
+            OriginalItemName "The Huntsman"
+            "fire rate penalty" 8.5
+            "damage bonus" 21.85
+            "arrow mastery" 50
+        }
+//--------------------------------------------------------------------------------------------------//
+//                                              Spy                                                 //
+//--------------------------------------------------------------------------------------------------//
+
+//--------------------------------------------------------------------------------------------------//
+//                                              Multi-Class                                         //
+//--------------------------------------------------------------------------------------------------//
+    }
+    ExtendedUpgrades
+    {
+        BlastRadiusIncreased
+        {
+            Name "Blast Radius Increased"
+            Attribute "blast radius increased"
+            Cap 1.45
+            Increment .15
+            Cost 400
+            Description "+15% Explosion radius"
+            PlayerUpgrade 1
+            AllowPlayerClass Soldier
+            AllowPlayerClass Demoman
+        }
+        ArrowMastery
+        {
+            Name "Arrow Mastery"
+            Attribute "Arrow Mastery" 
+            Cap 2
+            Increment 1
+            Cost 500
+            Description "Fire 2 more arrows. One on each side!"
+            AllowedWeapons
+            {
+                Classname "tf_weapon_compound_bow"
+            }
+            DisallowedWeapons
+            {
+                Itemname "Robin Hood"
+            }
+        }
+    //     EfficientReloader
+    //     {
+    //         Name "Efficient Reload"
+    //         Attribute "Reload time decreased"
+    //         SecondaryAttributes
+    //         {
+    //             "fire rate penalty" .25
+    //         } 
+    //         Cap .85
+    //         Increment -.15
+    //         Cost 0
+    //         Description "+15% Reload Speed, -25% Firing Speed"
+    //         PlayerUpgrade 1
+    //         DisallowedUpgrade
+    //         {
+    //             Upgrade QuickShot
+    //             Level 1
+    //         }
+    //     }        
+    //     QuickShot
+    //     {
+    //         Name "Quick Shot"
+    //         Attribute "Fire rate bonus"
+    //         SecondaryAttributes
+    //         {
+    //             "reload time increased" .25
+    //         } 
+    //         Cap .85
+    //         Increment -.15
+    //         Cost 0
+    //         Description "+15% Firing Speed, -25% Reload Speed"
+    //         PlayerUpgrade 1
+    //         DisallowedUpgrade
+    //         {
+    //             Upgrade EfficientReloader
+    //             Level 1
+    //         }   
+    //     }
+    //     GlassCannon
+    //     {
+    //         Name "The Glass Cannon"
+    //         Attribute "Damage bonus"
+    //         SecondaryAttributes
+    //         {
+    //             "dmg taken increased" .5
+    //         }
+    //         Cap 1.25
+    //         Increment .25
+    //         Cost 0
+    //         Description "+25% Damage dealt, +50% Damage taken"
+    //         PlayerUpgrade 1
+    //         DisallowedUpgrade
+    //         {
+    //             Upgrade IronWall
+    //             Level 1
+    //         }  
+    //     }
+    //     IronWall
+    //     {
+    //         Name "The Iron Wall"
+    //         Attribute "dmg taken increased"
+    //         SecondaryAttributes
+    //         {
+    //             "damage penalty" -.25
+    //         }
+    //         Cap 0.80
+    //         Increment -.2
+    //         Cost 0
+    //         Description "-20% Damage taken, -25% Damage dealt"
+    //         PlayerUpgrade 1
+    //         DisallowedUpgrade
+    //         {
+    //             Upgrade GlassCannon
+    //             Level 1
+    //         }  
+    //     }
+        HomingRocketsUpgrade
+        {
+            Name "Homing Rockets"
+            Attribute "mod projectile heat seek power"
+            SecondaryAttributes
+            {
+                "mod projectile heat aim error" 10
+            }
+            Cap 60
+            Increment 20
+            Cost 500
+            Description "Rockets now home in on robots. Higher levels increase efficiency"
+            AllowedWeapons
+            {
+                Classname "tf_weapon_rocketlauncher"
+                Itemname "The Air Strike"
+                Itemname "The Direct Hit"
+                Classname "tf_weapon_particle_cannon"
+            }
+        }
+        Tier1FireRate
+        {
+            Name "fire rate bonus"
+            Attribute "fire rate bonus"
+            Cap .8
+            Increment -0.05
+            Cost 150
+            Description "Testy thingy"
+            Tier 1
+            AllowedWeapons
+            {
+                Itemname "Standard Issue RL"
+            }
+        }
+        Tier1Reload
+        {
+            Name "reload time decreased"
+            Attribute "reload time decreased"
+            Cap .8
+            Increment -0.05
+            Cost 150
+            Description "Testy thingy 2"
+            Tier 1
+            AllowedWeapons
+            {
+                Itemname "Standard Issue RL"
+            }
+        }
+        Tier2
+        {
+            Name "Tier 2"
+            Attribute "sapper damage penalty hidden"
+            Cap 1.5
+            Increment .5
+            Cost 500
+            Description "Testy thingy 3"
+            Tier 2
+            AllowedWeapons
+            {
+                Itemname "Standard Issue RL"
+            }
+            OnApply
+            {
+                Output "!activator,$giveitem,Upgraded Missile Silo,0"
+            }
+        }
+        MinUpgradesTier
+        {
+            1 8
+        }
+        MaxUpgradesTier
+        {
+            1 8
+        }
+    }    
+    PrecacheModel "models/weapons/c_models/c_tranquilizer"
+    PrecacheModel "models/weapons/c_models/c_corkscrew"
+    ExtraLoadoutItems
+    {
+        AllowEquipOutsideSpawn 1
+        Scout
+        {
+            Primary
+            {
+                Item "The Corkscrew"
+                Cost 250
+                AllowRefund 1
+            }
+            Melee
+            {
+                Item "The Flamehammer"
+                Cost 500
+                AllowRefund 1
+            }
+
+        }
+        Soldier
+        {
+            Primary
+            {
+                Item "Standard Issue RL"
+                Cost 500
+                AllowRefund 1
+            }
+            Primary
+            {
+                Item "The Frost Launcher"
+                Cost 750
+                AllowRefund 1
+            }
+            Primary
+            {
+                Item "The Team Captain"
+                Cost 1000
+                AllowRefund 1
+            }
+            Secondary
+            {
+                Item "Spray and Pray"
+                Cost 350
+                AllowRefund 1
+            }
+            Secondary
+            {
+                Item "The Soldier's Warcry"
+                Cost 1000
+                AllowRefund 1
+            }
+            Secondary
+            {
+                Item "The Vampire's Call"
+                Cost 750
+                AllowRefund 1
+            }
+            Secondary
+            {
+                Item "The Return To Sender"
+                Cost 500
+                AllowRefund 1
+            }
+            PDA
+            {
+                Item "Test"
+                Cost 0
+                AllowRefund 1
+            }
+        }
+        Pyro
+        {
+            Primary
+            {
+                Item "The Flying Phoenix"
+                Cost 400
+                AllowRefund 1
+            }
+            Primary
+            {
+                Item "The Reflector"
+                Cost 250
+                AllowRefund 1
+            }
+            Primary
+            {
+                Item "The Living Bullet"
+                Cost 5000
+                AllowRefund 1
+            }
+            Secondary
+            {
+                Item "Spray and Pray"
+                Cost 350
+                AllowRefund 1
+            }
+        }
+        Demoman
+        {
+            Primary
+            {
+                Item "The Clusterbomber"
+                Cost 500
+                AllowRefund 1
+            }
+            Melee
+            {
+                Item "The Last Resort"
+                Cost 1000
+                AllowRefund 1
+            }
+        }
+        Heavyweapons
+        {
+            Primary
+            {
+                Item "The Leviathan"
+                Cost 1500
+                AllowRefund 1
+            }
+            Primary
+            {
+                Item "Mister Cuddles"
+                Cost 750
+                AllowRefund 1
+            }           
+            Primary
+            {
+                Item "The Fat Scout"
+                Cost 100
+                AllowRefund 1
+            }
+            Secondary
+            {
+                Item "Spray and Pray"
+                Cost 350
+                AllowRefund 1
+            }
+            Secondary
+            {
+                Item "The Soviet Flight Program"
+                Cost 200
+                AllowRefund 1
+            }            
+            Secondary
+            {
+                Item "The Soviet Space Program"
+                Cost 5000
+                AllowRefund 1
+            }
+        }
+        Engineer
+        {
+            Primary
+            {
+                Item "The Point-Blank Texan"
+                Cost 750
+                AllowRefund 1
+            }
+            Primary
+            {
+                Item "Spray and Pray"
+                Cost 350
+                AllowRefund 1
+            }
+            Melee
+            {
+                Item "Whack-a-Mole"
+                Cost 500
+                AllowRefund 1
+            }
+            Melee
+            {
+                Item "Testing Thing"
+                Cost 0
+                AllowRefund 1
+            }
+        }
+        Medic
+        {
+            Secondary
+            {
+                Item "The Overhealer"
+                Cost 1000
+                AllowRefund 1
+            }
+            Secondary
+            {
+                Item "The Fixer-Upper"
+                Cost 1000
+                AllowRefund 1
+            }
+            Secondary 
+            {
+                Item "The Invigorator"
+                Cost 1000
+                AllowRefund 1
+            }
+        }
+        Sniper
+        {
+            Primary
+            {
+                Item "Robin Hood"
+                Cost 5000
+                AllowRefund 1
+            }
+            Primary
+            {
+                Item "Choice and Focus"
+                Cost 5000
+                AllowRefund 1
+            }
+        }
+        Spy
+        {
+            Secondary
+            {
+                Item "The Tranquilizer"
+                Cost 750
+                AllowRefund 1
+            }
+            Melee
+            {
+                Item "The Goliath Slayer"
+                Cost 2500
+                AllowRefund 1
+            }
+        }
+    }    
+    DisallowUpgrade
+    {
+        Upgrade "Overheal Expert"
+        Maxlevel 0
+        Itemname "The Fixer-Upper"
+        Itemname "The Overhealer"
+    }
+    DisallowUpgrade
+    {
+        Upgrade "Damage bonus"
+        Maxlevel 0
+        Itemname "Choice and Focus"
+    }
+}
+//Broken Attributes:
+// "self add cond on hit (duration)" does not apply cond on hit. Player or Enemy

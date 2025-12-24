@@ -1,0 +1,9 @@
+"WorldVertexTransition"
+{
+	"$baseTexture" "petra/rockwall009"
+	"$basetexture2" "petra/rockground006"
+	"$surfaceprop" "dirt"
+	"$bumpmap" "petra/rockwall009_height-ssbump"
+	"$ssbump" "1"
+	"%keywords" "tf"
+}

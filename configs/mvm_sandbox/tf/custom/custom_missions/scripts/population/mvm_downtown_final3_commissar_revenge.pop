@@ -1,0 +1,1127 @@
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_gatebot.pop
+#base robot_wonders.pop
+#base robot_mobster.pop //exclusive to this mission!
+population
+{
+	StartingCurrency	5000
+	RespawnWaveTime	4
+	CanBotsAttackWhileInSpawnRoom	no
+	AddSentryBusterWhenDamageDealtExceeds	15000
+	AddSentryBusterWhenKillCountExceeds	15
+	Templates
+	{
+	}
+	Mission
+	{
+		Objective	DestroySentries
+		Where	spawnbot
+		Where  spawnbot_garage_giant
+		Where  spawnbot_mensch_giant
+		Where  spawnbot_trainstation
+		BeginAtWave	1
+		RunForThisManyWaves	7
+		InitialCooldown	30
+		CooldownTime	30
+		DesiredCount	1
+		TFBot
+		{
+			Template	T_TFBot_SentryBuster
+		}
+	}
+	Mission
+	{
+		Objective	Sniper
+		Where	spawnbot_upper
+		Where   spawnbot_mensch
+		Where   spawnbot_garage
+		Where   spawnbot_trainstation
+		BeginAtWave	5
+		RunForThisManyWaves	1
+		InitialCooldown	30
+		CooldownTime	30
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Sniper
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	deflectorgiants
+			TotalCurrency	200
+			TotalCount	6
+			MaxActive	6
+			SpawnCount	2
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Where  spawnbot_garage_giant
+		    Where  spawnbot_mensch_giant
+		    Where  spawnbot_trainstation
+			StartWaveWarningSound   "vo/mvm/mght/heavy_mvm_m_domination12.mp3"
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Heavyweapons_Deflector
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	gaterushheavy
+			TotalCurrency	100
+			TotalCount	30
+			MaxActive	15
+			SpawnCount	10
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Where  spawnbot_garage
+			Where  spawnbot_mensch
+		    Where  spawnbot_trainstation
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFGateBot_Heavy_Hard
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	gotohellwanker
+			TotalCurrency	200
+			TotalCount	8
+			MaxActive	4
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllDead	deflectorgiants
+			Where	spawnbot
+			Where  spawnbot_garage_giant
+		    Where  spawnbot_mensch_giant
+		    Where  spawnbot_trainstation
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Sniper_Bowman_Giant_Razorback
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	tank1
+			TotalCurrency	200
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllDead	gaterushheavy
+			
+			Tank
+			{
+				Health	30000
+				Name	Tank
+				Speed	60
+				StartingPathTrackNode "a_1"
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	hellasupport
+			TotalCurrency	100
+			TotalCount	24
+			MaxActive	8
+			SpawnCount	6
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllSpawned	tank1
+			Where	spawnbot
+			Where   spawnbot_upper
+			Where   spawnbot_garage
+			Where   spawnbot_mensch
+			Where   spawnbot_trainstation
+			
+			FirstSpawnOutput
+			{
+				Target "bomb_relay_2"
+				Action Trigger
+			}
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Scout_FAN
+					Attributes	"AlwaysCrit"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Shotgun
+				}
+				TFBot
+				{
+					Template	T_TFBot_Demo_Burst
+					Attributes	"AlwaysCrit"
+				}
+				TFBot
+				{
+					Skill	Hard
+					Template	T_TFBot_Soldier_Extended_Battalion
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	thisgonfuckyou
+			TotalCurrency	200
+			TotalCount	4
+			MaxActive	2
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllSpawned	tank1
+			Where	spawnbot
+			Where   spawnbot_garage_giant
+			Where   spawnbot_mensch_giant
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Soldier_BurstFire
+				}
+				TFBot
+				{
+					Template	T_TFBot_Giant_Medic_Regen
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	mainsupport1
+			TotalCurrency	100
+			TotalCount	12
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Support	1
+			Where	spawnbot_upper
+			Where   spawnbot_garage
+			Where   spawnbot_mensch
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Scout_Shortstop
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	poundtownA
+			TotalCurrency	100
+			TotalCount	6
+			MaxActive	2
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot_upper
+			Where   spawnbot_garage_giant
+			Where   spawnbot_mensch_giant
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFGateBot_Giant_Soldier_BurstFire_Crit
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	poundtownB
+			TotalCurrency	100
+			TotalCount	6
+			MaxActive	2
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Where   spawnbot_garage_giant
+			Where   spawnbot_mensch_giant
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Heavyweapons_HealOnKill
+					Attributes	"AlwaysCrit"
+					Item	"deflector"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	nutham
+			TotalCurrency	100
+			TotalCount	20
+			MaxActive	5
+			SpawnCount	5
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Where   spawnbot_garage
+			Where   spawnbot_mensch
+			Where   spawnbot_trainstation
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Scout_Mobster_FaN
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_FAN
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavy_Mobster_Shotgun
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_FaN_Upgraded
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	suppressors
+			TotalCurrency	100
+			TotalCount	32
+			MaxActive	8
+			SpawnCount	8
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllSpawned	poundtownA
+			Where	spawnbot
+			Where   spawnbot_garage
+			Where   spawnbot_mensch
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Heavy_Stunner
+					Attributes	"AlwaysCrit"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_Battle_Armoured
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	healrain
+			TotalCurrency	100
+			TotalCount	20
+			MaxActive	6
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllSpawned	poundtownB
+			Where	spawnbot_upper
+			Where   spawnbot_garage
+			Where   spawnbot_mensch
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Demo_Loch
+					Attributes	"AlwaysCrit"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	bannergiantRNG
+			TotalCurrency	200
+			TotalCount	4
+			MaxActive	2
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllDead	poundtownA
+			Where	spawnbot
+			Where   spawnbot_garage_giant
+			Where   spawnbot_mensch_giant
+			
+			FirstSpawnOutput
+			{
+				Target "bomb_relay_1"
+				Action Trigger
+			}
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Soldier_Extended_Buff_Banner
+					ItemAttributes
+					{
+						ItemName	"the buff banner"
+						"deploy time decreased"	0.5
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Giant_Soldier_Extended_Battalion
+					ItemAttributes
+					{
+						ItemName	"the battalion's backup"
+						"deploy time decreased"	0.5
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Giant_Soldier_Extended_Concheror
+					ItemAttributes
+					{
+						ItemName	"the concheror"
+						"deploy time decreased"	0.5
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	minibossRNG
+			TotalCurrency	200
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllDead	poundtownB
+			Where	spawnbot_elevator
+			Where   spawnbot_garage_giant
+			Where   spawnbot_mensch_giant
+			FirstSpawnWarningSound  "vo/mvm/mght/heavy_mvm_m_laughlong02.mp3"
+			
+			FirstSpawnOutput
+			{
+				Target "bomb_relay_2"
+				Action Trigger
+			}
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Demo_Tank_Hardened_Alt
+				}
+				TFBot
+				{
+					Template	T_TFBot_Soldier_Giant_Dumpster_Rage
+				}
+				TFBot
+				{
+					Template	T_TFBot_Soldier_MiniBoss_Tank
+					Attributes	"AlwaysCrit"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	mainsupport2
+			TotalCurrency	100
+			TotalCount	12
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Support	1
+			Where	spawnbot_upper
+			Where   spawnbot_garage
+			Where   spawnbot_mensch
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Demo_Scatter
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	mobwave1
+			TotalCurrency	1000
+			TotalCount	200
+			MaxActive	20
+			SpawnCount	5
+			WaitBeforeStarting	44
+			WaitBetweenSpawns	2
+			Where	spawnbot
+			Where   spawnbot_upper
+			StartWaveWarningSound "mvmthemes/Mob_Assault.mp3"
+			
+			FirstSpawnOutput
+			{
+				Target "bomb_relay_2"
+				Action Trigger
+			}
+			
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Sniper_Mobster_SMG
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_Mobster_FaN
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavy_Mobster_Shotgun
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavy_Mobster_Tomislav
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavy_Stunner
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	mainsupport3
+			TotalCurrency	100
+			TotalCount	10
+			MaxActive	2
+			SpawnCount	2
+			WaitBeforeStarting	44
+			WaitBetweenSpawns	5
+			Support	1
+			Where	spawnbot
+			Where   spawnbot_upper
+			
+			FirstSpawnOutput
+			{
+				Target "bomb_relay_1"
+				Action Trigger
+			}
+			
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Demo_Mobster_Enforcer
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	tank2
+			TotalCurrency	200
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			
+			Tank
+			{
+				Health	50000
+				Name	Tank
+				Speed	75
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	boss1
+			TotalCurrency	200
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot_elevator
+			FirstSpawnWarningSound  "vo/mvm/mght/heavy_mvm_m_battlecry01.mp3"
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFGateBot_Chief_Heavyweapons_HealOnKill
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	maniasupport
+			TotalCurrency	100
+			TotalCount	24
+			MaxActive	6
+			SpawnCount	6
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllSpawned	tank2
+			Where	spawnbot_upper
+			Where   spawnbot_garage
+			Where   spawnbot_mensch
+			Where   spawnbot_trainstation
+			
+			FirstSpawnOutput
+			{
+				Target "bomb_relay_1"
+				Action Trigger
+			}
+			
+			Squad
+			{
+				TFBot
+				{
+					Skill	Expert
+					Template	T_TFBot_Demoman
+					Attributes	"AlwaysCrit"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	gianthell
+			TotalCurrency	200
+			TotalCount	5
+			MaxActive	5
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllSpawned	boss1
+			Where	spawnbot
+			Where   spawnbot_garage_giant
+			Where   spawnbot_mensch_giant
+			
+			FirstSpawnOutput
+			{
+				Target "bomb_relay_2"
+				Action Trigger
+			}
+			
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Demo_Giant_Bomber
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	thisisit
+			TotalCurrency	200
+			TotalCount	4
+			MaxActive	2
+			SpawnCount	2
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	10
+			WaitForAllDead	ManiaSupport
+			Where	spawnbot
+			Where   spawnbot_garage_giant
+			Where   spawnbot_mensch_giant
+			FirstSpawnWarningSound "vo/mvm/mght/heavy_mvm_m_laughevil02.mp3"
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Soldier_Giant_Quadshot
+					Attributes	"AlwaysCrit"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Giant_Medic
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	theend
+			TotalCurrency	200
+			TotalCount	4
+			MaxActive	2
+			SpawnCount	2
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	10
+			WaitForAllDead	gianthell
+			Where	spawnbot
+			Where   spawnbot_garage_giant
+			Where   spawnbot_mensch_giant
+			FirstSpawnWarningSound "vo/mvm/mght/heavy_mvm_m_laughhappy04.mp3"
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Heavy_Giant_Firesprayer
+				}
+				TFBot
+				{
+					Template	T_TFBot_Giant_Medic
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	survivethis
+			TotalCurrency	100
+			TotalCount	32
+			MaxActive	8
+			SpawnCount	8
+			WaitBeforeStarting	20
+			WaitBetweenSpawns	10
+			WaitForAllDead	tank2
+			Where	spawnbot_upper
+			Where   spawnbot_garage
+			Where   spawnbot_mensch
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Scout_FaN_Upgraded
+					Attributes	"AlwaysCrit"
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	rexfight
+			TotalCurrency	1000
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			StartWaveWarningSound   "vo/mvm/mght/heavy_mvm_m_domination08.mp3"
+			FirstSpawnWarningSound  "mvmthemes/Rexintro.wav"
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Soldier_MiniBoss_Sarge_Rex
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	mainsupport5
+			TotalCurrency	100
+			TotalCount	24
+			MaxActive	8
+			SpawnCount	8
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllSpawned	rexfight
+			Support	1
+			Where	spawnbot_upper
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	heavy_brassbeast
+					Health	300
+					Skill	Expert
+					Name	HeavyWeapons
+					Class	HeavyWeapons
+					Attributes	"AlwaysCrit"
+					Item	"the brass beast"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	mainsupport6
+			TotalCurrency	100
+			TotalCount	20
+			MaxActive	5
+			SpawnCount	5
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllSpawned	rexfight
+			Support	1
+			Where	spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Medic_Battle_Armoured
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_QuickUber
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_BigHeal
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	burstslick
+			TotalCurrency	100
+			TotalCount	10
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	20
+			WaitBetweenSpawnsAfterDeath	20
+			WaitForAllSpawned	rexfight
+			Support	1
+			Where	spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Special_Oilslick
+				}
+				TFBot
+				{
+					Template	T_TFBot_Special_Burstwave
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	finaltank
+			TotalCurrency	500
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			
+			Tank
+			{
+				Health	100000
+				Name	Tank
+				Speed	50
+				Skin	1
+				StartingPathTrackNode  "a_1"
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	absolutesupport
+			TotalCurrency	500
+			TotalCount	100
+			MaxActive	20
+			SpawnCount	5
+			WaitBeforeStarting	26
+			WaitBetweenSpawns	2
+			WaitForAllSpawned	finaltank
+			Where	spawnbot_upper
+			Where   spawnbot_upper
+			StartWaveWarningSound  "mvmthemes/Final_Mob_Assault.mp3"
+			
+			FirstSpawnOutput
+			{
+				Target "bomb_relay_1"
+				Action Trigger
+			}
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Heavy_Mobster_Tomislav
+					Attributes	"AlwaysCrit"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavy_Mobster_Shotgun
+					Attributes	"AlwaysCrit"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_Mobster_FaN
+					Attributes	"AlwaysCrit"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Sniper_Mobster_SMG
+					Attributes	"AlwaysCrit"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	finalsupport
+			TotalCurrency	100
+			TotalCount	10
+			MaxActive	2
+			SpawnCount	2
+			WaitBeforeStarting	26
+			WaitBetweenSpawns	5
+			WaitForAllSpawned	finaltank
+			Support	1
+			Where	spawnbot_upper
+			
+			FirstSpawnOutput
+			{
+				Target "bomb_relay_2"
+				Action Trigger
+			}
+			
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Demo_Mobster_Enforcer
+					Attributes	"AlwaysCrit"
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	thefinalfight
+			TotalCurrency	500000
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			StartWaveWarningSound "vo/mvm/mght/heavy_mvm_m_domination14.mp3"
+			FirstSpawnWarningSound "vo/mvm/mght/heavy_mvm_m_domination16.mp3"
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Heavy_Boss_Commissar_Giant
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	mainsupport1
+			TotalCurrency	500
+			TotalCount	100
+			MaxActive	10
+			SpawnCount	5
+			WaitForAllSpawned thefinalfight
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	2
+			Support	1
+			Where	spawnbot_upper
+			Where   spawnbot
+			FirstSpawnWarningSound "mvmthemes/SuperCommieFight.mp3"
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Heavy_Mobster_Tomislav
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavy_Mobster_Shotgun
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_Mobster_FaN
+				}
+				TFBot
+				{
+					Template	T_TFBot_Demo_Mobster_Enforcer
+				}
+				TFBot
+				{
+					Template	T_TFBot_Sniper_Mobster_SMG
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	burstslick
+			TotalCurrency	500
+			TotalCount	10
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	10
+			WaitBetweenSpawnsAfterDeath	10
+			Support	1
+			Where	spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Special_Oilslick
+				}
+				TFBot
+				{
+					Template	T_TFBot_Special_Burstwave
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	mainsupport8
+			TotalCurrency	100
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Support	limited
+			Where	spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+				   Template  T_TFBot_Scout_FAN
+				}
+			}
+		}
+	}
+}
+

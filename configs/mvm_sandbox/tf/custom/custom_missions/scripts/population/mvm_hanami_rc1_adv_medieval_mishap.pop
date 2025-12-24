@@ -1,0 +1,988 @@
+// +----------+----------+----------+
+// | Wave     | Currency | A+       |
+// +----------+----------+----------+
+// | Wave 1   | 400      | 500      |
+// | Wave 2   | 500      | 600      |
+// | Wave 3   | 800      | 900      |
+// | Wave 4   | 900      | 1000     |
+// | Wave 5   | 0        | 0        |
+// +----------+----------+----------+
+// | Total    | 2600     | 3000     |
+// +----------+----------+----------+
+
+#base robot_giant_tweaked.pop
+#base robot_standard_tweaked.pop
+
+WaveSchedule
+{
+	StartingCurrency	1400
+	RespawnWaveTime	3
+	CanBotsAttackWhileInSpawnRoom	no
+	FixedRespawnWaveTime	Yes
+	Advanced    1
+	MedievalMode 1
+	MinibossSentrySingleKill 1
+	///
+	RobotLimit 30
+	AllowBotExtraSlots 1	//a weirdly persistant bug happens that makes test servers only allow 2 players to join, this fixes it?
+	ExtraBotSlotsNoDeathcam 0
+	MaxRedPlayers 6
+	///
+	DisableSound    "Announcer.MVM_Get_To_Upgrade"
+	DisableSound	"Game.YourTeamWon"
+	OverrideSounds  
+	{
+		"MVM.BombWarning"	"siren2.wav"
+		"Announcer.MVM_Bonus"		"MVM.MoneyPickup"
+		"MVM.GiantHeavyExplodes"	"npc\env_headcrabcanister\explosion.wav"
+		"MVM.GiantCommonExplodes"	"npc\env_headcrabcanister\explosion.wav"
+		"music.mvm_start_last_wave"	"misc/null.wav"
+		"music.mvm_end_last_wave"	"teamwon.wav"
+	}
+
+	CustomUpgradesFile	"mvm_upgrades_scallywags_v2.txt"
+	PrecacheGeneric "scripts/items/mvm_upgrades_scallywags_v2.txt"
+	PrecacheSound	"teamwon.wav"
+
+	ExtendedUpgrades
+	{
+
+		MeleeResistance // all class - reduce damage taken from melee
+		{
+			Name "Stab Vest"
+			Description "Receive resistance to melee damage by 20% per point"
+			PlayerUpgrade 1
+			Cost 200
+			Attribute "mult dmgtaken from melee"
+			Increment -0.2
+			Cap 0.4
+		}
+
+		NoFallDamage // scout - fall damage immunity
+		{
+			Name "Long-Fall Boots"
+			Description "Receive immunity to fall damage and 75% knockback resistance"
+			AllowPlayerClass Scout
+			PlayerUpgrade 1
+			Cost 200
+			Attribute "cancel falling damage"
+			Increment 1
+			Cap 1
+			SecondaryAttributes
+			{
+				"damage force reduction"	-0.75
+			}
+		}
+
+		HealthGainedBonus // scout - healing bonus from shortstop made passive
+		{
+			Name "Health Siphons"
+			Description "Increases health gained from all sources, including money piles, by 40%"
+			AllowPlayerClass Scout
+			PlayerUpgrade 1
+			Cost 300
+			Attribute "healing received bonus"
+			Increment 1
+			Cap 2
+		}
+
+		MeleeCleave // demoman - add cleave to all sword type weapons
+		{
+			Name "DEMOKNIGHT'S VIABLE!!"
+			Description "Swords and axes can hit multiple enemies at once and have increased range"
+			AllowPlayerClass Demoman
+            AllowedWeapons
+			{
+				ItemName	"The Eyelander"
+				ItemName	"Festive Eyelander"
+				ItemName	"The Horseless Headless Horseman's Headtaker"
+				ItemName	"Nessie's Nine Iron"
+				ItemName	"The Scotsman's Skullcutter"
+				ItemName	"The Claidheamohmor"
+				ItemName	"The Half-Zatoichi"
+				ItemName	"The Persian Persuader"
+			}
+			Cost 350
+			Attribute "melee cleave attack"
+			Increment 1
+			Cap 1
+			SecondaryAttributes
+			{
+				"melee range multiplier"	0.5
+				"melee bounds multiplier"	0.3
+			}
+		}
+
+		CreditVacuum // demoman - receive 100% collect bonus and 15% credit pile healing
+		{
+			Name "Scottish IRS"
+			Description "Receive 100% collect radius bonus and 15% healing from credit piles"
+			AllowPlayerClass Demoman
+            AllowedWeapons
+			{
+				Slot	"Melee"
+			}
+			DisallowedWeapons
+			{
+				ItemName	"The Scotsman's Skullcutter"
+				ItemName	"The Half-Zatoichi"
+			}
+			Cost 250
+			Attribute "mult credit collect range"
+			Increment 2
+			Cap 2
+			SecondaryAttributes
+			{
+				"health from credits" 20
+			}
+		}
+
+		MadMilkCrossbow	// medic - mad milk crossbow bolts
+		{
+			Name "Mad Milk Bolts"
+			Description "Crossbow bolts apply mad milk effect to targets for 4 seconds"
+			AllowPlayerClass Medic
+			AllowedWeapons
+			{
+				ItemName	"The Crusader's Crossbow"
+				ItemName	"Festive Crusader's Crossbow"
+			}
+			Cost 250
+			Attribute "add cond on hit duration"
+			Increment 4
+			Cap 4
+			SecondaryAttributes
+			{
+				"add cond on hit"	27
+			}
+		}
+		
+		HeadshotCrossbow // medic - headshot crossbow bolts
+		{
+			Name "Tactical Bolts"
+			Description "Allows crossbow bolts to headshot, fuck you Valve"
+			AllowPlayerClass Medic
+			AllowedWeapons
+			{
+				ItemName	"The Crusader's Crossbow"
+				ItemName	"Festive Crusader's Crossbow"
+			}
+			Cost 200
+			Attribute "can headshot"
+			Increment 1
+			Cap 1
+		}
+
+		DamageConnected	// sniper - add damage all connected via healing beams to bows
+		{
+			Name "Electrified Arrows"
+			Description "Allows huntsman arrows to deal damage to enemies connected via healing beams"
+			AllowPlayerClass Sniper
+			AllowedWeapons
+			{
+				ItemName	"The Huntsman"
+				ItemName	"Festive Huntsman"
+				ItemName	"The Fortified Compound"
+			}
+			Cost 300
+			Attribute "damage all connected"
+			Increment 1
+			Cap 1
+		}
+
+		FrenchCreditVacuum // spy - receive 100% collect bonus and 15% credit pile healing
+		{
+			Name "French IRS"
+			Description "Receive 100% collect radius bonus and 15% healing from credit piles"
+			AllowPlayerClass Spy
+            AllowedWeapons
+			{
+				Slot	"Melee"
+			}
+			DisallowedWeapons
+			{
+				ItemName	"Conniver's Kunai"
+			}
+			Cost 250
+			Attribute "mult credit collect range"
+			Increment 2
+			Cap 2
+			SecondaryAttributes
+			{
+				"health from credits" 20
+			}
+		}
+    }
+
+	Templates
+	{
+		Shogun_Soldier
+		{
+			ClassIcon	demoknight_samurai
+			Health	550
+			Name	"Shogun Soldier"
+			Scale	1.3
+			Class	Soldier
+			Skill	Hard
+			WeaponRestrictions	MeleeOnly
+			Item	"the half-zatoichi"
+			Item	"the shogun's shoulder guard"
+			Item	"the menpo"
+			Item	"demo kabuto"
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	w1_01
+			TotalCurrency	50
+			TotalCount	12
+			MaxActive	6
+			SpawnCount	2
+			WaitBeforeStarting	1
+			WaitBetweenSpawns	3
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	scout_bat_nys
+					Health	125
+					Name	"Bat Scout"
+					Class	Scout
+					Skill	Normal
+					ForceRomeVision 1
+					WeaponRestrictions	MeleeOnly
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w1_01a
+			TotalCurrency	50
+			TotalCount	10
+			MaxActive	5
+			SpawnCount	1
+			WaitBeforeStarting	3
+			WaitBetweenSpawns	1
+			Where	spawnbot
+			Where	spawnbot_river
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	scout_bat_nys
+					Health	125
+					Name	"Bat Scout"
+					Class	Scout
+					Skill	Normal
+					WeaponRestrictions	MeleeOnly
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w1_01b
+			TotalCurrency	65
+			TotalCount	9
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	2
+			Where	spawnbot_flank
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Scout_Sandman
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w1_02
+			TotalCurrency	75
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	1
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	5
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	Shogun_Soldier
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w1_02a
+			WaitForAllSpawned	w1_02
+			TotalCurrency	80
+			TotalCount	20
+			MaxActive	10
+			SpawnCount	1
+			WaitBeforeStarting	1
+			WaitBetweenSpawns	2
+			Where	spawnbot_invasion
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	scout_bat_nys
+					Health	125
+					Name	"Bat Scout"
+					Class	Scout
+					Skill	Normal
+					WeaponRestrictions	MeleeOnly
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w1_02b
+			WaitForAllSpawned	w1_02
+			TotalCurrency	80
+			TotalCount	5
+			MaxActive	5
+			SpawnCount	1
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	5
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	soldier
+					Health	200
+					Name	Soldier
+					Class	Soldier
+					Skill	Normal
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	w1_01
+			TotalCurrency	100
+			TotalCount	10
+			MaxActive	5
+			SpawnCount	5
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	3
+			Where	spawnbot_river
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	scout_bat_nys
+					Health	125
+					Name	Scout
+					Class	Scout
+					Skill	Normal
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w1_01a
+			TotalCurrency	75
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	1
+			WaitBeforeStarting	3.5
+			WaitBetweenSpawns	3
+			Where	spawnbot_river
+			Squad
+			{
+				TFBot
+				{
+					Template	Shogun_Soldier
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w1_01b
+			TotalCurrency	75
+			TotalCount	28
+			MaxActive	14
+			SpawnCount	4
+			WaitBeforeStarting	7.5
+			WaitBetweenSpawns	3
+			Where	spawnbot_flank
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Scout_Sandman
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_Sandman_FastCharge
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w1_02
+			WaitForAllSpawned	w1_01b
+			TotalCurrency	80
+			TotalCount	8
+			MaxActive	8
+			SpawnCount	1
+			WaitBeforeStarting	1
+			WaitBetweenSpawns	1
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Heavyweight_Champ
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w1_02
+			WaitForAllSpawned	w1_01b
+			TotalCurrency	50
+			TotalCount	9
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	3
+			WaitBetweenSpawns	1
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	scout_bat_nys
+					Health	125
+					Name	Scout
+					Class	Scout
+					Skill	Easy
+				}
+				TFBot
+				{
+					Template	Shogun_Soldier
+				}
+				TFBot
+				{
+					ClassIcon	scout_bat_nys
+					Health	125
+					Name	Scout
+					Class	Scout
+					Skill	Easy
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w1_02a
+			WaitForAllSpawned	w1_01b
+			TotalCurrency	70
+			TotalCount	12
+			MaxActive	6
+			SpawnCount	1
+			WaitBeforeStarting	7.5
+			WaitBetweenSpawns	1
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Heavyweight_Champ
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w1_02a
+			WaitForAllSpawned	w1_01b
+			TotalCurrency	50
+			TotalCount	69
+			MaxActive	3
+			SpawnCount	1
+			WaitBeforeStarting	8.5
+			WaitBetweenSpawns	2
+			Support	1
+			Where	spawnbot_flank
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	scout_bat_nys
+					Health	125
+					Name	"Bat Scout"
+					Class	Scout
+					Skill	Normal
+					WeaponRestrictions	MeleeOnly
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	w1_01
+			TotalCurrency	200
+			TotalCount	30
+			MaxActive	15
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	1
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Heavyweight_Champ_Fast
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w1_01a
+			TotalCurrency	150
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	5
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Demoman_Samurai
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w1_01b
+			TotalCurrency	50
+			TotalCount	10
+			MaxActive	5
+			SpawnCount	1
+			WaitBeforeStarting	3
+			WaitBetweenSpawns	2.5
+			Support	Limited
+			Where	spawnbot_river
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	scout_bat_nys
+					Health	125
+					Name	"Bat Scout"
+					Class	Scout
+					Skill	Normal
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w1_02
+			WaitForAllDead	w1_01
+			TotalCurrency	300
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	3
+			Tank
+			{
+				Health	10000
+				Name	Tank
+				Speed	75
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w1_02
+			WaitForAllDead	w1_01
+			TotalCurrency	100
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	heavy_steelfist_conch_nys
+					Template	T_TFBot_Heavyweapons_Fist
+					Attributes	"SpawnWithFullCharge"
+					Attributes	"AlwaysCrit"
+					CharacterAttributes
+					{
+						"increase buff duration"	9
+					}
+					Item	"the concheror"
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	w1_01
+			TotalCurrency	150
+			TotalCount	2
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Sniper_Huntsman_Spammer
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w1_01a
+			TotalCurrency	75
+			TotalCount	16
+			MaxActive	8
+			SpawnCount	4
+			WaitBeforeStarting	3
+			WaitBetweenSpawns	2
+			Where	spawnbot_invasion
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Scout_Bonk
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w1_01b
+			TotalCurrency	55
+			TotalCount	20
+			MaxActive	5
+			SpawnCount	5
+			WaitBeforeStarting	8
+			WaitBetweenSpawns	5
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Scout_Sandman_FastCharge
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w1_02
+			WaitForAllDead	w1_01
+			TotalCurrency	70
+			TotalCount	100
+			MaxActive	10
+			SpawnCount	1
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	1
+			Support	1
+			Where	spawnbot_invasion
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Scout_Jumping_Sandman
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w1_02a
+			WaitForAllDead	w1_01
+			TotalCurrency	275
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	2
+			WaitBeforeStarting	3
+			Where	spawnbot_flank
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Pyro
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_BigHeal
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w1_02a
+			WaitForAllDead	w1_01
+			TotalCurrency	275
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	2
+			WaitBeforeStarting	7.5
+			Where	spawnbot_flank
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Demo_RapidFire
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_BigHeal
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	w1_01
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Health	15000
+					Template	T_TFBot_Chief_Tavish
+					CharacterAttributes
+					{
+						"health regen"	50
+						"override footstep sound set"	7
+						"rage giving scale"	0.5
+					}
+					Item	"the king of scotland cape"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCurrency	0
+			WaitBeforeStarting	99999
+			Support	1
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon   random_lite
+					Class	Scout
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCurrency	0
+			TotalCount	100
+			MaxActive	20
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	2.5
+			Support	1
+			Where	spawnbot_invasion
+			RandomChoice
+			{
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Scout_Bonk
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Scout_Bonk
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Scout_Sandman
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Scout_Sandman_FastCharge
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Scout_SunStick
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Heavyweapons_Heavyweight_Champ
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Heavyweapons_Heavyweight_Champ_Fast
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Heavyweapons_Gnome
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	Shogun_Soldier
+					}
+				}
+				Squad
+				{
+					TFBot
+					{
+						Template	T_TFBot_Demoman_Knight
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w1_02
+			WaitForAllSpawned	w1_01
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	35
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Health	13800
+					Name	"Chief Sho(t)gun"
+					WeaponRestrictions	SecondaryOnly
+					Template	T_TFBot_Giant_Soldier
+					ItemAttributes
+					{
+						ItemName	tf_weapon_shotgun_soldier
+						"damage bonus"	1.35
+						"fire rate bonus"	1.25
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.45
+						"override footstep sound set"	7
+						"airblast vertical vulnerability multiplier"	0.1
+						"rage giving scale"	0.5
+					}
+				}
+			}
+		}
+	}
+}

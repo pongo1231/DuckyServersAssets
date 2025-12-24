@@ -1,0 +1,816 @@
+//Yakibomb's robots
+/////Wave Icons/////
+//enemy				= silhouette (for regular)
+//enemy_giant		= silhouette (for giants)
+//enemy_boss		= silhouette red aura (for regular)
+//enemy_boss_giant	= silhouette red aura (for giants)
+
+WaveSchedule
+{
+	Templates
+	{
+/////EVENT ROBOTS/////
+		
+		T_Bersk_Event_Bomb
+		{
+			Class Heavyweapons
+			Skill Expert
+			ClassIcon NOTHING
+			Attributes SuppressFire
+			Attributes IgnoreEnemies
+			CharacterAttributes
+			{
+				"damage penalty" 0
+			}
+		}
+	
+		T_Bersk_AutoDie
+		{
+			Class Heavyweapons
+			Skill Easy
+			Health 5
+			Scale 1.01
+			ClassIcon enemy
+			Attributes IgnoreFlag
+			CharacterAttributes
+			{
+				"active health degen" -1
+				"no_jump" 1
+			}
+		}
+		
+		T_Bersk_Shopkeeper_1
+		{
+			Class Engineer
+			Skill Easy
+			ClassIcon enemy
+			Tag bot_ubered
+			Attributes SuppressFire
+			Attributes IgnoreEnemies
+			Attributes IgnoreFlag
+			WeaponRestrictions MeleeOnly
+			CharacterAttributes
+			{
+				"damage penalty" 0
+				"move speed penalty" 0.01
+				"move speed bonus" 0.01
+				"no_duck" 1
+				"no_jump" 1
+				"no_attack" 1
+			}
+		}
+	
+/////BASIC "ENEMY" BOTS/////
+
+///E.SCOUT///
+
+		T_Bersk_Scout_Scattergun
+		{
+			Class Scout
+			Skill Normal
+			ClassIcon enemy
+			WeaponRestrictions PrimaryOnly
+		}
+		T_Bersk_Scout_Pistol
+		{
+			Class Scout
+			Skill Normal
+			ClassIcon enemy
+			WeaponRestrictions SecondaryOnly
+		}
+		T_Bersk_Scout_Bat
+		{
+			Class Scout
+			Skill Normal
+			ClassIcon enemy
+			WeaponRestrictions MeleeOnly
+		}
+
+///E.SOLDIER///
+
+		T_Bersk_Soldier_Big_Liberty
+		{
+			Class Soldier
+			Name "Big Liberty Soldier"
+			Health 300
+			Scale 1.2
+			Skill Expert
+			ClassIcon enemy
+			Attributes HoldFireUntilFullReload
+			Item "The Liberty Launcher"
+			ItemAttributes
+			{
+				ItemName "The Liberty Launcher"
+				"faster reload rate" 0.75
+				"fire rate bonus" 0.9
+				"projectile spread angle penalty" 2
+			}
+		}
+		
+///E.PYRO///
+
+		T_Bersk_Pyro_Primary
+		{
+			Class Pyro
+			Skill Expert
+			ClassIcon enemy
+			WeaponRestrictions PrimaryOnly
+			Attributes DisableDodge
+		}
+		
+		T_Bersk_Pyro_Secondary
+		{
+			Class Pyro
+			Skill Normal
+			ClassIcon enemy
+			WeaponRestrictions SecondaryOnly
+			Attributes DisableDodge
+		}
+		
+		T_Bersk_Pyro_ScorchShot
+		{
+			Class Pyro
+			Skill Expert
+			ClassIcon enemy
+			WeaponRestrictions SecondaryOnly
+			Attributes DisableDodge
+			Item "The Scorch Shot"
+			ItemAttributes
+			{
+				ItemName "The Scorch Shot"
+				"damage penalty" 0.5
+				"fire rate bonus" 0.75
+				"faster reload rate" 0.75
+				"damage causes airblast" 1
+			}
+		}
+
+		T_Bersk_Pyro_VolcanoFragment
+		{
+			Class Pyro
+			Skill Expert
+			ClassIcon enemy
+			WeaponRestrictions MeleeOnly
+			Item "Sharpened Volcano Fragment"
+			Attributes DisableDodge
+		}
+		
+///E.DEMOMAN///
+
+		T_Bersk_Demoknight
+		{
+			Class Demoman
+			Name "Demoknight"
+			Skill Hard
+			Health 150
+			ClassIcon enemy
+			WeaponRestrictions MeleeOnly
+			Item "The Eyelander"
+			Item "The Chargin' Targe"
+		}
+		
+///E.HEAVYWEAPONS///
+
+		T_Bersk_Heavyweapons_Natty
+		{
+			Class Heavyweapons
+			Skill Expert
+			ClassIcon enemy
+			WeaponRestrictions PrimaryOnly
+			Item "Natascha"
+		}
+		
+		T_Bersk_Heavyweapons_SteelGauntlet
+		{
+			Class Heavyweapons
+			Skill Hard
+			Scale 1.5
+			Health 900
+			ClassIcon enemy
+			WeaponRestrictions MeleeOnly
+			Item "Fists of Steel"
+		}
+		
+///E.ENGINEER///
+
+		T_Bersk_Engineer
+		{
+			Class Engineer
+			Skill Expert
+			Health 325
+			ClassIcon enemy
+			Attributes IgnoreFlag
+		}
+
+		T_Bersk_Engineer_Buff
+		{
+			Class Engineer
+			Name "Buff Engineer"
+			Skill Expert
+			Health 325
+			ClassIcon enemy
+			Item "The Jag"
+			Item "The Buff Banner"
+			Attributes SpawnWithFullCharge
+			Attributes IgnoreFlag
+			CharacterAttributes
+			{
+				"increase buff duration" 10
+			}
+		}
+		
+///E.MEDIC///
+		T_Bersk_Medic_QF_ShortShield
+		{				
+			Class Medic
+			Name "Projectile Shield Quick-Fix Medic"
+			Skill Expert
+			Health 150
+			ClassIcon enemy
+			Attributes SpawnWithFullCharge
+			Attributes ProjectileShield
+			Item "Upgradeable TF_WEAPON_SYRINGEGUN_MEDIC"
+			Item "The Quick-Fix"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_SYRINGEGUN_MEDIC"
+				"damage penalty" 0.1
+			}
+			ItemAttributes
+			{
+				ItemName "The Quick-Fix"
+				"uber duration bonus" 999
+				"generate rage on heal"	1
+				"increase buff duration HIDDEN" 0.5
+			}
+			CharacterAttributes
+			{
+				"bot medic uber health threshold" 151
+				"voice pitch scale" 0
+			}
+		}
+		
+		T_Bersk_Medic_BigHeal
+		{
+			Class Medic
+			Name "Big-Heal Medic"
+			Skill Expert
+			Health 150
+			ClassIcon enemy
+			Item "Upgradeable TF_WEAPON_SYRINGEGUN_MEDIC"
+			Item "The Quick-Fix"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_SYRINGEGUN_MEDIC"
+				"damage penalty" 0.1
+			}
+			ItemAttributes
+			{
+				ItemName "The Quick-Fix"
+				"heal rate bonus" 10
+			}
+		}
+		
+/////"ENEMY_GIANT" BOTS/////
+
+///G.DEMOMAN///
+
+			T_Bersk_Giant_Demoman_RapidFire
+			{
+				Class Demoman
+				Name "Giant Rapid-Fire Demoman"
+				Scale 1.75
+				Health 4400
+				Skill Expert
+				ClassIcon enemy_giant
+				Item "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+				WeaponRestrictions PrimaryOnly
+				Attributes MiniBoss
+				Attributes HoldFireUntilFullReload
+				ItemAttributes
+				{
+					ItemName "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+					"faster reload rate" 0.8
+					"fire rate bonus" 0.1
+					"clip size upgrade atomic" 4
+					"projectile spread angle penalty" 5
+					"Projectile speed increased"	1.1
+				}
+				CharacterAttributes
+				{
+					"move speed bonus"	0.5
+					"damage force reduction" 0.4
+					"airblast vulnerability multiplier" 0.4
+					"override footstep sound set" 4
+				}
+			}
+		
+/////BOSS "ENEMY_BOSS_GIANT" BOTS/////
+// -!- Name the boss in the popfile.
+
+		T_Bersk_Boss_Giant_Heavy_3Forms_8KGB_8GRU_4Sandvich
+		{
+			Class Heavyweapons
+			Health 12000
+			ClassIcon enemy_boss_giant
+			Scale 3
+			
+			EventChangeAttributes
+			{
+				Default
+				{
+					Tag bot_boss_mod_behavior1_at_4
+					
+					Skill Expert
+					Attributes MiniBoss
+					Attributes UseBossHealthBar
+					Tag bot_boss
+					
+					WeaponRestrictions SecondaryOnly
+					Item "The Bunsen Brave"
+					Item "The Buffalo Steak Sandvich"
+					Item "the killing gloves of boxing"
+					ItemAttributes
+					{
+						ItemName "The Bunsen Brave"
+						"attach particle effect" 10
+						"set item tint RGB" 8208497
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"damage force reduction" 0.6
+						"airblast vulnerability multiplier" 0.6
+						"override footstep sound set" 6
+						"melee range multiplier" 1.7
+					}
+				}
+				Behavior1
+				{
+					Tag bot_boss_mod_behavior2_at_8
+					
+					Skill Normal
+					Attributes MiniBoss
+					Attributes UseBossHealthBar
+					Tag bot_boss
+					
+					WeaponRestrictions MeleeOnly
+					Item "The Bunsen Brave"
+					Item "the killing gloves of boxing"
+					Item "The Buffalo Steak Sandvich"
+					ItemAttributes
+					{
+						ItemName "The Bunsen Brave"
+						"attach particle effect" 10
+						"set item tint RGB" 8208497
+					}
+					ItemAttributes
+					{
+						ItemName "the killing gloves of boxing"
+						"damage causes airblast" 1
+						"scattergun knockback mult" 1.5
+						"melee range multiplier" 1.6
+					}
+					CharacterAttributes
+					{
+						"charge recharge rate increased" 0.1
+						"move speed bonus"	0.5
+						"damage force reduction" 0.6
+						"airblast vulnerability multiplier" 0.6
+						"override footstep sound set" 6
+					}
+				}
+				Behavior2
+				{
+					Tag bot_boss_mod_behavior3_at_8
+					
+					Skill Expert
+					Attributes MiniBoss
+					Attributes UseBossHealthBar
+					Tag bot_boss
+					Tag bot_disciplinaryaction
+					
+					WeaponRestrictions MeleeOnly
+					Item "The Bunsen Brave"
+					Item "Gloves of Running Urgently MvM"
+					ItemAttributes
+					{
+						ItemName "The Bunsen Brave"
+						"attach particle effect" 2
+						"set item tint RGB" 12073019
+					}
+					ItemAttributes
+					{
+						ItemName "Gloves of Running Urgently MvM"
+						"scattergun knockback mult" 1.5
+						"damage causes airblast" 1
+						"fire rate penalty" 0.8
+						"melee range multiplier" 1.6
+					}
+					CharacterAttributes
+					{
+						"charge recharge rate increased" 5
+						"lunchbox healing decreased" 0
+						"SPELL: set Halloween footstep type" 13595446
+						"damage force reduction" 0.6
+						"airblast vulnerability multiplier" 0.6
+						"override footstep sound set" 6
+					}
+				}
+				Behavior3
+				{
+					Tag bot_boss_mod_behavior1_at_4
+					
+					Skill Expert
+					Attributes MiniBoss
+					Attributes UseBossHealthBar
+					Attributes SpawnWithFullCharge
+					Attributes IgnoreEnemies
+					Attributes IgnoreFlag
+					Attributes SuppressFire
+					MaxVisionRange 1
+					Tag bot_boss
+					Tag bot_ubered
+					Tag bot_healing
+					
+					WeaponRestrictions SecondaryOnly
+					Item "The Bunsen Brave"
+					Item "The Buffalo Steak Sandvich"
+					Item "Upgradeable TF_WEAPON_FISTS"
+					ItemAttributes
+					{
+						ItemName "The Bunsen Brave"
+						"attach particle effect" 9
+						"set item tint RGB" 3329330
+					}
+					ItemAttributes
+					{
+						ItemName "The Buffalo Steak Sandvich"
+						"is_passive_weapon" 1
+						"health regen" 450
+					}
+					ItemAttributes
+					{
+						ItemName "Upgradeable TF_WEAPON_FISTS"
+						"damage penalty" 0
+					}
+					CharacterAttributes
+					{
+						"no_attack" 1
+						"no_duck" 1
+						"no_jump" 1
+						"move speed bonus"	0.01
+						"move speed penalty" 0.01
+						"damage force reduction" 0.6
+						"airblast vulnerability multiplier" 0.6
+						"override footstep sound set" 6
+						"melee range multiplier" 1.7
+					}
+				}
+			}
+		}
+		
+		T_Bersk_ALPHA_Boss_Giant_Heavy_4Melee_8Speedup_4StunRegen
+		{
+			Class Heavyweapons
+			Health 12000
+			ClassIcon enemy_boss_giant
+			Scale 3.25
+			
+			EventChangeAttributes
+			{
+				Default
+				{
+					Tag bot_boss_mod_behavior1
+					
+					Skill Normal
+					Attributes MiniBoss
+					Tag bot_boss
+					Tag bot_ubered
+					
+					WeaponRestrictions MeleeOnly
+					Item "The Bunsen Brave"
+					Item "the killing gloves of boxing"
+					ItemAttributes
+					{
+						ItemName "The Bunsen Brave"
+						"attach particle effect" 10
+						"set item tint RGB" 8208497
+					}
+					ItemAttributes
+					{
+						ItemName "the killing gloves of boxing"
+						"fire rate penalty" 1.5
+						"damage causes airblast" 1
+						"scattergun knockback mult" 1.5
+						"melee range multiplier" 1.7
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"damage force reduction" 0.6
+						"airblast vulnerability multiplier" 0.6
+						"override footstep sound set" 6
+					}
+				}
+				Behavior1
+				{
+					Tag bot_boss_mod_behavior2_at_4
+					
+					Skill Normal
+					Attributes MiniBoss
+					Attributes UseBossHealthBar
+					Tag bot_boss
+					Tag bot_crits
+					
+					WeaponRestrictions MeleeOnly
+					Item "The Bunsen Brave"
+					Item "the killing gloves of boxing"
+					ItemAttributes
+					{
+						ItemName "The Bunsen Brave"
+						"attach particle effect" 10
+						"set item tint RGB" 8208497
+					}
+					ItemAttributes
+					{
+						ItemName "the killing gloves of boxing"
+						"fire rate penalty" 1.5
+						"damage causes airblast" 1
+						"scattergun knockback mult" 1.5
+						"melee range multiplier" 1.7
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"damage force reduction" 0.6
+						"airblast vulnerability multiplier" 0.6
+						"override footstep sound set" 6
+					}
+				}
+				Behavior2
+				{
+					Tag bot_boss_mod_behavior3_at_8
+					
+					Skill Expert
+					Attributes MiniBoss
+					Attributes UseBossHealthBar
+					Tag bot_boss
+					Tag bot_disciplinaryaction
+					
+					WeaponRestrictions MeleeOnly
+					Item "The Bunsen Brave"
+					Item "Gloves of Running Urgently MvM"
+					ItemAttributes
+					{
+						ItemName "The Bunsen Brave"
+						"attach particle effect" 2
+						"set item tint RGB" 12073019
+					}
+					ItemAttributes
+					{
+						ItemName "Gloves of Running Urgently MvM"
+						"scattergun knockback mult" 1.5
+						"damage causes airblast" 1
+						"fire rate penalty" 0.8
+						"melee range multiplier" 1.7
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.65
+						"SPELL: set Halloween footstep type" 13595446
+						"damage force reduction" 0.6
+						"airblast vulnerability multiplier" 0.6
+						"override footstep sound set" 6
+					}
+				}
+				Behavior3
+				{
+					Tag bot_boss_mod_behavior1_at_4
+					
+					Skill Easy
+					Attributes MiniBoss
+					Attributes UseBossHealthBar
+					Tag bot_boss
+					Tag bot_stunned
+					Tag bot_ubered
+					Tag bot_healer
+					
+					WeaponRestrictions MeleeOnly
+					Item "The Bunsen Brave"
+					ItemAttributes
+					{
+						ItemName "The Bunsen Brave"
+						"attach particle effect" 9
+						"set item tint RGB" 3329330
+					}
+					CharacterAttributes
+					{
+						"no_jump" 1
+						"health regen" 1000
+						"move speed bonus"	0.5
+						"damage force reduction" 0.6
+						"airblast vulnerability multiplier" 0.6
+						"override footstep sound set" 6
+						"melee range multiplier" 1.7
+					}
+				}
+			}
+		}
+
+		T_Bersk_Boss_Giant_Soldier_3Forms_4Melee_4BlackBox_8Original
+		{
+			Class Soldier
+			Health 18000
+			ClassIcon enemy_boss_giant
+			Scale 3.25
+			AutoJumpMin 1
+			AutoJumpMax 1
+				
+			EventChangeAttributes
+			{
+				Default
+				{
+					Tag bot_boss_mod_behavior5
+					
+					Skill Expert
+					Attributes MiniBoss
+					Attributes UseBossHealthBar
+					Tag bot_boss
+					WeaponRestrictions MeleeOnly
+					Item "Tyrant's Helm"
+					Item "The Escape Plan"
+					Item "The B.A.S.E. Jumper"
+					
+					ItemAttributes
+					{
+						ItemName "Tyrant's Helm"
+						"attach particle effect" 10
+						"set item tint RGB" 8208497
+					}
+					ItemAttributes
+					{
+						ItemName "The Escape Plan"
+						"move speed bonus"	1.25
+						"melee range multiplier" 1.6
+						"damage causes airblast" 1
+						"crits_become_minicrits" 1
+						"Attack not cancel charge" 1
+					}
+					CharacterAttributes
+					{
+						"damage force reduction" 0.6
+						"SPELL: set Halloween footstep type" 13595446
+						"airblast vulnerability multiplier" 0.6
+						"override footstep sound set" 6
+						"cancel falling damage" 1
+						"no_jump" 1
+					}
+				}
+				Behavior5
+				{
+					Tag bot_boss_mod_behavior6_at_4
+					
+					Skill Expert
+					Attributes MiniBoss
+					Attributes UseBossHealthBar
+					Tag bot_boss
+					Tag bot_disciplinaryaction
+					Tag bot_chargin
+					
+					WeaponRestrictions MeleeOnly
+					Item "Tyrant's Helm"
+					Item "The Escape Plan"
+					Item "The B.A.S.E. Jumper"
+					
+					ItemAttributes
+					{
+						ItemName "Tyrant's Helm"
+						"attach particle effect" 10
+						"set item tint RGB" 8208497
+					}
+					ItemAttributes
+					{
+						ItemName "The Escape Plan"
+						"move speed bonus"	1.25
+						"melee range multiplier" 1.6
+						"damage causes airblast" 1
+						"crits_become_minicrits" 1
+						"Attack not cancel charge" 1
+					}
+					CharacterAttributes
+					{
+						"damage force reduction" 0.6
+						"SPELL: set Halloween footstep type" 13595446
+						"airblast vulnerability multiplier" 0.6
+						"override footstep sound set" 6
+						"cancel falling damage" 1
+						"no_jump" 1
+					}
+				}
+				Behavior6
+				{
+					Tag bot_boss_mod_behavior7_at_4
+					
+					Skill Hard
+					Attributes MiniBoss
+					Attributes UseBossHealthBar
+					Attributes HoldFireUntilFullReload
+					Tag bot_boss
+					
+					WeaponRestrictions PrimaryOnly
+					Item "Tyrant's Helm"
+					Item "The Black Box"
+					Item "The B.A.S.E. Jumper"
+					ItemAttributes
+					{
+						ItemName "Tyrant's Helm"
+						"attach particle effect" 9
+						"set item tint RGB" 3329330
+					}
+					ItemAttributes
+					{
+						ItemName "The Black Box"
+						"heal on hit for rapidfire" 1000
+						"Reload time decreased" 1.5
+						"fire rate bonus" 0.1
+						"damage penalty" 0.5
+						"projectile spread angle penalty" 3
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.7
+						"damage force reduction" 0.6
+						"airblast vulnerability multiplier" 0.6
+						"override footstep sound set" 6
+						"cancel falling damage" 1
+						"no_jump" 1
+					}
+				}
+				Behavior7
+				{
+					Tag bot_boss_mod_behavior5_at_8
+					
+					Skill Easy
+					Attributes MiniBoss
+					Attributes UseBossHealthBar
+					Attributes AutoJump
+					Tag bot_boss
+					Tag bot_crits
+					
+					WeaponRestrictions PrimaryOnly
+					Item "Tyrant's Helm"
+					Item "The Original"
+					Item "The B.A.S.E. Jumper"
+					ItemAttributes
+					{
+						ItemName "Tyrant's Helm"
+						"attach particle effect" 2
+						"set item tint RGB" 12073019
+					}
+					ItemAttributes
+					{
+						ItemName "The Original"
+						"auto fires full clip" 1
+						"auto fires when full" 1
+						"faster reload rate" 0.01
+						"fire rate bonus" 0.2
+						"projectile spread angle penalty" 7
+						"clip size upgrade atomic" 16
+						"Projectile speed decreased" 0.4
+						"damage penalty" 0.5
+						"SPELL: Halloween pumpkin explosions" 1
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.7
+						"damage force reduction" 0.6
+						"airblast vulnerability multiplier" 0.6
+						"override footstep sound set" 6
+						"cancel falling damage" 1
+						"increased jump height" 7
+					}
+				}
+			}
+		}
+		
+		
+/////DEBUG BOTS/////
+
+		T_Bersk_Engineer_d
+		{
+			Class Engineer
+			Skill Expert
+			Health 10
+			ClassIcon enemy
+			Attributes IgnoreFlag
+			CharacterAttributes
+			{
+				"move speed bonus" 3
+				"engy building health bonus" 0.1
+				"engy sentry damage bonus" 0.1
+				"engy sentry radius increased" 0.01
+			}
+		}
+	}
+}

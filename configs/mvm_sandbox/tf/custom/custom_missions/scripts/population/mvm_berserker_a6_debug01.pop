@@ -1,0 +1,190 @@
+//Debug Popfile: Sends you to Corpse Cacophony ADV boss
+//Alpha 5b
+//22 October 2019
+//Yakibomb
+
+//Tags for Bots
+//bot_jarated				= bot has piss on them
+//bot_milked				= bot has milk on them
+//bot_bonked				= bot is 100% invulnerable (a la Bonk! Atomic Punch)
+//bot_disciplinaryaction	= bot has 40% speed boost
+//bot_rune_reflect			= bot has Mann Power's reflect rune
+//bot_invisible				= bot is cloaked
+//bot_crits					= bot has 100% crits
+//bot_ubered				= bot is Ubercharged
+//bot_stunned				= bot is stunned, like Mannhattan's GateBots. Note: Seems to not work when used with bot_healing (Uber Heal) or bot_bonked (Bonk! invuln).
+//bot_healing				= bot is healed from the Medigun to 200% HP (with restrictions for pre-set Health for the robot)
+//bot_healer				= bot heals other bots around itself (like the Amputator)
+//drop_random				= on death, bot will drop a small treasure chest (100% chance)
+//drop_random_chance		= on death, bot will drop a small treasure chest (6.25% chance)
+//drop_key_basic			= dying drops a basic dungeon key
+//drop_rare_trap			= bot drops big chest with 5 live pipe bombs (that are meant to kill the player..!)
+//drop_rare_cash			= bot drops big chest with $125 cold hard cash
+//bot_boss					= for bosses only
+//bot_boss_mod_behavior1_at_4
+//bot_boss_mod_behavior1_at_8
+//bot_boss_mod_behavior1_at_12
+//bot_boss_mod_behavior1_at_16
+//bot_boss_mod_behavior1_at_20
+
+#base robot_berserker_a6.pop
+
+WaveSchedule
+{
+	StartingCurrency		2000
+	RespawnWaveTime 0
+	CanBotsAttackWhileInSpawnRoom Yes
+	FixedRespawnWaveTime Yes
+		
+	//STAGE 1 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		InitWaveOutput
+		{
+			Target wave_init_relay_s1
+			Action Trigger
+		}
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		
+		//Setting up event: stage 1 boss
+		WaveSpawn
+		{
+			StartWaveOutput
+			{
+				Target event_bomb
+				Action Enable
+			}
+			
+			Name "s1a3_closing"
+			
+			FirstSpawnOutput
+			{
+				Target boss_s1_relay_cam
+				Action Trigger
+			}
+			
+			Where spawnbot_bomb
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+
+			TFBot
+			{
+				Template T_Bersk_Event_Bomb
+			}
+		}
+		
+		WaveSpawn
+		{
+			Where spawnbot_s1_shop
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+			
+			Support Limited
+
+			TFBot
+			{
+				Template T_Bersk_Shopkeeper_1
+			}
+		}
+		
+		//BOSS STAGE 1
+		WaveSpawn
+		{
+			StartWaveWarningSound "\music\mvm_start_last_wave.wav"
+			
+			WaitForAllDead "s1a3_closing"
+			
+			Name "s1a3_boss"
+			
+			Where spawnbot_s1_boss
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+			
+			TFBot
+			{
+				Template T_Bersk_Boss_Giant_Heavy_3Forms_8KGB_8GRU_4Sandvich
+				Name "Stage 1 Boss"
+			}
+		}
+		WaveSpawn
+		{
+			WaitForAllDead "s1a3_closing"
+			
+			Name "s1a3_boss"
+			
+			Where spawnbot_s1_boss
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+			
+			TFBot
+			{
+				Template T_Bersk_Boss_Giant_Soldier_3Forms_4Melee_4BlackBox_8Original
+				Name "Stage 1 Boss"
+			}
+		}
+	}
+	
+	//STAGE 2 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+//	Wave
+//	{
+//		InitWaveOutput
+//		{
+//			Target wave_init_relay_stage2
+//			Action Trigger
+//		}
+//		StartWaveOutput
+//		{
+//			Target wave_start_relay
+//			Action Trigger
+//		}
+//		DoneOutput					
+//		{
+//			Target wave_finished_relay
+//			Action trigger
+//		}
+//		
+//		WaveSpawn
+//		{			
+//			Where spawnbot_bomb
+//			TotalCount 8
+//			MaxActive 1
+//			SpawnCount 1
+//			WaitBeforeStarting 0
+//			WaitBetweenSpawns 0
+//			TotalCurrency 0
+//
+//			TFBot
+//			{
+//				Class Heavyweapons
+//				Skill Expert
+//				ClassIcon enemy
+//				Attributes SuppressFire
+//				Attributes IgnoreEnemies
+//				CharacterAttributes
+//				{
+//					"damage penalty" 0
+//				}
+//			}
+//		}
+//	}
+}

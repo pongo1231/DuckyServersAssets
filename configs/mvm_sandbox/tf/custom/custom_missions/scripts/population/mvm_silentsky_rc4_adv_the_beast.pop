@@ -1,0 +1,500 @@
+//mvm silentsky
+//Expert skill
+
+///////////////////////////////////////////////////////////////////////////
+// BEGIN POP FILE
+///////////////////////////////////////////////////////////////////////////
+
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_D_I_L.pop
+
+WaveSchedule
+{
+
+	StartingCurrency 16000
+	FixedRespawnWaveTime 2
+	CanBotsAttackWhileInSpawnRoom no
+	
+/////////////////
+//MISSIONS
+/////////////////
+
+
+///////////////////////////////////////////////////////////////////////////
+//SENTRY BUSTER MISSIONS
+///////////////////////////////////////////////////////////////////////////
+
+Mission	// Sentry Busters - All
+	{
+		Objective DestroySentries
+
+		InitialCooldown 40
+		Where spawnbot
+		BeginAtWave 1
+		RunForThisManyWaves 21
+		CooldownTime 60
+
+            	TFBot
+		{
+			Template T_TFBot_SentryBuster
+			Tag bot_sentrybuster
+           	}
+	}
+	
+///////////////////////////////////////////////////////////////////////////
+//SNIPER MISSIONS
+///////////////////////////////////////////////////////////////////////////
+
+	Mission // Sniper
+	{
+		Objective Sniper
+
+		InitialCooldown 35
+		Where spawnbot_mission_sniper
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		CooldownTime 35
+		DesiredCount 3
+
+		TFBot
+		{
+			Class Sniper
+			Skill Expert
+			Name Sniper
+			MaxVisionRange 2500
+		}
+	}
+
+
+
+///////////////////////////////////////////////////////////////////////////
+//SPY MISSIONS
+///////////////////////////////////////////////////////////////////////////
+
+	Mission // Spy
+	{
+		Objective Spy  
+
+		InitialCooldown 45
+		Where spawnbot_mission_spy
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		CooldownTime 45
+		DesiredCount 4
+
+		TFBot
+		{
+			Class Spy
+			Skill Expert
+			Name Spy
+		}
+	}
+
+
+	
+///////////////////////////////////////////////////////////////////////////
+//ENGINEER MISSIONS
+///////////////////////////////////////////////////////////////////////////	
+	
+	Mission // Engineer
+	{
+		Objective Engineer  
+
+		InitialCooldown 50
+		Where spawnbot
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		CooldownTime 60
+		DesiredCount 1
+
+		TFBot
+		{
+			Template T_TFBot_Engineer_Sentry_Teleporter
+			Tag botcontrol_block
+			TeleportWhere spawnbot_mission_engineer
+			Attributes TeleportToHint
+			Health 500
+		}
+	}
+	
+
+// Wave 1 /////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// The BEAST (4000)
+// Support Gun Nut Heavy Airdrop (300)
+///////////////////////////////////////////////////////////////////////////
+
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}	
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+
+		Checkpoint Yes
+
+		WaveSpawn
+		{
+			TotalCount 0
+			TotalCurrency 0
+			WaitBeforeStarting 10
+			FirstSpawnOutput
+			{
+				Target bot_attributes_random10_relay
+				Action Trigger
+			}
+		}
+		
+		WaveSpawn // The BEAST (4000)
+		{
+			Where spawnbot	
+			Name "W1_A"
+			TotalCount 1	
+			MaxActive 1						
+			SpawnCount 1									
+			WaitBetweenSpawns 0
+			WaitBeforeStarting 0
+			TotalCurrency 4000
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_The_Beast
+					Tag botcontrol_block
+					Tag giant
+					Health 312000
+					EventChangeAttributes
+					{
+						Default
+						{
+							Skill Expert
+						
+							WeaponRestrictions  PrimaryOnly
+							Tag attrbot
+							Skill Expert
+							MaxVisionRange 3500
+							Item "The Beggar's Bazooka"
+							Item "The Equalizer"
+							Item "War Head"
+							Attributes UseBossHealthBar
+							Attributes MiniBoss
+							Attributes HoldFireUntilFullReload
+							ItemAttributes
+							{
+								ItemName "The Beggar's Bazooka"
+								"faster reload rate" 0.08
+								"fire rate bonus" 0.03
+								"damage bonus" 1.5
+								"clip size upgrade atomic" 12.0
+								"projectile spread angle penalty" 16
+								"Projectile speed increased" 0.5
+								"blast radius increased" 1.2
+								"bleeding duration" 4
+								"mod projectile heat seek power" 5 //Sigmo only
+								"mod projectile heat aim error" 360
+								"projectile trail particle" eyeboss_projectile
+							}
+							CharacterAttributes
+							{
+								"can overload" -1
+								"auto fires full clip" -1
+								"move speed bonus"	0.23
+								"damage force reduction" 0.1
+								"airblast vulnerability multiplier" 0.05
+								"override footstep sound set" 3
+								"health regen"	125
+								"airblast vertical vulnerability multiplier" 0.05
+								"rage giving scale" 0.03
+								"increased jump height" 2
+								"dmg taken increased" 0.05 
+   		 						"dmg from melee increased" 40
+   								"dmg from ranged reduced" 20
+								"head scale" 1.2
+								"boots falling stomp" 1
+								"health from healers reduced" 0.1
+							}
+						}
+
+						BotAttributes1
+						{
+							Skill Expert
+						
+							WeaponRestrictions  SecondaryOnly
+							Tag attrbot
+							Skill Expert
+							MaxVisionRange 3500
+							Item "The Beggar's Bazooka"
+							Item "The Equalizer"
+							Item "War Head"
+							Attributes UseBossHealthBar
+							Attributes MiniBoss
+							Attributes HoldFireUntilFullReload
+							ItemAttributes
+							{
+								ItemName "TF_WEAPON_SHOTGUN_SOLDIER"
+								"damage bonus" 0.5
+								"projectile penetration" 4.0
+								"bullets per shot bonus" 3
+								"clip size upgrade atomic" 2.0
+								"faster reload rate" 0.38
+								"fire rate bonus" 0.3
+								"bleeding duration" 3
+				
+							}
+							CharacterAttributes
+							{
+								//"can overload" -1
+								//"auto fires full clip" -1
+								"move speed bonus"	0.23
+								"damage force reduction" 0.1
+								"airblast vulnerability multiplier" 0.05
+								"override footstep sound set" 3
+								"health regen"	125
+								"airblast vertical vulnerability multiplier" 0.05
+								"rage giving scale" 0.03
+								"increased jump height" 2
+								"dmg taken increased" 0.05 
+   		 						"dmg from melee increased" 40
+   								"dmg from ranged reduced" 20
+								"head scale" 1.2
+								"boots falling stomp" 1
+								"health from healers reduced" 0.1
+							}
+						}
+						BotAttributes2
+						{
+							Skill Expert
+						
+							WeaponRestrictions  MeleeOnly
+							Tag attrbot
+							Skill Expert
+							
+							Item "The Beggar's Bazooka"
+							Item "The Equalizer"
+							Item "War Head"
+							Attributes UseBossHealthBar
+							Attributes MiniBoss
+							Attributes HoldFireUntilFullReload
+							ItemAttributes
+							{
+								ItemName "The Equalizer"
+								"damage bonus" 3.2
+								"fire rate bonus" 0.9
+								"heal on hit for rapidfire" 300
+								"heal on kill" 1700
+								"speed boost when active" 1
+								"bleeding duration" 16
+								"melee range multiplier" 1.5
+								"move speed bonus"	2.7
+								"dmg taken increased" 0.05 
+   		 						"dmg from melee increased" 120
+   								"dmg from ranged reduced" 25
+								"damage causes airblast" 1
+							}
+							CharacterAttributes
+							{
+								//"can overload" -1
+								//"auto fires full clip" -1
+								"move speed bonus"	0.23
+								"damage force reduction" 0.1
+								"airblast vulnerability multiplier" 0.3
+								"override footstep sound set" 3
+								"health regen"	125
+								"airblast vertical vulnerability multiplier" 0.2
+								"rage giving scale" 0.1
+								"increased jump height" 2
+								"dmg taken increased" 0.05 
+   		 						"dmg from melee increased" 40
+   								"dmg from ranged reduced" 20
+								"head scale" 1.2
+								"boots falling stomp" 1
+								"health from healers reduced" 0.1
+							}
+						}
+
+						BotAttributes3
+						{
+							Skill Expert
+						
+							WeaponRestrictions  PrimaryOnly
+							Tag attrbot
+							Skill Expert
+							MaxVisionRange 3500
+							Item "The Beggar's Bazooka"
+							Item "The Equalizer"
+							Item "War Head"
+							Attributes UseBossHealthBar
+							Attributes MiniBoss
+							Attributes HoldFireUntilFullReload
+							ItemAttributes
+							{
+								ItemName "The Beggar's Bazooka"
+								"faster reload rate" 0.01
+								"fire rate bonus" 0.01
+								"damage bonus" 2
+								"clip size upgrade atomic" 87.0
+								"projectile spread angle penalty" 120
+								"Projectile speed increased" 0.7
+								"blast radius increased" 1.6
+								"bleeding duration" 7
+								"mod projectile heat seek power" 7.5 //Sigmo only
+								"mod projectile heat aim error" 360
+								"projectile trail particle" eyeboss_projectile
+							}
+							CharacterAttributes
+							{
+								"can overload" -1
+								"auto fires full clip" -1
+								"move speed bonus"	0.21
+								"damage force reduction" 0.1
+								"airblast vulnerability multiplier" 0.05
+								"override footstep sound set" 3
+								"health regen"	125
+								"airblast vertical vulnerability multiplier" 0.05
+								"rage giving scale" 0.03
+								"increased jump height" 2
+								"dmg taken increased" 0.05 
+   		 						"dmg from melee increased" 40
+   								"dmg from ranged reduced" 20
+								"head scale" 1.2
+								"boots falling stomp" 1
+								"health from healers reduced" 0.1
+							}
+						}
+
+
+						//BotAttributes4
+						//{
+							//Skill Expert
+							//MaxVisionRange 3500
+							//WeaponRestrictions  PrimaryOnly
+							//Tag attrbot
+							//Skill Expert
+							//Scale 2.15
+							//Item "The Beggar's Bazooka"
+							//Item "The Equalizer"
+							//Item "War Head"
+							//Attributes UseBossHealthBar
+							//Attributes MiniBoss
+							//Attributes HoldFireUntilFullReload
+							//ItemAttributes
+							//{
+								//ItemName "The Beggar's Bazooka"
+								//"faster reload rate" 1
+								//"fire rate bonus" 0.05
+								//"damage bonus" 20
+								//"clip size upgrade atomic" 1
+								//"projectile spread angle penalty" 6
+								//"Projectile speed increased" 0.33
+								//"blast radius increased" 2
+								//"use large smoke explosion" 1
+							//}
+							//CharacterAttributes
+							//{
+								//"can overload" -1
+								//"auto fires full clip" -1
+								//"move speed bonus"	0.23
+								//"damage force reduction" 0.1
+								//"airblast vulnerability multiplier" 0.03
+								//"override footstep sound set" 3
+								//"health regen"	125
+								//"airblast vertical vulnerability multiplier" 0.05
+								//"rage giving scale" 0.03
+								//"increased jump height" 2
+								//"dmg taken increased" 0.03 
+   		 						//"dmg from melee increased" 100
+   								//"dmg from ranged reduced" 20
+								//"head scale" 1.2
+								//"boots falling stomp" 1
+								//"health from healers reduced" 0.1
+							//}
+							//HomingRockets  
+           						//{
+            							//IgnoreDisguisedSpies 1
+             							//IgnoreStealthedSpies 1
+             							//RocketSpeed 0.33
+             							//TurnPower 40 
+             							//MaxAimError 360
+                					//}
+						//}
+					}
+				}
+			}
+		}
+		
+		WaveSpawn // Support Aidropped Gun Nut Heavies (200)
+		{
+			Where spawnbot_airdrop0
+			Name "W3_B"
+			TotalCount 3	
+			MaxActive 2						
+			SpawnCount 1
+			WaitForAllDead "W3_A"									
+			WaitBetweenSpawns 90
+			WaitBeforeStarting 120
+			TotalCurrency 100
+			
+			Support 1
+			TFBot
+			{
+				Template T_TFBot_Giant_Heavyweapons_Aimless
+				Tag botcontrol_block
+				Item "The B.A.S.E. Jumper"
+				ClassIcon heavy_gun_nut
+				Tag giant
+			}
+		}
+
+		WaveSpawn // Support Aidropped Gun Nut Heavies (200)
+		{
+			Where spawnbot_airdrop1
+			Name "W3_B"
+			TotalCount 3	
+			MaxActive 2						
+			SpawnCount 1									
+			WaitBetweenSpawns 90
+			WaitBeforeStarting 120
+			TotalCurrency 100
+			
+			Support 1
+			TFBot
+			{
+				Template T_TFBot_Giant_Heavyweapons_Aimless
+				Tag botcontrol_block
+				Item "The B.A.S.E. Jumper"
+				ClassIcon heavy_gun_nut
+				Tag giant
+			}
+		}
+
+		WaveSpawn // Support Aidropped Gun Nut Heavies (200)
+		{
+			Where spawnbot_airdrop2
+			Name "W3_B"
+			TotalCount 3	
+			MaxActive 2						
+			SpawnCount 1								
+			WaitBetweenSpawns 90
+			WaitBeforeStarting 120
+			TotalCurrency 100
+			
+			Support 1
+			TFBot
+			{
+				Template T_TFBot_Giant_Heavyweapons_Aimless
+				Tag botcontrol_block
+				Item "The B.A.S.E. Jumper"
+				ClassIcon heavy_gun_nut
+				Tag giant
+			}
+		}
+
+	}
+}

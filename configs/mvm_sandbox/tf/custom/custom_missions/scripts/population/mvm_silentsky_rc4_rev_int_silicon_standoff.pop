@@ -1,0 +1,5702 @@
+//mvm silentsky
+//Intermediate skill
+
+//Dylan_Is_Legend/WizzardII
+//Silentsky int reverse 4CP
+//Giant team
+//Boss will be Titan Bot with progressively smaller bots until you get a max power common robot at the end.
+
+///////////////////////////////////////////////////////////////////////////
+// BEGIN POP FILE
+///////////////////////////////////////////////////////////////////////////
+
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_D_I_L.pop
+#base robot_giant_red.pop
+#base robot_standard_red.pop
+
+ChunkyMetalLadsGoForAStrollAndAreNowSquattingAtMyHouseHelp
+{
+
+	StartingCurrency 800
+	RespawnWaveTime 4
+	CanBotsAttackWhileInSpawnRoom no
+	ReverseWinConditions 1  	 				 
+	AllowJoinTeamBlueMax 6				 
+	AllowJoinTeamBlue 1  	 				 
+	HumansMustJoinTeam Blue  	  	
+	SetCreditTeam 3
+	SniperAllowHeadshots 1
+	SendBotsToSpectatorImmediately 1
+	RobotLimit 26
+	BluHumanInfiniteAmmo 1	
+	FlagCarrierMovementPenalty 0.85 			 
+	BluPlayersAreRobots 1
+	BluHumanFlagCapture 1  	 				 
+	BluHumanFlagPickup 1
+	BotsRandomCrit 0
+    	PrecacheModel "models\props_mvm\hatch_shield.mdl"  
+	PrecacheModel "models\props_mvm\mvm_upgrade_blu.mdl"
+	RespawnWaveTimeBlue 5  
+	FixedRespawnWaveTimeBlue 1  	
+	FlagEscortCountOffset 14
+	TextPrintTime 0
+	NoRedBotsRandomCrit 1
+	UpgradeStationKeepWeapons 1
+	ExtendedUpgradesOnly 1
+	ConchHealthOnHit 0.2
+	AllowMultipleSappers 1
+	UpgradeStationKeepWeapons 1
+	BonusRatioHalf 0.7
+	BonusRatioHalf 1.1
+
+    	ClassLimit
+	{
+		Scout 2
+		Soldier 2
+		Pyro 2
+		Demoman 2
+		Heavyweapons 2
+	}
+
+	PlayerAttributes
+	{
+				
+		//"cannot upgrade" 1
+		Scout
+		{
+			"max health additive bonus" 1475
+			"damage force reduction" 0.7
+			"airblast vulnerability multiplier" 0.7
+			"override footstep sound set" 5
+			"voice pitch scale" 0.8
+			"health from packs decreased" 0.5
+			"cannot pick up intelligence" 1
+			"min respawn time" 13
+			"is miniboss" 1
+			"patient overheal penalty" 0
+		}
+		Soldier
+		{
+			"max health additive bonus" 3600
+			"move speed penalty"	0.5
+			"damage force reduction" 0.4
+			"airblast vulnerability multiplier" 0.4
+			"override footstep sound set" 3
+			"Is Miniboss" 1
+			"voice pitch scale" 0.8
+			"health from packs decreased" 0.35
+			"is miniboss" 1
+			"patient overheal penalty" 0
+			"min respawn time" 17
+		}
+
+		Pyro
+		{
+			"max health additive bonus" 2825
+			"move speed penalty"	0.5
+			"damage force reduction" 0.6
+			"airblast vulnerability multiplier" 0.6
+			"override footstep sound set" 6
+			"Is Miniboss" 1
+			"voice pitch scale" 0.8
+			"health from packs decreased" 0.35
+			"is miniboss" 1
+			"patient overheal penalty" 0
+			"min respawn time" 17
+		}
+
+		Demoman
+		{
+			"max health additive bonus" 3125
+			"move speed penalty"	0.5
+			"damage force reduction" 0.5
+			"airblast vulnerability multiplier" 0.5
+			"override footstep sound set" 4
+			"Is Miniboss" 1
+			"voice pitch scale" 0.8
+			"health from packs decreased" 0.35
+			"patient overheal penalty" 0
+			"min respawn time" 17
+		}
+
+		Heavyweapons
+		{
+			"max health additive bonus" 4700
+			"move speed penalty"	0.5
+			"damage force reduction" 0.3
+			"airblast vulnerability multiplier" 0.3
+			"override footstep sound set" 2
+			"Is Miniboss" 1
+			"voice pitch scale" 0.8
+			"health from packs decreased" 0.3
+			"patient overheal penalty" 0
+			"min respawn time" 22
+		}
+
+		Medic
+		{
+			"max health additive bonus" 500
+			"damage force reduction" 0.85
+			"airblast vulnerability multiplier" 0.85
+			"voice pitch scale" 0.9
+			"health from packs decreased" 0.8
+			"patient overheal penalty" 0
+		}
+
+		Sniper
+		{
+			"max health additive bonus" 1875
+			"move speed penalty" 0.7
+			"damage force reduction" 0.75
+			"override footstep sound set" 2
+			"airblast vulnerability multiplier" 0.7
+			"Is Miniboss" 1
+			"voice pitch scale" 0.8
+			"health from packs decreased" 0.4
+			"patient overheal penalty" 0
+			"min respawn time" 15
+		}
+
+		Spy
+		{
+			"max health additive bonus" 525
+			"damage force reduction" 0.85
+			"airblast vulnerability multiplier" 0.85
+			"head scale" 0.7
+			"voice pitch scale" 0.9
+			"cannot pick up intelligence" 1
+			"health from packs decreased" 0.7
+			"model scale" 1.4
+			"melee range multiplier" 1.4
+			"crit mod disabled" 1
+			"patient overheal penalty" 0.2
+		}
+		Engineer
+		{
+			"max health additive bonus" 525
+			"damage force reduction" 0.85
+			"airblast vulnerability multiplier" 0.85
+			"voice pitch scale" 0.9
+			"health from packs decreased" 0.7
+			"engy building health bonus" 1.35
+			"engy dispenser radius increased" 2
+			"model scale" 1.4
+			"melee range multiplier" 1.4
+			"crit mod disabled" 1
+			"patient overheal penalty" 0.2	
+		}
+	}
+
+	ItemBlacklist
+	{
+		Name "Zombie Scout"
+		Name "Zombie Soldier"
+		Name "Zombie Pyro"
+		Name "Zombie Demo"
+		Name "Zombie Heavy"
+		Name "Zombie Engineer"
+		Name "Zombie Sniper"
+		Name "Zombie Medic"
+		Name "Zombie Spy"
+		Name "The Air Strike" //Disabled for being essentially unusable
+		Name "Rocket Jumper" //Disabled for being essentially unusable
+		Item "Stickybomb Jumper"
+		ClassName "tf_weapon_pipebomblauncher"
+	}
+
+	ItemAttributes // This weapon is so broken op
+	{
+		ClassName "tf_weapon_katana"
+		"restore health on kill" 8 // PDA Why
+		"honorbound" 0 
+		//"overheal from heal on kill" 0 // This attribute doesn't work, neither the overheal decay attribute and the HealOnKillOverhealMelee 0 keyvalue. This katana is so cursed
+	}
+	ItemAttributes 
+	{
+		ItemName "The Battalion's Backup"
+		"max health additive bonus" 200
+	}
+	ItemAttributes 
+	{
+		ItemName "The Concheror"
+		"health regen" 20
+	}
+	ItemAttributes 
+	{
+		ItemName "The B.A.S.E. Jumper"
+		"special item description" "[INFO]: Increases your Jump Height and Air Control."
+		"increased jump height" 3
+		"increased air control" 4
+		"cancel falling damage" 1
+	}
+	ItemAttributes 
+	{
+		ItemName "The Gunboats"
+		"special item description" "[INFO]: Gunboats provides extra health and movement speed."
+		"max health additive bonus" 200
+		"move speed bonus" 1.2
+	}
+	ItemAttributes 
+	{
+		ItemName "The Mantreads"
+		"special item description" "[INFO]: Deals Damage by bumping into players."
+		"stomp player time" 0.5
+		"stomp player damage" 50
+		"stomp player force" 300
+	}
+
+	ItemAttributes // No More Huge Goomba Stomp!
+	{
+		ItemName "The Thermal Thruster"
+		"provide on active" 1
+		"cannot pick up intelligence" 1
+		//"damage penalty" 0.5 // Doesn't work :(
+	}
+	ItemAttributes
+	{
+		ItemName "The Homewrecker"
+		"SET BONUS: dmg from sentry reduced" 0.5
+		"dmg bonus vs buildings" 4
+	}
+	ItemAttributes
+	{
+		ItemName "The Maul"
+		"SET BONUS: dmg from sentry reduced" 0.5
+		"dmg bonus vs buildings" 4
+	}
+	// Demoman 
+	ItemAttributes 
+	{
+		ItemName "Ali Baba's Wee Booties"
+		"max health additive bonus" 200
+	}
+	ItemAttributes 
+	{
+		ItemName "The Bootlegger"
+		"max health additive bonus" 200
+	}
+	ItemAttributes 
+	{
+		ItemName "The Tide Turner"
+		"lose demo charge on damage when charging" 0
+	}
+	ItemAttributes 
+	{
+		ItemName "The Eyelander"
+		"max health additive penalty" 0
+	}
+	ItemAttributes 
+	{
+		ItemName "Nessie's Nine Iron"
+		"max health additive penalty" 0
+	}
+	ItemAttributes 
+	{
+		ItemName "The Horseless Headless Horseman's Headtaker"
+		"max health additive penalty" 0
+	}
+	ItemAttributes 
+	{
+		ItemName "Festive Eyelander"
+		"max health additive penalty" 0
+		"set turn to ice" 1
+	}
+	ItemAttributes 
+	{
+		ItemName "The Ullapool Caber"
+		"special item description" "[INFO]: Caber Regenerates after the explosion hit."
+		"regenerate stickbomb" 1
+		"blast dmg to self increased" 5
+	}
+
+	ItemAttributes 
+	{
+		ItemName "The Huo Long Heatmaker"
+		"damage penalty" 1
+	}
+
+	ItemAttributes 
+	{
+		ItemName "Gloves of Running Urgently"
+		"special item description" "[INFO]: Removed Health drain, but re-added Mark-For-Death Attribute."
+		"mod_maxhealth_drain_rate" 0
+        	"single wep holster time increased" 1.5
+        	"self mark for death" 3
+        	"provide on active" 1
+        	"damage penalty" 0.75
+	}
+	ItemAttributes 
+	{
+		ItemName "Festive Gloves of Running Urgently"
+		"special item description" "[INFO]: Removed Health drain, but re-added Mark-For-Death Attribute."
+		"mod_maxhealth_drain_rate" 0
+        	"single wep holster time increased" 1.5
+        	"self mark for death" 3
+        	"provide on active" 1
+        	"damage penalty" 0.75
+	}
+	ItemAttributes 
+	{
+		ItemName "The Bread Bite"
+		"special item description" "[INFO]: Removed Health drain, but re-added Mark-For-Death Attribute."
+		"mod_maxhealth_drain_rate" 0
+        	"single wep holster time increased" 1.5
+        	"self mark for death" 3
+        	"provide on active" 1
+        	"damage penalty" 0.75
+	}
+
+	ItemAttributes 
+	{
+		ItemName "The Eviction Notice"
+		"special item description" "[INFO]: Removed Health drain."
+		"mod_maxhealth_drain_rate" 0
+	}
+
+	ItemAttributes // Too Overpowered with Infinite Ammo
+	{
+		ItemName "The Short Circuit"
+		"fire rate penalty" 3.5
+	}
+
+	ItemAttributes // I tried
+    	{
+        	ItemName "The Gunslinger"
+		"special item description" "[INFO]: Buildings are restricted to level 1"
+		"dmg from ranged reduced" 0.75
+		"damage bonus" 2
+        	"engy disposable sentries" 2
+        	"engy sentry radius increased" 2
+		"building max level" 1
+		"engy sentry damage bonus" 1.5
+		"engy building health bonus" 2
+    	}
+
+	ItemAttributes
+	{
+		ClassName "TF_WEAPON_REVOLVER"
+		"mult dmg vs tanks" 2.5
+		"mult dmg vs giants" 2.5
+	}
+	ItemAttributes
+    {
+        ItemName "The Ambassador"
+		"special item description" "[INFO]: Removed Crit Damage Falloff."
+        "crit_dmg_falloff" 0
+    }
+	ItemAttributes
+    {
+        ItemName "Festive Ambassador"
+		"special item description" "[INFO]: Removed Crit Damage Falloff."
+		"crit_dmg_falloff" 0
+    }
+	ItemAttributes // Fuck this sapper
+	{
+		ItemName "The Red-Tape Recorder"
+		"special item description" "[INFO]: Now functions like the stock Sapper."
+		"sapper degenerates buildings" 0
+		"sapper damage penalty" 1
+	}
+
+
+
+	ExtendedUpgrades 
+	{
+		// All Giant Class
+		upgrade // Blast Resistance
+		{
+			Name "+10% Blast resistance"
+			Attribute "dmg taken from blast reduced"
+			cap 0.60
+			Increment -0.1
+			cost 300
+			Playerupgrade 1
+			AllowPlayerClass Scout
+			AllowPlayerClass Soldier
+			AllowPlayerClass Pyro
+			AllowPlayerClass Demoman
+			AllowPlayerClass HeavyWeapons
+			AllowPlayerClass Sniper
+		}
+		upgrade // Bullet Resistance
+		{
+			Name "+10% Bullet resistance"
+			Attribute "dmg taken from bullets reduced"
+			cap 0.60
+			Increment -0.1
+			cost 300
+			Playerupgrade 1
+			AllowPlayerClass Scout
+			AllowPlayerClass Soldier
+			AllowPlayerClass Pyro
+			AllowPlayerClass Demoman
+			AllowPlayerClass HeavyWeapons
+			AllowPlayerClass Sniper
+		}
+		upgrade // Fire Resistance
+		{
+			Name "+10% Fire resistance"
+			Attribute "dmg taken from fire reduced"
+			cap 0.60
+			Increment -0.1
+			cost 200
+			Playerupgrade 1
+			AllowPlayerClass Scout
+			AllowPlayerClass Soldier
+			AllowPlayerClass Pyro
+			AllowPlayerClass Demoman
+			AllowPlayerClass HeavyWeapons
+			AllowPlayerClass Sniper
+		}
+		upgrade // Crit Resistance
+		{
+			Name "+15% Crit resistance"
+			Attribute "dmg taken from crit reduced"
+			cap 0.4
+			Increment -0.15
+			cost 200
+			Playerupgrade 1
+			AllowPlayerClass Scout
+			AllowPlayerClass Soldier
+			AllowPlayerClass Pyro
+			AllowPlayerClass Demoman
+			AllowPlayerClass HeavyWeapons
+			AllowPlayerClass Sniper
+		}
+		upgrade // Jump Height
+		{
+			Name "+20% Jump height"
+			Attribute "increased jump height"
+			cap 1.6
+			Increment 0.2
+			Cost 150
+			Playerupgrade 1
+			AllowPlayerClass Scout
+			AllowPlayerClass Soldier
+			AllowPlayerClass Pyro
+			AllowPlayerClass Demoman
+			AllowPlayerClass HeavyWeapons
+			AllowPlayerClass Sniper
+		}
+		upgrade // Slow Giant Move Speed Bonus
+		{
+			Name "+10% Move speed"
+			Attribute "move speed bonus"
+			cap 1.2
+			Increment 0.1
+			Cost 250
+			Playerupgrade 1
+			AllowPlayerClass Soldier
+			AllowPlayerClass Pyro
+			AllowPlayerClass Demoman
+			AllowPlayerClass HeavyWeapons
+			AllowPlayerClass Sniper
+		}
+
+		armoryboy
+		{
+			Name "Heavy Armor"
+			Description "Slows you down but gives more Health"
+			Attribute "damage bonus"
+			Cap 1.1
+			Increment 0.1
+			Cost 500
+			Playerupgrade 1
+			AllowPlayerClass Scout
+			SecondaryAttributes
+			{
+				"move speed penalty" -0.25
+				"max health additive penalty" 1400
+				"health from packs decreased" -0.25
+			}
+			OnUpgrade
+			{
+				Output "!activator,$ForceRespawn,,1"
+			}
+		}
+		upgrade // Damage Upgrade Primary
+        {
+            Name "+25% Damage bonus"
+            Attribute "damage bonus"
+            Cap 2
+			Increment 0.25
+			Cost 400 
+			AllowPlayerClass Scout
+            AllowPlayerClass Soldier
+            AllowedWeapons
+			{
+				Slot "Primary"
+			}
+			DisallowedWeapons
+			{
+				ItemName "Rocket Jumper"
+			}
+        }
+		upgrade // Damage Upgrade Demoman Only
+        {
+            Name "+20% Damage bonus"
+            Attribute "damage bonus"
+            Cap 1.8
+			Increment 0.2
+			Cost 400 //500
+			AllowPlayerClass Demoman
+            AllowedWeapons
+			{
+				Slot "Primary"
+				Slot "Secondary"
+			}
+			DisallowedWeapons
+			{
+				ItemName "Ali Baba's Wee Booties"
+				ItemName "The Bootlegger"
+				ItemName "The Chargin' Targe"
+				ItemName "The Splendid Screen"
+				ItemName "The Tide Turner"
+			}
+        }
+		upgrade // Projectile Penetration
+		{
+			Name "Projectile penetration"
+			Attribute "Projectile Penetration"
+			Cap 1
+			Increment 1
+			Cost 300
+			AllowPlayerClass Scout
+			AllowedWeapons
+			{
+				Slot "Primary"
+			}
+		}
+		upgrade // Melee Damage bonus Swords only
+        {
+            Name "+25% Damage bonus"
+            Attribute "damage bonus"
+            Cap 2
+			Increment 0.25 
+			Cost 300
+            AllowPlayerClass Soldier
+			AllowPlayerClass Demoman
+            AllowedWeapons // Restricts upgrade to specified weapons
+			{
+				ItemName "The Half-Zatoichi"
+				ItemName "The Eyelander"
+				ItemName "The Scotsman's Skullcutter"
+				ItemName "The Claidheamohmor"
+				ItemName "The Persian Persuader"
+				ItemName "Nessie's Nine Iron"
+				ItemName "Festive Eyelander"
+				ItemName "The Horseless Headless Horseman's Headtaker"
+				ItemName "The Ullapool Caber"
+			}
+        }
+		upgrade // Melee Attack Cleave
+        {
+            Name "Melee cleave attack"
+            Attribute "melee cleave attack"
+            Cap 1
+			Increment 1 
+			Cost 650
+            AllowPlayerClass Soldier
+			AllowPlayerClass Demoman
+            AllowedWeapons // Restricts upgrade to specified weapons
+			{
+				ItemName "The Half-Zatoichi"
+				ItemName "The Eyelander"
+				ItemName "The Scotsman's Skullcutter"
+				ItemName "The Claidheamohmor"
+				ItemName "The Persian Persuader"
+				ItemName "Nessie's Nine Iron"
+				ItemName "Festive Eyelander"
+				ItemName "The Horseless Headless Horseman's Headtaker"
+			}
+        }
+		upgrade // Health on Kill (Giant)
+		{
+			Name "+50 Health on kill"
+			Attribute "heal on kill"
+			Cap 250
+			Increment 50
+			Cost 200
+			AllowPlayerClass Scout
+			AllowPlayerClass Soldier
+			AllowPlayerClass Pyro
+			AllowPlayerClass Demoman
+			AllowPlayerClass HeavyWeapons
+			AllowPlayerClass Sniper
+			AllowedWeapons
+			{
+				Slot "Primary"
+				Slot "Secondary"
+				Slot "Melee"
+			}
+			DisallowedWeapons
+			{
+				// Scout
+				ItemName "Mad Milk"
+				ItemName "Mutated Milk"
+				ItemName "Bonk! Atomic Punch"
+				ItemName "Crit-a-Cola"
+				ItemName "The Flying Guillotine"
+
+				// Soldier
+				ItemName "Rocket Jumper"
+				ItemName "The Buff Banner"
+				ItemName "Festive Buff Banner"
+				ItemName "The Battalion's Backup"
+				ItemName "The Concheror"
+				ItemName "The B.A.S.E. Jumper"
+				ItemName "The Mantreads"
+				ItemName "The Gunboats"
+
+				// Pyro
+				ItemName "The Gas Passer"
+				ItemName "The Thermal Thruster"
+
+				// Demoman
+				ItemName "Ali Baba's Wee Booties"
+				ItemName "The Bootlegger"
+				ItemName "The Chargin' Targe"
+				ItemName "The Splendid Screen"
+				ItemName "The Tide Turner"
+
+				// Heavy
+				ItemName "The Sandvich"
+				ItemName "Festive Sandvich"
+				ItemName "The Buffalo Steak Sandvich"
+				ItemName "The Dalokohs Bar"
+				ItemName "Sandvich Promo Package"
+				ItemName "The Second Banana"
+
+				ItemName "Jarate"
+				ItemName "The Self-Aware Beauty Mark"
+				ItemName "The Razorback"
+				ItemName "The Cozy Camper"
+				ItemName "Darwin's Danger Shield"
+			} 
+		}
+		critboost // Crit on Kill, Demo and spy Only
+		{
+			Name "+2s Crits on kill"
+			Attribute "critboost on kill"
+			Cap 4
+			Increment 2
+			Cost 350
+			AllowPlayerClass Demoman
+			AllowPlayerClass Spy
+			AllowedWeapons
+			{
+				Slot "Melee"
+			}
+			DisallowedUpgrade
+			{
+				upgrade speedboost
+				level 1
+			}
+		}
+		speedboost // Speedboost on Kill, Demo Only
+		{
+			Name "+2s Speed Boost on kill"
+			Attribute "speed_boost_on_kill"
+			Cap 4
+			Increment 2
+			Cost 350
+			AllowPlayerClass Demoman
+			AllowedWeapons
+			{
+				Slot "Melee"
+			}
+			DisallowedUpgrade
+			{
+				upgrade critboost
+				level 1
+			}
+		}
+		upgrade // Crits on Kill, Soldier Only
+		{
+			Name "+2s Crits on kill"
+			Attribute "critboost on kill"
+			Cap 4
+			Increment 2
+			Cost 350
+			AllowPlayerClass Soldier
+			AllowedWeapons
+			{
+				ItemName "The Half-Zatoichi"
+			}
+		}
+		// Common bots Upgrade 
+		upgrade // Blast Resistance
+		{
+			Name "+25% Blast resistance"
+			Attribute "dmg taken from blast reduced"
+			cap 0.25
+			Increment -0.25
+			cost 300
+			Playerupgrade 1
+			AllowPlayerClass Engineer
+			AllowPlayerClass Medic
+			AllowPlayerClass Spy
+		}
+		upgrade // Bullet Resistance
+		{
+			Name "+25% Bullet resistance"
+			Attribute "dmg taken from bullets reduced"
+			cap 0.25
+			Increment -0.25
+			cost 300
+			Playerupgrade 1
+			AllowPlayerClass Engineer
+			AllowPlayerClass Medic
+			AllowPlayerClass Spy
+		}
+		upgrade // Movement speed
+		{
+			Name "+10% Movement speed"
+			Attribute "move speed bonus"
+			cap 1.3
+			Increment 0.1
+			Cost 200
+			Playerupgrade 1
+			AllowPlayerClass Engineer
+			AllowPlayerClass Medic
+			AllowPlayerClass Spy
+		}
+		upgrade // Health Regen
+		{
+			Name "+4 Health regen"
+			Attribute "Health Regen"
+			cap 12
+			Increment 4
+			Cost 200
+			Playerupgrade 1
+			AllowPlayerClass Engineer
+			AllowPlayerClass Medic
+			AllowPlayerClass Spy
+		}
+		upgrade // Fire Resistance
+		{
+			Name "+25% Fire resistance"
+			Attribute "dmg taken from fire reduced"
+			cap 0.25
+			Increment -0.25
+			cost 150
+			Playerupgrade 1
+			AllowPlayerClass Engineer
+			AllowPlayerClass Medic
+			AllowPlayerClass Spy
+		}
+		upgrade // Crit Resistance
+		{
+			Name "+30% Crit resistance"
+			Attribute "dmg taken from crit reduced"
+			cap 0.01
+			Increment -0.33
+			cost 150
+			Playerupgrade 1
+			AllowPlayerClass Engineer
+			AllowPlayerClass Medic
+			AllowPlayerClass Spy
+		}
+		upgrade // Jump Height
+		{
+			Name "+20% Jump height"
+			Attribute "increased jump height"
+			cap 1.6
+			Increment 0.2
+			Cost 100
+			Playerupgrade 1
+			AllowPlayerClass Engineer
+			AllowPlayerClass Medic
+			AllowPlayerClass Spy
+		}
+		upgrade // Damage Upgrade Secondary
+        {
+            Name "+25% Damage bonus"
+            Attribute "damage bonus"
+            Cap 1.5
+			Increment 0.25
+			Cost 300 
+			AllowPlayerClass Scout
+			AllowPlayerClass Soldier
+			AllowPlayerClass Pyro
+			AllowPlayerClass HeavyWeapons
+			AllowPlayerClass Engineer
+			AllowPlayerClass Sniper
+			AllowPlayerClass Spy
+            AllowedWeapons
+			{
+				Slot "Secondary"
+			}
+			DisallowedWeapons
+			{
+				// Scout
+				ItemName "Mad Milk"
+				ItemName "Mutated Milk"
+				ItemName "Bonk! Atomic Punch"
+				ItemName "Crit-a-Cola"
+				ItemName "The Flying Guillotine"
+				ItemName "The Winger"
+				// Soldier
+				ItemName "The Righteous Bison" // Doesn't work?
+				ItemName "The Buff Banner"
+				ItemName "Festive Buff Banner"
+				ItemName "The Battalion's Backup"
+				ItemName "The Concheror"
+				ItemName "The B.A.S.E. Jumper"
+				ItemName "The Mantreads"
+				ItemName "The Gunboats"
+				// Pyro
+				ItemName "The Gas Passer"
+				ItemName "The Thermal Thruster"
+				ItemName "The Flare Gun"
+				ItemName "The Detonator"
+				ItemName "The Scorch Shot"
+				ItemName "The Manmelter"
+				ItemName "Spitfire Flare Gun"
+				// Heavy
+				ItemName "The Sandvich"
+				ItemName "Festive Sandvich"
+				ItemName "The Buffalo Steak Sandvich"
+				ItemName "The Dalokohs Bar"
+				ItemName "Sandvich Promo Package"
+				ItemName "The Second Banana"
+
+				// Engineer
+				ItemName "The Short Circuit"
+				ItemName "The Wrangler"
+				ItemName "Festive Wrangler"
+				ItemName "The Giger Counter"
+				ItemName "Gamma Gazer"
+				// Sniper
+				ItemName "Jarate"
+				ItemName "The Self-Aware Beauty Mark"
+				ItemName "The Razorback"
+				ItemName "The Cozy Camper"
+				ItemName "Darwin's Danger Shield"
+			} 
+        }
+		upgrade // Reload speed Primary
+		{
+			Name "+20% Reload speed"
+			Attribute "faster reload rate"
+			Cap 0.4
+			Increment -0.2
+			Cost 250
+			AllowPlayerClass Scout
+			AllowPlayerClass Engineer
+			AllowPlayerClass Sniper 
+			AllowedWeapons
+			{
+				slot "Primary"
+			}
+			DisallowedWeapons
+			{
+				ItemName "The Soda Popper"
+				ItemName "The Force-a-Nature"
+				ItemName "Festive Force-a-Nature"
+				ItemName "The Shortstop"
+				ItemName "The Widowmaker" 
+			}
+		}
+		upgrade // Faster firing speed Primary
+		{
+			Name "+10% Faster firing speed"
+			Attribute "Fire Rate Bonus"
+			Cap 0.6
+			Increment -0.1
+			Cost 200
+			AllowPlayerClass Scout
+			AllowedWeapons
+			{
+				Slot "Primary"
+			}
+			DisallowedWeapons
+			{
+				ItemName "The Soda Popper"
+				ItemName "The Force-a-Nature"
+				ItemName "Festive Force-a-Nature"
+			}
+		}
+		upgrade // Faster firing speed Primary Engineer
+		{
+			Name "+10% Faster firing speed"
+			Attribute "Fire Rate Bonus"
+			Cap 0.6
+			Increment -0.1
+			Cost 100
+			AllowPlayerClass Engineer
+			AllowedWeapons
+			{
+				Slot "Primary"
+			}
+		}
+		upgrade // Recharge rate 
+		{
+			Name "+15% Recharge rate"
+			Attribute "effect bar recharge rate increased"
+			Cap 0.4
+			Increment -0.15
+			Cost 250
+			AllowedWeapons
+			{
+				// Scout 
+				ItemName "Mad Milk"
+				ItemName "Mutated Milk"
+				ItemName "Bonk! Atomic Punch"
+				ItemName "Crit-a-Cola"
+				ItemName "The Flying Guillotine"
+				// Sniper
+				ItemName "Jarate"
+				ItemName "The Self-Aware Beauty Mark"
+				ItemName "The Razorback"
+			}
+		}
+		upgrade // Slow Jar
+		{
+			Name "-35% Speed On target"
+			Attribute "applies snare effect"
+			Cap 0.65
+			Increment -0.35
+			Cost 200
+			AllowedWeapons
+			{
+				ItemName "Mad Milk"
+				ItemName "Mutated Milk"
+				ItemName "Jarate"
+				ItemName "The Self-Aware Beauty Mark"
+				ItemName "The Gas Passer"
+			}
+		}
+		upgrade // Melee Attack Speed
+		{
+			Name "+10% Melee attack speed"
+			Attribute "melee attack rate bonus"
+			cap 0.6
+			Increment -0.1
+			cost 200
+			AllowedWeapons
+			{
+				slot "Melee"
+			}
+		}
+		upgrade // Health on Kill (Regular)
+		{
+			Name "+25 Health on kill"
+			Attribute "heal on kill"
+			Cap 100
+			Increment 25
+			Cost 200
+			AllowPlayerClass Medic
+			AllowedWeapons
+			{
+				Slot "Primary"
+			}
+		}
+		upgrade // Health on Kill Engineer Primary (Regular)
+		{
+			Name "+25 Health on kill"
+			Attribute "heal on kill"
+			Cap 100
+			Increment 25
+			Cost 100
+			AllowPlayerClass Engineer
+			AllowedWeapons
+			{
+				Slot "Primary"
+			}
+		}
+		upgrade // Health on Kill Engineer and Spy (Regular)
+		{
+			Name "+25 Health on kill"
+			Attribute "heal on kill"
+			Cap 100
+			Increment 25
+			Cost 200
+			AllowPlayerClass Engineer
+			AllowPlayerClass Spy
+			AllowedWeapons
+			{
+				Slot "Melee"
+			}
+		}
+		upgrade // Health on Kill Secondary (Regular)
+		{
+			Name "+25 Health on kill"
+			Attribute "heal on kill"
+			Cap 100
+			Increment 25
+			Cost 100
+			AllowPlayerClass Engineer
+			AllowedWeapons
+			{
+				Slot "Secondary"
+			}
+			DisallowedWeapons
+			{
+				// Engineer
+				ItemName "The Wrangler"
+				ItemName "Festive Wrangler"
+				ItemName "The Giger Counter"
+				// Sniper
+				ItemName "Jarate"
+				ItemName "The Self-Aware Beauty Mark"
+				ItemName "The Razorback"
+				ItemName "The Cozy Camper"
+				ItemName "Darwin's Danger Shield"
+			}
+		}
+		upgrade // Health on Kill Melee Medic (Regular)
+		{
+			Name "+25 Health on kill"
+			Attribute "heal on kill"
+			Cap 100
+			Increment 25
+			Cost 100
+			AllowPlayerClass Medic
+			AllowedWeapons
+			{
+				Slot "Melee"
+			}
+		}
+		upgrade // Projectile Penetration Secondary
+		{
+			Name "Projectile penetration"
+			Attribute "Projectile Penetration"
+			Cap 1
+			Increment 1
+			Cost 200
+			AllowPlayerClass Scout
+			AllowPlayerClass Engineer
+			AllowPlayerClass Sniper
+			AllowPlayerClass Spy
+			AllowedWeapons
+			{
+				Slot "Secondary"
+			}
+			DisallowedWeapons
+			{
+				// Scout
+				ItemName "Mad Milk"
+				ItemName "Mutated Milk"
+				ItemName "Bonk! Atomic Punch"
+				ItemName "Crit-a-Cola"
+				ItemName "The Flying Guillotine"
+				// Engineer
+				ItemName "The Wrangler"
+				ItemName "Festive Wrangler"
+				ItemName "The Giger Counter"
+				// Sniper
+				ItemName "Jarate"
+				ItemName "The Self-Aware Beauty Mark"
+				ItemName "The Razorback"
+				ItemName "The Cozy Camper"
+				ItemName "Darwin's Danger Shield"
+			}
+		}
+		upgrade // faster firing rate Secondary
+		{
+			Name "+10% Faster firing speed"
+			Attribute "fire rate bonus"
+			Cap 0.6
+			Increment -0.1
+			Cost 100
+			AllowPlayerClass Scout
+			AllowPlayerClass Engineer
+			AllowPlayerClass Sniper
+			AllowPlayerClass Spy
+			AllowedWeapons
+			{
+				Slot "Secondary"
+			}
+			DisallowedWeapons
+			{
+				// Scout
+				ItemName "Mad Milk"
+				ItemName "Mutated Milk"
+				ItemName "Bonk! Atomic Punch"
+				ItemName "Crit-a-Cola"
+				ItemName "The Flying Guillotine"
+				// Engineer
+				ItemName "The Wrangler"
+				ItemName "Festive Wrangler"
+				ItemName "The Giger Counter"
+				// Sniper
+				ItemName "Jarate"
+				ItemName "The Self-Aware Beauty Mark"
+				ItemName "The Razorback"
+				ItemName "The Cozy Camper"
+				ItemName "Darwin's Danger Shield"
+			}
+		}
+		upgrade // Clip size Secondary
+		{
+			Name "+50% Clip size"
+			Attribute "clip size bonus upgrade"
+			Cap 3
+			Increment 0.5
+			Cost 200
+			AllowPlayerClass Scout
+			AllowPlayerClass Engineer
+			AllowPlayerClass Sniper
+			AllowPlayerClass Spy
+			AllowedWeapons
+			{
+				Slot "Secondary"
+			}
+			DisallowedWeapons
+			{
+				// Scout
+				ItemName "Mad Milk"
+				ItemName "Mutated Milk"
+				ItemName "Bonk! Atomic Punch"
+				ItemName "Crit-a-Cola"
+				ItemName "The Flying Guillotine"
+				// Engineer
+				ItemName "The Short Circuit"
+				ItemName "The Wrangler"
+				ItemName "Festive Wrangler"
+				ItemName "The Giger Counter"
+				// Sniper
+				ItemName "Jarate"
+				ItemName "The Self-Aware Beauty Mark"
+				ItemName "The Razorback"
+				ItemName "The Cozy Camper"
+				ItemName "Darwin's Danger Shield"
+			}
+		}
+		// Scout
+		upgrade // Clip size Primary
+		{
+			Name "+50% Clip size"
+			Attribute "clip size bonus upgrade"
+			Cap 3
+			Increment 0.5
+			Cost 400
+			AllowPlayerClass Scout
+			AllowedWeapons
+			{
+				Slot "Primary"
+			}
+		}
+		supershotgun
+		{
+			Name "Super shotgun module"
+			Attribute "damage penalty"
+			Cap 0.5
+			Increment -0.5
+			Cost 350
+			AllowPlayerClass Scout
+			SecondaryAttributes
+			{
+				"bullets per shot bonus" 3
+				//"damage penalty" -0.5 // Oops
+				"reload time increased" 1
+				"fire rate penalty" 0.5
+			}
+			AllowedWeapons
+			{
+				Slot "Primary"
+			}
+			DisallowedUpgrade
+			{
+				upgrade anotherheadshot
+				level 1
+			}
+		}
+		anotherheadshot // Boom headshot!
+		{
+			Name "Headshot bullet module"
+			Description "Allows your weapon deal crit damage on headshot."
+			Attribute "can headshot"
+			Cap 1
+			Increment 1
+			Cost 400
+			AllowPlayerClass Scout
+			AllowedWeapons
+			{
+				Slot "Primary"
+			}
+			SecondaryAttributes
+			{
+				"headshot damage increase" 0.5 // This is a bad idea
+				"revolver use hit locations" 1
+				"weapon spread bonus" -0.5
+				"fire rate penalty" 1
+			}
+			DisallowedUpgrade
+			{
+				upgrade supershotgun
+				level 1
+			}
+		}
+		upgrade // Super Scout Module
+		{
+			Name "Super speed module"
+			Description "Only provides faster movement speed when melee is active!"
+			Attribute "move speed bonus"
+			Cap 2
+			Increment 1
+			Cost 400
+			AllowedWeapons
+			{
+				ItemName "The Holy Mackerel"
+				ItemName "Festive Holy Mackerel"
+			}
+			SecondaryAttributes
+			{
+				"provide on active" 1
+				"max health additive penalty" -400
+				//"move speed bonus" 2
+			}
+		}
+		upgrade // Winger
+		{
+			Name "+25% Damage bonus"
+			Attribute "damage bonus"
+			Cap 1.65
+			Increment 0.25
+			Cost 300
+			AllowedWeapons
+			{
+				ItemName "The Winger"
+				ItemName "Gamma Gazer"
+			}
+		}
+		upgrade // Boom headshot!
+		{
+			Name "Headshot bullet module"
+			Description "Allows your weapon deal crit damage on headshot."
+			Attribute "can headshot"
+			Cap 1
+			Increment 1
+			Cost 300
+			AllowPlayerClass Scout
+			AllowPlayerClass Engineer
+			AllowPlayerClass Sniper
+			AllowedWeapons
+			{
+				Slot "Secondary"
+			}
+			SecondaryAttributes
+			{
+				"CARD: damage bonus" 0.5
+				"revolver use hit locations" 1
+				"weapon spread bonus" -0.5
+				"fire rate penalty" 1
+			}
+			DisallowedWeapons
+			{
+				// Scout
+				ItemName "Mad Milk"
+				ItemName "Mutated Milk"
+				ItemName "Bonk! Atomic Punch"
+				ItemName "Crit-a-Cola"
+				ItemName "The Flying Guillotine"
+				// Engineer
+				ItemName "The Short Circuit"
+				ItemName "The Wrangler"
+				ItemName "Festive Wrangler"
+				ItemName "The Giger Counter"
+				ItemName "Gamma Gazer"
+				// Sniper
+				ItemName "Jarate"
+				ItemName "The Self-Aware Beauty Mark"
+				ItemName "The Razorback"
+				ItemName "The Cozy Camper"
+				ItemName "Darwin's Danger Shield"
+			}
+		}
+		upgrade // Bleed damage
+		{
+			Name "+100% Bleed damage"
+			Attribute "dmg penalty vs players"
+			Cap 5
+			Increment 1
+			Cost 300
+			AllowedWeapons
+			{
+				ItemName "The Flying Guillotine"
+				ItemName "The Boston Basher"
+				ItemName "Three-Rune Blade"
+				ItemName "The Wrap Assassin"
+			}
+		}
+		// Soldier 
+		rocketspecialist // Rocket Specialist
+		{
+			Name "Rocket specialist"
+			Attribute "rocket specialist"
+			Cap 4
+			Increment 1
+			Cost 300
+			AllowPlayerClass Soldier
+			AllowedWeapons
+			{
+				Slot "Primary"
+			}
+			DisallowedUpgrade { upgrade homingprojectile }
+			DisallowedUpgrade { upgrade homingprojectile_airstrike }
+			DisallowedUpgrade { upgrade homingprojectile_liberty }
+		}
+		homingprojectile // Homing Module
+        {
+            Name "Homing module"
+            Attribute "damage penalty"
+            //Description "Take control of your rockets by aiming with your crosshair" // Manual thing off, now automatic
+            Cap 0.85
+            Increment -0.15
+            Cost 650
+            AllowPlayerClass Soldier
+            AllowedWeapons
+            {
+                Slot "Primary"
+            }
+            SecondaryAttributes
+            {
+				"Blast radius decreased" -0.2
+                "mod projectile heat seek power"      120
+			    "mod projectile heat aim error"       45
+			    "mod projectile heat aim time"        10
+				//"mod projectile heat follow crosshair" 1
+				"projectile trail particle" eyeboss_projectile
+            }
+			DisallowedWeapons
+			{
+				//ItemName "The Cow Mangler 5000"
+				ItemName "The Liberty Launcher"
+				ItemName "The Air Strike"
+				ItemName "The Beggar's Bazooka"
+				ItemName "W.A.S.P Launcher"
+			}
+			DisallowedUpgrade { upgrade rocketspecialist }
+			DisallowedUpgrade { upgrade blackbox_heal }
+        }
+		homingprojectile_airstrike // Homing Module Air Strike
+        {
+            Name "Homing module"
+            Attribute "Blast radius decreased"
+            //Description "Take control of your rockets by aiming with your crosshair"
+            Cap 0.8
+            Increment -0.1
+            Cost 650
+            //AllowPlayerClass Soldier
+            AllowedWeapons
+            {
+				ItemName "The Air Strike"
+            }
+            SecondaryAttributes
+            {
+
+                "mod projectile heat seek power"      120
+			    "mod projectile heat aim error"       45
+			    "mod projectile heat aim time"        10
+				"projectile trail particle" eyeboss_projectile
+            }
+			DisallowedUpgrade { upgrade rocketspecialist }
+        }
+		homingprojectile_liberty // Homing Module Liberty
+        {
+            Name "Homing module"
+            Attribute "Blast radius decreased"
+            //Description "Take control of your rockets by aiming with your crosshair"
+            Cap 0.8
+            Increment -0.2
+            Cost 650
+            //AllowPlayerClass Soldier
+            AllowedWeapons
+            {
+				ItemName "The Liberty Launcher"
+            }
+            SecondaryAttributes
+            {
+                "mod projectile heat seek power"      120
+			    "mod projectile heat aim error"       45
+			    "mod projectile heat aim time"        10
+				"damage penalty" 0.1
+				"projectile trail particle" eyeboss_projectile
+            }
+			DisallowedUpgrade { upgrade rocketspecialist }
+		}
+		charged_soldier // Charged Module
+		{
+			Name "Charged module"
+			Attribute "always crit"
+			Cap 1
+			Increment 1
+			Cost 450
+			AllowPlayerClass Soldier
+            AllowedWeapons
+            {
+                Slot "Primary"
+            }
+			SecondaryAttributes
+            {
+				"CARD: damage bonus" 0.5
+				"always crit" 1
+                "faster reload rate" -0.8
+				"fire rate bonus" 1
+				"Projectile speed decreased" -0.5
+				"self dmg push force increased" 4
+				"apply z velocity on damage" 250
+            }
+			DisallowedWeapons
+			{
+				ItemName "The Beggar's Bazooka"
+				ItemName "The Cow Mangler 5000"
+				ItemName "W.A.S.P Launcher"
+			}
+			DisallowedUpgrade { upgrade rapid_soldier }
+			DisallowedUpgrade { upgrade burst_soldier }
+			DisallowedUpgrade { upgrade rocketrain_soldier }
+			DisallowedUpgrade { upgrade blackbox_heal }
+			DisallowedUpgrade { upgrade blackbox_atomic }
+		}
+		rapid_soldier // Rapid Fire Module
+		{
+			Name "Rapid fire module"
+			Attribute "hidden primary max ammo bonus"
+			Cap 1.5
+			Increment 0.5
+			Cost 650
+			AllowPlayerClass Soldier
+            AllowedWeapons
+            {
+               slot "Primary"
+            }
+			SecondaryAttributes
+            {
+                "faster reload rate" -1.8
+				"fire rate bonus" -0.5
+				"Projectile speed decreased" -0.35
+            }
+			DisallowedWeapons
+			{
+				ItemName "The Beggar's Bazooka"
+			}
+			DisallowedUpgrade { upgrade charged_soldier }
+			DisallowedUpgrade { upgrade burst_soldier }
+			DisallowedUpgrade { upgrade rocketrain_soldier }
+			DisallowedUpgrade { upgrade cow_burst_soldier }
+			DisallowedUpgrade { upgrade cow_rocketrain_soldier }
+			DisallowedUpgrade { upgrade blackbox_heal }
+			DisallowedUpgrade { upgrade blackbox_atomic }
+		}
+		burst_soldier // Burst Fire Module
+		{
+			Name "Burst fire module"
+			Attribute "hidden primary max ammo bonus"
+			Cap 1.5
+			Increment 0.5
+			Cost 800
+			AllowPlayerClass Soldier
+            AllowedWeapons
+            {
+                slot "Primary"
+            }
+			SecondaryAttributes
+            {
+                "faster reload rate" -0.4
+				"fire rate bonus" -0.9
+				"clip size upgrade atomic" 5.0
+				"Projectile speed decreased" -0.35
+            }
+			DisallowedWeapons
+			{
+				ItemName "The Beggar's Bazooka"
+				ItemName "The Cow Mangler 5000"
+			}
+			DisallowedUpgrade { upgrade charged_soldier }
+			DisallowedUpgrade { upgrade rapid_soldier }
+			DisallowedUpgrade { upgrade rocketrain_soldier }
+			DisallowedUpgrade { upgrade blackbox_heal }
+			DisallowedUpgrade { upgrade blackbox_atomic }
+		}
+		cow_burst_module // Burst Fire Module (Cow Mangler)
+		{
+			Name "Burst fire module"
+			Attribute "hidden primary max ammo bonus"
+			Cap 1.5
+			Increment 0.5
+			Cost 800
+			SecondaryAttributes
+            {
+                "faster reload rate" -0.4
+				"fire rate bonus" -0.9
+				"clip size bonus upgrade" 1
+				"Projectile speed decreased" -0.35
+            }
+			AllowedWeapons
+			{
+				ItemName "The Cow Mangler 5000"
+			}
+			DisallowedUpgrade { upgrade rapid_soldier }
+			DisallowedUpgrade { upgrade cow_rocketrain_soldier }
+		}
+		rocketrain_soldier // Rocket Rain Module
+		{
+			Name "Rocket rain module"
+			Attribute "hidden primary max ammo bonus"
+			Cap 1.5
+			Increment 0.5
+			Cost 1100
+			AllowPlayerClass Soldier
+            AllowedWeapons
+            {
+                Slot "Primary"
+            }
+			SecondaryAttributes
+            {
+                "reload time increased" 6
+				"reload full clip at once" 1
+				"fire rate bonus" -0.999
+				"clip size upgrade atomic" 8
+				"Projectile speed decreased" -0.4
+				"projectile spread angle penalty" 6
+				"blast radius increased" 0.35
+            }
+			DisallowedWeapons
+			{
+				ItemName "The Beggar's Bazooka"
+				ItemName "The Cow Mangler 5000"
+			}
+			DisallowedUpgrade { upgrade charged_soldier }
+			DisallowedUpgrade { upgrade rapid_soldier }
+			DisallowedUpgrade { upgrade burst_soldier }
+			DisallowedUpgrade { upgrade blackbox_heal }
+			DisallowedUpgrade { upgrade blackbox_atomic }
+		}
+		cow_rocketrain_soldier // Rocket Rain Module (Cow Mangler)
+		{
+			Name "Rocket rain module"
+			Attribute "hidden primary max ammo bonus"
+			Cap 1.5
+			Increment 0.5
+			Cost 1100
+			//AllowPlayerClass Soldier
+			SecondaryAttributes
+            {
+            	"reload time increased" 6
+				"reload full clip at once" 1
+				"fire rate bonus" -0.999
+				"clip size bonus upgrade" 2
+				"Projectile speed decreased" -0.4
+				"projectile spread angle penalty" 6
+				"blast radius increased" 0.35
+            }
+			AllowedWeapons
+			{
+				ItemName "The Cow Mangler 5000"
+			}
+			DisallowedUpgrade { upgrade rapid_soldier }
+			DisallowedUpgrade { upgrade cow_burst_soldier }
+		}
+		cow_rocketrain_soldier // Rocket Rain Module (Cow Mangler)
+		{
+			Name "Rocket rain module"
+			Attribute "hidden primary max ammo bonus"
+			Cap 1.5
+			Increment 0.5
+			Cost 1100
+			//AllowPlayerClass Soldier
+			SecondaryAttributes
+            {
+            	"reload time increased" 6
+				"reload full clip at once" 1
+				"fire rate bonus" -0.999
+				"clip size bonus upgrade" 2
+				"Projectile speed decreased" -0.4
+				"projectile spread angle penalty" 6
+				"blast radius increased" 0.35
+            }
+			AllowedWeapons
+			{
+				ItemName "The Cow Mangler 5000"
+			}
+			DisallowedUpgrade { upgrade rapid_soldier }
+			DisallowedUpgrade { upgrade cow_burst_soldier }
+		}
+		cow_burst_module // Burst Fire Module (Cow Mangler)
+		{
+			Name "Burst fire module"
+			Attribute "hidden primary max ammo bonus"
+			Cap 1.5
+			Increment 0.5
+			Cost 800
+			SecondaryAttributes
+            {
+                "faster reload rate" -0.4
+				"fire rate bonus" -0.9
+				"clip size bonus upgrade" 1
+				"Projectile speed decreased" -0.35
+            }
+			AllowedWeapons
+			{
+				ItemName "The Cow Mangler 5000"
+			}
+			DisallowedUpgrade { upgrade rapid_soldier }
+			DisallowedUpgrade { upgrade cow_rocketrain_soldier }
+		}
+		rocketrain_soldier // Rocket Rain Module
+		{
+			Name "Rocket rain module"
+			Attribute "hidden primary max ammo bonus"
+			Cap 1.5
+			Increment 0.5
+			Cost 1100
+			AllowPlayerClass Soldier
+            AllowedWeapons
+            {
+                Slot "Primary"
+            }
+			SecondaryAttributes
+            {
+                "reload time increased" 6
+				"reload full clip at once" 1
+				"fire rate bonus" -0.999
+				"clip size upgrade atomic" 8
+				"Projectile speed decreased" -0.4
+				"projectile spread angle penalty" 6
+				"blast radius increased" 0.35
+            }
+			DisallowedWeapons
+			{
+				ItemName "The Beggar's Bazooka"
+				ItemName "The Cow Mangler 5000"
+			}
+			DisallowedUpgrade { upgrade charged_soldier }
+			DisallowedUpgrade { upgrade rapid_soldier }
+			DisallowedUpgrade { upgrade burst_soldier }
+			DisallowedUpgrade { upgrade blackbox_heal }
+			DisallowedUpgrade { upgrade blackbox_atomic }
+		}
+		cow_rocketrain_soldier // Rocket Rain Module (Cow Mangler)
+		{
+			Name "Rocket rain module"
+			Attribute "hidden primary max ammo bonus"
+			Cap 1.5
+			Increment 0.5
+			Cost 1100
+			//AllowPlayerClass Soldier
+			SecondaryAttributes
+            {
+            	"reload time increased" 6
+				"reload full clip at once" 1
+				"fire rate bonus" -0.999
+				"clip size bonus upgrade" 2
+				"Projectile speed decreased" -0.4
+				"projectile spread angle penalty" 6
+				"blast radius increased" 0.35
+            }
+			AllowedWeapons
+			{
+				ItemName "The Cow Mangler 5000"
+			}
+			DisallowedUpgrade { upgrade rapid_soldier }
+			DisallowedUpgrade { upgrade cow_burst_soldier }
+		}
+		beggars_burst_soldier // Beggars is getting some love too
+		{
+			Name "Burst fire module"
+			Attribute "hidden primary max ammo bonus"
+			Cap 1.5
+			Increment 0.5
+			Cost 800
+			//AllowPlayerClass Soldier
+			SecondaryAttributes
+            {
+				"can overload" -1
+				"auto fires full clip" 1
+				"auto fires when full" 1
+                "faster reload rate" -0.6
+				"fire rate bonus" -0.7
+				"clip size upgrade atomic" 6.0
+				"Projectile speed decreased" -0.35
+            }
+			AllowedWeapons
+			{
+                ItemName "The Beggar's Bazooka"
+			}
+			DisallowedUpgrade { upgrade beggars_rocketrain_soldier }
+		}
+		beggars_rocketrain_soldier // Beggars is getting some love too
+		{
+			Name "Rocket rain module"
+			Attribute "hidden primary max ammo bonus"
+			Cap 1.5
+			Increment 0.5
+			Cost 1100
+			//AllowPlayerClass Soldier
+			SecondaryAttributes
+            {
+				"can overload" -1
+				"auto fires full clip" 1
+				"auto fires when full" 1
+				"reload time increased" 6
+				"reload full clip at once" 1
+				"fire rate bonus" -0.999
+				"clip size upgrade atomic" 9
+				"Projectile speed decreased" -0.4
+				"projectile spread angle penalty" 3
+				"blast radius increased" 0.35
+				"reload time increased hidden" -0.2
+            }
+			AllowedWeapons
+			{
+                ItemName "The Beggar's Bazooka"
+			}
+			DisallowedUpgrade { upgrade beggars_burst_soldier }
+		}
+		blackbox_heal
+		{
+			Name "Healing missile module"
+			Attribute "hidden primary max ammo bonus"
+			Cap 1.5
+			Increment 0.5
+			Cost 700
+			AllowedWeapons
+			{
+				ItemName "The Black Box"
+				ItemName "Festive Black Box"
+			}
+			SecondaryAttributes
+			{
+				"damage penalty" -0.35
+				"mult dmg vs tanks" 0.75
+				"fire rate bonus" -0.999
+				"reload time increased" 0.6
+				"blast radius increased" 0.25
+				"projectile spread angle penalty" 4
+				"health on radius damage" 480
+			}
+			DisallowedUpgrade { upgrade rapid_soldier }
+			DisallowedUpgrade { upgrade charged_soldier }
+			DisallowedUpgrade { upgrade burst_soldier }
+			DisallowedUpgrade { upgrade rocketrain_soldier }
+			DisallowedUpgrade { upgrade blackbox_atomic }
+			DisallowedUpgrade { upgrade homingprojectile }
+		}
+		blackbox_atomic
+		{
+			Name "Atomic missile module"
+			Attribute "hidden primary max ammo bonus"
+			Cap 1.5
+			Increment 0.5
+			Cost 1100
+			AllowedWeapons
+			{
+				ItemName "The Black Box"
+				ItemName "Festive Black Box"
+			}
+			SecondaryAttributes
+			{
+				//"always crit" 1
+				"reload time increased" 1.8
+				"fire rate penalty" 1
+				"clip size penalty" -0.25
+				"Projectile speed decreased" -0.5
+				"CARD: damage bonus" 2
+				"blast radius increased" 1
+				"use large smoke explosion" 1
+				"health on radius damage" -20
+				"mult crit dmg" -0.25
+				"custom impact sound" "ambient\explosions\explode_4.wav"
+			}
+			DisallowedUpgrade { upgrade rapid_soldier }
+			DisallowedUpgrade { upgrade charged_soldier }
+			DisallowedUpgrade { upgrade burst_soldier }
+			DisallowedUpgrade { upgrade rocketrain_soldier }
+			DisallowedUpgrade { upgrade blackbox_heal }
+		}
+		upgrade // Buff Duration
+		{
+			Name "+100% Buff duration"
+			Attribute "increase buff duration"
+			Cap 3
+			Increment 1
+			Cost 250
+            AllowedWeapons
+            {
+                ItemName "The Buff Banner"
+				ItemName "Festive Buff Banner"
+				ItemName "The Battalion's Backup"
+				ItemName "The Concheror"
+            }
+		}
+		upgrade // Bison Damage upgrade
+		{
+			Name "+25% Damage bonus"
+			Attribute "dmg penalty vs players"
+            Cap 1.5
+			Increment 0.25
+			Cost 300
+            AllowedWeapons
+			{
+				ItemName "The Righteous Bison"
+			}
+		}
+		upgrade // Homing Bison
+		{
+			Name "Homing bison module"
+			Attribute "Projectile speed decreased"
+			Cap 0.65
+			Increment -0.35
+			Cost 450
+			//AllowPlayerClass Soldier
+			AllowedWeapons
+			{
+				ItemName "The Righteous Bison"
+			}
+			SecondaryAttributes
+			{
+				"mod projectile heat seek power" 60
+				"mod projectile heat aim error" 45
+				"mod projectile heat aim time" 10
+				"particle color rgb" 16738740
+				//"set item tint RGB" 16738740 // Doesn't replace the colour projectile :(
+			}
+		}
+		upgrade // Clip size Bison
+		{
+			Name "+50% Clip size bonus"
+			Attribute "clip size bonus upgrade"
+			Cap 3
+			Increment 0.5
+			Cost 200
+			//AllowPlayerClass Soldier 
+			AllowedWeapons
+			{
+				ItemName "The Righteous Bison"
+			}
+		}
+		upgrade // Reload speed Bison
+		{
+			Name "+20% Faster reload time"
+			Attribute "faster reload rate"
+			Cap 0.4
+			Increment -0.2
+			Cost 250
+			//AllowPlayerClass Soldier 
+			AllowedWeapons
+			{
+				ItemName "The Righteous Bison"
+			}
+		}
+		upgrade // faster firing rate Bison
+		{
+			Name "+10% Faster firing speed"
+			Attribute "fire rate bonus"
+			Cap 0.6
+			Increment -0.1
+			Cost 100
+			//AllowPlayerClass Soldier 
+			AllowedWeapons
+			{
+				ItemName "The Righteous Bison"
+			}
+		}
+
+		// Pyro
+		upgrade // Construction Crusher
+		{
+			Name "Construction Crusher"
+			Description "+50% damage bonus against buildings, +25% damage bonus against tanks"
+			attribute "dmg bonus vs buildings"
+			cap 2
+			increment 0.5
+			cost 200
+			AllowPlayerClass Pyro
+			SecondaryAttributes
+			{
+				"mult dmg vs tanks" 0.25
+			}
+			AllowedWeapons
+			{
+				Slot "Primary"
+				Slot "Secondary"
+			}
+			DisallowedWeapons
+			{
+				ItemName "The Gas Passer"
+				ItemName "The Thermal Thruster"
+			}
+		}
+		upgrade // Damage Upgrade Pyro Primary
+        {
+            Name "+25% Damage bonus"
+			Description "+25% Afterburn damage bonus."
+            Attribute "damage bonus"
+            Cap 2
+			Increment 0.25
+			Cost 400 
+			AllowPlayerClass Pyro // Special treatment
+            AllowedWeapons
+			{
+				Slot "Primary"
+			}
+			SecondaryAttributes
+			{
+				"weapon burn dmg increased" 0.25
+			}
+			DisallowedWeapons
+			{
+				ItemName "Rocket Jumper"
+			}
+        }
+		phlog_buff
+		{
+			Name "+25% Buff duration"
+			Attribute "increase buff duration"
+			Cap 2
+			Increment 0.25
+			Cost 300
+			AllowedWeapons
+			{
+				ItemName "The Phlogistinator"
+			}
+		}
+		upgrade // Afterburn damage Secondary Only
+		{
+			Name "+25% Damage bonus"
+			Description "+25% Afterburn damage bonus."
+			Attribute "damage bonus"
+			cap 2
+			Increment 0.25
+			Cost 250
+			AllowPlayerClass Pyro
+			SecondaryAttributes
+			{
+				"weapon burn dmg increased" 0.25
+			}
+			AllowedWeapons
+			{
+				ItemName "The Flare Gun"
+				ItemName "The Detonator"
+				ItemName "The Scorch Shot"
+				ItemName "The Manmelter"
+				ItemName "Spitfire Flare Gun"
+			}
+		}
+		multishot // Multi projectile shot // wack
+		{
+			Name "+2 Extra projcetile shot"
+			//Description "Adds two extra Projectile on your Flare Gun."
+			Attribute "mult projectile count"
+			Cap 5
+			Increment 2
+			Cost 400
+			SecondaryAttributes
+			{
+				"projectile spread angle penalty" 2
+			}
+			AllowedWeapons
+			{
+				ItemName "Spitfire Flare Gun"
+				ItemName "The Manmelter"
+			}
+			DisallowedUpgrade { upgrade rainflare }
+		}
+		upgrade // Reload speed splitfire only
+		{
+			Name "+20% Faster reload time"
+			Attribute "faster reload rate"
+			Cap 0.6
+			Increment -0.2
+			Cost 250
+			AllowedWeapons
+			{
+				ItemName "Spitfire Flare Gun"
+			}
+		}
+		upgrade // faster firing rate splitfire only
+		{
+			Name "+10% Faster firing speed"
+			Attribute "fire rate bonus"
+			Cap 0.6
+			Increment -0.1
+			Cost 100
+			AllowedWeapons
+			{
+				ItemName "Spitfire Flare Gun"
+			}
+		}
+		airblast // Airblast Force
+		{
+			Name "+25% Airblast force"
+			Attribute "airblast pushback scale"
+			cap 2
+			Increment 0.25
+			Cost 250
+			AllowPlayerClass Pyro
+			AllowedWeapons
+			{
+				slot "Primary"
+			}
+			DisallowedWeapons
+			{
+				ItemName "The Phlogistinator" // Lmao can't airblast anyways
+			}
+		}
+
+		homingflares
+		{
+			Name "Homing flare module"
+			Attribute "mod projectile heat seek power"
+			Cap 60
+			Increment 60
+			Cost 450
+			SecondaryAttributes
+			{
+				"mod projectile heat aim error" 45
+				"mod projectile heat aim time" 6
+			}
+			AllowedWeapons
+			{
+				ItemName "The Flare Gun"
+				ItemName "The Detonator"
+				ItemName "The Manmelter"
+			}
+		}
+		rapidflare // Rapid Flare Module
+		{
+			Name "Rapid flare module"
+			Attribute "fire rate bonus"
+			Cap 0.3
+			Increment -0.7
+			Cost 400
+			AllowedWeapons
+			{
+				ItemName "The Flare Gun"
+				ItemName "The Detonator"
+				ItemName "The Scorch Shot"
+				ItemName "The Manmelter"
+			}
+			DisallowedUpgrade { upgrade rainflare }
+		}
+		rainflare // Flare Rain Module
+		{
+			Name "Flare rain module"
+			Attribute "faster reload rate"
+			Cap 0.8
+			Increment -0.2
+			Cost 600
+			AllowedWeapons
+			{
+				ItemName "The Flare Gun"
+				ItemName "The Detonator"
+				ItemName "The Scorch Shot"
+			}
+			SecondaryAttributes
+			{
+				"fire rate bonus HIDDEN" -0.7
+				"projectile spread angle penalty" 5
+				"projectile speed decreased" -0.6
+			}
+			DisallowedUpgrade { upgrade rapidflare }
+			DisallowedUpgrade { upgrade multishot }
+		}
+		upgrade // Recharge rate Gas and thruster
+		{
+			Name "+15% Recharge rate"
+			Attribute "mult_item_meter_charge_rate"
+			cap 0.4
+			Increment -0.15
+			Cost 250
+			AllowedWeapons
+			{
+				// Heavy
+				ItemName "The Sandvich"
+				ItemName "The Robo-Sandvich"
+				ItemName "The Buffalo Steak Sandvich"
+				ItemName "The Second Banana"
+				ItemName "The Dalokohs Bar"
+				ItemName "Fishcake"
+				//Pyro
+				ItemName "The Thermal Thruster"
+			}
+		}
+		upgrade // Re-launch in-flight
+		{
+			Name "Able to re-launch while already in-flight"
+			Attribute "thermal_thruster_air_launch"
+			Cap 1
+			Increment 1
+			Cost 400
+			AllowedWeapons
+			{
+				ItemName "The Thermal Thruster"
+			}
+		}
+		upgrade // Stun Thermal Thruster
+		{
+			Name "Stun enemies when you land"
+			Attribute "falling_impact_radius_stun"
+			Cap 1
+			Increment 1
+			Cost 300
+			AllowedWeapons
+			{
+				ItemName "The Thermal Thruster"
+			}
+		}
+
+		// Demoman
+		upgrade // Mortar Grenade
+		{
+			Name "Mortar grenade module"
+			Description "Grenade explodes when hitting a surface."
+			Attribute "grenade explode on impact"
+			Cap 1
+			Increment 1
+			Cost 350
+            AllowPlayerClass Demoman
+            AllowedWeapons
+            {
+                Slot "Primary"
+            }
+			DisallowedWeapons
+			{
+				ItemName "The Loch-n-Load"
+				//ItemName "The Loose Cannon"
+				ItemName "Ali Baba's Wee Booties"
+				ItemName "The Bootlegger"
+			}	
+		}
+		upgrade // Mortar Grenade Loch Only
+		{
+			Name "Mortar grenade module"
+			Description "Grenade explodes when hitting a surface."
+			Attribute "grenade explode on impact"
+			Cap 1
+			Increment 1
+			Cost 350
+            AllowedWeapons
+            {
+                ItemName "The Loch-n-Load"
+            }
+			SecondaryAttributes
+			{
+				"sticky air burst mode" -1
+			}
+		}
+		rapid_demo // Rapid Fire Module
+		{
+			Name "Rapid fire module"
+			Attribute "hidden primary max ammo bonus"
+			Cap 1.5
+			Increment 0.5
+			Cost 450
+			AllowPlayerClass Demoman
+            AllowedWeapons
+            {
+                Slot "Primary"
+            }
+			SecondaryAttributes
+            {
+				"faster reload rate" -1.6
+				"fire rate bonus" -0.25
+            }
+			DisallowedWeapons
+			{
+				ItemName "The Loose Cannon"
+				ItemName "Ali Baba's Wee Booties"
+				ItemName "The Bootlegger"
+			}
+			DisallowedUpgrade { upgrade burst_demo }
+			DisallowedUpgrade { upgrade cluster_demo }
+		}
+		burst_demo // Burst Fire Module
+		{
+			Name "Burst fire module"
+			Attribute "hidden primary max ammo bonus"
+			Cap 1.5
+			Increment 0.5
+			Cost 700
+			AllowPlayerClass Demoman
+            AllowedWeapons
+            {
+                Slot "Primary"
+            }
+			SecondaryAttributes
+            {
+				"faster reload rate" -0.35
+				"fire rate bonus" -0.9
+				"clip size upgrade atomic" 7.0
+				"projectile spread angle penalty" 5
+				"Projectile speed increased"	0.1
+            }
+			DisallowedWeapons
+			{
+				//ItemName "The Loch-n-load"
+				ItemName "The Loose Cannon"
+				ItemName "Ali Baba's Wee Booties"
+				ItemName "The Bootlegger"
+			}
+			DisallowedUpgrade { upgrade rapid_demo }
+			DisallowedUpgrade { upgrade cluster_demo }
+		}
+		cluster_demo // Clusterbomb Module
+		{
+			Name "Clusterbomb module"
+			Attribute "hidden primary max ammo bonus"
+			Cap 1.5
+			Increment 0.5
+			Cost 1100
+			AllowPlayerClass Demoman
+            AllowedWeapons
+            {
+                Slot "Primary"
+            }
+			SecondaryAttributes
+            {
+				"reload time increased" 6
+				"reload full clip at once" 1
+				"fire rate bonus" -0.999
+                "clip size upgrade atomic" 8
+				"projectile spread angle penalty" 7
+				"Projectile speed increased" 0.2
+                "Fuse bonus" 2
+				"blast radius increased" 0.35
+            }
+			DisallowedWeapons
+			{
+				//ItemName "The Loch-n-load"
+				ItemName "The Loose Cannon"
+				ItemName "Ali Baba's Wee Booties"
+				ItemName "The Bootlegger"
+			}
+			DisallowedUpgrade { upgrade rapid_demo }
+			DisallowedUpgrade { upgrade burst_demo }
+		}
+		// Loose Cannon Only
+		rapidcannon
+		{
+			Name "Rapid cannon module"
+			Attribute "hidden primary max ammo bonus"
+			Cap 1.5
+			Increment 0.5
+			Cost 450
+			//AllowPlayerClass Demoman
+			AllowedWeapons
+			{
+				ItemName "The Loose Cannon"
+			}
+			SecondaryAttributes
+			{
+				"grenade launcher mortar mode" -1
+				"faster reload rate" -1.6
+				"fire rate bonus" -0.25
+			}
+			DisallowedUpgrade { upgrade burstcannon }
+			DisallowedUpgrade { upgrade nukecannon }
+		}
+		burstcannon
+		{
+			Name "Burst cannon module"
+			Attribute "hidden primary max ammo bonus"
+			Cap 1.5
+			Increment 0.5
+			Cost 700
+            AllowedWeapons
+            {
+                ItemName "The Loose Cannon"
+            }
+			SecondaryAttributes
+            {
+				"grenade launcher mortar mode" -1
+				"faster reload rate" -0.35
+				"fire rate bonus" -0.9
+				"clip size upgrade atomic" 7.0
+				"projectile spread angle penalty" 5
+				"Projectile speed increased"	0.1
+            }
+			DisallowedUpgrade { upgrade rapidcannon }
+			DisallowedUpgrade { upgrade nukecannon }
+		}
+		nukecannon
+		{
+			Name "Nuke cannon module"
+			Attribute "hidden primary max ammo bonus"
+			Cap 1.5
+			Increment 0.5 
+			Cost 950
+			AllowedWeapons
+			{
+				ItemName "The Loose Cannon"
+			}
+			SecondaryAttributes
+			{
+
+				"reload time increased" 1.8
+				"fire rate penalty" 1
+				"clip size penalty" -0.5
+				"CARD: damage bonus" 4
+				"damage causes airblast" 1
+				"blast radius increased" 1
+				"use large smoke explosion" 1
+				"grenade no bounce" 1
+				"mult crit dmg" -0.25
+				"custom impact sound" "ambient\explosions\explode_4.wav"
+			}
+			DisallowedUpgrade { upgrade rapidcannon }
+			DisallowedUpgrade { upgrade burstcannon }
+		}
+		upgrade // +1s charge duration
+		{
+			Name "+1s Charge duration"
+			Attribute "charge time increased"
+			Cap 3
+			Increment 1
+			Cost 200
+			AllowedWeapons
+			{
+				ItemName "The Chargin' Targe"
+				ItemName "The Splendid Screen"
+				ItemName "The Tide Turner"
+			}
+		}
+		upgrade // charge rehcarge
+		{
+			Name "+100% Charge recharge rate"
+			Attribute "charge recharge rate increased"
+			Cap 5
+			Increment 1
+			Cost 150
+			AllowedWeapons
+			{
+				ItemName "The Chargin' Targe"
+				ItemName "The Splendid Screen"
+				ItemName "The Tide Turner"
+			}
+		}
+		upgrade // charge not cancel
+		{
+			Name "Boosted melee charge module"
+			Description "Attack with your melee while charging does not cancel the charge."
+			Attribute "Attack not cancel charge"
+			Cap 1
+			Increment 1
+			Cost 200
+			AllowedWeapons
+			{
+				ItemName "The Chargin' Targe"
+				ItemName "The Splendid Screen"
+				ItemName "The Tide Turner"
+			}
+		}
+		// Heavy
+		heavydmg_bonus // Damage bonus
+		{
+			Name "+25% Damage bonus"
+			Attribute "damage bonus"
+			Cap 1.5
+			Increment 0.25
+			Cost 600
+			AllowPlayerClass HeavyWeapons
+			AllowedWeapons
+			{
+				Slot "Primary"
+			}
+			DisallowedWeapons
+			{
+				ItemName "The Brass Beast"
+				ItemName "Tokamak"
+			}
+		}
+		heavybrass_dmg // Damage bonus Brass Only
+		{
+			Name "+25% Damage bonus"
+			Attribute "damage bonus"
+			Cap 1.7
+			Increment 0.25
+			Cost 600
+			//AllowPlayerClass HeavyWeapons
+			AllowedWeapons
+			{
+				ItemName "The Brass Beast"
+			}
+		}
+		upgrade // Damage bonus Melee Only
+		{
+			Name "+25 Damage bonus"
+			Attribute "damage bonus"
+			Cap 2
+			Increment 0.25
+			Cost 300
+			AllowPlayerClass HeavyWeapons
+			AllowedWeapons
+			{
+				slot "Melee"
+			}
+			DisallowedWeapons
+			{
+				ItemName "Fists of Steel"
+				ItemName "Warrior's Spirit"
+			}
+		}
+		upgrade // Damage bonus Melee Only
+		{
+			Name "+25 Damage bonus"
+			Attribute "damage bonus"
+			Cap 2.3
+			Increment 0.25
+			Cost 300
+			AllowPlayerClass HeavyWeapons
+			AllowedWeapons
+			{
+				ItemName "Warrior's Spirit"
+			}
+		}
+		upgrade // Destroy Projectiles
+		{
+			Name "Destroy projectiles"
+			Attribute "attack projectiles"
+			Cap 2
+			Increment 1
+			Cost 400
+			AllowPlayerClass HeavyWeapons
+			AllowedWeapons
+			{
+				slot "Primary"
+			}
+			DisallowedWeapons
+			{
+				ItemName "Bio Breaker"
+				ItemName "Tokamak"
+			}
+		}
+		upgrade // Projectile Penetration
+		{
+			Name "Projectile penetration"
+			Attribute "projectile penetration heavy"
+			Cap 3
+			Increment 1
+			Cost 400
+			AllowPlayerClass HeavyWeapons
+			AllowedWeapons
+			{
+				slot "Primary"
+			}
+		}
+		upgrade // Knockback Rage
+		{
+			Name "Knockback rage"
+			Attribute "generate rage on damage"
+			Cap 1
+			Increment 1
+			Cost 500
+			AllowPlayerClass HeavyWeapons
+			AllowedWeapons
+			{
+				slot "Primary"
+			}
+		}
+		heavyshotgun
+		{
+			Name "Heavy shotgun module"
+			Attribute "fire rate penalty"
+			Cap 2.5
+			Increment 1.5
+			Cost 400
+			AllowPlayerClass Soldier
+			AllowPlayerClass Pyro
+			AllowPlayerClass Heavyweapons
+			AllowedWeapons
+			{
+				slot "Secondary"
+			}
+			SecondaryAttributes
+			{
+				"provide on active" 1
+				"bullets per shot bonus" 9
+				"damage penalty" -0.5
+				"faster reload rate" -0.8
+				"attack projectiles" 1
+				"move speed bonus" 0.2
+			}
+			DisallowedWeapons
+			{
+				ItemName "Panic Attack Shotgun"
+				ItemName "The Family Business"
+				// Soldier
+				ItemName "The Righteous Bison"
+				ItemName "The Buff Banner"
+				ItemName "Festive Buff Banner"
+				ItemName "The Battalion's Backup"
+				ItemName "The Concheror"
+				ItemName "The B.A.S.E. Jumper"
+				ItemName "The Mantreads"
+				ItemName "The Gunboats"
+				// Pyro
+				ItemName "The Gas Passer"
+				ItemName "The Thermal Thruster"
+				ItemName "The Flare Gun"
+				ItemName "The Detonator"
+				ItemName "The Scorch Shot"
+				ItemName "The Manmelter"
+				ItemName "Spitfire Flare Gun"
+				// Heavy
+				ItemName "The Sandvich"
+				ItemName "Festive Sandvich"
+				ItemName "The Buffalo Steak Sandvich"
+				ItemName "The Dalokohs Bar"
+				ItemName "Sandvich Promo Package"
+				ItemName "The Second Banana"
+			}
+			DisallowedUpgrade
+			{
+				upgrade burstshotgun
+				level 1
+			}
+		}
+		burstshotgun
+		{
+			Name "Burst shotgun module"
+			Attribute "fire rate bonus"
+			Cap 0.2
+			Increment -0.8
+			Cost 600
+			AllowPlayerClass Soldier
+			AllowPlayerClass Pyro
+			AllowPlayerClass Heavyweapons
+			AllowedWeapons
+			{
+				slot "Secondary"
+			}
+			SecondaryAttributes
+			{
+				//"fire rate bonus" -0.75
+				"bullets per shot bonus" 1
+				"damage penalty" -0.20
+				"faster reload rate" -0.40
+                "clip size bonus upgrade" 1
+                "auto fires full clip" 1
+                "auto fires when full" 1
+				"spread penalty" 0.2
+			}
+			DisallowedWeapons
+			{
+				ItemName "Panic Attack Shotgun"
+				ItemName "The Family Business"
+				// Soldier
+				ItemName "Panic Attack Shotgun"
+				ItemName "The Righteous Bison"
+				ItemName "The Buff Banner"
+				ItemName "Festive Buff Banner"
+				ItemName "The Battalion's Backup"
+				ItemName "The Concheror"
+				ItemName "The B.A.S.E. Jumper"
+				ItemName "The Mantreads" 
+				ItemName "The Gunboats"
+				// Pyro
+				ItemName "The Gas Passer"
+				ItemName "The Thermal Thruster"
+				ItemName "The Flare Gun"
+				ItemName "The Detonator"
+				ItemName "The Scorch Shot"
+				ItemName "The Manmelter"
+				ItemName "Spitfire Flare Gun"
+				// Heavy
+				ItemName "The Sandvich"
+				ItemName "Festive Sandvich"
+				ItemName "The Buffalo Steak Sandvich"
+				ItemName "The Dalokohs Bar"
+				ItemName "Sandvich Promo Package"
+				ItemName "The Second Banana"
+			}
+			DisallowedUpgrade
+			{
+				upgrade heavyshotgun
+				level 1
+			}
+		}
+		familyheavyshotgun
+		{
+			Name "Heavy shotgun module"
+			Attribute "fire rate penalty"
+			Cap 2.5
+			Increment 1.5
+			Cost 400
+			AllowedWeapons
+			{
+				ItemName "The Family Business"
+			}
+			SecondaryAttributes
+			{
+				"provide on active" 1
+				"bullets per shot bonus" 9
+				"damage penalty" -0.35
+				"faster reload rate" -0.8
+				"attack projectiles" 1
+				"move speed bonus" 0.2
+			}	
+			DisallowedUpgrade
+			{
+				upgrade familyburstshotgun
+				level 1
+			}
+		}
+		familyburstshotgun
+		{
+			Name "Burst shotgun module"
+			Attribute "fire rate bonus"
+			Cap 0.2
+			Increment -0.65
+			Cost 600
+			AllowedWeapons
+			{
+				ItemName "The Family Business"
+			}
+			SecondaryAttributes
+			{
+				"bullets per shot bonus" 1
+				"damage penalty" -0.05
+				"faster reload rate" -0.4
+                "clip size bonus upgrade" 1
+                "auto fires full clip" 1
+                "auto fires when full" 1
+				"spread penalty" 0.2
+			}
+			DisallowedUpgrade
+			{
+				upgrade familyheavyshotgun
+				level 1
+			}
+		}
+		panicheavyshotgun
+		{
+			Name "Heavy shotgun module"
+			Attribute "fire rate penalty"
+			Cap 2.5
+			Increment 1.5
+			Cost 400
+			AllowPlayerClass Soldier
+			AllowPlayerClass Pyro
+			AllowPlayerClass Heavyweapons
+			AllowedWeapons
+			{
+				ItemName "Panic Attack Shotgun"
+			}
+			SecondaryAttributes
+			{
+				"provide on active" 1
+				"bullets per shot bonus" 8.5
+				"damage penalty" -0.3
+				"faster reload rate" -0.8
+				"attack projectiles" 1
+				"move speed bonus" 0.2
+			}
+			DisallowedUpgrade
+			{
+				upgrade panicburstshotgun
+				level 1
+			}
+		}
+		panicburstshotgun
+		{
+			Name "Burst shotgun module"
+			Attribute "fire rate bonus"
+			Cap 0.2
+			Increment -0.8
+			Cost 600
+			AllowPlayerClass Soldier
+			AllowPlayerClass Pyro
+			AllowPlayerClass Heavyweapons
+			AllowedWeapons
+			{
+				ItemName "Panic Attack Shotgun"
+			}
+			SecondaryAttributes
+			{
+				"bullets per shot bonus" 0.5
+				"faster reload rate" -0.4
+                "clip size bonus upgrade" 1
+                "auto fires full clip" 1
+                "auto fires when full" 1
+				"spread penalty" 0.2
+			}
+			DisallowedUpgrade
+			{
+				upgrade panicheavyshotgun
+				level 1
+			}
+		}
+		sandwich_heal
+		{
+			Name "Regenerative Consumable"
+			Description "+300% healing effect of your consumable lunchbox"
+			Attribute "lunchbox healing decreased"
+			Cap 10
+			Increment 3
+			Cost 150
+			AllowedWeapons
+			{
+				ItemName "The Sandvich"
+				ItemName "Festive Sandvich"
+				ItemName "The Robo-Sandvich"
+				ItemName "The Second Banana"
+			}
+		}
+		upgrade // Steel Gauntlet Module
+		{
+			Name "Steel gauntlet module"
+			Description "+1000 Max health bonus, +400% damage bonus"
+			Attribute "max health additive bonus"
+			Cap 1000
+			Increment 1000
+			Cost 750
+			AllowedWeapons
+			{
+				ItemName "Fists of Steel"
+			}
+			SecondaryAttributes
+			{
+				"provide on active" 1
+				"damage bonus" 4
+			}
+			OnUpgrade
+			{
+				Output "!activator,$ForceRespawn,,1"
+			}
+		}
+
+		// Engineer
+		upgrade // Damage Upgrade Engineer Only
+        {
+            Name "+25% Damage bonus"
+            Attribute "damage bonus"
+            Cap 2
+			Increment 0.25
+			Cost 300 
+			AllowPlayerClass Engineer
+            AllowedWeapons
+			{
+				Slot "Primary"
+			}
+			DisallowedWeapons
+			{
+				ItemName "The Pomson 6000"
+			}
+        }
+		upgrade // Damage Upgrade pomson
+        {
+            Name "+25% Damage bonus"
+            Attribute "dmg penalty vs players"
+            Cap 2
+			Increment 0.25
+			Cost 400 
+			AllowPlayerClass Engineer
+            AllowedWeapons
+			{
+				ItemName "The Pomson 6000" // Energy weapons are wack
+			}
+        }
+		upgrade // Projectile Penetration
+		{
+			Name "Projectile penetration"
+			Attribute "Projectile Penetration"
+			Cap 1
+			Increment 1
+			Cost 200
+			AllowPlayerClass Engineer
+			AllowedWeapons
+			{
+				Slot "Primary"
+			}
+			DisallowedWeapons
+			{
+				ItemName "The Pomson 6000"
+			}
+		}
+		upgrade // Clip size bonus Primary
+		{
+			Name "+50 Clip size bonus"
+			Attribute "clip size bonus upgrade"
+			Cap 3
+			Increment 0.5
+			Cost 200
+			AllowPlayerClass Engineer
+			AllowPlayerClass Medic
+			AllowedWeapons
+			{
+				Slot "Primary"
+			}
+			DisallowedWeapons
+			{
+				ItemName "The Crusader's Crossbow"
+				ItemName "The Widowmaker"
+			}
+		}
+		heavy_engineershotgun
+		{
+			Name "Heavy shotgun module"
+			Attribute "fire rate penalty"
+			Cap 2.5
+			Increment 1.5
+			Cost 400
+			AllowPlayerClass Engineer
+			AllowedWeapons
+			{
+				ClassName "TF_WEAPON_SHOTGUN_PRIMARY"
+			}
+			DisallowedWeapons
+			{
+				ItemName "The Widowmaker"
+				ItemName "Panic Attack Shotgun"
+				ItemName "The Pomson 6000" // Cannot believe i forgor this
+			}
+			SecondaryAttributes
+			{
+				"bullets per shot bonus" 9
+				"damage penalty" -0.5
+				"attack projectiles" 1
+				"mult crit dmg" -0.25
+			}
+			DisallowedUpgrade
+			{
+				upgrade burst_engineershotgun
+				level 1
+			}
+		}
+		burst_engineershotgun
+		{
+			Name "Burst shotgun module"
+			Attribute "fire rate bonus HIDDEN"
+			Cap 0.4
+			Increment -0.6
+			Cost 500
+			AllowPlayerClass Engineer
+			AllowedWeapons
+			{
+				ClassName "TF_WEAPON_SHOTGUN_PRIMARY"
+			}
+			DisallowedWeapons
+			{
+				ItemName "The Widowmaker"
+				ItemName "Panic Attack Shotgun"
+				ItemName "The Pomson 6000" // Cannot believe i forgor this
+			}
+			SecondaryAttributes
+			{
+				"bullets per shot bonus" 1
+				"damage penalty" -0.20
+
+                "auto fires full clip" 1
+                "auto fires when full" 1
+				"spread penalty" 0.2
+			}
+			DisallowedUpgrade
+			{
+				upgrade heavy_engineershotgun
+				level 1
+			}
+		}
+		panic_engineershotgun
+		{
+			Name "Heavy shotgun module"
+			Attribute "fire rate penalty"
+			Cap 2.5
+			Increment 1.5
+			Cost 400
+			AllowPlayerClass Engineer
+			AllowedWeapons
+			{
+				ItemName "Panic Attack Shotgun"
+			}
+			SecondaryAttributes
+			{
+				"bullets per shot bonus" 8.5
+				"damage penalty" -0.3
+				"attack projectiles" 1
+				"mult crit dmg" -0.25
+			}
+			DisallowedUpgrade
+			{
+				upgrade burstpanic_engineershotgun
+				level 1
+			}
+		}
+		burstpanic_engineershotgun
+		{
+			Name "Burst shotgun module"
+			Attribute "fire rate bonus HIDDEN"
+			Cap 0.4
+			Increment -0.6
+			Cost 500
+			AllowPlayerClass Engineer
+			AllowedWeapons
+			{
+				ItemName "Panic Attack Shotgun"
+			}
+			SecondaryAttributes
+			{
+				"bullets per shot bonus" 1
+                "auto fires full clip" 1
+                "auto fires when full" 1
+				"spread penalty" 0.2
+			}
+			DisallowedUpgrade
+			{
+				upgrade panic_engineershotgun
+				level 1
+			}
+		}
+		justified
+		{
+			Name "Justified module"
+			Description "+250% Crit damage, +100% damage bonus against buildings"
+			Attribute "mult crit dmg"
+			Cap 3.5
+			Increment 2.5
+ 			Cost 400
+			AllowedWeapons 
+			{
+				ItemName "The Frontier Justice"
+				ItemName "Festive Frontier Justice"
+			}
+			SecondaryAttributes
+			{
+				"damage penalty" -0.5
+				"dmg bonus vs buildings" 2
+				"fire rate penalty" 0.5
+				"reload time increased" 0.2
+			}
+			DisallowUpgrade
+			{
+				Upgrade unjustified
+				level 1
+			}
+		}
+		unjustified
+		{
+			Name "Hustle module"
+			Description "+50% Crit damage bonus, +25% bullets per shot, removes clip size penalty"
+			Attribute "mult crit dmg"
+			Cap 1.5
+			Increment 0.5
+			Cost 450
+			AllowedWeapons 
+			{
+				ItemName "The Frontier Justice"
+				ItemName "Festive Frontier Justice"
+			}
+			SecondaryAttributes
+			{
+				"spread penalty" 0.5
+				"bullets per shot bonus" 0.25
+				"fire rate bonus hidden" -0.7
+				"reload time increased" 0.25
+				"clip size penalty" 0.5
+			}
+			DisallowUpgrade
+			{
+				Upgrade justified
+				level 1
+			}
+		}
+		lasertag
+		{
+			Name "Laser tag pomson"
+			Description "Fires laser bullets, Marks enemies for death."
+			Attribute "sniper fires tracer HIDDEN"
+			Cap 1
+			Increment 1
+ 			Cost 450
+			SecondaryAttributes
+			{
+				"provide on active" 1
+				"override projectile type" 1
+				"mark for death" 1
+				"minicrits become crits" 1
+				"dmg bonus vs buildings" 10
+				"damage applies to sappers" 1
+				"subtract victim cloak on hit" -18
+				"subtract victim medigun charge on hit" -9
+				"ragdolls become ash" 1
+			}
+			AllowedWeapons 
+			{
+				ItemName "The Pomson 6000"
+			}
+			DisallowedUpgrade
+			{
+				upgrade disruptor
+				level 1
+			}
+		}
+		disruptor
+		{
+			Name "The Disruptor Pomson"
+			Description "Fires laser bullets, On Hit: 100% chance to stun non-giant or mini-giants."
+			Attribute "spread penalty"
+			Cap 1.25
+			Increment 0.25
+			Cost 400
+			SecondaryAttributes
+			{
+				"provide on active" 1
+				"override projectile type" 1
+				"sniper fires tracer HIDDEN" 1
+				"ragdolls become ash" 1
+				"fire rate penalty" 1
+				"stun on damage" 60
+				"damage all connected" 1
+				"add cond on hit" 50
+				"add cond on hit duration" 3
+				"damage all connected" 1
+				"reveal cloaked victim on hit" 1
+				"reveal disguised victim on hit" 1
+			}
+			AllowedWeapons 
+			{
+				ItemName "The Pomson 6000"
+			}
+			DisallowedUpgrade
+			{
+				upgrade lasertag
+				level 1
+			}
+		}
+		rescue_multishot
+		{
+			Name "+1 Extra projcetile shot"
+			//Description "Adds an additional projectile on your Rescue Ranger."
+			Attribute "mult projectile count"
+			Cap 3
+			Increment 1
+			Cost 300
+			SecondaryAttributes
+			{
+				"projectile spread angle penalty" 1
+			}
+			AllowedWeapons
+			{
+				ItemName "The Rescue Ranger"
+			}
+			DisallowedUpgrade
+			{
+				upgrade rescue_beggars
+				level 1
+			}
+		}
+		rescue_beggars
+		{
+			Name "Unloaded bolt module"
+			Attribute "fire rate bonus HIDDEN"
+			Description "Hold fire to load up your bolts and on full clip unleashes the barrage"
+			Cap 0.3
+			Increment -0.7
+			Cost 400
+			SecondaryAttributes
+			{
+				"projectile spread angle penalty" 3
+				"reload time increased" 0.2
+				"auto fires full clip" 1
+				"auto fires when full" 1
+			}
+			AllowedWeapons
+			{
+				ItemName "The Rescue Ranger"
+			}
+			DisallowedUpgrade
+			{
+				upgrade rescue_multishot
+				level 1
+			}
+		}
+		wrangleroffense
+		{
+			Name "Offensive Manual Control"
+			Description "Increase your sentry damage, but remove the sentry's shield while active"
+			Attribute "disable wrangler shield"
+			Cap 1
+			Increment 1
+			Cost 400
+			SecondaryAttributes
+			{
+				"engy sentry damage bonus" 0.5
+				"max health additive penalty" -50
+				"penetrate teammates" 1
+			}
+			AllowedWeapons
+			{
+				ItemName "The Wrangler"
+				ItemName "Festive Wrangler"
+				ItemName "The Giger Counter"
+			}
+			DisallowedUpgrade
+			{
+				upgrade wranglerdefensive
+				level 1
+			}
+		}
+		wranglerdefensive
+		{
+			Name "Defensive Manual Control"
+			Description "Increase switch-to speed and gain a Battalion's Backup effect while active."
+			Attribute "switch from wep deploy time decreased"
+			Cap 0.5
+			Increment -0.5
+			Cost 400
+			SecondaryAttributes
+			{
+				"add cond when active" 26
+				"healing received bonus" 0.25
+			}
+			AllowedWeapons
+			{
+				ItemName "The Wrangler"
+				ItemName "Festive Wrangler"
+				ItemName "The Giger Counter"
+			}
+			DisallowedUpgrade
+			{
+				upgrade wrangleroffense
+				level 1
+			}
+		}
+		upgrade // Upgrade rate increase
+		{
+			Name "+100% Faster upgrade rate"
+			Attribute "upgrade rate decrease"
+			Cap 2
+			Increment 1
+			Cost 400
+			AllowPlayerClass Engineer
+			AllowedWeapons
+			{
+				Slot "Melee"
+			}
+		}
+		defensivebuilding
+		{
+			Name "Defensive Construction Unit"
+			Description "+100% building health, +150 dispenser range."
+			Attribute "engy building health bonus"
+			Cap 5
+			Increment 1
+			Cost 200
+			AllowPlayerClass Engineer
+			SecondaryAttributes
+			{
+				"engy dispenser radius increased" 1.5
+			}
+			AllowedWeapons
+			{
+				Slot "PDA"
+			}
+		}
+		supportbuilding
+		{
+			Name "Specialized Supportive Unit"
+			Description "Your dispenser gets +50% supply power, and your teleporter charges 5% faster and +30% construction rate"
+			Attribute "Construction rate increased"
+			Cap 2.2
+			Increment 0.3
+			Cost 150
+			AllowPlayerClass Engineer
+			SecondaryAttributes
+			{
+				"mult dispenser rate" 0.5
+				"mult teleporter recharge rate" -0.05
+			}
+			AllowedWeapons
+			{
+				Slot "melee"
+			}
+		}
+		autoturret
+		{
+			Name "Advanced Automated Turret"
+			Description "Your sentry gets +12% damage, +10% range, and +5% faster fire rate."
+			Attribute "engy sentry damage bonus"
+			Cap 1.5
+			Increment 0.125
+			Cost 250
+			AllowPlayerClass Engineer
+			SecondaryAttributes
+			{
+				"engy sentry fire rate increased" -0.05
+				"engy sentry radius increased" 0.1
+			}
+			DisallowedUpgrade
+			{
+				upgrade "rocketturret"
+				level 1
+			}
+			AllowedWeapons
+			{
+				Slot "PDA"
+			}
+		}
+		rocketturret
+		{
+			Name "Heavy Artillery Turret"
+			Description "Your sentry gets +25% damage, +10% range and +15% rocket fire rate."
+			Attribute "engy sentry fire rate increased"
+			Cap 3
+			Increment 0.5
+			Cost 300
+			AllowPlayerClass Engineer
+			SecondaryAttributes
+			{
+				"engy sentry damage bonus" 0.25
+				"engy sentry radius increased" 0.1
+				"mult firerocket rate" -0.15
+				"rocket specialist" 1
+				//"engy sentry fire rate increased" 0.5
+			}
+			DisallowedUpgrade
+			{
+				upgrade "autoturret"
+				level 1
+			}
+			AllowedWeapons
+			{
+				Slot "PDA"
+			}
+		}
+		upgrade // Disposable Sentry Gun
+		{
+			Name "+1 Disposable sentry gun"
+			Attribute "engy disposable sentries"
+			Cap 1
+			Increment 1
+			Cost 150
+			AllowPlayerClass Engineer
+			AllowedWeapons
+			{
+				Slot "PDA"
+			}
+		}
+		upgrade // 2-way teleporters
+		{
+			Name "2-Way teleporters"
+			Attribute "bidirectional teleport"
+			Cap 1
+			Increment 1
+			Cost 50
+			AllowPlayerClass Engineer
+			AllowedWeapons
+			{
+				Slot "PDA"
+			}
+		}
+		upgrade // Milk Bolts
+		{
+			Name "Mad Milk crossbow"
+			Description "Use Alt-fire to fire Mad Milk Bolt. Regenerates every 4 seconds"
+			Attribute "fires milk bolt"
+			Cap 4
+			Increment 4
+			Cost 800
+			AllowedWeapons
+			{
+				ItemName "The Crusader's Crossbow" 
+			}
+		}
+		upgrade // Atomic clip size Crossbow Only
+		{
+			Name "+2 clip size bonus"
+			Attribute "clip size upgrade atomic"
+			Cap 8
+			Increment 2
+			Cost 400
+			AllowedWeapons
+			{
+				ItemName "The Crusader's Crossbow" 
+			}
+		}
+		upgrade // Reload speed Crossbow Only
+		{
+			Name "+20% faster reload time"
+			Attribute "faster reload rate"
+			Cap 0.4
+			Increment -0.2
+			Cost 250
+			AllowedWeapons
+			{
+				ItemName "The Crusader's Crossbow" 
+			}
+		}
+		upgrade // Faster firing speed Medic
+		{
+			Name "+10% Faster firing speed"
+			Attribute "Fire Rate Bonus"
+			Cap 0.6
+			Increment -0.1
+			Cost 100
+			AllowPlayerClass Medic
+			AllowedWeapons
+			{
+				Slot "Primary" 
+			}
+		}
+		upgrade // mad milk syringes
+		{
+			Name "Mad Milk syringes"
+			Attribute "mad milk syringes"
+			Cap 1
+			Increment 1
+			Cost 800 // Because Fuck you
+			AllowPlayerClass Medic
+			AllowedWeapons
+			{
+				Slot "Primary" 
+			}
+			DisallowedWeapons
+			{
+				ItemName "The Crusader's Crossbow" 
+			}
+		}
+		upgrade // Projectile Penetration
+		{
+			Name "Projectile penetration"
+			Attribute "Projectile Penetration"
+			Cap 1
+			Increment 1
+			Cost 400
+			AllowedWeapons
+			{
+				ItemName "The Crusader's Crossbow" 
+			}
+		}
+		upgrade // Healing Mastery
+		{
+			Name "Healing mastery"
+			Attribute "healing mastery"
+			Cap 4
+			Increment 1
+			Cost 250
+			AllowPlayerClass Medic
+			AllowedWeapons
+			{
+				Slot "Secondary"
+			}
+		}
+		upgrade // Just shield
+		{
+			Name "Projectile shield"
+			Attribute "generate rage on heal"
+			Cap 2
+			Increment 1
+			Cost 500
+			AllowPlayerClass Medic
+			AllowedWeapons
+			{
+				Slot "Secondary"
+			}
+		}
+		quickuber // Stock
+		{
+			Name "Quick Uber Module"
+			Attribute "ubercharge rate bonus"
+			Cap 3
+			Increment 2
+			Cost 450
+			AllowPlayerClass Medic
+			AllowedWeapons
+			{
+				Slot "Secondary"
+			}
+			DisallowedUpgrade
+			{
+				upgrade longeruber
+				level 1
+			}
+			DisallowedWeapons
+			{
+				ItemName "The Kritzkrieg"
+				ItemName "The Quick-Fix"
+				ItemName "The Vaccinator"
+			}
+		}
+		longeruber // Stock
+		{
+			Name "Extended Uber Module"
+			Description "Uber duration is extended up to 14 seconds"
+			Attribute "uber duration bonus"
+			Cap 4
+			Increment 4
+			Cost 600
+			AllowPlayerClass Medic
+			AllowedWeapons
+			{
+				Slot "Secondary"
+			}
+			SecondaryAttributes
+			{
+				"ubercharge rate penalty" -0.5
+				"heal rate bonus" 1
+			}
+			DisallowedUpgrade
+			{
+				upgrade quickuber
+				level 1
+			}
+			DisallowedWeapons
+			{
+				ItemName "The Kritzkrieg"
+				ItemName "The Quick-Fix"
+				ItemName "The Vaccinator"
+			}
+		}
+		quickkritz // Kritzkrieg
+		{
+			Name "Quick Kritz Module"
+			Attribute "ubercharge rate bonus"
+			Cap 3
+			Increment 1.75
+			Cost 450
+			AllowedWeapons
+			{
+				ItemName "The Kritzkrieg"
+			}
+			SecondaryAttributes
+			{
+				"heal rate bonus" 1
+			}
+			DisallowedUpgrade
+			{
+				upgrade kritzbattallion
+				level 1
+			}
+		}
+		kritzbattallion // kritzkrieg
+		{
+			Name "Defensive Kritz Module"
+			Description "Ubering your patient also grants them a Battalion's Backup effect."
+			Attribute "ubercharge rate bonus"
+			Cap 2
+			Increment 0.75
+			Cost 600
+			AllowedWeapons
+			{
+				ItemName "The Kritzkrieg"
+			}
+			SecondaryAttributes
+			{
+				"increase buff duration" 1
+				"effect cond override" 6667 
+			}
+			DisallowedUpgrade
+			{
+				upgrade quickkritz
+				level 1
+			}
+		}
+		bigheal // Quickfix
+		{
+			Name "Bigheal Module"
+			Attribute "heal rate bonus"
+			Cap 5
+			Increment 3.6
+			Cost 450
+			AllowedWeapons
+			{
+				ItemName "The Quick-Fix"
+			}
+			SecondaryAttributes
+			{
+				"ubercharge rate bonus" -0.1
+				"ubercharge rate penalty" -1
+				"uber duration bonus" -8
+				"overheal penalty" -0.5
+			}
+			DisallowedUpgrade
+			{
+				upgrade boosterfix
+				level 1
+			}
+		}
+		boosterfix // Quickfix
+		{
+			Name "Boosted Adrenaline Module"
+			Description "Ubering your patient also grants them higher movement speed, fire rate and reload rate."
+			Attribute "ubercharge rate bonus"
+			Cap 2
+			Increment 0.9
+			Cost 600
+			AllowedWeapons
+			{
+				ItemName "The Quick-Fix"
+			}
+			SecondaryAttributes
+			{
+				"effect cond override" 1319025
+			}
+			DisallowedUpgrade
+			{
+				upgrade bigheal
+				level 1
+			}
+		}
+		vacresists // Vaccinator
+		{
+			Name "Resist Immunity Module"
+			description "Uber duration is extended up to 8 seconds"
+			Attribute "ubercharge rate bonus"
+			Cap 3
+			Increment 1.33
+			Cost 600
+			AllowedWeapons
+			{
+				ItemName "The Vaccinator"
+			}
+			SecondaryAttributes
+			{
+				"uber duration bonus" 6 // The most op thing ever made
+				"medigun bullet resist deployed" 0.25
+				"medigun blast resist deployed" 0.25
+				"medigun fire resist deployed" 0.25
+			}
+			DisallowedUpgrade
+			{
+				upgrade genericvac
+				level 1
+			}
+		}
+		genericvac // Vaccinator
+		{
+			Name "Bigheal Vaccinator"
+			Attribute "heal rate Bonus"
+			Cap 5
+			Increment 4
+			Cost 450
+			AllowedWeapons
+			{
+				ItemName "The Vaccinator"
+			}
+			SecondaryAttributes
+			{
+				"ubercharge rate bonus" 0.33
+			}
+			DisallowedUpgrade
+			{
+				upgrade vacresists
+				level 1
+			}
+		}
+		upgrade // Machinery Beam
+		{
+			Name "+25% Healing Machinery Beam"
+			Description "Allows you to heal friendly Engineer buildings"
+			Attribute "medic machinery beam"
+			Cap 5
+			Increment 2.5
+			Cost 200
+			AllowPlayerClass Medic
+			AllowedWeapons
+			{
+				Slot "Secondary"
+			}
+		}
+		upgrade // Canteen Specialist
+		{
+			Name "Canteen specialist"
+			Attribute "Canteen specialist"
+			Cap 1
+			Increment 1
+			Cost 500
+			AllowPlayerClass Medic
+			AllowedWeapons
+			{
+				Slot "Secondary"
+			}
+		}
+		
+		upgrade // Damage Upgrade Sniper Only
+        {
+            Name "+25% Damage bonus"
+            Attribute "damage bonus"
+            Cap 2
+			Increment 0.25
+			Cost 400 
+			//AllowPlayerClass Engineer
+			AllowPlayerClass Sniper
+            AllowedWeapons
+			{
+				Slot "Primary"
+			}
+        }
+		explosiveheadshot // Explosive Headshot
+		{
+			Name "Explosive headshot"
+			Attribute "explosive sniper shot"
+			Cap 3
+			Increment 1
+			Cost 350
+			AllowPlayerClass Sniper
+			AllowedWeapons
+			{
+				Slot "Primary"
+			}
+			DisallowedWeapons
+			{
+				ItemName "The Huntsman"
+				ItemName "The Fortified Compound"
+				ItemName "Festive Huntsman"
+			}
+			DisallowedUpgrade
+			{
+				upgrade headshotdamage
+				level 1
+			}
+		}
+		headshotdamage // Headshot damage
+		{
+			Name "+25% Headshot damage bonus"
+			Attribute "headshot damage increase"
+			Cap 1.5
+			Increment 0.25
+			Cost 400
+			AllowPlayerClass Sniper
+			AllowedWeapons
+			{
+				Slot "Primary"
+			}
+			DisallowedUpgrade
+			{
+				upgrade explosiveheadshot
+				level 1
+			}
+			DisallowedWeapons // Doesn't work with the bow
+			{
+				ItemName "The Huntsman"
+				ItemName "The Fortified Compound"
+				ItemName "Festive Huntsman"
+			}
+		}
+		upgrade // Faster Charge
+		{
+			Name "+25% Faster charge rate"
+			Attribute "SRifle Charge rate increased"
+			Cap 2
+			Increment 0.25
+			Cost 100
+			AllowPlayerClass Sniper
+			AllowedWeapons
+			{
+				Slot "Primary"
+			}
+			DisallowedWeapons
+			{
+				ItemName "The Huntsman"
+				ItemName "The Fortified Compound"
+				ItemName "Festive Huntsman"
+			}
+		}
+		upgrade // 5s Bleed on target 
+		{
+			Name "+5s Bleed on target"
+			Attribute "bleeding duration"
+			Cap 15
+			Increment 5
+			Cost 200
+			AllowPlayerClass Sniper
+			AllowedWeapons
+			{
+				ItemName "The Huntsman"
+				ItemName "The Fortified Compound"
+				ItemName "Festive Huntsman"
+			}
+		}
+		penetratearrow // Projectile Penetration
+		{
+			Name "Projectile penetration"
+			Attribute "Projectile Penetration"
+			Cap 1
+			Increment 1
+			Cost 400
+			AllowPlayerClass Sniper
+			AllowedWeapons
+			{
+				Slot "Primary"
+			}
+		}
+		upgrade // Robo-sapper
+		{
+			Name "Robo-Sapper"
+			Attribute "robo sapper"
+			Cap 3
+			Increment 1
+			Cost 350
+			AllowPlayerClass Spy
+			AllowedWeapons
+			{
+				ClassName "TF_WEAPON_BUILDER_SPY"
+				ItemName "The Red-Tape Recorder"
+				ItemName "The Ap-Sap"
+				ItemName "The Snack Attack"
+				ItemName "Festive Sapper"
+			}
+		}
+		upgrade // Sapper damage bonus?
+		{
+			Name "50% Sapper damage bonus"
+			//Description "Increases Damage dealt to Buildings only!"
+			Attribute "sapper damage bonus"
+			Cap 2.5
+			Increment 0.5
+			Cost 200
+			AllowPlayerClass Spy
+			AllowedWeapons
+			{
+				ClassName "TF_WEAPON_BUILDER_SPY"
+				ItemName "The Red-Tape Recorder"
+				ItemName "The Ap-Sap"
+				ItemName "The Snack Attack"
+				ItemName "Festive Sapper"
+			}
+		}
+		upgrade // Armor Penetration
+		{
+			Name "+25% Armor penetration"
+			Attribute "armor piercing"
+			Cap 100
+			Increment 25
+			Cost 300
+			AllowPlayerClass Spy
+			AllowedWeapons
+			{
+				Slot "Melee"
+			}
+		}
+		//canteens
+		crit_can
+		{
+			Name "Crit canteen"
+			Attribute "critboost"
+			Cap 3
+			Increment 1
+			Cost 100
+			UIGroup 2
+			AllowedWeapons
+			{
+				Classname "tf_powerup_bottle"
+			}
+			DisallowedUpgrade {upgrade building_can}
+			DisallowedUpgrade {Upgrade uber_can}
+			DisallowedUpgrade {Upgrade recall_can}
+			DisallowedUpgrade {upgrade speed_can}
+			DisallowedUpgrade {Upgrade re_can}
+		}
+		uber_can
+		{
+			Name "Uber canteen"
+			Attribute "ubercharge"
+			Cap 3
+			Increment 1
+			Cost 75
+			UIGroup 2
+			AllowedWeapons
+			{
+				Classname "tf_powerup_bottle"
+			}
+			DisallowedUpgrade {upgrade building_can}
+			DisallowedUpgrade {Upgrade crit_can}
+			DisallowedUpgrade {Upgrade recall_can}
+			DisallowedUpgrade {upgrade speed_can}
+			DisallowedUpgrade {Upgrade re_can}
+		}
+		recall_can
+		{
+			Name "Recall canteen"
+			Attribute "recall"
+			Cap 3
+			Increment 1
+			Cost 10
+			UIGroup 2
+			AllowedWeapons
+			{
+				Classname "tf_powerup_bottle"
+			}
+			DisallowedUpgrade {upgrade building_can}
+			DisallowedUpgrade {Upgrade uber_can}
+			DisallowedUpgrade {Upgrade crit_can}
+			DisallowedUpgrade {upgrade speed_can}
+			DisallowedUpgrade {Upgrade re_can}
+		}
+		building_can
+		{
+			Name "Instant building canteen"
+			Attribute "building instant upgrade"
+			Cap 3
+			Increment 1
+			Cost 50
+			AllowPlayerClass Engineer
+			UIGroup 2
+			AllowedWeapons
+			{
+				Classname "tf_powerup_bottle"
+			}
+			DisallowedUpgrade {upgrade crit_can}
+			DisallowedUpgrade {Upgrade uber_can}
+			DisallowedUpgrade {Upgrade recall_can}
+			DisallowedUpgrade {upgrade speed_can}
+			DisallowedUpgrade {Upgrade re_can}
+		}
+	}
+
+	ItemAttributes   //Adds attributes to specified item given to players
+	{
+		Classname "tf_weapon_bottle" // you can specify classname instead of itemname  
+		"move speed bonus" 1.5
+		"provide on active" 1
+		
+	}
+
+	ItemAttributes   //Adds attributes to specified item given to players
+	{
+		Classname "tf_weapon_shovel" // you can specify classname instead of itemname  
+		"move speed bonus" 1.3
+		"provide on active" 1
+	}
+
+
+	ItemAttributes   //Adds attributes to specified item given to players
+	{
+		Classname "tf_weapon_fireaxe" // you can specify classname instead of itemname  
+		"major move speed bonus" 1.3
+		"provide on active" 1
+	}
+
+	ItemAttributes   //Adds attributes to specified item given to players
+	{
+		Classname "tf_weapon_bonesaw" // you can specify classname instead of itemname  
+		"move speed bonus" 1.5
+		"provide on active" 1
+	}
+
+	ItemAttributes   //Adds attributes to specified item given to players
+	{
+		Classname "tf_weapon_syringegun" // you can specify classname instead of itemname  
+		"move speed bonus" 1.5
+		"provide on active" 1
+	}
+
+
+	PointTemplates
+	{
+		powerup_kill
+        	{
+            		OnParentKilledOutput
+            		{
+                		Target "item_powerup_rune"
+                		Action Kill
+            		}
+        	}
+
+corelogic //all the things we want to automatically run when the popfile reloads.  Use this the most to avoid spaghetti
+		{  
+            NoFixup 1
+			logic_auto 
+			{
+				"origin" "0 0 0" 
+				"targetname" "mainrelay"
+				"OnMapSpawn" "gate1_alarm*,Kill,,0,-1" //gets spammed by both red and blu team
+				"OnMapSpawn" "bomb*,Kill,,0,-1" //gets spammed by both red and blu team
+				"OnMapSpawn" "spawnbot_airdrop*,Kill,,0,-1"
+				"OnMapSpawn" "spawnbot_alt*,Kill,,0,-1"
+				"OnMapSpawn" "spawnbot_invasion*,Kill,,0,-1"
+				"OnMapSpawn" "spawnbot_mission*,Kill,,0,-1"
+				"OnMapSpawn" "item_ammopack*,Kill,,0,-1" //might want to comment this out if players have limited ammo
+				"OnMapSpawn" "move_rope,Kill,,0,-1"
+				"OnMapSpawn" "keyframe_rope,Kill,,0,-1"
+		//		"OnMapSpawn" "filter_redteam,Kill,,0,-1" //red team filters might cause problems, deleting them might cause more problems
+		//		"OnMapSpawn" "trigger_push,Disable,,0,-1" //some maps use trigger_pushes intended to un-stick bots
+				"OnMapSpawn" "wave_start_relay*,AddOutput,OnTrigger spawnbarrier*:Disable:0:-1"
+				"OnMapSpawn" "wave_finished_relay,AddOutput,OnTrigger spawnbarrier*:Enable:0:-1"
+				"OnMapSpawn" "hint,AddOutput,display_text test,10,-1" //change annotation text to test 10s after map spawn
+				"OnMapSpawn" "wave_start_relay_classic,AddOutput,OnTrigger hint:Show:0:-1"
+				"OnMapSpawn" "wave_start*,AddOutput,OnTrigger func_capturezone:Disable:0:-1,0,-1"
+		
+			}
+            NoFixup 1
+			logic_relay
+			{
+				"targetname" "kill_relay"
+				"OnTrigger" "obj_dispenser,RemoveHealth,5000,0,-1"
+				"OnTrigger" "obj_sentrygun,RemoveHealth,5000,0,-1"
+				"OnTrigger" "obj_teleporter,RemoveHealth,5000,0,-1"
+				"OnTrigger" "player,SetHealth,-10000,0,-1"
+			}
+            NoFixup 1
+			logic_relay
+			{
+				"origin" "0 0 0"
+				"targetname" "redwin_relay"
+				"OnTrigger" "bots_win_red,RoundWin,,0,-1"
+				"OnTrigger" "pit_explosion_wav,PlaySound,,0,-1" //map dependent
+				"OnTrigger" "failuresound,PlaySound,,0,-1" //map dependent
+			}
+
+			NoFixup 1
+			logic_relay
+			{
+				"targetname" "red_tank_relay"
+				"OnTrigger" "tank_boss,Setteam,2,0.25,-1"
+				"OnTrigger" "tank_boss,AddCaptureDestroyPostfix,destroy_mvm_cactus_valley3,0,-1" //cool explodey effect, doesn't work :(
+			}	
+            NoFixup 1
+			game_round_win //do not
+			{
+				"origin" "0 0 0"
+				"TeamNum" "2"
+				"targetname" "bots_win_red"
+				"switch_teams" "0"
+				"force_map_reset" "1"
+				"classname" "game_round_win"
+			}
+            NoFixup 1
+			logic_relay
+			{
+				"targetname" "red_tank_relay"
+				"OnTrigger" "tankbossred,Setteam,2,0.25,-1"
+				"OnTrigger" "tankbossred,AddCaptureDestroyPostfix,destroy_mvm_cactus_valley3,0.5,-1" //cool explodey effect, doesn't work :(
+			}
+			NoFixup 1
+			trigger_multiple
+			{
+				"targetname" "thirdperson"
+				"StartDisabled" "1"
+				"spawnflags" "3"
+				"origin" "1542.488770 739.029175 -143.968689"
+				"maxs" "50 50 50"
+				"mins" "-50 -50 -50"
+				"filtername" "filter_blue"
+				"OnStartTouch" "!activator,setforcedtauntcam,1,0.1,-1"
+				"OnStartTouch" "!activator,SetHUDVisibility,0,0.1,-1"
+				"OnStartTouch" "!activator,DisableDamageForces,,0,-1" //doesn't work?
+				"OnEndTouch" "!activator,setforcedtauntcam,0,0,-1"
+				"OnEndTouch" "!activator,SetHUDVisibility,1,0,-1"
+				"OnEndTouch" "!activator,EnableDamageForces,,0,-1"
+			}
+			NoFixup 1
+			ambient_generic
+			{
+				"targetname" "failuresound"
+				"health" "10"
+				"message" "vo\announcer_failure.mp3"
+				"pitch" "100"
+				"pitchstart" "100"
+				"radius" "20000"
+				"spawnflags" "49"
+				"origin" "0 0 0"
+			}
+
+
+			func_nav_prerequisite //tells bots with a tag to defend this area, like telling gatebots to stay at the gate
+            		{ 
+                		"targetname" "HatchNav"
+				"mins" "-1000 -1000 -1000"
+               			"maxs" "750 1000 1800"
+                		"Entity" "HatchNav"
+                		"filtername" "filter_hatch"
+                		"origin" "0 -2000 500"
+                		"spawnflags" "1"
+                		"start_disabled" "0"
+                		"StartDisabled" "0"
+                		"Task" "2"
+                		"Value" "-1"
+            		}     
+
+
+			func_nav_prerequisite //tells bots with a tag to defend this area, like telling gatebots to stay at the gate
+            		{ 
+                		"targetname" "ToHatchNav"
+				"mins" "-350 -1000 -1000"
+               			"maxs" "350 1000 1800"
+                		"Entity" "HatchNav"
+                		"filtername" "filter_hatch"
+                		"origin" "1500 -2000 500"
+                		"spawnflags" "1"
+                		"start_disabled" "0"
+                		"StartDisabled" "0"
+                		"Task" "2"
+                		"Value" "-1"
+            		}  
+
+			func_nav_prerequisite //tells bots with a tag to defend this area, like telling gatebots to stay at the gate
+            		{ 
+                		"targetname" "ToHatchNav"
+				"mins" "-350 -1000 -1000"
+               			"maxs" "350 1000 1800"
+                		"Entity" "HatchNav"
+                		"filtername" "filter_hatch"
+                		"origin" "-1500 -2000 500"
+                		"spawnflags" "1"
+                		"start_disabled" "0"
+                		"StartDisabled" "0"
+                		"Task" "2"
+                		"Value" "-1"
+            		}   
+            		filter_tf_bot_has_tag //our tag
+            		{
+                		"Negated" "0"
+                		"require_all_tags" "1"
+                		"tags" "bot_hatch"
+                		"targetname" "filter_hatch"
+            		}			
+		}
+
+		
+		finaltele
+		{
+			NoFixup 1
+			trigger_teleport //teleport timer to box
+           		{
+                		"targetname" "timertele"
+                		"origin" "-5440 200 200"
+                		"spawnflags" "1"
+                		"solid" "0"
+                		"StartDisabled" "0"
+                		"maxs" "500 650 600"
+                		"mins" "-500 -650 -100"
+                		"target" "timerbox"
+            		}
+			NoFixup 1
+            		info_target
+           		{
+                		"targetname" "timerbox"
+                		"origin" "-5641 -800 170"
+				"angles" "0 -90 0"
+            		}
+		}
+		barriers //spawn blocker
+		{
+			NoFixup 1
+			func_forcefield
+			{
+				
+                "disablereceiveshadows" "0"
+                "origin" "0 0 0"
+                "renderamt" "255"
+                "rendercolor" "255 255 255"
+                "renderfx" "0"
+                "rendermode" "10"
+                "TeamNum" "2"
+                "targetname" "spawnbarrierA1"
+                "mins" "-700 -200 -300"
+                "maxs" "700 200 2000"
+				"StartDisabled" "0"
+			}			
+		}
+
+        controlpoint
+		{
+			//1
+			NoFixup 1
+			prop_dynamic
+			{
+				"model" "models/props_gameplay/cap_point_base.mdl"
+				"targetname" "cap_base1"
+				"solid" "6"
+				"skin" "1"  			//set this number to 0 for neutral, 1 for red, 2 for blu
+                "origin" "-5925 -3100 -132"
+			}
+			trigger_capture_area
+			{
+				"classname" "trigger_capture_area"
+				"area_cap_point" "cap_point1"
+				"area_time_to_cap" "12"				//multiply this number by 2 to get the capture duration in seconds, raising "team_numcap_3" and "team_numcap_2" will also increase the time taken by a factor of the value (e.g. raising it to 2 will multiply the duration by 2)
+				"StartDisabled" "0"
+				"targetname" "cap_area1"
+				"team_cancap_2" "0"  				//setting this number to 0 disables red team from recapturing, 1 enables red team to recapture 
+				"team_cancap_3" "1"					//1 enables blu team to cap
+				"team_numcap_2" "1"  				//changing this number will change the number of red players required to stand on the point to finish capturing
+				"team_numcap_3" "1"					//changing this number will change the number of blu players required to stand on the point to finish capturing
+				"team_spawn_2" "0"
+				"team_spawn_3" "0"
+				"team_startcap_2" "1"				//changing this number will change the number of red players required to stand on the point to begin capturing
+				"team_startcap_3" "1"				//changing this number will change the number of blu players required to stand on the point to begin capturing
+
+				"mins" "-128 -128 -128"
+				"maxs" "128 128 128"
+				"spawnflags" "1"
+				"origin" "-5925 -3100 4"
+				"OnCapTeam1" "cap_base1,Skin,1,0,-1" 		//set the first number to 0 for neutral, 1 for red, 2 for blu
+				"OnCapTeam2" "cap_base1,Skin,2,0,-1" 		//set the first number to 0 for neutral, 1 for red, 2 for blu
+                "OnCapTeam2" "minutehand,add,1,0,-1"
+				
+				////////////////////////////////////////////editable outputs//////////////////////////////////////////// OnStartTeam1,OnBreakTeam1,OnCapTeam1,OnStartTeam2,OnBreakTeam2.OnCapTeam2,OnStartCap,OnBreakCap,OnEndCap,OnNumCappersChanged,OnNumCappersChanged2
+				//add your outputs here using "OnCapTeam2" for blu team capture, or "OnCapTeam1" for red team capture
+				
+			}
+			team_control_point
+			{
+				"classname" "team_control_point"
+				"angles" "0 0 0"
+				"point_default_owner" "2"					//this is the team that the control point will spawn in, set this number to 0 for neutral, 2 for red, 3 for blu
+				"point_group" "0"
+				"point_index" "0"							//if you plan on having multiple control points at once, you must give each one a unique "point_index", spawning more than 8 control points on the map will crash the server
+				"point_printname" "rampart approach"			//this is the name of the control point that will show up in the kill feed
+				"point_start_locked" "0"
+				"point_warn_on_cap" "0"
+				"point_warn_sound" "ControlPoint.CaptureWarn"
+				"random_owner_on_restart" "0"
+				"spawnflags" "4"
+				"targetname" "cap_point1"
+				"team_bodygroup_0" "3"
+				"team_bodygroup_2" "1"
+				"team_bodygroup_3" "1"
+				"team_icon_0" "sprites/obj_icons/icon_obj_neutral"			//this is the image shown on the hud icon
+				"team_icon_2" "sprites/obj_icons/icon_obj_red"
+				"team_icon_3" "sprites/obj_icons/icon_obj_blu"
+				"team_model_0" "models/effects/cappoint_hologram.mdl"		//this is the model of the hologram that appears above the control point
+				"team_model_2" "models/effects/cappoint_hologram.mdl"
+				"team_model_3" "models/effects/cappoint_hologram.mdl"
+				"team_previouspoint_3_0" "cap_point1"		//if you want to create a sequence of control points similar to an attack/defense map, this keyvalue determines the order in which they can be captured
+															//it represents the names of the previous control points that must be owned by blu team before this point can be unlocked, if this is the first control point on the map, it must refer to itself or else it will be locked
+				//"team_previouspoint_3_1" "0"
+				//"team_previouspoint_3_2" "0"
+				//"team_previouspoint_2_0" "cap_point"		//this allows red to recapture if "team_cancap_2" is set to 1 in the trigger_capture_area
+				//"team_previouspoint_2_1" "0"
+				//"team_previouspoint_2_2" "0"
+				"team_timedpoints_2" "0"
+				"team_timedpoints_3" "0"
+				"origin" "-5925 -3100 -80"
+			}
+			//2
+            prop_dynamic
+			{
+				"model" "models/props_gameplay/cap_point_base.mdl"
+				"targetname" "cap_base2"
+				"solid" "6"
+				"skin" "1"  			//set this number to 0 for neutral, 1 for red, 2 for blu
+                "origin" "-4687 -2428 129"
+			}
+			trigger_capture_area
+			{
+				"classname" "trigger_capture_area"
+				"area_cap_point" "cap_point2"
+				"area_time_to_cap" "12"				//multiply this number by 2 to get the capture duration in seconds, raising "team_numcap_3" and "team_numcap_2" will also increase the time taken by a factor of the value (e.g. raising it to 2 will multiply the duration by 2)
+				"StartDisabled" "0"
+				"targetname" "cap_area2"
+				"team_cancap_2" "0"  				//setting this number to 0 disables red team from recapturing, 1 enables red team to recapture 
+				"team_cancap_3" "1"					//1 enables blu team to cap
+				"team_numcap_2" "1"  				//changing this number will change the number of red players required to stand on the point to finish capturing
+				"team_numcap_3" "1"					//changing this number will change the number of blu players required to stand on the point to finish capturing
+				"team_spawn_2" "0"
+				"team_spawn_3" "0"
+				"team_startcap_2" "1"				//changing this number will change the number of red players required to stand on the point to begin capturing
+				"team_startcap_3" "1"				//changing this number will change the number of blu players required to stand on the point to begin capturing
+
+				"mins" "-128 -128 -128"
+				"maxs" "128 128 128"
+				"origin" "-4687 -2428 270"
+				"spawnflags" "1"
+				
+				"OnCapTeam1" "cap_base2,Skin,1,0,-1" 		//set the first number to 0 for neutral, 1 for red, 2 for blu
+				"OnCapTeam2" "cap_base2,Skin,2,0,-1" 		//set the first number to 0 for neutral, 1 for red, 2 for blu
+                "OnCapTeam2" "minutehand,add,1,0,-1"
+				
+				////////////////////////////////////////////editable outputs//////////////////////////////////////////// OnStartTeam1,OnBreakTeam1,OnCapTeam1,OnStartTeam2,OnBreakTeam2.OnCapTeam2,OnStartCap,OnBreakCap,OnEndCap,OnNumCappersChanged,OnNumCappersChanged2
+				//add your outputs here using "OnCapTeam2" for blu team capture, or "OnCapTeam1" for red team capture
+				
+			}
+			team_control_point
+			{
+				"classname" "team_control_point"
+				"angles" "0 0 0"
+				"point_default_owner" "2"					//this is the team that the control point will spawn in, set this number to 0 for neutral, 2 for red, 3 for blu
+				"point_group" "0"
+				"point_index" "1"							//if you plan on having multiple control points at once, you must give each one a unique "point_index", spawning more than 8 control points on the map will crash the server
+				"point_printname" "rampart"			//this is the name of the control point that will show up in the kill feed
+				"point_start_locked" "0"
+				"point_warn_on_cap" "0"
+				"point_warn_sound" "ControlPoint.CaptureWarn"
+				"random_owner_on_restart" "0"
+				"spawnflags" "4"
+				"targetname" "cap_point2"
+				"team_bodygroup_0" "3"
+				"team_bodygroup_2" "1"
+				"team_bodygroup_3" "1"
+				"team_icon_0" "sprites/obj_icons/icon_obj_neutral"			//this is the image shown on the hud icon
+				"team_icon_2" "sprites/obj_icons/icon_obj_red"
+				"team_icon_3" "sprites/obj_icons/icon_obj_blu"
+				"team_model_0" "models/effects/cappoint_hologram.mdl"		//this is the model of the hologram that appears above the control point
+				"team_model_2" "models/effects/cappoint_hologram.mdl"
+				"team_model_3" "models/effects/cappoint_hologram.mdl"
+				"team_previouspoint_3_0" "cap_point1"		//if you want to create a sequence of control points similar to an attack/defense map, this keyvalue determines the order in which they can be captured
+															//it represents the names of the previous control points that must be owned by blu team before this point can be unlocked, if this is the first control point on the map, it must refer to itself or else it will be locked
+				//"team_previouspoint_3_1" "0"
+				//"team_previouspoint_3_2" "0"
+				//"team_previouspoint_2_0" "cap_point"		//this allows red to recapture if "team_cancap_2" is set to 1 in the trigger_capture_area
+				//"team_previouspoint_2_1" "0"
+				//"team_previouspoint_2_2" "0"
+				"team_timedpoints_2" "0"
+				"team_timedpoints_3" "0"
+				"origin" "-4687 -2428 181"
+			}
+			//3
+            prop_dynamic
+			{
+				"model" "models/props_gameplay/cap_point_base.mdl"
+				"targetname" "cap_base3"
+				"solid" "6"
+				"skin" "1"  			//set this number to 0 for neutral, 1 for red, 2 for blu
+                "origin" "-3845 -3187 383"
+			}
+			trigger_capture_area
+			{
+				"classname" "trigger_capture_area"
+				"area_cap_point" "cap_point3"
+				"area_time_to_cap" "12"				//multiply this number by 2 to get the capture duration in seconds, raising "team_numcap_3" and "team_numcap_2" will also increase the time taken by a factor of the value (e.g. raising it to 2 will multiply the duration by 2)
+				"StartDisabled" "0"
+				"targetname" "cap_area3"
+				"team_cancap_2" "0"  				//setting this number to 0 disables red team from recapturing, 1 enables red team to recapture 
+				"team_cancap_3" "1"					//1 enables blu team to cap
+				"team_numcap_2" "1"  				//changing this number will change the number of red players required to stand on the point to finish capturing
+				"team_numcap_3" "1"					//changing this number will change the number of blu players required to stand on the point to finish capturing
+				"team_spawn_2" "0"
+				"team_spawn_3" "0"
+				"team_startcap_2" "1"				//changing this number will change the number of red players required to stand on the point to begin capturing
+				"team_startcap_3" "1"				//changing this number will change the number of blu players required to stand on the point to begin capturing
+
+				"mins" "-128 -128 -128"
+				"maxs" "128 128 128"
+                "origin" "-3845 -3187 519"
+				"spawnflags" "1"
+				
+				"OnCapTeam1" "cap_base3,Skin,1,0,-1" 		//set the first number to 0 for neutral, 1 for red, 2 for blu
+				"OnCapTeam2" "cap_base3,Skin,2,0,-1" 		//set the first number to 0 for neutral, 1 for red, 2 for blu
+                "OnCapTeam2" "minutehand,add,1,0,-1"
+				
+				////////////////////////////////////////////editable outputs//////////////////////////////////////////// OnStartTeam1,OnBreakTeam1,OnCapTeam1,OnStartTeam2,OnBreakTeam2.OnCapTeam2,OnStartCap,OnBreakCap,OnEndCap,OnNumCappersChanged,OnNumCappersChanged2
+				//add your outputs here using "OnCapTeam2" for blu team capture, or "OnCapTeam1" for red team capture
+				
+			}
+			team_control_point
+			{
+				"classname" "team_control_point"
+				"angles" "0 0 0"
+				"point_default_owner" "2"					//this is the team that the control point will spawn in, set this number to 0 for neutral, 2 for red, 3 for blu
+				"point_group" "0"
+				"point_index" "2"							//if you plan on having multiple control points at once, you must give each one a unique "point_index", spawning more than 8 control points on the map will crash the server
+				"point_printname" "hatch approach"			//this is the name of the control point that will show up in the kill feed
+				"point_start_locked" "0"
+				"point_warn_on_cap" "0"
+				"point_warn_sound" "ControlPoint.CaptureWarn"
+				"random_owner_on_restart" "0"
+				"spawnflags" "4"
+				"targetname" "cap_point3"
+				"team_bodygroup_0" "3"
+				"team_bodygroup_2" "1"
+				"team_bodygroup_3" "1"
+				"team_icon_0" "sprites/obj_icons/icon_obj_neutral"			//this is the image shown on the hud icon
+				"team_icon_2" "sprites/obj_icons/icon_obj_red"
+				"team_icon_3" "sprites/obj_icons/icon_obj_blu"
+				"team_model_0" "models/effects/cappoint_hologram.mdl"		//this is the model of the hologram that appears above the control point
+				"team_model_2" "models/effects/cappoint_hologram.mdl"
+				"team_model_3" "models/effects/cappoint_hologram.mdl"
+				"team_previouspoint_3_0" "cap_point2"		//if you want to create a sequence of control points similar to an attack/defense map, this keyvalue determines the order in which they can be captured
+															//it represents the names of the previous control points that must be owned by blu team before this point can be unlocked, if this is the first control point on the map, it must refer to itself or else it will be locked
+				//"team_previouspoint_3_1" "0"
+				//"team_previouspoint_3_2" "0"
+				//"team_previouspoint_2_0" "cap_point"		//this allows red to recapture if "team_cancap_2" is set to 1 in the trigger_capture_area
+				//"team_previouspoint_2_1" "0"
+				//"team_previouspoint_2_2" "0"
+				"team_timedpoints_2" "0"
+				"team_timedpoints_3" "0"
+                "origin" "-3845 -3187 424"
+			}
+			//4
+            prop_dynamic
+			{
+				"model" "models/props_gameplay/cap_point_base.mdl"
+				"targetname" "cap_base4"
+				"solid" "6"
+				"skin" "1"  			//set this number to 0 for neutral, 1 for red, 2 for blu
+                "origin" "-1479 -3607 580"
+			}
+			trigger_capture_area
+			{
+				"classname" "trigger_capture_area"
+				"area_cap_point" "cap_point4"
+				"area_time_to_cap" "16"				//multiply this number by 2 to get the capture duration in seconds, raising "team_numcap_3" and "team_numcap_2" will also increase the time taken by a factor of the value (e.g. raising it to 2 will multiply the duration by 2)
+				"StartDisabled" "0"
+				"targetname" "cap_area4"
+				"team_cancap_2" "0"  				//setting this number to 0 disables red team from recapturing, 1 enables red team to recapture 
+				"team_cancap_3" "1"					//1 enables blu team to cap
+				"team_numcap_2" "1"  				//changing this number will change the number of red players required to stand on the point to finish capturing
+				"team_numcap_3" "1"					//changing this number will change the number of blu players required to stand on the point to finish capturing
+				"team_spawn_2" "0"
+				"team_spawn_3" "0"
+				"team_startcap_2" "1"				//changing this number will change the number of red players required to stand on the point to begin capturing
+				"team_startcap_3" "1"				//changing this number will change the number of blu players required to stand on the point to begin capturing
+
+				"mins" "-128 -128 -128"
+				"maxs" "128 128 128"
+                "origin" "-1479 -3607 720"
+				"spawnflags" "1"
+				
+				"OnCapTeam1" "cap_base4,Skin,1,0,-1" 		//set the first number to 0 for neutral, 1 for red, 2 for blu
+				"OnCapTeam2" "cap_base4,Skin,2,0,-1" 		//set the first number to 0 for neutral, 1 for red, 2 for blu
+                "OnCapTeam2" "boss_deploy_relay,Trigger,,0,-1"
+				
+				////////////////////////////////////////////editable outputs//////////////////////////////////////////// OnStartTeam1,OnBreakTeam1,OnCapTeam1,OnStartTeam2,OnBreakTeam2.OnCapTeam2,OnStartCap,OnBreakCap,OnEndCap,OnNumCappersChanged,OnNumCappersChanged2
+				//add your outputs here using "OnCapTeam2" for blu team capture, or "OnCapTeam1" for red team capture
+				
+			}
+			team_control_point
+			{
+				"classname" "team_control_point"
+				"angles" "0 0 0"
+				"point_default_owner" "2"					//this is the team that the control point will spawn in, set this number to 0 for neutral, 2 for red, 3 for blu
+				"point_group" "0"
+				"point_index" "3"							//if you plan on having multiple control points at once, you must give each one a unique "point_index", spawning more than 8 control points on the map will crash the server
+				"point_printname" "hatch"			//this is the name of the control point that will show up in the kill feed
+				"point_start_locked" "1"
+				"point_warn_on_cap" "0"
+				"point_warn_sound" "ControlPoint.CaptureWarn"
+				"random_owner_on_restart" "0"
+				"spawnflags" "4"
+				"targetname" "cap_point4"
+				"team_bodygroup_0" "3"
+				"team_bodygroup_2" "1"
+				"team_bodygroup_3" "1"
+				"team_icon_0" "sprites/obj_icons/icon_obj_neutral"			//this is the image shown on the hud icon
+				"team_icon_2" "sprites/obj_icons/icon_obj_red"
+				"team_icon_3" "sprites/obj_icons/icon_obj_blu"
+				"team_model_0" "models/effects/cappoint_hologram.mdl"		//this is the model of the hologram that appears above the control point
+				"team_model_2" "models/effects/cappoint_hologram.mdl"
+				"team_model_3" "models/effects/cappoint_hologram.mdl"
+				"team_previouspoint_3_0" "cap_point3"		//if you want to create a sequence of control points similar to an attack/defense map, this keyvalue determines the order in which they can be captured
+															//it represents the names of the previous control points that must be owned by blu team before this point can be unlocked, if this is the first control point on the map, it must refer to itself or else it will be locked
+				//"team_previouspoint_3_1" "0"
+				//"team_previouspoint_3_2" "0"
+				//"team_previouspoint_2_0" "cap_point"		//this allows red to recapture if "team_cancap_2" is set to 1 in the trigger_capture_area
+				//"team_previouspoint_2_1" "0"
+				//"team_previouspoint_2_2" "0"
+				"team_timedpoints_2" "0"
+				"team_timedpoints_3" "0"
+				"origin" "-1479 -3607 580"
+			}
+			team_control_point_master
+			{
+				"classname" "team_control_point_master"
+				"cpm_restrict_team_cap_win" "1"				//this makes it so the wave does not end when all the points are owned by a team, set this to 0 for neither team (this will end the wave on capture), 1 to restrict both teams, 2 to restrict red team winning, and 3 to restrict blu team winning
+				"custom_position_x" "0.4"					//you can change the number here to move the control points on the hud if something is blocking it, accepted values are from 0 to 1 and is expressed as a percentage of the screen from left to right, 0.5 or "-1" will center the hud
+				"custom_position_y" "-1"
+				"partial_cap_points_rate" "0"				//this keyvalue allows money to be gained by capturing points, setting it to a number above 0 will allow players who are capturing to receive money, a higher number results in higher revenue, decimals accepted
+				"play_all_rounds" "0"
+				"score_style" "0"
+				"StartDisabled" "0"
+				"switch_teams" "0"
+				"targetname" "cap_master"
+				"team_base_icon_2" "sprites/obj_icons/icon_base_red"
+				"team_base_icon_3" "sprites/obj_icons/icon_base_blu"
+			}
+			OnSpawnOutput						//very important to keep this output otherwise the control point will not function
+			{
+				Target cap_area1
+				Action SetControlPoint 
+				Param cap_point1
+			}
+            OnSpawnOutput						//very important to keep this output otherwise the control point will not function
+			{
+				Target cap_area2
+				Action SetControlPoint 
+				Param cap_point2
+			}
+            OnSpawnOutput						//very important to keep this output otherwise the control point will not function
+			{
+				Target cap_area3
+				Action SetControlPoint 
+				Param cap_point3
+			}
+            OnSpawnOutput						//very important to keep this output otherwise the control point will not function
+			{
+				Target cap_area4
+				Action SetControlPoint 
+				Param cap_point4
+			}
+			OnSpawnOutput						//this output is optional but it is kept here for debugging purposes, if you do not restrict a team from winning and the control point spawned is not neutral, it will automatically end the wave so make sure you set the restriction
+			{
+				Target cap_master 
+				Action RoundSpawn
+			}
+            logic_relay
+            {
+                "targetname" "unlock_last"
+                "OnTrigger" "cap_point4,SetLocked,0,0,-1"
+            }
+		}
+
+		textualtimer
+		{
+			OnSpawnOutput
+			{
+				Param 6 // change the value for minutes
+
+				Target minutehand
+				Action SetValue
+			}
+			OnSpawnOutput
+			{
+				Param 50 // change the value for seconds
+
+				Target secondhand
+				Action SetValue
+			}
+			logic_relay
+			{
+				"targetname" "loserelay"
+				"startdisabled" "1"
+				"ontrigger" "bots_win_red,RoundWin,,2,-1"
+				"ontrigger" "realtimer,cancelpending,,2,-1"
+				"onspawn" "wave_start*,addoutput,ontrigger realtimer:trigger::0:-1,0,-1"
+				"onspawn" "wave_finish*,addoutput,ontrigger realtimer:cancelpending::0:-1,0,-1"
+				"onspawn" "wave_finish*,addoutput,ontrigger loserelay:cancelpending::0:-1,0,-1"
+			}
+
+			NoFixup 1
+			math_counter
+			{
+				"targetname" "minutehand"
+				"max" "9999"
+				"outvalue" "timerformat,$setkey$case01,,0,-1"
+				"onhitmin" "loserelay,enable,,1,-1"
+			}
+			math_counter
+			{
+				"targetname" "secondhand"
+				"max" "60"
+				"outvalue" "timerformat,$setkey$case02,,0,-1"
+				"outvalue" "zerocompare,setvaluecompare,,0,-1"
+				"onhitmin" "loserelay,trigger,,0,-1"
+				"onhitmin" "!self,setvalue,60,1,-1"
+				"onhitmin" "minutehand,subtract,1,1,-1"
+			}
+			logic_compare
+			{
+				"targetname" "zerocompare"
+				"comparevalue" "9"
+				"onequalto" "timerformat,$setkey$case16,%:0%,0,-1"
+				"ongreaterthan" "timerformat,$setkey$case16,%:%,0,-1"
+			}
+			logic_case
+			{
+				"targetname" "timerformat"
+				"case16" "%:%"
+				"ondefault" "timertext,$setkey$message,,0,-1"
+				"ondefault" "timertext,display,0,0,-1"
+			}
+			game_text
+			{
+				"targetname" "timertext"
+				"color" "255 50 70"
+				"holdtime" "2"
+				"spawnflags" "1"
+				"x" "0.48"
+				"y" "0.86"
+			}
+			logic_relay
+			{
+				"targetname" "realtimer"
+				"spawnflags" "2"
+				"ontrigger" "timerformat,$format,,0.01,-1"
+				"ontrigger" "secondhand,subtract,1,1,-1" //it doubles for some reason lol, also second should be 0.5 not 0
+				"ontrigger" "!self,trigger,,1,-1"
+			}
+			game_round_win
+			{
+				"teamnum" "2"
+				"targetname" "bots_win_red"
+				"force_map_reset" "1"
+			}
+		}
+		station //all-in-one upgrade station template
+		{
+			func_upgradestation
+			{
+				"mins" "-105 -100 0" 
+				"maxs" "105 100 242"
+				"solid" "0"
+			}
+			NoFixup 1
+			prop_dynamic
+			{
+				"targetname" "upgradestation"
+				"angles" "0 0 0"
+				"DisableBoneFollowers" "0"
+				"disablereceiveshadows" "0"
+				"disableshadows" "1"
+				"ExplodeDamage" "0"
+				"ExplodeRadius" "0"
+				"fademaxdist" "0"
+				"fademindist" "-1"
+				"fadescale" "1"
+				"MaxAnimTime" "10"
+				"maxdxlevel" "0"
+				"MinAnimTime" "5"
+				"mindxlevel" "0"
+				"model" "models\props_mvm\mvm_upgrade_blu.mdl"
+				"modelscale" "1"
+				"PerformanceMode" "0"
+				"pressuredelay" "0"
+				"RandomAnimation" "0"
+				"renderamt" "255"
+				"renderfx" "0"
+				"rendermode" "0"
+				"SetBodyGroup" "0"
+				"skin" "0"
+				"solid" "0"
+				"spawnflags" "0"
+				"origin" "0 0 0"
+			}
+			func_upgradestation
+			{
+				"mins" "-100 -100 0" 
+				"maxs" "90 60 100"
+				"parentname" "upgradestation"
+			}
+            NoFixup 1
+			prop_dynamic
+			{
+				
+				"targetname" "shopcollision"
+				"angles" "0 -90 0"
+				"DisableBoneFollowers" "1"
+				"disablereceiveshadows" "1"
+				"model" "models/props_vehicles/train_flatcar_container.mdl"
+				"disableshadows" "1"
+				"ExplodeDamage" "0"
+				"ExplodeRadius" "0"
+				"fademaxdist" "0"
+				"fademindist" "-1"
+				"fadescale" "1"
+				"MaxAnimTime" "10"
+				"maxdxlevel" "0"
+				"MinAnimTime" "5"
+				"mindxlevel" "0"
+				"modelscale" "1"
+				"PerformanceMode" "0"
+				"pressuredelay" "0"
+				"RandomAnimation" "0"
+				"renderamt" "0"
+				"renderfx" "0"
+				"rendermode" "10"
+				"SetBodyGroup" "0"
+				"skin" "0"
+				"CollisionGroup" "5"
+				"solid" "6"
+				"spawnflags" "0"
+				"StartDisabled" "0"
+				"origin" "0 0 0"	
+			}		
+		}
+		blocker //giant building for blocking stuff
+		{
+			NoFixup 1
+			func_forcefield
+			{
+				
+                		"disablereceiveshadows" "0"
+                		"origin" "-6660 -500 150"
+                		"renderamt" "255"
+                		"rendercolor" "255 255 255"
+                		"renderfx" "0"
+               			"rendermode" "10"
+                		"TeamNum" "2"
+                		"targetname" "blocker"
+                		"mins" "-200 -200 -200"
+                		"maxs" "200 200 2700"
+				"StartDisabled" "0"
+			}
+
+			NoFixup 1
+			func_forcefield
+			{
+				
+                		"disablereceiveshadows" "0"
+                		"origin" "-5870 -300 150"
+                		"renderamt" "255"
+                		"rendercolor" "255 255 255"
+                		"renderfx" "0"
+               			"rendermode" "10"
+                		"TeamNum" "2"
+                		"targetname" "blocker"
+                		"mins" "-1000 -300 -200"
+                		"maxs" "1000 300 2700"
+				"StartDisabled" "0"
+			}
+		}
+
+		spawnIndicators
+        	{
+            		NoFixup 1
+			entity
+            		{
+                		"id" "6"
+                		"classname" "prop_dynamic"
+                		"angles" "0 90 0"
+                		"DefaultAnim" "idle"
+                		"fademindist" "-1"
+                		"fadescale" "1"
+                		"MaxAnimTime" "10"
+                		"MinAnimTime" "5"
+                		"model" "models/props_mvm/robot_spawnpoint.mdl"
+                		"modelscale" "1.0"
+                		"renderamt" "255"
+                		"rendercolor" "255 255 255"
+                		"skin" "0"
+                		"solid" "6"
+                		"targetname" "A"
+                		"origin" "-1200 1800 514"
+                		editor
+                		{
+                    		"color" "220 30 220"
+                    		"visgroupshown" "1"
+                    		"visgroupautoshown" "1"
+                    		"logicalpos" "[0 0]"
+                		}
+            		} 
+
+            		NoFixup 1
+			entity
+            		{
+                		"id" "6"
+                		"classname" "prop_dynamic"
+                		"angles" "0 90 0"
+                		"DefaultAnim" "idle"
+                		"fademindist" "-1"
+                		"fadescale" "1"
+                		"MaxAnimTime" "10"
+                		"MinAnimTime" "5"
+                		"model" "models/props_mvm/robot_spawnpoint.mdl"
+                		"modelscale" "1.0"
+                		"renderamt" "255"
+                		"rendercolor" "255 255 255"
+                		"skin" "0"
+                		"solid" "6"
+                		"targetname" "B"
+                		"origin" "-1600 1800 514"
+                		editor
+                		{
+                    		"color" "220 30 220"
+                    		"visgroupshown" "1"
+                    		"visgroupautoshown" "1"
+                    		"logicalpos" "[0 0]"
+                		}
+            		} 
+
+            		NoFixup 1
+			entity
+            		{
+                		"id" "6"
+                		"classname" "prop_dynamic"
+                		"angles" "0 90 0"
+                		"DefaultAnim" "idle"
+                		"fademindist" "-1"
+                		"fadescale" "1"
+                		"MaxAnimTime" "10"
+                		"MinAnimTime" "5"
+                		"model" "models/props_mvm/robot_spawnpoint.mdl"
+                		"modelscale" "1.0"
+                		"renderamt" "255"
+                		"rendercolor" "255 255 255"
+                		"skin" "0"
+                		"solid" "6"
+                		"targetname" "B"
+                		"origin" "-1250 5500 514"
+                		editor
+                		{
+                    		"color" "220 30 220"
+                    		"visgroupshown" "1"
+                    		"visgroupautoshown" "1"
+                    		"logicalpos" "[0 0]"
+                		}
+            		} 
+
+            		NoFixup 1
+			entity
+            		{
+                		"id" "6"
+                		"classname" "prop_dynamic"
+                		"angles" "0 90 0"
+                		"DefaultAnim" "idle"
+                		"fademindist" "-1"
+                		"fadescale" "1"
+                		"MaxAnimTime" "10"
+                		"MinAnimTime" "5"
+                		"model" "models/props_mvm/robot_spawnpoint.mdl"
+                		"modelscale" "1.0"
+                		"renderamt" "255"
+                		"rendercolor" "255 255 255"
+                		"skin" "0"
+                		"solid" "6"
+                		"targetname" "B"
+                		"origin" "-2220 6000 514"
+                		editor
+                		{
+                    		"color" "220 30 220"
+                    		"visgroupshown" "1"
+                    		"visgroupautoshown" "1"
+                    		"logicalpos" "[0 0]"
+                		}
+            		} 
+
+            		NoFixup 1
+			entity
+            		{
+                		"id" "6"
+                		"classname" "prop_dynamic"
+                		"angles" "0 90 0"
+                		"DefaultAnim" "idle"
+                		"fademindist" "-1"
+                		"fadescale" "1"
+                		"MaxAnimTime" "10"
+                		"MinAnimTime" "5"
+                		"model" "models/props_mvm/robot_spawnpoint.mdl"
+                		"modelscale" "1.0"
+                		"renderamt" "255"
+                		"rendercolor" "255 255 255"
+                		"skin" "0"
+                		"solid" "6"
+                		"targetname" "B"
+                		"origin" "-5281 4738 514"
+                		editor
+                		{
+                    		"color" "220 30 220"
+                    		"visgroupshown" "1"
+                    		"visgroupautoshown" "1"
+                    		"logicalpos" "[0 0]"
+                		}
+            		} 
+
+            		NoFixup 1
+			entity
+            		{
+                		"id" "6"
+                		"classname" "prop_dynamic"
+                		"angles" "0 90 0"
+                		"DefaultAnim" "idle"
+                		"fademindist" "-1"
+                		"fadescale" "1"
+                		"MaxAnimTime" "10"
+                		"MinAnimTime" "5"
+                		"model" "models/props_mvm/robot_spawnpoint.mdl"
+                		"modelscale" "1.0"
+                		"renderamt" "255"
+                		"rendercolor" "255 255 255"
+                		"skin" "0"
+                		"solid" "6"
+                		"targetname" "B"
+                		"origin" "-5600 4389 514"
+                		editor
+                		{
+                    		"color" "220 30 220"
+                    		"visgroupshown" "1"
+                    		"visgroupautoshown" "1"
+                    		"logicalpos" "[0 0]"
+                		}
+            		} 
+
+            		NoFixup 1
+			entity
+            		{
+                		"id" "6"
+                		"classname" "prop_dynamic"
+                		"angles" "0 90 0"
+                		"DefaultAnim" "idle"
+                		"fademindist" "-1"
+                		"fadescale" "1"
+                		"MaxAnimTime" "10"
+                		"MinAnimTime" "5"
+                		"model" "models/props_mvm/robot_spawnpoint.mdl"
+                		"modelscale" "1.0"
+                		"renderamt" "255"
+                		"rendercolor" "255 255 255"
+                		"skin" "0"
+                		"solid" "6"
+                		"targetname" "B"
+                		"origin" "-5012 3415 514"
+                		editor
+                		{
+                    		"color" "220 30 220"
+                    		"visgroupshown" "1"
+                    		"visgroupautoshown" "1"
+                    		"logicalpos" "[0 0]"
+                		}
+            		} 
+
+            		NoFixup 1
+			entity
+            		{
+                		"id" "6"
+                		"classname" "prop_dynamic"
+                		"angles" "0 90 0"
+                		"DefaultAnim" "idle"
+                		"fademindist" "-1"
+                		"fadescale" "1"
+                		"MaxAnimTime" "10"
+                		"MinAnimTime" "5"
+                		"model" "models/props_mvm/robot_spawnpoint.mdl"
+                		"modelscale" "1.0"
+                		"renderamt" "255"
+                		"rendercolor" "255 255 255"
+                		"skin" "0"
+                		"solid" "6"
+                		"targetname" "B"
+                		"origin" "-4406 2450 514"
+                		editor
+                		{
+                    		"color" "220 30 220"
+                    		"visgroupshown" "1"
+                    		"visgroupautoshown" "1"
+                    		"logicalpos" "[0 0]"
+                		}
+            		} 
+		}  
+
+		no_uber_can //Thank MIKO and bazooks for this
+		{
+			NoFixup 1
+          		trigger_multiple
+            		{
+                		"filtername" "filter_bomb"
+                		"StartDisabled"    "0"
+                		"targetname"    "block"
+                		"mins"    "-5000 -5000 -5000"
+                		"maxs"    "5000 5000 5000"
+                		"OnTrigger" "@c@!activator,ForceDrop,,0,-1"
+                		"origin" "0 -256 643"
+                		"spawnflags" "1"
+				"wait" "0.3"
+            		}
+			filter_multi
+			{
+				"targetname" "filter_bomb"
+				"Filter01" "filter_uber"
+				"Filter02" "filter_bonk"
+				"Filter03" "filter_uber2"
+				"FilterType" "1"
+			}
+			filter_tf_condition
+			{
+				"targetname" "filter_uber"
+				"condition" "52"
+			}
+
+			filter_tf_condition
+			{
+				"targetname" "filter_uber2"
+				"condition" "5"
+			}
+			filter_tf_condition
+			{
+				"targetname" "filter_bonk"
+				"condition" "14"
+			}
+		}
+
+		metalfence1 //Template name
+		{
+			NoFixup 1
+			prop_dynamic
+			{
+				"model" "models/props_island/corrugated_panel_low.mdl"
+				"solid" "6"
+				"modelscale" "1.6"
+			}
+			
+		}
+
+		metalfence2 //Template name
+		{
+			NoFixup 1
+			prop_dynamic
+			{
+				"model" "models/props_island/corrugated_panel_med.mdl"
+				"solid" "6"
+				"modelscale" "1.6"
+			}
+			
+		}
+
+		metalfence3 //Template name
+		{
+			NoFixup 1
+			prop_dynamic
+			{
+				"model" "models/props_island/corrugated_panel_high.mdl"
+				"solid" "6"
+				"modelscale" "1.6"
+			}
+			
+		}
+
+		SplitRocket
+		{
+
+			OnSpawnOutput
+			{
+				Target "shoot"
+				Action "$setowner"
+				Param "!activator"
+				Delay 0.01
+			}
+			OnSpawnOutput
+			{
+				Target "shoot"
+				Action "FireUser1"
+				Delay 0.01
+			}
+			tf_point_weapon_mimic
+			{
+				"targetname" "shoot"
+				"origin" "0 -15 0"
+				"angles" "0 -8 0"
+				"speedmin" "1000"
+				"speedmax" "1000"
+				"WeaponType" "0"
+				"SplashRadius" "120"
+				"Damage" "75"
+				"teamnum" "2"
+				"OnUser1" "!self,FireOnce,,0,-1"
+				"OnUser1" "!self,FireUser1,,1,-1"
+			}
+			tf_point_weapon_mimic
+			{
+				"targetname" "shoot"
+				"origin" "0 15 0"
+				"angles" "0 8 0"
+				"speedmin" "1000"
+				"speedmax" "1000"
+				"WeaponType" "0"
+				"SplashRadius" "120"
+				"Damage" "75"
+				"teamnum" "2"
+				"OnUser1" "!self,FireOnce,,0,-1"
+				"OnUser1" "!self,FireUser1,,1,-1"
+			}
+
+			tf_point_weapon_mimic
+			{
+				"targetname" "shoot"
+				"origin" "0 -30 0"
+				"angles" "0 -16 0"
+				"speedmin" "1000"
+				"speedmax" "1000"
+				"WeaponType" "0"
+				"SplashRadius" "120"
+				"Damage" "75"
+				"teamnum" "2"
+				"OnUser1" "!self,FireOnce,,0,-1"
+				"OnUser1" "!self,FireUser1,,1,-1"
+			}
+			tf_point_weapon_mimic
+			{
+				"targetname" "shoot"
+				"origin" "0 30 0"
+				"angles" "0 16 0"
+				"speedmin" "1000"
+				"speedmax" "1000"
+				"WeaponType" "0"
+				"SplashRadius" "120"
+				"Damage" "75"
+				"teamnum" "2"
+				"OnUser1" "!self,FireOnce,,0,-1"
+				"OnUser1" "!self,FireUser1,,1,-1"
+			}
+		}
+	}
+
+	SpawnTemplate   "corelogic"
+
+	SpawnTemplate "spawnIndicators"
+
+	SpawnTemplate "textualtimer"
+
+	SpawnTemplate "controlpoint"
+
+	SpawnTemplate "no_uber_can"
+
+	SpawnTemplate "blocker"
+
+	SpawnTemplate "finaltele"
+
+	SpawnTemplate
+	{
+		Name "station"
+		"origin" "-6450 -865 130"
+		"angles" "0 -180 0"
+	}
+
+	SpawnTemplate
+	{
+		Name "station"
+		"origin" "-6270 -815 134"
+		"angles" "0 0 0"
+	}
+
+	SpawnTemplate
+	{
+		Name "station"
+		"origin" "-5430 -815 134"
+		"angles" "0 -180 0"
+	}
+
+	SpawnTemplate  
+	{ 
+		Name "barriers" //use these if your map has no spawn door
+		"origin" "-5833 -1119 270"
+		"angles" "0 0 0"
+	}
+
+	//SpawnTemplate  
+	//{ 
+		//Name "blocker" //use these if your map has no spawn door
+		//"origin" "-639 9518 1119"
+		//"angles" "0 0 0"
+	//}
+
+	//SpawnTemplate   
+	//{
+	//	Name "metalfence1"
+	//	"origin" "-6560 -720 220"
+	//	"angles" "0 -90 0"
+	//}
+
+	//SpawnTemplate   
+	//{
+	//	Name "metalfence1"
+	//	"origin" "-6760 -850 220"
+	//	"angles" "0 0 0"
+	//}
+
+	ExtraSpawnPoint  
+	{
+        	Name "blumain"
+        	TeamNum 3 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        	X	"-6020"                     
+        	Y	"-800"                  
+        	Z	"170"        
+	}
+
+	ExtraSpawnPoint  
+	{
+        	Name "blumain"
+        	TeamNum 3 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        	X	"-5641"                     
+        	Y	"-800"                  
+        	Z	"170"        
+	}
+
+	ExtraSpawnPoint  
+	{
+        	Name "front"
+        	TeamNum 2 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        	X	"-5100"                     
+        	Y	"-2500"                  
+        	Z	"150"        
+	}
+
+	ExtraSpawnPoint  
+	{
+        	Name "front"
+        	TeamNum 2 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        	X	"-5100"                     
+        	Y	"-3350"                  
+        	Z	"150"        
+	}
+
+	ExtraSpawnPoint  
+	{
+        	Name "mid"
+        	TeamNum 2 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        	X	"-3524"                     
+        	Y	"-3499"                  
+        	Z	"600"        
+	}
+
+	ExtraSpawnPoint  
+	{
+        	Name "mid"
+        	TeamNum 2 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        	X	"-3085"                     
+        	Y	"-2662"                  
+        	Z	"560"        
+	}
+
+	ExtraSpawnPoint  
+	{
+        	Name "back"
+        	TeamNum 2 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        	X	"-1325"                     
+        	Y	"-3105"                  
+        	Z	"780"        
+	}
+
+	ExtraSpawnPoint  
+	{
+        	Name "back"
+        	TeamNum 2 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        	X	"-1325"                     
+        	Y	"-3280"                  
+        	Z	"780"        
+	}
+
+	ExtraSpawnPoint  
+	{
+        	Name "back"
+        	TeamNum 2 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        	X	"-2194"                     
+        	Y	"-3755"                  
+        	Z	"710"        
+	}
+
+	ExtraSpawnPoint  
+	{
+        	Name "point1hold"
+        	TeamNum 2 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        	X	"-5930"                     
+        	Y	"-3108"                  
+        	Z	"-100"        
+	}
+
+	ExtraSpawnPoint  
+	{
+        	Name "point2hold"
+        	TeamNum 2 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        	X	"-4685"                     
+        	Y	"-2365"                  
+        	Z	"150"        
+	}
+
+	ExtraSpawnPoint  
+	{
+        	Name "point3hold"
+        	TeamNum 2 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        	X	"-3800"                     
+        	Y	"-3213"                  
+        	Z	"400"        
+	}
+
+	ExtraSpawnPoint  
+	{
+        	Name "point4hold"
+        	TeamNum 2 // 2 - Red team 3 - Robots. If you are adding spawn for reprogrammed robots, use team 3
+        	X	"-1505"                     
+        	Y	"-3675"                  
+        	Z	"600"       
+	}
+
+
+// Wave 1 /////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// 32 scout bats (180)
+// 8 scouts (90)
+// 8 pistol scouts (90)
+// ------------------------
+// 2 Heavies with an uber medic (200)
+// 20 Pyros (140)
+// 12 bison soldiers (100)
+///////////////////////////////////////////////////////////////////////////
+
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+
+		Checkpoint Yes
+
+
+
+		SentryGun  
+        	{
+        		Position
+        		{
+            			X    "-6455"
+            			Y    "-2600"
+            			Z     "130"
+            			Pitch   "0.00"
+            			Yaw   "90"
+            			Roll    "0.00"
+        		}
+        		TeamNum 2
+			Level 2
+        	}
+
+		SentryGun  
+        	{
+        		Position
+        		{
+            			X    "-4593"
+            			Y    "-3587"
+            			Z     "384"
+            			Pitch   "0.00"
+            			Yaw   "90"
+            			Roll    "0.00"
+        		}
+        		TeamNum 2
+			Level 2
+        	}
+
+		SentryGun  
+        	{
+        		Position
+        		{
+            			X    "-4637"
+            			Y    "-1818"
+            			Z     "320"
+            			Pitch   "0.00"
+            			Yaw   "-90"
+            			Roll    "0.00"
+        		}
+        		TeamNum 2
+			Level 2
+        	}
+
+		SentryGun  
+        	{
+        		Position
+        		{
+            			X    "-3363"
+            			Y    "-2914"
+            			Z     "706"
+            			Pitch   "0.00"
+            			Yaw   "180"
+            			Roll    "0.00"
+        		}
+        		TeamNum 2
+			Level 2
+        	}
+
+		SentryGun  
+       		{
+        		Position
+        		{
+            			X    "-5222"
+            			Y    "-2675"
+            			Z     "255" //-35
+            			Pitch   "0.00"
+            			Yaw   "180"
+            			Roll    "0.00"
+        		}
+        		TeamNum 2
+        		Health 100 //no level
+			Ismini 1
+			Skin 2
+			Bodygroup 1
+        	}
+
+
+		WaveSpawn // 8 pistol scouts (60)
+		{
+			Where blumain	
+			Name "blueman"
+			TotalCount 15	
+			MaxActive 1						
+			SpawnCount 1									
+			WaitBetweenSpawns 30
+			WaitBeforeStarting 0
+			RandomSpawn 1
+			Support 1
+			TFBot
+			{
+				Template T_TFBot_Giant_Scout_Pistol
+				Attributes IgnoreFlag
+				Action Mobber
+				ClassIcon blu2_lite
+			}
+		}
+
+		WaveSpawn // 8 pistol scouts (60)
+		{
+			Where blumain	
+			Name "blueman"
+			TotalCount 15	
+			MaxActive 1						
+			SpawnCount 1									
+			WaitBetweenSpawns 1
+			WaitBeforeStarting 0
+			RandomSpawn 1
+			Support 1
+			TFBot
+			{
+				Class Soldier
+				Item "The Libery Launcher"
+				Attributes IgnoreFlag
+				Action Mobber
+				ClassIcon blu2_lite
+			}
+		}
+
+		WaveSpawn // 8 pistol scouts (60)
+		{
+			Where front	
+			Name "A"
+			TotalCount 32	
+			MaxActive 12						
+			SpawnCount 4									
+			WaitBetweenSpawns 2
+			WaitBeforeStarting 0
+			TotalCurrency 70
+			RandomSpawn 1
+			TFBot
+			{
+				Class Pyro
+				AddCond   { Name TF_COND_REPROGRAMMED }
+				AimTrackingInterval 0.25 
+				Skill Hard
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_FLAMETHROWER"
+					"airblast disabled" 1
+				}
+				Attributes IgnoreFlag
+				Action Mobber
+				Attributes DisableDodge
+			}
+		}
+
+		WaveSpawn // 8 pistol scouts (60)
+		{
+			Where front	
+			Name "A"
+			TotalCount 1	
+			MaxActive 1						
+			SpawnCount 1									
+			WaitBetweenSpawns 2
+			WaitBeforeStarting 0
+			TotalCurrency 70
+			RandomSpawn 1
+			TFBot
+			{
+				Template T_TFBot_Giant_Soldier_Bison
+				AddCond   { Name TF_COND_REPROGRAMMED }
+				ItemAttributes
+				{
+					ItemName "The Righteous Bison"
+					"mult dmg vs giants" 2
+				}
+				Attributes IgnoreFlag
+				Action Mobber
+				Attributes DisableDodge
+			}
+		}
+
+		WaveSpawn // 8 pistol scouts (60)
+		{
+			Where front	
+			Name "A"
+			TotalCount 1	
+			MaxActive 1						
+			SpawnCount 1									
+			WaitBetweenSpawns 2
+			WaitBeforeStarting 20
+			TotalCurrency 60
+			RandomSpawn 1
+			TFBot
+			{
+				Template T_TFBot_Red_Giant_Demoman
+				AddCond   { Name TF_COND_REPROGRAMMED }
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_GRENADELAUNCHER"
+					"mult dmg vs giants" 1.5
+				}
+				Attributes IgnoreFlag
+				Action Mobber
+				Attributes DisableDodge
+			}
+		}
+
+		WaveSpawn // 8 pistol scouts (60)
+		{
+			Where mid	
+			Name "B"
+			TotalCount 66	
+			MaxActive 21						
+			SpawnCount 3									
+			WaitBetweenSpawns 1
+			WaitBeforeStarting 6
+			TotalCurrency 100
+			WaitForAllSpawned "A"
+			RandomSpawn 1
+			TFBot
+			{
+				Template T_TFBot_Red_Heavyweapons_Heavyweight_Champ_Fast
+				AddCond   { Name TF_COND_REPROGRAMMED } 
+				Attributes IgnoreFlag
+				Action Mobber
+				Attributes DisableDodge
+			}
+		}
+
+		WaveSpawn // 8 pistol scouts (60)
+		{
+			Where mid	
+			Name "B"
+			TotalCount 4	
+			MaxActive 2						
+			SpawnCount 1									
+			WaitBetweenSpawns 18
+			WaitBeforeStarting 6
+			TotalCurrency 75
+			WaitForAllSpawned "A"
+			RandomSpawn 1
+			TFBot
+			{
+				Template T_TFBot_Red_Giant_Soldier_Extended_Buff_Banner
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_ROCKETLAUNCHER"
+					"mult dmg vs giants" 1.5
+				}
+				AddCond   { Name TF_COND_REPROGRAMMED } 
+				Attributes IgnoreFlag
+				Action Mobber
+				Attributes DisableDodge
+			}
+		}
+
+		WaveSpawn // 8 pistol scouts (60)
+		{
+			Where back	
+			Name "C"
+			TotalCount 50	
+			MaxActive 14						
+			SpawnCount 5									
+			WaitBetweenSpawns 2
+			WaitBeforeStarting 6
+			TotalCurrency 50
+			WaitForAllSpawned "B"
+			RandomSpawn 1
+			TFBot
+			{
+				Class Scout
+				AddCond   { Name TF_COND_REPROGRAMMED } 
+				Skill Hard
+				Attributes IgnoreFlag
+				Action Mobber
+				Attributes DisableDodge
+			}
+		}
+
+		WaveSpawn // 8 pistol scouts (60)
+		{
+			Where Back
+			Name "C"
+			TotalCount 4	
+			MaxActive 2						
+			SpawnCount 1									
+			WaitBetweenSpawns 18
+			WaitBeforeStarting 6
+			TotalCurrency 75
+			WaitForAllSpawned "B"
+			RandomSpawn 1
+			TFBot
+			{
+				Template T_TFBot_Giant_Soldier_Bison
+				AddCond   { Name TF_COND_REPROGRAMMED }
+				ItemAttributes
+				{
+					ItemName "The Righteous Bison"
+					"mult dmg vs giants" 2
+				}
+				Attributes IgnoreFlag
+				Action Mobber
+				Attributes DisableDodge
+			}
+		}
+
+		WaveSpawn // 8 pistol scouts (60)
+		{
+			Where back	
+			Name "D"
+			TotalCount 40	
+			MaxActive 8						
+			SpawnCount 3									
+			WaitBetweenSpawns 4.5
+			WaitBeforeStarting 8
+			TotalCurrency 50
+			WaitForAllSpawned "C"
+			RandomSpawn 1
+			Support 1
+			TFBot
+			{
+				Class Soldier
+				AddCond   { Name TF_COND_REPROGRAMMED } 
+				Skill Hard
+				Attributes IgnoreFlag
+				Action Mobber
+				Attributes DisableDodge
+			}
+		}
+
+		WaveSpawn // 8 pistol scouts (60)
+		{
+			Where back	
+			TotalCount 1	
+			MaxActive 1						
+			SpawnCount 1									
+			WaitBetweenSpawns 4.5
+			WaitBeforeStarting 999
+			TotalCurrency 50
+			RandomSpawn 1
+			HideIcon 1
+			TFBot
+			{
+				Class Scout
+				AddCond   { Name TF_COND_REPROGRAMMED } 
+				Skill Hard
+				Attributes IgnoreFlag
+				Action Mobber
+				Attributes DisableDodge
+			}
+		}
+
+		WaveSpawn // 8 pistol scouts (60)
+		{
+			Where point1hold	
+			TotalCount 1	
+			MaxActive 1						
+			SpawnCount 1									
+			WaitBetweenSpawns 2.5
+			WaitBeforeStarting 0
+			TotalCurrency 50
+			TFBot
+			{
+				Template T_TFBot_Red_Giant_Soldier_Extended_Buff_Banner
+				AddCond   { Name TF_COND_REPROGRAMMED } 
+				Attributes IgnoreFlag
+				Action Idle
+				Attributes DisableDodge
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_ROCKETLAUNCHER"
+					"mult dmg vs giants" 1.5
+				}
+				InterruptAction
+				{
+					Target "cap_base1"	
+					Delay 0.4
+					Cooldown 30
+					Duration 30
+				}
+			}
+		}
+
+		WaveSpawn // 8 pistol scouts (60)
+		{
+			Where point2hold	
+			TotalCount 1	
+			MaxActive 1						
+			SpawnCount 1									
+			WaitBetweenSpawns 2.5
+			WaitBeforeStarting 0
+			TotalCurrency 50
+			TFBot
+			{
+				Template T_TFBot_Red_Giant_Demoman
+				AddCond   { Name TF_COND_REPROGRAMMED } 
+				Attributes IgnoreFlag
+				Action Idle
+				Attributes DisableDodge
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_GRENADELAUNCHER"
+					"mult dmg vs giants" 1.5
+				}
+				InterruptAction
+				{
+					Target "cap_base2"	
+					Delay 0.4
+					Cooldown 30
+					Duration 30
+				}
+			}
+		}
+
+		WaveSpawn // 8 pistol scouts (60)
+		{
+			Where point3hold	
+			TotalCount 2	
+			MaxActive 2						
+			SpawnCount 1									
+			WaitBetweenSpawns 2.5
+			WaitBeforeStarting 0
+			TotalCurrency 50
+			TFBot
+			{
+				Template T_TFBot_Red_Giant_Pyro_Flare_Spammer
+				ClassIcon pyro_flare_red
+				AddCond   { Name TF_COND_REPROGRAMMED } 
+				Attributes IgnoreFlag
+				Action Idle
+				Attributes DisableDodge
+				ItemAttributes
+				{
+					ItemName "The Detonator"
+					"mult dmg vs giants" 1.5
+				}
+				InterruptAction
+				{
+					Target "cap_base3"	
+					Delay 0.4
+					Cooldown 30
+					Duration 30
+				}
+			}
+		}
+
+		WaveSpawn // 8 pistol scouts (60)
+		{
+			Where point4hold	
+			TotalCount 1	
+			MaxActive 1						
+			SpawnCount 1									
+			WaitBetweenSpawns 2.5
+			WaitBeforeStarting 0
+			TotalCurrency 50
+			TFBot
+			{
+				Template T_TFBot_Red_Heavyweapons_Heater
+				Name "Giant Heater Heavy"
+				AddCond   { Name TF_COND_REPROGRAMMED } 
+				Attributes IgnoreFlag
+				Action Idle
+				Attributes DisableDodge
+				ItemAttributes
+				{
+					ItemName "The Huo Long Heatmaker"
+					"mult dmg vs giants" 1.5
+				}
+				InterruptAction
+				{
+					Target "cap_base4"	
+					Delay 0.4
+					Cooldown 30
+					Duration 30
+				}
+			}
+		}
+
+		Wavespawn // SentryIcon
+		{
+			Where "spawnbot"
+			TotalCount 1
+			SpawnCount 1
+			WaitBeforeStarting 9999
+			Support Limited
+			TFBot
+			{
+				Class Scout
+				ClassIcon sentry_gun_lvl2_red_lite
+			}
+		}
+	}
+}

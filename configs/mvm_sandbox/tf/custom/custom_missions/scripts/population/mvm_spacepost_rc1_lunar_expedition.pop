@@ -1,0 +1,1384 @@
+
+///////////////////////////////////////////////////////////////////////////
+// BEGIN POP FILE
+///////////////////////////////////////////////////////////////////////////
+
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_extras.pop
+#base robot_galactic.pop
+
+WaveSchedule													
+{
+
+	StartingCurrency 700
+	RespawnWaveTime 7
+	CanBotsAttackWhileInSpawnRoom no
+	
+/////////////////
+//TEMPLATES
+/////////////////
+
+
+	
+/////////////////
+//MISSIONS
+/////////////////
+
+
+///////////////////////////////////////////////////////////////////////////
+//SENTRY BUSTER MISSIONS
+///////////////////////////////////////////////////////////////////////////
+	
+	Mission	// Sentry Busters - all
+	{
+		Objective DestroySentries
+
+		InitialCooldown 30
+		Where spawnbot_mission_sentry_buster
+		BeginAtWave 1
+		RunForThisManyWaves 6
+		CooldownTime 30
+
+            TFBot
+			{
+				Template T_TFBot_SentryBuster
+            }
+	}
+
+///////////////////////////////////////////////////////////////////////////
+//SNIPER MISSIONS
+///////////////////////////////////////////////////////////////////////////
+	
+	Mission
+	{
+		Objective	Sniper
+		Where	spawnbot_mission_sniper
+		BeginAtWave	1
+		RunForThisManyWaves	2
+		InitialCooldown	45
+		CooldownTime	45
+		DesiredCount	3
+		TFBot
+		{
+			Template	Space_Sniper
+		}
+	}	
+	Mission
+	{
+		Objective	Sniper
+		Where	spawnbot_mission_sniper
+		BeginAtWave	5
+		RunForThisManyWaves	2
+		InitialCooldown	45
+		CooldownTime	30
+		DesiredCount	2
+		TFBot
+		{
+			Template	Space_Sniper
+		}
+	}	
+	
+///////////////////////////////////////////////////////////////////////////
+//SPY MISSIONS
+///////////////////////////////////////////////////////////////////////////
+	
+	Mission
+	{
+		Objective Spy		
+		InitialCooldown 30
+		Where spawnbot_mission_spy
+		BeginAtWave 4
+		RunForThisManyWaves 1
+		DesiredCount 3
+		CooldownTime 60
+		
+		TFBot
+		{
+			Template T_TFBot_Spy
+			Name	"Android Spy"
+			Item	"Camera Beard"
+			Item	"The Aviator Assassin"
+		}
+	}	
+	
+	Mission
+	{
+		Objective Spy		
+		InitialCooldown 30
+		Where spawnbot_mission_spy
+		BeginAtWave 6
+		RunForThisManyWaves 1
+		DesiredCount 3
+		CooldownTime 60
+		
+		TFBot
+		{
+			Template T_TFBot_Spy
+			Name	"Android Spy"
+			Item	"Camera Beard"
+			Item	"The Aviator Assassin"
+		}
+	}
+
+///////////////////////////////////////////////////////////////////////////	
+//ENGINEER MISSIONS
+///////////////////////////////////////////////////////////////////////////	
+
+
+
+/////////////////
+//WAVES
+/////////////////
+
+/////////////////
+//START $700
+//DROP W1 $800 / W2 $900 / W3 $900 / W4 $800 / W5 $800 / W6 $700 / W7 $600
+//START: $700 / DROP: $5600 / TOTAL: $6300 / TOTAL PLUS BONUS: $6900
+/////////////////	
+
+//WAVE 1  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// Total cash in this wave is $700
+///////////////////////////////////////////////////////////////////////////
+
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	w1_melee_scouts
+			TotalCurrency	100
+			TotalCount	35
+			MaxActive	15
+			SpawnCount	5
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	6
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Scout_Melee
+					Name	"Intergalactic Scout"
+					Item	"The Bolt Boy"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w1_cyberpunk_pyros
+			WaitForAllSpawned	w1_melee_scouts
+			TotalCurrency	100
+			TotalCount	32
+			MaxActive	9
+			SpawnCount	3
+			WaitBeforeStarting	14
+			WaitBetweenSpawns	4
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Pyro
+					Name	"Cyberpunk Pyro"
+					Skill	Easy
+					Item	"The Person in the Iron Mask"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w1_support_sandman
+			WaitForAllDead	w1_cyberpunk_pyros
+			TotalCurrency	100
+			TotalCount	25
+			MaxActive	18
+			SpawnCount	2
+			WaitBeforeStarting	18
+			WaitBetweenSpawns	4
+			Where	spawnbot_upper
+			support	1
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Scout_Sandman_FastCharge
+					Name	"Intergalactic Baseball Scout"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w1_bison_soldiers
+			TotalCurrency	150
+			TotalCount	20
+			MaxActive	7
+			SpawnCount	4
+			WaitBeforeStarting	8
+			WaitBetweenSpawns	8
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	Bison_Soldier
+					Health	350
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w1_giant_mangler_soldier
+			WaitForAllSpawned	w1_bison_soldiers
+			TotalCurrency	150
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	1
+			WaitBeforeStarting	12
+			WaitBetweenSpawns	24
+			Where	spawnbot_upper
+			Squad
+			{
+				TFBot
+				{
+					Template	Giant_Mangler_Soldier
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w1_scouts
+			WaitForAllSpawned	w1_bison_soldiers
+			TotalCurrency	100
+			TotalCount	24
+			MaxActive	14
+			SpawnCount	4
+			WaitBeforeStarting	12
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Class	Scout
+					Name	"Intergalactic Scout"
+					Item	"The Bolt Boy"
+				}
+			}
+		}
+	}
+
+	
+//WAVE 2  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// Total cash in this wave is $700
+///////////////////////////////////////////////////////////////////////////
+
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	w2_heavies
+			TotalCurrency	120
+			TotalCount	16
+			MaxActive	16
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	6
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Class	HeavyWeapons
+					Skill	Normal
+					Name	"Interstellar Heavy"
+					Item	"The Tungsten Toque"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w2_heavies_boxer
+			WaitForAllDead	w2_heavies
+			TotalCurrency	160
+			TotalCount	20
+			MaxActive	16
+			SpawnCount	5
+			WaitBeforeStarting	2
+			WaitBetweenSpawns	9
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Heavyweight_Champ
+					Name	"Interstellar Boxer Heavy"
+					Item	"The Tungsten Toque"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w2_super_scouts
+			WaitForAllDead	w2_heavies
+			TotalCurrency	80
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	6
+			WaitBetweenSpawns	15
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Scout_Fast 
+					Name	"Intergalactic Super Scout"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w2_super_scouts_2
+			WaitForAllDead	w2_super_scouts
+			TotalCurrency	120
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	1
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	18
+			Where	spawnbot_upper
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Scout_Fast 
+					Name	"Intergalactic Super Scout"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w2_mangler_soldier
+			WaitForAllSpawned	w2_super_scouts
+			TotalCurrency	80
+			TotalCount	24
+			MaxActive	10
+			SpawnCount	5
+			WaitBeforeStarting	12
+			WaitBetweenSpawns	12
+			Where	spawnbot_upper
+			Squad
+			{
+				TFBot
+				{
+					Template	Mangler_Soldier 
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w2_heavies_or_boxer
+			WaitForAllSpawned	w2_heavies_boxer
+			TotalCurrency	140
+			TotalCount	32
+			MaxActive	7
+			SpawnCount	3
+			WaitBeforeStarting	8
+			WaitBetweenSpawns	6
+			Where	spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Heavyweight_Champ
+					Name	"Interstellar Boxer Heavy"
+					Item	"The Tungsten Toque"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Heavyweight_Champ
+					Name	"Interstellar Boxer Heavy"
+					Item	"The Tungsten Toque"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Heavyweight_Champ
+					Name	"Interstellar Boxer Heavy"
+					Item	"The Tungsten Toque"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Heavyweight_Champ
+					Name	"Interstellar Boxer Heavy"
+					Item	"The Tungsten Toque"
+				}
+				TFBot
+				{
+					Class	HeavyWeapons
+					Skill	Normal
+					Name	"Interstellar Heavy"
+					Item	"The Tungsten Toque"
+				}
+			}
+		}
+	}
+	
+
+//WAVE 3  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// Total cash in this wave is $700
+///////////////////////////////////////////////////////////////////////////
+
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	w3_demos
+			TotalCurrency	120
+			TotalCount	24
+			MaxActive	16
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	6
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Class	Demoman
+					Skill	Easy
+					Name	"Quantum Demoman"
+					Item	"The Broadband Bonnet"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w3_melee_scouts
+			WaitForAllSpawned	w3_demos
+			TotalCurrency	60
+			TotalCount	20
+			MaxActive	20
+			SpawnCount	4
+			WaitBeforeStarting	12
+			WaitBetweenSpawns	3
+			Where	spawnbot_upper
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Scout_Melee
+					Name	"Intergalactic Scout"
+					Item	"The Bolt Boy"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCurrency 80
+			Name	w3_tank
+			WaitForAllSpawned	w3_demos
+			WaitBeforeStarting 6
+			TotalCount 1
+			
+			FirstSpawnOutput                                                                                                                                                            
+			{
+				 Target boss_spawn_relay                                            
+				 Action Trigger                         
+			}
+
+			Tank
+			{
+				Health 30000
+				Speed 75
+				Name "boss"
+				StartingPathTrackNode "tank_path_a_1"
+				//StartingPathTrackNode "boss_path_b1"
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w3_boxers
+			WaitForAllDead	w3_tank
+			TotalCurrency	160
+			TotalCount	42
+			MaxActive	14
+			SpawnCount	3
+			WaitBeforeStarting	4
+			WaitBetweenSpawns	4
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Heavyweight_Champ
+					Name	"Interstellar Boxer Heavy"
+					Item	"The Tungsten Toque"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w3_heavy_medics
+			WaitForAllDead	w3_tank
+			TotalCurrency	180
+			TotalCount	16
+			MaxActive	8
+			SpawnCount	4
+			WaitBeforeStarting	11
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Class	HeavyWeapons
+					Skill	Normal
+					Name	"Interstellar Heavy"
+					Item	"The Tungsten Toque"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_QuickUber
+					Name	"Cyborg Medic"
+					Item	"The Surgeon's Space Suit"
+					Item	"The Byte'd Beak"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w3_giant_soldier
+			WaitForAllSpawned	w3_heavy_medics
+			TotalCurrency	100
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	2
+			WaitBetweenSpawns	2
+			Where	spawnbot_upper
+			Squad
+			{
+				TFBot
+				{
+					Template	Giant_Mangler_Soldier
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_QuickUber
+					Name	"Cyborg Medic"
+					Item	"The Surgeon's Space Suit"
+					Item	"The Byte'd Beak"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_QuickUber
+					Name	"Cyborg Medic"
+					Item	"The Surgeon's Space Suit"
+					Item	"The Byte'd Beak"
+				}
+			}
+		}
+	}
+
+//WAVE 4  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// Total cash in this wave is $700
+///////////////////////////////////////////////////////////////////////////
+
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	w4_pyros
+			TotalCurrency	160
+			TotalCount	42
+			MaxActive	14
+			SpawnCount	3
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	5
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Pyro
+					Name	"Cyberpunk Pyro"
+					Skill	Easy
+					Item	"The Person in the Iron Mask"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w4_shotgunners
+			TotalCurrency	140
+			TotalCount	24
+			MaxActive	8
+			SpawnCount	4
+			WaitBeforeStarting	4
+			WaitBetweenSpawns	9
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Shotgun
+					Name	"Interstellar Shotgunner"
+					Item	"The Tungsten Toque"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w4_giant_knight
+			WaitForAllSpawned	w4_pyros
+			TotalCurrency	80
+			TotalCount	9
+			MaxActive	9
+			SpawnCount	3
+			WaitBeforeStarting	6
+			WaitBetweenSpawns	18
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Demoman
+					Name	"Giant Quantum Demoman"
+					Item	"The Broadband Bonnet"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_QuickUber
+					Name	"Cyborg Medic"
+					Item	"The Surgeon's Space Suit"
+					Item	"The Byte'd Beak"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_QuickUber
+					Name	"Cyborg Medic"
+					Item	"The Surgeon's Space Suit"
+					Item	"The Byte'd Beak"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w4_giant_knight
+			WaitForAllSpawned	w4_shotgunners
+			TotalCurrency	120
+			TotalCount	32
+			MaxActive	16
+			SpawnCount	4
+			WaitBeforeStarting	7
+			WaitBetweenSpawns	5
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Class	Scout
+					Name	"Intergalactic Scout"
+					Item	"The Bolt Boy"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w4_rapid_mangler_soldier
+			WaitForAllDead	w4_giant_knight
+			TotalCurrency	120
+			TotalCount	10
+			MaxActive	10
+			SpawnCount	5
+			WaitBeforeStarting	12
+			WaitBetweenSpawns	20
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	Giant_Mangler_Soldier
+					Classicon	soldier_mangler_spammer_giant
+					Name	"Giant Rapid Mangler Soldier"
+					ItemAttributes
+					{
+						ItemName	"the cow mangler 5000"
+						"fire rate bonus"	0.5
+						"faster reload rate"	-0.8
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_QuickUber
+					Name	"Cyborg Medic"
+					Item	"The Surgeon's Space Suit"
+					Item	"The Byte'd Beak"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_QuickUber
+					Name	"Cyborg Medic"
+					Item	"The Surgeon's Space Suit"
+					Item	"The Byte'd Beak"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_QuickUber
+					Name	"Cyborg Medic"
+					Item	"The Surgeon's Space Suit"
+					Item	"The Byte'd Beak"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_QuickUber
+					Name	"Cyborg Medic"
+					Item	"The Surgeon's Space Suit"
+					Item	"The Byte'd Beak"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w4_random_choice_1
+			WaitForAllDead	w4_giant_knight
+			TotalCurrency	80
+			TotalCount	32
+			MaxActive	15
+			SpawnCount	3
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	3
+			Where	spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Pyro
+					Name	"Cyberpunk Pyro"
+					Skill	Easy
+					Item	"The Person in the Iron Mask"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Pyro
+					Name	"Cyberpunk Pyro"
+					Skill	Easy
+					Item	"The Person in the Iron Mask"
+				}
+				TFBot
+				{
+					Class	Scout
+					Name	"Intergalactic Scout"
+					Item	"The Bolt Boy"
+				}
+				TFBot
+				{
+					Class	Scout
+					Name	"Intergalactic Scout"
+					Item	"The Bolt Boy"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Shotgun
+					Name	"Interstellar Shotgunner"
+					Item	"The Tungsten Toque"
+				}
+			}
+		}
+	}
+	
+//WAVE 5  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// Total cash in this wave is $700
+///////////////////////////////////////////////////////////////////////////
+
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			TotalCurrency	50
+			TotalCount	50
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	12
+			WaitBetweenSpawns	0
+			Support	1
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Scout_Melee
+					Classicon	scout_bat
+					Name	"Intergalactic Scout"
+					Item	"The Bolt Boy"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w5_mangler_soldiers
+			TotalCurrency	160
+			TotalCount	24
+			MaxActive	9
+			SpawnCount	5
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	6
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	Mangler_Soldier
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w5_burst_shotgunners
+			TotalCurrency	120
+			TotalCount	16
+			MaxActive	8
+			SpawnCount	4
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	9
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Burst_Shotgun_Soldier
+					Name	"Comsic Burst Shotgunner"
+					Item	"Steel Shako"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCurrency 100
+			Name	w5_heavy_medics_tank
+			WaitForAllSpawned	w5_mangler_soldiers
+			WaitBeforeStarting 6
+			TotalCount 1
+			
+			FirstSpawnOutput                                                                                                                                                            
+			{
+				 Target boss_spawn_relay                                            
+				 Action Trigger                         
+			}
+
+			Tank
+			{
+				Health 25000
+				Speed 75
+				Name "boss"
+				StartingPathTrackNode "tank_path_a_1"
+				//StartingPathTrackNode "boss_path_b1"
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w5_heavy_medics_tank
+			WaitForAllDead	w5_burst_shotgunners
+			TotalCurrency	180
+			TotalCount	24
+			MaxActive	16
+			SpawnCount	4
+			WaitBeforeStarting	2
+			WaitBetweenSpawns	7
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Class	HeavyWeapons
+					Skill	Normal
+					Name	"Interstellar Heavy"
+					Item	"The Tungsten Toque"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_QuickUber
+					Name	"Cyborg Medic"
+					Item	"The Surgeon's Space Suit"
+					Item	"The Byte'd Beak"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			WaitForAllDead	w5_heavy_medics_tank
+			TotalCurrency	50
+			TotalCount	25
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	12
+			WaitBetweenSpawns	0
+			Support	1
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Pyro
+					Name	"Cyberpunk Pyro"
+					Skill	Normal
+					Item	"The Person in the Iron Mask"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			WaitForAllDead	w5_heavy_medics_tank
+			TotalCurrency	120
+			TotalCount	18
+			MaxActive	12
+			SpawnCount	4
+			WaitBeforeStarting	24
+			WaitBetweenSpawns	6
+			Where	spawnbot_upper
+			Squad
+			{
+				TFBot
+				{
+					Class	Scout_crit
+					Attributes	"AlwaysCrit"
+					Name	"Intergalactic Scout"
+					Item	"The Bolt Boy"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			WaitForAllDead	w5_heavy_medics_tank
+			TotalCurrency	120
+			TotalCount	15
+			MaxActive	15
+			SpawnCount	5
+			WaitBeforeStarting	8
+			WaitBetweenSpawns	20
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	Giant_Mangler_Soldier
+					Classicon	soldier_mangler_spammer_giant
+					Name	"Giant Rapid Mangler Soldier"
+					ItemAttributes
+					{
+						ItemName	"the cow mangler 5000"
+						"fire rate bonus"	0.5
+						"faster reload rate"	-0.8
+					}
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_QuickUber
+					Name	"Cyborg Medic"
+					Item	"The Surgeon's Space Suit"
+					Item	"The Byte'd Beak"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_QuickUber
+					Name	"Cyborg Medic"
+					Item	"The Surgeon's Space Suit"
+					Item	"The Byte'd Beak"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_QuickUber
+					Name	"Cyborg Medic"
+					Item	"The Surgeon's Space Suit"
+					Item	"The Byte'd Beak"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_QuickUber
+					Name	"Cyborg Medic"
+					Item	"The Surgeon's Space Suit"
+					Item	"The Byte'd Beak"
+				}
+			}
+		}
+	}
+	
+//WAVE 6  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// Total cash in this wave is $700
+///////////////////////////////////////////////////////////////////////////
+	
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	w6_random_giants
+			TotalCurrency	250
+			TotalCount	48
+			MaxActive	14
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	5
+			Where	spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Pyro
+					Name	"Cyberpunk Pyro"
+					Skill	Normal
+					Item	"The Person in the Iron Mask"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Pyro
+					Name	"Cyberpunk Pyro"
+					Skill	Normal
+					Item	"The Person in the Iron Mask"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_Melee
+					Name	"Intergalactic Scout"
+					Item	"The Bolt Boy"
+				}
+				TFBot
+				{
+					Class	HeavyWeapons
+					Skill	Normal
+					Name	"Interstellar Heavy"
+					Item	"The Tungsten Toque"
+				}
+				TFBot
+				{
+					Class	HeavyWeapons
+					Skill	Normal
+					Name	"Interstellar Heavy"
+					Item	"The Tungsten Toque"
+				}
+				TFBot
+				{
+					Template	Bison_Soldier
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_Sandman_FastCharge
+					Name	"Intergalactic Baseball Scout"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_Sandman_FastCharge
+					Name	"Intergalactic Baseball Scout"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w6_random_giants
+			TotalCurrency	100
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	2
+			WaitBeforeStarting	12
+			WaitBetweenSpawns	15
+			Where	spawnbot_upper
+			Squad
+			{
+				TFBot
+				{
+					Template	Giant_Mangler_Soldier
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCurrency 100
+			Name	w6_tank_1
+			WaitForAllSpawned	w6_random_giants
+			WaitBeforeStarting 10
+			TotalCount 1
+			
+			FirstSpawnOutput                                                                                                                                                            
+			{
+				 Target boss_spawn_relay                                            
+				 Action Trigger                         
+			}
+
+			Tank
+			{
+				Health 26000
+				Speed 75
+				Name "boss"
+				StartingPathTrackNode "tank_path_a_1"
+				//StartingPathTrackNode "boss_path_b1"
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}
+		}
+		WaveSpawn
+		{
+			WaitForAllDead	w6_tank_1
+			TotalCurrency	75
+			TotalCount	15
+			MaxActive	4
+			SpawnCount	4
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	0
+			Where	spawnbot
+			support	1
+			Squad
+			{
+				TFBot
+				{
+					Template	Mangler_Soldier
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w6_heavies
+			WaitForAllDead	w6_random_giants
+			TotalCurrency	100
+			TotalCount	24
+			MaxActive	12
+			SpawnCount	4
+			WaitBeforeStarting	12
+			WaitBetweenSpawns	3
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Class	HeavyWeapons
+					Skill	Normal
+					Name	"Interstellar Heavy"
+					Item	"The Tungsten Toque"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w6_mangler_heavys
+			WaitForAllDead	w6_heavies
+			TotalCurrency	150
+			TotalCount	18
+			MaxActive	12
+			SpawnCount	6
+			WaitBeforeStarting	4
+			WaitBetweenSpawns	18
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	Giant_Mangler_Soldier
+				}
+				TFBot
+				{
+					Template	Bison_Soldier
+				}
+				TFBot
+				{
+					Template	Bison_Soldier
+				}
+				TFBot
+				{
+					Template	Bison_Soldier
+				}
+				TFBot
+				{
+					Template	Bison_Soldier
+				}
+				TFBot
+				{
+					Template	Bison_Soldier
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	w6_random_choice_2
+			WaitForAllSpawned	w6_mangler_heavys
+			TotalCurrency	125
+			TotalCount	32
+			MaxActive	15
+			SpawnCount	4
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	4
+			Where	spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Scout_Sandman_FastCharge
+					Name	"Intergalactic Baseball Scout"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_Sandman_FastCharge
+					Name	"Intergalactic Baseball Scout"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_Sandman_FastCharge
+					Name	"Intergalactic Baseball Scout"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_Sandman_FastCharge
+					Name	"Intergalactic Baseball Scout"
+				}
+				TFBot
+				{
+					Template	Bison_Soldier
+				}
+				TFBot
+				{
+					Template	Bison_Soldier
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCurrency 100
+			Name	w6_tank_2
+			WaitForAllSpawned	w6_mangler_heavys
+			WaitBeforeStarting 2
+			TotalCount 1
+			
+			FirstSpawnOutput                                                                                                                                                            
+			{
+				 Target boss_spawn_relay                                            
+				 Action Trigger                         
+			}
+
+			Tank
+			{
+				Health 36500
+				Speed 75
+				Skin	1
+				Name "boss"
+				StartingPathTrackNode "tank_path_a_1"
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}
+		}
+	}
+}

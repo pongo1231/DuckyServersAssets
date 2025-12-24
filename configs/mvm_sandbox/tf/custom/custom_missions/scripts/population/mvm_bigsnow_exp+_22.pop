@@ -1,0 +1,629 @@
+#base robot_standard.pop
+#base robot_giant.pop
+#base Waffle's_custom.pop
+#base robot_click.pop
+#base robot_click_giant_fixed.pop
+
+Waveschedule
+{
+    Startingcurrency 22
+    Canbotsattackwhileinspawnroom no
+    respawnwavetime 5
+
+    Mission
+	{
+		Objective DestroySentries
+		InitialCooldown 15
+		Where spawnbot
+		BeginAtWave 1
+		RunForThisManyWaves 22
+		CooldownTime 22
+        TFBot
+		{
+		    Template T_TFBot_SentryBuster
+        }
+	}
+   // ExtraSpawnPoint  
+    //{
+       // Name "spawnbot_overbridge"
+   //     TeamNum 3
+   //     X    -65   
+      //  Y    -1994
+   //     Z    521
+//    }
+    Wave
+    {
+        StartWaveOutput
+		{
+			Target	wave_start_relay_boss
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        Wavespawn
+        {
+            Name 22
+            Where spawnbot_mission_spy
+            Totalcount 22
+            Spawncount 22
+            MaxActive 22
+            Totalcurrency 222
+            Tfbot
+            {
+                Template T_TFBot_Scout_Blaster_Hyper
+                Skill Hard
+            }
+        }
+    }
+    Wave
+    {
+        StartWaveOutput
+		{
+			Target	wave_start_relay_boss
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        Wavespawn
+        {
+            Name 22
+            Where spawnbot
+            Totalcount 22
+            Spawncount 22
+            MaxActive 22
+            Totalcurrency 222
+            Tfbot
+            {
+                Template T_TFBot_Soldier_Airstrike_Hyper
+                Skill Hard
+            }
+        }
+    }
+    Wave
+    {
+        StartWaveOutput
+		{
+			Target	wave_start_relay_boss
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        Wavespawn
+        {
+            Name 22
+            Where spawnbot
+            Totalcount 22
+            Spawncount 22
+            MaxActive 22
+            Totalcurrency 222
+            Tfbot
+            {
+                Template T_TFBot_Pyro_Backburner_Hyper
+                Skill Hard
+            }
+        }
+    }
+    Wave
+    {
+        StartWaveOutput
+		{
+			Target	wave_start_relay_boss
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        Wavespawn
+        {
+            Name 22
+            Where spawnbot
+            Totalcount 22
+            Spawncount 22
+            MaxActive 22
+            Totalcurrency 222
+            Tfbot
+            {
+                Template T_TFBot_Demo_Chargeknight_Hyper
+                Skill Hard
+            }
+        }
+    }
+    Wave
+    {
+        StartWaveOutput
+		{
+			Target	wave_start_relay_boss
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        Wavespawn
+        {
+            Name 22
+            Where spawnbot
+            Totalcount 22
+            Spawncount 22
+            MaxActive 22
+            Totalcurrency 222
+            Tfbot
+            {
+                Template T_TFBot_Heavy_Juggernaut_Minigun
+                Skill Hard
+            }
+        }
+    }
+    Wave
+    {
+        StartWaveOutput
+		{
+			Target	wave_start_relay_boss
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        Wavespawn
+        {
+            Name 22
+            Where spawnbot
+            Totalcount 22
+            Spawncount 22
+            MaxActive 22
+            Totalcurrency 222
+            Waitbeforestarting 2
+            Tfbot
+            {
+                Template T_TFBot_Demo_Samurai_Traditional_Waffle
+                Skill Hard
+            }
+        }
+    }
+    Wave
+    {
+        StartWaveOutput
+		{
+			Target	wave_start_relay_boss
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        Wavespawn
+        {
+            Name 22
+            Where spawnbot
+            Totalcount 22
+            Spawncount 22
+            MaxActive 22
+            Totalcurrency 222
+            Tfbot
+            {
+                Template T_TFBot_Medic_Crossbow_Bleed
+                Skill Hard
+            }
+        }
+    }
+    Wave
+    {
+        StartWaveOutput
+		{
+			Target	wave_start_relay_boss
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        Wavespawn
+        {
+            Name 22
+            Where spawnbot
+            Totalcount 22
+            Spawncount 22
+            MaxActive 22
+            Totalcurrency 222
+            Tfbot
+            {
+                Template T_TFBot_Sniper_Huntsman_Hyper_Spammer_Penetration
+                Skill Hard
+            }
+        }
+    }
+    Wave
+    {
+        StartWaveOutput
+		{
+			Target	wave_start_relay_boss
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        Wavespawn
+        {
+            Name 22
+            Where spawnbot
+            Totalcount 22
+            Spawncount 22
+            MaxActive 22
+            Totalcurrency 222
+            Tfbot
+            {
+                Template T_TFBot_Spy_Hyper_Revolver
+                Skill Hard
+            }
+        }
+    }
+    Wave
+    {
+        StartWaveOutput
+		{
+			Target	wave_start_relay_boss
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        Wavespawn
+        {
+            Name 22
+            Where spawnbot
+            Totalcount 22
+            Spawncount 22
+            MaxActive 22
+            Totalcurrency 222
+            Tfbot
+            {
+                Template T_TFBot_Giant_Scout_Baseball_Spammer_Hyper
+                Skill Hard
+            }
+        }
+    }
+    Wave
+    {
+        StartWaveOutput
+		{
+			Target	wave_start_relay_boss
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        Wavespawn
+        {
+            Name 22
+            Where spawnbot
+            Totalcount 22
+            Spawncount 22
+            MaxActive 22
+            Totalcurrency 222
+            Tfbot
+            {
+                Template T_TFBot_Giant_Soldier_Smoker
+                Skill Hard
+            }
+        }
+    }
+    Wave
+    {
+        StartWaveOutput
+		{
+			Target	wave_start_relay_boss
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        Wavespawn
+        {
+            Name 22
+            Where spawnbot
+            Totalcount 22
+            Spawncount 22
+            MaxActive 22
+            Totalcurrency 222
+            Tfbot
+            {
+                Template T_TFBot_Giant_Pyro_Dragon_Hyper
+                Skill Hard
+            }
+        }
+    }
+    Wave
+    {
+        StartWaveOutput
+		{
+			Target	wave_start_relay_boss
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        Wavespawn
+        {
+            Name 22
+            Where spawnbot
+            Totalcount 22
+            Spawncount 22
+            MaxActive 22
+            Totalcurrency 222
+            Tfbot
+            {
+                Template T_TFBot_Giant_Demo_Sticky_Infinite_Hyper
+                Skill Hard
+            }
+        }
+    }
+    Wave
+    {
+        StartWaveOutput
+		{
+			Target	wave_start_relay_boss
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        Wavespawn
+        {
+            Name 22
+            Where spawnbot
+            Totalcount 22
+            Spawncount 22
+            MaxActive 22
+            Totalcurrency 222
+            Tfbot
+            {
+                Template T_TFBot_Giant_Heavy_Tomislav_Hyper
+                Skill Hard
+            }
+        }
+    }
+    Wave
+    {
+        StartWaveOutput
+		{
+			Target	wave_start_relay_boss
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        Wavespawn
+        {
+            Name 22
+            Where spawnbot
+            Totalcount 22
+            Spawncount 22
+            MaxActive 22
+            Totalcurrency 222
+            Tfbot
+            {
+                Template T_Tfbot_Giant_Soldier_Turbo_Burst_Waffle
+                Skill Expert
+            }
+        }
+    }
+    Wave
+    {
+        StartWaveOutput
+		{
+			Target	wave_start_relay_boss
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        Wavespawn
+        {
+            Name 22
+            Where spawnbot
+            Totalcount 22
+            Spawncount 22
+            MaxActive 22
+            Totalcurrency 222
+            Tfbot
+            {
+                Template T_TFBot_Giant_Medic_Crossbow_Burst
+                Skill Hard
+            }
+        }
+    }
+    Wave
+    {
+        StartWaveOutput
+		{
+			Target	wave_start_relay_boss
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        Wavespawn
+        {
+            Name 22
+            Where spawnbot
+            Totalcount 22
+            Spawncount 22
+            MaxActive 22
+            Totalcurrency 222
+            Tfbot
+            {
+                Template T_TFBot_Giant_Sniper_SMG_Spammer_Expert
+                Skill Hard
+            }
+        }
+    }
+    Wave
+    {
+        StartWaveOutput
+		{
+			Target	wave_start_relay_boss
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        Wavespawn
+        {
+            Name 22
+            Where spawnbot
+            Totalcount 22
+            Spawncount 22
+            MaxActive 22
+            Totalcurrency 222
+            Tfbot
+            {
+                Template Waffle_Giant_Soldier_Spammer_Homing
+                Skill Hard
+            }
+        }
+    }
+    Wave
+    {
+        StartWaveOutput
+		{
+			Target	wave_start_relay_boss
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        Wavespawn
+        {
+            Name 22
+            Where spawnbot
+            Totalcount 22
+            Spawncount 22
+            MaxActive 22
+            Totalcurrency 222
+            Tfbot
+            {
+                Template T_TFBot_Giant_Heavy_Rocket_Hyper
+                Skill Hard
+            }
+        }
+    }
+    Wave
+    {
+        StartWaveOutput
+		{
+			Target	wave_start_relay_boss
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        Wavespawn
+        {
+            Name 22
+            Where spawnbot
+            Totalcount 22
+            Spawncount 22
+            MaxActive 22
+            Totalcurrency 222
+            Tfbot
+            {
+                Template T_TFBot_Giant_Scout_Blaster_Hyper
+                Skill Hard
+            }
+        }
+    }
+    Wave
+    {
+        StartWaveOutput
+		{
+			Target	wave_start_relay_boss
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        Wavespawn
+        {
+            Name 22
+            Where spawnbot
+            Totalcount 22
+            Spawncount 22
+            MaxActive 22
+            Totalcurrency 222
+            Tfbot
+            {
+                Template T_TFBot_Giant_Soldier_Tanker
+                Skill Hard
+            }
+        }
+    }
+    Wave
+    {
+        StartWaveOutput
+		{
+			Target	wave_start_relay_boss
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        Wavespawn
+        {
+            Name 22
+            Where spawnbot
+            Totalcount 22
+            Spawncount 22
+            MaxActive 22
+            Totalcurrency 222
+            Tfbot
+            {
+                Template T_TFBot_Giant_Scout_Blaster_Hyper_Armored
+                Skill Hard
+            }
+        }
+    }
+}

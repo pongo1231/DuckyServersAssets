@@ -1,0 +1,509 @@
+// mvm_gd_caster mission: Payout Paradise
+// Credits: PDA Expert (concept, programming and testing), Jack5 (cleanup and testing)
+// Difficulty: Normal
+#base robot_caster.pop
+WaveSchedule {
+	StartingCurrency 400
+	RespawnWaveTime 2
+	CanBotsAttackWhileInSpawnRoom No
+	MaxRedPlayers 2 [$SIGSEGV] // Sigsegv maximum RED players override
+	Mission { // Sentry Buster
+		Objective DestroySentries
+		InitialCooldown 30
+		Where spawnbot
+		Where spawnbot_gate
+		BeginAtWave 1
+		RunForThisManyWaves 6
+		CooldownTime 60
+		TFBot {
+			Template T_Caster_SentryBuster
+		}
+	}
+	Mission { // Wave 4 Spies
+		Objective Spy
+		InitialCooldown 30
+		Where spawnbot
+		Where spawnbot_gate
+		BeginAtWave 4
+		RunForThisManyWaves 1
+		CooldownTime 40
+		DesiredCount 3
+		TFBot {
+			Template T_Caster_Spy
+		}
+	}
+	Mission { // Wave 6 Spies
+		Objective Spy
+		InitialCooldown 25
+		Where spawnbot
+		Where spawnbot_gate
+		BeginAtWave 6
+		RunForThisManyWaves 1
+		CooldownTime 50
+		DesiredCount 5
+		TFBot {
+			Template T_Caster_Spy
+		}
+	}
+	// ----------------------------------------------------------------------
+	// Wave 1 ($400 + $300 (this wave) + $100 (bonus) = $800)
+	// Group 1: 12 Bushwacka Snipers and 12 Jarate Snipers on bottom floor
+	// Group 1.5: 10 Running Heavies and 6 Shotgun Heavies on bottom floor
+	Wave {
+		StartWaveOutput {
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput {
+			Target wave_finished_relay
+			Action Trigger
+		}
+		InitWaveOutput {
+			Target wave_pathmodels_bottom
+			Action Trigger
+		}
+		WaveSpawn {
+			Support Limited
+			TotalCount 1
+			Where spawnbot_money
+			WaitForAllSpawned "wave1-group1.5" // Will not take up an extra bot slot
+			TotalCurrency 300
+			RandomChoice { // Will hide bot icon
+				RandomChoice {
+					TFBot {
+						Class Scout
+					}
+				}
+			}
+		}
+		WaveSpawn {
+			Name "wave1-group1"
+			TotalCount 24
+			SpawnCount 6
+			MaxActive 12
+			Where spawnbot
+			Where spawnbot_gate
+			WaitBetweenSpawns 2
+			TFBot {
+				Template T_Caster_SniperBushWorker
+				ClassIcon sniper_jarate_bushwacka
+				Tag nav_prefer_left
+			}
+		}
+		WaveSpawn {
+			Name "wave1-group1"
+			TotalCount 12
+			SpawnCount 2
+			MaxActive 6
+			Where spawnbot
+			Where spawnbot_gate
+			WaitBeforeStarting 1
+			WaitBetweenSpawns 3
+			TFBot {
+				Template T_Caster_SniperJarateWorker
+				ClassIcon sniper_jarate_bushwacka
+				Tag nav_prefer_left
+			}
+		}
+		WaveSpawn {
+			Name "wave1-group1.5"
+			TotalCount 10
+			SpawnCount 5
+			MaxActive 10
+			Where spawnbot
+			Where spawnbot_gate
+			WaitForAllSpawned "wave1-group1"
+			WaitBeforeStarting 2.5
+			WaitBetweenSpawns 12
+			TFBot {
+				Template T_Caster_HeavyRunning
+				Tag nav_prefer_left
+			}
+		}
+		WaveSpawn {
+			Name "wave1-group1.5"
+			TotalCount 6
+			SpawnCount 3
+			MaxActive 3
+			Where spawnbot_top
+			Where spawnbot_gate
+			WaitForAllSpawned "wave1-group1"
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 4
+			TFBot {
+				Template T_Caster_HeavyShotgun
+				Tag nav_prefer_right
+			}
+		}
+	}
+	// ----------------------------------------------------------------------
+	// Wave 2 ($800 + $500 (this wave) + $100 (bonus) = $1400)
+	// Hazards: Smoke active for Group 2
+	// Group 1: 15 Scouts on bottom floor and 10 Pistol Scouts on top floor
+	// Group 2: 3 Giant Scouts on top floor
+	Wave {
+		StartWaveOutput {
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput {
+			Target wave_finished_relay
+			Action Trigger
+		}
+		InitWaveOutput {
+			Target wave_pathmodels_both_la
+			Action Trigger
+		}
+		WaveSpawn {
+			Support Limited
+			TotalCount 1
+			Where spawnbot_money
+			WaitForAllSpawned "wave2-group2" // Will not take up an extra bot slot
+			TotalCurrency 500
+			TFBot {
+				Class Scout
+				ClassIcon caster_smoke
+			}
+		}
+		WaveSpawn {
+			Name "wave2-group1"
+			TotalCount 15
+			SpawnCount 3
+			MaxActive 15
+			Where spawnbot
+			Where spawnbot_gate
+			WaitBetweenSpawns 4.5
+			TFBot {
+				Template T_Caster_Scout
+				Tag nav_prefer_left
+			}
+		}
+		WaveSpawn {
+			Name "wave2-group1"
+			TotalCount 10
+			SpawnCount 2
+			MaxActive 10
+			Where spawnbot_top
+			Where spawnbot_gate
+			WaitBetweenSpawns 4.5
+			TFBot {
+				Template T_Caster_ScoutPistol
+				Tag nav_prefer_top_left
+			}
+		}
+		WaveSpawn {
+			StartWaveOutput {
+				Target wave_event_smoke
+				Action Trigger
+			}
+			Name "wave2-group2"
+			TotalCount 3
+			SpawnCount 1
+			MaxActive 2
+			Where spawnbot_top
+			Where spawnbot_gate
+			WaitForAllDead "wave2-group1"
+			WaitBeforeStarting 10 // 10 second wait while hazard starts
+			WaitBetweenSpawns 15
+			TFBot {
+				Template T_Caster_ScoutGiant
+				Tag nav_prefer_top_right
+			}
+		}
+	}
+	// ----------------------------------------------------------------------
+	// Wave 3 ($1400 + $500 (this wave) + $100 (bonus) = $2000)
+	// 2 Giant Soldiers on bottom floor
+	// Support: Crit Bat Scouts on bottom floor
+	Wave {
+		StartWaveOutput {
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput {
+			Target wave_finished_relay
+			Action Trigger
+		}
+		InitWaveOutput {
+			Target wave_pathmodels_bottom_l
+			Action Trigger
+		}
+		WaveSpawn {
+			Support Limited
+			TotalCount 1
+			Where spawnbot_money
+			WaitForAllSpawned "wave3-group" // Will not take up an extra bot slot
+			TotalCurrency 500
+			RandomChoice { // Will hide bot icon
+				RandomChoice {
+					TFBot {
+						Class Scout
+					}
+				}
+			}
+		}
+		WaveSpawn {
+			Name "wave3-group"
+			TotalCount 2
+			SpawnCount 1
+			MaxActive 2
+			Where spawnbot
+			Where spawnbot_gate
+			WaitBetweenSpawns 30
+			TFBot {
+				Template T_Caster_SoldierGiant
+				Tag nav_prefer_left
+			}
+		}
+		WaveSpawn {
+			Name "wave3-support"
+			Support 1
+			SpawnCount 2
+			MaxActive 8
+			Where spawnbot_top
+			Where spawnbot_gate
+			WaitBeforeStarting 3
+			WaitBetweenSpawns 5
+			TFBot {
+				Template T_Caster_ScoutBatCrit
+				Tag nav_prefer_left
+			}
+		}
+	}
+	// ----------------------------------------------------------------------
+	// Wave 4 ($2000 + $700 (this wave) + $100 (bonus) = $2800)
+	// Group 1: 14 Loch Demomen and 24 Fish Scouts on bottom floor
+	// Group 2: 4000HP 75HU/s tank
+	// Support: Spies active for entire wave
+	Wave {
+		StartWaveOutput {
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput {
+			Target wave_finished_relay
+			Action Trigger
+		}
+		InitWaveOutput {
+			Target wave_pathmodels_bottom
+			Action Trigger
+		}
+		WaveSpawn {
+			Support Limited
+			TotalCount 1
+			Where spawnbot_money
+			WaitForAllSpawned "wave4-group2" // Will not take up an extra bot slot
+			TotalCurrency 700
+			RandomChoice { // Will hide bot icon
+				RandomChoice {
+					TFBot {
+						Class Scout
+					}
+				}
+			}
+		}
+		WaveSpawn {
+			Name "wave4-group1"
+			TotalCount 14
+			SpawnCount 2
+			MaxActive 6
+			Where spawnbot
+			Where spawnbot_gate
+			WaitBetweenSpawns 6
+			TFBot {
+				Template T_Caster_DemoLoch
+				Tag nav_prefer_right
+			}
+		}
+		WaveSpawn {
+			Name "wave4-group1"
+			TotalCount 24
+			SpawnCount 2
+			MaxActive 12
+			Where spawnbot
+			Where spawnbot_gate
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 2.5
+			TFBot {
+				Template T_Caster_ScoutFish
+				Tag nav_prefer_left
+			}
+		}
+		WaveSpawn {
+			Name "wave4-group2"
+			TotalCount 1
+			WaitForAllDead "wave4-group1"
+			Tank {
+				Name "tankboss"
+				Health 4000
+				Speed 75
+				StartingPathTrackNode "path_tank_1"
+				OnBombDroppedOutput {
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+	}
+	// ----------------------------------------------------------------------
+	// Wave 5 ($2800 + $700 (this wave) + $100 (bonus) = $3600)
+	// Hazards: Smoke active for entire wave
+	// Group 1: 20 Loch Demomen on bottom floor
+	// Group 2: 20 Liberty Soldiers on bottom floor
+	// Group 3: 20 Easy Heavies on bottom floor
+	Wave {
+		StartWaveOutput {
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput {
+			Target wave_finished_relay
+			Action Trigger
+		}
+		InitWaveOutput {
+			Target wave_pathmodels_bottom_r
+			Action Trigger
+		}
+		WaveSpawn {
+			Support Limited
+			TotalCount 1
+			Where spawnbot_money
+			WaitForAllSpawned "wave5-group3" // Will not take up an extra bot slot
+			TotalCurrency 700
+			TFBot {
+				Class Scout
+				ClassIcon caster_smoke
+			}
+		}
+		WaveSpawn {
+			StartWaveOutput {
+				Target wave_event_smoke
+				Action Trigger
+			}
+			Name "wave5-group1"
+			TotalCount 20
+			SpawnCount 10
+			MaxActive 10
+			Where spawnbot
+			Where spawnbot_gate
+			WaitBeforeStarting 10 // 10 second wait while hazard starts
+			WaitBetweenSpawns 10
+			TFBot {
+				Template T_Caster_DemoLoch
+				Tag nav_prefer_right
+			}
+		}
+		WaveSpawn {
+			Name "wave5-group2"
+			TotalCount 20
+			SpawnCount 10
+			MaxActive 10
+			Where spawnbot
+			Where spawnbot_gate
+			WaitForAllDead "wave5-group1"
+			WaitBetweenSpawns 10
+			TFBot {
+				Template T_Caster_SoldierLiberty
+				Tag nav_prefer_right
+			}
+		}
+		WaveSpawn {
+			Name "wave5-group3"
+			TotalCount 20
+			SpawnCount 10
+			MaxActive 10
+			Where spawnbot
+			Where spawnbot_gate
+			WaitForAllDead "wave5-group2"
+			WaitBetweenSpawns 10
+			TFBot {
+				Template T_Caster_HeavyEasy
+				Tag nav_prefer_right
+			}
+		}
+	}
+	// ----------------------------------------------------------------------
+	// Wave 6 ($3600 + $900 (this wave) = $4500)
+	// Hazards: Smoke active for entire wave
+	// Group 1: Giant Heavy, Kritz Medic and Charged Medic on bottom floor
+	// Group 2: 8000HP 60HU/s grenade tank
+	// Support: Spies active for entire wave
+	Wave {
+		StartWaveOutput {
+			Target wave_start_relay
+			Action Trigger
+		}
+		InitWaveOutput {
+			Target wave_pathmodels_bottom_l
+			Action Trigger
+		}
+		WaveSpawn {
+			Support Limited
+			TotalCount 2
+			Where spawnbot_money
+			WaitForAllSpawned "wave6-group2" // Will not take up an extra bot slot
+			TotalCurrency 900
+			Squad {
+				TFBot {
+					Class Scout
+					ClassIcon caster_smoke
+				}
+				TFBot {
+					Class Scout
+					ClassIcon caster_grenadetank
+				}
+			}
+		}
+		WaveSpawn {
+			StartWaveOutput {
+				Target wave_event_smoke
+				Action Trigger
+			}
+			Name "wave6-group1"
+			TotalCount 3
+			SpawnCount 3
+			MaxActive 3
+			Where spawnbot
+			Where spawnbot_gate
+			WaitBeforeStarting 10 // 10 second wait while hazard starts
+			Squad {
+				TFBot {
+					Template T_Caster_HeavyGiant
+					Tag nav_prefer_left
+				}
+				TFBot {
+					Template T_Caster_MedicKritz
+					Tag nav_prefer_left
+				}
+				TFBot {
+					Template T_Caster_MedicCharged
+					Tag nav_prefer_left
+				}
+			}
+		}
+		WaveSpawn {
+			Name "wave6-group2"
+			TotalCount 1
+			WaitForAllDead "wave6-group1"
+			Tank {
+				Name "grenadetankboss"
+				Health 8000
+				Speed 60
+				Skin 1
+				StartingPathTrackNode "path_grenadetank_1"
+				OnBombDroppedOutput {
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+			FirstSpawnOutput {
+				Target grenadetank_start_relay
+				Action Trigger
+			}
+			DoneOutput {
+				Target grenadetank_kill_relay
+				Action Trigger
+			}
+		}
+	}
+}

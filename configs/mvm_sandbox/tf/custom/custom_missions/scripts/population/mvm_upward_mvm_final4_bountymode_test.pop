@@ -1,0 +1,145 @@
+WaveSchedule
+{
+
+	StartingCurrency				200
+	CanBotsAttackWhileInSpawnRoom 	Yes
+	RespawnWaveTime					5
+	RespawnWaveTimeBlue 			5 
+	LuaScriptFile "scripts/playercounter.lua"
+	DeathPenalty 200
+	//Fixes
+	NoReanimators 1 							 
+	NoMvMDeathTune 1 	 					 
+	SniperAllowHeadshots 1
+	SendBotsToSpectatorImmediately 1 		
+	EnableDominations 1
+	//Global
+	RobotLimit 2
+	NoHolidayPickups 1 						 
+	BotPushaway 1 //also disables teammates pushing eachother	 	
+	MaxTotalPlayers 18
+	DisplayRobotDeathNotice 1
+	CustomUpgradesFile "mvm_upgrades_bountymode.txt"
+	NoRomevisionCosmetics 1  //models/bots/tw2/boss_bot/twcarrier_addon.mdl
+	RemoveBluVelocityLimit 1 
+	NoBluHumanFootsteps 1
+	BluHumanInfiniteAmmo 0
+	
+	// Force everyone to start on BLU, players can DM in this phase with friendly fire 				 
+	AllowJoinTeamBlue 1
+	AllowJoinTeamBlueMax 18
+	HumansMustJoinTeam Blue
+	WaveStartCountdown 5
+	
+	PointTemplates {
+		
+		corelogic
+		{
+			NoFixup 1
+			info_player_teamspawn
+			{
+				"TeamNum" "3"
+				"targetname" "dmspawn"
+			}
+			info_player_teamspawn
+			{
+				"TeamNum" "3"
+				"targetname" "botspawn"
+				"origin" "-2714.866211 2591.661621 -579.47674"
+			}
+			logic_relay
+			{
+				"targetname" "forceready"
+				"OnTrigger" "tf_gamerules,$SetProp$m_bPlayerReady$0*,1,0,-1"
+			}
+			
+		}
+	}
+	
+	SpawnTemplate "corelogic"
+	
+	Wave
+	{
+		StartWaveOutput 
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput 
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn {
+			Name "countdown"
+			Where "botspawn"
+			TotalCount 24
+			SpawnCount 1
+			MaxActive 1
+			TFBot{ Class Scout ClassIcon blu2_lite }
+		}
+	}
+	Wave
+	{
+		StartWaveOutput 
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput 
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn {
+			Name "countdown"
+			Where "botspawn"
+			TotalCount 36
+			SpawnCount 1
+			MaxActive 1
+			TFBot{ Class Scout ClassIcon blu2_lite }
+		}
+	}
+	Wave
+	{
+		StartWaveOutput 
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput 
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn {
+			Name "countdown"
+			Where "botspawn"
+			TotalCount 48
+			SpawnCount 1
+			MaxActive 1
+			TFBot{ Class Scout ClassIcon blu2_lite }
+		}
+	}
+	Wave
+	{
+		StartWaveOutput 
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput 
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn {
+			Name "countdown"
+			Where "botspawn"
+			TotalCount 60
+			SpawnCount 1
+			MaxActive 1
+			TFBot{ Class Scout ClassIcon blu2_lite }
+		}
+	}
+}

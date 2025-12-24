@@ -1,0 +1,844 @@
+//Written by Startacker! https://steamcommunity.com/id/startacker/
+
+#base robot_standard.pop
+#base robot_giant.pop
+
+//Boiler plate code to start us off
+
+WaveSchedule
+{
+	StartingCurrency 800
+	CanBotsAttackWhileInSpawnRoom No
+	RespawnWaveTime 1
+	Advanced 1
+
+    //Wave 1, mix of pyros and scouts, incredibly simple wave 1 to start things off
+
+    Mission
+    {
+        Objective Sniper
+        Where spawnbot
+        BeginAtWave 5
+        RunForThisManyWaves 2
+        InitialCooldown 25
+        CooldownTime 40
+        DesiredCount 2
+
+        TFBot
+        {
+            Template T_TFBot_Sniper
+        }
+    }
+
+    Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        InitWaveOutput
+		{
+			Target wave_reset_relay
+			Action Trigger
+		}
+
+        WaveSpawn //I can't stress how much you shouldn't touch this wavespawn
+		{
+			Name "wave_1_dynamic_element"
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 0
+			FirstSpawnOutput
+			{
+				Target wave_start_events_1
+				Action Trigger
+			}
+        }
+
+        WaveSpawn
+        {
+            Name "wave01_a"
+            TotalCount 40
+			//TotalCount 1
+            SpawnCount 2
+            MaxActive 8
+            WaitBeforeStarting 0
+            WaitBetweenSpawns 3
+            Where spawnbot
+            Where spawnbot_left
+            TotalCurrency 0
+
+            TFBot
+            {
+                Template T_TFBot_Pyro_Flaregun
+                BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot
+            }
+        }
+        WaveSpawn
+        {
+            Name "wave01_b"
+            TotalCount 60
+			//TotalCount 1
+            SpawnCount 3
+            MaxActive 9
+            WaitBeforeStarting 0
+            WaitBetweenSpawns 4
+            Where spawnbot
+            Where spawnbot_right
+            TotalCurrency 0
+
+            TFBot
+            {
+                Class Scout
+                Skill Normal
+                BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot
+            }
+        }
+		WaveSpawn
+		{
+			Name	itspaydayfellas	// "I SAID IT'S FUCKIN PAYDAY MOTHERFUCKE-"
+			WaitForAllDead	wave01_a
+			TotalCurrency	900
+			TotalCount	1
+			MaxActive	11
+			SpawnCount	11
+			Where	spawnbot_money
+					
+			TFBot
+			{
+				Class	Heavyweapons
+				WeaponRestrictions	MeleeOnly
+				Name	"mmmm money"
+				Health	69
+				BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+			}
+		}
+    }
+
+    //Wave 2, bring in a giant soldier with small bot support. Lead in to mix of heavies with soldiers
+
+    Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        InitWaveOutput
+		{
+			Target wave_reset_relay
+			Action Trigger
+		}
+
+        WaveSpawn //I can't stress how much you shouldn't touch this wavespawn
+		{
+			Name "wave_2_dynamic_element"
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 0
+			FirstSpawnOutput
+			{
+				Target wave_start_events_2
+				Action Trigger
+			}
+        }
+
+        WaveSpawn
+        {
+            Name "wave02_a"
+            TotalCount 2
+            SpawnCount 1
+            MaxActive 1
+            WaitBeforeStarting 5
+            WaitBetweenSpawns 20
+            Where spawnbot
+            TotalCurrency 0
+
+            TFBot
+            {
+                Template T_TFBot_Giant_Soldier
+                BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot
+            }
+        }
+        WaveSpawn
+        {
+            Name "wave02_b"
+            TotalCount 32
+            SpawnCount 4
+            MaxActive 8
+            WaitBeforeStarting 0
+            WaitBetweenSpawns 5
+            Where spawnbot_left
+            Where spawnbot
+            TotalCurrency 0
+
+            TFBot
+            {
+                Class Pyro
+                Skill Normal
+                BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot
+            }
+        }
+        WaveSpawn
+        {
+            Name "wave02_c"
+            TotalCount 25
+            SpawnCount 5
+            MaxActive 8
+            WaitBeforeStarting 14
+            WaitForAllDead "wave02_a"
+            WaitBetweenSpawns 5
+            Where spawnbot
+            Where spawnbot_right
+            TotalCurrency 0
+
+            TFBot
+            {
+                Class Heavyweapons
+                Skill Easy
+                BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot
+            }
+        }
+        WaveSpawn
+        {
+            Name "wave02_d"
+            TotalCount 24
+            SpawnCount 4
+            MaxActive 8
+            WaitBeforeStarting 8
+            WaitForAllDead "wave02_b"
+            WaitBetweenSpawns 5
+            Where spawnbot
+            Where spawnbot_right
+            TotalCurrency 0
+
+            TFBot
+            {
+                Class Soldier
+                Skill Normal
+                BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot
+            }
+        }
+		WaveSpawn
+		{
+			Name	itspaydayfellas	// "I SAID IT'S FUCKIN PAYDAY MOTHERFUCKE-"
+			WaitForAllDead	wave01_a
+			TotalCurrency	700
+			TotalCount	1
+			MaxActive	11
+			SpawnCount	11
+			Where	spawnbot_money
+					
+			TFBot
+			{
+				Class	Heavyweapons
+				WeaponRestrictions	MeleeOnly
+				Name	"mmmm money"
+				Health	69
+				BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+			}
+		}
+    }
+
+    //Wave 3 YOOOOOOOOOO WHATS POPPING? AUGH - Pincer pyro attack, then followed with gauntlet heavies
+
+    Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        InitWaveOutput
+		{
+			Target wave_reset_relay
+			Action Trigger
+		}
+
+        WaveSpawn //DONT TOUCH THIS!!!!!!!!!
+		{
+			Name "wave_3_dynamic_element"
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 0
+			FirstSpawnOutput
+			{
+				Target wave_start_events_3
+				Action Trigger
+			}
+		}
+
+        WaveSpawn
+        {
+            Name "wave03_a"
+            TotalCount 2
+            SpawnCount 1
+            MaxActive 2
+            WaitBeforeStarting 5
+            WaitBetweenSpawns 25
+            Where spawnbot_left
+            TotalCurrency 0
+
+            TFBot
+            {
+                Template T_TFBot_Giant_Pyro
+                Attributes AlwaysFireWeapon
+                BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot
+            }
+        }
+        WaveSpawn
+        {
+            Name "wave03_a"
+            TotalCount 2
+            SpawnCount 1
+            MaxActive 2
+            WaitBeforeStarting 5
+            WaitBetweenSpawns 25
+            Where spawnbot_right
+            TotalCurrency 0
+
+            TFBot
+            {
+                Template T_TFBot_Giant_Pyro
+                Attributes AlwaysFireWeapon
+                BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot
+            }
+        }
+        WaveSpawn
+        {
+            Name "wave03_b"
+            TotalCount 12
+            SpawnCount 2
+            MaxActive 4
+            WaitBeforeStarting 10
+            WaitForAllDead "wave03_a"
+            WaitBetweenSpawns 6
+            Where spawnbot
+            TotalCurrency 0
+
+            TFBot
+            {
+                Template T_TFBot_Heavyweapons_Fist
+                BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot
+            }
+        }
+        WaveSpawn
+        {
+            Name "wave03_c"
+            TotalCount 50
+            SpawnCount 5
+            MaxActive 8
+            WaitBeforeStarting 0
+            WaitBetweenSpawns 6
+            Where spawnbot
+            TotalCurrency 0
+            Support 1
+
+            TFBot
+            {
+                Class Scout
+                Skill Easy
+                WeaponRestrictions MeleeOnly
+                BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot
+            }
+        }
+        WaveSpawn
+        {
+            Name "wave03_d"
+            TotalCount 20
+            SpawnCount 4
+            MaxActive 6
+            WaitBeforeStarting 14
+            WaitForAllSpawned "wave03_b"
+            WaitBetweenSpawns 4
+            Where spawnbot
+            Where spawnbot_left
+            TotalCurrency 0
+
+            TFBot
+            {
+                Class Demoman 
+                Skill Normal
+                BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot
+            }
+        }
+		WaveSpawn
+		{
+			Name	itspaydayfellas	// "I SAID IT'S FUCKIN PAYDAY MOTHERFUCKE-"
+			WaitForAllDead	wave03_d
+			TotalCurrency	700
+			TotalCount	1
+			MaxActive	11
+			SpawnCount	11
+			Where	spawnbot_money
+					
+			TFBot
+			{
+				Class	Heavyweapons
+				WeaponRestrictions	MeleeOnly
+				Name	"mmmm money"
+				Health	69
+				BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+			}
+		}
+    }
+    Wave //Wave 4 - Scout rush
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        InitWaveOutput
+		{
+			Target wave_reset_relay
+			Action Trigger
+		}
+
+        WaveSpawn //I will destroy you if you touch this and somehow break it
+		{
+			Name "wave_4_dynamic_element"
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 0
+			FirstSpawnOutput
+			{
+				Target wave_start_events_4
+				Action Trigger
+			}
+		}
+
+        WaveSpawn
+        {
+            Name "wave04_a"
+            TotalCount 4
+            SpawnCount 1
+            MaxActive 2
+            WaitBeforeStarting 10
+            WaitBetweenSpawns 15
+            Where spawnbot
+            TotalCurrency 0
+
+            TFBot
+            {
+                Template T_TFBot_Giant_Scout_FAN
+                BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot
+            }
+        }
+        WaveSpawn
+        {
+            Name "wave04_b"
+            TotalCount 100
+            SpawnCount 1
+            MaxActive 15
+            WaitBeforeStarting 0
+            WaitBetweenSpawns 0.5
+            Where spawnbot
+            Where spawnbot_left
+            Where spawnbot_right
+            TotalCurrency 0
+
+            TFBot
+            {
+                Template T_TFBot_Scout_FAN
+                BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot
+            }
+        }
+		WaveSpawn
+		{
+			Name	itspaydayfellas	// "I SAID IT'S FUCKIN PAYDAY MOTHERFUCKE-"
+			WaitForAllDead	wave04_b
+			TotalCurrency	800
+			TotalCount	1
+			MaxActive	11
+			SpawnCount	11
+			Where	spawnbot_money
+					
+			TFBot
+			{
+				Class	Heavyweapons
+				WeaponRestrictions	MeleeOnly
+				Name	"mmmm money"
+				Health	69
+				BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+			}
+		}
+    }
+    Wave //Wave 5
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        InitWaveOutput
+		{
+			Target wave_reset_relay
+			Action Trigger
+		}
+
+        WaveSpawn
+		{
+			Name "wave_5_dynamic_element"
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 0
+			FirstSpawnOutput
+			{
+				Target wave_start_events_5
+				Action Trigger
+			}
+		}
+
+        WaveSpawn
+        {
+            Name "wave05_a"
+            TotalCount 4
+            SpawnCount 1
+            MaxActive 3
+            WaitBeforeStarting 5
+            WaitBetweenSpawns 10
+            Where spawnbot
+            TotalCurrency 0
+
+            TFBot
+            {
+                Template T_TFBot_Giant_Heavyweapons_Shotgun
+                BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot
+            }
+        }
+        WaveSpawn
+        {
+            Name "wave05_b"
+            TotalCount 12
+            SpawnCount 4
+            MaxActive 6
+            WaitBeforeStarting 20
+            WaitForAllSpawned "wave05_a"
+            WaitBetweenSpawns 8
+            Where spawnbot
+            Where spawnbot_left
+            TotalCurrency 0
+
+            TFBot //This used to be a mess and then I scrapped using gatebot templates
+            {
+                Template T_TFBot_Sniper_Huntsman_Spammer
+                ClassIcon sniper_bow_multi
+                BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot
+            }
+        }
+        WaveSpawn
+        {
+            Name "wave05_c"
+            TotalCount 28
+            SpawnCount 4
+            MaxActive 6
+            WaitBeforeStarting 5
+            WaitForAllDead "wave05_a"
+            WaitBetweenSpawns 6
+            Where spawnbot
+            TotalCurrency 0
+
+            TFBot
+            {
+                Class Pyro
+                Skill Normal
+                Attributes AlwaysFireWeapon
+                BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot
+            }
+        }
+        WaveSpawn
+        {
+            Name "wave05_d"
+            TotalCount 35
+            SpawnCount 5
+            MaxActive 8
+            WaitBeforeStarting 8
+            WaitForAllDead "wave05_c"
+            WaitBetweenSpawns 6
+            Where spawnbot
+            Where spawnbot_left
+            TotalCurrency 0
+
+            TFBot
+            {
+                Class Demoman
+                Skill Normal
+                BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot
+            }
+        }
+        WaveSpawn
+        {
+            Name "wave05_d"
+            TotalCount 24
+            SpawnCount 4
+            MaxActive 6
+            WaitBeforeStarting 8
+            WaitForAllDead "wave05_c"
+            WaitBetweenSpawns 6
+            Where spawnbot
+            Where spawnbot_right
+            TotalCurrency 0
+
+            TFBot
+            {
+                Class Soldier
+                Skill Normal
+                BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot
+            }
+        }
+		WaveSpawn
+		{
+			Name	itspaydayfellas	// "I SAID IT'S FUCKIN PAYDAY MOTHERFUCKE-"
+			WaitForAllDead	wave05_c
+			TotalCurrency	800
+			TotalCount	1
+			MaxActive	11
+			SpawnCount	11
+			Where	spawnbot_money
+					
+			TFBot
+			{
+				Class	Heavyweapons
+				WeaponRestrictions	MeleeOnly
+				Name	"mmmm money"
+				Health	69
+				BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+			}
+		}
+    }
+    Wave //Wave 6
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        InitWaveOutput
+		{
+			Target wave_reset_relay
+			Action Trigger
+		}
+
+        WaveSpawn
+		{
+			Name "wave_6_dynamic_element"
+			TotalCount 0
+			SpawnCount 0
+			WaitBeforeStarting 0
+			FirstSpawnOutput
+			{
+				Target wave_start_events_6
+				Action Trigger
+			}
+		}
+
+        WaveSpawn
+        {
+            Name "wave06_a"
+			TotalCount 40
+            SpawnCount 1
+            MaxActive 10
+            WaitBeforeStarting 0
+            WaitBetweenSpawns .5
+            Where spawnbot
+            Where spawnbot_left
+            Where spawnbot_right
+
+            TFBot
+            {
+                Class Heavyweapons
+                Skill Normal
+                BehaviorModifiers	Push
+				Attributes			IgnoreFlag
+				Tag nav_prefer_gate1_flank
+				Tag bot_gatebot
+            }
+        }
+        WaveSpawn
+        {
+            Name "wave06_b"
+            TotalCount 11
+            SpawnCount 11
+            MaxActive 11
+            WaitBeforeStarting 5
+            WaitForAllSpawned "wave06_a"
+            Where spawnbot
+            
+            Squad
+            {
+                TFBot
+                {
+                    Class Soldier
+			        Name "Chief Carpet Bomber"
+			        Item "Armored Authority"
+			        Skill Expert
+			        Attributes HoldFireUntilFullReload
+			        ClassIcon soldier_burstfire
+			        Attributes MiniBoss
+			        Attributes UseBossHealthBar
+			        Scale 1.9
+			        Health 7500
+			        ItemAttributes
+			        {
+			        	ItemName "TF_WEAPON_ROCKETLAUNCHER"
+			        	"fire rate bonus" 0.01
+			        	"Projectile speed increased" 0.9
+			        	"faster reload rate" 0.25
+			        	"damage bonus" 2
+			        }
+		        	CharacterAttributes
+		        	{
+		        		"move speed bonus"	0.3
+		        		"damage force reduction" 0.1
+		        		"airblast vulnerability multiplier" 0.1
+		        		"override footstep sound set" 4
+		        		"rage giving scale" 0.1
+		        	}
+                    BehaviorModifiers	Push
+			    	Attributes			IgnoreFlag
+			    	Tag nav_prefer_gate1_flank
+			    	Tag bot_gatebot
+					Tag bot_giant
+                }
+                TFBot
+                {
+                    Template T_TFBot_Medic
+                }
+                TFBot
+                {
+                    Template T_TFBot_Medic
+                }
+                TFBot
+                {
+                    Template T_TFBot_Medic
+                }
+                TFBot
+                {
+                    Template T_TFBot_Medic
+                }
+                TFBot
+                {
+                    Template T_TFBot_Medic
+                }
+                TFBot
+                {
+                    Template T_TFBot_Medic
+                }
+                TFBot
+                {
+                    Template T_TFBot_Medic
+                }
+                TFBot
+                {
+                    Template T_TFBot_Medic
+                }
+                TFBot
+                {
+                    Template T_TFBot_Medic
+                }
+                TFBot
+                {
+                    Template T_TFBot_Medic
+                }
+            }
+        }
+    }
+}
+//Congrats, you made it to the end

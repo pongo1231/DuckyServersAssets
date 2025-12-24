@@ -1,0 +1,349 @@
+/////////////////////////////////////////////////////////////////////
+// Helpful debug and console commands for developing MVM population scripts:
+//
+// sv_cheats 1 							// Allows cheat commands.
+// currency_give x						// Give player x amount of game currency to be used on upgrades.
+// tf_populator_health_multiplier x.x	// Multiplies health of enemy bots - example: tf_populator_health_multiplier 0.01 will set health of bots to 1% of normal.
+// tf_mvm_popfile abcd					// Will load the .pop file of the specified name - example tf_mvm_popfile mvm_mapname_challenge2 will load mvm_mapname_challenge2.pop in the tf/scripts/population directory.
+// tf_mvm_jump_to_wave x				// Will jump to the specified wave number of the current .pop file - example tf_mvm_jump_to_wave 6 will jump to wave 6.
+// tf_bot_flag_kill_on_touch 1			// When a bot picks up the flag, they die.
+// host_timescale 10					// timescale up
+// addcond [91, 72, 33, 5]				// Enables Haste, Jump, Crit, and Uber respectively
+/////////////////////////////////////////////////////////////////////
+// BEGIN POP FILE
+/////////////////////////////////////////////////////////////////////
+
+#base yiresa_robot_total.pop
+
+WaveSchedule
+{
+	//Initilaize
+	StartingCurrency 600
+	RespawnWaveTime 6 //Check if you can disable 2s increase
+	CanBotsAttackWhileInSpawnRoom no
+
+	// Custom Bot Templates
+	Templates
+	{
+		T_TFBot_Soldier_Shotgun
+		{
+			Class Soldier
+			Name "Shotgun Soldier"
+			Item "Loyalty Reward"
+			Skill Hard
+			ClassIcon heavy_shotgun
+			WeaponRestrictions SecondaryOnly
+			Tag bomb_carrier
+			CharacterAttributes
+			{
+				"head scale" 0.75
+			}
+		}
+		T_TFBot_Soldier_Banner
+		{
+			Class Soldier
+			ClassIcon soldier_conch_giant
+			Name "Flag Bearer"	
+			Health 500
+			Scale 1.2
+			Item "The Disciplinary Action"
+			Item "The Concheror"
+			Item "Full Metal Drill Hat"
+			Attributes SpawnWithFullCharge
+			Attributes MiniBoss
+			WeaponRestrictions MeleeOnly
+			Tag bomb_carrier
+			CharacterAttributes
+			{
+				"move speed bonus"	0.8
+				"damage force reduction" 0.4
+				"airblast vulnerability multiplier" 0.4
+				"override footstep sound set" 3
+				"increase buff duration" 9.0
+			}
+		}
+		T_TFBot_Soldier_Shovel
+		{
+			Class Soldier
+			Name "Shovel Soldier"
+			Item "The Shellmet"
+			Skill Expert
+			ClassIcon soldier
+			WeaponRestrictions MeleeOnly
+			Attributes DisableDodge
+			Attributes AlwaysFireWeapon
+			Tag bomb_carrier
+			CharacterAttributes
+			{
+				"move speed bonus"	1.2
+				"head scale" 0.75
+			}
+		}
+	}
+	// Missions (Support Bots)
+		// Missions (Support Bots)
+	Mission // Trail Sentry Buster - Wave 1 to 2 | 40sec Cooldown
+	{
+		Objective DestroySentries
+		InitialCooldown 20
+		Where spawnbot_mission_sentrybuster
+		Where spawnbot_mission_sentrybuster_left
+		Where spawnbot_mission_sentrybuster_right
+		BeginAtWave 1
+		RunForThisManyWaves 2
+		CooldownTime 40
+		DesiredCount 1
+		TFBot
+		{
+			Template T_TFBot_Trail_Buster //Leaves A Bomb Trail
+		}
+	}
+	Mission // Spy Sentry Buster - Wave 3 to 3 | 40sec Cooldown
+	{
+		Objective DestroySentries
+		InitialCooldown 20
+		Where spawnbot_mission_sentrybuster
+		Where spawnbot_mission_sentrybuster_left
+		Where spawnbot_mission_sentrybuster_right
+		BeginAtWave 3
+		RunForThisManyWaves 1
+		CooldownTime 40
+		DesiredCount 1
+		TFBot
+		{
+			Template T_TFBot_Spy_Buster //Disguised Buster
+		}
+	}
+	Mission // ChargeTrail Sentry Buster - Wave 4 to 4 | 40sec Cooldown
+	{
+		Objective DestroySentries
+		InitialCooldown 20
+		Where spawnbot_mission_sentrybuster
+		Where spawnbot_mission_sentrybuster_left
+		Where spawnbot_mission_sentrybuster_right
+		BeginAtWave 4
+		RunForThisManyWaves 1
+		CooldownTime 40
+		DesiredCount 1
+		TFBot
+		{
+			Template T_TFBot_ChargeTrail_Buster //Leaves A Bomb Trail
+		}
+	}
+	Mission // Crit ChargeTrail Sentry Buster - Wave 5 to 6 | 35sec Cooldown
+	{
+		Objective DestroySentries
+		InitialCooldown 20
+		Where spawnbot_mission_sentrybuster
+		Where spawnbot_mission_sentrybuster_left
+		Where spawnbot_mission_sentrybuster_right
+		BeginAtWave 5
+		RunForThisManyWaves 2
+		CooldownTime 35
+		DesiredCount 1
+		TFBot
+		{
+			Template T_TFBot_ChargeTrail_Buster //Leaves A Bomb Trail
+			Attributes AlwaysCrit
+			Name "Saxton Buster"
+			Item "Jungle Booty"
+			Item "Halloween Mask - Saxton Hale"
+		}
+	}
+	Mission // Spy Sentry Buster - Wave 5 to 6 | 70sec Cooldown
+	{
+		Objective DestroySentries
+		InitialCooldown 30
+		Where spawnbot_mission_sentrybuster
+		Where spawnbot_mission_sentrybuster_left
+		Where spawnbot_mission_sentrybuster_right
+		BeginAtWave 5
+		RunForThisManyWaves 2
+		CooldownTime 80
+		DesiredCount 1
+		TFBot
+		{
+			Template T_TFBot_Spy_Buster //Spy Buster
+		}
+	}	
+	Mission // Launch Sniper - Wave 1 to 2 | 35sec Cooldown
+	{
+		Objective Sniper
+		InitialCooldown 30
+		Where spawnbot_mission_sniper
+		BeginAtWave 1
+		RunForThisManyWaves 2
+		InitialCooldown 20
+		CooldownTime 35
+		DesiredCount 1
+		
+		TFBot
+		{
+			Template T_TFBot_Launch_Sniper
+		}
+	}
+	Mission // MarkSniper - Wave 3 to 4 | 40sec Cooldown
+	{
+		Objective Sniper
+		InitialCooldown 30
+		Where spawnbot_mission_sniper
+		BeginAtWave 3
+		RunForThisManyWaves 2
+		CooldownTime 40
+		DesiredCount 1
+		
+		TFBot
+		{
+			Template T_TFBot_Sniper_Sydney_Sleeper
+			Item "Deity's Dress"
+			Item "Full Metal Drill Hat"
+			ItemAttributes
+			{
+				ItemName "The Sniper Rifle"
+				"damage bonus" 1
+				"mark for death" 5
+			}
+		}
+	}
+	Mission // DamageMarkSniper - Wave 5 to 6| 40sec Cooldown
+	{
+		Objective Sniper
+		InitialCooldown 30
+		Where spawnbot_mission_sniper
+		BeginAtWave 5
+		RunForThisManyWaves 2
+		CooldownTime 40
+		DesiredCount 1
+		
+		TFBot
+		{
+			Template T_TFBot_Sniper
+			Item "The Person in the Iron Mask"
+			Item "Deity's Dress"
+			ItemAttributes
+			{
+				ItemName "The Sniper Rifle"
+				"damage bonus" 1.5
+				"mark for death" 5
+			}
+		}
+	}
+	Mission // Spy - Wave 4 to 6
+	{
+		Objective Spy
+		
+		InitialCooldown 60
+		Where spawnbot_mission_spy
+		BeginAtWave 4
+		RunForThisManyWaves 3
+		InitialCooldown 85
+		CooldownTime 60
+		DesiredCount 2
+		TFBot
+		{
+			Class Spy
+			Skill Expert
+			ItemAttributes
+			{
+				ItemName "TF_Weapon_Spy_Sapper"
+				"sapper degenerates buildings" 0.5
+                "sapper damage penalty" 0
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone 60
+		Sound "Announcer.IncomingMob"
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_nextwave_left		
+			Action	Trigger
+		}
+		WaveSpawn // Opener Flag Soldier | 25
+		{
+			TotalCurrency 25
+			Name "w1_flag_soldier"
+			Where spawnbot_front_left
+			Where spawnbot_front_right
+			Where spawnbot_left
+			Where spawnbot_right
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 1
+			RandomSpawn 1
+			TFBot
+			{
+				Template T_TFBot_Soldier_Banner
+				Scale 1.6
+				Health 1500
+			}
+		}
+		WaveSpawn // Soldier Grunts | 100
+		{
+			TotalCurrency 100
+			Name "w1_soldier_shotgun"
+			WaitForAllDead "w1_flag_soldier"
+			Where spawnbot_front_left
+			Where spawnbot_front_right
+			Where spawnbot_left
+			Where spawnbot_right
+			TotalCount 12
+			MaxActive 12
+			SpawnCount 4
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 5
+			RandomSpawn 1
+			TFBot
+			{
+				Template T_TFBot_Soldier_Shotgun
+			}
+		}
+		WaveSpawn // Solder Squads | 200
+		{
+			TotalCurrency 200
+			Name "w1_soldier_squad"
+			WaitForAllDead "w1_flag_soldier"
+			Where spawnbot_front_left
+			Where spawnbot_front_right
+			Where spawnbot_left
+			Where spawnbot_right
+			TotalCount 15
+			MaxActive 15
+			SpawnCount 5
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 5
+			RandomSpawn 1
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Soldier_Banner
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Shovel
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Shovel
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Shovel
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Shovel
+				}
+			}
+		}
+	}
+}

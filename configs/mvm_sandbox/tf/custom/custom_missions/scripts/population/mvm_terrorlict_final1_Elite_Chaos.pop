@@ -1,0 +1,667 @@
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_gatebot.pop
+population
+{
+	StartingCurrency	5000
+	RespawnWaveTime	3
+	CanBotsAttackWhileInSpawnRoom	no
+	AddSentryBusterWhenDamageDealtExceeds	15000
+	AddSentryBusterWhenKillCountExceeds	15
+	Templates
+	{
+		Deflector_Heavy
+		{
+			ClassIcon	heavy_deflector
+			WeaponRestrictions	PrimaryOnly
+			Health	300
+			Skill	Hard
+			Name	"Deflector Heavy"
+			Class	HeavyWeapons
+			ItemAttributes
+			{
+				ItemName	deflector
+				"attack projectiles"	2
+			}
+			Item	"deflector"
+			Item	"the u-clank-a"
+		}
+		Dumpster_Diver_
+		{
+			ClassIcon	soldier_dumpster
+			WeaponRestrictions	PrimaryOnly
+			Scale	1.25
+			Health	400
+			Skill	Expert
+			Name	"Dumpster Diver "
+			Class	Soldier
+			Attributes	"SpawnWithFullCharge"
+			ItemAttributes
+			{
+				"damage bonus"	0.66
+				ItemName	"the beggar's bazooka"
+				"fire rate bonus"	0.7
+				"faster reload rate"	0.8
+				"auto fires when full"	2
+			}
+			CharacterAttributes
+			{
+				"increase buff duration"	9.0
+			}
+			Item	"the beggar's bazooka"
+			Item	"the battalion's backup"
+			Item	"the helmet without a home"
+			Item	"the captain's cocktails"
+		}
+		Loch_Demoman
+		{
+			ClassIcon	demo_loch
+			WeaponRestrictions	PrimaryOnly
+			Health	175
+			Skill	Expert
+			Name	"Loch Demoman"
+			Class	Demoman
+			ItemAttributes
+			{
+				ItemName	"the loch-n-load"
+				"fire rate bonus"	-1
+				"damage penalty"	0.66
+				"projectile spread angle penalty"	3
+				"health on radius damage"	60
+			}
+			Item	"the loch-n-load"
+		}
+		Elite_Burstwave
+		{
+			ClassIcon	special_burstwave_elite
+			WeaponRestrictions	PrimaryOnly
+			Scale	1.9
+			Health	4000
+			Skill	Expert
+			Name	"Elite Burstwave"
+			Class	Soldier
+			Attributes	"HoldFireUntilFullReload"
+			Attributes	"MiniBoss"
+			ItemAttributes
+			{
+				"damage bonus"	7.01
+				ItemName	"gold botkiller rocket launcher mk.i"
+				"fire rate bonus"	0.05
+				"projectile spread angle penalty"	4
+				"heal on hit for rapidfire"	1000
+				"Projectile speed increased"	1.7
+				"Set DamageType Ignite"	1
+			}
+			CharacterAttributes
+			{
+				"override footstep sound set"	3
+				"airblast vulnerability multiplier"	0.2
+				"damage force reduction"	0.2
+				"move speed penalty"	0.4
+			}
+			Item	"gold botkiller rocket launcher mk.i"
+			Item	"treasure hat 2"
+		}
+		Rocket_Scout
+		{
+			ClassIcon	scout_rocket
+			WeaponRestrictions	SecondaryOnly
+			Health	150
+			Skill	Expert
+			Name	"Rocket Scout"
+			Class	Scout
+			AutoJumpMax	3
+			AutoJumpMin	1
+			Attributes	"AutoJump"
+			ItemAttributes
+			{
+				ItemName	"the soda popper"
+				"minicritboost on kill"	3
+				"spread penalty"	1.5
+			}
+			ItemAttributes
+			{
+				"damage bonus"	51.0
+				ItemName	"mad milk"
+				"critboost on kill"	5
+				"override projectile type"	2
+				"Blast radius increased"	1.5
+			}
+			CharacterAttributes
+			{
+				"increased jump height"	1.5
+				"cancel falling damage"	1
+			}
+			Item	"the soda popper"
+			Item	"mad milk"
+			Item	"the flight of the monarch"
+			Item	"duck billed hatypus"
+		}
+		Reaper_Sniper
+		{
+			ClassIcon	sniper_camper
+			WeaponRestrictions	PrimaryOnly
+			Scale	1.75
+			Health	1500
+			Skill	Expert
+			Name	"Reaper Sniper"
+			Class	Sniper
+			MaxVisionRange	2500
+			Attributes	"MiniBoss"
+			ItemAttributes
+			{
+				ItemName	"the classic"
+				"faster reload rate"	0.65
+				"heal on kill"	1500
+				"headshot damage increase"	4.45
+				"sniper charge per sec"	1.35
+			}
+			CharacterAttributes
+			{
+				"override footstep sound set"	5
+				"damage force reduction"	0.6
+				"move speed penalty"	0.5
+			}
+			Item	"the classic"
+			Item	"the golden garment"
+			Item	"the toy soldier"
+		}
+	}
+	Mission
+	{
+		Objective	DestroySentries
+		Where	spawnbot
+		BeginAtWave	1
+		RunForThisManyWaves	1
+		InitialCooldown	30
+		CooldownTime	30
+		DesiredCount	1
+		TFBot
+		{
+			Template	T_TFBot_SentryBuster
+		}
+	}
+	Mission
+	{
+		Objective	Sniper
+		Where	spawnbot_scattered
+		BeginAtWave	1
+		RunForThisManyWaves	1
+		InitialCooldown	30
+		CooldownTime	30
+		DesiredCount	2
+		TFBot
+		{
+			Template	Reaper_Sniper
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	scoots
+			TotalCurrency	200
+			TotalCount	10
+			MaxActive	2
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	scout
+					Health	500
+					Skill	Expert
+					Name	Scout
+					Class	Scout
+					ItemAttributes
+					{
+						"damage bonus"	2.0
+						ItemName	tf_weapon_scattergun
+					}
+					Item	"spine-chilling skull 2011 style 3"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	bowpyro
+			TotalCurrency	400
+			TotalCount	24
+			MaxActive	4
+			SpawnCount	4
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	10
+			Where	spawnbot_scattered
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	pyro
+					Health	700
+					Skill	Expert
+					Name	Pyro
+					Class	Pyro
+					Attributes	"AlwaysFireWeapon"
+					ItemAttributes
+					{
+						"damage bonus"	2.0
+						ItemName	tf_weapon_flamethrower
+					}
+					Item	"spine-chilling skull 2011 style 3"
+				}
+				TFBot
+				{
+					Health	500
+					Skill	Expert
+					Template	T_TFBot_Sniper_Huntsman
+					ItemAttributes
+					{
+						"damage bonus"	2.0
+						ItemName	"the huntsman"
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	soldier
+			TotalCurrency	200
+			TotalCount	12
+			MaxActive	2
+			SpawnCount	2
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	10
+			WaitForAllDead	scout
+			Where	spawnbot_tunnel
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	soldier
+					Health	800
+					Skill	Expert
+					Name	Soldier
+					Class	Soldier
+					ItemAttributes
+					{
+						"damage bonus"	2.0
+						ItemName	tf_weapon_rocketlauncher
+					}
+					Item	"spine-chilling skull 2011 style 3"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	phase2start
+			TotalCurrency	250
+			TotalCount	9
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	30
+			WaitBetweenSpawns	10
+			WaitForAllDead	soldier
+			Where	spawnbot_scattered
+			Squad
+			{
+				TFBot
+				{
+					Health	500
+					Skill	Expert
+					Template	T_TFBot_Scout_Bonk
+					ItemAttributes
+					{
+						ItemName	tf_weapon_bat
+						"damage bonus"	2.0
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	shotgun
+			TotalCurrency	250
+			TotalCount	16
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	42
+			WaitBetweenSpawns	10
+			WaitForAllDead	soldier
+			Where	spawnbot_invasion
+			Squad
+			{
+				TFBot
+				{
+					Health	1200
+					Skill	Expert
+					Template	T_TFBot_Heavyweapons_Shotgun
+					ItemAttributes
+					{
+						"damage bonus"	2.0
+						ItemName	tf_weapon_shotgun_hwg
+					}
+					Item	"spine-chilling skull 2011 style 3"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	dumpsterdiver
+			TotalCurrency	250
+			TotalCount	12
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllSpawned	phase2start
+			Where	spawnbot_tunnel
+			Squad
+			{
+				TFBot
+				{
+					Health	1600
+					Template	Dumpster_Diver_
+					ItemAttributes
+					{
+						"damage bonus"	2.0
+						ItemName	"the beggar's bazooka"
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	jumperscoot
+			TotalCurrency	250
+			TotalCount	12
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	7
+			WaitBetweenSpawns	10
+			WaitForAllDead	shotgun
+			Where	spawnbot_invasion
+			Squad
+			{
+				TFBot
+				{
+					Health	500
+					Skill	Expert
+					Template	T_TFBot_Scout_Jumping_Sandman
+					ItemAttributes
+					{
+						"damage bonus"	2.0
+						ItemName	"the sandman"
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	phase3start
+			TotalCurrency	400
+			TotalCount	32
+			MaxActive	8
+			SpawnCount	8
+			WaitBeforeStarting	30
+			WaitBetweenSpawns	10
+			WaitForAllDead	jumperscoot
+			Where	spawnbot_scattered
+			Squad
+			{
+				TFBot
+				{
+					Health	1200
+					Skill	Expert
+					Template	Deflector_Heavy
+					ItemAttributes
+					{
+						"damage bonus"	2.0
+						ItemName	deflector
+					}
+				}
+				TFBot
+				{
+					Health	600
+					Skill	Expert
+					Template	T_TFBot_Medic_BigHeal
+					Item	"spine-chilling skull 2011 style 3"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	loch
+			TotalCurrency	400
+			TotalCount	12
+			MaxActive	4
+			SpawnCount	4
+			WaitBeforeStarting	37
+			WaitBetweenSpawns	10
+			WaitForAllDead	jumperscoot
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Health	700
+					Template	Loch_Demoman
+					ItemAttributes
+					{
+						"damage bonus"	2.0
+						ItemName	"the loch-n-load"
+					}
+					Item	"spine-chilling skull 2011 style 3"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	soldier2
+			TotalCurrency	400
+			TotalCount	12
+			MaxActive	4
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllDead	phase3start
+			Where	spawnbot_invasion
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	soldier
+					Health	800
+					Skill	Expert
+					Name	Soldier
+					Class	Soldier
+					ItemAttributes
+					{
+						"damage bonus"	2.0
+						ItemName	tf_weapon_rocketlauncher
+					}
+					Item	"spine-chilling skull 2011 style 3"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	buffsoldiers
+			TotalCurrency	400
+			TotalCount	20
+			MaxActive	4
+			SpawnCount	4
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	10
+			WaitForAllDead	loch
+			Where	spawnbot_tunnel
+			Squad
+			{
+				TFBot
+				{
+					Health	800
+					Skill	Expert
+					Template	T_TFBot_Soldier_Extended_Buff_Banner
+					ItemAttributes
+					{
+						"damage bonus"	2.0
+						ItemName	tf_weapon_rocketlauncher
+					}
+					Item	"spine-chilling skull 2011 style 3"
+				}
+				TFBot
+				{
+					Health	800
+					Skill	Expert
+					Template	T_TFBot_Soldier_Extended_Concheror
+					ItemAttributes
+					{
+						"damage bonus"	2.0
+						ItemName	tf_weapon_rocketlauncher
+					}
+					Item	"spine-chilling skull 2011 style 3"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	lastphasestart
+			TotalCurrency	400
+			TotalCount	20
+			MaxActive	4
+			SpawnCount	4
+			WaitBeforeStarting	30
+			WaitBetweenSpawns	10
+			WaitForAllDead	buffsoldiers
+			Where	spawnbot_scattered
+			Where   spawnbot_invasion
+			Squad
+			{
+				TFBot
+				{
+					Health	3600
+					Template	T_TFBot_Heavyweapons_Fist
+					Attributes "AlwaysCrit"
+					ItemAttributes
+					{
+						"damage bonus"	2.0
+						ItemName	"fists of steel"	
+				}
+			}
+		}
+	}
+		WaveSpawn
+		{
+			Name	scoutfan
+			TotalCurrency	400
+			TotalCount	24
+			MaxActive	4
+			SpawnCount	4
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	10
+			WaitForAllSpawned	lastphasestart
+			Where	spawnbot_scattered
+			Squad
+			{
+				TFBot
+				{
+					Health	500
+					Template	T_TFBot_Scout_FAN
+					ItemAttributes
+					{
+						"damage bonus"	2.0
+						ItemName	"the force-a-nature"
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	burstdemo
+			TotalCurrency	400
+			TotalCount	22
+			MaxActive	4
+			SpawnCount	4
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	10
+			WaitForAllSpawned	scoutfan
+			Where	spawnbot_tunnel
+			Squad
+			{
+				TFBot
+				{
+					
+					Health 700
+					Skill Expert
+					Template   T_TFBot_Demo_Burst
+					Attributes "AlwaysCrit"
+					ItemAttributes
+					{
+						"damage bonus"	2.0
+						ItemName	tf_weapon_grenadelauncher
+					}
+					Item	"spine-chilling skull 2011 style 3"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	erazorcannon
+			TotalCurrency	400
+			TotalCount	24
+			MaxActive	4
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllDead     scoutfan
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Health	600
+					Template	Rocket_Scout
+					ItemAttributes
+					{
+						"damage bonus"	102.0
+						ItemName	"mad milk"
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	eliteburstwave
+			TotalCurrency	0
+			TotalCount	10
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	60
+			WaitBetweenSpawnsAfterDeath	60
+			Support	1
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	Elite_Burstwave
+				}
+			}
+		}
+	}
+}
+

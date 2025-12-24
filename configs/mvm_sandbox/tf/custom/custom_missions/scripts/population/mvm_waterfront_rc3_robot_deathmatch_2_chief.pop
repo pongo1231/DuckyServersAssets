@@ -1,0 +1,987 @@
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_D_I_L.pop
+#base robot_deathmatch_base.pop
+#base robot_deathmatch_commonspawns.pop
+//Updated Version
+WaveSchedule
+{
+
+	StartingCurrency 0
+	CanBotsAttackWhileInSpawnRoom No
+	RespawnWaveTime 1
+	RobotLimit 24
+	SniperAllowHeadshots 1
+	NoReanimators 1
+	UpgradeStationKeepWeapons 1
+	ExtendedUpgradesOnly 1
+	BluPlayersAreRobots 1
+	RedPlayersAreRobots 1
+	BodyPartScaleSpeed 99
+	NoRedBotsRandomCrit 1
+	
+	PointTemplates
+	{
+
+
+		NoFixup 1
+		finaltele
+		{
+			trigger_teleport //teleport timer to box
+           		{
+                		"targetname" "timertele"
+                		"origin" "-1794 -2375 128"
+                		"spawnflags" "1"
+                		"solid" "0"
+                		"StartDisabled" "0"
+                		"maxs" "30 30 30"
+                		"mins" "-30 -30 -30"
+                		"target" "timerbox"
+            		}
+            		info_target
+           		{
+                		"targetname" "timerbox"
+                		"origin" "-1479 -2567 330"
+            		}
+		}
+
+		NoFixup 1
+		blueman
+		{
+
+
+			trigger_add_tf_player_condition
+			{
+				"condition" "43"
+				"origin" "-798 -2591 320"
+				"maxs" "30 30 30"
+                		"mins" "-30 -30 -30"
+				"spawnflags" "1"
+				"duration" "999"
+			}			
+
+			trigger_teleport //teleport timer to box
+           		{
+                		"targetname" "timertele"
+                		"origin" "-798 -2591 320"
+                		"spawnflags" "1"
+                		"solid" "0"
+                		"StartDisabled" "0"
+                		"maxs" "20 20 30"
+                		"mins" "-20 -20 -30"
+                		"target" "timeregg"
+            		}
+            		info_target
+           		{
+                		"targetname" "timeregg"
+                		"origin" "2142 329 320"
+            		}
+
+			trigger_add_tf_player_condition
+			{
+				"condition" "43"
+				"origin" "-1040 -2189 320"
+				"maxs" "30 30 30"
+                		"mins" "-30 -30 -30"
+				"spawnflags" "1"
+				"duration" "999"
+			}			
+
+			trigger_teleport //teleport timer to box
+           		{
+                		"targetname" "timertele"
+                		"origin" "-1040 -2189 320"
+                		"spawnflags" "1"
+                		"solid" "0"
+                		"StartDisabled" "0"
+                		"maxs" "20 20 30"
+                		"mins" "-20 -20 -30"
+                		"target" "timeregg2"
+            		}
+            		info_target
+           		{
+                		"targetname" "timeregg2"
+                		"origin" "1257 1074 64"
+            		}
+		}
+
+		spawnIndicators
+        	{
+            		NoFixup 1
+
+			entity
+            		{
+                		"id" "6"
+                		"classname" "prop_dynamic"
+                		"angles" "0 90 0"
+                		"DefaultAnim" "idle"
+                		"fademindist" "-1"
+                		"fadescale" "1"
+                		"MaxAnimTime" "10"
+                		"MinAnimTime" "5"
+                		"model" "models/props_mvm/robot_spawnpoint.mdl"
+                		"modelscale" "0.6"
+                		"renderamt" "255"
+                		"rendercolor" "255 255 255"
+                		"skin" "0"
+                		"solid" "6"
+                		"targetname" "2ndLeftG"
+                		"origin" "-1794 -2375 128"
+                		editor
+                		{
+                    		"color" "30 220 220"
+                    		"visgroupshown" "1"
+                    		"visgroupautoshown" "1"
+                    		"logicalpos" "[0 0]"
+                		}
+            		}
+
+            		NoFixup 1
+
+			entity
+            		{
+                		"id" "6"
+                		"classname" "prop_dynamic"
+                		"angles" "0 0 0"
+                		"DefaultAnim" "idle"
+                		"fademindist" "-1"
+                		"fadescale" "1"
+                		"MaxAnimTime" "10"
+                		"MinAnimTime" "5"
+                		"model" "models/props_mvm/robot_spawnpoint.mdl"
+                		"modelscale" "0.6"
+                		"renderamt" "255"
+                		"rendercolor" "255 255 255"
+                		"skin" "0"
+                		"solid" "6"
+                		"targetname" "2ndLeftG"
+                		"origin" "-798 -2591 320"
+                		editor
+                		{
+                    		"color" "30 220 220"
+                    		"visgroupshown" "1"
+                    		"visgroupautoshown" "1"
+                    		"logicalpos" "[0 0]"
+                		}
+            		}
+
+            		NoFixup 1
+
+			entity
+            		{
+                		"id" "6"
+                		"classname" "prop_dynamic"
+                		"angles" "0 180 0"
+                		"DefaultAnim" "idle"
+                		"fademindist" "-1"
+                		"fadescale" "1"
+                		"MaxAnimTime" "10"
+                		"MinAnimTime" "5"
+                		"model" "models/props_mvm/robot_spawnpoint.mdl"
+                		"modelscale" "0.6"
+                		"renderamt" "255"
+                		"rendercolor" "255 255 255"
+                		"skin" "0"
+                		"solid" "6"
+                		"targetname" "2ndLeftG"
+                		"origin" "-1040 -2189 320"
+                		editor
+                		{
+                    		"color" "30 220 220"
+                    		"visgroupshown" "1"
+                    		"visgroupautoshown" "1"
+                    		"logicalpos" "[0 0]"
+                		}
+            		}
+		}
+
+	}
+
+	Spawntemplate "finaltele"
+	Spawntemplate "blueman"
+	Spawntemplate "spawnIndicators"
+
+	ExtraSpawnPoint  
+	{
+        	Name "red"
+        	TeamNum 2
+        	X	"-2708"                     
+        	Y	"-2016"                  
+        	Z	"240"        
+	}
+
+
+	ExtraSpawnPoint  
+	{
+        	Name "red"
+        	TeamNum 2
+        	X	"-2695"                     
+        	Y	"-955"                  
+        	Z	"240"        
+	}
+
+	ExtraSpawnPoint  
+	{
+        	Name "red"
+        	TeamNum 2
+        	X	"-1834"                     
+        	Y	"-1639"                  
+        	Z	"176"        
+	}
+
+
+	ExtraSpawnPoint  
+	{
+        	Name "red"
+        	TeamNum 2
+        	X	"-1813"                     
+        	Y	"-1043"                  
+        	Z	"176"        
+	}
+ 
+
+	ExtraSpawnPoint  
+	{
+        	Name "red"
+        	TeamNum 2
+        	X	"-779"                     
+        	Y	"-1879"                  
+        	Z	"320"        
+	}
+
+	ExtraSpawnPoint  
+	{
+        	Name "spawnbot"
+        	TeamNum 3
+        	X	"1312"                     
+        	Y	"1152"                  
+        	Z	"60"        
+	}
+
+	ExtraSpawnPoint  
+	{
+        	Name "spawnbot"
+        	TeamNum 3
+        	X	"1268"                     
+        	Y	"-32"                  
+        	Z	"320"        
+	}
+
+
+
+	
+
+
+
+	Templates
+	{
+
+	}
+	
+	Mission // sentry buster
+	{
+		Objective DestroySentries
+
+		InitialCooldown 5
+		Where spawnbot
+		BeginAtWave 1
+		RunForThisManyWaves 6
+
+		CooldownTime 35            
+
+            	TFBot
+		{
+			Template T_TFBot_SentryBuster
+            	}
+	}	
+
+
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		WaitWhenDone 65
+		Checkpoint Yes
+
+		Explanation    //Dispayed once the wave is initialized
+		{
+			Line "{green}Get money and buy new playstyles with !missionitems"
+			Line "{blu}Go through the Robot indicators to become blu for a single life"
+		}
+
+		WaveSpawn // 1 Heavyweight champ spawnbot ignore flag push (10)
+		{
+			Where spawnbot_boss
+			TotalCount 18
+			SpawnCount 1
+			MaxActive 2
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 35
+			TotalCurrency 10000
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Metalbeard
+					Attributes IgnoreFlag
+					Action Mobber  
+					Health 25000
+					DesiredAttackRange 600
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Chief_Demo_Atomic
+					Attributes IgnoreFlag
+					Action Mobber  
+					Health 27500
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Chief_Soldier
+					Attributes IgnoreFlag
+					Action Mobber  
+					Health 25000
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Chief_Soldier_SlowCrit
+					Attributes IgnoreFlag
+					Action Mobber  
+					Health 25000
+					DesiredAttackRange 400
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Chief_Pyro
+					Attributes IgnoreFlag
+					Action Mobber  
+					Health 25000
+					DesiredAttackRange 250
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Chief_Tavish
+					Attributes IgnoreFlag
+					Action Mobber  
+					Health 25000
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+				}
+
+				TFBot
+				{
+					Template T_TFBot_Chief_Gauntlet
+					Attributes IgnoreFlag
+					Action Mobber  
+					Health 25000
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Major_League
+					Attributes IgnoreFlag
+					Action Mobber  
+					Health 20000
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Spammer_Chief
+					Attributes IgnoreFlag
+					Action Mobber  
+					Attributes IgnoreFlag
+					Health 25000
+					DesiredAttackRange 250
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_D_E_M_O
+					Attributes IgnoreFlag
+					Action Mobber  
+					Health 25000
+					DesiredAttackRange 2500
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Pill_Master
+					Attributes IgnoreFlag
+					Action Mobber  
+					Health 25000
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Scout
+					Attributes IgnoreFlag
+					Name "Chief Scout"
+					Item "Bonk Leadwear"
+					Item "The Flying Guillotine"
+					Action Mobber  
+					Health 25000
+					DesiredAttackRange 250
+					Scale 1.9
+					Attributes HoldFireUntilFullReload
+					Attributes UseBossHealthBar
+					Attributes AlwaysCrit
+					WeaponRestrictions SecondaryOnly
+					ItemAttributes
+					{
+						ItemName "The Flying Guillotine"
+						"dmg penalty vs players" 4
+					}
+					CharacterAttributes
+					{
+						"Bullets per shot bonus" 1.5
+						"fire rate bonus" 0.4
+						"reload time decreased" 0.65
+						"move speed penalty" 0.75
+					}
+				}
+
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Spammer
+					Attributes IgnoreFlag
+					Name "Chief Soldier Spammer"
+					Item "The Lucky Shot"
+					Action Mobber  
+					Health 25000
+					Scale 1.9
+					Attributes HoldFireUntilFullReload
+					Attributes UseBossHealthBar
+					Attributes AlwaysCrit
+					CharacterAttributes
+					{
+						"damage bonus" 1.5
+						"projectile speed increased" 1.4
+						"fire rate bonus" 0.7
+					}
+				}
+
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Crit
+					Attributes IgnoreFlag
+					Name "Chief Soldier Crit"
+					Item "The Doe-Boy"
+					Action Mobber  
+					Health 25000
+					Scale 1.9
+					Attributes HoldFireUntilFullReload
+					Attributes UseBossHealthBar
+					Attributes AlwaysCrit
+					CharacterAttributes
+					{
+						"damage bonus" 4
+						"fire rate bonus" 0.85
+						"projectile speed increased" 1.4
+						"fire rate bonus" 0.7
+					}
+				}
+
+				TFBot
+				{
+					Template T_TFBot_Giant_Pyro_Flare_Spammer
+					Attributes IgnoreFlag
+					Name "Chief Pyro Flaregun"
+					Action Mobber  
+					Health 25000
+					Scale 1.9
+					Attributes UseBossHealthBar
+					Attributes AlwaysCrit
+					CharacterAttributes
+					{
+						"dmg penalty vs players" 2
+						"fire rate bonus" 0.5
+						"projectile speed increased" 1.35
+						"move speed penalty" 0.8
+					}
+				}
+
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons
+					Attributes IgnoreFlag
+					Name "Chief Heavy"
+					Item "The Gridiron Guardian"
+					Action Mobber  
+					Health 25000
+					Scale 1.9
+					Attributes UseBossHealthBar
+					CharacterAttributes
+					{
+						"damage bonus" 1.2
+						"fire rate bonus" 0.9
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons_Shotgun
+					Attributes IgnoreFlag
+					Name "Chief Heavy Shotgun"
+					Action Mobber  
+					DesiredAttackRange 250
+					Health 25000
+					Scale 1.9
+					Item "The Eliminators Safeguard"
+					Attributes UseBossHealthBar
+					CharacterAttributes
+					{
+						"damage bonus" 2.5
+						"fire rate bonus" 0.85
+						"move speed penalty" 0.85
+					}
+				}
+
+				TFBot
+				{
+					Template T_TFBot_Giant_Sniper_Huntsman
+					Attributes IgnoreFlag
+					Name "Chief Bowman"
+					Action Mobber  
+					Health 25000
+					Scale 1.9
+					Item "Larrikin Robin"
+					Attributes UseBossHealthBar
+					CharacterAttributes
+					{
+						"projectile spread angle penalty" 2.5
+						"mult projectile count" 2
+					}
+				}
+
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Bison
+					Attributes IgnoreFlag
+					Name "Chief Bison Soldier"
+					Action Mobber  
+					Health 25000
+					Scale 1.9
+					Item "Larrikin Robin"
+					Attributes UseBossHealthBar
+					Attributes alwayscrit
+					CharacterAttributes
+					{
+						"mult projectile count" 2
+						"fire rate bonus" 0.35
+					}
+				}
+			}
+		}
+
+
+		WaveSpawn // 1 Heavyweight champ spawnbot ignore flag push (10)
+		{
+			Where red
+			TotalCount 18
+			SpawnCount 1
+			MaxActive 2
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 35
+			Support 1
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Metalbeard
+					Attributes IgnoreFlag
+					Action Mobber  
+					Health 25000
+					DesiredAttackRange 600
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+					AddCond   { Name "TF_COND_REPROGRAMMED" }
+ClassIcon red2_lite 		
+				}
+				TFBot
+				{
+					Template T_TFBot_Chief_Demo_Atomic
+					Attributes IgnoreFlag
+					Action Mobber  
+					Health 27500
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+					AddCond   { Name "TF_COND_REPROGRAMMED" }
+ClassIcon red2_lite 	
+				}
+				TFBot
+				{
+					Template T_TFBot_Chief_Soldier
+					Attributes IgnoreFlag
+					Action Mobber  
+					Health 25000
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+					AddCond   { Name "TF_COND_REPROGRAMMED" }
+ClassIcon red2_lite 	
+				}
+				TFBot
+				{
+					Template T_TFBot_Chief_Soldier_SlowCrit
+					Attributes IgnoreFlag
+					Action Mobber  
+					Health 25000
+					DesiredAttackRange 400
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+					AddCond   { Name "TF_COND_REPROGRAMMED" } 
+ClassIcon red2_lite 	
+				}
+				TFBot
+				{
+					Template T_TFBot_Chief_Pyro
+					Attributes IgnoreFlag
+					Action Mobber  
+					Health 25000
+					DesiredAttackRange 250
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+					AddCond   { Name "TF_COND_REPROGRAMMED" }
+ClassIcon red2_lite 	
+				}
+				TFBot
+				{
+					Template T_TFBot_Chief_Tavish
+					Attributes IgnoreFlag
+					Action Mobber  
+					Health 25000
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+					AddCond   { Name "TF_COND_REPROGRAMMED" } 
+ClassIcon red2_lite 	
+				}
+
+				TFBot
+				{
+					Template T_TFBot_Chief_Gauntlet
+					Attributes IgnoreFlag
+					Action Mobber  
+					Health 25000
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+					AddCond   { Name "TF_COND_REPROGRAMMED" }
+ClassIcon red2_lite 	
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Major_League
+					Attributes IgnoreFlag
+					Action Mobber  
+					Health 20000
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+					AddCond   { Name "TF_COND_REPROGRAMMED" }
+ClassIcon red2_lite 	
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Spammer_Chief
+					Attributes IgnoreFlag
+					Action Mobber  
+					Attributes IgnoreFlag
+					Health 25000
+					DesiredAttackRange 250
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+					AddCond   { Name "TF_COND_REPROGRAMMED" }
+ClassIcon red2_lite 	
+				}
+				TFBot
+				{
+					Template T_TFBot_D_E_M_O
+					Attributes IgnoreFlag
+					Action Mobber  
+					Health 25000
+					DesiredAttackRange 2500
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+					AddCond   { Name "TF_COND_REPROGRAMMED" }
+ClassIcon red2_lite 	
+				}
+				TFBot
+				{
+					Template T_TFBot_Pill_Master
+					Attributes IgnoreFlag
+					Action Mobber  
+					Health 25000
+					CharacterAttributes
+					{
+						"health regen" 0
+					}
+					AddCond   { Name "TF_COND_REPROGRAMMED" }
+ClassIcon red2_lite 	
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Scout
+					Attributes IgnoreFlag
+					Name "Chief Scout"
+					Item "Bonk Leadwear"
+					Item "The Flying Guillotine"
+					Action Mobber  
+					Health 25000
+					DesiredAttackRange 250
+					Scale 1.9
+					Attributes HoldFireUntilFullReload
+					Attributes UseBossHealthBar
+					Attributes AlwaysCrit
+					WeaponRestrictions SecondaryOnly
+					ItemAttributes
+					{
+						ItemName "The Flying Guillotine"
+						"dmg penalty vs players" 4
+					}
+					CharacterAttributes
+					{
+						"Bullets per shot bonus" 1.5
+						"fire rate bonus" 0.4
+						"reload time decreased" 0.65
+						"move speed penalty" 0.75
+					}
+					AddCond   { Name "TF_COND_REPROGRAMMED" } 
+ClassIcon red2_lite 	
+				}
+
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Spammer
+					Attributes IgnoreFlag
+					Name "Chief Soldier Spammer"
+					Item "The Lucky Shot"
+					Action Mobber  
+					Health 25000
+					Scale 1.9
+					Attributes HoldFireUntilFullReload
+					Attributes UseBossHealthBar
+					Attributes AlwaysCrit
+					CharacterAttributes
+					{
+						"damage bonus" 1.5
+						"projectile speed increased" 1
+						"fire rate bonus" 0.7
+					}
+					AddCond   { Name "TF_COND_REPROGRAMMED" }
+ClassIcon red2_lite 	
+				}
+
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Crit
+					Attributes IgnoreFlag
+					Name "Chief Soldier Crit"
+					Item "The Doe-Boy"
+					Action Mobber  
+					Health 25000
+					Scale 1.9
+					Attributes HoldFireUntilFullReload
+					Attributes UseBossHealthBar
+					Attributes AlwaysCrit
+					CharacterAttributes
+					{
+						"damage bonus" 4
+						"fire rate bonus" 0.85
+						"projectile speed increased" 1.4
+						"fire rate bonus" 0.7
+					}
+					AddCond   { Name "TF_COND_REPROGRAMMED" }
+ClassIcon red2_lite 	
+				}
+
+				TFBot
+				{
+					Template T_TFBot_Giant_Pyro_Flare_Spammer
+					Attributes IgnoreFlag
+					Name "Chief Pyro Flaregun"
+					Action Mobber  
+					Health 25000
+					Scale 1.9
+					Attributes UseBossHealthBar
+					Attributes AlwaysCrit
+					CharacterAttributes
+					{
+						"dmg penalty vs players" 2
+						"fire rate bonus" 0.5
+						"projectile speed increased" 1.35
+						"move speed penalty" 0.8
+					}
+					AddCond   { Name "TF_COND_REPROGRAMMED" }
+ClassIcon red2_lite 	
+				}
+
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons
+					Attributes IgnoreFlag
+					Name "Chief Heavy"
+					Item "The Gridiron Guardian"
+					Action Mobber  
+					Health 25000
+					Scale 1.9
+					Attributes UseBossHealthBar
+					CharacterAttributes
+					{
+						"damage bonus" 1.2
+						"fire rate bonus" 0.9
+					}
+					AddCond   { Name "TF_COND_REPROGRAMMED" }
+ClassIcon red2_lite 	
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons_Shotgun
+					Attributes IgnoreFlag
+					Name "Chief Heavy Shotgun"
+					Action Mobber  
+					DesiredAttackRange 250
+					Health 25000
+					Scale 1.9
+					Item "The Eliminators Safeguard"
+					Attributes UseBossHealthBar
+					CharacterAttributes
+					{
+						"damage bonus" 2.5
+						"fire rate bonus" 0.85
+						"move speed penalty" 0.85
+					}
+					AddCond   { Name "TF_COND_REPROGRAMMED" }
+ClassIcon red2_lite 	
+				}
+
+				TFBot
+				{
+					Template T_TFBot_Giant_Sniper_Huntsman
+					Attributes IgnoreFlag
+					Name "Chief Bowman"
+					Action Mobber  
+					Health 25000
+					Scale 1.9
+					Item "Larrikin Robin"
+					Attributes UseBossHealthBar
+					CharacterAttributes
+					{
+						"projectile spread angle penalty" 2.5
+						"mult projectile count" 2
+					}
+					AddCond   { Name "TF_COND_REPROGRAMMED" }
+ClassIcon red2_lite 	
+				}
+
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Bison
+					Attributes IgnoreFlag
+					Name "Chief Bison Soldier"
+					Action Mobber  
+					Health 25000
+					Scale 1.9
+					Item "Larrikin Robin"
+					Attributes UseBossHealthBar
+					Attributes alwayscrit
+					CharacterAttributes
+					{
+						"mult projectile count" 2
+						"fire rate bonus" 0.35
+					}
+					AddCond   { Name "TF_COND_REPROGRAMMED" }
+ClassIcon red2_lite 	
+				}
+			}
+		}
+
+		WaveSpawn // blu light
+		{
+			Where spawnbot
+			TotalCount 700
+			MaxActive 6
+			SpawnCount 6
+			WaitBetweenSpawns 1
+			TotalCurrency 3600
+			Template T_Wavespawn_Blu_Light
+			FirstSpawnOutput
+			{
+				Target boss_door_open_relay
+				Action Trigger
+			}
+		}
+
+
+		WaveSpawn // red light
+		{
+			Where red
+			TotalCount 900
+			MaxActive 6
+			SpawnCount 6
+			WaitBetweenSpawns 1
+			Template T_Wavespawn_Red_Light		
+		}
+
+	}
+}

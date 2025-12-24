@@ -1,0 +1,888 @@
+#base robot_giant.pop
+#base robot_standard.pop
+
+WaveSchedule
+{
+	StartingCurrency	25000
+	RespawnWaveTime 		3
+	FixedRespawnWaveTime 1
+	RedPlayersAreRobots 1
+	GrapplingHook 1  
+	MedigunShieldDamage 1  
+	CanBotsAttackWhileInSpawnRoom no
+	
+	PrecacheModel "models\bots\boss_bot\boss_tank_color.mdl"	 
+	PrecacheModel "models/props_frontline/tank_cart.mdl" //stickytank
+    PrecacheModel "models/props_frontline/tank_turret.mdl" //stickytank
+    PrecacheModel "models/props_tumb/mvm/tank_shield.mdl" //vacctank
+	
+	PointTemplates
+	{
+		UltimateTank		//What the fuck
+		{
+			//SENTRYTANK
+            obj_sentrygun
+			{
+				"targetname" "l"
+				"origin" "70 0 160"
+				"SolidToPlayer" "0"
+				"teamnum" "3"
+				"spawnflags" "10"
+				"defaultupgrade" 2
+				"modelscale" 1
+			}
+			obj_sentrygun
+			{
+				"targetname" "l"
+				"origin" "-70 -30 160"
+				"SolidToPlayer" "0"
+				"teamnum" "3"
+				"spawnflags" "10"
+				//"defaultupgrade" 1
+				"modelscale" 1
+			}
+			obj_sentrygun
+			{
+				"targetname" "l"
+				"origin" "-70 30 160"
+				"SolidToPlayer" "0"
+				"teamnum" "3"
+				"spawnflags" "10"
+				//"defaultupgrade" 1
+				"modelscale" 1
+			}
+            //STICKYTANK HELLMET
+            logic_relay
+            {
+                "id" "2"
+                "classname" "logic_relay"
+                "spawnflags" "0"
+                "targetname" "ST_kill_relay"
+                    "OnTrigger" "ST_mimic,Kill,,0,-1"
+                    "OnTrigger" "ST_mimic_crit,Kill,,0,-1"
+                    "OnTrigger" "ST_shoot_sound,Kill,,0,-1"
+                    "OnTrigger" "ST_shoot_sound_crit,Kill,,0,-1"
+                    "OnTrigger" "ST_model,Kill,,0,-1"
+                    "OnTrigger" "ST_timer,Disable,,0,-1"
+                    "OnTrigger" "ST_shooter_relay,CancelPending,,0,-1"
+                    "OnTrigger" "tf_projectile_pipe,Kill,,0,-1"
+                "origin" "-16 480 0"
+            }
+            logic_relay
+            {
+                "id" "4"
+                "classname" "logic_relay"
+                "spawnflags" "0"
+                "targetname" "ST_shooter_relay"
+                    "OnTrigger" "ST_mimic_crit,DetonateStickies,,7,-1"
+                    "OnTrigger" "ST_mimic,DetonateStickies,,7,-1"
+                    "OnTrigger" "ST_shoot_sound,PlaySound,,0.5,-1"
+                    "OnTrigger" "ST_mimic,FireMultiple,4,0.5,-1"
+                    "OnTrigger" "ST_shoot_sound,PlaySound,,0.3,-1"
+                    "OnTrigger" "ST_mimic,FireOnce,,0.3,-1"
+                    "OnTrigger" "ST_shoot_sound,PlaySound,,0.2,-1"
+                    "OnTrigger" "ST_mimic,FireOnce,,0.2,-1"
+                    "OnTrigger" "ST_shoot_sound,PlaySound,,0.1,-1"
+                    "OnTrigger" "ST_mimic,FireOnce,,0.1,-1"
+                    "OnTrigger" "ST_shoot_sound,PlaySound,,0,-1"
+                    "OnTrigger" "ST_mimic,FireOnce,,0,-1"
+                    "OnTrigger" "ST_mimic,FireOnce,,0.4,-1"
+                    "OnTrigger" "ST_shoot_sound,PlaySound,,0.4,-1"
+                    "OnTrigger" "ST_mimic,FireOnce,,0.6,-1"
+                    "OnTrigger" "ST_shoot_sound,PlaySound,,0.6,-1"
+                    "OnTrigger" "ST_shoot_sound,PlaySound,,0.7,-1"
+                    "OnTrigger" "ST_mimic,FireOnce,,0.7,-1"
+                    "OnTrigger" "ST_shoot_sound,PlaySound,,0.8,-1"
+                    "OnTrigger" "ST_mimic,FireOnce,,0.8,-1"
+                    "OnTrigger" "ST_shoot_sound,PlaySound,,0.9,-1"
+                    "OnTrigger" "ST_mimic,FireOnce,,0.9,-1"
+                    "OnTrigger" "ST_mimic,FireMultiple,4,1,-1"
+                    "OnTrigger" "ST_shoot_sound,PlaySound,,1,-1"
+                    "OnTrigger" "ST_mimic_crit,FireOnce,,1.5,-1"
+                    "OnTrigger" "ST_shoot_sound_crit,PlaySound,,1.5,-1"
+                    "OnTrigger" "ST_shoot_sound_crit,PlaySound,,2,-1"
+                    "OnTrigger" "ST_mimic_crit,FireMultiple,2,2,-1"
+                    "OnTrigger" "ST_shoot_sound_crit,PlaySound,,2.5,-1"
+                    "OnTrigger" "ST_mimic_crit,FireMultiple,3,2.5,-1"
+                    "OnTrigger" "ST_shoot_sound_crit,PlaySound,,3,-1"
+                    "OnTrigger" "ST_mimic_crit,FireMultiple,6,3,-1"
+                "origin" "-16 496 0"
+            }
+            logic_timer
+            {
+                "id" "8"
+                "classname" "logic_timer"
+                "LowerRandomBound" "5"
+                "spawnflags" "0"
+                "StartDisabled" "0"
+                "targetname" "ST_timer"
+                "UpperRandomBound" "5"
+                "UseRandomTime" "0"
+                    "OnTimer" "ST_shooter_relay,Trigger,,0,-1"
+                "origin" "0 496 0"
+            }
+            tf_point_weapon_mimic
+            {
+                "id" "18"
+                "classname" "tf_point_weapon_mimic"
+                "angles" "-56.5 0 0"
+                "Crits" "1"
+                "Damage" "138"
+                "FireSound" "weapons/stickybomblauncher_shoot_crit.wav"
+                "ModelScale" "1"
+                "SpeedMax" "525"
+                "SpeedMin" "525"
+                "SplashRadius" "189"
+                "SpreadAngle" "25"
+                "targetname" "ST_mimic_crit"
+                "WeaponType" "3"
+                "origin" "33.948 59 167.289"
+            }
+            tf_point_weapon_mimic
+            {
+                "id" "20"
+                "classname" "tf_point_weapon_mimic"
+                "angles" "-58.5 0 180"
+                "Crits" "1"
+                "Damage" "138"
+                "FireSound" "weapons/stickybomblauncher_shoot_crit.wav"
+                "ModelScale" "1"
+                "SpeedMax" "525"
+                "SpeedMin" "525"
+                "SplashRadius" "189"
+                "SpreadAngle" "25"
+                "targetname" "ST_mimic_crit"
+                "WeaponType" "3"
+                "origin" "34.16 -59 167.121"
+            }
+            tf_point_weapon_mimic
+            {
+                "id" "22"
+                "classname" "tf_point_weapon_mimic"
+                "angles" "-58.5 0 180"
+                "Crits" "0"
+                "Damage" "138"
+                "FireSound" "weapons/stickybomblauncher_shoot.wav"
+                "ModelScale" "1"
+                "SpeedMax" "525"
+                "SpeedMin" "525"
+                "SplashRadius" "189"
+                "SpreadAngle" "25"
+                "targetname" "ST_mimic"
+                "WeaponType" "3"
+                "origin" "34.16 -59 167.121"
+            }
+            tf_point_weapon_mimic
+            {
+                "id" "24"
+                "classname" "tf_point_weapon_mimic"
+                "angles" "-56.5 0 0"
+                "Crits" "0"
+                "Damage" "138"
+                "FireSound" "weapons/stickybomblauncher_shoot.wav"
+                "ModelScale" "1"
+                "SpeedMax" "525"
+                "SpeedMin" "525"
+                "SplashRadius" "189"
+                "SpreadAngle" "25"
+                "targetname" "ST_mimic"
+                "WeaponType" "3"
+                "origin" "33.948 59 167.289"
+            }
+            prop_dynamic
+            {
+                "id" "30"
+                "classname" "prop_dynamic"
+                "angles" "-58.5 0 90"
+                "DisableBoneFollowers" "0"
+                "disablereceiveshadows" "1"
+                "disableshadows" "1"
+                "ExplodeDamage" "0"
+                "ExplodeRadius" "0"
+                "fademaxdist" "0"
+                "fademindist" "-1"
+                "fadescale" "1"
+                "MaxAnimTime" "10"
+                "maxdxlevel" "0"
+                "MinAnimTime" "5"
+                "mindxlevel" "0"
+                "model" "models/props_frontline/tank_turret.mdl"
+                "modelscale" "1"
+                "PerformanceMode" "0"
+                "physdamagescale" "1.0"
+                "pressuredelay" "0"
+                "RandomAnimation" "0"
+                "renderamt" "255"
+                "rendercolor" "255 255 255"
+                "renderfx" "0"
+                "rendermode" "0"
+                "SetBodyGroup" "0"
+                "skin" "2"
+                "solid" "0"
+                "spawnflags" "0"
+                "StartDisabled" "0"
+                "targetname" "ST_model"
+                "origin" "-32.851 64 57.912"
+            }
+            prop_dynamic
+            {
+                "id" "32"
+                "classname" "prop_dynamic"
+                "angles" "-56.5 0 -90"
+                "DisableBoneFollowers" "0"
+                "disablereceiveshadows" "1"
+                "disableshadows" "1"
+                "ExplodeDamage" "0"
+                "ExplodeRadius" "0"
+                "fademaxdist" "0"
+                "fademindist" "-1"
+                "fadescale" "1"
+                "MaxAnimTime" "10"
+                "maxdxlevel" "0"
+                "MinAnimTime" "5"
+                "mindxlevel" "0"
+                "model" "models/props_frontline/tank_turret.mdl"
+                "modelscale" "1"
+                "PerformanceMode" "0"
+                "physdamagescale" "1.0"
+                "pressuredelay" "0"
+                "RandomAnimation" "0"
+                "renderamt" "255"
+                "rendercolor" "255 255 255"
+                "renderfx" "0"
+                "rendermode" "0"
+                "SetBodyGroup" "0"
+                "skin" "2"
+                "solid" "0"
+                "spawnflags" "0"
+                "StartDisabled" "0"
+                "targetname" "ST_model"
+                "origin" "-36.709 -64 60.403"
+            }
+            ambient_generic
+            {
+                "id" "34"
+                "classname" "ambient_generic"
+                "angles" "0 0 0"
+                "cspinup" "0"
+                "fadeinsecs" "0"
+                "fadeoutsecs" "0"
+                "health" "10"
+                "lfomodpitch" "0"
+                "lfomodvol" "0"
+                "lforate" "0"
+                "lfotype" "0"
+                "message" "weapons/stickybomblauncher_shoot_crit.wav"
+                "pitch" "100"
+                "pitchstart" "100"
+                "preset" "0"
+                "radius" "5000"
+                "spawnflags" "48"
+                "spindown" "0"
+                "spinup" "0"
+                "targetname" "ST_shoot_sound_crit"
+                "volstart" "0"
+                "origin" "36 -9.53674e-07 168"
+            }
+            ambient_generic
+            {
+                "id" "37"
+                "classname" "ambient_generic"
+                "angles" "0 0 0"
+                "cspinup" "0"
+                "fadeinsecs" "0"
+                "fadeoutsecs" "0"
+                "health" "10"
+                "lfomodpitch" "0"
+                "lfomodvol" "0"
+                "lforate" "0"
+                "lfotype" "0"
+                "message" "weapons/stickybomblauncher_shoot.wav"
+                "pitch" "100"
+                "pitchstart" "100"
+                "preset" "0"
+                "radius" "5000"
+                "spawnflags" "48"
+                "spindown" "0"
+                "spinup" "0"
+                "targetname" "ST_shoot_sound"
+                "volstart" "0"
+                "origin" "36 -9.53674e-07 168"
+            }
+			OnSpawnOutput
+			{
+				Target "!parent"
+				Action SetDamageFilter
+				Param  "filter_bullet"
+				Delay  0.00
+			}
+			
+            ambient_generic
+            {
+                "targetname" "tank_vacc_deploy_sound"            
+                "health"     "10"
+                "message"    "weapons/medi_shield_deploy.wav"
+                "pitch"      "100"
+                "pitchstart" "100"
+                "radius"     "5000"
+                "spawnflags" "48"
+                "origin"     "0 0 180"
+            }
+			
+			logic_timer
+			{
+				"targetname"    "tank_vacc_timer"
+				"RefireTime"    "14"
+				"spawnflags"    "0"
+				"StartDisabled" "0"
+				"UseRandomTime" "0"
+
+				"OnTimer"       "tank_vacc_changing,Trigger,,0,-1"
+				"OnTimer"       "tank_vacc_deploy_sound,PlaySound,,4,-1"
+				"OnTimer"       "tank_vacc_case,PickRandom,,4,-1"
+			}
+			
+			logic_relay
+			{
+				"targetname" "tank_vacc_enable_all"
+				
+				"OnTrigger"  "tank_shield_melee,Enable,,0,-1"
+				"OnTrigger"  "tank_shield_bullet,Enable,,0,-1"
+				"OnTrigger"  "tank_shield_blast,Enable,,0,-1"
+				"OnTrigger"  "tank_shield_fire,Enable,,0,-1"					
+			}
+			logic_relay
+			{
+				"targetname" "tank_vacc_disable_all"
+				
+				"OnTrigger"  "tank_shield_fire,Disable,,0,-1"
+				"OnTrigger"  "tank_shield_melee,Disable,,0,-1"
+				"OnTrigger"  "tank_shield_bullet,Disable,,0,-1"
+				"OnTrigger"  "tank_shield_blast,Disable,,0,-1"				
+			}
+			logic_relay
+			{
+				"targetname" "tank_vacc_changing"
+				
+				"OnTrigger"  "!parent,SetDamageFilter,,0,-1"       // Tank is vulnerable to all damage for this duration
+				"OnTrigger"  "tank_vacc_enable_all,Trigger,,0,-1"
+				"OnTrigger"  "tank_vacc_disable_all,Trigger,,0.5,-1"
+				"OnTrigger"  "tank_vacc_enable_all,Trigger,,1,-1"
+				"OnTrigger"  "tank_vacc_disable_all,Trigger,,1.5,-1"
+				"OnTrigger"  "tank_vacc_enable_all,Trigger,,2,-1"
+				"OnTrigger"  "tank_vacc_disable_all,Trigger,,2.5,-1"
+				"OnTrigger"  "tank_vacc_enable_all,Trigger,,3,-1"
+				"OnTrigger"  "tank_vacc_disable_all,Trigger,,3.5,-1"
+			}
+			
+			logic_case
+			{
+				"targetname" "tank_vacc_case"
+				
+				"OnCase01"   "!parent,SetDamageFilter,filter_bullet,0,-1"
+				"OnCase01"   "tank_shield_bullet,Enable,,0,-1"
+				"OnCase02"   "!parent,SetDamageFilter,filter_bullet,0,-1"
+				"OnCase02"   "tank_shield_bullet,Enable,,0,-1"
+				
+				"OnCase03"   "!parent,SetDamageFilter,filter_blast,0,-1"
+				"OnCase03"   "tank_shield_blast,Enable,,0,-1"
+				"OnCase04"   "!parent,SetDamageFilter,filter_blast,0,-1"
+				"OnCase04"   "tank_shield_blast,Enable,,0,-1"
+
+				"OnCase05"   "!parent,SetDamageFilter,filter_fire,0,-1"
+				"OnCase05"   "tank_shield_fire,Enable,,0,-1"
+				"OnCase06"   "!parent,SetDamageFilter,filter_fire,0,-1"
+				"OnCase06"   "tank_shield_fire,Enable,,0,-1"
+
+				"OnCase07"   "!parent,SetDamageFilter,filter_melee,0,-1"
+				"OnCase07"   "tank_shield_melee,Enable,,0,-1"				
+			}
+			
+			
+            prop_dynamic
+            {
+                "targetname"    "tank_shield_melee"
+                "model"         "models/props_tumb/mvm/tank_shield.mdl"
+				"StartDisabled" "1"
+                "skin"          "1"
+            }
+            prop_dynamic
+            {
+                "targetname"    "tank_shield_bullet"
+                "model"         "models/props_tumb/mvm/tank_shield.mdl"
+				"StartDisabled" "0"
+                "skin"          "2"
+            }
+            prop_dynamic
+            {
+                "targetname"    "tank_shield_blast"
+                "model"         "models/props_tumb/mvm/tank_shield.mdl"
+				"StartDisabled" "1"
+                "skin"          "3"
+            }
+            prop_dynamic
+            {
+                "targetname"    "tank_shield_fire"
+                "model"         "models/props_tumb/mvm/tank_shield.mdl"
+				"StartDisabled" "1"
+                "skin"          "4"
+            }
+			// BULLET
+			// -----------------------------------------------------------
+			filter_damage_type
+			{
+				"targetname" "filter_bullet1"
+				"damagetype" "538968064"
+				"Negated"    "1"
+			}
+			filter_damage_type
+			{
+				"targetname" "filter_bullet2"
+				"damagetype" "540016640"
+				"Negated"    "1"
+			}
+			filter_damage_type
+			{
+				"targetname" "filter_bullet3"
+				"damagetype" "2097154"
+				"Negated"    "1"
+			}
+			filter_damage_type
+			{
+				"targetname" "filter_bullet4"
+				"damagetype" "3145730"
+				"Negated"    "1"
+			}
+			filter_damage_type
+			{
+				"targetname" "filter_bullet5"
+				"damagetype" "34603010"
+				"Negated"    "1"
+			}
+			filter_damage_type
+			{
+				"targetname" "filter_bullet6"
+				"damagetype" "33554434"
+				"Negated"    "1"
+			}
+			filter_damage_type
+			{
+				"targetname" "filter_bullet7"
+				"damagetype" "2228226"
+				"Negated"    "1"
+			}
+			filter_damage_type
+			{
+				"targetname" "filter_bullet8"
+				"damagetype" "2230274"
+				"Negated"    "1"
+			}
+			
+			filter_multi
+			{
+				"targetname" "filter_bullet_mix1"
+				"Negated"    "0"
+				"filtertype" "0"
+				"Filter01"   "filter_bullet6"
+				"Filter02"   "filter_bullet7"
+				"Filter03"   "filter_bullet8"
+				"Filter04"   "filter_isnt_building"
+			}
+			filter_multi
+			{
+				"targetname" "filter_bullet_mix2"
+				"Negated"    "0"
+				"filtertype" "0"
+				"Filter01"   "filter_bullet1"
+				"Filter02"   "filter_bullet2"
+				"Filter03"   "filter_bullet3"
+				"Filter04"   "filter_bullet4"
+				"Filter05"   "filter_bullet5"
+			}
+			filter_multi
+			{
+				"targetname" "filter_bullet_mixall"
+				"Negated"    "0"
+				"filtertype" "0"
+				"Filter01"   "filter_bullet_mix1"
+				"Filter02"   "filter_bullet_mix2"
+			}
+			filter_multi
+			{
+				"targetname" "filter_bullet"
+				"Negated"    "0"
+				"filtertype" "1"
+				"Filter01"   "filter_sentry_explosives"
+				"Filter02"   "filter_bullet_mixall"
+			}
+			
+			// BLAST
+			// -----------------------------------------------------------
+			filter_damage_type
+			{
+				"targetname" "filter_blast1"
+				"damagetype" "2359360"
+				"Negated"    "1"
+			}
+			filter_damage_type
+			{
+				"targetname" "filter_blast2"
+				"damagetype" "3407936"
+				"Negated"    "1"
+			}
+			filter_damage_type
+			{
+				"targetname" "filter_blast3"
+				"damagetype" "262208"
+				"Negated"    "1"
+			}
+			filter_damage_type
+			{
+				"targetname" "filter_blast4"
+				"damagetype" "1310784"
+				"Negated"    "1"
+			}
+			
+			filter_multi
+			{
+				"targetname" "filter_blast_allow"
+				"Negated"    "1"
+				"filtertype" "0"
+				"Filter01"   "filter_blast1"
+				"Filter02"   "filter_blast2"
+				"Filter03"   "filter_blast3"
+				"Filter04"   "filter_blast4"
+			}
+			filter_multi
+			{
+				"targetname" "filter_blast"
+				"Negated"    "0"
+				"filtertype" "0"
+				"Filter01"   "filter_blast1"
+				"Filter02"   "filter_blast2"
+				"Filter03"   "filter_blast3"
+				"Filter04"   "filter_blast4"
+				"Filter05"   "filter_blast5"
+			}			
+
+			// FIRE
+			// -----------------------------------------------------------
+			filter_damage_type
+			{
+				"targetname" "filter_fire1"
+				"damagetype" "16779264"
+				"Negated"    "1"
+			}
+			filter_damage_type
+			{
+				"targetname" "filter_fire2"
+				"damagetype" "17827840"
+				"Negated"    "1"
+			}
+			
+			filter_multi
+			{
+				"targetname" "filter_fire"
+				"Negated"    "0"
+				"filtertype" "0"
+				"Filter01"   "filter_fire1"
+				"Filter02"   "filter_fire2"
+			}
+
+			// MISC
+			// -----------------------------------------------------------
+			filter_tf_damaged_by_weapon_in_slot
+			{
+				"targetname" "filter_isnt_primary"
+				"Negated"    "1"
+				"weaponSlot" "0"
+			}
+			filter_tf_damaged_by_weapon_in_slot
+			{
+				"targetname" "filter_isnt_secondary"
+				"Negated"    "1"
+				"weaponSlot" "1"
+			}
+			filter_tf_damaged_by_weapon_in_slot
+			{
+				"targetname" "filter_melee"
+				"Negated"    "0"
+				"weaponSlot" "2"
+			}
+			filter_tf_damaged_by_weapon_in_slot
+			{
+				"targetname" "filter_isnt_melee"
+				"Negated"    "1"
+				"weaponSlot" "2"
+			}
+			
+			filter_multi
+			{
+				"targetname" "filter_is_building"
+				"Negated"    "0"
+				"filtertype" "0"
+				"Filter01"   "filter_isnt_primary"
+				"Filter02"   "filter_isnt_secondary"
+				"Filter03"   "filter_isnt_melee"
+			}
+			filter_multi
+			{
+				"targetname" "filter_isnt_building"
+				"Negated"    "1"
+				"filtertype" "0"
+				"Filter01"   "filter_isnt_primary"
+				"Filter02"   "filter_isnt_secondary"
+				"Filter03"   "filter_isnt_melee"
+			}	
+			filter_multi
+			{
+				"targetname" "filter_sentry_explosives"
+				"Negated"    "0"
+				"filtertype" "0"
+				"Filter01"   "filter_is_building"
+				"Filter02"   "filter_blast_allow"
+			}
+			OnSpawnOutput
+            {
+                Target  "!activator"
+                Action  "color"
+                Param  "255 255 255" 
+            }
+			logic_timer
+			{
+				"targetname"    "tank_color_timer"
+				"RefireTime"    "0.05"             // How quickly color is transitioned. | Minimum: 0.03
+				"spawnflags"    "0"
+				"StartDisabled" "0"
+				"UseRandomTime" "0"
+
+				"OnTimer"       "tank_color_state,GetValue,,0,-1"
+			}
+			
+			// Holds which color math_counter we're adding to
+			math_counter
+			{
+				"targetname" "tank_color_state"
+				"startvalue" "1"
+				"min"        "1"
+				"max"        "3"                // Change this value if you change the number of colors in your transition
+				
+				"OnGetValue" "tank_color_changecase,InValue,,0,-1"
+			}
+			
+			// Which color math_counter should we modify for this iteration based on tank_color_state
+			logic_case
+			{
+				"targetname" "tank_color_changecase"
+				"Case01"     "1"
+				"Case02"     "2"
+				"Case03"     "3"
+				
+				// Changing how much is added each timer iteration changes the smoothness of the color transition
+				// (5 is smoother than 25, and goes through more colors values, but is also much slower)
+				"OnCase01"   "tank_color_rg,Add,5,0,-1"
+				"OnCase02"   "tank_color_gb,Add,5,0,-1"
+				"OnCase03"   "tank_color_br,Add,5,0,-1"
+			}
+			// Counter 1 (RED - GREEN)
+			math_counter
+			{
+				"targetname"    "tank_color_rg"
+				"StartDisabled" "0"
+				"startvalue"    "0"
+				"min"           "0"
+				"max"           "255"
+
+				"OutValue"      "tank_color_rg_blend,InValue,,0,-1"
+				"OnHitMax"      "tank_color_state,SetValueNoFire,2,0,-1"
+				"OnHitMax"      "!self,SetValueNoFire,0,0.01,-1"
+				"OnHitMax"      "!self,Disable,,0.02,-1"
+				"OnHitMax"      "tank_color_gb,Enable,,0.02,-1"				
+			}
+			math_colorblend
+			{
+				"targetname" "tank_color_rg_blend"
+				"spawnflags" "1"
+				"inmin"      "0"
+				"inmax"      "255"
+				"colormin"   "255 0 0"
+				"colormax"   "0 255 0"
+				
+				"OutColor"   "!parent,Color,,0,-1"
+			}
+			
+			// Counter 2 (GREEN - BLUE)
+			math_counter
+			{
+				"targetname"    "tank_color_gb"
+				"StartDisabled" "1"
+				"startvalue"    "0"
+				"min"           "0"
+				"max"           "255"
+
+				"OutValue"      "tank_color_gb_blend,InValue,,0,-1"
+				"OnHitMax"      "tank_color_state,SetValueNoFire,3,0,-1"
+				"OnHitMax"      "!self,SetValueNoFire,0,0.01,-1"
+				"OnHitMax"      "!self,Disable,,0.02,-1"		
+				"OnHitMax"      "tank_color_br,Enable,,0.02,-1"	
+			}
+			math_colorblend
+			{
+				"targetname" "tank_color_gb_blend"
+				"spawnflags" "1"
+				"inmin"      "0"
+				"inmax"      "255"
+				"colormin"   "0 255 0"
+				"colormax"   "0 0 255"
+				
+				"OutColor"   "!parent,Color,,0,-1"
+			}
+			
+			// Counter 3 (BLUE - RED)
+			math_counter
+			{
+				"targetname"    "tank_color_br"
+				"StartDisabled" "1"
+				"startvalue"    "0"
+				"min"           "0"
+				"max"           "255"
+
+				"OutValue"      "tank_color_br_blend,InValue,,0,-1"
+				"OnHitMax"      "tank_color_state,SetValueNoFire,1,0,-1" // Loop back to first counter
+				"OnHitMax"      "!self,SetValueNoFire,0,0.01,-1"
+				"OnHitMax"      "!self,Disable,,0.02,-1"
+				"OnHitMax"      "tank_color_rg,Enable,,0.02,-1"          // Loop back to first counter
+			}
+			math_colorblend
+			{
+				"targetname" "tank_color_br_blend"
+				"spawnflags" "1"
+				"inmin"      "0"
+				"inmax"      "255"
+				"colormin"   "0 0 255"
+				"colormax"   "255 0 0"
+				
+				"OutColor"   "!parent,Color,,0,-1"
+			}
+			logic_auto
+            {
+                "targetname" "bootank_init_relay"
+                "OnMapSpawn" "tankboss_ghost,AddOutput,color,41 21 61,1,-1"
+                "OnMapSpawn" "tank_ghost,SetParent,tankboss_ghost,0.1,-1"
+                "OnMapSpawn" "tank_stun,SetParent,tankboss_ghost,0.1,-1"
+            }
+            trigger_stun
+            {
+                "trigger_delay" ".5"
+                "targetname" "tank_stun"
+                "stun_type" "2"
+                "stun_effects" "1"
+                "stun_duration" "3"
+                "StartDisabled" "0"
+                "spawnflags" "1"
+                "mins" "-80 -80 -80"
+                "maxs" "80 80 80"
+                "origin" "115 0 0"
+                "move_speed_reduction" "0"
+                "filtername" "filter_redteam"
+            }
+            prop_dynamic
+            {
+                "origin" "115 0 0"
+                "targetname" "tank_ghost"
+                "StartDisabled" "0"
+                "spawnflags" "0"
+                "solid" "0"
+                "skin" "0"
+                "SetBodyGroup" "0"
+                "rendermode" "0"
+                "renderfx" "0"
+                "rendercolor" "255 255 255"
+                "renderamt" "255"
+                "RandomAnimation" "0"
+                "pressuredelay" "0"
+                "PerformanceMode" "0"
+                "modelscale" "1.6"
+                "model" "models/props_halloween/ghost.mdl"
+                "mindxlevel" "0"
+                "MinAnimTime" "5"
+                "maxdxlevel" "0"
+                "MaxAnimTime" "10"
+                "fadescale" "1"
+                "fademindist" "-1"
+                "fademaxdist" "0"
+                "ExplodeRadius" "0"
+                "ExplodeDamage" "0"
+                "disableshadows" "1"
+                "disablereceiveshadows" "0"
+                "DefaultAnim" "idle"
+                "angles" "0 0 0"
+            }
+			OnSpawnOutput
+			{
+				Target panictank_init_relay
+				Action Trigger
+			}
+			
+			logic_relay
+			{
+				"targetname" "panictank_init_relay"
+				
+				"OnTrigger"  "!parent,AddOutput,OnHealthBelow90Percent !self:SetSpeed:85:0:-1,0,-1"
+				"OnTrigger"  "!parent,AddOutput,OnHealthBelow70Percent !self:SetSpeed:100:0:-1,0,-1"
+				"OnTrigger"  "!parent,AddOutput,OnHealthBelow50Percent !self:SetSpeed:120:0:-1,0,-1"
+				"OnTrigger"  "!parent,AddOutput,OnHealthBelow30Percent !self:SetSpeed:150:0:-1,0,-1"
+				"OnTrigger"  "!parent,AddOutput,OnHealthBelow20Percent !self:SetSpeed:180:0:-1,0,-1"
+				"OnTrigger"  "!parent,AddOutput,OnHealthBelow10Percent !self:SetSpeed:220:0:-1,0,-1"
+			}
+		}
+	}
+	Wave
+	{	
+		StartWaveOutput
+		{
+			Target	wave_start_relay_expert
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+		    TotalCurrency 0
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+			FirstSpawnOutput
+			{
+				Target tankdozer_spawn_relay
+				Action Trigger
+			}			
+			Tank
+			{
+                        Name "Tankdozer"
+				Health	50000
+				ClassIcon tank_sentry_sticky_ring
+				Model  "models/bots/boss_bot/boss_tank_color.mdl"
+				StartingPathTrackNode path_tank_cliff_1
+				SpawnTemplate "UltimateTank"
+				
+				OnKilledOutput
+				{
+					Target tankdozer_dead_relay
+					Action Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+	}
+}

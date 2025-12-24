@@ -1,0 +1,733 @@
+//collab by randomguy and hellblade 1010
+#base robot_randomguy.pop //HELLBLADE1010 HAS PERMISSION TO USE MY BOTS IN WAVE 4-6 IF THEY WANT TO. IDK WHY I AM SPECIFYING THIS BUT I AM.
+#base robot_sig_randomguy.pop //^
+#base robot_sigsegv_reloaded.pop //DEFAULT SIGSEGV POPFILE. HAS THINGS LIKE THE TANKS AND POOP.
+
+//THIS POPFILE WAS COLLABORATED ON BY BOTH RANDOMGUY AND HELLBLADE1010, RANDOMGUY MADE WAVES 1-3, AND HELLBLADE1010 MADE WAVES 4-6.
+//ALL BOTS USED WERE BOTS.
+
+WaveSchedule
+{
+	CanBotsAttackWhileInSpawnRoom no
+	RespawnWaveTime	2
+	StartingCurrency 2200
+	Advanced 1
+	AddSentryBusterWhenDamageDealtExceeds 5
+	AddSentryBusterWhenKillCountExceeds	1
+	NoRomevisionCosmetics 1   //If set, robots will not wear romevision cosmetics unless forced to (default: 0)
+	MedievalMode 0  
+	NoReanimators 1  
+	
+	ClassLimit   //Limits the number of specified classes
+	{
+		Demoman 2
+		Heavyweapons 3
+		Medic 2
+		Sniper 2
+		Spy 1
+	}
+	
+		ItemWhitelist  
+		{
+			Allowed		"saxxy"
+			Allowed		"tf_weapon_lunchbox_drink"
+			Allowed		"tf_weapon_jar_milk"
+			Allowed		"tf_weapon_cleaver"
+			Allowed		"tf_weapon_bat"
+			Allowed		"tf_weapon_bat_wood"
+			Allowed		"tf_weapon_bat_fish"
+			Allowed		"tf_weapon_bat_giftwrap"
+			Allowed		"tf_weapon_buff_item"
+			Allowed		"tf_weapon_parachute"
+			Allowed		"tf_weapon_shovel"
+			Allowed		"tf_weapon_katana"
+			Allowed		"tf_weapon_fireaxe"
+			Allowed		"tf_weapon_breakable_sign"
+			Allowed		"tf_weapon_slap"
+			Allowed		"tf_wearable_demoshield"
+			Allowed		"tf_weapon_bottle"
+			Allowed		"tf_weapon_sword"
+			Allowed		"tf_weapon_stickbomb"
+			Allowed		"tf_weapon_lunchbox"
+			Allowed		"tf_weapon_fists"
+			Allowed		"tf_weapon_wrench"
+			Allowed		"tf_weapon_robot_arm"
+			Allowed		"tf_weapon_crossbow"
+			Allowed		"tf_weapon_bonesaw"
+			Allowed		"tf_weapon_compound_bow"
+			Allowed		"tf_weapon_jar"
+			Allowed		"tf_weapon_club"
+			Allowed		"tf_weapon_knife"
+			Allowed		"tf_weapon_invis"
+			Allowed		"tf_wearable"
+			Allowed		"tf_powerup_bottle"
+			Allowed		"tf_weapon_cannon"
+			Allowed		"tf_weapon_flaregun"
+			Allowed		"tf_weapon_shotgun_building_rescue"
+			//REMEMBER TO COMMENT OUT THE FOLLOWING THREE THINGS. THEY ARE ADDED SO I (RANDOMGUY) CAN SOLOTEST THE MISSION WITH A SENTRY
+			//Allowed		"tf_weapon_pda_engineer_build"
+			//Allowed		"tf_weapon_pda_engineer_destroy"
+			//Allowed		"tf_weapon_builder"
+		}
+		
+		ItemBlacklist  
+		{
+			DefIndex	735		//Sapper
+			DefIndex	736		//Sapper
+			DefIndex	810		//Sapper
+			DefIndex	831		//Sapper
+			DefIndex	933		//Sapper
+			DefIndex	1080	//Sapper
+			DefIndex	1102	//Sapper
+			Name		"The Scorch Shot"
+		}
+	
+	ItemAttributes   //Adds attributes to specified item given to players
+	{
+		ItemName "The Loose Cannon"
+		"grenade not explode on impact" 0
+		"cannonball push back" 0
+		//"grenade launcher mortar mode" 0
+		"override projectile type" 3
+		//"projectile speed increased" 1
+		"custom projectile model" "models/weapons/w_models/w_cannonball.mdl"
+		"damage penalty" 0.5
+		//"fire rate penalty" 1.5
+		"Reload time increased" 1.1
+	}
+	
+	ItemAttributes   //Adds attributes to specified item given to players
+	{
+		ItemName "Frying Pan"
+		"crit vs burning players" 1
+		"crit from behind" 1
+		"crit vs non burning players" 1
+		"crit vs disguised players" 1
+		"crit vs stunned players" 1
+		"damage penalty" 0.333
+	}
+	
+	Templates
+	{
+		Engineer_Medieval_Teleporter
+		{
+			Template T_TFBot_Engineer_Sentry_Tele_Battle
+			Health 200
+			Name "Teleporter and Sentry Caster"
+			Item "The Gunslinger"
+			Item "The Texas Half-Pants"
+			Item "The Last Straw"
+			Item "The El Paso Poncho"
+			Attributes BecomeSpectatorOnDeath
+			ItemAttributes
+			{
+				ItemName "The Gunslinger"
+				"mod wrench builds minisentry" 0
+				"engy sentry fire rate increased" 2
+				"engy sentry radius increased" 0.5
+				"max health additive bonus" 0
+				"engineer sentry build rate multiplier" 0.25
+				"engy building health bonus" 0.75
+				"engy sentry damage bonus" 0.25
+				"build small sentries" 1  
+			}
+		}
+		
+		T_TFBot_Giant_Scout_Fast_Medieval
+		{
+			Class Scout
+			Name "Super Scout"
+			ClassIcon scout_giant_fast
+			Skill Easy
+			Item "Hephaistos' Handcraft"
+			Item "Athenian Attire"
+			Item "The Holy Mackerel"
+			Health 1200
+			WeaponRestrictions MeleeOnly
+			Attributes MiniBoss Tag bot_giant
+			CharacterAttributes
+			{
+				"move speed bonus"	2
+				"damage force reduction" 0.0
+				"airblast vulnerability multiplier" 0.0
+				"override footstep sound set" 5
+			}
+		}
+		
+		T_TFBot_LoyalScout
+		{
+			Class Scout
+            Skill Expert
+			Health 150
+			Name "Knight Novice"
+            ClassIcon scout_threerune_daan
+            Item "The Dark Falkirk Helm"
+            Item "Three-Rune Blade"
+            WeaponRestrictions MeleeOnly
+            ItemAttributes
+            {
+                ItemName "Three-Rune Blade"
+                "hit self on miss" 0
+				"bleeding duration" 0
+            }
+		}
+	}
+	
+	PointTemplates    
+	{
+		Box //Template name
+		{
+			NoFixup 1 //Normally, each spawned template entity has added an unique suffix to it. Use NoFixup to prevent such changes, which allows the entity to be used in outputs outside of template without wildcard character added to it
+			prop_dynamic //Entity classname
+			{
+				"model" "models/props_hydro/barrel_crate.mdl" //keyvalue
+				"solid" "6" //Physics collision model (0- No collision, 1 - BSP, 2 - Bounding box, 3 - Oriented bounding box, 6 - VPhysics)
+				//"Modelscale" 2
+			}
+		}
+	}
+	
+	SpawnTemplate   //Spawn template once the mission loads
+	{
+		Name "Box"
+		Origin "1570 700 190" //Position where to spawn the template
+		Angles "90 90 0" //Rotation
+	}
+	
+	Mission
+	{
+		Objective Spy
+
+		InitialCooldown 15
+		Where spawnbot_wall_left
+		BeginAtWave 0
+		RunForThisManyWaves 1
+		CooldownTime 40
+		DesiredCount 2
+
+		TFBot
+		{
+			Template T_TFBot_Spy
+		}
+	}
+	
+	Mission
+	{
+		Objective Sniper
+		
+		Where spawnbot_wall_right
+		BeginAtWave 0
+		RunForThisManyWaves 1
+		InitialCooldown 25
+		CooldownTime 30
+		DesiredCount 2
+		TFBot
+		{
+			Template T_TFBot_Sniper
+		}
+	}
+	
+	
+	Mission // so if anyone manages to put down a sentry they just get clapped
+	{
+		Objective	DestroySentries
+		
+		Where spawnbot
+		InitialCooldown 1000 //1
+		CooldownTime 1
+		BeginAtWave 1
+		RunForThisManyWaves 10
+		TFBot
+		{
+			Template T_TFBot_SentryBuster
+		}
+	}
+	
+//WAVE 1 //////////CURRENCY 400///////////////////////////////////
+	Wave
+	{
+	
+		Explanation    //Dispayed once the wave is initialized
+		{
+			Line "{reset}Medieval Mode Activated."
+			Line "{green}You are allowed to use some extra items, these are: Loose Cannon, Flare gun/detonator, Rescue Ranger and Jarate"
+			Line "{blue}You are restricted to 1 spy maximum, 2 demomen, 2 snipers and 2 medics maximum, and 3 heavies maximum"
+		}
+		
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		
+		WaveSpawn
+		{
+			Name w4_firerush
+			Where spawnbot
+			TotalCount 24
+			MaxActive 8
+			SpawnCount 8
+			WaitBeforeStarting 3
+			WaitBetweenSpawns 10
+			
+			
+				TFBot
+				{
+					Class Pyro
+					WeaponRestrictions MeleeOnly
+					Item "The Axtinguisher"
+				}
+		}
+		WaveSpawn
+		{
+			Name w4_firerush
+			Where spawnbot
+			TotalCount 3
+			MaxActive 3
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 15
+			
+			
+				TFBot
+				{
+					Class Pyro
+					Name "Giant Flare Pyro"
+					ClassIcon pyro_flare_rain_nys
+					Skill Expert
+					Health 3000
+					Item "The Flare Gun"
+					WeaponRestrictions SecondaryOnly
+					Attributes MiniBoss
+					ItemAttributes
+					{
+
+						ItemName "The Scorch Shot"
+						"fire rate bonus" 0.5
+						"projectile spread angle penalty" 10
+						"faster reload rate" 0.22
+						"damage penalty" 0
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"damage force reduction" 0.6
+						"airblast vulnerability multiplier" 0.6
+						"override footstep sound set" 6
+					}
+				}
+		}
+		WaveSpawn
+		{
+			Name w4_firerush
+			Where spawnbot
+			TotalCount 6
+			MaxActive 4
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 20
+			
+			
+				TFBot
+				{
+					Class Soldier
+					ClassIcon soldier_conch
+					Attributes SpawnWithFullCharge
+					Health 900
+					Scale 1.3
+					Item "The Concheror"
+					Item "The Escape Plan"
+					StripItemSlot 1
+					CharacterAttributes
+					{
+						"increase buff duration"	100.0
+					}
+				}
+		}
+		WaveSpawn
+		{
+			Name w4_amputator
+			Where spawnbot
+			TotalCount 6
+			MaxActive 4
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 20
+			
+			
+				TFBot
+				{
+					Class Soldier
+					ClassIcon soldier_conch
+					Attributes SpawnWithFullCharge
+					Health 900
+					Scale 1.3
+					WeaponRestrictions SecondaryOnly
+					Item "The Concheror"
+					CharacterAttributes
+					{
+						"increase buff duration"	100.0
+					}
+				}
+		}
+		WaveSpawn
+		{
+			Name w4_pyro1
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 20
+			
+			
+				TFBot
+				{
+					Class Pyro
+					Name "Giant Flame Arrow Pyro"
+					ClassIcon sniper_bow_ignite
+					Skill Expert
+					Health 3000
+					Item "The Flare Gun"
+					Item "Old Guadalajara"
+					WeaponRestrictions PrimaryOnly
+					Attributes Alwaysfire
+					Attributes MiniBoss
+					ItemAttributes
+					{
+						ItemName "The Flare Gun"
+						"faster reload rate" 0.22
+						"override projectile type"  8
+						is_passive_weapon    1
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"damage force reduction" 0.6
+						"airblast vulnerability multiplier" 0.6
+						"override footstep sound set" 6
+					}
+				}
+		}
+		WaveSpawn
+		{
+			Name w4_pyro2
+			Where spawnbot
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 2
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 20
+			
+			Squad
+			{
+				TFBot
+				{
+					Class Pyro
+					Name "Giant Flame Arrow Pyro"
+					ClassIcon sniper_bow_ignite
+					Skill Expert
+					Health 3000
+					Item "The Scorch Shot"
+					Item "Old Guadalajara"
+					WeaponRestrictions PrimaryOnly
+					Attributes Alwaysfire
+					Attributes MiniBoss
+					ItemAttributes
+					{
+						ItemName "The Scorch Shot"
+						"faster reload rate" 0.22
+						"override projectile type"  8
+						is_passive_weapon    1
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"damage force reduction" 0.6
+						"airblast vulnerability multiplier" 0.6
+						"override footstep sound set" 6
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic
+				}
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name stage1
+			WaitForAllDead bombpush
+			Where spawnbot
+			TotalCount 25
+			MaxActive 15
+			SpawnCount 5
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 7
+			TotalCurrency 200
+			
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Demoman_Knight
+					Name "Knight's Captain"
+					Item "Prince Tavish's Crown"
+					Item "The Claidheamohmor"
+					Health 250
+					Scale 1.3
+				}
+				
+				TFBot
+				{
+					Template T_TFBot_LoyalScout
+				}
+				
+				TFBot
+				{
+					Template T_TFBot_LoyalScout
+				}
+				
+				TFBot
+				{
+					Template T_TFBot_LoyalScout
+				}
+				
+				TFBot
+				{
+					Template T_TFBot_LoyalScout
+				}
+			}
+		}
+	}
+	WAVE 1 //////////CURRENCY 400///////////////////////////////////
+	Wave
+	{
+	
+		Explanation    //Dispayed once the wave is initialized
+		{
+			Line "{reset}Medieval Mode Activated."
+			Line "{green}You are allowed to use some extra items, these are: Loose Cannon, Flare gun/detonator, Rescue Ranger and Jarate"
+			Line "{blue}You are restricted to 1 spy maximum, 2 demomen, 2 snipers and 2 medics maximum, and 3 heavies maximum"
+		}
+		
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+			WaveSpawn
+			{
+				Name w4_pyro1
+				Where spawnbot
+				TotalCount 1
+				MaxActive 1
+				SpawnCount 1
+				WaitBeforeStarting 0
+				WaitBetweenSpawns 20
+				
+				
+					TFBot
+					{
+						Class Pyro
+						Name "Giant Flame Arrow Pyro"
+						ClassIcon sniper_bow_ignite
+						Skill Expert
+						Health 3000
+						Item "The Quickiebomb Launcher"
+						Item "Old Guadalajara"
+						WeaponRestrictions PrimaryOnly
+						Attributes Alwaysfireweapon
+						Attributes MiniBoss
+						AimAt Head  
+						AimLeadProjectileSpeed 2000  
+						ItemAttributes
+						{
+							ItemName "The Quickiebomb Launcher"
+							"stickybomb charge rate"     0.001
+							"override projectile type"  8
+							"grenade not explode on impact" 0
+							is_passive_weapon    1
+						}
+						CharacterAttributes
+						{
+							"move speed bonus"	0.5
+							"damage force reduction" 0.6
+							"airblast vulnerability multiplier" 0.6
+							"override footstep sound set" 6
+						}
+					}
+			}
+	}
+	Wave
+	{
+	
+		Explanation    //Dispayed once the wave is initialized
+		{
+			Line "{reset}Medieval Mode Activated."
+			Line "{green}You are allowed to use some extra items, these are: Loose Cannon, Flare gun/detonator, Rescue Ranger and Jarate"
+			Line "{blue}You are restricted to 1 spy maximum, 2 demomen, 2 snipers and 2 medics maximum, and 3 heavies maximum"
+		}
+		
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		WaveSpawn
+		{
+			Name w7_boss
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 3
+			WaitBetweenSpawns 10
+			
+			
+				TFBot
+				{
+					Class Sniper
+					Name "The Drunken Bowman"
+					ClassIcon sniper_bow
+					Skill Expert
+					Health 10000
+					MaxVisionRange 4200
+					Attributes MiniBoss
+					Item "The Fortified Compound"
+					Item "TF_WEAPON_SPELLBOOK"
+					FireWeapon    //Periodically fires weapon
+						{
+							IfSeeTarget 1 
+							Cooldown 3
+						}
+					ItemAttributes
+						{
+							ItemName "The Fortified Compound"
+							"arrow mastery"				4
+							"projectile penetration"	1
+							"Reload time decreased"		0.1
+						}
+					ItemAttributes
+						{
+							ItemName "TF_WEAPON_SMG"
+							"weapon spread bonus"	 0.001
+							"damage penalty"		 0.5
+							"override projectile type"  2
+							"clip size penalty"		 0.12
+							"mini rockets" 1
+							"Reload time increased"		2
+							is_passive_weapon    1
+						}
+						RocketCustomParticle eyeboss_projectile  
+						HomingRockets  
+						{
+							IgnoreDisguisedSpies 1
+							IgnoreStealthedSpies 1
+							RocketSpeed 0.7 // Multiplier of rocket speed. 1 for default speed
+							TurnPower 90 //How fast should the rocket rotate to face the target=
+							MaxAimError 360 //Max angle between rocket and the target
+						}
+					CharacterAttributes
+						{
+							"move speed bonus"					0.25
+							"damage force reduction" 			0.6
+							"airblast vulnerability multiplier" 0.6
+							"override footstep sound set" 		5
+						}
+					Spell   //Gives specified spell to bots.
+						{
+							Delay 5 //Time before the first spell charges are given (Default: 10)
+							Cooldown 10 //Time between each spell changes (Default: 10)
+							Repeats 0 //How many times should spell charges be given in total (Default: 0 - Infinite)
+							IfSeeTarget 1 //When set to 1, this task activates only when the bot can see the target player (Default: 0 - Always activate)
+							Charges 1 //How many spell charges to give every time the spell is given (Default: 1)
+							Limit 1 //How many spell charges the bot can store (Default: Same as charges given)
+							Type "Fireball"
+						}
+					Spell   //Gives specified spell to bots.
+						{
+							Delay 15 //Time before the first spell charges are given (Default: 10)
+							Cooldown 15 //Time between each spell changes (Default: 10)
+							Repeats 0 //How many times should spell charges be given in total (Default: 0 - Infinite)
+							IfSeeTarget 1 //When set to 1, this task activates only when the bot can see the target player (Default: 0 - Always activate)
+							Charges 1 //How many spell charges to give every time the spell is given (Default: 1)
+							Limit 1 //How many spell charges the bot can store (Default: Same as charges given)
+							Type "Healing Aura"
+							IfHealthBelow 2500
+						}
+					Spell   //Gives specified spell to bots.
+						{
+							Delay 10 //Time before the first spell charges are given (Default: 10)
+							Cooldown 10 //Time between each spell changes (Default: 10)
+							Repeats 0 //How many times should spell charges be given in total (Default: 0 - Infinite)
+							IfSeeTarget 1 //When set to 1, this task activates only when the bot can see the target player (Default: 0 - Always activate)
+							Charges 1 //How many spell charges to give every time the spell is given (Default: 1)
+							Limit 1 //How many spell charges the bot can store (Default: Same as charges given)
+							Type "Ball O' Bats"
+						}
+					Spell   //Gives specified spell to bots.
+						{
+							Delay 8 //Time before the first spell charges are given (Default: 10)
+							Cooldown 8 //Time between each spell changes (Default: 10)
+							Repeats 0 //How many times should spell charges be given in total (Default: 0 - Infinite)
+							IfSeeTarget 1 //When set to 1, this task activates only when the bot can see the target player (Default: 0 - Always activate)
+							Charges 1 //How many spell charges to give every time the spell is given (Default: 1)
+							Limit 1 //How many spell charges the bot can store (Default: Same as charges given)
+							Type "Pumpkin MIRV"
+						}
+					Spell   //Gives specified spell to bots.
+						{
+							Delay 45 //Time before the first spell charges are given (Default: 10)
+							Cooldown 30 //Time between each spell changes (Default: 10)
+							Repeats 0 //How many times should spell charges be given in total (Default: 0 - Infinite)
+							IfSeeTarget 1 //When set to 1, this task activates only when the bot can see the target player (Default: 0 - Always activate)
+							Charges 1 //How many spell charges to give every time the spell is given (Default: 1)
+							Limit 1 //How many spell charges the bot can store (Default: Same as charges given)
+							IfHealthBelow 5000
+							Type "Tesla Bolt"
+						}
+					Spell   //Gives specified spell to bots.
+						{
+							Delay 30 //Time before the first spell charges are given (Default: 10)
+							Cooldown 15 //Time between each spell changes (Default: 10)
+							Repeats 2 //How many times should spell charges be given in total (Default: 0 - Infinite)
+							IfSeeTarget 1 //When set to 1, this task activates only when the bot can see the target player (Default: 0 - Always activate)
+							Charges 1 //How many spell charges to give every time the spell is given (Default: 1)
+							Limit 1 //How many spell charges the bot can store (Default: Same as charges given)
+							IfHealthBelow 2500
+							Type "Summon Monoculus"
+						}
+					Spell   //Gives specified spell to bots.
+						{
+							Delay 30 //Time before the first spell charges are given (Default: 10)
+							Cooldown 10 //Time between each spell changes (Default: 10)
+							Repeats 0 //How many times should spell charges be given in total (Default: 0 - Infinite)
+							IfSeeTarget 1 //When set to 1, this task activates only when the bot can see the target player (Default: 0 - Always activate)
+							Charges 1 //How many spell charges to give every time the spell is given (Default: 1)
+							Limit 1 //How many spell charges the bot can store (Default: Same as charges given)
+							IfHealthBelow 500
+							Type "Meteor Shower"
+						}
+					
+				}
+		}
+	}
+}

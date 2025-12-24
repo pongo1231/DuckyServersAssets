@@ -1,0 +1,871 @@
+#base robot_giant.pop
+#base robot_standard.pop
+
+WaveSchedule
+{
+
+	StartingCurrency 7000
+	RespawnWaveTime 3
+	CanBotsAttackWhileInSpawnRoom no
+	FixedRespawnWaveTime Yes
+	Advanced 1
+	EventPopfile Halloween
+
+	Templates
+	{
+		T_TFBot_Giant_Sniper_Huntsman_Crit
+		{
+			Class Sniper
+			ClassIcon sniper_bow_giant
+			Health 2500
+			Name "Giant Bowman"
+			Skill Expert
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			Attributes AlwaysCrit
+			Item "The Huntsman"
+			Item "Darwin's Danger Shield"
+			Item "Holy Hunter"
+			Item "Silver Bullets"
+			Item "Garlic Flank Stake"
+			ItemAttributes
+			{
+				ItemName "The Huntsman"
+				"damage bonus" 2.0
+				"Reload time increased" 1.5
+			}
+			ItemAttributes
+			{
+				ItemName "Darwin's Danger Shield"
+				"max health additive bonus" 0
+				"dmg taken from bullets reduced" 0.7
+				"dmg taken from blast increased" 1.4
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"damage force reduction" 0.5
+				"airblast vulnerability multiplier" 0.5
+				"override footstep sound set" 2
+			}
+		}
+	}
+	Mission // sentry buster
+	{
+		Objective DestroySentries
+		InitialCooldown 120
+		Where spawnbot
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		CooldownTime 120
+		TFBot
+		{
+			Template T_TFBot_SentryBuster
+		}
+	}
+	Mission // Spy
+	{
+		Objective Spy
+		InitialCooldown 180
+		Where spawnbot_mission_spy
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		CooldownTime 180
+		DesiredCount 2
+		TFBot
+		{
+			Class Spy
+			Skill Expert
+			Item "The Diamondback"
+			Item "Blood Botkiller Knife Mk.I"
+			Item "The Virtual Viewfinder"
+			Item "The Cut-Throat Concierge"
+			Item "dec2014 Pocket Momma"
+		}
+	}	
+	Mission // Sniper
+	{
+		Objective Sniper
+		InitialCooldown 120
+		Where spawnbot_mission_sniper
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		CooldownTime 210
+		DesiredCount 2
+		TFBot
+		{
+			Template T_TFBot_Sniper
+			Skill Expert
+			MaxVisionRange 3000
+			Item "Blood Botkiller Sniper Rifle Mk.I"
+			Item "Darwin's Danger Shield"
+			Item "The Shahanshah"
+			Item "The Virtual Viewfinder"
+			Item "The Outback Intellectual"
+		}
+	}
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_666
+			Action Trigger
+		}
+		Checkpoint Yes
+
+		//STAGE 01 //Currency 700 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		WaveSpawn //WAVE 01a: 60 total, 10 active, Scout (bonk) 
+		{
+			Name "wave01"
+			Where spawnbot
+			TotalCount 30
+			MaxActive 10
+			SpawnCount 10
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 300
+			TFBot
+			{
+				Template T_TFBot_Scout_Bonk
+				Attributes AlwaysCrit
+				Item "Batsaber"
+				Item "Head Hunter"
+				Item "Claws and Infect"
+				Item "Crazy Legs"
+				ItemAttributes
+				{
+					ItemName "Bonk! Atomic Punch"
+					"effect bar recharge rate increased" 0.6
+				}
+			}
+		}
+		WaveSpawn //WAVE 01b: 32 total, 8 active, Pyro (always fire)
+		{
+			Name "wave01"
+			Where spawnbot
+			TotalCount 32
+			MaxActive 8
+			SpawnCount 8
+			WaitBeforeStarting 3
+			WaitBetweenSpawns 7
+			TotalCurrency 200
+			TFBot
+			{
+				Class Pyro
+				Skill Normal
+				Attributes AlwaysFireWeapon
+				Item "Blood Botkiller Flame Thrower Mk.I"
+				Item "Burny's Boney Bonnet"
+				Item "The Cauterizer's Caudal Appendage"
+				Item "The Monster's Stompers"
+				ItemAttributes
+				{
+					ItemName "Blood Botkiller Flame Thrower Mk.I"
+					"SPELL: Halloween green flames" 1
+				}
+			}
+		}
+		WaveSpawn //WAVE 01c: [GIANT] 12 total, 4 active, Demoman (demoknight)
+		{
+			Name "wave01"
+			Where spawnbot
+			TotalCount 12
+			MaxActive 4
+			SpawnCount 4
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 5
+			TotalCurrency 200
+			TFBot
+			{
+				Template T_TFBot_Giant_DemoMan_PrinceTavish
+				Attributes AlwaysCrit
+				Item "The Horseless Headless Horseman's Headtaker"
+				Item "Forgotten King's Restless Head"
+				Item "Forgotten King's Pauldrons"
+			}
+		}
+	//STAGE 02 //Currency 400 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		WaveSpawn //WAVE 02a: [GIANT] 10(20) total, 10(20) active, Soldier (slow crit + uber medic)
+		{
+			Name "wave02"
+			Where spawnbot
+			TotalCount 20
+			MaxActive 20
+			SpawnCount 4
+			WaitForAllDead "wave01"
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 2
+			TotalCurrency 400
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Crit
+					Item "The Hardium Helm"
+					Item "The Jupiter Jumpers"
+					Item "The Space Bracers"
+					ItemAttributes
+					{
+						ItemName "The Original"
+						"damage bonus" 2.0
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Item "Blood Botkiller Medi Gun Mk.I"
+					Item "Templar's Spirit"
+					Item "Wings of Purity"
+					ItemAttributes
+					{
+						ItemName "Blood Botkiller Medi Gun Mk.I"
+						"ubercharge rate bonus" 5
+						"uber duration bonus" -3
+					}
+				}
+			}
+		}
+	//STAGE 03 //Currency 1000 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		WaveSpawn //WAVE 03a: 40 total, 10 active, Soldier 
+		{
+			Name "wave03"
+			Where spawnbot
+			TotalCount 40
+			MaxActive 10
+			SpawnCount 5
+			WaitForAllDead "wave02"
+			WaitBeforeStarting 8
+			WaitBetweenSpawns 2
+			TotalCurrency 300
+			TFBot
+			{
+				Class Soldier
+				Skill Normal
+				Item "Blood Botkiller Rocket Launcher Mk.I"
+				Item "Idiot Box"
+				Item "Steel Pipes"
+				Item "Shoestring Budget"
+				ItemAttributes
+				{
+					ItemName "Blood Botkiller Rocket Launcher Mk.I"
+					"SPELL: Halloween pumpkin explosions" 1
+				}
+			}
+		}
+		WaveSpawn //WAVE 03b: 40 total, 10 active, Heavyweapons 
+		{
+			Name "wave03"
+			Where spawnbot
+			TotalCount 40
+			MaxActive 10
+			SpawnCount 5
+			WaitForAllDead "wave02"
+			WaitBeforeStarting 8
+			WaitBetweenSpawns 2
+			TotalCurrency 300
+			TFBot
+			{
+				Class Heavyweapons
+				Skill Normal
+				Item "Blood Botkiller Minigun Mk.I"
+				Item "Can Opener"
+				Item "Soviet Stich-Up"
+				Item "Steel-Toed Stompers"
+			}
+		}
+		WaveSpawn //WAVE 03c: [GIANT] 5 total, 2 active, Soldier 
+		{
+			Name "wave03"
+			Where spawnbot
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitForAllDead "wave02"
+			WaitBeforeStarting 8
+			WaitBetweenSpawns 30
+			TotalCurrency 200
+			TFBot
+			{
+				Template T_TFBot_Giant_Soldier_Spammer
+				Item "Blood Botkiller Rocket Launcher Mk.I"
+				Item "Hellhunter's Headpiece"
+				Item "Supernatural Stalker"
+				Item "Ghoul Gibbin' Gear"
+				ItemAttributes
+				{
+					ItemName "Blood Botkiller Rocket Launcher Mk.I"
+					"fire rate bonus" 0.5
+					"faster reload rate" -0.8
+					"SPELL: Halloween pumpkin explosions" 1
+				}
+			}
+		}
+		WaveSpawn //WAVE 03d: [GIANT] 5 total, 2 active, Heavyweapons 
+		{
+			Name "wave03"
+			Where spawnbot
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1
+			WaitForAllDead "wave02"
+			WaitBeforeStarting 8
+			WaitBetweenSpawns 30
+			TotalCurrency 200
+			TFBot
+			{
+				Template T_TFBot_Giant_Heavyweapons
+				Item "Blood Botkiller Minigun Mk.I"
+				Item "Bone-Cut Belt"
+				Item "Bull Locks"
+				Item "Minsk Beef"
+				ItemAttributes
+				{
+					ItemName "Blood Botkiller Minigun Mk.I"
+					"damage bonus" 1.5
+				}
+			}
+		}
+	//STAGE 04 //Currency 1200 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		WaveSpawn //WAVE 04a: 80 total, 10 active, Scout
+		{
+			Name "wave04"
+			Where spawnbot_scattered
+			RandomSpawn 1
+			TotalCount 80
+			MaxActive 10
+			SpawnCount 5
+			WaitForAllDead "wave03"
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 8
+			TotalCurrency 600
+			TFBot
+			{
+				Class Scout
+				Skill Normal
+				Attributes AlwaysCrit
+				WeaponRestrictions SecondaryOnly
+				Item "The C.A.P.P.E.R"
+				Item "Head Hunter"
+				Item "Claws and Infect"
+				Item "Crazy Legs"
+			}
+		}
+		WaveSpawn //WAVE 04b: [3 TANKS]  
+		{
+			Name "wave04"
+			TotalCount 3
+			WaitForAllDead "wave03"
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 50
+			TotalCurrency 600
+			FirstSpawnOutput
+			{
+				Target boss_spawn_relay                                            
+				Action Trigger                         
+			}
+			Tank
+			{
+				Health 40000
+				Speed 70
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_1"
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}
+		}
+	//STAGE 05 //Currency 1000 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		WaveSpawn //WAVE 05a: [GIANT] 40 total, 15 active, Demoman
+		{
+			Name "wave05"
+			Where spawnbot
+			TotalCount 40
+			MaxActive 10
+			SpawnCount 5
+			WaitForAllDead "wave04"
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 10
+			TotalCurrency 500
+			TFBot
+			{
+				Template T_TFBot_Giant_Demo_RapidFire
+				Item "Hair of the Dog"
+				Item "Scottish Snarl"
+				Item "Pickled Paws"
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_GRENADELAUNCHER"
+					"fire rate bonus" 0.5
+					"SPELL: Halloween pumpkin explosions" 1
+				}
+			}
+		}
+		WaveSpawn //WAVE 05b: 40 total, 5 active, Demoman (Eyelander + Charge N Targe)
+		{
+			Name "wave05"
+			Where spawnbot
+			TotalCount 40
+			MaxActive 5
+			SpawnCount 5
+			WaitForAllDead "wave04"
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 8
+			TotalCurrency 500
+			TFBot
+			{
+				Template T_TFBot_Demoman_Knight
+				Attributes AlwaysCrit
+				Item "The Horseless Headless Horseman's Headtaker"
+				Item "Forgotten King's Restless Head"
+				Item "Forgotten King's Pauldrons"
+			}
+		}
+		WaveSpawn //WAVE 05c: [TANK]  
+		{
+			Name "wave05"
+			TotalCount 1
+			WaitForAllDead "wave04"
+			WaitBeforeStarting 55
+			WaitBetweenSpawns 0
+			TotalCurrency 600
+			FirstSpawnOutput
+			{
+				Target boss_spawn_relay                                            
+				Action Trigger                         
+			}
+			Tank
+			{
+				Health 50000
+				Speed 65
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_1"
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}
+		}
+	//STAGE 06 //Currency 700 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		WaveSpawn //WAVE 06a: 40 total, 20 active, Soldier (Direct hit, buff banner)
+		{
+			Name "wave06a"
+			Where spawnbot_scattered
+			RandomSpawn 1
+			TotalCount 40
+			MaxActive 20
+			SpawnCount 10
+			WaitForAllDead "wave05"
+			WaitBeforeStarting 15
+			WaitBetweenSpawns 2
+			TotalCurrency 300
+			TFBot
+			{
+				Class Soldier
+				ClassIcon soldier_buff
+				Name "Buff Box Soldier"
+				Skill Expert
+				WeaponRestrictions PrimaryOnly
+				Item "The Black Box"
+				Item "The Buff Banner"
+				Item "The Hardium Helm"
+				Item "The Jupiter Jumpers"
+				Item "The Space Bracers"
+				Attributes SpawnWithFullCharge
+				ItemAttributes
+				{
+					ItemName "The Black Box"
+					"damage bonus"	2.0
+					"faster reload rate" -0.8
+					"SPELL: Halloween pumpkin explosions" 1
+				}
+				CharacterAttributes 
+				{
+					"increase buff duration"	9.0					
+				}
+			}
+		}
+		WaveSpawn //WAVE 06b: [GIANT] 4(8) total, 4(8) active, Heavyweapons (Always Crit + Giant medic)
+		{
+			Name "wave06b"
+			Where spawnbot
+			TotalCount 8
+			MaxActive 8
+			SpawnCount 2
+			WaitForAllSpawned "wave06a"
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 30
+			TotalCurrency 400
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons_Deflector
+					Attributes AlwaysCrit
+					Item "Blood Botkiller Minigun Mk.I"
+					Item "The Grand Duchess Tutu"
+					Item "The Grand Duchess Fairy Wings"
+					Item "The Grand Duchess Tiara"
+					ItemAttributes
+					{
+						ItemName "Blood Botkiller Minigun Mk.I"
+						"damage bonus" 1.5
+						"attack projectiles" 2
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic
+					Item "Blood Botkiller Medi Gun Mk.I"
+					Item "Herzensbrecher"
+					Item "Hundekopf"
+					Item "Kriegsmaschine-9000"
+					ItemAttributes
+					{
+						ItemName "Blood Botkiller Medi Gun Mk.I"
+						"lunchbox adds minicrits" 2
+						"medigun charge is megaheal" 2
+						"ubercharge rate bonus" 1.25
+						"overheal penalty" 0.5
+					}
+				}
+			}
+		}
+	//STAGE 07 //Currency 1300 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		WaveSpawn //WAVE 07a: [4 TANKS]  
+		{
+			Name "wave07"
+			TotalCount 4
+			WaitForAllDead "wave06b"
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 30
+			TotalCurrency 1100
+			FirstSpawnOutput
+			{
+				Target boss_spawn_relay                                            
+				Action Trigger                         
+			}
+			Tank
+			{
+				Health 45000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_1"
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}
+		}
+		WaveSpawn //WAVE 07b: 96 total, 16 active, Spy 
+		{
+			Name "wave07"
+			Where spawnbot
+			TotalCount 150
+			MaxActive 16
+			SpawnCount 8
+			WaitForAllDead "wave06b"
+			WaitBeforeStarting 40
+			WaitBetweenSpawns 5
+			TotalCurrency 200
+			TFBot
+			{
+				Class Spy
+				ClassIcon spy_d
+				Name "Man of Honour"
+				Skill Expert
+				Item "The Enforcer"
+				Item "The Big Earner"
+				Item "The Made Man"
+				Item "Cosa Nostra Cap"
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "wave08a-1"
+			Where spawnbot
+			TotalCount 6
+			MaxActive 2
+			SpawnCount 2
+			WaitForAllDead "wave07"
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 15
+			TotalCurrency 600
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Sniper_Huntsman_Crit
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic
+					Item "Blood Botkiller Medi Gun Mk.I"
+					Item "Herzensbrecher"
+					Item "Hundekopf"
+					Item "Kriegsmaschine-9000"
+					ItemAttributes
+					{
+						ItemName "Blood Botkiller Medi Gun Mk.I"
+						"lunchbox adds minicrits" 2
+						"medigun charge is megaheal" 2
+						"ubercharge rate bonus" 1.25
+						"overheal penalty" 0.5
+					}
+				}
+			}
+		}
+		WaveSpawn //WAVE 08a: 75 total, 20 active, Sniper (Huntsman)
+		{
+			Name "wave08a-2"
+			Where spawnbot_scattered
+			RandomSpawn 1
+			TotalCount 75
+			MaxActive 20
+			SpawnCount 5
+			WaitForAllDead "wave07"
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 1
+			TotalCurrency 300
+			TFBot
+			{
+				Template T_TFBot_Sniper_Huntsman
+				Skill Expert
+				Item "The Fortified Compound"
+				Item "Holy Hunter"
+				Item "Silver Bullets"
+				Item "Garlic Flank Stake"
+				Attributes AlwaysCrit
+				ItemAttributes
+				{
+					ItemName "The Fortified Compound"
+					"damage bonus"	1.5
+					"faster reload rate" 0.2
+				}
+			}
+		}
+		WaveSpawn //WAVE 08b: 75 total, 20 active, Soldier (Always Crit)
+		{
+			Name "wave08b"
+			Where spawnbot_scattered
+			RandomSpawn 1
+			TotalCount 75
+			MaxActive 20
+			SpawnCount 5
+			WaitForAllSpawned "wave08a-2"
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 1
+			TotalCurrency 300
+			TFBot
+			{
+				Class Soldier
+				Skill Expert
+				Attributes AlwaysCrit
+				Item "Blood Botkiller Rocket Launcher Mk.I"
+				Item "The Hardium Helm"
+				Item "The Jupiter Jumpers"
+				Item "The Space Bracers"
+				ItemAttributes
+				{
+					ItemName "Blood Botkiller Rocket Launcher Mk.I"
+					"damage bonus" 2.0
+					"faster reload rate" -0.8
+					"fire rate bonus" 0.6
+					"SPELL: Halloween pumpkin explosions" 1
+				}
+			}
+		}
+		WaveSpawn //WAVE 08c: 75 total, 20 active, Demoman (Always Crit)
+		{
+			Name "wave08c"
+			Where spawnbot_scattered
+			RandomSpawn 1
+			TotalCount 75
+			MaxActive 20
+			SpawnCount 5
+			WaitForAllSpawned "wave08b"
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 1
+			TotalCurrency 200
+			TFBot
+			{
+				Class Demoman
+				Skill Expert
+				Attributes AlwaysCrit
+				Item "Hair of the Dog"
+				Item "Scottish Snarl"
+				Item "Pickled Paws"
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_GRENADELAUNCHER"
+					"damage bonus" 2.0
+					"faster reload rate" -0.8
+					"fire rate bonus" 0.5
+					"Projectile speed increased" 2.0
+					"SPELL: Halloween pumpkin explosions" 1
+				}
+			}
+		}
+		WaveSpawn //WAVE 08d: 75 total, 20 active, Pyro (Always Crit)
+		{
+			Name "wave08d"
+			Where spawnbot_scattered
+			RandomSpawn 1
+			TotalCount 75
+			MaxActive 20
+			SpawnCount 5
+			WaitForAllSpawned "wave08c"
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 1
+			TotalCurrency 200
+			TFBot
+			{
+				Class Pyro
+				Skill Expert
+				Attributes AlwaysCrit
+				Item "Blood Botkiller Flame Thrower Mk.I"
+				Item "Burny's Boney Bonnet"
+				Item "The Cauterizer's Caudal Appendage"
+				Item "The Monster's Stompers"
+				ItemAttributes
+				{
+					ItemName "Blood Botkiller Flame Thrower Mk.I"
+					"damage bonus" 2.0
+					"move speed bonus" 1.5
+					"SPELL: Halloween green flames" 1
+				}
+			}
+		}
+		WaveSpawn //WAVE 08e: 75 total, 20 active, Scout (Always Crit)
+		{
+			Name "wave08e"
+			Where spawnbot_scattered
+			RandomSpawn 1
+			TotalCount 75
+			MaxActive 20
+			SpawnCount 5
+			WaitForAllSpawned "wave08d"
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 1
+			TotalCurrency 200
+			TFBot
+			{
+				Class Scout
+				Skill Expert
+				Attributes AlwaysCrit
+				Item "Blood Botkiller Scattergun Mk.I"
+				Item "Head Hunter"
+				Item "Claws and Infect"
+				Item "Crazy Legs"
+			}
+		}
+		WaveSpawn //WAVE 08f: 48 total, 22 active, Heavyweapons (Always Crit + Uber medic)
+		{
+			Name "wave08f"
+			Where spawnbot_scattered
+			RandomSpawn 1
+			TotalCount 48
+			MaxActive 22
+			SpawnCount 4
+			WaitForAllSpawned "wave08e"
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 1
+			TotalCurrency 200
+			Squad
+			{
+				TFBot
+				{
+					Class Heavyweapons
+					Skill Expert
+					Attributes AlwaysCrit
+					Item "Blood Botkiller Minigun Mk.I"
+					Item "Can Opener"
+					Item "Soviet Stich-Up"
+					Item "Steel-Toed Stompers"
+					ItemAttributes
+					{
+						ItemName "Blood Botkiller Minigun Mk.I"
+						"damage bonus" 1.5
+						"fire rate bonus" 0.8
+						"minigun spinup time decreased" 0.5
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Item "Blood Botkiller Medi Gun Mk.I"
+					Item "The Templar's Spirit"
+					Item "Wings of Purity"
+					ItemAttributes
+					{
+						ItemName "Blood Botkiller Medi Gun Mk.I"
+						"ubercharge rate bonus" 5
+						"uber duration bonus" -3
+					}
+				}
+			}
+		}
+		WaveSpawn //WAVE 08g: [FINAL TANK]  
+		{
+			Name "wave08g"
+			TotalCount 1
+			WaitForAllDead "wave08d"
+			WaitBeforeStarting 20
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+			FirstSpawnOutput
+			{
+				Target boss_spawn_relay
+				Action Trigger
+			}
+			Tank
+			{
+				Health 85000
+				Speed 40
+				Name "tankboss"
+				Skin 1
+				StartingPathTrackNode "boss_path_1"
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+	}
+}

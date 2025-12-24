@@ -1,0 +1,204 @@
+#base robot_standard.pop
+#base robot_giant.pop
+#base robot_typicalcolors_weapons.pop
+#base robot_toomanyjokes.pop
+WaveSchedule
+{
+	StartingCurrency 20000
+	CanBotsAttackWhileInSpawnRoom no
+	RespawnWaveTime 5
+	Advanced 1
+	Templates {}
+	CustomUpgradesFile	"mvm_upgrades_sigsegv_extra_v20.txt"
+	Wave // Wave 1
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 123456789
+			WaitBetweenSpawns 123456789
+			TotalCurrency 0
+			TFBot
+			{
+				ClassIcon	dead
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			TotalCount 24
+			MaxActive 24
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+			Support 1
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Scout_Shotgun_Cannon
+					Attributes IgnoreFlag
+					Action Mobber
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_FaN_NoKB_Ignite
+					Attributes IgnoreFlag
+					Action Mobber
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_ArchingRocket
+					Attributes IgnoreFlag
+					Action Mobber
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_DoubleRocket
+					Attributes IgnoreFlag
+					Action Mobber
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_WW2
+					Attributes IgnoreFlag
+					Action Mobber
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_TunnelRat
+					Attributes IgnoreFlag
+					Action Mobber
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Incendiary_Rockets
+					Attributes IgnoreFlag
+					Action Mobber
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Jarate
+					Attributes IgnoreFlag
+					Action Mobber
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Peacekeeper
+					Attributes IgnoreFlag
+					Action Mobber
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_TwoPills_Cluster
+					Attributes IgnoreFlag
+					Action Mobber
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavyweapons_HealOnHit
+					Attributes IgnoreFlag
+					Action Mobber
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_TwoPills_Cluster
+					Attributes IgnoreFlag
+					Action Mobber
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavyweapons_FastMove_Reved
+					Attributes IgnoreFlag
+					Action Mobber
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavyweapons_Shotgun_HoK
+					Attributes IgnoreFlag
+					Action Mobber
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Poachers_Pride
+					Attributes IgnoreFlag
+					Action Mobber
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Heal
+					Attributes IgnoreFlag
+					Action Default
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Sniper_Poachers_Pride
+					Attributes IgnoreFlag
+					Action Mobber
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_ArchingRocket
+					Attributes IgnoreFlag
+					Action Mobber
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_DoubleRocket
+					Attributes IgnoreFlag
+					Action Mobber
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Demoman_Jarate
+					Attributes IgnoreFlag
+					Action Mobber
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_WW2
+					Attributes IgnoreFlag
+					Action Mobber
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Demoman_TwoPills_Cluster
+					Attributes IgnoreFlag
+					Action Mobber
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Pyro_Incendiary_Rockets
+					Attributes IgnoreFlag
+					Action Mobber
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons_Shotgun_HoK_Heavy
+					Attributes IgnoreFlag
+					Action Mobber
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons_FastMove_Reved
+					Attributes IgnoreFlag
+					Action Mobber
+				}
+			}
+		}
+	}
+}

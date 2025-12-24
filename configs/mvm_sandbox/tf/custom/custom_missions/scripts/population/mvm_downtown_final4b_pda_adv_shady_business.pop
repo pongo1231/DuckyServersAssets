@@ -1,0 +1,1900 @@
+#base robot_standard.pop
+#base robot_giant.pop
+#base robot_gatebot.pop
+
+// spawns :
+// spawnbot
+// spawnbot_support (small little thing to left)
+// spawnbot_upper (right side)
+// spawnbot_elevator (duh, needs its own triggers)
+// spawnbot_garage (gate a)
+// spawnbot_garage_giant (gate a, for giants)
+// spawnbot_mensch (gate b)
+// spawnbot_mensch_giant (gate b, for giants)
+// spawnbot_trainstation (giants can't spawn here. Gate C)
+
+// tank paths :
+// a_1 (Left lane path)
+// b_1 (Right lane path)
+
+// made by pda expert for the DRoboTK servers.
+// hard advanced
+
+WaveSchedule
+{
+StartingCurrency 4000
+RespawnWaveTime 5
+CanBotsAttackWhileInSpawnRoom no
+FixedRespawnWaveTime	Yes
+Advanced 1
+
+    Templates
+	{
+	
+	br_giant_vaccinator_medic // Vaccinator medic dummy template.
+	{			
+	Class Medic
+	Name "Giant Vaccinator Medic"
+	ClassIcon medic_vac_trio_nys_giant
+	Skill Expert
+	Health 4500
+	Attributes SpawnWithFullCharge
+	//Item "The Vaccinator"
+	Attributes MiniBoss
+	//Item "Officer's Ushanka" // For Bullet
+	//Item "The Birdcage" // For Fire
+	//Item "Armored Authority" // For Blast
+	ItemAttributes
+	{
+	ItemName    tf_weapon_medigun
+	"heal rate bonus"    25
+	"medigun bullet resist passive"    1
+	"medigun bullet resist deployed"    1
+	"medigun blast resist passive"    1
+	"medigun blast resist deployed" 1.0
+	"medigun fire resist passive" 1
+	"medigun fire resist deployed" 1
+	"medigun charge is resists"    3
+	"lunchbox adds minicrits"    3
+	"ubercharge rate bonus"    500
+	}
+	CharacterAttributes
+	{
+	"uber duration bonus" 100
+	"bot medic uber health threshold"    4500
+	"move speed bonus"	0.5
+	"damage force reduction" 0.6
+	"airblast vulnerability multiplier" 0.6
+	}
+	}
+	
+	br_giant_bullet_medic
+	{
+	Template br_giant_vaccinator_medic
+	ClassIcon medic_bullet_giant
+	Attributes VaccinatorBullets
+	Name "Giant Bullet Absorber"
+    Item "Officer's Ushanka"
+	}
+	
+	br_giant_blast_medic
+	{
+	Template br_giant_vaccinator_medic
+	ClassIcon medic_blast_giant
+	Attributes VaccinatorBlast
+	Name "Giant Blast Absorber"
+	Item "Armored Authority"
+	}
+	
+	br_giant_fire_medic
+	{
+	Template br_giant_vaccinator_medic
+	ClassIcon medic_fire_giant
+	Attributes VaccinatorFire
+	Name "Giant Fire Absorber"
+	Item "The Birdcage"
+	}
+	
+	PDA_Randy_Marshal // boss of subwave 1-4
+	{
+	Health 30000
+	Class Heavyweapons
+	Skill Expert
+	Scale 1.8
+	ClassIcon heavy_deflector_push
+	Tag bot_giant
+	Name "Randy Marshal"
+	Item "teufort_minigun_warroom" 
+	Item "The One-Man Army"
+	Item "The Apparatchik's Apparel"
+	Item "The Triggerman's Tacticals"
+	Attributes MiniBoss
+	Attributes UseBossHealthBar
+	Attributes AlwaysFireWeapon
+    ItemAttributes
+	{
+	ItemName "teufort_minigun_warroom" 
+	"damage bonus" 1.35
+	"fire rate bonus" 0.6
+	"spread penalty" 1.5
+	"bullets per shot bonus" 1.65
+	"attack projectiles" 2
+	"apply z velocity on damage" -1
+	"apply look velocity on damage" 555
+	}
+	CharacterAttributes
+	{
+	"move speed bonus" 0.4
+	"damage force reduction" 0.2
+	"airblast vulnerability multiplier" 0.1
+	"rage giving scale" 0.1
+	"override footstep sound set" 2
+	"airblast vertical vulnerability multiplier" 0.1
+	}
+	}
+	
+	PDA_Agent_404 // boss of subwave 5.
+	{
+	Health 50000
+	Name "Agent 404"
+	Scale 1.8
+	Class Soldier
+	Skill Expert
+	ClassIcon soldier_rocketrain
+	Tag bot_giant
+	Attributes MiniBoss
+	Attributes UseBossHealthBar
+    Item "The Beggar's Bazooka"
+	Item "The Spook Specs"
+	//Item "The Classified Coif"
+	Item "The Man in Slacks"
+	ItemAttributes
+	{
+	ItemName "The Beggar's Bazooka"
+	"fire rate bonus" 0.3
+	"faster reload rate" 0.5
+	"clip size upgrade atomic" 17
+	"blast radius increased" 1.2
+	"blast radius decreased" 1.0
+	"auto fires when full" 1
+	}
+	CharacterAttributes
+	{
+	"move speed bonus" 0.4
+	"damage force reduction" 0.2
+	"airblast vulnerability multiplier" 0.1
+	"rage giving scale" 0.1
+	"override footstep sound set" 3
+	"airblast vertical vulnerability multiplier" 0.1
+	}
+	}
+	
+	PDA_DrStickySplayer // boss of subwave 8-10
+	{
+	Health 60000
+	Name "Dr. Stickysplayer"
+	Scale 1.8
+	Class Demoman
+	Skill Expert
+	Tag bot_giant
+	ClassIcon demo_sticky_daan
+	WeaponRestrictions SecondaryOnly
+	Attributes MiniBoss
+	Attributes UseBossHealthBar
+	Attributes AlwaysCrit
+	Item "The Iron Bomber"
+	Item "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+	Item "Das Hazmattenhatten"
+	Item "Siberian Tigerstripe"
+	ItemAttributes
+	{
+	ItemName "The Iron Bomber"
+	"damage bonus" 2.0
+	"is_passive_weapon" 1
+	"dmg pierces resists absorbs" 1
+	"Projectile speed increased" 0.75
+	"fuse bonus" 2.5
+	"fire rate penalty" 6
+	"blast radius increased" 1.4
+	"faster reload rate" 2.5
+	"use large smoke explosion" 1
+	}
+	ItemAttributes
+	{
+	ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+	"stickybomb charge rate" 0.01
+	"max pipebombs decreased" -4
+	"clip size upgrade atomic" 22
+	"faster reload rate" -2
+	"fire rate bonus" 0.3
+	"blast radius decreased" 0.8
+	"no self blast dmg" 2
+	"projectile spread angle penalty" 4
+	"damage bonus" 1.5
+	"Projectile range increased" 0.35
+	}
+	CharacterAttributes
+	{
+	"move speed bonus" 0.4
+	"damage force reduction" 0.1
+	"airblast vulnerability multiplier" 0.1
+	"rage giving scale" 0.1
+	"override footstep sound set" 4
+	"airblast vertical vulnerability multiplier" 0.1
+	}
+	}
+	
+	}
+
+    // Sentry Buster
+	Mission
+	{
+		Where spawnbot_upper
+		Where spawnbot_garage_giant
+		Where spawnbot_mensch_giant
+		Objective DestroySentries
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		CooldownTime 25
+		TFBot
+		{
+		Template T_TFBot_SentryBuster
+		Tag bot_giant	
+        }
+	}
+	
+    // Engineer
+	Mission
+	{
+    	Where spawnbot_elevator
+		Where spawnbot_garage
+		Where spawnbot_mensch
+		Where spawnbot_trainstation
+		Objective   Engineer
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		InitialCooldown 80
+		CooldownTime    50
+		DesiredCount    1
+		TFBot
+		{
+		Template T_TFBot_Engineer_Sentry_Tele_Battle
+		TeleportWhere spawnbot_upper
+		TeleportWhere spawnbot_garage
+		TeleportWhere spawnbot_mensch
+		TeleportWhere spawnbot_garage_giant
+		TeleportWhere spawnbot_mensch_giant
+		TeleportWhere spawnbot_trainstation
+		
+		Name "Behind The Scenes Technician"
+		Health 500
+		Item Wavefinder
+	    Item "Rocket Operator"
+		}
+	}
+	
+	// Sniper
+	Mission
+	{
+	    Where spawnbot_support
+		Where spawnbot_garage
+		Where spawnbot_mensch
+		Where spawnbot_mensch_giant
+		Objective Sniper
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		DesiredCount 2
+		InitialCooldown 60
+		CooldownTime 50
+		TFBot
+		{
+		Template T_TFBot_Sniper_Razorback
+		Name "Behind The Scenes Camera-Man"
+		}
+	}
+	
+	// Spy
+	Mission
+	{
+	    Where spawnbot_support
+		Where spawnbot_garage
+		Where spawnbot_mensch_giant
+		Objective Spy
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		DesiredCount 3
+		InitialCooldown 90
+		CooldownTime 70
+		TFBot
+		{
+		Template T_TFBot_Spy
+		Name "Ragdoll Visualizer"
+		CharacterAttributes
+		{
+		"voice pitch scale" 0.0
+		"move speed bonus" 1.25
+		}
+		}
+	}
+
+    Wave
+	{    
+	    StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		
+		WaveSpawn
+		{
+		Name "bomb"
+		TotalCount 60
+		MaxActive 1
+		SpawnCount 1
+		Support Limited
+		Where spawnbot_support
+		Where spawnbot_garage
+		Where spawnbot_mensch
+		Where spawnbot_trainstation
+		WaitBetweenSpawns 10
+		WaitBeforeStarting 20
+		TFBot
+		{
+		Template T_TFBot_Heavyweapons_Shotgun
+		Name "Prop Lifter"
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "bomb2"
+		WaitForAllDead "bomb"
+		TotalCount 3
+		MaxActive 1
+		Support 1
+		SpawnCount 1
+		Where spawnbot_support
+		Where spawnbot_garage
+		Where spawnbot_mensch
+		Where spawnbot_trainstation
+		WaitBetweenSpawns 10
+		WaitBeforeStarting 5
+		TFBot
+		{
+		Template T_TFBot_Heavyweapons_Shotgun
+		Name "Experienced Prop Lifter"
+		ItemAttributes
+		{
+		ItemName "TF_WEAPON_SHOTGUN_HWG"
+		"faster reload rate" 0.1
+		"fire rate bonus" 2.5
+		"bullets per shot bonus" 3
+		"damage bonus" 0.33
+		"spread penalty" 1.44
+		"attach particle effect" 703
+		}
+		CharacterAttributes
+		{
+		"dmg pierces resists absorbs" 1
+		}
+		}
+		}
+		
+		// Action Movies (Leans towards war movies)
+		
+		// Subwave #1 :
+		// 40 Scatter Gun Scouts
+		// 16 Juggies
+		// 24 Heavies (Gatebots)
+		
+		
+		WaveSpawn
+		{
+		Name "wave01"
+		TotalCount 40
+		MaxActive 19
+		SpawnCount 3
+		Where spawnbot_upper
+		Where spawnbot_garage
+		Where spawnbot_mensch
+		Where spawnbot_trainstation
+		WaitBetweenSpawns 2.5
+		TotalCurrency 100 // i forgot about this lol
+		TFBot
+		{
+		Class Scout
+		Skill Normal
+		Name "Lever-Action Dude"
+		Item "Fortunate Son"
+		Item "Flak Jack"
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "wave01"
+		TotalCount 14
+		MaxActive 6
+		SpawnCount 2
+		Where spawnbot
+		Where spawnbot_garage_giant
+		Where spawnbot_mensch_giant
+		WaitBetweenSpawns 6
+		TotalCurrency 200
+		TFBot
+		{
+		Class Demoman
+		ClassIcon demoknight_skullcutter_lite
+		Skill Hard
+		Name "Battle-Axe Wielder"
+		Attributes AlwaysCrit
+		WeaponRestrictions MeleeOnly // makes bots wield melee
+		Tag bot_giant
+		Health 1500
+		Scale 1.5
+		Item "Blast Defense"
+		Item "The Scotsman's Skullcutter"
+		ItemAttributes
+		{
+		ItemName "The Scotsman's Skullcutter"
+		"damage bonus" 1.75
+		"move speed penalty" 0.65
+		}
+		CharacterAttributes
+		{
+		"damage force reduction" 0.5
+		"airblast vulnerability multiplier" 0.5
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "wave01"
+		TotalCount 24
+		MaxActive 12
+		SpawnCount 6
+		Where spawnbot_upper
+		Where spawnbot_garage
+		Where spawnbot_mensch
+		Where spawnbot_trainstation
+		WaitBetweenSpawns 8
+		WaitBeforeStarting 10
+		TotalCurrency 100
+		TFBot
+		{
+		Template T_TFGateBot_Heavy_Hard
+		}
+		}
+		
+		// Subwave #2 :
+		// 6 Giant Rapid Fire Soldiers (gatebot)
+		// 39 Slug Shot Scouts (come from elevator)
+		// 80 Fist Heavies (Carry on to next subwave.)
+		
+		WaveSpawn
+		{
+		Name "wave02"
+		WaitForAllDead "wave01"
+		TotalCount 12
+		MaxActive 6
+		SpawnCount 1
+		WaitBeforeStarting 6
+		WaitBetweenSpawns 5
+		Where spawnbot
+		Where spawnbot_garage_giant
+		Where spawnbot_mensch_giant
+		TotalCurrency 200
+		TFBot
+		{
+			Class Soldier
+			Name "RPG Duke"
+			ClassIcon soldier_spammer
+			Health 3800
+			EventChangeAttributes
+			{
+				Default
+				{
+					Tag bot_gatebot 				// having these will cause bots to run towards gates
+					Tag nav_prefer_gate1_flank		// having these will cause bots to run towards gates
+					BehaviorModifiers push			// having these will cause bots to run towards gates
+					Attributes IgnoreFlag 			// having these will cause bots to run towards gates
+
+					Item "MvM GateBot Light Soldier"
+					Skill Expert
+					WeaponRestrictions PrimaryOnly
+					Attributes MiniBoss
+					Tag bot_giant
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_ROCKETLAUNCHER"
+						"faster reload rate" -0.8
+						"fire rate bonus" 0.5
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"damage force reduction" 0.4
+						"airblast vulnerability multiplier" 0.4
+						"override footstep sound set" 3
+						"Projectile speed increased" 0.65
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Item "MvM GateBot Light Soldier"
+					ItemAttributes               // turn off light hat
+					{
+						ItemName "MvM GateBot Light Soldier"
+						"item style override" 1
+					}
+					Skill Expert
+					WeaponRestrictions PrimaryOnly
+					Attributes MiniBoss
+					Tag bot_giant
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_ROCKETLAUNCHER"
+						"faster reload rate" -0.8
+						"fire rate bonus" 0.5
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"damage force reduction" 0.4
+						"airblast vulnerability multiplier" 0.4
+						"override footstep sound set" 3
+						"Projectile speed increased" 0.65
+					}
+				}
+			}
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "wave02"
+		WaitForAllDead "wave01"
+		TotalCount 39
+		SpawnCount 13
+		MaxActive 13
+		WaitBeforeStarting 10
+		WaitBetweenSpawns 10
+		Where spawnbot_elevator
+		Where spawnbot_garage
+		Where spawnbot_mensch
+		Where spawnbot_trainstation
+		TotalCurrency 200
+		TFBot
+		{
+		Skill Hard
+		Name "On-The-Run Criminal"
+		Class Scout
+		Item "Baby Face's Blaster"
+		Item "The Fed-Fightin' Fedora"
+		Item "Dillinger's Duffel"
+		Attributes SpawnWithFullCharge
+		ItemAttributes
+		{
+		ItemName "Baby Face's Blaster"
+		"lose hype on take damage" 0
+		"weapon spread bonus" 0.001
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		//Name "wave02"
+		WaitForAllDead "wave01"
+		TotalCount 80
+		MaxActive 20
+		SpawnCount 4
+		WaitBeforeStarting 12
+		WaitBetweenSpawns 2
+		Where spawnbot_support
+		Where spawnbot_garage
+		Where spawnbot_mensch
+		Where spawnbot_trainstation
+		TotalCurrency 100
+		TFBot
+		{
+		Class Heavyweapons
+		Skill Hard
+		Name "Martial Artist"
+		ClassIcon heavy_fist_nys
+		//Scale 1.25 // most likely will not fit in spawnbot_support
+		Item "Mediterranean Mercenary"
+		WeaponRestrictions MeleeOnly
+		CharacterAttributes
+		{
+		"fire rate bonus" 0.6
+		"damage bonus" 1.25
+		"damage force reduction" 0.5
+		"airblast vulnerability multiplier" 0.5
+		}
+		}
+		}
+		
+		// Subwave #3 :
+		// 6 Giant Burst-Fire Demomen & Giant Regen Medics (Gatebots)
+		// 3 Giant Heavies (Natascha)
+		// 1 Tank
+		
+		WaveSpawn
+		{
+		Name "wave03"
+		WaitForAllSpawned "wave02"
+		TotalCount 12
+		MaxActive 6
+		SpawnCount 2
+		Where spawnbot
+		Where spawnbot_garage_giant
+		Where spawnbot_mensch_giant
+		WaitBetweenSpawns 10
+		TotalCurrency 200
+		TFBot
+		{
+			Class Demoman
+			Name "Minelayer Duke"
+			ClassIcon demo_burst_giant
+			Health 3300
+			EventChangeAttributes
+			{
+				Default
+				{
+					BehaviorModifiers push			// having these will cause bots to run towards gates
+					Attributes IgnoreFlag			// having these will cause bots to run towards gates
+					Tag nav_prefer_gate1_flank 		// having these will cause bots to run towards gates
+					Tag bot_gatebot 				// having these will cause bots to run towards gates
+
+					Item "MvM GateBot Light Demoman"
+					Tag bot_giant
+					Skill Expert
+					Item "The Iron Bomber"
+					WeaponRestrictions PrimaryOnly
+					Attributes MiniBoss
+					Attributes HoldFireUntilFullReload
+					ItemAttributes
+					{
+						ItemName "The Iron Bomber"
+						"faster reload rate" 0.65 //35% faster reload
+						"fire rate bonus" 0.1
+						"clip size upgrade atomic" 7.0
+						"projectile spread angle penalty" 5
+					}
+
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"damage force reduction" 0.4
+						"airblast vulnerability multiplier" 0.4
+						"override footstep sound set" 4
+						"Projectile speed increased"	1.1
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Item "MvM GateBot Light Demoman"
+					ItemAttributes               // turn off light hat
+					{
+						ItemName "MvM GateBot Light Demoman"
+						"item style override" 1
+					}
+					Tag bot_giant
+					Skill Expert
+					Item "The Iron Bomber"
+					WeaponRestrictions PrimaryOnly
+					Attributes MiniBoss
+					Attributes HoldFireUntilFullReload
+					ItemAttributes
+					{
+						ItemName "The Iron Bomber"
+						"faster reload rate" 0.65 //35% faster reload
+						"fire rate bonus" 0.1
+						"clip size upgrade atomic" 7.0
+						"projectile spread angle penalty" 5
+					}
+
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"damage force reduction" 0.4
+						"airblast vulnerability multiplier" 0.4
+						"override footstep sound set" 4
+						"Projectile speed increased"	1.1
+					}
+				}
+			}
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "wave03"
+		TotalCount 3
+		MaxActive 3
+		SpawnCount 1
+		Where spawnbot_upper
+		Where spawnbot_garage_giant
+		Where spawnbot_mensch_giant
+		WaitForAllSpawned "wave02"
+		WaitBeforeStarting 10
+		WaitBetweenSpawns 8
+		TotalCurrency 300
+		TFBot
+		{
+		Template T_TFBot_Giant_Heavyweapons_Natascha
+		Tag bot_giant
+		Name "Attack Helicopter Gunner"
+		Item "The Whirly Warrior"
+		ItemAttributes
+		{
+		ItemName "Natascha"
+		"damage bonus"	1.25
+		"damage penalty" 1.0 // negates natascha's built in dmg penalty
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		TotalCount 40
+		MaxActive 20
+		SpawnCount 5
+		Where spawnbot_elevator
+		Where spawnbot_garage
+		Where spawnbot_mensch
+		Where spawnbot_trainstation
+		WaitBeforeStarting 25
+		WaitForAllSpawned "wave02"
+		TotalCurrency 200
+		TFBot
+		{
+    	Name "Ground Trooper"
+		Class Soldier
+		Skill Normal
+		Item "The Black Box"
+		Item "The Head Hedge"
+		Attributes HoldFireUntilFullReload
+		ItemAttributes
+		{
+		ItemName "The Black Box"
+		"heal on hit for rapidfire" 50
+		}	
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "wave03"
+		TotalCount 1
+		MaxActive 1
+		SpawnCount 1
+		WaitForAllDead "wave02"
+		WaitBeforeStarting 20
+		TotalCurrency 150
+		Tank
+		{
+		Health 20000
+		Speed 75
+		Name "tankboss"
+		StartingPathTrackNode "a_1"
+		OnKilledOutput
+		{
+		Target boss_dead_relay
+		Action Trigger
+		}
+		OnBombDroppedOutput
+		{
+		Target boss_deploy_relay
+		Action Trigger
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "wave04"
+		WaitForAllDead "wave03"
+		TotalCount 2
+		MaxActive 2
+		SpawnCount 2
+		Where spawnbot_elevator
+		Where spawnbot_garage_giant
+		Where spawnbot_mensch_giant
+		StartWaveWarningSound "mvm/giant_heavy/giant_heavy_gunwindup.wav"
+		FirstSpawnWarningSound "vo/mvm/norm/heavy_mvm_specialcompleted01.mp3"
+		DoneWarningSound "vo/mvm_wave_end02.mp3"
+		DoneOutput
+		{
+		Target backalley_station
+		Action Enable
+		}
+		WaitBeforeStarting 0.9
+		TotalCurrency 100
+		Squad
+		{
+		TFBot
+		{
+		Template PDA_Randy_Marshal
+		Tag bot_giant
+		}
+		TFBot
+		{
+		Template br_giant_bullet_medic
+		ClassIcon medic_vac_trio_nys_giant
+		Tag bot_giant
+		Name "Bullet Plot-Armor"
+		}
+		}
+		}
+	
+	    WaveSpawn
+		{
+		Name "warn"
+		WaitForAllDead "wave04"
+		StartWaveOutput
+		{
+		Target backalley_door
+		Action Open
+		}
+		WaitBeforeStarting 10
+		FirstSpawnWarningSound "vo/announcer_begins_20sec.mp3"
+		}
+		
+	    WaveSpawn
+		{
+		Name "warn"
+		WaitForAllDead "wave04"
+		StartWaveOutput
+		{
+		Target gate_reset_relay 
+		Action trigger
+		}
+		WaitBeforeStarting 20
+		FirstSpawnWarningSound "vo/announcer_begins_10sec.mp3"
+		}
+		
+	    WaveSpawn
+		{
+		Name "warn"
+		WaitForAllDead "wave04"
+		StartWaveOutput // causes bwr robots to not spawn.
+		{
+		Target BigNet
+		Action FireUser1
+		}
+		WaitBeforeStarting 25
+		FirstSpawnWarningSound "vo/announcer_begins_5sec.mp3"
+		}
+		
+	    WaveSpawn
+		{
+		Name "warn"
+		WaitForAllDead "wave04"
+		WaitBeforeStarting 26
+		FirstSpawnWarningSound "vo/announcer_begins_4sec.mp3"
+		}
+	
+	    WaveSpawn
+		{
+		Name "warn"
+		WaitForAllDead "wave04"
+		WaitBeforeStarting 27
+		FirstSpawnWarningSound "vo/announcer_begins_3sec.mp3"
+		}
+		
+	    WaveSpawn
+		{
+		Name "warn"
+		WaitForAllDead "wave04"
+		WaitBeforeStarting 28
+		FirstSpawnWarningSound "vo/announcer_begins_2sec.mp3"
+		}
+		
+	    WaveSpawn
+		{
+		Name "warn"
+		WaitForAllDead "wave04"
+		WaitBeforeStarting 29
+		FirstSpawnOutput
+		{
+		Target backalley_door
+		Action Close
+		}
+		FirstSpawnWarningSound "vo/announcer_begins_1sec.mp3"
+		}
+		
+		// Sci-Fi Movies
+		
+		WaveSpawn
+		{
+		TotalCount 4
+		MaxActive 4
+		SpawnCount 4
+		Where spawnbot_elevator
+		Where spawnbot_garage_giant
+		Where spawnbot_mensch_giant
+		FirstSpawnWarningSound "vo/mvm/norm/soldier_mvm_dominationsniper02.mp3" 
+		TotalCurrency 200
+		Name "wave05"
+		FirstSpawnOutput
+		{
+		Target backalley_station
+		Action Disable
+		}
+		LastSpawnOutput // causes bwr robots to spawn.
+		{
+		Target BigNet
+		Action FireUser1
+		}
+		WaitForAllDead "wave04"
+		WaitBeforeStarting 30
+		Squad
+		{
+		TFBot
+		{
+		Template PDA_Agent_404
+		}
+		TFBot
+		{
+		Template br_giant_blast_medic
+		Name "Blast Shield Generator"
+		ClassIcon medic_vac_trio_nys_giant
+		}
+		TFBot
+		{
+		Name "Giant Bodyguard"
+		Health 3300
+		Class Sniper
+		Skill Hard
+		ClassIcon sniper_smg_giant
+		WeaponRestrictions SecondaryOnly
+		Item "The Cleaner's Carbine"
+		Tag bot_giant
+		Item "The Razorback"
+		Item "The Cleaner's Carbine"
+		Attributes MiniBoss
+		ItemAttributes
+		{
+		ItemName "The Cleaner's Carbine"
+		"damage bonus" 1.5
+		"minicritboost on kill" 5
+		"fire rate bonus" 0.6
+		"faster reload rate" 1.3
+		}
+		CharacterAttributes
+		{
+		"move speed bonus"	0.45
+		"damage force reduction" 0.6
+		"airblast vulnerability multiplier" 0.6
+		"rage giving scale" 0.1
+		"override footstep sound set" 6
+		}
+		}
+		TFBot
+		{
+		Name "Giant Bodyguard"
+		Health 3300
+		Class Sniper
+		Skill Hard
+		ClassIcon sniper_smg_giant
+		WeaponRestrictions SecondaryOnly
+		Tag bot_giant
+		Item "The Cleaner's Carbine"
+		Item "The Razorback"
+		Item "The Cleaner's Carbine"
+		Attributes MiniBoss
+		ItemAttributes
+		{
+		ItemName "The Cleaner's Carbine"
+		"damage bonus" 1.5
+		"minicritboost on kill" 5
+		"fire rate bonus" 0.6
+		"faster reload rate" 1.3
+		}
+		CharacterAttributes
+		{
+		"move speed bonus"	0.45
+		"damage force reduction" 0.6
+		"airblast vulnerability multiplier" 0.6
+		"rage giving scale" 0.1
+		"override footstep sound set" 6
+		}
+		}
+		}
+		}
+		
+		// Subwave #1 :
+		// 12 Giant Gatebot Cabers
+		// 40 Bashing Space-Boomers (carries on to next subwave)
+		// 40 Bread Victims
+		
+		WaveSpawn
+		{
+		TotalCount 12
+		MaxActive 6
+		SpawnCount 2
+		Name "wave06"
+		WaitForAllSpawned "wave05"
+		WaitBeforeStarting 35
+		WaitBetweenSpawns 6
+		Where spawnbot_upper
+		Where spawnbot_garage_giant
+		Where spawnbot_mensch_giant
+		TotalCurrency 200
+		TFBot
+		{
+		Class Demoman
+		Name "Giant Bloater"
+		ClassIcon demo_caber_nys
+		Health 3300
+		EventChangeAttributes
+		{
+		Default
+		{
+		BehaviorModifiers push			// having these will cause bots to run towards gates
+		Attributes IgnoreFlag			// having these will cause bots to run towards gates
+		Tag nav_prefer_gate1_flank 		// having these will cause bots to run towards gates
+		Tag bot_gatebot 				// having these will cause bots to run towards gates
+		Item "MvM GateBot Light Demoman"
+		Item "The Ullapool Caber"
+		Tag bot_giant
+		Skill Expert
+		WeaponRestrictions MeleeOnly
+		Attributes AlwaysCrit
+		Attributes MiniBoss
+		Attributes HoldFireUntilFullReload
+		ItemAttributes
+		{
+		ItemName "The Ullapool Caber"
+		"damage bonus" 4.0
+		"fire rate bonus" 0.75
+		"blast dmg to self increased" 60.0
+		}
+		CharacterAttributes
+		{
+		"move speed bonus"	1.75
+		"torso scale" 0.25
+		"head scale" 3.0
+		"damage force reduction" 0.8
+		"airblast vulnerability multiplier" 0.8
+		"override footstep sound set" 4
+		}
+		}
+		RevertGateBotsBehavior
+		{
+		Item "MvM GateBot Light Demoman"
+		ItemAttributes               // turn off light hat
+		{
+		ItemName "MvM GateBot Light Demoman"
+		"item style override" 1
+		}
+		Tag bot_giant
+		Skill Expert
+		Item "The Ullapool Caber"
+		Tag bot_giant
+		Skill Expert
+		WeaponRestrictions MeleeOnly
+		Attributes AlwaysCrit
+		Attributes MiniBoss
+		Attributes HoldFireUntilFullReload
+		ItemAttributes
+		{
+		ItemName "The Ullapool Caber"
+		"damage bonus" 4.0
+		"fire rate bonus" 0.75
+		"blast dmg to self increased" 60.0
+		}
+		CharacterAttributes
+		{
+		"move speed bonus"	1.75
+		"torso scale" 0.25
+		"head scale" 3.0
+		"damage force reduction" 0.8
+		"airblast vulnerability multiplier" 0.8
+		"override footstep sound set" 4
+		}
+		}
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		TotalCount 40
+		MaxActive 16
+		SpawnCount 3
+		Name "wave06"
+		WaitForAllSpawned "wave05"
+	    WaitBeforeStarting 35
+		WaitBetweenSpawns 5
+		Where spawnbot_upper
+		Where spawnbot_garage
+		Where spawnbot_mensch
+		Where spawnbot_trainstation
+		TotalCurrency 100
+		TFBot
+		{
+		Class Heavyweapons
+		Name "Bread Victim"
+		Skill Hard
+		WeaponRestrictions MeleeOnly
+		ClassIcon heavy_fist_nys
+		Tag bot_giant
+		Scale 1.35
+		Health 700
+		Item "Bread Heads"
+		Item "The Bread Bite"
+		ItemAttributes
+		{
+		ItemName "The Bread Bite"
+		"damage bonus" 1.5
+		"bleeding duration" 6
+		"mod_maxhealth_drain_rate" 0 // disables health drain
+		"move speed bonus" 1.25
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		TotalCount 40
+		SpawnCount 10
+		MaxActive 20
+		Where spawnbot_elevator
+		Where spawnbot_garage_giant
+		Where spawnbot_mensch
+		Where spawnbot_trainstation
+		WaitForAllDead "wave05"
+		Name "wave06_extra"
+		WaitBeforeStarting 5
+		WaitBetweenSpawns 10
+		TotalCurrency 200
+		TFBot
+		{
+		Class Demoman
+		Skill Hard
+		Name "Bashing Space-Boomer"
+		Attributes HoldFireUntilFullReload
+		Item "Phononaut"
+		Item "EOTL_demopants"
+		Item "The Iron Bomber"
+		Item "The Chargin' Targe"
+		ItemAttributes
+		{
+		ItemName "The Chargin' Targe"
+		"charge impact damage increased" 1.45
+		"charge recharge rate increased" 1.25
+		}
+		CharacterAttributes
+		{
+		"faster reload rate" -2
+		}
+		}
+		}
+		
+		// Subwave 2# :
+		// 6 Giant Rocket Pod Heavies & Giant Regen Medics
+		// 30 AlwaysFireWeapon Phlog Pyros (Gatebots)
+		
+		
+		WaveSpawn
+		{
+		TotalCount 6
+		MaxActive 6
+		SpawnCount 1
+		WaitBeforeStarting 5
+		WaitForAllDead "wave06"
+		Name "wave07"
+		Where spawnbot
+		Where spawnbot_garage_giant
+		Where spawnbot_mensch_giant
+		WaitBetweenSpawns 10
+		TotalCurrency 200
+		TFBot
+		{
+		Template T_TFBot_Giant_Heavyweapons
+		Name "Giant Colonial Marine"
+		Tag bot_giant
+		Item "Corona Australis"
+		Item "Paka Parka"
+		Attributes AlwaysCrit
+		}
+		}
+		
+		WaveSpawn
+		{
+		TotalCount 30
+		MaxActive 20
+		SpawnCount 10
+		Where spawnbot
+		Where spawnbot_garage
+		Where spawnbot_mensch
+		Where spawnbot_trainstation
+		TotalCurrency 200
+		Name "wave07"
+		WaitForAllDead "wave06"
+		WaitBeforeStarting 10
+		WaitBetweenSpawns 10
+		TFBot
+		{
+			Class Pyro
+			Name "Heat Purge"
+			EventChangeAttributes
+			{
+				Default
+				{
+					Tag bot_gatebot 				// having these will cause bots to run towards gates
+					Tag nav_prefer_gate1_flank		// having these will cause bots to run towards gates
+					BehaviorModifiers push			// having these will cause bots to run towards gates
+					Attributes IgnoreFlag 			// having these will cause bots to run towards gates
+					Item "MvM GateBot Light Pyro"
+					Item "The Phlogistinator"
+					Attributes AlwaysFireWeapon
+					Attributes AlwaysCrit
+					Skill Hard
+				}
+				RevertGateBotsBehavior
+				{
+					Item "MvM GateBot Light Pyro"
+					Item "The Phlogistinator"
+					ItemAttributes               // turn off light hat
+					{
+						ItemName "MvM GateBot Light Pyro"
+						"item style override" 1
+					}
+					Attributes AlwaysFireWeapon
+					Attributes AlwaysCrit
+					Skill Hard
+				}
+			}
+		}
+		}
+		
+		// Subwave 3# :
+		// 1 Tank (22,5k HP)
+		// 1 Explosive Department Operator
+		// 1 Spaceship Captain
+		
+		WaveSpawn
+		{
+		Name "wave08"
+		TotalCount 1
+		MaxActive 1
+		SpawnCount 1
+		WaitForAllDead "wave07"
+		TotalCurrency 100
+		Tank
+		{
+		Health 22500
+		Speed 75
+		Name "tankboss"
+		StartingPathTrackNode "a_1"
+		OnKilledOutput
+		{
+		Target boss_dead_relay
+		Action Trigger
+		}
+		OnBombDroppedOutput
+		{
+		Target boss_deploy_relay
+		Action Trigger
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "wave08"
+		WaitForAllDead "wave07"
+		TotalCount 1
+		MaxActive 1
+		SpawnCount 1
+		WaitBeforeStarting 3
+		Where spawnbot_elevator
+		Where spawnbot_garage_giant
+		Where spawnbot_mensch_giant
+		FirstSpawnWarningSound "mvm/ambient_mp3/mvm_siren.mp3"
+		TotalCurrency 50
+		TFBot
+		{
+		Class Demoman
+		Health 28000
+		Name "Explosive Department Operator"
+		ClassIcon demo_giant
+		Tag bot_giant
+		Scale 1.8
+		Item "Captain Space Mann"
+		Item "Jupiter Jetpack"
+		Item "The Sub Zero Suit"
+		Item "The Loose Cannon"
+		Skill Expert
+		WeaponRestrictions PrimaryOnly
+		Attributes MiniBoss
+		Attributes UseBossHealthBar
+		Attributes HoldFireUntilFullReload
+		Attributes AlwaysCrit
+		ItemAttributes
+		{
+		ItemName "The Loose Cannon"
+		"grenade launcher mortar mode" 0
+		"faster reload rate" 1.8
+		"fire rate bonus" 3
+		"damage bonus" 2
+		"fuse bonus" 0.6
+		"damage causes airblast" 1
+		"blast radius increased" 1.3
+		"dmg pierces resists absorbs" 1
+		}
+		CharacterAttributes
+		{
+		"move speed bonus"	0.4
+		"rage giving scale" 0.45
+		"damage force reduction" 0.4
+		"airblast vulnerability multiplier" 0.4
+		"override footstep sound set" 4
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "wave08"
+		WaitForAllDead "wave07"
+		TotalCount 1
+		MaxActive 1
+		SpawnCount 1
+		WaitBeforeStarting 6
+		Where spawnbot_elevator
+		Where spawnbot_garage_giant
+		Where spawnbot_mensch_giant
+		TotalCurrency 50
+		TFBot
+		{
+		Class Soldier
+		Health 22000
+		ClassIcon soldier_crit
+		Tag bot_giant
+		Name "Spaceship Leader"
+		Scale 1.8
+		Item "The Team Captain"
+		Item "The Gift Bringer"
+		Item "The Black Box"
+		Skill Expert
+		WeaponRestrictions PrimaryOnly
+		Attributes MiniBoss
+		Attributes UseBossHealthBar
+		Attributes HoldFireUntilFullReload
+		Attributes AlwaysCrit
+		ItemAttributes
+		{
+		ItemName "The Black Box"
+		"faster reload rate" 2.0
+		"fire rate bonus" 3
+		"damage bonus" 2
+		"damage causes airblast" 1
+		"blast radius increased" 1.3
+		"Projectile speed increased" 1.2
+		"dmg pierces resists absorbs" 1
+		}
+		CharacterAttributes
+		{
+		"move speed bonus"	0.4
+		"rage giving scale" 0.45
+		"damage force reduction" 0.4
+		"airblast vulnerability multiplier" 0.4
+		"override footstep sound set" 4
+		}
+		}
+		}
+		
+	    WaveSpawn
+		{
+		Name "warn"
+		WaitForAllDead "wave08"
+		StartWaveOutput
+		{
+		Target backalley_door
+		Action Open
+		}
+		WaitBeforeStarting 10
+		FirstSpawnWarningSound "vo/announcer_begins_20sec.mp3"
+		}
+		
+	    WaveSpawn
+		{
+		Name "warn"
+		WaitForAllDead "wave08"
+		StartWaveOutput
+		{
+		Target gate_reset_relay 
+		Action trigger
+		}
+		WaitBeforeStarting 20
+		FirstSpawnWarningSound "vo/announcer_begins_10sec.mp3"
+		}
+		
+	    WaveSpawn
+		{
+		Name "warn"
+		WaitForAllDead "wave08"
+		StartWaveOutput
+		{
+		Target backalley_station
+		Action Enable
+		}
+		WaitBeforeStarting 25
+		FirstSpawnWarningSound "vo/announcer_begins_5sec.mp3"
+		}
+		
+	    WaveSpawn
+		{
+		Name "warn"
+		WaitForAllDead "wave08"
+		WaitBeforeStarting 26
+		StartWaveOutput // causes bwr robots to not spawn.
+		{
+		Target BigNet
+		Action FireUser1
+		}
+		FirstSpawnWarningSound "vo/announcer_begins_4sec.mp3"
+		}
+	
+	    WaveSpawn
+		{
+		Name "warn"
+		WaitForAllDead "wave08"
+		WaitBeforeStarting 27
+		FirstSpawnWarningSound "vo/announcer_begins_3sec.mp3"
+		}
+		
+	    WaveSpawn
+		{
+		Name "warn"
+		WaitForAllDead "wave08"
+		WaitBeforeStarting 28
+		FirstSpawnWarningSound "vo/announcer_begins_2sec.mp3"
+		}
+		
+	    WaveSpawn
+		{
+		Name "warn"
+		WaitForAllDead "wave08"
+		WaitBeforeStarting 29
+		FirstSpawnOutput
+		{
+		Target backalley_door
+		Action Close
+		}
+		FirstSpawnWarningSound "vo/announcer_begins_1sec.mp3"
+		}
+		
+		// Superhero Movies
+		
+		// Subwave #1 :
+		// 3 Tanks (30k HP)
+		// 10 Giant Backburner Pyros (Ambush)
+		
+		WaveSpawn
+		{
+		Name "wave_debug"
+		WaitBeforeStarting 34.5
+		WaitForAllDead "wave08"
+		FirstSpawnOutput // causes bwr robots to spawn.
+		{
+		Target BigNet
+		Action FireUser1
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "wave09"
+		TotalCount 3
+		MaxActive 3
+		SpawnCount 1
+		WaitForAllDead "wave08"
+		WaitBeforeStarting 30
+		FirstSpawnOutput
+		{
+		Target backalley_station
+		Action Disable
+		}
+		WaitBetweenSpawns 6
+		TotalCurrency 250
+		Tank
+		{
+		Health 20000
+		Speed 75
+		Name "tankboss"
+		StartingPathTrackNode "b_1"
+		OnKilledOutput
+		{
+		Target boss_dead_relay
+		Action Trigger
+		}
+		OnBombDroppedOutput
+		{
+		Target boss_deploy_relay
+		Action Trigger
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "wave09"
+		TotalCount 1
+		MaxActive 1
+		SpawnCount 1
+		WaitForAllDead "wave08"
+		WaitBeforeStarting 46
+		FirstSpawnOutput
+		{
+		Target backalley_station
+		Action Disable
+		}
+		WaitBetweenSpawns 6
+		TotalCurrency 50
+		Tank
+		{
+		Health 27000
+		Speed 55
+		Skin 1
+		Name "tankboss"
+		StartingPathTrackNode "b_1"
+		OnKilledOutput
+		{
+		Target boss_dead_relay
+		Action Trigger
+		}
+		OnBombDroppedOutput
+		{
+		Target boss_deploy_relay
+		Action Trigger
+		}
+		}
+		}
+		
+		WaveSpawn
+		{
+		WaitForAllDead "wave_debug"
+		WaitBeforeStarting 11
+		StartWaveOutput
+		{
+		Target garage_giantdoor
+		Action Open
+		}
+		FirstSpawnOutput
+		{
+		Target nav_refresh
+		Action recomputeblockers
+		}
+		}
+		
+		WaveSpawn
+		{
+		WaitForAllDead "wave_debug"
+		StartWaveOutput
+		{
+		Target gate1_entrance_door
+		Action Open
+		}
+	    FirstSpawnOutput
+		{
+		Target garage_brush
+		Action Disable
+		}
+		}
+		// main gate door = 10.8 seconds
+		// giant door = 11-12 seconds
+		
+		WaveSpawn
+		{
+		WaitForAllDead "wave_debug"
+		WaitBeforeStarting 9
+		FirstSpawnOutput
+		{
+		Target gate1_door_trigger
+		Action Disable
+		}
+		}		
+		
+		WaveSpawn
+		{
+		Name "wave09"
+		WaitForAllDead "wave_debug"
+		TotalCount 10
+		MaxActive 10
+		SpawnCount 1
+		WaitBeforeStarting 9
+		Where spawnbot_garage_giant
+		Where spawnbot_mensch_giant
+		FirstSpawnWarningSound "vo/announcer_security_warning.mp3"
+		WaitBetweenSpawns 4
+		TotalCurrency 200
+		StartWaveOutput
+		{
+		Target spawnbot_garage_giant
+		Action Enable
+		}
+		LastSpawnOutput
+		{
+		Target spawnbot_garage_giant
+		Action Disable
+		}
+		DoneOutput
+		{
+		Target gate1_entrance_door
+		Action Close
+		}
+		TFBot
+		{
+		Template T_TFBot_Giant_Pyro
+		Name "Troublemaking Firefly"		
+		Tag bot_giant
+		ClassIcon pyro_ambush
+		ItemAttributes
+		{
+		ItemName "The Backburner"
+		"damage bonus" 2.5
+		"flame_spread_degree"  3
+		"flame_drag" 4
+		"flame_speed" 1500
+		"flame_lifetime" 0.75   
+		"move speed bonus" 0.75
+		"lunchbox adds minicrits"    2
+		}
+		Item "The Backburner"
+		Item "The Firefly"
+		Item "Crusader's Getup"
+		}
+		}
+		
+		WaveSpawn
+		{
+		WaitForAllDead "wave09"
+		WaitBeforeStarting 10.8
+		
+		FirstSpawnOutput
+		{
+		Target nav_refresh
+		Action recomputeblockers
+		}
+		}
+		
+		WaveSpawn
+		{
+		WaitForAllDead "wave_debug"
+		TotalCount 8
+		MaxActive 8
+		SpawnCount 2
+		SpawnCount 1
+		Support Limited
+		WaitBeforeStarting 12
+		WaitBetweenSpawns 2
+		Where spawnbot_garage_giant
+		RandomChoice
+		{
+		Squad
+		{
+		TFBot
+		{
+		Template T_TFBot_Engineer_Sentry_Tele_Battle
+		Health 750
+		Name Tr0jan
+		Item "Jupiter Jetpack"
+		Item "The Space Diver"
+		Item "Corona Australis"
+		Item "The Jag"
+		}
+		TFBot
+		{
+		Template T_TFBot_Medic_QuickUber
+		Name V1rus
+		Item "Jupiter Jetpack"
+		Item "The Space Diver"
+		Item "Corona Australis"
+		}
+		}
+		}
+		}
+		
+		// Subwave #2 :
+		// 15 Giant Rapid Fire Soldiers
+		// 60 Sawed-Off Scouts
+		
+		WaveSpawn
+		{
+		Name "wave10"
+		WaitForAllDead "wave09"
+		TotalCount 15
+		SpawnCount 5
+		MaxActive 5
+		Where spawnbot
+		Where spawnbot_garage_giant
+		Where spawnbot_mensch_giant
+		StartWaveOutput
+		{
+		Target gate1_door_trigger
+		Action Enable
+		}
+		WaitBeforeStarting 10
+		TotalCurrency 300
+		TFBot
+		{
+		Template T_TFBot_Giant_Soldier_Spammer
+		Tag bot_giant
+		Health 4200
+		Name "Lethal Meltdown"
+		Item "The Gift Bringer"
+		Item "Climbing Commander"
+		ItemAttributes
+		{
+		ItemName "TF_WEAPON_ROCKETLAUNCHER"
+		"faster reload rate" -0.8
+		"fire rate bonus" 0.5
+		"damage bonus" 2.0
+		"Projectile speed increased" 0.8
+		}
+		Attributes AlwaysCrit
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "wave10"
+		WaitForAllDead "wave09"
+		TotalCount 100
+		SpawnCount 4
+		MaxActive 17
+		Where spawnbot_support
+		Where spawnbot_upper
+		Where spawnbot_garage
+		Where spawnbot_mensch
+		Where spawnbot_trainstation
+		WaitBeforeStarting 15
+		WaitBetweenSpawns 2
+		TotalCurrency 100
+		RandomChoice
+		{
+		TFBot
+		{
+		Name "Milk Delivery Guy"
+		Skill Hard
+		Class Scout
+		Attributes AlwaysCrit
+		Attributes HoldFireUntilFullReload
+		CharacterAttributes
+		{
+		"faster reload rate" 0.75
+		}
+		Item "Mad Milk"
+		Item "The Hot Dogger"
+		}
+		TFBot
+		{
+		Name "Mafioso Gunner"
+		Skill Hard
+		Class Scout
+		Attributes AlwaysCrit
+		Item "The Shortstop"
+		Item "Sophisticated Smoker"
+		}
+		TFBot
+		{
+		Name Alleyman
+		Attributes AlwaysCrit
+		Skill Hard
+		Class Scout
+		ClassIcon scout
+		Item "KF Pyro Mask"
+		Item "KF Pyro Tie"
+		Item "Crocleather Slouch"
+		Item "The Force-a-Nature"
+		ItemAttributes
+		{
+		ItemName "The Force-a-Nature"
+		"damage penalty" 1.0
+		"damage bonus" 2.0
+		"scattergun has knockback" 0
+		"Reload time increased" 1.75
+		"fire rate bonus" 0.3
+		}
+		}
+		}
+		}
+		
+		// Final Boss
+		
+		WaveSpawn
+		{
+		Name "wave12"
+		WaitForAllDead "wave10"
+		TotalCount 1
+		SpawnCount 1
+		MaxActive 1
+		WaitBeforeStarting 0.75
+		Where spawnbot_elevator
+		Where spawnbot_garage_giant
+		Where spawnbot_mensch_giant
+		FirstSpawnWarningSound "vo/mvm/norm/demoman_mvm_battlecry07.mp3"
+		TFBot
+		{
+		Template PDA_DrStickySplayer
+		}
+		}
+		
+		WaveSpawn
+		{
+		Name "bosslines"
+		WaitForAllDead "wave10"
+		WaitBeforeStarting 2
+		FirstSpawnWarningSound "music/hl2_song31.mp3"
+		}
+		
+		WaveSpawn
+		{
+		Name "bosslines"
+		WaitForAllDead "wave10"
+		WaitBeforeStarting 2
+		FirstSpawnWarningSound "music/hl2_song31.mp3"
+		}
+		
+		WaveSpawn
+		{
+		Name "bosslines"
+		WaitForAllDead "wave10"
+		WaitBeforeStarting 6
+		FirstSpawnWarningSound "vo/mvm/norm/demoman_mvm_dominationengineer06.mp3"
+		}
+		
+		WaveSpawn
+		{
+		Name "bosslines"
+		WaitForAllDead "wave10"
+		WaitBeforeStarting 9.5
+		FirstSpawnWarningSound "vo/mvm/norm/demoman_mvm_dominationpyro03.mp3"
+		}
+		
+		WaveSpawn
+		{
+		Name "bosslines"
+		WaitForAllDead "wave10"
+		WaitBeforeStarting 15
+		FirstSpawnWarningSound "vo/mvm/norm/demoman_mvm_laughlong01.mp3"
+		}
+		
+		WaveSpawn
+		{
+		Name "bosslines"
+		WaitForAllDead "wave10"
+		WaitBeforeStarting 20
+		FirstSpawnWarningSound "vo/mvm/norm/demoman_mvm_dominationscout06.mp3"
+		}
+		
+		WaveSpawn
+		{
+		Name "bosslines"
+		WaitForAllDead "wave10"
+		WaitBeforeStarting 25
+		FirstSpawnWarningSound "vo/mvm/norm/demoman_mvm_laughevil03.mp3"
+		}
+		
+		WaveSpawn
+		{
+		Name "bosslines"
+		WaitForAllDead "wave10"
+		WaitBeforeStarting 27
+		FirstSpawnWarningSound "vo/mvm/norm/demoman_mvm_painsevere04.mp3"
+		}
+	}
+	
+}
