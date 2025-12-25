@@ -1,2 +1,1 @@
-rcbot2
-nextmap
+sandbox
