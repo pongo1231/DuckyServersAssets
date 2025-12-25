@@ -1,0 +1,1 @@
+Don't like the map? You can initiate a map vote in the server menu (/menu).
