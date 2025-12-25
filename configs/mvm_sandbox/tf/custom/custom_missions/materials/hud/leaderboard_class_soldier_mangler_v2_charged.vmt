@@ -1,0 +1,8 @@
+"UnlitGeneric"
+{
+	"$basetexture" "hud/leaderboard_class_soldier_mangler_v2_charged"
+	"$ignorez" 1
+	"%keywords" "tf"
+	"$translucent" 1
+}
+
