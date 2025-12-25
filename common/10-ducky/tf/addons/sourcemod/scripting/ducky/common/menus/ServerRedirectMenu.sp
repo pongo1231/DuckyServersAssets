@@ -15,12 +15,13 @@ public Action MenuOpen(int client, int args) {
     SetMenuExitButton(menu, false);
 
     menu.AddItem("tf.gopong.dev:27017", "Sandbox");
+    menu.AddItem("tf.gopong.dev:27021", "Sandbox 2");
     menu.AddItem("tf.gopong.dev:27016", "MvM Sandbox");
+    menu.AddItem("tf.gopong.dev:27022", "MvM Sandbox 2");
     menu.AddItem("tf.gopong.dev:27015", "MvM Vanilla");
-    //menu.AddItem("tf.gopong.dev:27015", "Vanilla");
-    menu.AddItem("tf.gopong.dev:27019", "MGE [all class]");
-    menu.AddItem("tf.gopong.dev:27018", "MGE [NO ANTICHEAT / VAC]");
-    //menu.AddItem("tf.gopong.dev:27020", "Freak Fortress 2");
+    menu.AddItem("tf.gopong.dev:27019", "MGE");
+    menu.AddItem("tf.gopong.dev:27020", "MGE 2");
+    menu.AddItem("tf.gopong.dev:27018", "MGE HvH");
 
     menu.Display(client, MENU_TIME_FOREVER);
  
