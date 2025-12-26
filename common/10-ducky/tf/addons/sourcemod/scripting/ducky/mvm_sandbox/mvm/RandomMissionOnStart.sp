@@ -3,7 +3,23 @@
 
 char g_chosenPop[PLATFORM_MAX_PATH];
 
+public void OnPluginStart()
+{
+    RegAdminCmd("sm_mvm_randommission", Cmd_RandomMission, ADMFLAG_GENERIC);
+}
+
 public void OnMapStart()
+{
+    RandomizeMission();
+}
+
+public Action Cmd_RandomMission(int client, int args)
+{
+    RandomizeMission();
+    return Plugin_Handled;
+}
+
+void RandomizeMission()
 {
     char map[64];
     GetCurrentMap(map, sizeof(map));
