@@ -1,4 +1,4 @@
-TF_FOLDER = '../../../../../00-base/tf/'
+TF_FOLDER = '../../../../../../00-base/tf/'
 ITEMS_GAME = TF_FOLDER + 'scripts/items/items_game.txt'
 DB_FILE = TF_FOLDER + 'tf2idb.sq3'
 
