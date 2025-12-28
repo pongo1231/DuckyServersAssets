@@ -5,7 +5,7 @@ bool g_PlayingMvM = false;
 
 public void OnPluginStart()
 {
-    CreateTimer(20.0, Timer_CheckMission, _, TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE);
+    CreateTimer(30.0, Timer_CheckMission, _, TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE);
 }
 
 public void OnMapStart()
@@ -26,7 +26,7 @@ public Action Timer_CheckMission(Handle timer)
     char map[PLATFORM_MAX_PATH];
     strcopy(map, sizeof(map), buf[StrContains(buf, ": ", false) + 2]);
     TrimString(map);
-    ForceChangeLevel(map, "Broken popfile");
+    ServerCommand("changelevel %s", map);
 
     return Plugin_Continue;
 }
