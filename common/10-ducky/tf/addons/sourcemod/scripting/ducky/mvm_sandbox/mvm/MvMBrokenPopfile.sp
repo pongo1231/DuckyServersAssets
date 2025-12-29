@@ -5,7 +5,7 @@ bool g_PlayingMvM = false;
 
 public void OnPluginStart()
 {
-    CreateTimer(10.0, Timer_CheckMission, _, TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE);
+    CreateTimer(10.0, Timer_CheckMission, _, TIMER_REPEAT);
 }
 
 public void OnMapStart()
