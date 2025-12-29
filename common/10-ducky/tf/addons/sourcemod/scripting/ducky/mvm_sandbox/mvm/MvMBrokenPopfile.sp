@@ -58,7 +58,7 @@ public Action Timer_CheckMission(Handle timer)
     if (obj == -1)
         return Plugin_Continue;
 
-    if (GetEntProp(obj, Prop_Send, "m_nMannVsMachineWaveCount") != 0)
+    if (GetEntProp(obj, Prop_Send, "m_nMannVsMachineWaveCount") != 0 || GetEntProp(obj, Prop_Send, "m_nMannVsMachineMaxWaveCount") != 0)
         return Plugin_Continue;
 
     char map[PLATFORM_MAX_PATH];
