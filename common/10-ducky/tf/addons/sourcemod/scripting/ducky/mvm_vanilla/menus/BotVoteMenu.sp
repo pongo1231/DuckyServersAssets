@@ -3,12 +3,30 @@
 #include <server/serverchat>
 #include <tf2>
 #include <tf2_stocks>
+#include <rcbot2>
 
 ConVar g_enableBots;
 ConVar g_rcbotQuota;
 
+public void OnMapStart()
+{
+    CreateTimer(5.0, Delay_CheckWaypoints, _);
+}
+
+public Action Delay_CheckWaypoints(Handle timer)
+{
+    if (RCBot2_IsWaypointAvailable())
+        return Plugin_Continue;
+
+    SetConVarInt(g_enableBots, 0);
+    return Plugin_Continue;
+}
+
 public void OnClientDisconnect_Post(int client)
 {
+    if (!RCBot2_IsWaypointAvailable())
+        return;
+
     for (int client = 1; client < MaxClients + 1; client++)
         if (IsClientInGame(client) && !IsFakeClient(client))
             return;
@@ -30,6 +48,12 @@ public int Handle_Menu(Menu menu, MenuAction action, int client, int item) {
 }
 
 public Action MenuOpen(int client, int args) {
+    if (!RCBot2_IsWaypointAvailable())
+    {
+        Server_PrintToChat(client, "Menu", "This map does not support RCBots.");
+        return Plugin_Continue;
+    }
+
     Menu menu = new Menu(Handle_Menu);
     menu.SetTitle("Bot settings");
     SetMenuExitBackButton(menu, true);

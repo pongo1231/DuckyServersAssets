@@ -3,6 +3,7 @@
 #include <server/serverchat>
 #include <tf2>
 #include <tf2_stocks>
+#include <rcbot2>
 
 ConVar enable_bots;
 ConVar rcbot_quota;
@@ -21,8 +22,25 @@ public void OnPluginStart() {
     HookConVarChange(force_class, force_class_changed);
 }
 
+public void OnMapStart()
+{
+    CreateTimer(5.0, Delay_CheckWaypoints, _);
+}
+
+public Action Delay_CheckWaypoints(Handle timer)
+{
+    if (RCBot2_IsWaypointAvailable())
+        return Plugin_Continue;
+
+    SetConVarInt(enable_bots, 0);
+    return Plugin_Continue;
+}
+
 public void OnClientDisconnect_Post(int client)
 {
+    if (!RCBot2_IsWaypointAvailable())
+        return;
+
     for (int client = 1; client < MaxClients + 1; client++)
         if (IsClientInGame(client) && !IsFakeClient(client))
             return;
@@ -65,9 +83,10 @@ public void force_class_changed(ConVar convar, const char[] oldValue, const char
 }
 
 public Action MenuOpen(int client, int args) {
-    if (GameRules_GetProp("m_bPlayingMannVsMachine")) {
-        Server_PrintToChat(client, "Menu", "RCBots can't be added to mvm automatically yet.");
-        return Plugin_Stop;
+    if (!RCBot2_IsWaypointAvailable())
+    {
+        Server_PrintToChat(client, "Menu", "This map does not support RCBots.");
+        return Plugin_Continue;
     }
 
     Menu menu = new Menu(Handle_Menu);
@@ -113,4 +132,6 @@ public int Handle_Menu(Menu menu, MenuAction action, int client, int item) {
            FakeClientCommand(client, "menu_bots");
     } else if (action == MenuAction_End)
         delete menu;
+
+    return 0;
 }
