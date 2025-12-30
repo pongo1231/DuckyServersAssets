@@ -1,1 +1,1 @@
-Wave is stuck? Use the kill all robots option in the player menu (/menu).
+Wave is stuck? Use the kill all robots option in the server menu (/menu).
