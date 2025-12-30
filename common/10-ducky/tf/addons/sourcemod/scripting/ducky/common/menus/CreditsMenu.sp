@@ -19,7 +19,7 @@ public Action MenuOpen(int client, int args) {
     menu.AddItem("7", "Contact:");
     menu.AddItem("8", "Our steam group: steamcommunity.com/groups/duckyservers");
     menu.AddItem("9", "Or personal:");
-    menu.AddItem("11", "E-Mail: pongo12310@gmail.com");
+    menu.AddItem("11", "E-Mail: pongo@gopong.dev");
     menu.AddItem("12", "Steam: steamcommunity.com/id/pongo1231");
     menu.Display(client, MENU_TIME_FOREVER);
  
