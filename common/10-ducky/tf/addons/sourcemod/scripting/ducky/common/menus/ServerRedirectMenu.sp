@@ -22,7 +22,7 @@ public Action MenuOpen(int client, int args) {
     menu.AddItem("tf.gopong.dev:27019", "MGE");
     menu.AddItem("tf.gopong.dev:27020", "MGE 2");
     menu.AddItem("tf.gopong.dev:27018", "MGE HvH");
-    menu.AddItem("tf.gopong.dev:27023", "MGE HvH 2");
+    menu.AddItem("tf.gopong.dev:27025", "MGE HvH 2");
 
     menu.Display(client, MENU_TIME_FOREVER);
  
