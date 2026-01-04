@@ -96,7 +96,6 @@ cp_coldfront
 cp_coldfront_rc3
 cp_conquest_hydro_a3
 cp_construct
-cp_construct.nav
 cp_corporation_b3
 cp_cowerhouse_b1
 cp_cqt_standin_v1
@@ -204,7 +203,6 @@ ctf_asteroid_redux
 ctf_atrophy_b4
 ctf_badlands
 ctf_battletal_b2_event
-ctf_battletal_b2_event.nav
 ctf_bball2_fixed
 ctf_bedrock_b3
 ctf_bluefort_rc1
