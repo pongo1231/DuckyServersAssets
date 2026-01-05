@@ -1,3 +1,2 @@
 rcbot2
 failsafe
-nextmap
