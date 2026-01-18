@@ -12,16 +12,21 @@ public void OnPluginStart()
 public void OnMapStart()
 {
     g_PlayingMvM = GameRules_GetProp("m_bPlayingMannVsMachine") > 0;
+
+    char mapName[128];
+    GetCurrentMap(mapName, sizeof(mapName));
+    if (StrEqual(mapName, "itemtest"))
+        ChangeMap("Placeholder map");
 }
 
-bool GetRandomMap(char[] map, int maxlen)
+void ChangeMap(char[] reason)
 {
 	char path[PLATFORM_MAX_PATH];
 	BuildPath(Path_SM, path, sizeof(path), "../../custom/pongo/cfg/mapcycle.txt");
 
     Handle file = OpenFile(path, "r", true);
     if (file == null)
-        return false;
+        return;
 
     char maps[256][PLATFORM_MAX_PATH];
     int count = 0;
@@ -42,23 +47,19 @@ bool GetRandomMap(char[] map, int maxlen)
     CloseHandle(file);
 
     if (count == 0)
-        return false;
+        return;
 
     int index = GetRandomInt(0, count - 1);
-    strcopy(map, maxlen, maps[index]);
-
-    return true;
+    ForceChangeLevel(maps[index], reason);
 }
 
 public Action Timer_Check(Handle timer)
 {
     if (!RCBot2_IsWaypointAvailable())
     {
-        char map[PLATFORM_MAX_PATH];
-        if (!GetRandomMap(map, sizeof(map)))
-            return Plugin_Continue;
-
-        ForceChangeLevel(map, "No waypoints");
+        ChangeMap("No waypoints");
+        
+        return Plugin_Continue;
     }
 
     if (g_PlayingMvM)
@@ -69,12 +70,8 @@ public Action Timer_Check(Handle timer)
 
         if (GetEntProp(obj, Prop_Send, "m_nMannVsMachineWaveCount") != 0 || GetEntProp(obj, Prop_Send, "m_nMannVsMachineMaxWaveCount") != 0)
             return Plugin_Continue;
-
-        char map[PLATFORM_MAX_PATH];
-        if (!GetRandomMap(map, sizeof(map)))
-            return Plugin_Continue;
-
-        ForceChangeLevel(map, "Broken popfile");
+            
+        ChangeMap("Broken popfile");
     }
 
     return Plugin_Continue;
