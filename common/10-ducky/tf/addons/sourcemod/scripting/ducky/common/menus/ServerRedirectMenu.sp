@@ -14,15 +14,15 @@ public Action MenuOpen(int client, int args) {
     SetMenuExitBackButton(menu, true);
     SetMenuExitButton(menu, false);
 
-    menu.AddItem("tf.gopong.dev:27017", "Sandbox");
-    menu.AddItem("tf.gopong.dev:27021", "Sandbox 2");
-    menu.AddItem("tf.gopong.dev:27016", "MvM Sandbox");
-    menu.AddItem("tf.gopong.dev:27022", "MvM Sandbox 2");
-    menu.AddItem("tf.gopong.dev:27015", "MvM Vanilla");
-    menu.AddItem("tf.gopong.dev:27019", "MGE");
-    menu.AddItem("tf.gopong.dev:27020", "MGE 2");
-    menu.AddItem("tf.gopong.dev:27018", "MGE HvH");
-    menu.AddItem("tf.gopong.dev:27025", "MGE HvH 2");
+    menu.AddItem("tf.ecmec.eu:27017", "Sandbox");
+    menu.AddItem("tf.ecmec.eu:27021", "Sandbox 2");
+    menu.AddItem("tf.ecmec.eu:27016", "MvM Sandbox");
+    menu.AddItem("tf.ecmec.eu:27022", "MvM Sandbox 2");
+    menu.AddItem("tf.ecmec.eu:27015", "MvM Vanilla");
+    menu.AddItem("tf.ecmec.eu:27019", "MGE");
+    menu.AddItem("tf.ecmec.eu:27020", "MGE 2");
+    menu.AddItem("tf.ecmec.eu:27018", "MGE HvH");
+    menu.AddItem("tf.ecmec.eu:27025", "MGE HvH 2");
 
     menu.Display(client, MENU_TIME_FOREVER);
  
