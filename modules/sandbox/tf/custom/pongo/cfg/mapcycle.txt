@@ -258,7 +258,7 @@ ctf_sidewinder_rc3b
 ctf_sidewinder_rc3bw.ain
 ctf_sidewinder_rc3bw
 ctf_sidewinder_rc4a
-ctf_smoked_rc1
+//ctf_smoked_rc1
 ctf_snowdrift_b4a
 ctf_snowfort
 ctf_steamroll
