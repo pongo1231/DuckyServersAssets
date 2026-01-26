@@ -1,24 +1,27 @@
 #include <sourcemod>
 
 Handle hudSync;
+Handle hudTimer;
 
-public void OnPluginStart() {
+public void OnPluginStart()
+{
 	hudSync = CreateHudSynchronizer();
-	HookEvent("player_spawn", Event_PlayerSpawn);
+	hudTimer = CreateTimer(0.25, Timer_UpdateHud, _, TIMER_REPEAT);
 }
 
-public Action Event_PlayerSpawn(Handle event, const char[] name, bool dontBroadcast) {
-	int client = GetClientOfUserId(GetEventInt(event, "userid"));
-	if (IsClientConnected(client)) { // Weirdly enough they might not be sometimes?
-		CreateTimer(0.25, Delay_ShowHudText, client);
-	}
-}
-
-public Action Delay_ShowHudText(Handle timer, int client) {
+public Action Timer_UpdateHud(Handle timer)
+{
 	SetHudTextParams(0.01, 0.01, 9999999999.0, 0, 153, 0, 127, 0, 0.0, 0.0);
-	ShowSyncHudText(client, hudSync, "DuckyServers EU");
+
+	for (int i = 1; i <= MaxClients; i++)
+		if (IsClientConnected(i) && IsClientInGame(i))
+			ShowSyncHudText(i, hudSync, "DuckyServers EU");
+
+	return Plugin_Continue;
 }
 
-public void OnPluginEnd() {
+public void OnPluginEnd()
+{
+	delete hudTimer;
 	delete hudSync;
 }
