@@ -14,15 +14,19 @@ public Action MenuOpen(int client, int args) {
     SetMenuExitBackButton(menu, true);
     SetMenuExitButton(menu, false);
 
-    menu.AddItem("tf.ecmec.eu:27017", "Sandbox");
-    menu.AddItem("tf.ecmec.eu:27021", "Sandbox 2");
-    menu.AddItem("tf.ecmec.eu:27016", "MvM Sandbox");
-    menu.AddItem("tf.ecmec.eu:27022", "MvM Sandbox 2");
-    menu.AddItem("tf.ecmec.eu:27015", "MvM Vanilla");
-    menu.AddItem("tf.ecmec.eu:27019", "MGE");
-    menu.AddItem("tf.ecmec.eu:27020", "MGE 2");
-    menu.AddItem("tf.ecmec.eu:27018", "MGE HvH");
-    menu.AddItem("tf.ecmec.eu:27025", "MGE HvH 2");
+    menu.AddItem("tf.ecmec.eu:27017", "EU | Sandbox");
+    menu.AddItem("tf.ecmec.eu:27021", "EU | Sandbox 2");
+    menu.AddItem("tf.ecmec.eu:27016", "EU | MvM Sandbox");
+    menu.AddItem("tf.ecmec.eu:27022", "EU | MvM Sandbox 2");
+    menu.AddItem("tf.ecmec.eu:27015", "EU | MvM Vanilla");
+    menu.AddItem("tf.ecmec.eu:27019", "EU | MGE");
+    menu.AddItem("tf.ecmec.eu:27020", "EU | MGE 2");
+    menu.AddItem("tf.ecmec.eu:27018", "EU | MGE HvH");
+    menu.AddItem("tf.ecmec.eu:27025", "EU | MGE HvH 2");
+    
+    menu.AddItem("tf2.ecmec.eu:27019", "US | MGE");
+    menu.AddItem("tf2.ecmec.eu:27018", "US | MGE HvH");
+    menu.AddItem("tf2.ecmec.eu:27016", "US | MvM Sandbox");
 
     menu.Display(client, MENU_TIME_FOREVER);
  
