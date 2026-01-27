@@ -24,9 +24,9 @@ public Action MenuOpen(int client, int args) {
     menu.AddItem("tf.ecmec.eu:27018", "EU | MGE HvH");
     menu.AddItem("tf.ecmec.eu:27025", "EU | MGE HvH 2");
     
-    menu.AddItem("tf2.ecmec.eu:27019", "NA | MGE");
-    menu.AddItem("tf2.ecmec.eu:27018", "NA | MGE HvH");
-    menu.AddItem("tf2.ecmec.eu:27016", "NA | MvM Sandbox");
+    menu.AddItem("tf.na.ecmec.eu:27019", "NA | MGE");
+    menu.AddItem("tf.na.ecmec.eu:27018", "NA | MGE HvH");
+    menu.AddItem("tf.na.ecmec.eu:27016", "NA | MvM Sandbox");
 
     menu.Display(client, MENU_TIME_FOREVER);
  
