@@ -18,6 +18,8 @@ public Action MenuOpen(int client, int args) {
 
     menu.AddItem("server_silly", "Silly settings");
 
+    menu.AddItem("server_rtv", "Map settings");
+
     int halloween_mode = GetConVarInt(FindConVar("tf_forced_holiday"));
     // tf_forced_holiday 2 is Halloween Mode
     if (halloween_mode == 2)
@@ -39,8 +41,10 @@ public int Handle_Menu(Menu menu, MenuAction action, int client, int item) {
             case 0:
                 FakeClientCommand(client, "menu_server_silly");
             case 1:
-                Voting_CreateYesNoConVarVote(client, "tf_forced_holiday", "Enable halloween mode?", 2, 0);
+                FakeClientCommand(client, "menu_server_map");
             case 2:
+                Voting_CreateYesNoConVarVote(client, "tf_forced_holiday", "Enable halloween mode?", 2, 0);
+            case 3:
                 Voting_CreateYesNoConVarVote(client, "mp_disable_respawn_times", "Enable instant respawning?");
         }
     else if (action == MenuAction_Cancel) {
