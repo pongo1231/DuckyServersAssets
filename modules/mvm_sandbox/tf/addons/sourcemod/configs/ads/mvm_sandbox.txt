@@ -1,1 +1,2 @@
 Wave is stuck? Use the kill all robots option in the server menu (/menu).
+Mission or map is completely broken / stuck? Type /rtv to change map.
