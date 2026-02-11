@@ -12,15 +12,8 @@ public Action MenuOpen(int client, int args) {
     menu.AddItem("1", "Credits:");
     menu.AddItem("2", "Server by pongo1231 / Ducky");
     menu.AddItem("3", "");
-    menu.AddItem("4", "");
-    menu.AddItem("5", "");
-    menu.AddItem("6", "");
-    menu.AddItem("7", "");
-    menu.AddItem("7", "Contact:");
-    menu.AddItem("8", "Our steam group: steamcommunity.com/groups/duckyservers");
-    menu.AddItem("9", "Or personal:");
-    menu.AddItem("11", "E-Mail: pongo@ecmec.eu");
-    menu.AddItem("12", "Steam: steamcommunity.com/id/pongo1231");
+    menu.AddItem("4", "Steam Group: steamcommunity.com/groups/duckyservers");
+    menu.AddItem("5", "E-Mail: ducky@ecmec.eu");
     menu.Display(client, MENU_TIME_FOREVER);
  
     return Plugin_Handled;
