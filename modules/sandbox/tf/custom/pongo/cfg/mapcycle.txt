@@ -519,7 +519,7 @@ pl_ritual_rc5
 plr_matterhorn_b3
 plr_medieval_hightower_b3
 pl_rocketravine_b6
-plr_tinyrock
+//plr_tinyrock
 pl_rumble_rc1
 pl_rumford_rc2
 plr_valentine_b2
