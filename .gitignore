@@ -1,6 +1,6 @@
 /common/00-base/
 /run/
-/overrides/
+/overlays/
 /updater/
 secrets/
 __pycache__
