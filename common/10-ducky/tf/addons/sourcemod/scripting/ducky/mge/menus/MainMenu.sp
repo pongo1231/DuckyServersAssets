@@ -17,6 +17,7 @@ public Action MenuOpen(int client, int args) {
     SetMenuExitButton(menu, true);
     menu.AddItem("main_add", "Add to arena");
     menu.AddItem("main_remove", "Remove from arena");
+    menu.AddItem("main_radio", "Radio (/radio)");
     menu.AddItem("main_player", "Player settings");
     menu.AddItem("main_redirect", "Other servers");
     menu.AddItem("main_credits", "Credits");
@@ -33,10 +34,12 @@ public int Handle_Menu(Menu menu, MenuAction action, int client, int item) {
             case 1:
                 FakeClientCommand(client, "remove");
             case 2:
-                FakeClientCommand(client, "menu_player");
+                FakeClientCommand(client, "menu_radio");
             case 3:
-                FakeClientCommand(client, "menu_redirect");
+                FakeClientCommand(client, "menu_player");
             case 4:
+                FakeClientCommand(client, "menu_redirect");
+            case 5:
                 FakeClientCommand(client, "menu_credits");
         }
     } else if (action == MenuAction_End)

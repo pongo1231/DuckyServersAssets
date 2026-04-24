@@ -15,6 +15,7 @@ public Action MenuOpen(int client, int args) {
     menu.SetTitle("Welcome, %s!\nYou can open this menu anytime via /menu.", client_name);
     SetMenuExitBackButton(menu, false);
     SetMenuExitButton(menu, true);
+    menu.AddItem("main_radio", "Radio (/radio)");
     menu.AddItem("main_player", "Player settings");
     menu.AddItem("main_bots", "Bot settings");
     menu.AddItem("main_redirect", "Other servers");
@@ -28,12 +29,14 @@ public int Handle_Menu(Menu menu, MenuAction action, int client, int item) {
     if (action == MenuAction_Select) {
         switch (item) {
             case 0:
-                FakeClientCommand(client, "menu_player");
+                FakeClientCommand(client, "menu_radio");
             case 1:
-                FakeClientCommand(client, "menu_bots");
+                FakeClientCommand(client, "menu_player");
             case 2:
-                FakeClientCommand(client, "menu_redirect");
+                FakeClientCommand(client, "menu_bots");
             case 3:
+                FakeClientCommand(client, "menu_redirect");
+            case 4:
                 FakeClientCommand(client, "menu_credits");
         }
     } else if (action == MenuAction_End)
