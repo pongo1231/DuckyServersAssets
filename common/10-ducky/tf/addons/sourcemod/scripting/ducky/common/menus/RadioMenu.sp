@@ -37,7 +37,7 @@ public Action CmdRadio(int client, int args)
 
 void ShowMenu(int client)
 {
-    AdvMOTD_ShowMOTDPanel(client, "Radio", "https://ecmec.eu/radio", MOTDPANEL_TYPE_URL, true, true, true, OnMOTDFailure);
+    AdvMOTD_ShowMOTDPanel(client, "Radio", "https://ecmec.eu/radio?hiperf=1", MOTDPANEL_TYPE_URL, true, true, true, OnMOTDFailure);
 }
 
 void OnMOTDFailure(int client, MOTDFailureReason reason)
