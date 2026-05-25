@@ -15,7 +15,7 @@ public Action Timer_UpdateHud(Handle timer)
 
 	for (int i = 1; i <= MaxClients; i++)
 		if (IsClientConnected(i) && IsClientInGame(i))
-			ShowSyncHudText(i, hudSync, "DuckyServers EU");
+			ShowSyncHudText(i, hudSync, "Ducky EU");
 
 	return Plugin_Continue;
 }
