@@ -14,19 +14,8 @@ public Action MenuOpen(int client, int args) {
     SetMenuExitBackButton(menu, true);
     SetMenuExitButton(menu, false);
 
-    menu.AddItem("tf.ecmec.eu:27017", "EU | Sandbox");
-    menu.AddItem("tf.ecmec.eu:27021", "EU | Sandbox 2");
-    menu.AddItem("tf.ecmec.eu:27016", "EU | MvM Sandbox");
-    menu.AddItem("tf.ecmec.eu:27022", "EU | MvM Sandbox 2");
-    menu.AddItem("tf.ecmec.eu:27015", "EU | MvM Vanilla");
-    menu.AddItem("tf.ecmec.eu:27019", "EU | MGE");
-    menu.AddItem("tf.ecmec.eu:27020", "EU | MGE 2");
-    menu.AddItem("tf.ecmec.eu:27018", "EU | MGE HvH");
-    menu.AddItem("tf.ecmec.eu:27025", "EU | MGE HvH 2");
-    
-    menu.AddItem("tf.na.ecmec.eu:27019", "NA | MGE");
-    menu.AddItem("tf.na.ecmec.eu:27018", "NA | MGE HvH");
-    menu.AddItem("tf.na.ecmec.eu:27016", "NA | MvM Sandbox");
+    menu.AddItem("1", "All of our servers are listed here:");
+    menu.AddItem("2", "servers.ecmec.eu");
 
     menu.Display(client, MENU_TIME_FOREVER);
  
@@ -34,12 +23,7 @@ public Action MenuOpen(int client, int args) {
 }
 
 public int Handle_VoteMenu(Menu menu, MenuAction action, int client, int item) {
-    if (action == MenuAction_Select) {
-        char item_info[32];
-        if (GetMenuItem(menu, item, item_info, sizeof(item_info)))
-            DisplayAskConnectBox(client, 10.0, item_info);
-    }
-    else if (action == MenuAction_Cancel) {
+    if (action == MenuAction_Cancel) {
         if (item == MenuCancel_ExitBack)
            FakeClientCommand(client, "menu");
     } else if (action == MenuAction_End)
