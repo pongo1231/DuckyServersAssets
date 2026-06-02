@@ -19,6 +19,42 @@ bool g_bMedieval;
 bool g_bLateLoad;
 float g_fWeaponDropTime = 0.0;
 
+int g_iGivenPrimary[MAXPLAYERS + 1];
+int g_iGivenSecondary[MAXPLAYERS + 1];
+int g_iGivenMelee[MAXPLAYERS + 1];
+int g_iGivenPDA[MAXPLAYERS + 1];
+int g_iGivenPDA2[MAXPLAYERS + 1];
+bool g_bWeaponsGiven[MAXPLAYERS + 1];
+
+int g_iSeedCounter;
+
+int BotRandom(int client, int min, int max)
+{
+	if (!g_bWeaponsGiven[client])
+	{
+		char name[64];
+		GetClientName(client, name, sizeof(name));
+		int seed = HashString(name) + view_as<int>(TF2_GetPlayerClass(client));
+		g_iSeedCounter++;
+		return SeededRandom(seed, g_iSeedCounter, max - min + 1) + min - 1;
+	}
+	return GetRandomUInt(min, max);
+}
+
+int HashString(const char[] str)
+{
+	int hash = 5381;
+	for (int i = 0; str[i] != '\0'; i++)
+		hash = ((hash << 5) + hash) + str[i];
+	return hash;
+}
+
+int SeededRandom(int seed, int subid, int max)
+{
+	int val = ((seed * 1103515245 + subid * 12345 + 12345) ^ (seed >> 16)) & 0x7fffffff;
+	return (val % max) + 1;
+}
+
 public Plugin myinfo = 
 {
 	name = "Give Bots More Weapons",
@@ -50,8 +86,6 @@ public void OnPluginStart()
 	
 	
 	HookEvent("post_inventory_application", player_inv);
-	HookConVarChange(g_hCVEnabled, OnEnabledChanged);
-	HookEvent("player_spawn", OnPlayerSpawn);
 	
 	SetConVarString(hCVversioncvar, PLUGIN_VERSION);
 
@@ -75,21 +109,7 @@ public void OnPluginStart()
 
 	delete hTF2; 
 }
-
-public void OnEnabledChanged(ConVar convar, const char[] oldValue, const char[] newValue)
-{
-	if (GetConVarBool(g_hCVEnabled))
-	{
-		HookEvent("post_inventory_application", player_inv);
-		HookEvent("player_hurt", player_hurt);
-	}
-	else
-	{
-		UnhookEvent("post_inventory_application", player_inv);
-		UnhookEvent("player_hurt", player_hurt);
-	}
-}
-
+ 
 public void OnMapStart()
 {
 	if (GameRules_GetProp("m_bPlayingMannVsMachine"))
@@ -103,410 +123,51 @@ public void OnMapStart()
 	}	
 }
 
-public void OnPlayerSpawn(Event event, const char[] name, bool dontBroadcast) 
+public void OnClientDisconnect(int client)
 {
-	int client = GetClientOfUserId(event.GetInt("userid"));
-	
-	if (IsPlayerHere(client))
-	{
-		SetFakeClientConVar(client, "cl_autoreload", "1");
-		SetFakeClientConVar(client, "hud_medicautocallers", "1");
-	}
+	g_bWeaponsGiven[client] = false;
+	g_iGivenPrimary[client] = 0;
+	g_iGivenSecondary[client] = 0;
+	g_iGivenMelee[client] = 0;
+	g_iGivenPDA[client] = 0;
+	g_iGivenPDA2[client] = 0;
 }
 
-public void player_hurt(Handle event, const char[] name, bool dontBroadcast) 
+bool BotHasCorrectWeapons(int client)
 {
-	if (!GetConVarBool(g_hCVEnabled))
+	if (!g_bWeaponsGiven[client])
+		return false;
+
+	int item;
+	// Check primary
+	int wep = GetPlayerWeaponSlot(client, 0);
+	if (g_iGivenPrimary[client] != 0)
 	{
-		return;
+		if (wep == -1 || !IsValidEntity(wep)) return false;
+		item = GetEntProp(wep, Prop_Send, "m_iItemDefinitionIndex");
+		if (item != g_iGivenPrimary[client]) return false;
 	}
-
-	int victim = GetClientOfUserId(GetEventInt(event, "userid"));
-
-	if (IsPlayerHere(victim))
+	// Check secondary
+	wep = GetPlayerWeaponSlot(client, 1);
+	if (g_iGivenSecondary[client] != 0)
 	{
-		int actwep = GetEntPropEnt(victim, Prop_Send, "m_hActiveWeapon");
-		int wep = GetPlayerWeaponSlot(victim, 0);
-		int wepIndex;
-
-		if (IsValidEntity(wep))
-		{
-			wepIndex = GetEntProp(wep, Prop_Send, "m_iItemDefinitionIndex");
-		}
-
-		switch (wepIndex) 
-		{
-			case 594: // Make Pyros use Phlog Charge
-			{
-				if (GetEntPropFloat(victim, Prop_Send, "m_flRageMeter") > 99.9 && wep == actwep) 
-				{
-					FakeClientCommand(victim, "taunt");
-				}
-			}
-		}
+		if (wep == -1 || !IsValidEntity(wep)) return false;
+		item = GetEntProp(wep, Prop_Send, "m_iItemDefinitionIndex");
+		if (item != g_iGivenSecondary[client]) return false;
 	}
-	
-	return;
+	// Check melee
+	wep = GetPlayerWeaponSlot(client, 2);
+	if (g_iGivenMelee[client] != 0)
+	{
+		if (wep == -1 || !IsValidEntity(wep)) return false;
+		item = GetEntProp(wep, Prop_Send, "m_iItemDefinitionIndex");
+		if (item != g_iGivenMelee[client]) return false;
+	}
+	return true;
 }
 
 public Action OnPlayerRunCmd(int victim, int& buttons, int& impulse, float vel[3], float angles[3], int& weapon, int& subtype, int& cmdnum, int& tickcount, int& seed, int mouse[2])
 {
-	if (g_bMVM && TF2_GetClientTeam(victim) != TFTeam_Red)
-		return Plugin_Continue;
-
-	if (IsPlayerHere(victim) && IsPlayerAlive(victim))
-	{	
-		if (buttons&IN_ATTACK)
-		{
-			int actwep = GetEntPropEnt(victim, Prop_Send, "m_hActiveWeapon");
-			int wep = GetPlayerWeaponSlot(victim, 0);
-			int wepIndex;
-
-			if (IsValidEntity(wep))
-			{
-				wepIndex = GetEntProp(wep, Prop_Send, "m_iItemDefinitionIndex");
-			}
-
-			int wep2 = GetPlayerWeaponSlot(victim, 1);
-			int wepIndex2;
-
-			if (IsValidEntity(wep2))
-			{
-				wepIndex2 = GetEntProp(wep2, Prop_Send, "m_iItemDefinitionIndex");
-			}
-			
-			int wep3 = GetPlayerWeaponSlot(victim, 2);
-			int wepIndex3;
-
-			if (IsValidEntity(wep3))
-			{
-				wepIndex3 = GetEntProp(wep3, Prop_Send, "m_iItemDefinitionIndex");
-			}
-			
-			TFClassType class = TF2_GetPlayerClass(victim);
-
-			switch (wepIndex) 
-			{
-				case 448: //Make scouts use soda popper charge bar
-				{
-					if (GetEntPropFloat(victim, Prop_Send, "m_flHypeMeter") > 99.9 && wep == actwep) 
-					{
-						buttons ^= IN_ATTACK;
-						buttons |= IN_ATTACK2;
-						return Plugin_Changed;
-					}
-				}
-				case 441: //Make soldiers use charge shot on cow managler
-				{
-					if (GetEntPropFloat(wep, Prop_Send, "m_flEnergy") > 19.9 && wep == actwep && GetRandomUInt(1,2) == 1) 
-					{
-						buttons ^= IN_ATTACK;
-						buttons |= IN_ATTACK2;
-						return Plugin_Changed;
-					}
-				}
-				case 730: //Make soldiers not kill themselves using the beggers bazzoka
-				{
-					if (wep == actwep && GetEntProp(wep, Prop_Data, "m_iClip1") > 2) 
-					{
-						buttons ^= IN_ATTACK;
-						return Plugin_Changed;
-					}					
-				}
-			}
-
-			switch (wepIndex2) 
-			{
-				case 751: //Make snipers use the cleaners carbine charge bar
-				{
-					if (wep2 == actwep && GetRandomUInt(1,2) == 1) 
-					{
-						buttons |= IN_ATTACK2;
-						return Plugin_Changed;
-					}
-				}
-				case 30668: //Wrangler secondary fire
-				{
-					if (wep2 == actwep)
-					{
-						buttons |= IN_ATTACK2;
-						return Plugin_Changed;
-					}
-				}
-				case 140: //Wrangler secondary fire
-				{
-					if (wep2 == actwep)
-					{
-						buttons |= IN_ATTACK2;
-						return Plugin_Changed;
-					}
-				}
-				case 1086: //Wrangler secondary fire
-				{
-					if (wep2 == actwep)
-					{
-						buttons |= IN_ATTACK2;
-						return Plugin_Changed;
-					}
-				}
-			}
-			
-			switch (wepIndex3) 
-			{
-				case 648: //Make scout use ball secondary
-				{
-					if (wep3 == actwep) 
-					{
-						buttons |= IN_ATTACK2;
-						return Plugin_Changed;
-					}
-				}
-				case 44: //Make scout use ball secondary
-				{
-					if (wep3 == actwep) 
-					{
-						buttons |= IN_ATTACK2;
-						return Plugin_Changed;
-					}
-				}
-				case 589: //Make engineer use teleport to home
-				{
-					if (GetClientHealth(victim) < 100 && wep3 == actwep) 
-					{
-						FakeClientCommand(victim, "eureka_teleport 0");
-					}
-				}
-			}
-			
-			switch (class) 
-			{
-				case TFClass_DemoMan: //demoman charge behavior
-				{
-					if (wep2 != -1) //if weapon is not a shield stop here
-					{
-						return Plugin_Continue;
-					}
-					else if (GetRandomUInt(1,2) == 1) // otherwise make demo left click when he attacked with grenade launcher
-					{
-						buttons |= IN_ATTACK2;
-						return Plugin_Changed;
-					}
-				}
-				case TFClass_Scout: //Scout jumps in combat
-				{
-					if (GetRandomUInt(1,25) == 1) 
-					{
-						buttons |= IN_JUMP;
-						return Plugin_Changed;
-					}
-				}
-			}
-		}
-		else
-		{
-			int actwep = GetEntPropEnt(victim, Prop_Send, "m_hActiveWeapon");
-
-			int wep2 = GetPlayerWeaponSlot(victim, 1);
-			int wepIndex2;
-
-			if (IsValidEntity(wep2))
-			{
-				wepIndex2 = GetEntProp(wep2, Prop_Send, "m_iItemDefinitionIndex");
-			}
-			
-			int wep3 = GetPlayerWeaponSlot(victim, 2);
-			int wepIndex3;
-
-			if (IsValidEntity(wep3))
-			{
-				wepIndex3 = GetEntProp(wep3, Prop_Send, "m_iItemDefinitionIndex");
-			}
-			
-			TFClassType class = TF2_GetPlayerClass(victim);
-			
-			switch (wepIndex2) 
-			{
-				case 42: //sandvich code (mostly repeated)
-				{
-					if (GetClientHealth(victim) < 200)
-					{
-						EquipWeaponSlot(victim, 1);
-					
-						if (wep2 == actwep && GetClientHealth(victim) < 200)
-						{
-							buttons |= IN_ATTACK;
-							return Plugin_Changed;
-						}
-					}
-					else if (wep2 == actwep && GetRandomUInt(1,2) == 1)
-					{
-						buttons |= IN_ATTACK2;
-						return Plugin_Changed;
-					}
-				}
-				case 863:
-				{
-					if (GetClientHealth(victim) < 200) 
-					{
-						EquipWeaponSlot(victim, 1);
-					
-						if (wep2 == actwep && GetClientHealth(victim) < 200)
-						{
-							buttons |= IN_ATTACK;
-							return Plugin_Changed;
-						}
-					}
-					else if (wep2 == actwep && GetRandomUInt(1,2) == 1)
-					{
-						buttons |= IN_ATTACK2;
-						return Plugin_Changed;
-					}
-				}
-				case 1002:
-				{
-					if (GetClientHealth(victim) < 200) 
-					{
-						EquipWeaponSlot(victim, 1);
-					
-						if (wep2 == actwep && GetClientHealth(victim) < 200)
-						{
-							buttons |= IN_ATTACK;
-							return Plugin_Changed;
-						}
-					}
-					else if (wep2 == actwep && GetRandomUInt(1,2) == 1)
-					{
-						buttons |= IN_ATTACK2;
-						return Plugin_Changed;
-					}
-				}
-				case 159:
-				{
-					if (GetClientHealth(victim) < 250) 
-					{
-						EquipWeaponSlot(victim, 1);
-					
-						if (wep2 == actwep && GetClientHealth(victim) < 250)
-						{
-							buttons |= IN_ATTACK;
-							return Plugin_Changed;
-						}
-					}
-					else if (wep2 == actwep && GetRandomUInt(1,2) == 1)
-					{
-						buttons |= IN_ATTACK2;
-						return Plugin_Changed;
-					}
-				}
-				case 433:
-				{
-					if (GetClientHealth(victim) < 250) 
-					{
-						EquipWeaponSlot(victim, 1);
-					
-						if (wep2 == actwep && GetClientHealth(victim) < 250)
-						{
-							buttons |= IN_ATTACK;
-							return Plugin_Changed;
-						}
-					}
-					else if (wep2 == actwep && GetRandomUInt(1,2) == 1)
-					{
-						buttons |= IN_ATTACK2;
-						return Plugin_Changed;
-					}
-				}
-				case 1190:
-				{
-					if (GetClientHealth(victim) < 250) 
-					{
-						EquipWeaponSlot(victim, 1);
-					
-						if (wep2 == actwep && GetClientHealth(victim) < 250)
-						{
-							buttons |= IN_ATTACK;
-							return Plugin_Changed;
-						}
-					}
-					else if (wep2 == actwep && GetRandomUInt(1,2) == 1)
-					{
-						buttons |= IN_ATTACK2;
-						return Plugin_Changed;
-					}
-				}
-				case 30668: //wrangler put away as to not keep sentry wrangled when away
-				{
-					if (wep2 == actwep && GetRandomUInt(1,2) == 1) 
-					{
-						EquipWeaponSlot(victim, 2);
-						return Plugin_Changed;
-					}
-				}
-				case 140:
-				{
-					if (wep2 == actwep && GetRandomUInt(1,2) == 1) 
-					{
-						EquipWeaponSlot(victim, 2);
-						return Plugin_Changed;
-					}
-				}
-				case 1086:
-				{
-					if (wep2 == actwep && GetRandomUInt(1,2) == 1) 
-					{
-						EquipWeaponSlot(victim, 2);
-						return Plugin_Changed;
-					}
-				}
-				case 311: //eat steak when we equip it when we run out of ammo
-				{
-					if (wep2 == actwep && GetRandomUInt(1,2) == 1) 
-					{
-						buttons |= IN_ATTACK;
-						return Plugin_Changed;
-					}
-				}
-			}
-			
-			switch (wepIndex3) 
-			{
-				case 304: //medic use amputator taunt 
-				{
-					if (GetClientHealth(victim) < 100 && wep3 != actwep)
-					{
-						EquipWeaponSlot(victim, 2);
-						FakeClientCommand(victim, "taunt");
-						return Plugin_Changed;
-					}
-				}
-			}
-			
-			switch (class)
-			{
-				case TFClass_DemoMan: //shield code again 
-				{
-					if (wep2 != -1) 
-					{
-						return Plugin_Continue;
-					}
-					else if (GetRandomUInt(1,2) == 1 && wep3 == actwep)
-					{
-						buttons |= IN_ATTACK2;
-						return Plugin_Changed;
-					}
-				}
-				case TFClass_Medic:
-				{
-					if (GetRandomUInt(1,2) == 1 && wep2 == actwep) 
-					{
-						buttons |= IN_ATTACK;
-						return Plugin_Changed;
-					}
-				}
-			}
-		}
-	}
-	
 	return Plugin_Continue;
 }
 
@@ -575,7 +236,8 @@ public void player_inv(Handle event, const char[] name, bool dontBroadcast)
 			}
 		}
 
-		CreateTimer(timer, Timer_GiveWeapons, userd);
+		if (!BotHasCorrectWeapons(client))
+			CreateTimer(timer, Timer_GiveWeapons, userd);
 	}
 
 	if (g_bMVM && GetConVarBool(g_hCVMVMREDEnabled) && IsPlayerHere(client))
@@ -602,8 +264,9 @@ public void player_inv(Handle event, const char[] name, bool dontBroadcast)
 				AcceptEntityInput(ent, "Kill");
 			}
 		}
-		
-		CreateTimer(timer, Timer_GiveWeapons, userd);
+
+		if (!BotHasCorrectWeapons(client))
+			CreateTimer(timer, Timer_GiveWeapons, userd);
 	}
 		
 }
@@ -653,20 +316,22 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 
 	TFClassType class = TF2_GetPlayerClass(client);
 
+	g_iSeedCounter = 0;
+
 	switch (class)
 	{
 	case TFClass_Scout:
 		{
 			if (!g_bMedieval)
 			{
-				int rnd = GetRandomUInt(1,6);
+				int rnd = BotRandom(client, 1,6);
 				TF2_RemoveWeaponSlot(client, 0);
 
 				switch (rnd)
 				{
 				case 1:
 					{
-						int rnd8 = GetRandomUInt(1,3);
+						int rnd8 = BotRandom(client, 1,3);
 						switch (rnd8)
 						{
 						case 1:
@@ -685,7 +350,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 2:
 					{
-						int rnd6 = GetRandomUInt(1,2);
+						int rnd6 = BotRandom(client, 1,2);
 						switch (rnd6)
 						{
 						case 1:
@@ -700,7 +365,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 3:
 					{
-						int rnd7 = GetRandomUInt(1,2);
+						int rnd7 = BotRandom(client, 1,2);
 						switch (rnd7)
 						{
 						case 1:
@@ -723,7 +388,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 6:
 					{
-						int rnd8 = GetRandomUInt(1,7);
+						int rnd8 = BotRandom(client, 1,7);
 						switch (rnd8)
 						{
 						case 1:
@@ -748,7 +413,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 							}
 						case 6:
 							{
-								int rnd9 = GetRandomUInt(1,8);
+								int rnd9 = BotRandom(client, 1,8);
 								switch (rnd9)
 								{
 								case 1:
@@ -787,7 +452,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 							}
 						case 7:
 							{
-								int rnd10 = GetRandomUInt(1,14);
+								int rnd10 = BotRandom(client, 1,14);
 								switch (rnd10)
 								{
 								case 1:
@@ -852,7 +517,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				}
 				
-				int rnd2 = GetRandomUInt(1,7);
+				int rnd2 = BotRandom(client, 1,7);
 				TF2_RemoveWeaponSlot(client, 1);
 				
 				switch (rnd2)
@@ -863,7 +528,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 2:
 					{
-						int rnd14 = GetRandomUInt(1,2);
+						int rnd14 = BotRandom(client, 1,2);
 						switch (rnd14)
 						{
 						case 1:
@@ -878,7 +543,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 3:
 					{
-						int rnd800 = GetRandomUInt(1,2);
+						int rnd800 = BotRandom(client, 1,2);
 						switch (rnd800)
 						{
 						case 1:
@@ -893,7 +558,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 4:
 					{
-						int rnd9 = GetRandomUInt(1,2);
+						int rnd9 = BotRandom(client, 1,2);
 						switch (rnd9)
 						{
 						case 1:
@@ -908,7 +573,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 5:
 					{
-						int rnd8 = GetRandomUInt(1,2);
+						int rnd8 = BotRandom(client, 1,2);
 						switch (rnd8)
 						{
 						case 1:
@@ -927,12 +592,12 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 7:
 					{
-						int rnd3 = GetRandomUInt(1,3);
+						int rnd3 = BotRandom(client, 1,3);
 						switch (rnd3)
 						{
 						case 1:
 							{
-								int rnd7 = GetRandomUInt(1,2);
+								int rnd7 = BotRandom(client, 1,2);
 								switch (rnd7)
 								{
 								case 1:
@@ -951,7 +616,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 							}
 						case 3:
 							{
-								int rnd7 = GetRandomUInt(1,3);
+								int rnd7 = BotRandom(client, 1,3);
 								switch (rnd7)
 								{
 								case 1:
@@ -964,7 +629,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 									}
 								case 3:
 									{
-										int rnd8 = GetRandomUInt(1, 13);
+										int rnd8 = BotRandom(client, 1, 13);
 										switch (rnd8)
 										{
 										case 1:
@@ -1028,7 +693,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}
 			}
 			
-			int rnd3 = GetRandomUInt(1,8);
+			int rnd3 = BotRandom(client, 1,8);
 			TF2_RemoveWeaponSlot(client, 2);
 			
 			switch (rnd3)
@@ -1039,7 +704,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}
 			case 2:
 				{
-					int rnd6 = GetRandomUInt(1,2);
+					int rnd6 = BotRandom(client, 1,2);
 					switch (rnd6)
 					{
 					case 1:
@@ -1074,12 +739,12 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}
 			case 8:
 				{
-					int rnd24 = GetRandomUInt(1,2);
+					int rnd24 = BotRandom(client, 1,2);
 					switch (rnd24)
 					{
 					case 1:
 						{
-							int rnd25 = GetRandomUInt(1,2);
+							int rnd25 = BotRandom(client, 1,2);
 							switch (rnd25)
 							{
 							case 1:
@@ -1088,7 +753,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 								}
 							case 2:
 								{
-									int rnd7 = GetRandomUInt(1,3);
+									int rnd7 = BotRandom(client, 1,3);
 									switch (rnd7)
 									{
 									case 1:
@@ -1109,7 +774,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 						}
 					case 2:
 						{
-							int rnd7 = GetRandomUInt(1,13);
+							int rnd7 = BotRandom(client, 1,13);
 							switch (rnd7)
 							{
 							case 1:
@@ -1162,7 +827,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 								}
 							case 13:
 								{
-									int rnd9 = GetRandomUInt(1,3);
+									int rnd9 = BotRandom(client, 1,3);
 									switch (rnd9)
 									{
 									case 1:
@@ -1190,14 +855,14 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 		{
 			if (!g_bMedieval)
 			{
-				int rnd = GetRandomUInt(1,5);
+				int rnd = BotRandom(client, 1,5);
 				TF2_RemoveWeaponSlot(client, 0);
 				
 				switch (rnd)
 				{
 				case 1:
 					{
-						int rnd5 = GetRandomUInt(1,2);
+						int rnd5 = BotRandom(client, 1,2);
 						switch (rnd5)
 						{
 						case 1:
@@ -1206,7 +871,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 							}
 						case 2:
 							{
-								int rnd9 = GetRandomUInt(1,2);
+								int rnd9 = BotRandom(client, 1,2);
 								switch (rnd9)
 								{
 								case 1:
@@ -1227,7 +892,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 3:
 					{
-						int rnd6 = GetRandomUInt(1,2);
+						int rnd6 = BotRandom(client, 1,2);
 						switch (rnd6)
 						{
 						case 1:
@@ -1246,7 +911,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 5:
 					{
-						int rnd4 = GetRandomUInt(1,4);
+						int rnd4 = BotRandom(client, 1,4);
 						switch (rnd4)
 						{     
 						case 1:
@@ -1255,7 +920,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 							}
 						case 2:
 							{
-								int rnd11 = GetRandomUInt(1,2);
+								int rnd11 = BotRandom(client, 1,2);
 								switch (rnd11)
 								{
 								case 1:
@@ -1274,7 +939,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 							}
 						case 4:
 							{
-								int rnd11 = GetRandomUInt(1,6);
+								int rnd11 = BotRandom(client, 1,6);
 								switch (rnd11)
 								{
 								case 1:
@@ -1287,7 +952,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 									}
 								case 3:
 									{
-										int rnd10 = GetRandomUInt(1,8);
+										int rnd10 = BotRandom(client, 1,8);
 										switch (rnd10)
 										{
 										case 1:
@@ -1326,7 +991,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 									}
 								case 4:
 									{
-										int rnd14 = GetRandomUInt(1,14);
+										int rnd14 = BotRandom(client, 1,14);
 										switch (rnd14)
 										{
 										case 1:
@@ -1401,7 +1066,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}				
 				}
 				
-				int rnd2 = GetRandomUInt(1,6);
+				int rnd2 = BotRandom(client, 1,6);
 				TF2_RemoveWeaponSlot(client, 1);
 
 				switch (rnd2)
@@ -1424,7 +1089,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 5:
 					{
-						int rnd5 = GetRandomUInt(1,2);
+						int rnd5 = BotRandom(client, 1,2);
 						switch (rnd5)
 						{
 						case 1:
@@ -1433,7 +1098,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 							}
 						case 2:
 							{
-								int rnd9 = GetRandomUInt(1,2);
+								int rnd9 = BotRandom(client, 1,2);
 								switch (rnd9)
 								{
 								case 1:
@@ -1450,7 +1115,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 6:
 					{
-						int rnd6 = GetRandomUInt(1,6);
+						int rnd6 = BotRandom(client, 1,6);
 						switch (rnd6)
 						{
 						case 1:
@@ -1463,7 +1128,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 							}
 						case 3:
 							{
-								int rnd10 = GetRandomUInt(1,9);
+								int rnd10 = BotRandom(client, 1,9);
 								switch (rnd10)
 								{
 								case 1:
@@ -1521,7 +1186,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}
 			}
 			
-			int rnd3 = GetRandomUInt(1,4);
+			int rnd3 = BotRandom(client, 1,4);
 			TF2_RemoveWeaponSlot(client, 2);
 
 			switch (rnd3)
@@ -1536,7 +1201,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}
 			case 3:
 				{
-					int rnd6 = GetRandomUInt(1,2);
+					int rnd6 = BotRandom(client, 1,2);
 					switch (rnd6)
 					{
 					case 1:
@@ -1551,7 +1216,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}
 			case 4:
 				{
-					int rnd8 = GetRandomUInt(1,12);
+					int rnd8 = BotRandom(client, 1,12);
 					switch (rnd8)
 					{
 					case 1:
@@ -1600,7 +1265,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 						}
 					case 12:
 						{
-							int rnd9 = GetRandomUInt(1,2);
+							int rnd9 = BotRandom(client, 1,2);
 							switch (rnd9)
 							{
 							case 1:
@@ -1622,7 +1287,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 		{
 			if (!g_bMedieval)
 			{
-				int rnd = GetRandomUInt(1,7);
+				int rnd = BotRandom(client, 1,7);
 				TF2_RemoveWeaponSlot(client, 0);
 
 				switch (rnd)
@@ -1633,7 +1298,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 2:
 					{
-						int rnd4 = GetRandomUInt(1,4);
+						int rnd4 = BotRandom(client, 1,4);
 						switch (rnd4)
 						{     
 						case 1:
@@ -1664,7 +1329,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 5:
 					{
-						int rnd4 = GetRandomUInt(1,2);
+						int rnd4 = BotRandom(client, 1,2);
 						switch (rnd4)
 						{     
 						case 1:
@@ -1683,7 +1348,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 7:
 					{
-						int rnd4 = GetRandomUInt(1,2);
+						int rnd4 = BotRandom(client, 1,2);
 						switch (rnd4)
 						{     
 						case 1:
@@ -1692,7 +1357,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 							}
 						case 2:
 							{
-								int rnd69 = GetRandomUInt(1,6);
+								int rnd69 = BotRandom(client, 1,6);
 								switch (rnd69)
 								{     
 								case 1:
@@ -1705,7 +1370,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 									}
 								case 3:
 									{
-										int rnd11 = GetRandomUInt(1,8);
+										int rnd11 = BotRandom(client, 1,8);
 										switch (rnd11)
 										{
 										case 1:
@@ -1744,7 +1409,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 									}
 								case 4:
 									{
-										int rnd12 = GetRandomUInt(1,12);
+										int rnd12 = BotRandom(client, 1,12);
 										switch (rnd12)
 										{
 										case 1:
@@ -1811,7 +1476,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				}
 				
-				int rnd2 = GetRandomUInt(1,8);
+				int rnd2 = BotRandom(client, 1,8);
 				TF2_RemoveWeaponSlot(client, 1);
 				
 				switch (rnd2)
@@ -1822,7 +1487,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 2:
 					{
-						int rnd5 = GetRandomUInt(1,2);
+						int rnd5 = BotRandom(client, 1,2);
 						switch (rnd5)
 						{
 						case 1:
@@ -1837,7 +1502,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 3:
 					{
-						int rnd5 = GetRandomUInt(1,2);
+						int rnd5 = BotRandom(client, 1,2);
 						switch (rnd5)
 						{
 						case 1:
@@ -1852,7 +1517,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 4:
 					{
-						int rnd6 = GetRandomUInt(1,2);
+						int rnd6 = BotRandom(client, 1,2);
 						switch (rnd6)
 						{
 						case 1:
@@ -1879,7 +1544,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 8:
 					{
-						int rnd7 = GetRandomUInt(1,5);
+						int rnd7 = BotRandom(client, 1,5);
 						switch (rnd7)
 						{
 						case 1:
@@ -1892,7 +1557,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 							}
 						case 3:
 							{
-								int rnd11 = GetRandomUInt(1,9);
+								int rnd11 = BotRandom(client, 1,9);
 								switch (rnd11)
 								{
 								case 1:
@@ -1946,7 +1611,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}
 			}
 			
-			int rnd3 = GetRandomUInt(1,6);
+			int rnd3 = BotRandom(client, 1,6);
 			TF2_RemoveWeaponSlot(client, 2);
 			
 			switch (rnd3)
@@ -1973,7 +1638,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}
 			case 6:
 				{
-					int rnd5 = GetRandomUInt(1,12);
+					int rnd5 = BotRandom(client, 1,12);
 					switch (rnd5)
 					{
 					case 1:
@@ -2022,7 +1687,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 						}
 					case 12:
 						{
-							int rnd9 = GetRandomUInt(1,2);
+							int rnd9 = BotRandom(client, 1,2);
 							switch (rnd9)
 							{
 							case 1:
@@ -2044,14 +1709,14 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 		{
 			if (!g_bMedieval)
 			{
-				int rnd = GetRandomUInt(1,5); 
+				int rnd = BotRandom(client, 1,5); 
 				TF2_RemoveWeaponSlot(client, 0);
 				
 				switch (rnd)
 				{
 				case 1:
 					{
-						int rnd8 = GetRandomUInt(1,2);
+						int rnd8 = BotRandom(client, 1,2);
 						switch (rnd8)
 						{
 						case 1:
@@ -2066,7 +1731,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 2:
 					{
-						int rnd9 = GetRandomUInt(1,2);
+						int rnd9 = BotRandom(client, 1,2);
 						switch (rnd9)
 						{
 						case 1:
@@ -2081,7 +1746,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 3:
 					{
-						int rnd9 = GetRandomUInt(1,2);
+						int rnd9 = BotRandom(client, 1,2);
 						switch (rnd9)
 						{
 						case 1:
@@ -2096,7 +1761,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 4:
 					{
-						int rnd4 = GetRandomUInt(1,2);
+						int rnd4 = BotRandom(client, 1,2);
 						switch (rnd4)
 						{
 						case 1:
@@ -2111,7 +1776,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 5:
 					{
-						int rnd7 = GetRandomUInt(1,6);
+						int rnd7 = BotRandom(client, 1,6);
 						switch (rnd7)
 						{
 						case 1:
@@ -2124,7 +1789,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 							}
 						case 3:
 							{
-								int rnd11 = GetRandomUInt(1,8);
+								int rnd11 = BotRandom(client, 1,8);
 								switch (rnd11)
 								{
 								case 1:
@@ -2177,7 +1842,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}	
 				}
 				
-				int rnd2 = GetRandomUInt(1,6); 
+				int rnd2 = BotRandom(client, 1,6); 
 				TF2_RemoveWeaponSlot(client, 1);
 				
 				switch (rnd2)
@@ -2192,7 +1857,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 3:
 					{
-						int rnd4 = GetRandomUInt(1,2);
+						int rnd4 = BotRandom(client, 1,2);
 						switch (rnd4)
 						{     
 						case 1:
@@ -2215,7 +1880,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 6:
 					{
-						int rnd5 = GetRandomUInt(1,8);
+						int rnd5 = BotRandom(client, 1,8);
 						switch (rnd5)
 						{     
 						case 1:
@@ -2228,7 +1893,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 							}
 						case 3:
 							{
-								int rnd12 = GetRandomUInt(1,8);
+								int rnd12 = BotRandom(client, 1,8);
 								switch (rnd12)
 								{
 								case 1:
@@ -2267,7 +1932,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 							}
 						case 4:
 							{
-								int rnd14 = GetRandomUInt(1,13);
+								int rnd14 = BotRandom(client, 1,13);
 								switch (rnd14)
 								{
 								case 1:
@@ -2345,14 +2010,14 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}
 			}
 			
-			int rnd3 = GetRandomUInt(1,8);
+			int rnd3 = BotRandom(client, 1,8);
 			TF2_RemoveWeaponSlot(client, 2);
 			
 			switch (rnd3)
 			{
 			case 1:
 				{
-					int rnd5 = GetRandomUInt(1,3);
+					int rnd5 = BotRandom(client, 1,3);
 					switch (rnd5)
 					{
 					case 1:
@@ -2365,7 +2030,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 						}
 					case 3:
 						{
-							int rnd4 = GetRandomUInt(1,3);
+							int rnd4 = BotRandom(client, 1,3);
 							switch (rnd4)
 							{     
 							case 1:
@@ -2390,7 +2055,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}
 			case 3:
 				{
-					int rnd4 = GetRandomUInt(1,2);
+					int rnd4 = BotRandom(client, 1,2);
 					switch (rnd4)
 					{     
 					case 1:
@@ -2409,7 +2074,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}
 			case 5:
 				{
-					int rnd7 = GetRandomUInt(1,2);
+					int rnd7 = BotRandom(client, 1,2);
 					switch (rnd7)
 					{     
 					case 1:
@@ -2428,7 +2093,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}
 			case 7:
 				{
-					int rnd8 = GetRandomUInt(1,2);
+					int rnd8 = BotRandom(client, 1,2);
 					switch (rnd8)
 					{     
 					case 1:
@@ -2443,12 +2108,12 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}
 			case 8:
 				{
-					int rnd6 = GetRandomUInt(1,13);
+					int rnd6 = BotRandom(client, 1,13);
 					switch (rnd6)
 					{
 					case 1:
 						{
-							int rnd9 = GetRandomUInt(1,2);
+							int rnd9 = BotRandom(client, 1,2);
 							switch (rnd9)
 							{
 							case 1:
@@ -2518,14 +2183,14 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 		{
 			if (!g_bMedieval)
 			{
-				int rnd = GetRandomUInt(1,4); 
+				int rnd = BotRandom(client, 1,4); 
 				TF2_RemoveWeaponSlot(client, 0);
 				
 				switch (rnd)
 				{
 				case 1:
 					{
-						int rnd7 = GetRandomUInt(1,2);
+						int rnd7 = BotRandom(client, 1,2);
 						switch (rnd7)
 						{
 						case 1:
@@ -2540,7 +2205,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 2:
 					{
-						int rnd6 = GetRandomUInt(1,3);
+						int rnd6 = BotRandom(client, 1,3);
 						switch (rnd6)
 						{
 						case 1:
@@ -2563,7 +2228,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 4:
 					{
-						int rnd7 = GetRandomUInt(1,2);
+						int rnd7 = BotRandom(client, 1,2);
 						switch (rnd7)
 						{
 						case 1:
@@ -2578,7 +2243,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}				
 				}
 				
-				int rnd2 = GetRandomUInt(1,4);
+				int rnd2 = BotRandom(client, 1,4);
 				TF2_RemoveWeaponSlot(client, 1);
 				switch (rnd2)
 				{
@@ -2596,7 +2261,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 4:
 					{
-						int rnd4 = GetRandomUInt(1,7);
+						int rnd4 = BotRandom(client, 1,7);
 						switch (rnd4)
 						{     
 						case 1:
@@ -2609,7 +2274,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 							}
 						case 3:
 							{
-								int rnd13 = GetRandomUInt(1,8);
+								int rnd13 = BotRandom(client, 1,8);
 								switch (rnd13)
 								{
 								case 1:
@@ -2648,7 +2313,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 							}
 						case 4:
 							{
-								int rnd12 = GetRandomUInt(1,12);
+								int rnd12 = BotRandom(client, 1,12);
 								switch (rnd12)
 								{
 								case 1:
@@ -2717,14 +2382,14 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}				
 				}
 			}
-			int rnd3 = GetRandomUInt(1,3);
+			int rnd3 = BotRandom(client, 1,3);
 			TF2_RemoveWeaponSlot(client, 2);
 			
 			switch (rnd3)
 			{
 			case 1:
 				{
-					int rnd7 = GetRandomUInt(1,3);
+					int rnd7 = BotRandom(client, 1,3);
 					switch (rnd7)
 					{
 					case 1:
@@ -2743,7 +2408,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}
 			case 2:
 				{
-					int rnd8 = GetRandomUInt(1,2);
+					int rnd8 = BotRandom(client, 1,2);
 					switch (rnd8)
 					{
 					case 1:
@@ -2758,7 +2423,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}
 			case 3:
 				{
-					int rnd4 = GetRandomUInt(1,12);
+					int rnd4 = BotRandom(client, 1,12);
 					switch (rnd4)
 					{
 					case 1:
@@ -2807,7 +2472,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 						}
 					case 12:
 						{
-							int rnd9 = GetRandomUInt(1,3);
+							int rnd9 = BotRandom(client, 1,3);
 							switch (rnd9)
 							{
 							case 1:
@@ -2833,7 +2498,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 		{
 			if (!g_bMedieval)
 			{
-				int rnd = GetRandomUInt(1,5);
+				int rnd = BotRandom(client, 1,5);
 				TF2_RemoveWeaponSlot(client, 0);
 				
 				switch (rnd)
@@ -2844,7 +2509,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 2:
 					{
-						int rnd10 = GetRandomUInt(1,2);
+						int rnd10 = BotRandom(client, 1,2);
 						switch (rnd10)
 						{
 						case 1:
@@ -2859,7 +2524,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 3:
 					{
-						int rnd9 = GetRandomUInt(1,4);
+						int rnd9 = BotRandom(client, 1,4);
 						switch (rnd9)
 						{
 						case 1:
@@ -2882,7 +2547,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 4:
 					{
-						int rnd8 = GetRandomUInt(1,3);
+						int rnd8 = BotRandom(client, 1,3);
 						switch (rnd8)
 						{
 						case 1:
@@ -2901,7 +2566,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 5:
 					{
-						int rnd4 = GetRandomUInt(1,2);
+						int rnd4 = BotRandom(client, 1,2);
 						switch (rnd4)
 						{
 						case 1:
@@ -2910,7 +2575,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 							}
 						case 2:
 							{
-								int rnd8 = GetRandomUInt(1,3);
+								int rnd8 = BotRandom(client, 1,3);
 								switch (rnd8)
 								{
 								case 1:
@@ -2919,7 +2584,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 									}
 								case 2:
 									{
-										int rnd13 = GetRandomUInt(1,7);
+										int rnd13 = BotRandom(client, 1,7);
 										switch (rnd13)
 										{
 										case 1:
@@ -2958,7 +2623,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 									}
 								case 3:
 									{
-										int rnd12 = GetRandomUInt(1,15);
+										int rnd12 = BotRandom(client, 1,15);
 										switch (rnd12)
 										{
 										case 1:
@@ -3045,14 +2710,14 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}					
 				}
 				
-				int rnd2 = GetRandomUInt(1,7);
+				int rnd2 = BotRandom(client, 1,7);
 				TF2_RemoveWeaponSlot(client, 1);
 				
 				switch (rnd2)
 				{
 				case 1:
 					{
-						int rnd5 = GetRandomUInt(1,2);
+						int rnd5 = BotRandom(client, 1,2);
 						switch (rnd5)
 						{
 						case 1:
@@ -3067,7 +2732,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 2:
 					{
-						int rnd5 = GetRandomUInt(1,2);
+						int rnd5 = BotRandom(client, 1,2);
 						switch (rnd5)
 						{
 						case 1:
@@ -3082,7 +2747,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}	
 				case 3:
 					{
-						int rnd7 = GetRandomUInt(1,5);
+						int rnd7 = BotRandom(client, 1,5);
 						switch (rnd7)
 						{
 						case 1:
@@ -3095,7 +2760,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 							}
 						case 3:
 							{
-								int rnd11 = GetRandomUInt(1,9);
+								int rnd11 = BotRandom(client, 1,9);
 								switch (rnd11)
 								{
 								case 1:
@@ -3152,7 +2817,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 5:
 					{
-						int rnd5 = GetRandomUInt(1,3);
+						int rnd5 = BotRandom(client, 1,3);
 						switch (rnd5)
 						{
 						case 1:
@@ -3171,7 +2836,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 6:
 					{
-						int rnd6 = GetRandomUInt(1,2);
+						int rnd6 = BotRandom(client, 1,2);
 						switch (rnd6)
 						{
 						case 1:
@@ -3190,7 +2855,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				}
 			}
-			int rnd3 = GetRandomUInt(1,8);
+			int rnd3 = BotRandom(client, 1,8);
 			TF2_RemoveWeaponSlot(client, 2);
 			
 			switch (rnd3)
@@ -3201,7 +2866,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}
 			case 2:
 				{
-					int rnd5 = GetRandomUInt(1,2);
+					int rnd5 = BotRandom(client, 1,2);
 					switch (rnd5)
 					{
 					case 1:
@@ -3210,7 +2875,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 						}
 					case 2:
 						{
-							int rnd8 = GetRandomUInt(1,2);
+							int rnd8 = BotRandom(client, 1,2);
 							switch (rnd8)
 							{
 							case 1:
@@ -3247,12 +2912,12 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}
 			case 8:
 				{
-					int rnd6 = GetRandomUInt(1,13);
+					int rnd6 = BotRandom(client, 1,13);
 					switch (rnd6)
 					{
 					case 1:
 						{
-							int rnd9 = GetRandomUInt(1,2);
+							int rnd9 = BotRandom(client, 1,2);
 							switch (rnd9)
 							{
 							case 1:
@@ -3322,14 +2987,14 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 		{
 			if (!g_bMedieval)
 			{
-				int rnd = GetRandomUInt(1,5);
+				int rnd = BotRandom(client, 1,5);
 				TF2_RemoveWeaponSlot(client, 0);
 				
 				switch (rnd)
 				{
 				case 1:
 					{
-						int rnd5 = GetRandomUInt(1,2);
+						int rnd5 = BotRandom(client, 1,2);
 						switch (rnd5)
 						{
 						case 1:
@@ -3344,7 +3009,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 2:
 					{
-						int rnd9 = GetRandomUInt(1,2);
+						int rnd9 = BotRandom(client, 1,2);
 						switch (rnd9)
 						{
 						case 1:
@@ -3363,7 +3028,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 4:
 					{
-						int rnd9 = GetRandomUInt(1,2);
+						int rnd9 = BotRandom(client, 1,2);
 						switch (rnd9)
 						{
 						case 1:
@@ -3378,7 +3043,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 5:
 					{
-						int rnd4 = GetRandomUInt(1,3);
+						int rnd4 = BotRandom(client, 1,3);
 						switch (rnd4)
 						{
 						case 1:
@@ -3391,7 +3056,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 							}
 						case 3:
 							{
-								int rnd15 = GetRandomUInt(1,7);
+								int rnd15 = BotRandom(client, 1,7);
 								switch (rnd15)
 								{
 								case 1:
@@ -3400,7 +3065,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 									}
 								case 2:
 									{
-										int rnd16 = GetRandomUInt(1,8);
+										int rnd16 = BotRandom(client, 1,8);
 										switch (rnd16)
 										{
 										case 1:
@@ -3439,7 +3104,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 									}
 								case 3:
 									{
-										int rnd12 = GetRandomUInt(1,13);
+										int rnd12 = BotRandom(client, 1,13);
 										switch (rnd12)
 										{
 										case 1:
@@ -3518,14 +3183,14 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}	
 				}
 				
-				int rnd2 = GetRandomUInt(1,7);
+				int rnd2 = BotRandom(client, 1,7);
 				TF2_RemoveWeaponSlot(client, 1);
 				
 				switch (rnd2)
 				{
 				case 1:
 					{
-						int rnd7 = GetRandomUInt(1,2);
+						int rnd7 = BotRandom(client, 1,2);
 						switch (rnd7)
 						{
 						case 1:
@@ -3544,7 +3209,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 3:
 					{
-						int rnd7 = GetRandomUInt(1,2);
+						int rnd7 = BotRandom(client, 1,2);
 						switch (rnd7)
 						{
 						case 1:
@@ -3559,7 +3224,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 4:
 					{
-						int rnd5 = GetRandomUInt(1,2);
+						int rnd5 = BotRandom(client, 1,2);
 						switch (rnd5)
 						{
 						case 1:
@@ -3574,7 +3239,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 5:
 					{
-						int rnd6 = GetRandomUInt(1,2);
+						int rnd6 = BotRandom(client, 1,2);
 						switch (rnd6)
 						{
 						case 1:
@@ -3593,7 +3258,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 7:
 					{
-						int rnd8 = GetRandomUInt(1,5);
+						int rnd8 = BotRandom(client, 1,5);
 						switch (rnd8)
 						{
 						case 1:
@@ -3606,7 +3271,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 							}
 						case 3:
 							{
-								int rnd11 = GetRandomUInt(1,9);
+								int rnd11 = BotRandom(client, 1,9);
 								switch (rnd11)
 								{
 								case 1:
@@ -3660,14 +3325,14 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}
 			}
 			
-			int rnd3 = GetRandomUInt(1,7);
+			int rnd3 = BotRandom(client, 1,7);
 			TF2_RemoveWeaponSlot(client, 2);
 			
 			switch (rnd3)
 			{
 			case 1:
 				{
-					int rnd5 = GetRandomUInt(1,2);
+					int rnd5 = BotRandom(client, 1,2);
 					switch (rnd5)
 					{
 					case 1:
@@ -3676,7 +3341,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 						}
 					case 2:
 						{
-							int rnd6 = GetRandomUInt(1,3);
+							int rnd6 = BotRandom(client, 1,3);
 							switch (rnd6)
 							{
 							case 1:
@@ -3697,7 +3362,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}
 			case 2:
 				{
-					int rnd8 = GetRandomUInt(1,2);
+					int rnd8 = BotRandom(client, 1,2);
 					switch (rnd8)
 					{
 					case 1:
@@ -3712,7 +3377,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}
 			case 3:
 				{
-					int rnd9 = GetRandomUInt(1,2);
+					int rnd9 = BotRandom(client, 1,2);
 					switch (rnd9)
 					{
 					case 1:
@@ -3735,7 +3400,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}
 			case 6:
 				{
-					int rnd9 = GetRandomUInt(1,2);
+					int rnd9 = BotRandom(client, 1,2);
 					switch (rnd9)
 					{
 					case 1:
@@ -3758,7 +3423,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 		{
 			if (!g_bMedieval)
 			{
-				int rnd = GetRandomUInt(1,4);
+				int rnd = BotRandom(client, 1,4);
 				TF2_RemoveWeaponSlot(client, 0);
 				
 				switch (rnd)
@@ -3777,7 +3442,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 4:
 					{
-						int rnd23 = GetRandomUInt(1,2);
+						int rnd23 = BotRandom(client, 1,2);
 						switch (rnd23)
 						{
 						case 1:
@@ -3786,7 +3451,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 							}
 						case 2:
 							{
-								int rnd5 = GetRandomUInt(1,5);
+								int rnd5 = BotRandom(client, 1,5);
 								switch (rnd5)
 								{
 								case 1:
@@ -3799,7 +3464,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 									}
 								case 3:
 									{
-										int rnd12 = GetRandomUInt(1,11);
+										int rnd12 = BotRandom(client, 1,11);
 										switch (rnd12)
 										{
 										case 1:
@@ -3861,7 +3526,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 						}
 					}					
 				}
-				int rnd2 = GetRandomUInt(1,2);
+				int rnd2 = BotRandom(client, 1,2);
 				TF2_RemoveWeaponSlot(client, 1);
 				
 				switch (rnd2)
@@ -3877,7 +3542,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}
 			}
 			
-			int rnd3 = GetRandomUInt(1,5);
+			int rnd3 = BotRandom(client, 1,5);
 			TF2_RemoveWeaponSlot(client, 2);
 			CreateWeapon(client, "tf_weapon_pda_spy", 27, 6);
 			
@@ -3897,7 +3562,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}
 			case 4:
 				{
-					int rnd7 = GetRandomUInt(1,2);
+					int rnd7 = BotRandom(client, 1,2);
 					switch (rnd7)
 					{
 					case 1:
@@ -3912,7 +3577,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}
 			case 5:
 				{
-					int rnd6 = GetRandomUInt(1,3);
+					int rnd6 = BotRandom(client, 1,3);
 					switch (rnd6)
 					{
 					case 1:
@@ -3925,7 +3590,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 						}
 					case 3:
 						{
-							int rnd11 = GetRandomUInt(1,7);
+							int rnd11 = BotRandom(client, 1,7);
 							switch (rnd11)
 							{
 							case 1:
@@ -3934,7 +3599,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 								}
 							case 2:
 								{
-									int rnd12 = GetRandomUInt(1,8);
+									int rnd12 = BotRandom(client, 1,8);
 									switch (rnd12)
 									{
 									case 1:
@@ -3973,7 +3638,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 								}
 							case 3:
 								{
-									int rnd12 = GetRandomUInt(1,8);
+									int rnd12 = BotRandom(client, 1,8);
 									switch (rnd12)
 									{
 									case 1:
@@ -4032,7 +3697,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}					
 			}
 
-			int rnd4 = GetRandomUInt(1,3);
+			int rnd4 = BotRandom(client, 1,3);
 			TF2_RemoveWeaponSlot(client, 4);
 			
 			switch (rnd4)
@@ -4047,7 +3712,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}
 			case 3:
 				{
-					int rnd8 = GetRandomUInt(1,3);
+					int rnd8 = BotRandom(client, 1,3);
 					switch (rnd8)
 					{
 					case 1:
@@ -4070,14 +3735,14 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 		{
 			if (!g_bMedieval)
 			{
-				int rnd = GetRandomUInt(1,6);
+				int rnd = BotRandom(client, 1,6);
 				TF2_RemoveWeaponSlot(client, 0);
 				
 				switch (rnd)
 				{
 				case 1:
 					{
-						int rnd8 = GetRandomUInt(1,3);
+						int rnd8 = BotRandom(client, 1,3);
 						switch (rnd8)
 						{
 						case 1:
@@ -4100,7 +3765,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 3:
 					{
-						int rnd5 = GetRandomUInt(1,2);
+						int rnd5 = BotRandom(client, 1,2);
 						switch (rnd5)
 						{
 						case 1:
@@ -4119,7 +3784,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 5:
 					{
-						int rnd11 = GetRandomUInt(1,2);
+						int rnd11 = BotRandom(client, 1,2);
 						switch (rnd11)
 						{
 						case 1:
@@ -4134,7 +3799,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}						
 				case 6:
 					{
-						int rnd7 = GetRandomUInt(1,4);
+						int rnd7 = BotRandom(client, 1,4);
 						switch (rnd7)
 						{
 						case 1:
@@ -4147,7 +3812,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 							}
 						case 3:
 							{
-								int rnd11 = GetRandomUInt(1,9);
+								int rnd11 = BotRandom(client, 1,9);
 								switch (rnd11)
 								{
 								case 1:
@@ -4196,14 +3861,14 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}					
 				}
 			
-				int rnd2 = GetRandomUInt(1,3);
+				int rnd2 = BotRandom(client, 1,3);
 				TF2_RemoveWeaponSlot(client, 1);
 				
 				switch (rnd2)
 				{
 				case 1:
 					{
-						int rnd5 = GetRandomUInt(1,2);
+						int rnd5 = BotRandom(client, 1,2);
 						switch (rnd5)
 						{
 						case 1:
@@ -4212,7 +3877,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 							}
 						case 2:
 							{
-								int rnd7 = GetRandomUInt(1,2);
+								int rnd7 = BotRandom(client, 1,2);
 								switch (rnd7)
 								{
 								case 1:
@@ -4233,12 +3898,12 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}
 				case 3:
 					{
-						int rnd3 = GetRandomUInt(1,3);
+						int rnd3 = BotRandom(client, 1,3);
 						switch (rnd3)
 						{
 						case 1:
 							{
-								int rnd7 = GetRandomUInt(1,2);
+								int rnd7 = BotRandom(client, 1,2);
 								switch (rnd7)
 								{
 								case 1:
@@ -4257,7 +3922,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 							}
 						case 3:
 							{
-								int rnd7 = GetRandomUInt(1,3);
+								int rnd7 = BotRandom(client, 1,3);
 								switch (rnd7)
 								{
 								case 1:
@@ -4270,7 +3935,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 									}
 								case 3:
 									{
-										int rnd8 = GetRandomUInt(1, 13);
+										int rnd8 = BotRandom(client, 1, 13);
 										switch (rnd8)
 										{
 										case 1:
@@ -4332,7 +3997,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 						}
 					}
 				}
-				int rnd4 = GetRandomUInt(1,2);
+				int rnd4 = BotRandom(client, 1,2);
 				if(rnd4 == 1)
 				{
 					TF2_RemoveWeaponSlot(client, 3);				
@@ -4347,7 +4012,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				TF2_RemoveWeaponSlot(client, 4);
 				CreateWeapon(client, "tf_weapon_pda_engineer_destroy", 26, 6);					
 			}
-			int rnd3 = GetRandomUInt(1,5);
+			int rnd3 = BotRandom(client, 1,5);
 			TF2_RemoveWeaponSlot(client, 2);
 
 			switch (rnd3)
@@ -4362,7 +4027,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}
 			case 3:
 				{
-					int rnd6 = GetRandomUInt(1,2);
+					int rnd6 = BotRandom(client, 1,2);
 					switch (rnd6)
 					{
 					case 1:
@@ -4377,7 +4042,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 				}
 			case 4:
 				{
-					int rnd5 = GetRandomUInt(1,3);
+					int rnd5 = BotRandom(client, 1,3);
 					switch (rnd5)
 					{
 					case 1:
@@ -4390,7 +4055,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 						}
 					case 3:
 						{
-							int rnd12 = GetRandomUInt(1,7);
+							int rnd12 = BotRandom(client, 1,7);
 							switch (rnd12)
 							{
 							case 1:
@@ -4399,7 +4064,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 								}
 							case 2:
 								{
-									int rnd13 = GetRandomUInt(1,8);
+									int rnd13 = BotRandom(client, 1,8);
 									switch (rnd13)
 									{
 									case 1:
@@ -4438,7 +4103,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 								}
 							case 3:
 								{
-									int rnd13 = GetRandomUInt(1,7);
+									int rnd13 = BotRandom(client, 1,7);
 									switch (rnd13)
 									{
 									case 1:
@@ -4498,7 +4163,29 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 			}	
 		}
 	}
-	
+
+	// Store what was given so resupply cabinets don't re-roll
+	int wep;
+	wep = GetPlayerWeaponSlot(client, 0);
+	if (wep != -1 && IsValidEntity(wep))
+		g_iGivenPrimary[client] = GetEntProp(wep, Prop_Send, "m_iItemDefinitionIndex");
+	else
+		g_iGivenPrimary[client] = 0;
+
+	wep = GetPlayerWeaponSlot(client, 1);
+	if (wep != -1 && IsValidEntity(wep))
+		g_iGivenSecondary[client] = GetEntProp(wep, Prop_Send, "m_iItemDefinitionIndex");
+	else
+		g_iGivenSecondary[client] = 0;
+
+	wep = GetPlayerWeaponSlot(client, 2);
+	if (wep != -1 && IsValidEntity(wep))
+		g_iGivenMelee[client] = GetEntProp(wep, Prop_Send, "m_iItemDefinitionIndex");
+	else
+		g_iGivenMelee[client] = 0;
+
+	g_bWeaponsGiven[client] = true;
+
 	return Plugin_Handled;
 }
 
@@ -4524,7 +4211,7 @@ bool CreateWeapon(int client, char[] classname, int itemindex, int quality, int 
 	}
 	else
 	{
-		SetEntProp(weapon, Prop_Send, "m_iEntityLevel", GetRandomUInt(1,100));
+		SetEntProp(weapon, Prop_Send, "m_iEntityLevel", BotRandom(client, 1,100));
 	}
 
 	switch (itemindex)
@@ -4547,7 +4234,7 @@ bool CreateWeapon(int client, char[] classname, int itemindex, int quality, int 
 		}	
 	case 998:
 		{
-			SetEntProp(weapon, Prop_Send, "m_nChargeResistType", GetRandomUInt(0,2));
+			SetEntProp(weapon, Prop_Send, "m_nChargeResistType", BotRandom(client, 0,2));
 		}
 	case 1071:
 		{
@@ -4591,19 +4278,19 @@ bool CreateWeapon(int client, char[] classname, int itemindex, int quality, int 
 		
 		//TF2Attrib_SetByDefIndex(weapon, 2025, 1.0);
 
-		if (GetRandomUInt(1,5) == 1)
+		if (BotRandom(client, 1,5) == 1)
 		{
 			//TF2Attrib_SetByDefIndex(weapon, 2025, 2.0);
-			TF2Attrib_SetByDefIndex(weapon, 2014, GetRandomUInt(1,7) + 0.0);
+			TF2Attrib_SetByDefIndex(weapon, 2014, BotRandom(client, 1,7) + 0.0);
 		}
-		else if (GetRandomUInt(1,5) == 2)
+		else if (BotRandom(client, 1,5) == 2)
 		{
 			//TF2Attrib_SetByDefIndex(weapon, 2025, 3.0);
-			TF2Attrib_SetByDefIndex(weapon, 2014, GetRandomUInt(1,7) + 0.0);
-			TF2Attrib_SetByDefIndex(weapon, 2013, GetRandomUInt(2002,2008) + 0.0);
+			TF2Attrib_SetByDefIndex(weapon, 2014, BotRandom(client, 1,7) + 0.0);
+			TF2Attrib_SetByDefIndex(weapon, 2013, BotRandom(client, 2002,2008) + 0.0);
 		}
 		
-		TF2Attrib_SetByDefIndex(weapon, 214, view_as<float>(GetRandomUInt(0, 9000)));		
+		TF2Attrib_SetByDefIndex(weapon, 214, view_as<float>(BotRandom(client, 0, 9000)));		
 	}
 
 	if(itemindex == 200 || itemindex == 220 || itemindex == 448 || itemindex == 15002 || itemindex == 15015 || itemindex == 15021 || itemindex == 15029 || itemindex == 15036 || itemindex == 15053 || itemindex == 15065 || itemindex == 15069 || itemindex == 15106 || itemindex == 15107 || itemindex == 15108 || itemindex == 15131 || itemindex == 15151 || itemindex == 15157 || itemindex == 449 || itemindex == 15013 || itemindex == 15018 || itemindex == 15035 || itemindex == 15041 || itemindex == 15046 || itemindex == 15056 || itemindex == 15060 || itemindex == 15061 || itemindex == 15100 || itemindex == 15101
@@ -4615,7 +4302,7 @@ bool CreateWeapon(int client, char[] classname, int itemindex, int quality, int 
 			|| itemindex == 15134 || itemindex == 15153 || itemindex == 193 || itemindex == 401 || itemindex == 210 || itemindex == 15011 || itemindex == 15027 || itemindex == 15042 || itemindex == 15051 || itemindex == 15062 || itemindex == 15063 || itemindex == 15064 || itemindex == 15103 || itemindex == 15128 || itemindex == 15129 || itemindex == 15149 || itemindex == 194 || itemindex == 649 || itemindex == 15062 || itemindex == 15094 || itemindex == 15095 || itemindex == 15096 || itemindex == 15118 || itemindex == 15119 || itemindex == 15143 || itemindex == 15144 || itemindex == 209 || itemindex == 15013 || itemindex == 15018
 			|| itemindex == 15035 || itemindex == 15041 || itemindex == 15046 || itemindex == 15056 || itemindex == 15060 || itemindex == 15061 || itemindex == 15100 || itemindex == 15101 || itemindex == 15102 || itemindex == 15126 || itemindex == 15148 || itemindex == 415 || itemindex == 15003 || itemindex == 15016 || itemindex == 15044 || itemindex == 15047 || itemindex == 15085 || itemindex == 15109 || itemindex == 15132 || itemindex == 15133 || itemindex == 15152 || itemindex == 1153)
 	{
-		if(GetRandomUInt(1,10) == 1)
+		if(BotRandom(client, 1,10) == 1)
 		{
 			TF2Attrib_SetByDefIndex(weapon, 2053, 1.0);
 		}
@@ -4627,19 +4314,19 @@ bool CreateWeapon(int client, char[] classname, int itemindex, int quality, int 
 		
 		//TF2Attrib_SetByDefIndex(weapon, 2025, 1.0);
 
-		if (GetRandomUInt(1,5) == 1)
+		if (BotRandom(client, 1,5) == 1)
 		{
 			//TF2Attrib_SetByDefIndex(weapon, 2025, 2.0);
-			TF2Attrib_SetByDefIndex(weapon, 2014, GetRandomUInt(1,7) + 0.0);
+			TF2Attrib_SetByDefIndex(weapon, 2014, BotRandom(client, 1,7) + 0.0);
 		}
-		else if (GetRandomUInt(1,5) == 2)
+		else if (BotRandom(client, 1,5) == 2)
 		{
 			//TF2Attrib_SetByDefIndex(weapon, 2025, 3.0);
-			TF2Attrib_SetByDefIndex(weapon, 2014, GetRandomUInt(1,7) + 0.0);
-			TF2Attrib_SetByDefIndex(weapon, 2013, GetRandomUInt(2002,2008) + 0.0);
+			TF2Attrib_SetByDefIndex(weapon, 2014, BotRandom(client, 1,7) + 0.0);
+			TF2Attrib_SetByDefIndex(weapon, 2013, BotRandom(client, 2002,2008) + 0.0);
 		}
 		
-		TF2Attrib_SetByDefIndex(weapon, 214, view_as<float>(GetRandomUInt(0, 9000)));
+		TF2Attrib_SetByDefIndex(weapon, 214, view_as<float>(BotRandom(client, 0, 9000)));
 	}
 
 	if (quality == 15)
@@ -4660,7 +4347,7 @@ bool CreateWeapon(int client, char[] classname, int itemindex, int quality, int 
 	if (quality == 16)
 	{
 		quality = 14;
-		int rndp = GetRandomUInt(1,152);
+		int rndp = BotRandom(client, 1,152);
 		switch(rndp)
 		{
 		case 1:
@@ -5272,7 +4959,7 @@ bool CreateWeapon(int client, char[] classname, int itemindex, int quality, int 
 				TF2Attrib_SetByDefIndex(weapon, 834, view_as<float>(432));
 			}
 		}
-		if (GetRandomUInt(1,8) < 7)
+		if (BotRandom(client, 1,8) < 7)
 		{
 			TF2Attrib_SetByDefIndex(weapon, 725, GetRandomFloat(0.0,1.0));		
 		}
@@ -5282,7 +4969,7 @@ bool CreateWeapon(int client, char[] classname, int itemindex, int quality, int 
 	
 	if (quality >0 && quality < 9)
 	{
-		int rnd4 = GetRandomUInt(1,4);
+		int rnd4 = BotRandom(client, 1,4);
 		switch (rnd4)
 		{
 		case 1:
@@ -5300,23 +4987,23 @@ bool CreateWeapon(int client, char[] classname, int itemindex, int quality, int 
 		case 4:
 			{
 				SetEntData(weapon, FindSendPropInfo(entclass, "m_iEntityQuality"), 11);
-				if (GetRandomUInt(1,5) == 1)
+				if (BotRandom(client, 1,5) == 1)
 				{
 					//TF2Attrib_SetByDefIndex(weapon, 2025, 1.0);
 				}
-				else if (GetRandomUInt(1,5) == 2)
+				else if (BotRandom(client, 1,5) == 2)
 				{
 					//TF2Attrib_SetByDefIndex(weapon, 2025, 2.0);
-					TF2Attrib_SetByDefIndex(weapon, 2014, GetRandomUInt(1,7) + 0.0);
+					TF2Attrib_SetByDefIndex(weapon, 2014, BotRandom(client, 1,7) + 0.0);
 				}
-				else if (GetRandomUInt(1,5) == 3)
+				else if (BotRandom(client, 1,5) == 3)
 				{
 					//TF2Attrib_SetByDefIndex(weapon, 2025, 3.0);
-					TF2Attrib_SetByDefIndex(weapon, 2014, GetRandomUInt(1,7) + 0.0);
-					TF2Attrib_SetByDefIndex(weapon, 2013, GetRandomUInt(2002,2008) + 0.0);
+					TF2Attrib_SetByDefIndex(weapon, 2014, BotRandom(client, 1,7) + 0.0);
+					TF2Attrib_SetByDefIndex(weapon, 2013, BotRandom(client, 2002,2008) + 0.0);
 				}
 				
-				TF2Attrib_SetByDefIndex(weapon, 214, view_as<float>(GetRandomUInt(0, 9000)));
+				TF2Attrib_SetByDefIndex(weapon, 214, view_as<float>(BotRandom(client, 0, 9000)));
 			}
 		}
 	}
@@ -5333,12 +5020,12 @@ bool CreateWeapon(int client, char[] classname, int itemindex, int quality, int 
 		EquipPlayerWeapon(client, weapon); 
 	}
 
-	if (GetRandomUInt(1,20) == 1)
+	if (BotRandom(client, 1,20) == 1)
 	{
 		TF2Attrib_SetByName(weapon, "SPELL: Halloween death ghosts", 1.0);
 	}
 	
-	if (GetRandomUInt(1,10) == 1)
+	if (BotRandom(client, 1,10) == 1)
 	{
 		if (itemindex == 21 || itemindex == 208 || itemindex == 40 || itemindex == 215 || itemindex == 594 || itemindex == 659 || itemindex == 741 || itemindex == 798 || itemindex == 807 || itemindex == 887 || itemindex == 896 || itemindex == 905 || itemindex == 914 || itemindex == 963 || itemindex == 972 || itemindex == 1146 || itemindex == 1178 || itemindex == 15005 || itemindex == 15017 || itemindex == 15030 || itemindex == 15034 || itemindex == 15049 || itemindex == 15054 || itemindex == 15066 || itemindex == 15067 || itemindex == 15068 || itemindex == 15089 || itemindex == 15090 || itemindex == 15115 || itemindex == 15141 || itemindex == 30474)
 		{
@@ -5346,7 +5033,7 @@ bool CreateWeapon(int client, char[] classname, int itemindex, int quality, int 
 		}
 	}
 	
-	if (GetRandomUInt(1,10) == 1)
+	if (BotRandom(client, 1,10) == 1)
 	{
 		if (itemindex == 18 || itemindex == 205 || itemindex == 127 || itemindex == 228 || itemindex == 414 || itemindex == 513 || itemindex == 658 || itemindex == 730 || itemindex == 800 || itemindex == 809 || itemindex == 889 || itemindex == 898 || itemindex == 907 || itemindex == 916 || itemindex == 965 || itemindex == 974 || itemindex == 1085 || itemindex == 1104 || itemindex == 15006 || itemindex == 15014 || itemindex == 15028 || itemindex == 15043 || itemindex == 15052 || itemindex == 15057 || itemindex == 15081 || itemindex == 15104 || itemindex == 15105 || itemindex == 15129 || itemindex == 15130 || itemindex == 15150 || itemindex == 19 || itemindex == 206 || itemindex == 308 || itemindex == 996 || itemindex == 1007 || itemindex == 1151 || itemindex == 15077 || itemindex == 15079 || itemindex == 15091 || itemindex == 15092 || itemindex == 15116 || itemindex == 15117 || itemindex == 15142 || itemindex == 15158 || itemindex == 20 || itemindex == 207 || itemindex == 130 || itemindex == 661 || itemindex == 797 || itemindex == 806 || itemindex == 886 || itemindex == 895 || itemindex == 904 || itemindex == 913 || itemindex == 962 || itemindex == 971 || itemindex == 1150 || itemindex == 15009 || itemindex == 15012 || itemindex == 15024 || itemindex == 15038 || itemindex == 15045 || itemindex == 15048 || itemindex == 15082 || itemindex == 15083 || itemindex == 15084 || itemindex == 15113 || itemindex == 15137 || itemindex == 15138 || itemindex == 15155 || itemindex == 7 || itemindex == 197 || itemindex == 155 || itemindex == 169 || itemindex == 329 || itemindex == 423 || itemindex == 589 || itemindex == 662 || itemindex == 795 || itemindex == 804 || itemindex == 884 || itemindex == 893 || itemindex == 902 || itemindex == 911 || itemindex == 960 || itemindex == 969 || itemindex == 1071 || itemindex == 1123 || itemindex == 15073 || itemindex == 15074 || itemindex == 15075 || itemindex == 15139 || itemindex == 15140 || itemindex == 15114 || itemindex == 15156 || itemindex == 30758)
 		{
@@ -5354,7 +5041,7 @@ bool CreateWeapon(int client, char[] classname, int itemindex, int quality, int 
 		}
 	}
 	
-	if (GetRandomUInt(1,10) == 1)
+	if (BotRandom(client, 1,10) == 1)
 	{
 		if (TF2_GetPlayerClass(client) == TFClass_Medic)
 		{
@@ -5366,7 +5053,7 @@ bool CreateWeapon(int client, char[] classname, int itemindex, int quality, int 
 		}
 		
 		SetEntData(weapon, FindSendPropInfo(entclass, "m_iEntityQuality"), 5);			
-		int iRand = GetRandomUInt(1,4);
+		int iRand = BotRandom(client, 1,4);
 		if (iRand == 1)
 		{
 			TF2Attrib_SetByDefIndex(weapon, 134, 701.0);	
