@@ -1,0 +1,1929 @@
+#base robot_giant.pop
+#base robot_standard.pop
+
+WaveSchedule
+{
+
+	StartingCurrency		1500
+	RespawnWaveTime 		12
+	CanBotsAttackWhileInSpawnRoom no
+
+	Mission // sentry buster
+	{
+		Objective DestroySentries
+
+		InitialCooldown 5
+		Where spawnbot
+		BeginAtWave 1
+		RunForThisManyWaves 10
+
+		CooldownTime 60            
+
+            TFBot
+			{
+				Template T_TFBot_SentryBuster
+            }
+	}
+	Mission // Sniper Sydney Sleeper - waves 1-10
+	{
+		Objective Sniper
+
+		InitialCooldown 50
+		Where spawnbot_mission_sniper
+		BeginAtWave 1
+		RunForThisManyWaves 6
+		CooldownTime 60
+		DesiredCount 1
+
+		TFBot
+		{
+			Template T_TFBot_Sniper_Sydney_Sleeper
+			Item "The Razorback"
+			Item "Master's Yellow Belt"
+			ItemAttributes
+			{
+				ItemName "The Sydney Sleeper"
+				"faster reload rate" 1.4
+				"projectile speed increased" 1.3
+			}
+		}
+	}
+	Mission // Sniper Expert - waves 6-10
+	{
+		Objective Sniper
+
+		InitialCooldown 40
+		Where spawnbot_mission_sniper
+		BeginAtWave 6
+		RunForThisManyWaves 5
+		CooldownTime 60
+		DesiredCount 1
+
+		TFBot
+		{
+			Class Sniper
+			Skill Expert
+			Name "Deadeye"
+			MaxVisionRange 3000
+			Item "The Razorback"
+			Item "Soldered Sensei"
+		}
+	}
+
+	//WAVE 1 "Blood Rush" - Vampire melee scouts + knockback scouts + bleed heavies ////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target wave_start_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action trigger
+			}
+		WaitWhenDone 60
+		Checkpoint Yes
+		Description "SOLO #1: Blood Rush"
+
+		WaveSpawn // 30 Vampire Scouts - melee only, AlwaysCrit, heal on kill
+		{
+			Name "wave01a"
+			Where spawnbot
+			TotalCount 10
+			MaxActive 3
+			SpawnCount 6
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 2
+			TotalCurrency 200
+		
+			TFBot
+			{
+				Class Scout
+				Skill Hard
+				Name "Blood Leech"
+				Item "Bonk Helm"
+				WeaponRestrictions MeleeOnly
+				Attributes AlwaysCrit
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_BAT"
+					"heal on hit for slowfire" 21
+				}
+				CharacterAttributes
+				{
+					"move speed bonus" 0.55
+				}
+			}
+		}
+		WaveSpawn // 24 Knockback Scouts - scattergun with Force-A-Nature knockback
+		{
+			Name "wave01b"
+			Where spawnbot_invasion
+			TotalCount 8
+			MaxActive 2
+			SpawnCount 4
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 4
+			TotalCurrency 150
+	
+			TFBot
+			{
+				Class Scout
+				Skill Hard
+				Name "Shock Trooper"
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_SCATTERGUN"
+					"bullets per shot bonus" 1.5
+					"scattergun has knockback" 1
+					"damage penalty" 0.39
+				}
+				CharacterAttributes
+				{
+					"move speed bonus" 0.575
+				}
+			}
+		}
+		WaveSpawn // 10 Bleeder Heavies - Fist + bleeding on hit
+		{
+			Name "wave01c"
+			Where spawnbot
+			TotalCount 4
+			MaxActive 2
+			SpawnCount 3
+			WaitBeforeStarting 12
+			WaitBetweenSpawns 7
+			TotalCurrency 150
+	
+			TFBot
+			{
+				Template T_TFBot_Heavyweapons_Fist
+				Name "Gore Puncher"
+				Item "Hound Dog"
+				Attributes AlwaysCrit
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_FISTS"
+					"bleeding duration" 4
+					"slow enemy on hit" 0.3
+				}
+				CharacterAttributes
+				{
+					"damage bonus" 0.6
+				}
+			}
+		}
+	}	
+	//WAVE 2 "Iron Curtain" - Tanky Heavies with damage resistance + flanking Pyros that slow //////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target wave_start_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action trigger
+			}
+		WaitWhenDone 60
+		Checkpoint Yes
+		Description "SOLO #2: Iron Curtain"
+
+		WaveSpawn // 2(6) Fortress Giants - knockback immune, bullet resistant, slow
+		{
+			Name "wave02a"
+			Where spawnbot_giant
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 3
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 22
+			TotalCurrency 300
+	
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons
+					Name "Iron Curtain"
+					Item "Hound Dog"
+					CharacterAttributes
+					{
+						"damage force reduction" 0.3
+						"dmg taken from bullets reduced" 0.2
+						"move speed bonus" 0.4
+						"damage bonus" 0.575
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickFix
+					Name "Shield Surgeon"
+					Item "Berliner's Bucket Helm"
+					ItemAttributes
+					{
+						ItemName "The Quick-Fix"
+						"heal rate bonus" 0.78
+						"overheal decay disabled" 1
+					}
+				}
+			}
+		}
+		WaveSpawn // 20 Slowing Pyros - flamethrower with slow + bleed, airblast immune
+		{
+			Name "wave02b"
+			Where spawnbot
+			TotalCount 7
+			MaxActive 2
+			SpawnCount 4
+			WaitBeforeStarting 8
+			WaitBetweenSpawns 4
+			TotalCurrency 200
+
+			RandomChoice
+			{
+				TFBot
+				{
+					Class Pyro
+					Skill Normal
+					Name "Tar Pitcher"
+					Item "Old Guadalajara"
+					Attributes AlwaysFireWeapon
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_FLAMETHROWER"
+						"slow enemy on hit" 0.5
+						"damage penalty" 0.42
+					}
+					CharacterAttributes
+					{
+						"airblast vulnerability multiplier" 0.1
+					}
+				}
+				TFBot
+				{
+					Class Pyro
+					Skill Normal
+					Name "Tar Pitcher"
+					Item "Old Guadalajara"
+					Attributes AlwaysFireWeapon
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_FLAMETHROWER"
+						"slow enemy on hit" 0.5
+						"damage penalty" 0.42
+					}
+					CharacterAttributes
+					{
+						"airblast vulnerability multiplier" 0.1
+					}
+				}
+				TFBot
+				{
+					Class Pyro
+					Skill Normal
+					Name "Tar Pitcher"
+					Attributes AlwaysFireWeapon
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_FLAMETHROWER"
+						"slow enemy on hit" 0.5
+						"damage penalty" 0.42
+					}
+					CharacterAttributes
+					{
+						"airblast vulnerability multiplier" 0.1
+					}
+				}
+			}
+		}
+		WaveSpawn // 12 Sandman scouts (classic support)
+		{
+			Name "wave02c"
+			WaitForAllSpawned "wave02a"
+			Where spawnbot_invasion
+			TotalCount 4
+			MaxActive 2
+			SpawnCount 3
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 5
+			TotalCurrency 100
+	
+			TFBot
+			{
+				Template T_TFBot_Scout_Sandman
+				Skill Expert
+				Name "Sandman Skirmisher"
+				CharacterAttributes
+				{
+					"move speed bonus" 0.6
+				}
+			}
+		}
+	}	
+	//WAVE 3 "Wildfire" - Phlog rampage Pyros + sniper-flare Pyros + Giant flame-resistant Pyros + tank ///////////////////////
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target wave_start_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action trigger
+			}
+		WaitWhenDone 60
+		Checkpoint Yes
+		Description "SOLO #3: Wildfire"
+
+		WaveSpawn // 20 Phlog Pyros - critboost on kill, speed boost on kill
+		{
+			Name "wave03a"
+			Where spawnbot
+			TotalCount 7
+			MaxActive 2
+			SpawnCount 4
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			TotalCurrency 250
+	
+			TFBot
+			{
+				Class Pyro
+				Skill Normal
+				Name "Wildfire Zealot"
+				Attributes AlwaysFireWeapon
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_FLAMETHROWER"
+					"critboost on kill" 3
+					"speed_boost_on_kill" 2
+					"damage penalty" 0.45
+				}
+				CharacterAttributes
+				{
+					"move speed bonus" 0.525
+				}
+			}
+		}
+		WaveSpawn // 12 Sniper Pyros - long range flare gun
+		{
+			Name "wave03b"
+			Where spawnbot_invasion
+			TotalCount 4
+			MaxActive 2
+			SpawnCount 3
+			WaitBeforeStarting 8
+			WaitBetweenSpawns 6
+			TotalCurrency 150
+	
+			TFBot
+			{
+				Template T_TFBot_Pyro_Flaregun
+				Name "Solar Marksman"
+				ItemAttributes
+				{
+					ItemName "The Flare Gun"
+					"projectile speed increased" 2.5
+					"fire rate bonus" 1.8
+					"damage bonus" 0.72
+				}
+				CharacterAttributes
+				{
+					"move speed bonus" 0.45
+				}
+			}
+		}
+		WaveSpawn // Tank - 30k HP with fire resistance
+		{
+			Name "wave03c"
+			TotalCount 1
+			WaitBeforeStarting 20
+			TotalCurrency 300
+	
+			FirstSpawnOutput                                                                                                   
+			{
+				 Target boss_spawn_relay                                            
+				 Action Trigger                         
+			}
+
+			Tank
+			{
+				Health 18000
+				Speed 75
+				Name "Flame Ravager"
+				StartingPathTrackNode "boss_path_a1"
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}			
+		}
+		WaveSpawn // 4 Giant Pyros - fire-resistant, knockback immune
+		{
+			Name "wave03d"
+			WaitForAllDead "wave03a"
+			Where spawnbot_giant
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 15
+			TotalCurrency 200
+	
+			TFBot
+			{
+				Template T_TFBot_Giant_Pyro
+				Name "Inferno Behemoth"
+				Attributes AlwaysFireWeapon
+				Item "Old Guadalajara"
+				CharacterAttributes
+				{
+					"dmg taken from fire reduced" 0.6
+					"damage force reduction" 0.4
+					"damage bonus" 0.6
+				}
+			}
+		}
+	}	
+	//WAVE 4 "Lightning War" - Rampage Super Scouts + Storm Soldiers + Bleed Huntsman + tank //////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target wave_start_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action trigger
+			}
+		WaitWhenDone 60
+		Checkpoint Yes
+		Description "SOLO #4: Lightning War"
+
+		WaveSpawn // 8 Rampage Super Scouts - kill-chaining melee giants
+		{
+			Name "wave04a"
+			Where spawnbot_giant
+			TotalCount 3
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 10
+			TotalCurrency 250
+	
+			TFBot
+			{
+				Template T_TFBot_Giant_Scout_Fast
+				Name "Blitz Juggernaut"
+				Item "Bonk Helm"
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_BAT"
+					"critboost on kill" 4
+					"speed_boost_on_kill" 3
+					"health on kill" 60
+				}
+				CharacterAttributes
+				{
+					"move speed bonus" 0.65
+					"damage bonus" 0.55
+				}
+			}
+		}
+		WaveSpawn // 24 Storm Soldiers - increased blast radius + fire rate
+		{
+			Name "wave04b"
+			Where spawnbot
+			TotalCount 8
+			MaxActive 2
+			SpawnCount 4
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 5
+			TotalCurrency 200
+
+			TFBot
+			{
+				Class Soldier
+				Skill Hard
+				Name "Storm Bringer"
+				Item "Defiant Spartan"
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_ROCKETLAUNCHER"
+					"blast radius increased" 1.5
+					"fire rate bonus" 1.4
+					"damage penalty" 0.45
+				}
+				CharacterAttributes
+				{
+					"rocket jump damage reduction" 0.5
+				}
+			}
+		}
+		WaveSpawn // 20 Bleed Huntsman - long bleed
+		{
+			Name "wave04c"
+			Where spawnbot
+			TotalCount 7
+			MaxActive 2
+			SpawnCount 3
+			WaitBeforeStarting 25
+			WaitBetweenSpawns 6
+			TotalCurrency 150
+
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+					Name "Toxin Archer"
+					Item "Soldered Sensei"
+					ItemAttributes
+					{
+						ItemName "The Huntsman"
+						"bleeding duration" 6
+						"faster reload rate" 1.8
+						"damage penalty" 0.36
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+					Name "Toxin Archer"
+					Item "Soldered Sensei"
+					ItemAttributes
+					{
+						ItemName "The Huntsman"
+						"bleeding duration" 6
+						"faster reload rate" 1.8
+						"damage penalty" 0.36
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+					Name "Toxin Archer"
+					ItemAttributes
+					{
+						ItemName "The Huntsman"
+						"bleeding duration" 6
+						"faster reload rate" 1.8
+						"damage penalty" 0.36
+					}
+				}
+			}
+		}
+		WaveSpawn // 10 Direct Hit Bunker Busters - anti-building
+		{
+			Name "wave04d"
+			Where spawnbot
+			TotalCount 4
+			MaxActive 2
+			SpawnCount 2
+			WaitBeforeStarting 35
+			WaitBetweenSpawns 6
+			TotalCurrency 150
+	
+			TFBot
+			{
+				Class Soldier
+				Skill Expert
+				Name "Bunker Buster"
+				Item "The Direct Hit"
+				Item "Defiant Spartan"
+				ItemAttributes
+				{
+					ItemName "The Direct Hit"
+					"dmg bonus vs buildings" 1.5
+					"damage penalty" 0.3
+				}
+			}
+		}
+	}	
+	//WAVE 5 "The Juggernaut" - Momentum Giants + Punisher Scouts + Uber Medics + Giant Scouts ////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target wave_start_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action trigger
+			}
+		WaitWhenDone 60
+		Checkpoint Yes
+		Description "SOLO #5: The Juggernaut"
+		Sound "Announcer.MVM_Final_Wave_Start"
+
+		WaveSpawn // 60 Punisher Scouts - crit melee + bleed + slow
+		{
+			Name "wave05a"
+			Where spawnbot
+			TotalCount 20
+			MaxActive 4
+			SpawnCount 5
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 3
+			TotalCurrency 300
+
+			TFBot
+			{
+				Class Scout
+				Skill Hard
+				Name "Pain Dealer"
+				Item "Bonk Helm"
+				WeaponRestrictions MeleeOnly
+				Attributes AlwaysCrit
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_BAT"
+					"bleeding duration" 3
+					"slow enemy on hit" 0.4
+				}
+				CharacterAttributes
+				{
+					"move speed bonus" 0.6
+				}
+			}
+		}
+		WaveSpawn // 2(4) Juggernaut Giant Heavies + Uber medics (main right)
+		{
+			Name "wave05b"
+			Where spawnbot_giant
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 2
+			WaitBeforeStarting 15
+			WaitBetweenSpawns 40
+			TotalCurrency 250
+	
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons
+					Name "Juggernaut"
+					Item "Hound Dog"
+					CharacterAttributes
+					{
+						"move speed bonus" 0.6
+						"damage force reduction" 0.2
+						"damage bonus" 0.6
+					}
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_MINIGUN"
+						"health on kill" 30
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Name "Momentum Medic"
+					Item "Berliner's Bucket Helm"
+					ItemAttributes
+					{
+						ItemName "The Kritzkrieg"
+						"ubercharge rate bonus" 1.5
+					}
+				}
+			}
+		}
+		WaveSpawn // 2(4) Juggernaut Giant Heavies + Uber medics (main left)
+		{
+			Name "wave05c"
+			Where spawnbot_giant
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 2
+			WaitBeforeStarting 25
+			WaitBetweenSpawns 40
+			TotalCurrency 250
+	
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons
+					Name "Juggernaut"
+					Item "Hound Dog"
+					CharacterAttributes
+					{
+						"move speed bonus" 0.6
+						"damage force reduction" 0.2
+						"damage bonus" 0.6
+					}
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_MINIGUN"
+						"health on kill" 30
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Name "Momentum Medic"
+					Item "Berliner's Bucket Helm"
+					ItemAttributes
+					{
+						ItemName "The Kritzkrieg"
+						"ubercharge rate bonus" 1.5
+					}
+				}
+			}
+		}
+		WaveSpawn // 4 Giant Super Scouts with crit resistance (fast cleanup)
+		{
+			Name "wave05d"
+			WaitForAllSpawned "wave05b"
+			Where spawnbot_giant
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 8
+			TotalCurrency 100
+	
+			TFBot
+			{
+				Template T_TFBot_Giant_Scout_Fast
+				Name "Phase Runner"
+				CharacterAttributes
+				{
+					"dmg taken from crit reduced" 0.5
+					"move speed bonus" 0.625
+				}
+			}
+		}
+	}	
+	//WAVE 6 "Artillery Strike" - Earthquake Soldiers + Giant Crit suppression + Buff Banner chain + Spammer flanks ////////////
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target wave_start_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action trigger
+			}
+		WaitWhenDone 60
+		Checkpoint Yes
+		Description "SOLO #6: Artillery Strike"
+
+		WaveSpawn // 30 Earthquake Soldiers - massive blast + fire rate + reduced self-damage
+		{
+			Name "wave06a"
+			Where spawnbot
+			TotalCount 10
+			MaxActive 3
+			SpawnCount 6
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 3
+			TotalCurrency 250
+	
+			TFBot
+			{
+				Class Soldier
+				Skill Hard
+				Name "Quake Bringer"
+				Item "Defiant Spartan"
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_ROCKETLAUNCHER"
+					"blast radius increased" 1.8
+					"fire rate bonus" 1.3
+					"damage penalty" 0.48
+				}
+				CharacterAttributes
+				{
+					"rocket jump damage reduction" 0.3
+					"damage force reduction" 0.5
+				}
+			}
+		}
+		WaveSpawn // 2(4) Giant Crit Soldiers + 2 Uber medics (main right)
+		{
+			Name "wave06b"
+			Where spawnbot_giant
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 2
+			WaitBeforeStarting 20
+			WaitBetweenSpawns 45
+			TotalCurrency 250
+	
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Crit
+					Name "War Colossus"
+					Item "Point and Shoot"
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_ROCKETLAUNCHER"
+						"projectile speed increased" 1.5
+						"fire rate bonus" 1.2
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Name "War Surgeon"
+					Item "The Warsworn Helmet"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Name "War Surgeon"
+				}
+			}
+		}
+		WaveSpawn // 2(4) Giant Crit Soldiers + 2 Uber medics (main left)
+		{
+			Name "wave06c"
+			Where spawnbot_giant
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 2
+			WaitBeforeStarting 35
+			WaitBetweenSpawns 45
+			TotalCurrency 250
+	
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Crit
+					Name "War Colossus"
+					Item "Point and Shoot"
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_ROCKETLAUNCHER"
+						"projectile speed increased" 1.5
+						"fire rate bonus" 1.2
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Name "War Surgeon"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Name "War Surgeon"
+				}
+			}
+		}
+		WaveSpawn // 8 Endless Buff Banner Soldiers - buff everything
+		{
+			Name "wave06d"
+			WaitForAllSpawned "wave06a"
+			Where spawnbot
+			TotalCount 3
+			MaxActive 2
+			SpawnCount 4
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 10
+			TotalCurrency 200
+	
+			TFBot
+			{
+				Class Soldier
+				Skill Expert
+				Name "War Drummer"
+				WeaponRestrictions PrimaryOnly
+				Item "The Direct Hit"
+				Item "The Buff Banner"
+				Attributes SpawnWithFullCharge
+				ItemAttributes
+				{
+					ItemName "The Buff Banner"
+					"increase buff duration" 8.0
+				}
+			}
+		}
+		WaveSpawn // 4 Giant Spammer Soldiers (flank high)
+		{
+			Name "wave06e"
+			WaitForAllSpawned "wave06a"
+			Where spawnbot_giant
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 20
+			WaitBetweenSpawns 12
+			TotalCurrency 150
+
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Spammer
+					Name "Shell Storm"
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_ROCKETLAUNCHER"
+						"clip size bonus" 1.5
+						"projectile speed increased" 1.3
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Spammer
+					Name "Shell Storm"
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_ROCKETLAUNCHER"
+						"clip size bonus" 1.5
+						"projectile speed increased" 1.3
+					}
+				}
+			}
+		}
+	}
+	//WAVE 7 "Slaughterhouse" - Vampire Demoknights + Rampage Prince Tavish + Cluster Giant Demos + Bleed Tank ////////////////
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target wave_start_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action trigger
+			}
+		WaitWhenDone 60
+		Checkpoint Yes
+		Description "SOLO #7: Slaughterhouse"
+
+		WaveSpawn // 80 Vampire Demoknights - health on kill + crit + bleed
+		{
+			Name "wave07a"
+			Where spawnbot
+			TotalCount 27
+			MaxActive 4
+			SpawnCount 5
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 2
+			TotalCurrency 300
+	
+			TFBot
+			{
+				Template T_TFBot_Demoman_Knight
+				Name "Blood Knight"
+				Item "Spine-Chilling Skull"
+				Attributes AlwaysCrit
+				ItemAttributes
+				{
+					ItemName "The Eyelander"
+					"health on kill" 21
+					"bleeding duration" 4
+					"damage bonus" 0.69
+				}
+				CharacterAttributes
+				{
+					"move speed bonus" 0.55
+				}
+			}
+		}
+		WaveSpawn // 5 Rampage Prince Tavish + Huntsman + BigHeal squads
+		{
+			Name "wave07b"
+			Where spawnbot
+			TotalCount 9
+			MaxActive 4
+			SpawnCount 5
+			WaitBeforeStarting 20
+			WaitBetweenSpawns 15
+			TotalCurrency 300
+	
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_DemoMan_PrinceTavish
+					Name "Carnage Lord"
+					Item "Spine-Chilling Skull"
+					ItemAttributes
+					{
+						ItemName "The Eyelander"
+						"critboost on kill" 4
+						"speed_boost_on_kill" 3
+						"health on kill" 60
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+					Name "Death Mark Archer"
+					ItemAttributes
+					{
+						ItemName "The Huntsman"
+						"bleeding duration" 5
+						"faster reload rate" 1.4
+						"damage penalty" 0.36
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+					Name "Death Mark Archer"
+					ItemAttributes
+					{
+						ItemName "The Huntsman"
+						"bleeding duration" 5
+						"faster reload rate" 1.4
+						"damage penalty" 0.36
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_BigHeal
+					Name "Blood Priest"
+					Item "Berliner's Bucket Helm"
+					ItemAttributes
+					{
+						ItemName "The Kritzkrieg"
+						"heal rate bonus" 0.84
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_BigHeal
+					Name "Blood Priest"
+					ItemAttributes
+					{
+						ItemName "The Kritzkrieg"
+						"heal rate bonus" 0.84
+					}
+				}
+			}
+		}
+		WaveSpawn // Tank - 25k HP with health regen
+		{
+			Name "wave07c"
+			TotalCount 1
+			WaitBeforeStarting 40
+			TotalCurrency 250
+	
+			FirstSpawnOutput                                                                                                   
+			{
+				 Target boss_spawn_relay                                            
+				 Action Trigger                         
+			}
+
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Name "Siege Ram"
+				StartingPathTrackNode "boss_path_a1"
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}			
+		}
+		WaveSpawn // 8 Cluster Giant Demomen - multiple grenades per shot
+		{
+			Name "wave07d"
+			WaitForAllSpawned "wave07b"
+			Where spawnbot_giant
+			TotalCount 3
+			MaxActive 2
+			SpawnCount 2
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 8
+			TotalCurrency 200
+
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Demoman
+					Name "Cluster Bomber"
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_GRENADELAUNCHER"
+						"bullets per shot bonus" 1.5
+						"projectile speed increased" 1.3
+						"fire rate penalty" 0.6
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Demoman
+					Name "Cluster Bomber"
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_GRENADELAUNCHER"
+						"bullets per shot bonus" 1.5
+						"projectile speed increased" 1.3
+						"fire rate penalty" 0.6
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Demoman
+					Name "Cluster Bomber"
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_GRENADELAUNCHER"
+						"bullets per shot bonus" 1.5
+						"projectile speed increased" 1.3
+						"fire rate penalty" 0.6
+					}
+				}
+			}
+		}
+	}
+	//WAVE 8 "The Bulwark" - Fortress Deflectors with all resistances + Commander Concheror + Overheal Medics + tank ///////////
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target wave_start_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action trigger
+			}
+		WaitWhenDone 60
+		Checkpoint Yes
+		Description "SOLO #8: The Bulwark"
+
+		WaveSpawn // 3(6) Fortress Deflector Heavies + Overheal Giant Medics
+		{
+			Name "wave08a"
+			Where spawnbot_giant
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 2
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 30
+			TotalCurrency 350
+	
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons_Deflector
+					Name "Adamant Colossus"
+					Item "Hound Dog"
+					CharacterAttributes
+					{
+						"damage force reduction" 0.15
+						"dmg taken from bullets reduced" 0.3
+						"dmg taken from blast reduced" 0.3
+						"dmg taken from crit reduced" 0.3
+						"damage bonus" 0.575
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic
+					Name "Archon Medic"
+					Item "The Warsworn Helmet"
+					ItemAttributes
+					{
+						ItemName "The Kritzkrieg"
+						"overheal bonus" 2.0
+						"overheal decay disabled" 1
+						"heal rate bonus" 0.9
+					}
+				}
+			}
+		}
+		WaveSpawn // Tank - 35k HP with resistances
+		{
+			Name "wave08b"
+			TotalCount 1
+			WaitBeforeStarting 15
+			TotalCurrency 300
+	
+			FirstSpawnOutput                                                                                                   
+			{
+				 Target boss_spawn_relay                                            
+				 Action Trigger                         
+			}
+
+			Tank
+			{
+				Health 21000
+				Speed 75
+				Name "Bastion Engine"
+				StartingPathTrackNode "boss_path_a1"
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}			
+		}
+		WaveSpawn // 24 Commander Concheror Soldiers + BigHeal medics with regen
+		{
+			Name "wave08c"
+			WaitForAllSpawned "wave08a"
+			Where spawnbot
+			TotalCount 8
+			MaxActive 3
+			SpawnCount 4
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 8
+			TotalCurrency 250
+	
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Soldier_Extended_Concheror
+					Name "War Drummer"
+					Item "Defiant Spartan"
+					ItemAttributes
+					{
+						ItemName "The Concheror"
+						"increase buff duration" 6.0
+					}
+					CharacterAttributes
+					{
+						"health regen" 4
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_BigHeal
+					Name "Vitality Weaver"
+					Item "Berliner's Bucket Helm"
+				}
+			}
+		}
+		WaveSpawn // 4 Giant Heavies - flank both sides
+		{
+			Name "wave08d"
+			WaitForAllSpawned "wave08b"
+			Where spawnbot_giant
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 15
+			WaitBetweenSpawns 20
+			TotalCurrency 200
+
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons
+					Name "Flank Behemoth"
+					Item "Hound Dog"
+					CharacterAttributes
+					{
+						"move speed bonus" 0.575
+						"damage bonus" 0.6
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons
+					Name "Flank Behemoth"
+					Item "Hound Dog"
+					CharacterAttributes
+					{
+						"move speed bonus" 0.575
+						"damage bonus" 0.6
+					}
+				}
+			}
+		}
+	}	
+	//WAVE 9 "The Gauntlet" - Vampire Lord Heavies + Phantom Giants + 2 staggered tanks //////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target wave_start_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action trigger
+			}
+		WaitWhenDone 60
+		Checkpoint Yes
+		Description "SOLO #9: The Gauntlet"
+
+		WaveSpawn // 36 Vampire Lord Champs + QuickFix medics - kill-chain heavies
+		{
+			Name "wave09a"
+			Where spawnbot
+			TotalCount 12
+			MaxActive 3
+			SpawnCount 4
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			TotalCurrency 350
+	
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Heavyweapons_Heavyweight_Champ
+					Name "Blood Lord"
+					Item "Hound Dog"
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_MINIGUN"
+						"health on kill" 24
+						"critboost on kill" 3
+						"speed_boost_on_kill" 2
+					}
+					CharacterAttributes
+					{
+						"move speed bonus" 0.575
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickFix
+					Name "Leech Medic"
+					Item "Berliner's Bucket Helm"
+					ItemAttributes
+					{
+						ItemName "The Quick-Fix"
+						"heal rate bonus" 0.84
+					}
+				}
+			}
+		}
+		WaveSpawn // 4 Phantom Giant Flare Pyros - resistances + bleed flares
+		{
+			Name "wave09b"
+			Where spawnbot
+			TotalCount 6
+			MaxActive 3
+			SpawnCount 4
+			WaitBeforeStarting 15
+			WaitBetweenSpawns 12
+			TotalCurrency 300
+	
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Pyro_Flare_Spammer
+					Name "Phantom Inferno"
+					Item "Old Guadalajara"
+					ItemAttributes
+					{
+						ItemName "The Flare Gun"
+						"bleeding duration" 4
+						"projectile speed increased" 2.0
+						"damage bonus" 0.72
+					}
+					CharacterAttributes
+					{
+						"airblast vulnerability multiplier" 0.1
+						"dmg taken from fire reduced" 0.5
+						"damage force reduction" 0.3
+					}
+				}
+				TFBot
+				{
+					Class Pyro
+					Skill Normal
+					Name "Ghost Flame"
+					Attributes AlwaysFireWeapon
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_FLAMETHROWER"
+						"slow enemy on hit" 0.4
+						"damage penalty" 0.42
+					}
+				}
+				TFBot
+				{
+					Class Pyro
+					Skill Normal
+					Name "Ghost Flame"
+					Attributes AlwaysFireWeapon
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_FLAMETHROWER"
+						"slow enemy on hit" 0.4
+						"damage penalty" 0.42
+					}
+				}
+			}
+		}
+		WaveSpawn // Tank 1 - 20k HP
+		{
+			Name "wave09c"
+			TotalCount 1
+			WaitBeforeStarting 40
+			TotalCurrency 0
+	
+			FirstSpawnOutput                                                                                                   
+			{
+				 Target boss_spawn_relay                                            
+				 Action Trigger                         
+			}
+
+			Tank
+			{
+				Health 12000
+				Speed 75
+				Name "Iron Tyrant"
+				StartingPathTrackNode "boss_path_a1"
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}			
+		}
+		WaveSpawn // Tank 2 - 20k HP (staggered)
+		{
+			Name "wave09d"
+			TotalCount 1
+			WaitBeforeStarting 55
+			TotalCurrency 0
+	
+			FirstSpawnOutput                                                                                                   
+			{
+				 Target boss_spawn_relay                                            
+				 Action Trigger                         
+			}
+
+			Tank
+			{
+				Health 12000
+				Speed 75
+				Name "Iron Tyrant"
+				Skin 1
+				StartingPathTrackNode "boss_path_a1"
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}			
+		}
+		WaveSpawn // 16 Fast Heavies (cleanup after champs)
+		{
+			Name "wave09e"
+			WaitForAllDead "wave09a"
+			Where spawnbot_invasion
+			TotalCount 6
+			MaxActive 2
+			SpawnCount 4
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 4
+			TotalCurrency 200
+	
+			TFBot
+			{
+				Template T_TFBot_Heavyweapons_Heavyweight_Champ_Fast
+				Name "Death Marcher"
+				ItemAttributes
+				{
+					ItemName "TF_WEAPON_MINIGUN"
+					"minigun spinup time decreased" 1.6
+					"damage bonus" 0.69
+				}
+				CharacterAttributes
+				{
+					"move speed bonus" 0.55
+				}
+			}
+		}
+	}	
+	//WAVE 10 "Omega Protocol" - Every unique combo together + final boss tank ////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target wave_start_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target humans_win
+				Action RoundWin
+			}
+		WaitWhenDone 60
+		Checkpoint Yes
+		Description "SOLO #10: Omega Protocol"
+		Sound "Announcer.MVM_Final_Wave_Start"
+
+		WaveSpawn // 48 Vampire Scouts - Support 1 endless (heal on kill + crit melee)
+		{
+			Name "wave10a"
+			Where spawnbot
+			TotalCount 16
+			MaxActive 4
+			SpawnCount 5
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 2
+			TotalCurrency 300
+
+
+			RandomChoice
+			{
+				TFBot
+				{
+					Class Scout
+					Skill Hard
+					Name "Blood Leech"
+					WeaponRestrictions MeleeOnly
+					Attributes AlwaysCrit
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_BAT"
+						"health on kill" 21
+					}
+				}
+				TFBot
+				{
+					Class Scout
+					Skill Hard
+					Name "Shock Trooper"
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_SCATTERGUN"
+						"scattergun has knockback" 1
+						"bullets per shot bonus" 1.5
+						"damage penalty" 0.36
+					}
+				}
+				TFBot
+				{
+					Class Scout
+					Skill Hard
+					Name "Pain Dealer"
+					WeaponRestrictions MeleeOnly
+					Attributes AlwaysCrit
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_BAT"
+						"bleeding duration" 3
+						"slow enemy on hit" 0.3
+					}
+				}
+			}
+		}
+		WaveSpawn // 4 Giant Spammer Soldiers + Uber medics (main left) - Earthquake variant
+		{
+			Name "wave10b"
+			Where spawnbot_giant
+			TotalCount 4
+			MaxActive 2
+			SpawnCount 3
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 30
+			TotalCurrency 250
+	
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Spammer
+					Name "Quake Colossus"
+					Item "Point and Shoot"
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_ROCKETLAUNCHER"
+						"blast radius increased" 1.6
+						"projectile speed increased" 1.4
+						"clip size bonus" 1.5
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Name "Doom Surgeon"
+					ItemAttributes
+					{
+						ItemName "The Kritzkrieg"
+						"ubercharge rate bonus" 1.5
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Name "Doom Surgeon"
+				}
+			}
+		}
+		WaveSpawn // 4 Giant Spammer Soldiers + Uber medics (main right)
+		{
+			Name "wave10c"
+			Where spawnbot_giant
+			TotalCount 4
+			MaxActive 2
+			SpawnCount 3
+			WaitBeforeStarting 20
+			WaitBetweenSpawns 30
+			TotalCurrency 250
+	
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Spammer
+					Name "Quake Colossus"
+					Item "Point and Shoot"
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_ROCKETLAUNCHER"
+						"blast radius increased" 1.6
+						"projectile speed increased" 1.4
+						"clip size bonus" 1.5
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Name "Doom Surgeon"
+					ItemAttributes
+					{
+						ItemName "The Kritzkrieg"
+						"ubercharge rate bonus" 1.5
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Name "Doom Surgeon"
+				}
+			}
+		}
+		WaveSpawn // 4 Fortress Deflector Heavies + Archon Giant Medics
+		{
+			Name "wave10d"
+			Where spawnbot_giant
+			TotalCount 3
+			MaxActive 2
+			SpawnCount 2
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 25
+			TotalCurrency 300
+	
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons_Deflector
+					Name "Adamant Colossus"
+					Item "Hound Dog"
+					CharacterAttributes
+					{
+						"damage force reduction" 0.2
+						"dmg taken from bullets reduced" 0.4
+						"dmg taken from blast reduced" 0.3
+						"damage bonus" 0.6
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic
+					Name "Archon Medic"
+					Item "The Warsworn Helmet"
+					ItemAttributes
+					{
+						ItemName "The Kritzkrieg"
+						"overheal bonus" 2.0
+						"overheal decay disabled" 1
+					}
+				}
+			}
+		}
+		WaveSpawn // 6 Rampage Prince Tavish + Huntsman escort
+		{
+			Name "wave10e"
+			WaitForAllSpawned "wave10b"
+			Where spawnbot
+			TotalCount 8
+			MaxActive 4
+			SpawnCount 4
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 15
+			TotalCurrency 300
+	
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_DemoMan_PrinceTavish
+					Name "Carnage Lord"
+					Item "Spine-Chilling Skull"
+					ItemAttributes
+					{
+						ItemName "The Eyelander"
+						"critboost on kill" 4
+						"speed_boost_on_kill" 3
+						"health on kill" 60
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+					Name "Toxin Archer"
+					ItemAttributes
+					{
+						ItemName "The Huntsman"
+						"bleeding duration" 6
+						"faster reload rate" 1.6
+						"damage penalty" 0.3
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_BigHeal
+					Name "Blood Priest"
+				}
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+					Name "Toxin Archer"
+					ItemAttributes
+					{
+						ItemName "The Huntsman"
+						"bleeding duration" 6
+						"faster reload rate" 1.6
+						"damage penalty" 0.3
+					}
+				}
+			}
+		}
+		WaveSpawn // 6 Phantom Giant Flare Pyros (flanking both sides)
+		{
+			Name "wave10f"
+			WaitForAllSpawned "wave10c"
+			Where spawnbot
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 2
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 10
+			TotalCurrency 200
+
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Pyro_Flare_Spammer
+					Name "Phantom Inferno"
+					Item "Old Guadalajara"
+					ItemAttributes
+					{
+						ItemName "The Flare Gun"
+						"bleeding duration" 4
+						"projectile speed increased" 2.0
+					}
+					CharacterAttributes
+					{
+						"airblast vulnerability multiplier" 0.1
+						"dmg taken from fire reduced" 0.5
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Pyro_Flare_Spammer
+					Name "Phantom Inferno"
+					Item "Old Guadalajara"
+					ItemAttributes
+					{
+						ItemName "The Flare Gun"
+						"bleeding duration" 4
+						"projectile speed increased" 2.0
+					}
+					CharacterAttributes
+					{
+						"airblast vulnerability multiplier" 0.1
+						"dmg taken from fire reduced" 0.5
+					}
+				}
+			}
+		}
+		WaveSpawn // Final Boss Tank - 50k HP with health regen
+		{
+			Name "wave10g"
+			WaitForAllSpawned "wave10e"
+			TotalCount 1
+			WaitBeforeStarting 20
+			TotalCurrency 0
+	
+			FirstSpawnOutput                                                                                                   
+			{
+				 Target boss_spawn_relay                                            
+				 Action Trigger                         
+			}
+
+			Tank
+			{
+				Health 30000
+				Speed 75
+				Name "Omega Engine"
+				Skin 1
+				StartingPathTrackNode "boss_path_a1"
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}	
+		}
+		WaveSpawn // 36 Punisher Demoknights - endless pressure after tank
+		{
+			Name "wave10h"
+			WaitForAllSpawned "wave10g"
+			Where spawnbot
+			TotalCount 12
+			MaxActive 3
+			SpawnCount 4
+			WaitBeforeStarting 3
+			WaitBetweenSpawns 2
+			TotalCurrency 0
+	
+			TFBot
+			{
+				Template T_TFBot_Demoman_Knight
+				Name "Doom Knight"
+				Item "Spine-Chilling Skull"
+				Attributes AlwaysCrit
+				ItemAttributes
+				{
+					ItemName "The Eyelander"
+					"health on kill" 21
+					"bleeding duration" 4
+				}
+			}
+		}
+	}
+}
