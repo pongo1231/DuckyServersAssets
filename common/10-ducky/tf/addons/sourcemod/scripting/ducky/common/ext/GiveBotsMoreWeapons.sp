@@ -3183,7 +3183,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 					}	
 				}
 				
-				int rnd2 = BotRandom(client, 1,7);
+				int rnd2 = BotRandom(client, 1,8);
 				TF2_RemoveWeaponSlot(client, 1);
 				
 				switch (rnd2)
@@ -3321,7 +3321,11 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 								CreateWeapon(client, "tf_weapon_shotgun_pyro", 199, 11);
 							}
 						}
-					}				
+					}
+				case 8:
+					{
+						CreateWeapon(client, "tf_weapon_rocketpack", 1179, 6);
+					}
 				}
 			}
 			
