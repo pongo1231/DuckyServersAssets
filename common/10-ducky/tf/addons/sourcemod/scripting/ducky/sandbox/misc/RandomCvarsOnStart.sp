@@ -29,8 +29,6 @@ public void OnConfigsExecuted()
     TrySetWithSMSpecial("sm_aia_all", "1", false);
     TrySetWithSMSpecial("sm_hugeexplosions_enabled", "1", false);
     TrySetWithSMSpecial("sm_deadlywater_enabled", "1", true);
-    TrySetWithSMSpecial("sm_spyspyspyspy_enabled", "1", true);
-    TrySetWithSMSpecial("sm_helphelphelphelp_enabled", "1", true);
 
     TrySetRCBotClassSpecial();
 }
