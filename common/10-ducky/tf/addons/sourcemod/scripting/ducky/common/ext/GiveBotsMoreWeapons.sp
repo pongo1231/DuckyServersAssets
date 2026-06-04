@@ -317,6 +317,7 @@ public Action Timer_GiveWeapons(Handle timer, any data)
 	TFClassType class = TF2_GetPlayerClass(client);
 
 	g_iSeedCounter = 0;
+	g_bWeaponsGiven[client] = false;
 
 	switch (class)
 	{
