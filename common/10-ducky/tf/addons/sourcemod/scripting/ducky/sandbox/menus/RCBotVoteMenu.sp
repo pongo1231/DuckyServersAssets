@@ -96,22 +96,25 @@ public Action MenuOpen(int client, int args) {
 
 	char text[128];
 	ConVar cvar;
+	char state[16];
 
-	Format(text, sizeof(text), "Enable RCBots (Currently: %b)", GetConVarBool(enable_bots));
+	Format(text, sizeof(text), "Enable RCBots [%s]", GetConVarBool(enable_bots) ? "Enabled" : "Disabled");
 	menu.AddItem("rcbots_enable", text);
 
 	char force_class_value[16];
 	GetConVarString(force_class, force_class_value, sizeof(force_class_value));
-	Format(text, sizeof(text), "Force RCBots to specific class (Currently: %s)", force_class_value);
+	Format(text, sizeof(text), "Force RCBots to specific class [%s]", force_class_value);
 	menu.AddItem("rcbots_force_class", text);
 
 	if ((cvar = FindConVar("sm_gbmw_enabled")) != null) {
-		Format(text, sizeof(text), "RCBots use custom items (Currently: %b)", GetConVarBool(cvar));
+		FormatToggle(cvar, state, sizeof(state));
+		Format(text, sizeof(text), "RCBots use custom items [%s]", state);
 		menu.AddItem("rcbot_customloadouts", text);
 	}
 
 	if ((cvar = FindConVar("rcbot_melee_only")) != null) {
-		Format(text, sizeof(text), "RCBots only use melee (Silly) (Currently: %b)", GetConVarBool(cvar));
+		FormatToggle(cvar, state, sizeof(state));
+		Format(text, sizeof(text), "RCBots only use melee [%s]", state);
 		menu.AddItem("rcbots_melee", text);
 	}
 
@@ -126,13 +129,13 @@ public int Handle_Menu(Menu menu, MenuAction action, int client, int item) {
 		GetMenuItem(menu, item, info, sizeof(info));
 
 		if (StrEqual(info, "rcbots_enable"))
-			Voting_CreateYesNoConVarVote(client, "menu_bots_rcbot_enablebots", "Enable RCBots?");
+			Voting_CreateYesNoConVarVote(client, "menu_bots_rcbot_enablebots", "Enable RCBots?", 1, 0, "RCBots");
 		else if (StrEqual(info, "rcbots_force_class"))
-			Voting_CreateStringConVarVote(client, "menu_bots_rcbot_force_class", "Force RCBots to specific class?", "None", "Scout", "Soldier", "Pyro", "Demoman", "Heavy", "Engineer", "Medic", "Sniper", "Spy");
+			Voting_CreateStringConVarVote(client, "menu_bots_rcbot_force_class", "Force RCBots to specific class?", "RCBot force class", "None", "Scout", "Soldier", "Pyro", "Demoman", "Heavy", "Engineer", "Medic", "Sniper", "Spy");
 		else if (StrEqual(info, "rcbot_customloadouts"))
-			Voting_CreateYesNoCommandVote(client, "sm_gbmw_enabled 1; sm_gbmc_enabled 1", "Should rcbots use custom items?", "sm_gbmw_enabled 0; sm_gbmc_enabled 0");
+			Voting_CreateYesNoCommandVote(client, "sm_gbmw_enabled 1; sm_gbmc_enabled 1", "Should rcbots use custom items?", "sm_gbmw_enabled 0; sm_gbmc_enabled 0", "RCBot custom items");
 		else if (StrEqual(info, "rcbots_melee"))
-			Voting_CreateYesNoConVarVote(client, "rcbot_melee_only", "Should rcbots use melee only? (Silly)");
+			Voting_CreateYesNoConVarVote(client, "rcbot_melee_only", "Should rcbots use melee only?", 1, 0, "RCBot melee only");
 	} else if (action == MenuAction_Cancel) {
 		if (item == MenuCancel_ExitBack)
 			FakeClientCommand(client, "menu_bots");

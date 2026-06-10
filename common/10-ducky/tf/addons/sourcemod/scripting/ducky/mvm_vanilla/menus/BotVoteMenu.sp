@@ -35,14 +35,15 @@ public void OnClientDisconnect_Post(int client)
 }
 
 public int Handle_Menu(Menu menu, MenuAction action, int client, int item) {
-	if (action == MenuAction_Select)
-	switch (item) {
-			case 0:
-				Voting_CreateYesNoConVarVote(client, "menu_bots_rcbot_enablebots", "Enable RCBots?");
-		}
-	else if (action == MenuAction_Cancel) {
+	if (action == MenuAction_Select) {
+		char info[32];
+		GetMenuItem(menu, item, info, sizeof(info));
+
+		if (StrEqual(info, "bots_robots"))
+			Voting_CreateYesNoConVarVote(client, "menu_bots_rcbot_enablebots", "Enable RCBots?", 1, 0, "RCBots");
+	} else if (action == MenuAction_Cancel) {
 		if (item == MenuCancel_ExitBack)
-		   FakeClientCommand(client, "menu");
+			FakeClientCommand(client, "menu");
 	} else if (action == MenuAction_End)
 		delete menu;
 }
@@ -61,7 +62,7 @@ public Action MenuOpen(int client, int args) {
 
 	char text[128];
 
-	Format(text, sizeof(text), "Enable RCBots (Currently: %b)", GetConVarBool(FindConVar("menu_bots_rcbot_enablebots")));
+	Format(text, sizeof(text), "Enable RCBots [%s]", GetConVarBool(g_enableBots) ? "Enabled" : "Disabled");
 	menu.AddItem("bots_robots", text);
 
 	menu.Display(client, MENU_TIME_FOREVER);
