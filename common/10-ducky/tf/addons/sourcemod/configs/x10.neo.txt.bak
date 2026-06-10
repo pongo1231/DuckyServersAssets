@@ -1,0 +1,1883 @@
+"tf2x10_base_items"
+{
+	// === SHARED / ALL-CLASS MELEE ===
+	
+	"tf_weapon_bat" //Bat
+	{
+		"fire rate bonus" "0.8"
+		"mod_neo_adrenaline" "1"
+	}
+	"190" //Strange Bat
+	{
+		"fire rate bonus" "0.8"
+		"mod_neo_adrenaline" "1"
+	}
+	"660" //Festive Bat
+	{
+		"fire rate bonus" "0.8"
+		"mod_neo_adrenaline" "1"
+	}
+	
+	"tf_weapon_bottle" //Bottle
+	{
+		"damage bonus" "1.15"
+		"mod_neo_corpse_explode" "1"
+	}
+	"191" //Strange Bottle
+	{
+		"damage bonus" "1.15"
+		"mod_neo_corpse_explode" "1"
+	}
+	
+	"tf_weapon_fireaxe" //Fireaxe
+	{
+		"damage bonus" "1.15"
+		"mod_neo_ice_effect" "1"
+	}
+	"192" //Strange Fireaxe
+	{
+		"damage bonus" "1.15"
+		"mod_neo_ice_effect" "1"
+	}
+	
+	"tf_weapon_club" //Kukri
+	{
+		"damage bonus" "1.15"
+		"mod_neo_chain_lightning" "1"
+	}
+	"193" //Strange Kukri
+	{
+		"damage bonus" "1.15"
+		"mod_neo_chain_lightning" "1"
+	}
+	
+	"tf_weapon_knife" //Knife
+	{
+		"fire rate bonus" "0.6"
+		"mod_neo_berserker" "1"
+	}
+	"194" //Strange Knife
+	{
+		"fire rate bonus" "0.6"
+		"mod_neo_berserker" "1"
+	}
+	"665" //Festive Knife
+	{
+		"fire rate bonus" "0.6"
+		"mod_neo_berserker" "1"
+	}
+	"794" //Silver Botkiller Knife Mk.I
+	{
+		"fire rate bonus" "0.6"
+		"mod_neo_berserker" "1"
+	}
+	"803" //Gold Botkiller Knife Mk.I
+	{
+		"fire rate bonus" "0.6"
+		"mod_neo_berserker" "1"
+	}
+	"883" //Rust Botkiller Knife Mk.I
+	{
+		"fire rate bonus" "0.6"
+		"mod_neo_berserker" "1"
+	}
+	"892" //Blood Botkiller Knife Mk.I
+	{
+		"fire rate bonus" "0.6"
+		"mod_neo_berserker" "1"
+	}
+	"901" //Carbonado Botkiller Knife Mk.I
+	{
+		"fire rate bonus" "0.6"
+		"mod_neo_berserker" "1"
+	}
+	"910" //Diamond Botkiller Knife Mk.I
+	{
+		"fire rate bonus" "0.6"
+		"mod_neo_berserker" "1"
+	}
+	"959" //Silver Botkiller Knife Mk.II
+	{
+		"fire rate bonus" "0.6"
+		"mod_neo_berserker" "1"
+	}
+	"968" //Gold Botkiller Knife Mk.II
+	{
+		"fire rate bonus" "0.6"
+		"mod_neo_berserker" "1"
+	}
+	
+	"tf_weapon_fists" //Fists
+	{
+		"damage bonus" "1.15"
+		"mod_neo_corpse_explode" "1"
+	}
+	"195" //Strange Fists
+	{
+		"damage bonus" "1.15"
+		"mod_neo_corpse_explode" "1"
+	}
+	
+	"tf_weapon_shovel" //Shovel
+	{
+		"damage bonus" "1.2"
+		"mod_neo_berserker" "1"
+	}
+	"196" //Strange Shovel
+	{
+		"damage bonus" "1.2"
+		"mod_neo_berserker" "1"
+	}
+	
+	"tf_weapon_wrench" //Wrench
+	{
+		"fire rate bonus" "0.8"
+		"mod_neo_sentry_leech" "1"
+		"Construction rate increased" "1.25"
+	}
+	"197" //Strange Wrench
+	{
+		"fire rate bonus" "0.8"
+		"mod_neo_sentry_leech" "1"
+		"Construction rate increased" "1.25"
+	}
+	"662" //Festive Wrench
+	{
+		"fire rate bonus" "0.8"
+		"mod_neo_sentry_leech" "1"
+		"Construction rate increased" "1.25"
+	}
+	"795" //Silver Botkiller Wrench Mk.I
+	{
+		"fire rate bonus" "0.8"
+		"mod_neo_sentry_leech" "1"
+		"Construction rate increased" "1.25"
+	}
+	"804" //Gold Botkiller Wrench Mk.I
+	{
+		"fire rate bonus" "0.8"
+		"mod_neo_sentry_leech" "1"
+		"Construction rate increased" "1.25"
+	}
+	"884" //Rust Botkiller Wrench Mk.I
+	{
+		"fire rate bonus" "0.8"
+		"mod_neo_sentry_leech" "1"
+		"Construction rate increased" "1.25"
+	}
+	"893" //Blood Botkiller Wrench Mk.I
+	{
+		"fire rate bonus" "0.8"
+		"mod_neo_sentry_leech" "1"
+		"Construction rate increased" "1.25"
+	}
+	"902" //Carbonado Botkiller Wrench Mk.I
+	{
+		"fire rate bonus" "0.8"
+		"mod_neo_sentry_leech" "1"
+		"Construction rate increased" "1.25"
+	}
+	"911" //Diamond Botkiller Wrench Mk.I
+	{
+		"fire rate bonus" "0.8"
+		"mod_neo_sentry_leech" "1"
+		"Construction rate increased" "1.25"
+	}
+	"960" //Silver Botkiller Wrench Mk.II
+	{
+		"fire rate bonus" "0.8"
+		"mod_neo_sentry_leech" "1"
+		"Construction rate increased" "1.25"
+	}
+	"969" //Gold Botkiller Wrench Mk.II
+	{
+		"fire rate bonus" "0.8"
+		"mod_neo_sentry_leech" "1"
+		"Construction rate increased" "1.25"
+	}
+	
+	"tf_weapon_bonesaw" //Bonesaw
+	{
+		"damage bonus" "1.15"
+		"mod_neo_chain_lightning" "1"
+	}
+	"198" //Strange Bonesaw
+	{
+		"damage bonus" "1.15"
+		"mod_neo_chain_lightning" "1"
+	}
+
+	// === SHOTGUNS (class-specific) ===
+	
+	"9" //(Engineer) Shotgun
+	{
+		"Reload time decreased" "0.7"
+		"damage bonus" "1.15"
+		"mod_neo_sentry_leech" "1"
+	}
+	"199" //Strange Engineer Shotgun
+	{
+		"Reload time decreased" "0.7"
+		"damage bonus" "1.15"
+		"mod_neo_sentry_leech" "1"
+	}
+	"10" //(Soldier) Shotgun
+	{
+		"Reload time decreased" "0.7"
+		"damage bonus" "1.15"
+		"mod_neo_shrapnel" "1"
+	}
+	"11" //(Heavy) Shotgun
+	{
+		"Reload time decreased" "0.7"
+		"damage bonus" "1.15"
+		"mod_neo_shrapnel" "1"
+	}
+	"12" //(Pyro) Shotgun
+	{
+		"Reload time decreased" "0.7"
+		"damage bonus" "1.15"
+		"mod_neo_shrapnel" "1"
+	}
+	
+	// === PISTOLS ===
+	
+	"tf_weapon_pistol" //Pistol
+	{
+		"Reload time decreased" "0.5"
+		"damage bonus" "1.15"
+		"mod_neo_adrenaline" "1"
+	}
+	"22" //(Scout) Pistol - handled by tf_weapon_pistol
+	
+	// === REVOLVER ===
+	
+	"tf_weapon_revolver" //Revolver
+	{
+		"damage bonus" "1.15"
+		"fire rate bonus" "0.8"
+		"mod_neo_adrenaline" "1"
+	}
+	
+	// === SMG ===
+	
+	"tf_weapon_smg" //SMG
+	{
+		"fire rate bonus" "0.7"
+		"damage bonus" "1.1"
+		"mod_neo_shrapnel" "1"
+	}
+
+	// ============================================================================
+	// SCOUT WEAPONS
+	// ============================================================================
+	
+	"tf_weapon_scattergun" //Scattergun
+	{
+		"Reload time decreased" "0.6"
+		"damage bonus" "1.15"
+		"mod_neo_adrenaline" "1"
+	}
+	"200" //Strange Scattergun
+	{
+		"Reload time decreased" "0.6"
+		"damage bonus" "1.15"
+		"mod_neo_adrenaline" "1"
+	}
+	"669" //Festive Scattergun
+	{
+		"Reload time decreased" "0.6"
+		"damage bonus" "1.15"
+		"mod_neo_adrenaline" "1"
+	}
+	"799" //Silver Botkiller Scattergun Mk.I
+	{
+		"Reload time decreased" "0.6"
+		"damage bonus" "1.15"
+		"mod_neo_adrenaline" "1"
+	}
+	"808" //Gold Botkiller Scattergun Mk.I
+	{
+		"Reload time decreased" "0.6"
+		"damage bonus" "1.15"
+		"mod_neo_adrenaline" "1"
+	}
+	"888" //Rust Botkiller Scattergun Mk.I
+	{
+		"Reload time decreased" "0.6"
+		"damage bonus" "1.15"
+		"mod_neo_adrenaline" "1"
+	}
+	"897" //Blood Botkiller Scattergun Mk.I
+	{
+		"Reload time decreased" "0.6"
+		"damage bonus" "1.15"
+		"mod_neo_adrenaline" "1"
+	}
+	"906" //Carbonado Botkiller Scattergun Mk.I
+	{
+		"Reload time decreased" "0.6"
+		"damage bonus" "1.15"
+		"mod_neo_adrenaline" "1"
+	}
+	"915" //Diamond Botkiller Scattergun Mk.I
+	{
+		"Reload time decreased" "0.6"
+		"damage bonus" "1.15"
+		"mod_neo_adrenaline" "1"
+	}
+	"964" //Silver Botkiller Scattergun Mk.II
+	{
+		"Reload time decreased" "0.6"
+		"damage bonus" "1.15"
+		"mod_neo_adrenaline" "1"
+	}
+	"973" //Gold Botkiller Scattergun Mk.II
+	{
+		"Reload time decreased" "0.6"
+		"damage bonus" "1.15"
+		"mod_neo_adrenaline" "1"
+	}
+	
+	"45" //Force-a-Nature
+	{
+		"scattergun has knockback" "1"
+		"airblast pushback scale" "2.0"
+		"damage penalty" "0.85"
+		"mod_neo_explosive_jump" "1"
+		"mod_neo_corpse_explode" "1"
+	}
+	"1078" //Festive Force-a-Nature
+	{
+		"scattergun has knockback" "1"
+		"airblast pushback scale" "2.0"
+		"damage penalty" "0.85"
+		"mod_neo_explosive_jump" "1"
+		"mod_neo_corpse_explode" "1"
+	}
+	
+	"220" //Shortstop
+	{
+		"weapon spread bonus" "0.5"
+		"move speed bonus" "1.15"
+		"damage bonus" "1.1"
+		"mod_neo_chain_lightning" "1"
+		"mod_neo_ice_effect" "1"
+	}
+	
+	"448" //Soda Popper
+	{
+		"fire rate bonus" "0.5"
+		"scattergun has knockback" "0.3"
+		"mod_neo_fear_on_crit" "1"
+		"mod_neo_explosive_jump" "1"
+	}
+	
+	"772" //Baby Face's Blaster
+	{
+		"move speed bonus" "1.0"
+		"damage bonus" "1.0"
+		"mod_neo_adrenaline" "1"
+	}
+	
+	"1103" //Back Scatter
+	{
+		"damage bonus" "1.2"
+		"mod_neo_ambush" "1"
+	}
+	
+	// Scout Secondaries
+	
+	"46" //Bonk! Atomic Punch
+	{
+		"move speed bonus" "1.2"
+		"dmg taken from fire reduced" "1.5"
+	}
+	
+	"163" //Crit-a-Cola
+	{
+		"damage bonus" "1.25"
+		"dmg taken increased" "1.3"
+		"mod_neo_berserker" "1"
+	}
+	
+	"222" //Mad Milk
+	{
+		"heal on hit for rapidfire" "1.5"
+		"Blast radius increased" "1.5"
+	}
+	
+	"23" //Pistol (Scout secondary, handled by tf_weapon_pistol)
+	{
+	}
+	
+	"160" //Lugermorph
+	{
+		"Reload time decreased" "0.5"
+		"damage bonus" "1.15"
+		"mod_neo_adrenaline" "1"
+	}
+	"294" //Winger
+	{
+		"jump height bonus" "1.25"
+		"damage bonus" "1.15"
+		"mod_neo_explosive_jump" "1"
+	}
+	"773" //Pretty Boy's Pocket Pistol
+	{
+		"heal on hit for rapidfire" "5"
+		"fire rate bonus" "0.7"
+		"dmg taken from fire increased" "1.5"
+		"mod_neo_adrenaline" "1"
+	}
+	
+	// Scout Melees
+	
+	"44" //Sandman
+	{
+		"max health additive penalty" "-15"
+		"mod_neo_fear_on_crit" "1"
+	}
+	"317" //Candy Cane
+	{
+		"health on kill" "25"
+		"health from packs increased" "1.5"
+		"dmg taken from blast increased" "1.25"
+	}
+	"325" //Boston Basher
+	{
+		"bleeding duration" "5"
+		"selfdmg on hit" "0.5"
+	}
+	"349" //Sun-on-a-Stick
+	{
+		"crit vs burning players" "1"
+		"weapon burn time increased" "2.0"
+		"damage penalty" "0.75"
+	}
+	"355" //Fan O'War
+	{
+		"mark for death on hit" "1"
+		"bleeding duration" "3"
+	}
+	"450" //Atomizer
+	{
+		"air jump count" "1"
+		"deploy time penalty" "1.3"
+		"fire rate bonus" "0.7"
+	}
+	"648" //Wrap Assassin
+	{
+		"mod bat launches balls" "1"
+		"damage penalty" "0.65"
+		"mod_neo_chain_lightning" "1"
+		"mod_neo_ice_effect" "1"
+	}
+	"939" //Flying Guillotine (Wrapped gift)
+	{
+		"bleeding duration" "8"
+		"damage bonus" "1.5"
+	}
+	
+	// ============================================================================
+	// SOLDIER WEAPONS
+	// ============================================================================
+	
+	"tf_weapon_rocketlauncher" //Rocket Launcher
+	{
+		"projectile speed increased" "1.15"
+		"Blast radius increased" "1.1"
+		"mod_neo_berserker" "1"
+	}
+	"205" //Strange Rocket Launcher
+	{
+		"projectile speed increased" "1.15"
+		"Blast radius increased" "1.1"
+		"mod_neo_berserker" "1"
+	}
+	"658" //Festive Rocket Launcher
+	{
+		"projectile speed increased" "1.15"
+		"Blast radius increased" "1.1"
+		"mod_neo_berserker" "1"
+	}
+	"800" //Silver Botkiller Rocket Launcher Mk.I
+	{
+		"projectile speed increased" "1.15"
+		"Blast radius increased" "1.1"
+		"mod_neo_berserker" "1"
+	}
+	"809" //Gold Botkiller Rocket Launcher Mk.I
+	{
+		"projectile speed increased" "1.15"
+		"Blast radius increased" "1.1"
+		"mod_neo_berserker" "1"
+	}
+	"889" //Rust Botkiller Rocket Launcher Mk.I
+	{
+		"projectile speed increased" "1.15"
+		"Blast radius increased" "1.1"
+		"mod_neo_berserker" "1"
+	}
+	"898" //Blood Botkiller Rocket Launcher Mk.I
+	{
+		"projectile speed increased" "1.15"
+		"Blast radius increased" "1.1"
+		"mod_neo_berserker" "1"
+	}
+	"907" //Carbonado Botkiller Rocket Launcher Mk.I
+	{
+		"projectile speed increased" "1.15"
+		"Blast radius increased" "1.1"
+		"mod_neo_berserker" "1"
+	}
+	"916" //Diamond Botkiller Rocket Launcher Mk.I
+	{
+		"projectile speed increased" "1.15"
+		"Blast radius increased" "1.1"
+		"mod_neo_berserker" "1"
+	}
+	"965" //Silver Botkiller Rocket Launcher Mk.II
+	{
+		"projectile speed increased" "1.15"
+		"Blast radius increased" "1.1"
+		"mod_neo_berserker" "1"
+	}
+	"974" //Gold Botkiller Rocket Launcher Mk.II
+	{
+		"projectile speed increased" "1.15"
+		"Blast radius increased" "1.1"
+		"mod_neo_berserker" "1"
+	}
+	
+	"127" //Direct Hit
+	{
+		"damage bonus" "1.25"
+		"projectile speed increased" "1.8"
+		"Blast radius decreased" "0.5"
+		"mod_neo_fear_on_crit" "1"
+	}
+	
+	"228" //Black Box
+	{
+		"heal on hit for slowfire" "30"
+		"max health additive bonus" "25"
+		"damage penalty" "0.85"
+		"mod_neo_shared_damage" "1"
+	}
+	
+	"237" //Rocket Jumper
+	{
+		"clip size bonus" "2.0"
+		"fire rate bonus" "0.5"
+		"self dmg push force increased" "1.5"
+		"mod_neo_explosive_jump" "1"
+	}
+	
+	"414" //Liberty Launcher
+	{
+		"projectile speed increased" "1.4"
+		"fire rate bonus" "0.7"
+		"damage penalty" "0.8"
+		"mod_neo_chain_lightning" "1"
+	}
+	
+	"441" //Cow Mangler 5000
+	{
+		"charge time decreased" "0.5"
+		"mod mini-crit airborne" "1"
+		"damage penalty" "0.75"
+		"mod_neo_ice_effect" "1"
+	}
+	
+	"730" //Beggar's Bazooka
+	{
+		"max overload" "5"
+		"fire rate bonus" "0.4"
+		"spread penalty" "2.5"
+		"mod_neo_corpse_explode" "1"
+	}
+	
+	"1104" //Air Strike
+	{
+		"clip size on kill bonus" "1"
+		"fire rate bonus" "0.7"
+		"damage penalty" "0.85"
+		"mod_neo_explosive_jump" "1"
+	}
+	
+	// Soldier Secondaries
+	
+	"129" //Buff Banner
+	{
+		"rage on damage" "2.0"
+		"buff duration" "0.66"
+	}
+	
+	"133" //Gunboats
+	{
+		"rocket jump damage reduction" "0.5"
+		"self dmg push force increased" "1.25"
+		"mod_neo_explosive_jump" "1"
+	}
+	
+	"226" //Battalion's Backup
+	{
+		"rage on damage" "2.0"
+		"buff duration" "0.66"
+		"max health additive bonus" "20"
+	}
+	
+	"354" //Concheror
+	{
+		"rage on damage" "2.0"
+		"buff duration" "0.66"
+		"health regen" "2"
+		"move speed bonus" "1.2"
+	}
+	
+	"415" //Reserve Shooter
+	{
+		"mini-crit airborne" "1"
+		"deploy time bonus" "1.5"
+		"clip size bonus" "1.5"
+		"mod_neo_ice_effect" "1"
+	}
+	
+	"442" //Righteous Bison
+	{
+		"projectile penetrates" "1"
+		"damage bonus" "1.1"
+		"mod_neo_chain_lightning" "1"
+	}
+	
+	// Soldier Melees
+	
+	"128" //Equalizer
+	{
+		"damage bonus" "2.0"
+		"mod_neo_berserker" "1"
+	}
+	
+	"154" //Pain Train
+	{
+		"increase player capture value" "2"
+		"dmg taken from bullets increased" "1.1"
+	}
+	
+	"264" //Frying Pan
+	{
+		"damage bonus" "1.15"
+		"mod_neo_corpse_explode" "1"
+	}
+	"1071" //Golden Frying Pan
+	{
+		"damage bonus" "1.15"
+		"mod_neo_corpse_explode" "1"
+	}
+	
+	"357" //Half-Zatoichi
+	{
+		"damage bonus" "1.15"
+		"dmg taken from melee reduced" "1.25"
+	}
+	"1013" //Festive Half-Zatoichi
+	{
+		"damage bonus" "1.15"
+		"dmg taken from melee reduced" "1.25"
+	}
+	
+	"416" //Market Gardener
+	{
+		"crit while airborne" "1"
+		"melee range bonus" "1.5"
+		"mod_neo_corpse_explode" "1"
+	}
+	
+	"447" //Disciplinary Action
+	{
+		"melee range bonus" "2.0"
+		"damage penalty" "0.75"
+		"mod_neo_chain_lightning" "1"
+	}
+	
+	"775" //Escape Plan
+	{
+		"move speed bonus" "1.3"
+		"damage penalty" "0.75"
+		"mod_neo_adrenaline" "1"
+	}
+	
+	"444" //Mantreads
+	{
+		"stomp damage bonus" "3.0"
+		"air control bonus" "1.25"
+		"dmg taken from blast reduced" "1.25"
+	}
+	
+	// ============================================================================
+	// PYRO WEAPONS
+	// ============================================================================
+	
+	"tf_weapon_flamethrower" //Flame Thrower
+	{
+		"weapon burn time increased" "1.25"
+		"mult_airblastrefire_time" "0.7"
+		"airblast pushback scale" "1.3"
+		"mod_neo_fear_on_crit" "1"
+	}
+	"208" //Strange Flame Thrower
+	{
+		"weapon burn time increased" "1.25"
+		"mult_airblastrefire_time" "0.7"
+		"airblast pushback scale" "1.3"
+		"mod_neo_fear_on_crit" "1"
+	}
+	"659" //Festive Flame Thrower
+	{
+		"weapon burn time increased" "1.25"
+		"mult_airblastrefire_time" "0.7"
+		"airblast pushback scale" "1.3"
+		"mod_neo_fear_on_crit" "1"
+	}
+	"798" //Silver Botkiller Flame Thrower Mk.I
+	{
+		"weapon burn time increased" "1.25"
+		"mult_airblastrefire_time" "0.7"
+		"airblast pushback scale" "1.3"
+		"mod_neo_fear_on_crit" "1"
+	}
+	"807" //Gold Botkiller Flame Thrower Mk.I
+	{
+		"weapon burn time increased" "1.25"
+		"mult_airblastrefire_time" "0.7"
+		"airblast pushback scale" "1.3"
+		"mod_neo_fear_on_crit" "1"
+	}
+	"887" //Rust Botkiller Flame Thrower Mk.I
+	{
+		"weapon burn time increased" "1.25"
+		"mult_airblastrefire_time" "0.7"
+		"airblast pushback scale" "1.3"
+		"mod_neo_fear_on_crit" "1"
+	}
+	"896" //Blood Botkiller Flame Thrower Mk.I
+	{
+		"weapon burn time increased" "1.25"
+		"mult_airblastrefire_time" "0.7"
+		"airblast pushback scale" "1.3"
+		"mod_neo_fear_on_crit" "1"
+	}
+	"905" //Carbonado Botkiller Flame Thrower Mk.I
+	{
+		"weapon burn time increased" "1.25"
+		"mult_airblastrefire_time" "0.7"
+		"airblast pushback scale" "1.3"
+		"mod_neo_fear_on_crit" "1"
+	}
+	"914" //Diamond Botkiller Flame Thrower Mk.I
+	{
+		"weapon burn time increased" "1.25"
+		"mult_airblastrefire_time" "0.7"
+		"airblast pushback scale" "1.3"
+		"mod_neo_fear_on_crit" "1"
+	}
+	"963" //Silver Botkiller Flame Thrower Mk.II
+	{
+		"weapon burn time increased" "1.25"
+		"mult_airblastrefire_time" "0.7"
+		"airblast pushback scale" "1.3"
+		"mod_neo_fear_on_crit" "1"
+	}
+	"972" //Gold Botkiller Flame Thrower Mk.II
+	{
+		"weapon burn time increased" "1.25"
+		"mult_airblastrefire_time" "0.7"
+		"airblast pushback scale" "1.3"
+		"mod_neo_fear_on_crit" "1"
+	}
+	
+	"40" //Backburner
+	{
+		"crit from behind" "1"
+		"move speed bonus" "1.1"
+		"airblast cost penalty" "1.5"
+		"mod_neo_fear_on_crit" "1"
+	}
+	
+	"215" //Degreaser
+	{
+		"weapon switch speed bonus" "1.3"
+		"deploy time penalty" "0.7"
+		"weapon burn time penalty" "0.5"
+		"mod_neo_ice_effect" "1"
+	}
+	
+	"594" //Phlogistinator
+	{
+		"damage bonus" "1.25"
+		"no airblast" "1"
+		"mod_neo_corpse_explode" "1"
+		"mod_neo_shared_damage" "1"
+	}
+	
+	"741" //Rainblower
+	{
+		"weapon burn time increased" "1.25"
+		"mult_airblastrefire_time" "0.7"
+		"airblast pushback scale" "1.3"
+		"mod_neo_fear_on_crit" "1"
+	}
+	
+	"1178" //Dragon's Fury
+	{
+		"fire rate bonus" "0.6"
+		"damage bonus vs burning" "1.5"
+		"Reload time decreased" "0.7"
+		"mod_neo_chain_lightning" "1"
+	}
+	
+	// Pyro Secondaries
+	
+	"39" //Flare Gun
+	{
+		"crit vs burning players" "1"
+		"damage bonus" "1.2"
+		"mod_neo_chain_lightning" "1"
+	}
+	"1081" //Festive Flare Gun
+	{
+		"crit vs burning players" "1"
+		"damage bonus" "1.2"
+		"mod_neo_chain_lightning" "1"
+	}
+	
+	"351" //Detonator
+	{
+		"detonate mini-crits" "1"
+		"self dmg push force increased" "2.0"
+		"mod_neo_corpse_explode" "1"
+		"mod_neo_fear_on_crit" "1"
+	}
+	
+	"595" //Manmelter
+	{
+		"crit on extinguish" "1"
+		"projectile speed penalty" "0.85"
+		"mod_neo_ice_effect" "1"
+	}
+	
+	"740" //Scorch Shot
+	{
+		"blast radius increased" "1.5"
+		"knockback on hit" "1.5"
+		"damage penalty" "0.65"
+		"mod_neo_fear_on_crit" "1"
+	}
+	
+	"1180" //Gas Passer
+	{
+		"gas cloud radius increased" "1.5"
+		"mod_neo_corpse_explode" "1"
+		"mod_neo_fear_on_crit" "1"
+	}
+	
+	"1179" //Thermal Thruster
+	{
+		"launch force increased" "1.3"
+		"stomp damage" "1.5"
+		"mod_neo_explosive_jump" "1"
+	}
+	
+	// Pyro Melees
+	
+	"38" //Axtinguisher
+	{
+		"crit vs burning players" "1"
+		"deploy speed bonus" "1.5"
+		"mod_neo_corpse_explode" "1"
+	}
+	"1000" //Festive Axtinguisher
+	{
+		"crit vs burning players" "1"
+		"deploy speed bonus" "1.5"
+		"mod_neo_corpse_explode" "1"
+	}
+	
+	"153" //Homewrecker
+	{
+		"damage bonus vs buildings" "2.0"
+		"remove sapper on hit" "1"
+		"damage penalty vs players" "0.75"
+		"mod_neo_sentry_leech" "1"
+	}
+	
+	"214" //Powerjack
+	{
+		"move speed bonus" "1.15"
+		"health on kill" "25"
+		"mod_neo_chain_lightning" "1"
+	}
+	
+	"326" //Back Scratcher
+	{
+		"damage bonus" "1.25"
+		"health from packs increased" "2.0"
+		"health from healers reduced" "0.75"
+		"mod_neo_shared_damage" "1"
+	}
+	
+	"348" //Sharpened Volcano Fragment
+	{
+		"weapon burn time increased" "3.0"
+		"damage penalty" "0.8"
+		"mod_neo_corpse_explode" "1"
+	}
+	
+	"452" //Third Degree
+	{
+		"hits all medic-connected targets" "1"
+		"damage penalty" "0.85"
+		"mod_neo_chain_lightning" "1"
+		"mod_neo_fear_on_crit" "1"
+	}
+	
+	"813" //Neon Annihilator
+	{
+		"crit vs wet players" "1"
+		"damage bonus vs buildings" "1.3"
+		"mod_neo_chain_lightning" "1"
+		"mod_neo_ice_effect" "1"
+	}
+	
+	"1181" //Hot Hand
+	{
+		"fire rate bonus" "0.5"
+		"damage penalty" "0.5"
+		"mod_neo_explosive_jump" "1"
+		"mod_neo_adrenaline" "1"
+	}
+	
+	// ============================================================================
+	// DEMOMAN WEAPONS
+	// ============================================================================
+	
+	"tf_weapon_grenadelauncher" //Grenade Launcher
+	{
+		"projectile speed increased" "1.15"
+		"damage bonus" "1.1"
+		"mod_neo_corpse_explode" "1"
+	}
+	"206" //Strange Grenade Launcher
+	{
+		"projectile speed increased" "1.15"
+		"damage bonus" "1.1"
+		"mod_neo_corpse_explode" "1"
+	}
+	"1007" //Festive Grenade Launcher
+	{
+		"projectile speed increased" "1.15"
+		"damage bonus" "1.1"
+		"mod_neo_corpse_explode" "1"
+	}
+	
+	"308" //Loch-n-Load
+	{
+		"damage bonus vs buildings" "1.5"
+		"projectile speed increased" "1.25"
+		"mod_neo_berserker" "1"
+	}
+	
+	"996" //Loose Cannon
+	{
+		"projectile speed increased" "1.0"
+		"knockback on hit" "1.5"
+		"mod_neo_fear_on_crit" "1"
+	}
+	
+	"1151" //Iron Bomber
+	{
+		"sticky arm time penalty" "-0.5"
+		"projectile speed increased" "1.2"
+		"mod_neo_chain_lightning" "1"
+	}
+	
+	"tf_weapon_pipebomblauncher" //Stickybomb Launcher
+	{
+		"max pipebombs increased" "2"
+		"damage bonus" "1.1"
+		"mod_neo_chain_lightning" "1"
+	}
+	"207" //Strange Stickybomb Launcher
+	{
+		"max pipebombs increased" "2"
+		"damage bonus" "1.1"
+		"mod_neo_chain_lightning" "1"
+	}
+	"661" //Festive Stickybomb Launcher
+	{
+		"max pipebombs increased" "2"
+		"damage bonus" "1.1"
+		"mod_neo_chain_lightning" "1"
+	}
+	"797" //Silver Botkiller Stickybomb Launcher Mk.I
+	{
+		"max pipebombs increased" "2"
+		"damage bonus" "1.1"
+		"mod_neo_chain_lightning" "1"
+	}
+	"806" //Gold Botkiller Stickybomb Launcher Mk.I
+	{
+		"max pipebombs increased" "2"
+		"damage bonus" "1.1"
+		"mod_neo_chain_lightning" "1"
+	}
+	"886" //Rust Botkiller Stickybomb Launcher Mk.I
+	{
+		"max pipebombs increased" "2"
+		"damage bonus" "1.1"
+		"mod_neo_chain_lightning" "1"
+	}
+	"895" //Blood Botkiller Stickybomb Launcher Mk.I
+	{
+		"max pipebombs increased" "2"
+		"damage bonus" "1.1"
+		"mod_neo_chain_lightning" "1"
+	}
+	"904" //Carbonado Botkiller Stickybomb Launcher Mk.I
+	{
+		"max pipebombs increased" "2"
+		"damage bonus" "1.1"
+		"mod_neo_chain_lightning" "1"
+	}
+	"913" //Diamond Botkiller Stickybomb Launcher Mk.I
+	{
+		"max pipebombs increased" "2"
+		"damage bonus" "1.1"
+		"mod_neo_chain_lightning" "1"
+	}
+	"962" //Silver Botkiller Stickybomb Launcher Mk.II
+	{
+		"max pipebombs increased" "2"
+		"damage bonus" "1.1"
+		"mod_neo_chain_lightning" "1"
+	}
+	"971" //Gold Botkiller Stickybomb Launcher Mk.II
+	{
+		"max pipebombs increased" "2"
+		"damage bonus" "1.1"
+		"mod_neo_chain_lightning" "1"
+	}
+	
+	"130" //Scottish Resistance
+	{
+		"fire rate bonus" "0.7"
+		"max pipebombs increased" "4"
+		"mod_neo_ice_effect" "1"
+		"mod_neo_corpse_explode" "1"
+	}
+	
+	"265" //Sticky Jumper
+	{
+		"max pipebombs increased" "4"
+		"fire rate bonus" "0.5"
+		"self dmg push force increased" "2.0"
+		"mod_neo_explosive_jump" "1"
+	}
+	
+	"1150" //Quickiebomb Launcher
+	{
+		"sticky arm time penalty" "-0.5"
+		"damage bonus" "1.15"
+		"mod_neo_chain_lightning" "1"
+	}
+	
+	// Demo Shields
+	
+	"131" //Chargin' Targe
+	{
+		"dmg taken from blast reduced" "1.3"
+		"dmg taken from fire reduced" "1.3"
+		"mod_neo_shared_damage" "1"
+	}
+	
+	"406" //Splendid Screen
+	{
+		"charge impact damage increased" "1.25"
+		"mod_neo_corpse_explode" "1"
+		"mod_neo_explosive_jump" "1"
+	}
+	
+	"1099" //Tide Turner
+	{
+		"charge turn control" "1.0"
+		"charge recharge rate increased" "2.0"
+		"mod_neo_adrenaline" "1"
+	}
+	
+	// Demo Boots
+	
+	"405" //Ali Baba's Wee Booties / Bootlegger
+	{
+		"turn control bonus" "2.0"
+		"max health additive bonus" "25"
+		"mod_neo_explosive_jump" "1"
+	}
+	
+	// Demo Melees
+	
+	"132" //Eyelander / Horseless Headless Horsemann's Headtaker / Nessie's Nine Iron
+	{
+		"melee range bonus" "1.5"
+		"mod_neo_fear_on_crit" "1"
+		"mod_neo_chain_lightning" "1"
+	}
+	"266" //Horseless Headless Horsemann's Headtaker
+	{
+		"melee range bonus" "1.5"
+		"mod_neo_fear_on_crit" "1"
+		"mod_neo_chain_lightning" "1"
+	}
+	"482" //Nessie's Nine Iron
+	{
+		"melee range bonus" "1.5"
+		"mod_neo_fear_on_crit" "1"
+		"mod_neo_chain_lightning" "1"
+	}
+	"1082" //Festive Eyelander
+	{
+		"melee range bonus" "1.5"
+		"mod_neo_fear_on_crit" "1"
+		"mod_neo_chain_lightning" "1"
+	}
+	
+	"154" //Pain Train
+	{
+		"increase player capture value" "2"
+		"dmg taken from bullets increased" "1.1"
+	}
+	
+	"264" //Frying Pan
+	{
+		"damage bonus" "1.15"
+		"mod_neo_corpse_explode" "1"
+	}
+	"1071" //Golden Frying Pan
+	{
+		"damage bonus" "1.15"
+		"mod_neo_corpse_explode" "1"
+	}
+	
+	"357" //Half-Zatoichi
+	{
+		"damage bonus" "1.15"
+		"dmg taken from melee reduced" "1.25"
+	}
+	"1013" //Festive Half-Zatoichi
+	{
+		"damage bonus" "1.15"
+		"dmg taken from melee reduced" "1.25"
+	}
+	
+	"307" //Ullapool Caber
+	{
+		"damage bonus" "1.5"
+		"mod_neo_corpse_explode" "1"
+		"mod_neo_explosive_jump" "1"
+	}
+	
+	"327" //Claidheamh MÃ²r
+	{
+		"charge recharge rate increased" "2.0"
+		"charge impact damage increased" "1.25"
+	}
+	
+	"404" //Persian Persuader
+	{
+		"charge recharge rate increased" "1.5"
+		"mod_neo_chain_lightning" "1"
+	}
+	
+	"609" //Scotsman's Skullcutter
+	{
+		"damage bonus" "1.25"
+		"move speed penalty" "0.85"
+		"mod_neo_shared_damage" "1"
+	}
+	
+	// ============================================================================
+	// HEAVY WEAPONS
+	// ============================================================================
+	
+	"tf_weapon_minigun" //Minigun
+	{
+		"fire rate bonus" "0.85"
+		"minigun spinup time decreased" "0.75"
+		"mod_neo_berserker" "1"
+	}
+	"202" //Strange Minigun
+	{
+		"fire rate bonus" "0.85"
+		"minigun spinup time decreased" "0.75"
+		"mod_neo_berserker" "1"
+	}
+	"654" //Festive Minigun
+	{
+		"fire rate bonus" "0.85"
+		"minigun spinup time decreased" "0.75"
+		"mod_neo_berserker" "1"
+	}
+	"793" //Silver Botkiller Minigun Mk.I
+	{
+		"fire rate bonus" "0.85"
+		"minigun spinup time decreased" "0.75"
+		"mod_neo_berserker" "1"
+	}
+	"802" //Gold Botkiller Minigun Mk.I
+	{
+		"fire rate bonus" "0.85"
+		"minigun spinup time decreased" "0.75"
+		"mod_neo_berserker" "1"
+	}
+	"882" //Rust Botkiller Minigun Mk.I
+	{
+		"fire rate bonus" "0.85"
+		"minigun spinup time decreased" "0.75"
+		"mod_neo_berserker" "1"
+	}
+	"891" //Blood Botkiller Minigun Mk.I
+	{
+		"fire rate bonus" "0.85"
+		"minigun spinup time decreased" "0.75"
+		"mod_neo_berserker" "1"
+	}
+	"900" //Carbonado Botkiller Minigun Mk.I
+	{
+		"fire rate bonus" "0.85"
+		"minigun spinup time decreased" "0.75"
+		"mod_neo_berserker" "1"
+	}
+	"909" //Diamond Botkiller Minigun Mk.I
+	{
+		"fire rate bonus" "0.85"
+		"minigun spinup time decreased" "0.75"
+		"mod_neo_berserker" "1"
+	}
+	"958" //Silver Botkiller Minigun Mk.II
+	{
+		"fire rate bonus" "0.85"
+		"minigun spinup time decreased" "0.75"
+		"mod_neo_berserker" "1"
+	}
+	"967" //Gold Botkiller Minigun Mk.II
+	{
+		"fire rate bonus" "0.85"
+		"minigun spinup time decreased" "0.75"
+		"mod_neo_berserker" "1"
+	}
+	
+	"41" //Natascha
+	{
+		"slow enemy on hit" "1"
+		"mod_neo_ice_effect" "1"
+		"mod_neo_chain_lightning" "1"
+	}
+	
+	"312" //Brass Beast
+	{
+		"damage bonus" "1.2"
+		"dmg taken reduced" "1.15"
+		"mod_neo_shared_damage" "1"
+		"mod_neo_corpse_explode" "1"
+	}
+	
+	"424" //Tomislav
+	{
+		"minigun spinup time decreased" "0.5"
+		"weapon spread bonus" "0.7"
+		"mod_neo_fear_on_crit" "1"
+	}
+	
+	"811" //Huo-Long Heater
+	{
+		"weapon burn time increased" "1.5"
+		"mod_neo_explosive_jump" "1"
+	}
+	
+	// Heavy Secondaries
+	
+	"42" //Sandvich
+	{
+	}
+	
+	"159" //Dalokohs Bar
+	{
+		"max health additive bonus" "25"
+	}
+	
+	"433" //Buffalo Steak Sandvich
+	{
+		"move speed bonus" "1.15"
+		"mod_neo_berserker" "1"
+	}
+	
+	"425" //Family Business
+	{
+		"fire rate bonus" "0.7"
+		"clip size bonus" "1.5"
+		"mod_neo_chain_lightning" "1"
+	}
+	
+	// Heavy Melees
+	
+	"43" //K.G.B.
+	{
+		"critboost on kill" "5"
+		"mod_neo_fear_on_crit" "1"
+	}
+	
+	"239" //GRU
+	{
+		"move speed bonus" "1.2"
+		"damage penalty" "0.75"
+		"mod_neo_adrenaline" "1"
+	}
+	"1084" //Festive GRU
+	{
+		"move speed bonus" "1.2"
+		"damage penalty" "0.75"
+		"mod_neo_adrenaline" "1"
+	}
+	
+	"310" //Warrior's Spirit
+	{
+		"damage bonus" "1.3"
+		"dmg taken increased" "1.2"
+		"mod_neo_shared_damage" "1"
+	}
+	
+	"331" //Fists of Steel
+	{
+		"dmg taken from ranged reduced" "1.25"
+		"dmg taken from melee increased" "1.25"
+		"mod_neo_ice_effect" "1"
+	}
+	
+	"426" //Eviction Notice
+	{
+		"fire rate bonus" "0.6"
+		"move speed bonus on hit" "1.15"
+		"mod_neo_chain_lightning" "1"
+	}
+	
+	"656" //Holiday Punch
+	{
+		"crit on hit from behind" "1"
+		"mod_neo_fear_on_crit" "1"
+	}
+
+	// ============================================================================
+	// ENGINEER WEAPONS
+	// ============================================================================
+	
+	"141" //Frontier Justice
+	{
+		"clip size bonus" "1.5"
+		"mod_neo_corpse_explode" "1"
+		"mod_neo_chain_lightning" "1"
+	}
+	"1004" //Festive Frontier Justice
+	{
+		"clip size bonus" "1.5"
+		"mod_neo_corpse_explode" "1"
+		"mod_neo_chain_lightning" "1"
+	}
+	
+	"527" //Widowmaker
+	{
+		"heal on hit for rapidfire" "5"
+		"mod_neo_chain_lightning" "1"
+	}
+	
+	"588" //Pomson 6000
+	{
+		"projectile speed increased" "1.3"
+		"mod_neo_ice_effect" "1"
+		"mod_neo_chain_lightning" "1"
+	}
+	
+	"997" //Rescue Ranger
+	{
+		"mod_neo_sentry_leech" "1"
+		"mod_neo_explosive_jump" "1"
+	}
+	
+	"140" //Wrangler
+	{
+		"mod_neo_chain_lightning" "1"
+		"mod_neo_fear_on_crit" "1"
+	}
+	
+	"528" //Short Circuit
+	{
+		"mod_neo_chain_lightning" "1"
+		"mod_neo_explosive_jump" "1"
+	}
+	
+	// Engineer PDA
+	
+	"589" //Eureka Effect
+	{
+		"Construction rate increased" "1.25"
+		"mod_neo_explosive_jump" "1"
+		"mod_neo_corpse_explode" "1"
+	}
+	
+	// Engineer Wrenches
+	
+	"142" //Gunslinger
+	{
+		"max health additive bonus" "25"
+		"mod_neo_chain_lightning" "1"
+	}
+	
+	"155" //Southern Hospitality
+	{
+		"bleeding duration" "5"
+		"mod_neo_ice_effect" "1"
+		"mod_neo_corpse_explode" "1"
+	}
+	
+	"329" //Jag
+	{
+		"Construction rate increased" "2.0"
+		"mod_neo_sentry_leech" "1"
+		"mod_neo_adrenaline" "1"
+	}
+
+	// ============================================================================
+	// MEDIC WEAPONS
+	// ============================================================================
+	
+	"tf_weapon_syringegun_medic" //Syringe Gun
+	{
+		"fire rate bonus" "0.6"
+		"projectile speed increased" "1.3"
+		"mod_neo_chain_lightning" "1"
+	}
+	"204" //Strange Syringe Gun
+	{
+		"fire rate bonus" "0.6"
+		"projectile speed increased" "1.3"
+		"mod_neo_chain_lightning" "1"
+	}
+	
+	"305" //Crusader's Crossbow
+	{
+		"Reload time decreased" "0.7"
+		"projectile speed increased" "1.3"
+		"mod_neo_shrapnel" "1"
+	}
+	"1079" //Festive Crusader's Crossbow
+	{
+		"Reload time decreased" "0.7"
+		"projectile speed increased" "1.3"
+		"mod_neo_shrapnel" "1"
+	}
+	
+	"36" //Blutsauger
+	{
+		"heal on hit for rapidfire" "5"
+		"fire rate bonus" "0.8"
+		"mod_neo_shared_damage" "1"
+	}
+	
+	"412" //Overdose
+	{
+		"move speed bonus" "1.2"
+		"mod_neo_chain_lightning" "1"
+		"mod_neo_explosive_jump" "1"
+	}
+	
+	// Mediguns
+	
+	"tf_weapon_medigun" //Medi Gun
+	{
+		"heal rate bonus" "1.15"
+		"ubercharge rate bonus" "1.15"
+		"mod_neo_shared_damage" "1"
+	}
+	"211" //Strange Medi Gun
+	{
+		"heal rate bonus" "1.15"
+		"ubercharge rate bonus" "1.15"
+		"mod_neo_shared_damage" "1"
+	}
+	"663" //Festive Medi Gun
+	{
+		"heal rate bonus" "1.15"
+		"ubercharge rate bonus" "1.15"
+		"mod_neo_shared_damage" "1"
+	}
+	
+	"35" //Kritzkrieg
+	{
+		"ubercharge rate bonus" "1.25"
+		"mod_neo_chain_lightning" "1"
+		"mod_neo_fear_on_crit" "1"
+	}
+	
+	"411" //Quick-Fix
+	{
+		"heal rate bonus" "1.4"
+		"overheal penalty" "0.5"
+		"mod_neo_adrenaline" "1"
+	}
+	
+	"998" //Vaccinator
+	{
+		"ubercharge rate bonus" "1.5"
+		"mod_neo_ice_effect" "1"
+		"mod_neo_chain_lightning" "1"
+	}
+	
+	// Medic Melees
+	
+	"37" //Ubersaw
+	{
+		"add uber charge on hit" "25"
+		"mod_neo_chain_lightning" "1"
+		"mod_neo_fear_on_crit" "1"
+	}
+	"1003" //Festive Ubersaw
+	{
+		"add uber charge on hit" "25"
+		"mod_neo_chain_lightning" "1"
+		"mod_neo_fear_on_crit" "1"
+	}
+	
+	"173" //Vita-Saw
+	{
+		"ubercharge rate bonus" "1.15"
+		"mod_neo_shared_damage" "1"
+	}
+	
+	"304" //Amputator
+	{
+		"health regen" "3"
+		"mod_neo_sentry_leech" "1"
+	}
+	
+	"413" //Solemn Vow
+	{
+		"fire rate bonus" "0.8"
+		"mod_neo_fear_on_crit" "1"
+	}
+
+	// ============================================================================
+	// SNIPER WEAPONS
+	// ============================================================================
+	
+	"tf_weapon_sniperrifle" //Sniper Rifle
+	{
+		"Reload time decreased" "0.75"
+		"fire rate bonus" "0.75"
+		"mod_neo_fear_on_crit" "1"
+	}
+	"201" //Strange Sniper Rifle
+	{
+		"Reload time decreased" "0.75"
+		"fire rate bonus" "0.75"
+		"mod_neo_fear_on_crit" "1"
+	}
+	"664" //Festive Sniper Rifle
+	{
+		"Reload time decreased" "0.75"
+		"fire rate bonus" "0.75"
+		"mod_neo_fear_on_crit" "1"
+	}
+	"792" //Silver Botkiller Sniper Rifle Mk.I
+	{
+		"Reload time decreased" "0.75"
+		"fire rate bonus" "0.75"
+		"mod_neo_fear_on_crit" "1"
+	}
+	"801" //Gold Botkiller Sniper Rifle Mk.I
+	{
+		"Reload time decreased" "0.75"
+		"fire rate bonus" "0.75"
+		"mod_neo_fear_on_crit" "1"
+	}
+	"881" //Rust Botkiller Sniper Rifle Mk.I
+	{
+		"Reload time decreased" "0.75"
+		"fire rate bonus" "0.75"
+		"mod_neo_fear_on_crit" "1"
+	}
+	"890" //Blood Botkiller Sniper Rifle Mk.I
+	{
+		"Reload time decreased" "0.75"
+		"fire rate bonus" "0.75"
+		"mod_neo_fear_on_crit" "1"
+	}
+	"899" //Carbonado Botkiller Sniper Rifle Mk.I
+	{
+		"Reload time decreased" "0.75"
+		"fire rate bonus" "0.75"
+		"mod_neo_fear_on_crit" "1"
+	}
+	"908" //Diamond Botkiller Sniper Rifle Mk.I
+	{
+		"Reload time decreased" "0.75"
+		"fire rate bonus" "0.75"
+		"mod_neo_fear_on_crit" "1"
+	}
+	"957" //Silver Botkiller Sniper Rifle Mk.II
+	{
+		"Reload time decreased" "0.75"
+		"fire rate bonus" "0.75"
+		"mod_neo_fear_on_crit" "1"
+	}
+	"966" //Gold Botkiller Sniper Rifle Mk.II
+	{
+		"Reload time decreased" "0.75"
+		"fire rate bonus" "0.75"
+		"mod_neo_fear_on_crit" "1"
+	}
+	
+	"56" //Huntsman
+	{
+		"charge time decreased" "0.7"
+		"projectile speed increased" "1.2"
+		"mod_neo_chain_lightning" "1"
+	}
+	"1005" //Festive Huntsman
+	{
+		"charge time decreased" "0.7"
+		"projectile speed increased" "1.2"
+		"mod_neo_chain_lightning" "1"
+	}
+	
+	"230" //Sydney Sleeper
+	{
+		"charge time decreased" "0.5"
+		"mod_neo_chain_lightning" "1"
+		"mod_neo_ice_effect" "1"
+	}
+	
+	"402" //Bazaar Bargain
+	{
+		"charge time decreased" "0.6"
+		"mod_neo_corpse_explode" "1"
+	}
+	
+	"526" //Machina
+	{
+		"damage bonus" "1.15"
+		"mod_neo_corpse_explode" "1"
+		"mod_neo_fear_on_crit" "1"
+	}
+	
+	"752" //Hitman's Heatmaker
+	{
+		"charge time decreased" "0.75"
+		"mod_neo_chain_lightning" "1"
+	}
+	
+	"1098" //Classic
+	{
+		"charge time decreased" "0.6"
+		"mod_neo_explosive_jump" "1"
+	}
+	
+	// Sniper Secondaries
+	
+	"57" //Razorback
+	{
+		"mod_neo_shared_damage" "1"
+		"mod_neo_fear_on_crit" "1"
+	}
+	
+	"58" //Jarate
+	{
+		"mod_neo_chain_lightning" "1"
+		"mod_neo_corpse_explode" "1"
+	}
+	
+	"231" //Darwin's Danger Shield
+	{
+		"dmg taken from bullets reduced" "1.15"
+		"mod_neo_adrenaline" "1"
+	}
+	
+	"642" //Cozy Camper
+	{
+		"health regen" "2"
+		"mod_neo_sentry_leech" "1"
+	}
+	
+	// Sniper Melees
+	
+	"171" //Tribalman's Shiv
+	{
+		"bleeding duration" "8"
+		"mod_neo_ice_effect" "1"
+		"mod_neo_chain_lightning" "1"
+	}
+	
+	"232" //Bushwacka
+	{
+		"crit on minicrit" "1"
+		"mod_neo_corpse_explode" "1"
+	}
+	
+	"401" //Shahanshah
+	{
+		"damage bonus" "1.25"
+		"mod_neo_shared_damage" "1"
+		"mod_neo_adrenaline" "1"
+	}
+	
+	// SMG (Cleaner's Carbine)
+	
+	"751" //Cleaner's Carbine
+	{
+		"minicrit on kill" "1"
+		"mod_neo_chain_lightning" "1"
+		"mod_neo_ice_effect" "1"
+	}
+
+	// ============================================================================
+	// SPY WEAPONS
+	// ============================================================================
+	
+	"61" //Ambassador
+	{
+		"fire rate bonus" "0.8"
+		"mod_neo_chain_lightning" "1"
+		"mod_neo_fear_on_crit" "1"
+	}
+	"1006" //Festive Ambassador
+	{
+		"fire rate bonus" "0.8"
+		"mod_neo_chain_lightning" "1"
+		"mod_neo_fear_on_crit" "1"
+	}
+	
+	"224" //L'Etranger
+	{
+		"add cloak on hit" "20"
+		"mod_neo_ice_effect" "1"
+	}
+	
+	"460" //Enforcer
+	{
+		"damage bonus while disguised" "1.2"
+		"mod_neo_corpse_explode" "1"
+	}
+	
+	"525" //Diamondback
+	{
+		"sapper kills collect crits" "1"
+		"mod_neo_chain_lightning" "1"
+		"mod_neo_explosive_jump" "1"
+	}
+	
+	// Spy Watches
+	
+	"tf_weapon_invis" //Invisibility Watch
+	{
+		"mod_neo_explosive_jump" "1"
+	}
+	"59" //Dead Ringer
+	{
+		"mod_neo_corpse_explode" "1"
+	}
+	"60" //Cloak and Dagger
+	{
+		"mod_neo_ice_effect" "1"
+		"mod_neo_sentry_leech" "1"
+	}
+	"161" //Dead Ringer (alternate)
+	{
+		"mod_neo_corpse_explode" "1"
+	}
+	"163" //Cloak and Dagger (alternate)
+	{
+		"mod_neo_ice_effect" "1"
+		"mod_neo_sentry_leech" "1"
+	}
+	
+	// Spy Sappers
+	
+	"735" //Sapper (various types)
+	{
+		"mod_neo_chain_lightning" "1"
+		"mod_neo_sentry_leech" "1"
+	}
+	"810" //Red-Tape Recorder
+	{
+		"mod_neo_ice_effect" "1"
+		"mod_neo_fear_on_crit" "1"
+	}
+	"933" //Ap-Sap
+	{
+		"mod_neo_chain_lightning" "1"
+		"mod_neo_sentry_leech" "1"
+	}
+	"1080" //Festive Sapper
+	{
+		"mod_neo_chain_lightning" "1"
+		"mod_neo_sentry_leech" "1"
+	}
+	"1102" //Snack Attack
+	{
+		"mod_neo_chain_lightning" "1"
+		"mod_neo_sentry_leech" "1"
+	}
+	
+	// Spy Melees (in addition to tf_weapon_knife)
+	
+	"225" //Your Eternal Reward / Wanga Prick
+	{
+		"fire rate bonus" "0.8"
+		"mod_neo_chain_lightning" "1"
+	}
+	"574" //Wanga Prick
+	{
+		"fire rate bonus" "0.8"
+		"mod_neo_chain_lightning" "1"
+	}
+	
+	"356" //Conniver's Kunai
+	{
+		"fire rate bonus" "0.8"
+		"mod_neo_adrenaline" "1"
+		"mod_neo_shared_damage" "1"
+	}
+	
+	"461" //Big Earner
+	{
+		"mod_neo_corpse_explode" "1"
+		"mod_neo_adrenaline" "1"
+	}
+	
+	"649" //Spy-cicle
+	{
+		"mod_neo_ice_effect" "1"
+	}
+	
+	// === SAXXY / CONSIGLIERE / FREEDOM STAFF / MEMORY MAKER ===
+	"423" //Saxxy
+	{
+		"damage bonus" "1.25"
+		"mod_neo_corpse_explode" "1"
+		"mod_neo_chain_lightning" "1"
+	}
+	"880" //Freedom Staff / Memory Maker
+	{
+		"damage bonus" "1.25"
+		"mod_neo_corpse_explode" "1"
+		"mod_neo_chain_lightning" "1"
+	}
+}

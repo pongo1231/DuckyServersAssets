@@ -1,0 +1,3019 @@
+/*
+TF2x10
+
+Current developer: Wliu
+Original developers: Isatis and Invisighost
+Config updates: Mr. Blue and Ultimario
+
+Alliedmodders thread: https://forums.alliedmods.net/showthread.php?p=2338136
+Github: https://github.com/50DKP/TF2x10
+*/
+
+#pragma semicolon 1
+
+#include <sourcemod>
+#include <sdktools>
+#include <adminmenu>
+#include <sdkhooks>
+#include <tf2_stocks>
+#include <tf2items>
+#include <tf2attributes>
+#include <updater>
+#undef REQUIRE_PLUGIN
+#tryinclude <freak_fortress_2>
+#tryinclude <saxtonhale>
+#define REQUIRE_PLUGIN
+
+#pragma newdecls required
+
+#define PLUGIN_NAME			"Multiply a Weapon's Stats by 10"
+#define PLUGIN_AUTHOR		"The TF2x10 group"
+#define PLUGIN_VERSION		"1.7.5"
+#define PLUGIN_CONTACT		"http://steamcommunity.com/group/tf2x10/"
+#define PLUGIN_DESCRIPTION	"It's in the name! Also known as TF2x10 or TF20."
+
+#define UPDATE_URL			"http://50dkp.github.io/TF2x10/addons/sourcemod/update.txt"
+
+#define KUNAI_DAMAGE			2100
+#define DALOKOH_MAXHEALTH		800
+#define DALOKOH_HEALTHPERSEC	150
+#define DALOKOH_LASTHEALTH		50
+#define MAX_CURRENCY			30000
+#define DUMPTRUCK_MODEL			"models/props_hydro/dumptruck.mdl"
+#define DUMPTRUCK_EMPTY_MODEL	"models/props_hydro/dumptruck_empty.mdl"
+#define TRUCK_RED_MODEL			"models/props_vehicles/pickup03.mdl"
+#define TRUCK_BLU_MODEL			"models/props_vehicles/train_engine.mdl"
+#define DUCK_MODEL				"models/workshop/player/items/pyro/eotl_ducky/eotl_bonus_duck.mdl"
+
+static const float g_fBazaarRates[] =
+{
+	16.5, //seconds for 0 heads
+	8.25, //seconds for 1 head
+	3.3, //seconds for 2 heads
+	1.32, //seconds for 3 heads
+	0.66, //seconds for 4 heads
+	0.44, //seconds for 5 heads
+	0.33 //seconds for 6+ heads
+};
+
+int buildingsDestroyed[MAXPLAYERS + 1];
+int cabers[MAXPLAYERS + 1];
+int dalokohsSeconds[MAXPLAYERS + 1];
+int dalokohs[MAXPLAYERS + 1];
+float dalokohsTimer[MAXPLAYERS + 1];
+//int headsTaken[MAXPLAYERS + 1];
+int revengeCrits[MAXPLAYERS + 1];
+int amputatorHealing[MAXPLAYERS + 1];
+
+bool aprilFools;
+bool aprilFoolsOverride;
+bool ff2Running;
+bool hiddenRunning;
+bool vshRunning;
+
+bool hasCaber[MAXPLAYERS + 1];
+bool hasManmelter[MAXPLAYERS + 1];
+bool hasBazooka[MAXPLAYERS + 1];
+bool takesHeads[MAXPLAYERS + 1];
+bool chargingClassic[MAXPLAYERS + 1];
+
+float chargeBegin[MAXPLAYERS + 1];
+
+Handle hudText;
+Handle equipWearable;
+StringMap itemInfoTrie;
+TopMenu globalTopMenu;
+
+char selectedMod[16] = "default";
+
+// === Neo mode effect system ===
+#define NEO_CHAIN_LIGHTNING    (1 << 0)
+#define NEO_CORPSE_EXPLODE     (1 << 1)
+#define NEO_SHARED_DAMAGE      (1 << 2)
+#define NEO_ICE_EFFECT         (1 << 3)
+#define NEO_FEAR_ON_CRIT       (1 << 4)
+#define NEO_ADRENALINE         (1 << 5)
+#define NEO_EXPLOSIVE_JUMP     (1 << 6)
+#define NEO_SENTRY_LEECH       (1 << 7)
+#define NEO_SHRAPNEL           (1 << 8)
+#define NEO_AMBUSH             (1 << 9)
+#define NEO_BERSERKER          (1 << 10)
+
+StringMap g_hNeoEffectFlags;
+int g_iNeoActiveEffects[MAXPLAYERS + 1];
+int g_iNeoActiveDefIndex[MAXPLAYERS + 1];
+float g_fNeoLastAttackTime[MAXPLAYERS + 1];
+float g_fNeoBaseSpeed[MAXPLAYERS + 1];
+int g_iNeoSlapStreak[MAXPLAYERS + 1];
+float g_fNeoLastSlapTime[MAXPLAYERS + 1];
+int g_iNeoSawStreak[MAXPLAYERS + 1];
+float g_fNeoLastSawTime[MAXPLAYERS + 1];
+int g_iNeoEngineerSentry[MAXPLAYERS + 1];
+bool g_bNeoWasCloakedPrev[MAXPLAYERS + 1];
+float g_fNeoPrevCloakMeter[MAXPLAYERS + 1];
+bool g_bNeoProcessingSharedDamage[MAXPLAYERS + 1];
+bool g_bNeoExplosiveJumpPrevAttack[MAXPLAYERS + 1];
+
+float g_fNeoRageEndTime[MAXPLAYERS + 1];
+
+ConVar cvarEnabled;
+
+ConVar cvarAutoUpdate;
+//ConVar cvarHeadCap;
+ConVar cvarHeadScaling;
+ConVar cvarHeadScalingCap;
+ConVar cvarHealthCap;
+ConVar cvarIncludeBots;
+ConVar cvarCritsFJ;
+ConVar cvarCritsDiamondback;
+ConVar cvarCritsManmelter;
+ConVar cvarZatoichiSheathThreshold;
+ConVar cvarFeignDeathDuration;
+
+public Plugin myinfo =
+{
+	name = PLUGIN_NAME,
+	author = PLUGIN_AUTHOR,
+	description = PLUGIN_DESCRIPTION,
+	version = PLUGIN_VERSION,
+	url = PLUGIN_CONTACT
+}
+
+/******************************************************************
+
+Plugin Initialization
+
+******************************************************************/
+
+public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max)
+{
+	char gameFolder[8];
+	GetGameFolderName(gameFolder, sizeof(gameFolder));
+
+	if(StrContains(gameFolder, "tf") < 0)
+	{
+		strcopy(error, err_max, "This plugin can only run on Team Fortress 2... hence TF2x10!");
+		return APLRes_Failure;
+	}
+
+	MarkNativeAsOptional("VSH_IsSaxtonHaleModeEnabled");
+	MarkNativeAsOptional("VSH_GetSaxtonHaleUserId");
+	MarkNativeAsOptional("FF2_IsFF2Enabled");
+	MarkNativeAsOptional("FF2_GetBossCharge");
+	MarkNativeAsOptional("FF2_GetBossIndex");
+	MarkNativeAsOptional("FF2_GetBossTeam");
+	MarkNativeAsOptional("FF2_SetBossCharge");
+
+	return APLRes_Success;
+}
+
+public void OnPluginStart()
+{
+	CreateConVar("tf2x10_version", PLUGIN_VERSION, "TF2x10 version", FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY|FCVAR_DONTRECORD);
+
+	cvarAutoUpdate = CreateConVar("tf2x10_autoupdate", "1", "Tells Updater to automatically update this plugin.  0 = off, 1 = on.", _, true, 0.0, true, 1.0);
+	cvarCritsDiamondback = CreateConVar("tf2x10_crits_diamondback", "10", "Number of crits after successful sap with Diamondback equipped.", _, true, 0.0, false);
+	cvarCritsFJ = CreateConVar("tf2x10_crits_fj", "10", "Number of crits after Frontier kill or for buildings. Half this for assists.", _, true, 0.0, false);
+	cvarCritsManmelter = CreateConVar("tf2x10_crits_manmelter", "10", "Number of crits after Manmelter extinguishes player.", _, true, 0.0, false);
+	cvarEnabled = CreateConVar("tf2x10_enabled", "1", "Toggle TF2x10. 0=off, 1=x10, 2=Neo, 3=Neo x10", _, true, 0.0, true, 3.0);
+
+	//cvarHeadCap = CreateConVar("tf2x10_headcap", "40", "The number of heads before the wielder stops gaining health and speed bonuses", _, true, 4.0);
+	cvarHeadScaling = CreateConVar("tf2x10_headscaling", "1", "Enable any decapitation weapon (eyelander etc) to grow their head as they gain heads. 0 = off, 1 = on.", _, true, 0.0, true, 1.0);
+	cvarHeadScalingCap = CreateConVar("tf2x10_headscalingcap", "6.0", "The number of heads before head scaling stops growing their head. 6.0 = 24 heads.", _, true, 0.0, false);
+	cvarHealthCap = CreateConVar("tf2x10_healthcap", "2100", "The max health a player can have. -1 to disable.", _, true, -1.0, false);
+	cvarIncludeBots = CreateConVar("tf2x10_includebots", "0", "1 allows bots to receive TF2x10 weapons, 0 disables this.", _, true, 0.0, true, 1.0);
+	cvarZatoichiSheathThreshold = CreateConVar("tf2x10_zatoichi_sheath_threshold", "500", "Minimum required health needed in order to sheath the Half-Zatoichi.  Damage will be 500 regardless.", _, true, 0.0);
+	cvarFeignDeathDuration = FindConVar("tf_feign_death_duration");
+
+	cvarEnabled.AddChangeHook(OnConVarChanged);
+	cvarAutoUpdate.AddChangeHook(OnConVarChanged);
+
+	AutoExecConfig(true, "plugin.tf2x10");
+
+	RegAdminCmd("sm_tf2x10_disable", Command_Disable, ADMFLAG_CONVARS);
+	RegAdminCmd("sm_tf2x10_enable", Command_Enable, ADMFLAG_CONVARS);
+	RegAdminCmd("sm_tf2x10_getmod", Command_GetMod, ADMFLAG_GENERIC);
+	RegAdminCmd("sm_tf2x10_recache", Command_Recache, ADMFLAG_GENERIC);
+	RegAdminCmd("sm_tf2x10_setmod", Command_SetMod, ADMFLAG_CHEATS);
+	RegAdminCmd("sm_tf2x10_april_fools", Command_AprilFools, ADMFLAG_CHEATS);
+	RegConsoleCmd("sm_x10group", Command_Group);
+
+	HookEvent("arena_win_panel", OnRoundEnd, EventHookMode_PostNoCopy);
+	HookEvent("player_builtobject", OnObjectBuilt, EventHookMode_Post);
+	HookEvent("player_carryobject", OnObjectCarry, EventHookMode_Post);
+	HookEvent("player_dropobject", OnObjectDrop, EventHookMode_Post);
+	HookEvent("object_destroyed", OnObjectDestroyed, EventHookMode_Post);
+	HookEvent("object_removed", OnObjectRemoved, EventHookMode_Post);
+	HookEvent("player_healed", OnPlayerHealed, EventHookMode_Post);
+	HookEvent("player_extinguished", OnPlayerExtinguished, EventHookMode_Post);
+	HookEvent("player_death", OnPlayerDeath, EventHookMode_Post);
+	HookEvent("post_inventory_application", OnPostInventoryApplication, EventHookMode_Post);
+	HookEvent("teamplay_restart_round", OnRoundEnd, EventHookMode_PostNoCopy);
+	HookEvent("teamplay_win_panel", OnRoundEnd, EventHookMode_PostNoCopy);
+	HookEvent("round_end", OnRoundEnd, EventHookMode_PostNoCopy);
+	HookEvent("object_deflected", OnObjectDeflected, EventHookMode_Post);
+	HookEvent("mvm_pickup_currency", OnPickupMVMCurrency, EventHookMode_Pre);
+
+	HookUserMessage(GetUserMessageId("PlayerShieldBlocked"), OnPlayerShieldBlocked);
+
+	Handle config = LoadGameConfigFile("tf2items.randomizer");
+	if(config == null)
+	{
+		SetFailState("Could not find 'gamedata/tf2.randomizer.txt'. Get the file from [TF2Items] Randomizer.");
+	}
+
+	StartPrepSDKCall(SDKCall_Player);
+	PrepSDKCall_SetFromConf(config, SDKConf_Virtual, "CTFPlayer::EquipWearable");
+	PrepSDKCall_AddParameter(SDKType_CBaseEntity, SDKPass_Pointer);
+	equipWearable = EndPrepSDKCall();
+	config.Close();
+
+	if(equipWearable == null)
+	{
+		SetFailState("Failed to set up EquipWearable sdkcall. Get a new 'gamedata/tf2items.randomizer.txt' file from [TF2Items] Randomizer.");
+	}
+
+	for(int client = 1; client <= MaxClients; client++)
+	{
+		if(IsValidClient(client) && IsClientInGame(client))
+		{
+			UpdateVariables(client);
+		}
+	}
+
+	TopMenu topmenu = GetAdminTopMenu();
+	if(LibraryExists("adminmenu") && topmenu != null)
+	{
+		OnAdminMenuReady(topmenu);
+	}
+
+	hudText = CreateHudSynchronizer();
+	itemInfoTrie = CreateTrie();
+	g_hNeoEffectFlags = CreateTrie();
+}
+
+public void OnConfigsExecuted()
+{
+	if(cvarEnabled.IntValue == 0)
+	{
+		return;
+	}
+
+	if(FindConVar("aw2_version") != null)
+	{
+		SetFailState("TF2x10 is incompatible with Advanced Weaponiser.");
+	}
+
+	int mode = cvarEnabled.IntValue;
+	if (mode == 2)
+	{
+		selectedMod = "neo";
+		LoadFileIntoTrie("neo", "tf2x10_base_items");
+	}
+	else if (mode == 3)
+	{
+		selectedMod = "neox10";
+		LoadFileIntoTrie("neox10", "tf2x10_base_items");
+	}
+	else
+	{
+		selectedMod = "default";
+		LoadFileIntoTrie("default", "tf2x10_base_items");
+	}
+
+	switch(mode > 0 ? 1 : -1)
+	{
+		case -1:
+		{
+			SetFailState("Could not find configs/x10.default.txt. Aborting.");
+		}
+		case -2:
+		{
+			SetFailState("Your configs/x10.default.txt seems to be corrupt. Aborting.");
+		}
+		default:
+		{
+			CreateTimer(330.0, Timer_ServerRunningX10, _, TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
+		}
+	}
+
+	if(LibraryExists("updater") && cvarAutoUpdate.BoolValue)
+	{
+		Updater_AddPlugin(UPDATE_URL);
+	}
+}
+
+public void OnConVarChanged(Handle convar, const char[] oldValue, const char[] newValue)
+{
+	if(convar == cvarEnabled)
+	{
+		int mode = cvarEnabled.IntValue;
+		if(mode > 0)
+		{
+			for(int client = 1; client <= MaxClients; client++)
+			{
+				if(IsValidClient(client))
+				{
+					ResetVariables(client);
+					SDKHook(client, SDKHook_OnTakeDamage, OnTakeDamage);
+					SDKHook(client, SDKHook_OnTakeDamagePost, OnTakeDamagePost);
+					SDKHook(client, SDKHook_WeaponSwitch, OnWeaponSwitch);
+				}
+			}
+
+			if(FindConVar("sm_hidden_enabled"))
+			{
+				hiddenRunning = FindConVar("sm_hidden_enabled").BoolValue;
+			}
+			else
+			{
+				hiddenRunning = false;
+			}
+
+			#if defined _FF2_included
+			ff2Running = LibraryExists("freak_fortress_2") ? FF2_IsFF2Enabled() : false;
+			#else
+			ff2Running = false;
+			#endif
+
+			#if defined _VSH_included
+			vshRunning = LibraryExists("saxtonhale") ? VSH_IsSaxtonHaleModeEnabled() : false;
+			#else
+			vshRunning = false;
+			#endif
+
+			itemInfoTrie.Clear();
+			g_hNeoEffectFlags.Clear();
+
+			if (mode == 2)
+			{
+				selectedMod = "neo";
+				LoadFileIntoTrie("neo", "tf2x10_base_items");
+			}
+			else if (mode == 3)
+			{
+				selectedMod = "neox10";
+				LoadFileIntoTrie("neox10", "tf2x10_base_items");
+			}
+			else
+			{
+				selectedMod = "default";
+				LoadFileIntoTrie("default", "tf2x10_base_items");
+			}
+
+			if(ff2Running || vshRunning)
+			{
+				if (mode == 2)
+				{
+					selectedMod = "neo_vshff2";
+					LoadFileIntoTrie(selectedMod);
+				}
+				else if (mode == 3)
+				{
+					selectedMod = "neox10_vshff2";
+					LoadFileIntoTrie(selectedMod);
+				}
+				else
+				{
+					selectedMod = "vshff2";
+					LoadFileIntoTrie(selectedMod);
+				}
+			}
+
+			if(aprilFools)
+			{
+				selectedMod = "aprilfools";
+				LoadFileIntoTrie(selectedMod);
+			}
+		}
+		else
+		{
+			for(int client = 1; client <= MaxClients; client++)
+			{
+				if(IsValidClient(client))
+				{
+					ResetVariables(client);
+					SDKUnhook(client, SDKHook_OnTakeDamage, OnTakeDamage);
+					SDKUnhook(client, SDKHook_OnTakeDamagePost, OnTakeDamagePost);
+					SDKUnhook(client, SDKHook_GetMaxHealth, OnGetMaxHealth);
+					SDKUnhook(client, SDKHook_WeaponSwitch, OnWeaponSwitch);
+				}
+			}
+			itemInfoTrie.Clear();
+			g_hNeoEffectFlags.Clear();
+		}
+		SetGameDescription();
+	}
+	else if(convar == cvarAutoUpdate)
+	{
+		cvarAutoUpdate.BoolValue ? Updater_AddPlugin(UPDATE_URL) : Updater_RemovePlugin();
+	}
+}
+
+void SetGameDescription()
+{
+}
+
+public void OnAdminMenuReady(Handle topmenu)
+{
+	if(topmenu == globalTopMenu)
+	{
+		return;
+	}
+
+	globalTopMenu = TopMenu.FromHandle(topmenu);
+
+	TopMenuObject player_commands = globalTopMenu.FindCategory(ADMINMENU_SERVERCOMMANDS);
+
+	if(player_commands != INVALID_TOPMENUOBJECT)
+	{
+		globalTopMenu.AddItem("TF2x10: Recache Weapons", AdminMenu_Recache, player_commands, "sm_tf2x10_recache", ADMFLAG_GENERIC);
+	}
+}
+
+int LoadFileIntoTrie(const char[] rawname, const char[] basename = "")
+{
+	char config[64];
+	char weapon[64];
+	char attribute[64];
+	char value[64];
+	BuildPath(Path_SM, config, sizeof(config), "configs/x10.%s.txt", rawname);
+	char tmpID[64];
+	char finalbasename[32];
+	int i;
+
+	strcopy(finalbasename, sizeof(finalbasename), StrEqual(basename, "") ? rawname : basename);
+
+	KeyValues kv = CreateKeyValues(finalbasename);
+	if(kv.ImportFromFile(config))
+	{
+		kv.GetSectionName(config, sizeof(config));
+		if(StrEqual(config, finalbasename))
+		{
+			if(kv.GotoFirstSubKey())
+			{
+				do
+				{
+					i = 0;
+
+					kv.GetSectionName(weapon, sizeof(weapon));
+					if(kv.GotoFirstSubKey(false))
+					{
+						do
+						{
+							kv.GetSectionName(attribute, sizeof(attribute));
+							kv.GetString(NULL_STRING, value, sizeof(value));
+
+							if(StrContains(attribute, "mod_neo_") == 0)
+							{
+								// Neo custom effect — store in effect map instead of itemInfoTrie
+								char neoKey[16];
+								int defIndex = StringToInt(weapon);
+								if(defIndex > 0)
+									IntToString(defIndex, neoKey, sizeof(neoKey));
+								else
+									strcopy(neoKey, sizeof(neoKey), weapon);
+
+								int flags;
+								if(!g_hNeoEffectFlags.GetValue(neoKey, flags))
+									flags = 0;
+
+								if(StrEqual(attribute, "mod_neo_chain_lightning"))       flags |= NEO_CHAIN_LIGHTNING;
+								else if(StrEqual(attribute, "mod_neo_corpse_explode"))   flags |= NEO_CORPSE_EXPLODE;
+								else if(StrEqual(attribute, "mod_neo_shared_damage"))    flags |= NEO_SHARED_DAMAGE;
+								else if(StrEqual(attribute, "mod_neo_ice_effect"))       flags |= NEO_ICE_EFFECT;
+								else if(StrEqual(attribute, "mod_neo_fear_on_crit"))     flags |= NEO_FEAR_ON_CRIT;
+								else if(StrEqual(attribute, "mod_neo_adrenaline"))       flags |= NEO_ADRENALINE;
+								else if(StrEqual(attribute, "mod_neo_explosive_jump"))   flags |= NEO_EXPLOSIVE_JUMP;
+								else if(StrEqual(attribute, "mod_neo_sentry_leech"))     flags |= NEO_SENTRY_LEECH;
+								else if(StrEqual(attribute, "mod_neo_shrapnel"))         flags |= NEO_SHRAPNEL;
+								else if(StrEqual(attribute, "mod_neo_ambush"))           flags |= NEO_AMBUSH;
+								else if(StrEqual(attribute, "mod_neo_berserker"))        flags |= NEO_BERSERKER;
+
+								g_hNeoEffectFlags.SetValue(neoKey, flags);
+							}
+							else
+							{
+								Format(tmpID, sizeof(tmpID), "%s__%s_%i_name", rawname, weapon, i);
+								itemInfoTrie.SetString(tmpID, attribute);
+
+								Format(tmpID, sizeof(tmpID), "%s__%s_%i_val", rawname, weapon, i);
+								itemInfoTrie.SetString(tmpID, value);
+
+								i++;
+							}
+						}
+						while(kv.GotoNextKey(false));
+						kv.GoBack();
+					}
+
+					Format(tmpID, sizeof(tmpID), "%s__%s_size", rawname, weapon);
+					itemInfoTrie.SetValue(tmpID, i);
+				}
+				while(kv.GotoNextKey());
+				kv.GoBack();
+
+				itemInfoTrie.SetValue(weapon, 1);
+			}
+		}
+		else
+		{
+			kv.Close();
+			return -2;
+		}
+	}
+	else
+	{
+		kv.Close();
+		return -1;
+	}
+	kv.Close();
+	return 1;
+}
+
+public Action Timer_ServerRunningX10(Handle hTimer)
+{
+	if(cvarEnabled.IntValue == 0)
+	{
+		return Plugin_Stop;
+	}
+
+	SetGameDescription();
+
+	if (cvarEnabled.IntValue == 2)
+	{
+		PrintToChatAll("\x01[\x07FF0000TF2 \x0700FFFFNeo\x01] A balanced x2 experience. Original x10 mod by \x07FF5C33UltiMario\x01 and \x073399FFMr. Blue\x01.");
+		PrintToChatAll("\x01Plugin development by \x079EC34FWliu\x01 (based off of \x0794DBFFIsatis\x01's and \x075C5C8AInvisGhost\x01's code). Neo mode by pongo1231.");
+	}
+	else if (cvarEnabled.IntValue == 3)
+	{
+		PrintToChatAll("\x01[\x07FF0000TF2 \x07FF8C00Neo x10\x01] The focused x10 experience. Original x10 mod by \x07FF5C33UltiMario\x01 and \x073399FFMr. Blue\x01.");
+		PrintToChatAll("\x01Plugin development by \x079EC34FWliu\x01. Neo x10 mode by pongo1231.");
+	}
+	else
+	{
+		PrintToChatAll("\x01[\x07FF0000TF2\x070000FFx10\x01] Mod by \x07FF5C33UltiMario\x01 and \x073399FFMr. Blue\x01. Plugin development by \x079EC34FWliu\x01 (based off of \x0794DBFFI\x01s\x0794DBFFa\x01t\x0794DBFFi\x01s's and \x075C5C8AInvisGhost\x01's code).");
+		PrintToChatAll("\x01Join our Steam group for Hale x10, Randomizer x10 and more by typing \x05/x10group\x01!");
+	}
+	return Plugin_Continue;
+}
+
+/******************************************************************
+
+SourceMod Admin Commands
+
+******************************************************************/
+
+public void AdminMenu_Recache(Handle topmenu, TopMenuAction action, TopMenuObject object_id, int param, char[] buffer, int maxlength)
+{
+	if(cvarEnabled.BoolValue)
+	{
+		switch(action)
+		{
+			case TopMenuAction_DisplayOption:
+			{
+				Format(buffer, maxlength, "TF2x10 Recache Weapons");
+			}
+			case TopMenuAction_SelectOption:
+			{
+				Command_Recache(param, 0);
+			}
+		}
+	}
+}
+
+public Action Command_Enable(int client, int args)
+{
+	if(!cvarEnabled.BoolValue)
+	{
+		ServerCommand("tf2x10_enabled 1");
+		ReplyToCommand(client, "[TF2x10] Multiply A Weapon's Stats by 10 Plugin is now enabled.");
+	}
+	else
+	{
+		ReplyToCommand(client, "[TF2x10] Multiply A Weapon's Stats by 10 Plugin is already enabled.");
+	}
+	return Plugin_Handled;
+}
+
+public Action Command_Disable(int client, int args)
+{
+	if(cvarEnabled.BoolValue)
+	{
+		ServerCommand("tf2x10_enabled 0");
+		ReplyToCommand(client, "[TF2x10] Multiply A Weapon's Stats by 10 Plugin is now disabled.");
+	}
+	else
+	{
+		ReplyToCommand(client, "[TF2x10] Multiply A Weapon's Stats by 10 Plugin is already disabled.");
+	}
+	return Plugin_Handled;
+}
+
+public Action Command_GetMod(int client, int args)
+{
+	if(cvarEnabled.BoolValue)
+	{
+		ReplyToCommand(client, "[TF2x10] This mod is loading primarily from configs/x10.%s.txt.", selectedMod);
+	}
+	return Plugin_Handled;
+}
+
+public Action Command_Group(int client, int args)
+{
+	KeyValues kv = CreateKeyValues("data");
+	kv.SetString("title", "TF2x10 Steam Group");
+	kv.SetString("msg", "http://www.steamcommunity.com/groups/tf2x10");
+	kv.SetNum("customsvr", 1);
+	kv.SetNum("type", MOTDPANEL_TYPE_URL);
+	ShowVGUIPanel(client, "info", kv, true);
+	kv.Close();
+
+	return Plugin_Handled;
+}
+
+public Action Command_Recache(int client, int args)
+{
+	if(cvarEnabled.BoolValue)
+	{
+		switch(LoadFileIntoTrie("default", "tf2x10_base_items"))
+		{
+			case -1:
+			{
+				ReplyToCommand(client, "[TF2x10] Could not find configs/x10.default.txt. Please check and try again.");
+			}
+			case -2:
+			{
+				ReplyToCommand(client, "[TF2x10] Your configs/x10.default.txt seems to be corrupt. Please check and try again.");
+			}
+			default:
+			{
+				ReplyToCommand(client, "[TF2x10] Weapons recached.");
+			}
+		}
+	}
+	return Plugin_Handled;
+}
+
+public Action Command_SetMod(int client, int args)
+{
+	if(cvarEnabled.BoolValue)
+	{
+		if(args != 1)
+		{
+			ReplyToCommand(client, "[TF2x10] Please specify a mod name to load. Usage: sm_tf2x10_setmod <name>");
+			return Plugin_Handled;
+		}
+
+		int uselessVar;
+		GetCmdArg(1, selectedMod, sizeof(selectedMod));
+
+		if(!StrEqual(selectedMod, "default") && !itemInfoTrie.GetValue(selectedMod, uselessVar))
+		{
+			switch(LoadFileIntoTrie(selectedMod))
+			{
+				case -1:
+				{
+					ReplyToCommand(client, "[TF2x10] Could not find configs/x10.%s.txt. Please check and try again.", selectedMod);
+					selectedMod = "default";
+					return Plugin_Handled;
+				}
+				case -2:
+				{
+					ReplyToCommand(client, "[TF2x10] Your configs/x10.%s.txt seems to be corrupt: first line does not match filename.", selectedMod);
+					selectedMod = "default";
+					return Plugin_Handled;
+				}
+			}
+		}
+
+		if(!StrEqual(selectedMod, "default"))
+		{
+			ReplyToCommand(client, "[TF2x10] Now loading from configs/x10.%s.txt, defaulting to configs/x10.default.txt.", selectedMod);
+		}
+		else
+		{
+			ReplyToCommand(client, "[TF2x10] Now loading from configs/x10.default.txt.");
+		}
+	}
+	return Plugin_Handled;
+}
+
+public Action Command_AprilFools(int client, int args)
+{
+	if(aprilFools)
+	{
+		aprilFools = false;
+		selectedMod = "default";
+		LoadFileIntoTrie(selectedMod, "tf2x10_base_items");
+		ReplyToCommand(client, "[TF2x10] April Fool's mode has been disabled!");
+	}
+	else
+	{
+		aprilFools = true;
+		PrecacheModel(DUMPTRUCK_MODEL);
+		PrecacheModel(DUMPTRUCK_EMPTY_MODEL);
+		PrecacheModel(TRUCK_RED_MODEL);
+		PrecacheModel(TRUCK_BLU_MODEL);
+		PrecacheModel(DUCK_MODEL);
+		PrecacheSound("ambient/bumper_car_quack1.wav");
+		PrecacheSound("ambient/bumper_car_quack2.wav");
+		PrecacheSound("ambient/bumper_car_quack3.wav");
+		PrecacheSound("ambient/bumper_car_quack4.wav");
+		PrecacheSound("ambient/bumper_car_quack5.wav");
+		PrecacheSound("ambient/bumper_car_quack9.wav");
+		PrecacheSound("ambient/bumper_car_quack11.wav");
+		selectedMod = "aprilfools";
+		LoadFileIntoTrie(selectedMod);
+		ReplyToCommand(client, "[TF2x10] April Fool's mode has been enabled!");
+	}
+	aprilFoolsOverride = true;
+	return Plugin_Handled;
+}
+
+/******************************************************************
+
+SourceMod Map/Library Events
+
+******************************************************************/
+
+public void OnAllPluginsLoaded()
+{
+	if(FindConVar("sm_hidden_enabled"))
+	{
+		hiddenRunning = FindConVar("sm_hidden_enabled").BoolValue;
+	}
+	else
+	{
+		hiddenRunning = false;
+	}
+
+	#if defined _FF2_included
+	ff2Running = LibraryExists("freak_fortress_2") ? FF2_IsFF2Enabled() : false;
+	#else
+	ff2Running = false;
+	#endif
+
+	#if defined _VSH_included
+	vshRunning = LibraryExists("saxtonhale") ? VSH_IsSaxtonHaleModeEnabled() : false;
+	#else
+	vshRunning = false;
+	#endif
+
+	if(ff2Running || vshRunning)
+	{
+		int mode = cvarEnabled.IntValue;
+		if (mode == 2)
+		{
+			selectedMod = "neo_vshff2";
+			LoadFileIntoTrie(selectedMod);
+		}
+		else if (mode == 3)
+		{
+			selectedMod = "neox10_vshff2";
+			LoadFileIntoTrie(selectedMod);
+		}
+		else
+		{
+			selectedMod = "vshff2";
+			LoadFileIntoTrie(selectedMod);
+		}
+	}
+
+	if(aprilFools)
+	{
+		selectedMod = "aprilfools";
+		LoadFileIntoTrie(selectedMod);
+	}
+}
+
+public void OnLibraryAdded(const char[] name)
+{
+	if(StrEqual(name, "updater") && cvarAutoUpdate.BoolValue)
+	{
+		Updater_AddPlugin(UPDATE_URL);
+	}
+	else if(StrEqual(name, "freak_fortress_2"))
+	{
+		#if defined _FF2_included
+		ff2Running = FF2_IsFF2Enabled();
+		#endif
+	}
+	else if(StrEqual(name, "saxtonhale"))
+	{
+		#if defined _VSH_included
+		vshRunning = VSH_IsSaxtonHaleModeEnabled();
+		#endif
+	}
+}
+
+public void OnLibraryRemoved(const char[] name)
+{
+	if(StrEqual(name, "freak_fortress_2"))
+	{
+		ff2Running = false;
+	}
+	else if(StrEqual(name, "saxtonhale"))
+	{
+		vshRunning = false;
+	}
+	else if(StrEqual(name, "updater"))
+	{
+		Updater_RemovePlugin();
+	}
+}
+
+public void OnMapStart()
+{
+	if(cvarEnabled.BoolValue)
+	{
+		SetGameDescription();
+		if(aprilFools)
+		{
+			PrecacheModel(DUMPTRUCK_MODEL);
+			PrecacheModel(DUMPTRUCK_EMPTY_MODEL);
+			PrecacheModel(TRUCK_RED_MODEL);
+			PrecacheModel(TRUCK_BLU_MODEL);
+			PrecacheModel(DUCK_MODEL);
+			PrecacheSound("ambient/bumper_car_quack1.wav");
+			PrecacheSound("ambient/bumper_car_quack2.wav");
+			PrecacheSound("ambient/bumper_car_quack3.wav");
+			PrecacheSound("ambient/bumper_car_quack4.wav");
+			PrecacheSound("ambient/bumper_car_quack5.wav");
+			PrecacheSound("ambient/bumper_car_quack9.wav");
+			PrecacheSound("ambient/bumper_car_quack11.wav");
+		}
+	}
+}
+
+public void OnMapEnd()
+{
+}
+
+/******************************************************************
+
+Player Connect/Disconnect & Round End
+
+******************************************************************/
+
+public void OnClientPutInServer(int client)
+{
+	// Neo mode: initialize arrays
+	ClearNeoEffects(client);
+	g_fNeoBaseSpeed[client] = 0.0;
+	g_fNeoLastAttackTime[client] = 0.0;
+	for(int i = 1; i <= MaxClients; i++)
+		g_iNeoEngineerSentry[i] = -1;
+
+	if(cvarEnabled.BoolValue)
+	{
+		ResetVariables(client);
+		SDKHook(client, SDKHook_OnTakeDamage, OnTakeDamage);
+		SDKHook(client, SDKHook_OnTakeDamagePost, OnTakeDamagePost);
+		SDKHook(client, SDKHook_PreThink, OnPreThink);
+		SDKHook(client, SDKHook_WeaponSwitch, OnWeaponSwitch);
+	}
+}
+
+public void OnClientDisconnect(int client)
+{
+	ClearNeoEffects(client);
+
+	if(cvarEnabled.BoolValue)
+	{
+		ResetVariables(client);
+		SDKUnhook(client, SDKHook_OnTakeDamage, OnTakeDamage);
+		SDKUnhook(client, SDKHook_OnTakeDamagePost, OnTakeDamagePost);
+		SDKUnhook(client, SDKHook_PreThink, OnPreThink);
+		SDKUnhook(client, SDKHook_WeaponSwitch, OnWeaponSwitch);
+	}
+}
+
+public Action OnRoundEnd(Handle event, const char[] name, bool dontBroadcast)
+{
+	if(cvarEnabled.BoolValue)
+	{
+		for(int client = 1; client <= MaxClients; client++)
+		{
+			ResetVariables(client);
+		}
+	}
+	return Plugin_Continue;
+}
+
+/******************************************************************
+
+Gameplay: Event-Specific
+
+******************************************************************/
+
+public void TF2_OnConditionAdded(int client, TFCond condition)
+{
+	if(!cvarEnabled.BoolValue)
+	{
+		return;
+	}
+
+	int weapon = IsValidClient(client) ? GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon") : -1;
+	int index = IsValidEntity(weapon) ? GetEntProp(weapon, Prop_Send, "m_iItemDefinitionIndex") : -1;
+
+	if(condition == TFCond_Zoomed && index == 402)  //Bazaar Bargain
+	{
+		chargeBegin[client] = GetGameTime();
+		CreateTimer(0.0, Timer_BazaarCharge, GetClientUserId(client), TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
+	}
+
+	if(condition == TFCond_Taunting && (index == 159 || index == 433) && !vshRunning && !ff2Running && !hiddenRunning)  //Dalokohs Bar, Fishcake
+	{
+		CreateTimer(1.0, Timer_DalokohX10, GetClientUserId(client), TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
+	}
+
+	if(aprilFools && condition == TFCond_Charging && index == 327) // April Fools 2017: DEMOTRUCK TIME (Claidheamohmor)
+	{
+		// DEMOTRUCK
+		SetVariantString(TF2_GetClientTeam(client) == TFTeam_Red ? TRUCK_RED_MODEL : TRUCK_BLU_MODEL);
+		AcceptEntityInput(client, "SetCustomModel");
+		SetEntProp(client, Prop_Send, "m_bUseClassAnimations", 1);
+
+		// Third-person view (thanks to DarthNinja: https://forums.alliedmods.net/showthread.php?p=1694178)
+		SetVariantInt(1);
+		AcceptEntityInput(client, "SetForcedTauntCam");
+	}
+}
+
+public void TF2_OnConditionRemoved(int client, TFCond condition)
+{
+	if(cvarEnabled.BoolValue)
+	{
+		int weapon = IsValidClient(client) ? GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon") : -1;
+		int index = IsValidEntity(weapon) ? GetEntProp(weapon, Prop_Send, "m_iItemDefinitionIndex") : -1;
+
+		if(condition == TFCond_Zoomed && chargeBegin[client])
+		{
+			chargeBegin[client] = 0.0;
+		}
+
+		if(condition == TFCond_Taunting && dalokohsSeconds[client])
+		{
+			dalokohsSeconds[client] = 0;
+		}
+
+		if(aprilFools && condition == TFCond_Charging && index == 327) // Claidheamohmor
+		{
+			// Reset model
+			SetVariantString("");
+			AcceptEntityInput(client, "SetCustomModel");
+
+			// First-person view (thanks to DarthNinja: https://forums.alliedmods.net/showthread.php?p=1694178)
+			SetVariantInt(0);
+			AcceptEntityInput(client, "SetForcedTauntCam");
+		}
+	}
+}
+
+public Action Timer_BazaarCharge(Handle hTimer, any userid)
+{
+	int client = GetClientOfUserId(userid);
+
+	if(!IsValidClient(client) || !IsPlayerAlive(client) || !TF2_IsPlayerInCondition(client, TFCond_Zoomed))
+	{
+		return Plugin_Stop;
+	}
+
+	int weapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+	if(!IsValidEntity(weapon))
+	{
+		return Plugin_Stop;
+	}
+
+	int index = GetEntProp(weapon, Prop_Send, "m_iItemDefinitionIndex");
+	if(index != 402)  //Bazaar Bargain
+	{
+		return Plugin_Stop;
+	}
+
+	int heads = GetEntProp(client, Prop_Send, "m_iDecapitations");
+	if(heads > sizeof(g_fBazaarRates) - 1)
+	{
+		heads = sizeof(g_fBazaarRates) - 1;
+	}
+
+	float charge = 150 * (GetGameTime() - chargeBegin[client]) / g_fBazaarRates[heads];
+	if(charge > 150)
+	{
+		charge = 150.0;
+	}
+
+	SetEntPropFloat(weapon, Prop_Send, "m_flChargedDamage", charge);
+	return Plugin_Continue;
+}
+
+public Action Timer_DalokohX10(Handle timer, any userid)
+{
+	int client = GetClientOfUserId(userid);
+	if(!IsValidClient(client) || !IsPlayerAlive(client) || !TF2_IsPlayerInCondition(client, TFCond_Taunting))
+	{
+		dalokohsTimer[client] = 0.0;
+		return Plugin_Stop;
+	}
+
+	int weapon = GetPlayerWeaponSlot(client, TFWeaponSlot_Secondary);
+	if(!IsValidEntity(weapon))
+	{
+		return Plugin_Stop;
+	}
+
+	int index = GetEntProp(weapon, Prop_Send, "m_iItemDefinitionIndex");
+	if(index != 159 && index != 433)  //Dalokohs Bar, Fishcake
+	{
+		return Plugin_Stop;
+	}
+
+	weapon = GetPlayerWeaponSlot(client, TFWeaponSlot_Melee);
+	if(!IsValidEntity(weapon))
+	{
+		return Plugin_Stop;
+	}
+
+	index = GetEntProp(weapon, Prop_Send, "m_iItemDefinitionIndex");
+
+	int health = GetClientHealth(client);
+	int newHealth, maxHealth;
+	if(index == 310)  //Warrior's Spirit
+	{
+		maxHealth = DALOKOH_MAXHEALTH - 200;  //Warrior's Spirit subtracts 200 health
+	}
+	else
+	{
+		maxHealth = DALOKOH_MAXHEALTH;
+	}
+
+	dalokohsSeconds[client]++;
+	if(dalokohsSeconds[client] == 1)
+	{
+		if(!dalokohs[client])
+		{
+			dalokohs[client] = maxHealth;
+			SDKHook(client, SDKHook_GetMaxHealth, OnGetMaxHealth);
+		}
+		dalokohsTimer[client] = GetEngineTime() + 30.0;
+		//TF2Attrib_SetByName(secondary, "hidden maxhealth non buffed", float(DALOKOH_MAXHEALTH - 300));  //Disabled due to Invasion crashes
+	}
+	else if(dalokohsSeconds[client] == 4)
+	{
+		newHealth = health + DALOKOH_LASTHEALTH;
+		if(newHealth > maxHealth)
+		{
+			newHealth = maxHealth;
+		}
+		TF2_SetHealth(client, newHealth);
+	}
+
+	if(health < DALOKOH_MAXHEALTH && dalokohsSeconds[client] >= 1 && dalokohsSeconds[client] <= 3)
+	{
+		newHealth = dalokohsSeconds[client] == 3 ? health + DALOKOH_HEALTHPERSEC : health + DALOKOH_HEALTHPERSEC - 50;
+		if(newHealth > maxHealth)
+		{
+			newHealth = maxHealth;
+		}
+		TF2_SetHealth(client, newHealth);
+	}
+	return Plugin_Continue;
+}
+
+public void OnGameFrame()
+{
+	for(int client = 1; client <= MaxClients; client++)
+	{
+		if(!IsValidClient(client) || !IsPlayerAlive(client))
+		{
+			continue;
+		}
+
+		if(takesHeads[client])
+		{
+			int heads = GetEntProp(client, Prop_Send, "m_iDecapitations");
+			/*if(heads > cvarHeadCap.IntValue)
+			{
+				heads = cvarHeadCap.IntValue;
+			}
+
+			if(heads > 4)
+			{
+				float speed = GetEntPropFloat(client, Prop_Data, "m_flMaxspeed");
+				if(heads != headsTaken[client] && !TF2_IsPlayerInCondition(client, TFCond_Charging))  //Don't change the speed if they're charging
+				{
+					speed += heads * 22.4;  //Speed increases by 22.4 each head
+					if(speed > 520.0)  //520 is the max speed: don't go above it :P
+					{
+						speed = 520.0;
+					}
+
+					headsTaken[client] = heads;
+					PrintToChatAll("[TF2x10] New speed: %f", speed);
+				}
+				SetEntPropFloat(client, Prop_Data, "m_flMaxspeed", speed);
+			}*/
+
+			if(cvarHeadScaling.BoolValue)
+			{
+				float fPlayerHeadScale = 1.0 + heads / 4.0;
+				if(fPlayerHeadScale <= (aprilFools ? 9999.0 : cvarHeadScalingCap.FloatValue))  //April Fool's 2015: Heads keep getting bigger!
+				{
+					SetEntPropFloat(client, Prop_Send, "m_flHeadScale", fPlayerHeadScale);
+				}
+				else
+				{
+					SetEntPropFloat(client, Prop_Send, "m_flHeadScale", cvarHeadScalingCap.FloatValue);
+				}
+			}
+		}
+	}
+
+	// === Neo mode per-frame effects ===
+	if(cvarEnabled.IntValue == 2)
+	{
+		static int neoFrameSkip;
+		neoFrameSkip++;
+
+		for(int client = 1; client <= MaxClients; client++)
+		{
+			if(!IsValidClient(client) || !IsPlayerAlive(client) || ShouldDisableWeapons(client))
+				continue;
+
+			int effects = g_iNeoActiveEffects[client];
+			if(effects == 0)
+				continue;
+
+			// Adrenaline: speed scales with missing HP (up to 30%)
+			if(effects & NEO_ADRENALINE)
+			{
+				int maxHealth = GetEntProp(client, Prop_Data, "m_iMaxHealth");
+				int currentHealth = GetClientHealth(client);
+				float missingRatio = 1.0 - float(currentHealth) / float(maxHealth);
+				if(g_fNeoBaseSpeed[client] == 0.0)
+					g_fNeoBaseSpeed[client] = GetEntPropFloat(client, Prop_Data, "m_flMaxspeed");
+				float speed = g_fNeoBaseSpeed[client] * (1.0 + missingRatio * 0.3);
+				SetEntPropFloat(client, Prop_Data, "m_flMaxspeed", speed);
+			}
+
+			// Sentry leech: +1 HP/sec per owned sentry (throttled to ~1Hz)
+			if((effects & NEO_SENTRY_LEECH) && neoFrameSkip % 60 == client)
+			{
+				if(g_iNeoEngineerSentry[client] < 0)
+				{
+					int sentry = -1;
+					while((sentry = FindEntityByClassname(sentry, "obj_sentrygun")) != -1)
+					{
+						if(GetEntPropEnt(sentry, Prop_Send, "m_hBuilder") == client)
+							g_iNeoEngineerSentry[client] = sentry;
+					}
+				}
+
+				if(g_iNeoEngineerSentry[client] != -1 && IsValidEntity(g_iNeoEngineerSentry[client]))
+				{
+					int health = GetClientHealth(client);
+					int maxHealth = GetEntProp(client, Prop_Data, "m_iMaxHealth");
+					if(health < maxHealth)
+						SetEntityHealth(client, health + 1 < maxHealth ? health + 1 : maxHealth);
+				}
+			}
+
+			// Silent decloak (Invis Watch): decloak near enemies = brief stun + speed
+			int defIndex = g_iNeoActiveDefIndex[client];
+			if(defIndex == 30 || defIndex == 59 || defIndex == 60 || defIndex == 61 || defIndex == 297 || defIndex == 161 || defIndex == 163 || defIndex == 55)
+			{
+				bool isCloaked = TF2_IsPlayerInCondition(client, TFCond_Cloaked);
+				if(!isCloaked && g_bNeoWasCloakedPrev[client])
+				{
+					TF2_AddCondition(client, TFCond_SpeedBuffAlly, 2.0);
+					float pos[3];
+					GetClientAbsOrigin(client, pos);
+					for(int i = 1; i <= MaxClients; i++)
+					{
+						if(i == client || !IsValidClient(i) || !IsPlayerAlive(i) || GetClientTeam(i) == GetClientTeam(client))
+							continue;
+						float targPos[3];
+						GetClientAbsOrigin(i, targPos);
+						if(GetVectorDistance(pos, targPos) <= 200.0)
+							TF2_StunPlayer(i, 0.5, 0.0, TF_STUNFLAG_BONKSTUCK | TF_STUNFLAG_NOSOUNDOREFFECT, client);
+					}
+				}
+				g_bNeoWasCloakedPrev[client] = isCloaked;
+			}
+
+			// Cloak scavenger (L'Etranger): +25% cloak from ammo packs
+			if(defIndex == 224 || defIndex == 356 || defIndex == 574)
+			{
+				float cloakMeter = GetEntPropFloat(client, Prop_Send, "m_flCloakMeter");
+				float prevCloak = g_fNeoPrevCloakMeter[client];
+				if(cloakMeter > prevCloak + 1.0)
+				{
+					float maxCloak = 100.0;
+					float bonus = (cloakMeter - prevCloak) * 0.25;
+					if(cloakMeter + bonus <= maxCloak)
+						SetEntPropFloat(client, Prop_Send, "m_flCloakMeter", cloakMeter + bonus);
+				}
+				g_fNeoPrevCloakMeter[client] = cloakMeter;
+			}
+		}
+	}
+}
+
+public Action OnPlayerRunCmd(int client, int &buttons, int &impulse, float vel[3], float angles[3], int &weapon)
+{
+	if(!cvarEnabled.BoolValue || !IsValidClient(client) || !IsPlayerAlive(client))
+	{
+		return Plugin_Continue;
+	}
+
+	int activeWep = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+	int index = IsValidEntity(activeWep) ? GetEntProp(activeWep, Prop_Send, "m_iItemDefinitionIndex") : -1;
+
+	if(buttons & IN_ATTACK && index == 1098)  //Classic
+	{
+		chargingClassic[client] = true;
+	}
+	else
+	{
+		chargingClassic[client] = false;
+	}
+
+	if(index == 307)  //Ullapool Caber
+	{
+		int detonated = GetEntProp(activeWep, Prop_Send, "m_iDetonated");
+		if(!detonated)
+		{
+			SetHudTextParams(0.0, 0.0, 0.5, 255, 255, 255, 255, 0, 0.1, 0.1, 0.2);
+			ShowSyncHudText(client, hudText, "Cabers: %i", cabers[client]);
+		}
+
+		if(cabers[client] > 1 && detonated == 1)
+		{
+			SetEntProp(activeWep, Prop_Send, "m_iDetonated", 0);
+			cabers[client]--;
+		}
+	}
+
+	else if(index == 19 || index == 206 || index == 1007) //Grenade Launcher, Strange Grenade Launcher, Festive Grenade Launcher
+	{
+		if(GetEntProp(activeWep, Prop_Send, "m_iClip1") >= 10)
+		{
+			buttons &= ~IN_ATTACK;
+		}
+	}
+
+	if(hasManmelter[client])
+	{
+		int crits = GetEntProp(client, Prop_Send, "m_iRevengeCrits");
+		if(crits > revengeCrits[client])
+		{
+			int newCrits = ((crits - revengeCrits[client]) * cvarCritsManmelter.IntValue) + crits - 1;
+			SetEntProp(client, Prop_Send, "m_iRevengeCrits", newCrits);
+
+			revengeCrits[client] = newCrits;
+		}
+		else
+		{
+			revengeCrits[client] = crits;
+		}
+	}
+
+	// === Neo mode explosive jump ===
+	if(cvarEnabled.IntValue == 2 && !ShouldDisableWeapons(client) && (buttons & IN_ATTACK))
+	{
+		int effects = g_iNeoActiveEffects[client];
+		if(effects & NEO_EXPLOSIVE_JUMP)
+		{
+			if(!g_bNeoExplosiveJumpPrevAttack[client])
+			{
+				g_bNeoExplosiveJumpPrevAttack[client] = true;
+				float clientVel[3];
+				GetEntPropVector(client, Prop_Data, "m_vecVelocity", clientVel);
+				clientVel[2] += 300.0;
+				TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, clientVel);
+				TF2_AddCondition(client, TFCond_Parachute, 0.5);
+			}
+		}
+		else
+		{
+			g_bNeoExplosiveJumpPrevAttack[client] = false;
+		}
+	}
+	else
+	{
+		if(!(buttons & IN_ATTACK))
+			g_bNeoExplosiveJumpPrevAttack[client] = false;
+	}
+
+	return Plugin_Continue;
+}
+
+public Action OnGetMaxHealth(int client, int &maxHealth)
+{
+	if(cvarEnabled.BoolValue)
+	{
+		if(dalokohs[client])
+		{
+			maxHealth = dalokohs[client];
+			return Plugin_Changed;
+		}
+
+		/*int heads = GetEntProp(client, Prop_Send, "m_iDecapitations");
+		if(heads > cvarHeadCap.IntValue)
+		{
+			heads = cvarHeadCap.IntValue;
+		}
+
+		if(heads > 4)
+		{
+			maxHealth = GetEntProp(client, Prop_Data, "m_iMaxHealth") + heads * 15;
+			return Plugin_Changed;
+		}*/
+	}
+	return Plugin_Continue;
+}
+
+public Action OnPlayerExtinguished(Handle event, const char[] name, bool dontBroadcast)
+{
+	if(cvarEnabled.BoolValue)
+	{
+		int healer = GetEventInt(event, "healer");  //NOTE: This IS the client index, unlike most events.  Not a typo!
+		if(IsValidClient(healer))
+		{
+			int weapon = GetEntPropEnt(healer, Prop_Send, "m_hActiveWeapon");
+			if(IsValidEntity(weapon))
+			{
+				char classname[64];
+				GetEdictClassname(weapon, classname, sizeof(classname));
+				if(StrEqual(classname, "tf_weapon_flamethrower") || StrEqual(classname, "tf_weapon_flaregun_revenge"))
+				{
+					int health = GetClientHealth(healer);
+					int newhealth = health + 180;  //TF2 already adds 20 by default
+					int max = GetEntProp(healer, Prop_Data, "m_iMaxHealth");
+					if(newhealth <= max)
+					{
+						SetEntityHealth(healer, newhealth);
+					}
+					else if(health <= max)
+					{
+						SetEntityHealth(healer, max);
+					}
+				}
+				/*else
+				{
+					char classname[64];
+					GetEdictClassname(weapon, classname, sizeof(classname));
+					if(StrEqual(classname, "tf_weapon_jar_milk") || StrEqual(classname, "tf_weapon_jar"))
+					{
+						SetEntProp(weapon, Prop_Data, "m_iClip2", GetEntProp(weapon, Prop_Data, "m_iClip2") + 2);
+						SetEntProp(healer, Prop_Data, "m_iAmmo", 1, _, GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType"));
+					}
+				}*/
+			}
+		}
+
+		// Neo mode: extinguish rally (Manmelter)
+		if(cvarEnabled.IntValue == 2)
+		{
+			int weapon = GetEntPropEnt(healer, Prop_Send, "m_hActiveWeapon");
+			if(IsValidEntity(weapon))
+			{
+				int defIndex = GetEntProp(weapon, Prop_Send, "m_iItemDefinitionIndex");
+				if(defIndex == 595 || defIndex == 653)
+					TF2_AddCondition(healer, TFCond_CritCola, 5.0);
+			}
+		}
+	}
+	return Plugin_Continue;
+}
+
+public Action OnPlayerHealed(Handle event, const char[] name, bool dontBroadcast)
+{
+	if(!cvarEnabled.BoolValue)
+	{
+		return Plugin_Continue;
+	}
+
+	int healer = GetClientOfUserId(GetEventInt(event, "healer"));
+	if(IsValidClient(healer))
+	{
+		int weapon = GetEntPropEnt(healer, Prop_Send, "m_hActiveWeapon");
+		if(weapon == GetPlayerWeaponSlot(healer, TFWeaponSlot_Melee))
+		{
+			amputatorHealing[healer] += GetEventInt(event, "amount");
+			if(amputatorHealing[healer] >= 49)  //From the TF2 wiki
+			{
+				amputatorHealing[healer] -= 49;
+				int medigun=GetPlayerWeaponSlot(healer, TFWeaponSlot_Secondary);
+				if(IsValidEntity(medigun))
+				{
+					char medigunClassname[64];
+					GetEdictClassname(medigun, medigunClassname, sizeof(medigunClassname));
+					if(StrEqual(medigunClassname, "tf_weapon_medigun"))
+					{
+						float uber = GetEntPropFloat(medigun, Prop_Send, "m_flChargeLevel");
+						if(uber + 0.1 < 1.0)
+						{
+							//TF2 already adds 1% per 49 damage, so add 9 to that to make it x10
+							SetEntPropFloat(medigun, Prop_Send, "m_flChargeLevel", uber + 0.09);
+						}
+						else if(uber < 1.0)
+						{
+							SetEntPropFloat(medigun, Prop_Send, "m_flChargeLevel", 1.0);
+						}
+					}
+				}
+			}
+		}
+	}
+	return Plugin_Continue;
+}
+
+public Action OnObjectDeflected(Handle event, const char[] name, bool dontBroadcast)
+{
+	#if defined _FF2_included
+	if(cvarEnabled.BoolValue && ff2Running && !GetEventInt(event, "weaponid"))  //We only want a weaponid of 0 (a client)
+	{
+		int client = GetClientOfUserId(GetEventInt(event, "ownerid"));
+		int boss = FF2_GetBossIndex(client);
+
+		int weapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+		int index = IsValidEntity(weapon) ? GetEntProp(weapon, Prop_Send, "m_iItemDefinitionIndex") : -1;
+
+		if(boss != -1 && (index == 40 || index == 1146)) //Backburner
+		{
+			float charge = FF2_GetBossCharge(boss, 0) + 63.0; //Work with FF2's deflect to set to 70 in total instead of 7
+			if(charge > 100.0)
+			{
+				FF2_SetBossCharge(boss, 0, 100.0);
+			}
+			else
+			{
+				FF2_SetBossCharge(boss, 0, charge);
+			}
+		}
+	}
+	#endif
+	return Plugin_Continue;
+}
+
+/**
+ * Event parameters:
+ * @param userid	Client userid
+ * @param object	See TFObjectType
+ * @param index		Entity index of the object built
+ */
+public Action OnObjectBuilt(Event event, const char[] name, bool dontBroadcast)
+{
+	if(cvarEnabled.BoolValue)
+	{
+		int index = event.GetInt("index");
+		SDKHook(index, SDKHook_OnTakeDamage, OnTakeDamage_Object);
+
+		int client = GetClientOfUserId(event.GetInt("userid"));
+		TFObjectType building = view_as<TFObjectType>(event.GetInt("object"));
+		if(building == TFObject_Teleporter && GetEntProp(GetPlayerWeaponSlot(client, TFWeaponSlot_Melee), Prop_Send, "m_iItemDefinitionIndex") == 589) // Eureka Effect
+		{
+			SetEntProp(client, Prop_Data, "m_iAmmo", 200, 4, 3); // Building teleporters gives you max metal again!
+		}
+
+		if(aprilFools)
+		{
+			// Thanks to Pelipoika: https://forums.alliedmods.net/showthread.php?p=2031493
+			if(building == TFObject_Dispenser)
+			{
+				SetEntPropFloat(index, Prop_Send, "m_flModelScale", 0.316);
+			}
+			else if(building == TFObject_Sentry)
+			{
+				if(GetEntProp(index, Prop_Send, "m_bMiniBuilding"))
+				{
+					SetEntPropFloat(index, Prop_Send, "m_flModelScale", 2.5);
+				}
+				else
+				{
+					SetEntPropFloat(index, Prop_Send, "m_flModelScale", 0.316);
+				}
+			}
+		}
+	}
+	return Plugin_Continue;
+}
+
+public Action OnObjectCarry(Event event, const char[] name, bool dontBroadcast)
+{
+	// Thanks to Pelipoika: https://forums.alliedmods.net/showthread.php?p=2031493
+	if(cvarEnabled.BoolValue && aprilFools)
+	{
+		int index = event.GetInt("index");
+		TFObjectType building = view_as<TFObjectType>(event.GetInt("object"));
+		if(building == TFObject_Dispenser)
+		{
+			SetEntPropFloat(index, Prop_Send, "m_flModelScale", 1.0);
+		}
+		else if(building == TFObject_Sentry)
+		{
+			if(GetEntProp(index, Prop_Send, "m_bMiniBuilding"))
+			{
+				SetEntPropFloat(index, Prop_Send, "m_flModelScale", 1.0);
+			}
+			else
+			{
+				SetEntPropFloat(index, Prop_Send, "m_flModelScale", 1.0);
+			}
+		}
+	}
+	return Plugin_Continue;
+}
+
+public Action OnObjectDrop(Event event, const char[] name, bool dontBroadcast)
+{
+	// Thanks to Pelipoika: https://forums.alliedmods.net/showthread.php?p=2031493
+	if(cvarEnabled.BoolValue && aprilFools)
+	{
+		int index = event.GetInt("index");
+		TFObjectType building = view_as<TFObjectType>(event.GetInt("object"));
+		if(building == TFObject_Dispenser)
+		{
+			SetEntPropFloat(index, Prop_Send, "m_flModelScale", 0.316);
+		}
+		else if(building == TFObject_Sentry)
+		{
+			if(GetEntProp(index, Prop_Send, "m_bMiniBuilding"))
+			{
+				SetEntPropFloat(index, Prop_Send, "m_flModelScale", 2.5);
+			}
+			else
+			{
+				SetEntPropFloat(index, Prop_Send, "m_flModelScale", 0.316);
+			}
+		}
+
+		// Neo mode: cache sentry for sentry leech
+		if(cvarEnabled.IntValue == 2 && building == TFObject_Sentry)
+		{
+			int client = GetClientOfUserId(event.GetInt("userid"));
+			if(IsValidClient(client))
+				g_iNeoEngineerSentry[client] = index;
+		}
+	}
+	return Plugin_Continue;
+}
+
+public Action OnObjectDestroyed(Handle event, const char[] name, bool dontBroadcast)
+{
+	if(!cvarEnabled.BoolValue)
+	{
+		return Plugin_Continue;
+	}
+
+	int attacker = GetClientOfUserId(GetEventInt(event, "attacker"));
+	int primary = GetPlayerWeaponSlot(attacker, TFWeaponSlot_Primary);
+	int critsDiamondback = cvarCritsDiamondback.IntValue;
+
+	if(IsValidClient(attacker) && IsPlayerAlive(attacker) && critsDiamondback > 0 && IsValidEntity(primary) && WeaponHasAttribute(attacker, primary, "sapper kills collect crits"))
+	{
+		char weapon[32];
+		GetEventString(event, "weapon", weapon, sizeof(weapon));
+
+		if(StrContains(weapon, "sapper") != -1 || StrEqual(weapon, "recorder"))
+		{
+			SetEntProp(attacker, Prop_Send, "m_iRevengeCrits", GetEntProp(attacker, Prop_Send, "m_iRevengeCrits") + critsDiamondback - 1);
+		}
+	}
+
+	SDKUnhook(GetEventInt(event, "index"), SDKHook_OnTakeDamage, OnTakeDamage_Object);
+	return Plugin_Continue;
+}
+
+public Action OnObjectRemoved(Handle event, const char[] name, bool dontBroadcast)
+{
+	if(!cvarEnabled.BoolValue)
+	{
+		return Plugin_Continue;
+	}
+
+	int client = GetClientOfUserId(GetEventInt(event, "userid"));
+	if(!IsValidClient(client))
+	{
+		return Plugin_Continue;
+	}
+
+	int weapon = GetPlayerWeaponSlot(client, TFWeaponSlot_Primary);
+	if(!IsValidEntity(weapon))
+	{
+		return Plugin_Continue;
+	}
+
+	if(WeaponHasAttribute(client, weapon, "mod sentry killed revenge") && view_as<TFObjectType>(GetEventInt(event, "objecttype")) == TFObject_Sentry)
+	{
+		int crits = GetEntProp(client, Prop_Send, "m_iRevengeCrits") + buildingsDestroyed[client];
+		SetEntProp(client, Prop_Send, "m_iRevengeCrits", crits);
+		buildingsDestroyed[client] = 0;
+	}
+
+	SDKUnhook(GetEventInt(event, "index"), SDKHook_OnTakeDamage, OnTakeDamage_Object);
+	return Plugin_Continue;
+}
+
+public Action OnPickupMVMCurrency(Handle event, const char[] name, bool dontBroadcast)
+{
+	int client = GetEventInt(event, "player");
+	int dollars = GetEventInt(event, "currency");
+	int newDollahs = 0;
+
+	if(GetEntProp(client, Prop_Send, "m_nCurrency") < MAX_CURRENCY)
+	{
+		newDollahs = RoundToNearest(float(dollars) / 3.16);
+	}
+
+	SetEventInt(event, "currency", newDollahs);
+
+	return Plugin_Continue;
+}
+
+public Action TF2_OnIsHolidayActive(TFHoliday holiday, bool &result)
+{
+	if(holiday == TFHoliday_AprilFools && !aprilFoolsOverride)
+	{
+		aprilFools = result;
+		if(result)
+		{
+			PrecacheModel(DUMPTRUCK_MODEL);
+			PrecacheModel(DUMPTRUCK_EMPTY_MODEL);
+			PrecacheModel(TRUCK_RED_MODEL);
+			PrecacheModel(TRUCK_BLU_MODEL);
+			PrecacheModel(DUCK_MODEL);
+			PrecacheSound("ambient/bumper_car_quack1.wav");
+			PrecacheSound("ambient/bumper_car_quack2.wav");
+			PrecacheSound("ambient/bumper_car_quack3.wav");
+			PrecacheSound("ambient/bumper_car_quack4.wav");
+			PrecacheSound("ambient/bumper_car_quack5.wav");
+			PrecacheSound("ambient/bumper_car_quack9.wav");
+			PrecacheSound("ambient/bumper_car_quack11.wav");
+		}
+	}
+
+	return Plugin_Continue;
+}
+
+/******************************************************************
+
+Gameplay: Damage and Death Only
+
+******************************************************************/
+
+public Action OnPlayerDeath(Handle event, const char[] name, bool dontBroadcast)
+{
+	if(!cvarEnabled.BoolValue)
+	{
+		return Plugin_Continue;
+	}
+
+	int client = GetClientOfUserId(GetEventInt(event, "userid"));
+	int attacker = GetClientOfUserId(GetEventInt(event, "attacker"));
+	int inflictor_entindex = GetEventInt(event, "inflictor_entindex");
+	int activewep = IsValidClient(attacker) ? GetEntPropEnt(attacker, Prop_Send, "m_hActiveWeapon") : -1;
+	int weaponid = IsValidEntity(activewep) ? GetEntProp(activewep, Prop_Send, "m_iItemDefinitionIndex") : -1;
+	int customKill = GetEventInt(event, "customkill");
+
+	if(aprilFools && weaponid == 356)  //April Fool's 2015: Kunai gives health on ALL kills
+	{
+		TF2_SetHealth(attacker, KUNAI_DAMAGE);
+	}
+	else if(weaponid == 317)
+	{
+		TF2_SpawnMedipack(client);
+	}
+	else if(customKill == TF_CUSTOM_BACKSTAB && !hiddenRunning)
+	{
+		if(weaponid == 356)
+		{
+			TF2_SetHealth(attacker, KUNAI_DAMAGE);
+		}
+		if(IsValidClient(attacker))
+		{
+			int primWep = GetPlayerWeaponSlot(attacker, TFWeaponSlot_Primary);
+			if(IsValidEntity(primWep) && WeaponHasAttribute(attacker, primWep, "sapper kills collect crits"))
+			{
+				int crits = GetEntProp(attacker, Prop_Send, "m_iRevengeCrits") + cvarCritsDiamondback.IntValue - 1;
+				SetEntProp(attacker, Prop_Send, "m_iRevengeCrits", crits);
+			}
+		}
+	}
+
+	if(GetEventInt(event, "death_flags") & TF_DEATHFLAG_DEADRINGER)
+	{
+		TF2_AddCondition(client, TFCond_SpeedBuffAlly, cvarFeignDeathDuration.IntValue * 10.0);  //Speed boost * 10
+	}
+
+	if(IsValidEntity(inflictor_entindex))
+	{
+		char inflictorName[32];
+		GetEdictClassname(inflictor_entindex, inflictorName, sizeof(inflictorName));
+
+		if(StrContains(inflictorName, "sentry") >= 0)
+		{
+			int critsFJ = cvarCritsFJ.IntValue;
+
+			if(GetEventInt(event, "assister") < 1)
+			{
+				buildingsDestroyed[attacker] = buildingsDestroyed[attacker] + critsFJ - 2;
+			}
+			else
+			{
+				buildingsDestroyed[attacker] = buildingsDestroyed[attacker] + RoundToNearest(critsFJ / 2.0) - 2;
+			}
+		}
+	}
+
+	if(dalokohs[client])
+	{
+		SDKUnhook(client, SDKHook_GetMaxHealth, OnGetMaxHealth);
+		if(dalokohsTimer[client])
+		{
+			dalokohsTimer[client] = 0.0;
+		}
+	}
+
+	if(takesHeads[client])
+	{
+		SDKUnhook(client, SDKHook_GetMaxHealth, OnGetMaxHealth);
+	}
+
+	if(aprilFools)
+	{
+		for(int i; i < GetRandomInt(10, 20); i++)
+		{
+			// Thanks to 404UserNotFound for portions of the following code
+			// https://github.com/404UserNotFound/SpawnBonusDucks/blob/master/scripting/tf2_duckspawn.sp
+			float position[3];
+			GetClientAbsOrigin(client, position);
+			position[0] += GetRandomFloat(-5.0, 5.0);
+			position[1] += GetRandomFloat(-5.0, 5.0);
+			position[2] += GetRandomFloat(-5.0, 5.0);
+
+			float velocity[3];
+			velocity[0] = GetRandomFloat(-50.0, 50.0);
+			velocity[1] = GetRandomFloat(-50.0, 50.0);
+			velocity[2] = GetRandomFloat(-50.0, 50.0);
+
+			int duck = CreateEntityByName("tf_bonus_duck_pickup");
+			SetEntityModel(duck, DUCK_MODEL);
+			if(!GetRandomInt(0, 10)) // Quackston?
+			{
+				SetEntProp(duck, Prop_Send, "m_bSpecial", 1);
+				SetEntProp(duck, Prop_Send, "m_nSkin", 21);
+			}
+			else
+			{
+				TFClassType class = TF2_GetPlayerClass(client);
+				TFTeam team = TF2_GetClientTeam(client);
+				switch(class)
+				{
+					case TFClass_Scout:
+					{
+						if(team == TFTeam_Red)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 3);
+						}
+						else if(team == TFTeam_Blue)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 12);
+						}
+					}
+					case TFClass_Sniper:
+					{
+						if(team == TFTeam_Red)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 4);
+						}
+						else if(team == TFTeam_Blue)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 13);
+						}
+					}
+					case TFClass_Soldier:
+					{
+						if(team == TFTeam_Red)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 5);
+						}
+						else if(team == TFTeam_Blue)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 14);
+						}
+					}
+					case TFClass_DemoMan:
+					{
+						if(team == TFTeam_Red)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 6);
+						}
+						else if(team == TFTeam_Blue)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 15);
+						}
+					}
+					case TFClass_Medic:
+					{
+						if(team == TFTeam_Red)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 7);
+						}
+						else if(team == TFTeam_Blue)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 16);
+						}
+					}
+					case TFClass_Heavy:
+					{
+						if(team == TFTeam_Red)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 8);
+						}
+						else if(team == TFTeam_Blue)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 17);
+						}
+					}
+					case TFClass_Pyro:
+					{
+						if(team == TFTeam_Red)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 9);
+						}
+						else if(team == TFTeam_Blue)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 18);
+						}
+					}
+					case TFClass_Spy:
+					{
+						if(team == TFTeam_Red)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 10);
+						}
+						else if(team == TFTeam_Blue)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 19);
+						}
+					}
+					case TFClass_Engineer:
+					{
+						if(team == TFTeam_Red)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 11);
+						}
+						else if(team == TFTeam_Blue)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 20);
+						}
+					}
+				}
+			}
+			DispatchKeyValue(duck, "OnPlayerTouch", "!self,Kill,,0,-1");
+			DispatchSpawn(duck);
+			TeleportEntity(duck, position, NULL_VECTOR, velocity);
+			CreateTimer(30.0, Timer_RemoveDuck, EntIndexToEntRef(duck), TIMER_FLAG_NO_MAPCHANGE);
+
+			int random = GetRandomInt(1, 7);
+			if(random == 6)
+			{
+				random = 9;
+			}
+			else if(random == 7)
+			{
+				random = 11;
+			}
+
+			char sound[PLATFORM_MAX_PATH];
+			Format(sound, sizeof(sound), "ambient/bumper_car_quack%i.wav", random);
+			EmitSoundToAll(sound, duck, _, _, _, _, _, _, position, _, true);
+		}
+	}
+
+	ResetVariables(client);
+	return Plugin_Continue;
+}
+
+int _medPackTraceFilteredEnt = 0;
+
+void TF2_SpawnMedipack(int client, bool cmd = false)
+{
+	float fPlayerPosition[3];
+	GetClientAbsOrigin(client, fPlayerPosition);
+
+	if(fPlayerPosition[0] != 0.0 && fPlayerPosition[1] != 0.0 && fPlayerPosition[2] != 0.0)
+	{
+		fPlayerPosition[2] += 4;
+
+		if(cmd)
+		{
+			float PlayerPosEx[3], PlayerAngle[3], PlayerPosAway[3];
+			GetClientEyeAngles(client, PlayerAngle);
+			PlayerPosEx[0] = Cosine((PlayerAngle[1]/180)*FLOAT_PI);
+			PlayerPosEx[1] = Sine((PlayerAngle[1]/180)*FLOAT_PI);
+			PlayerPosEx[2] = 0.0;
+			ScaleVector(PlayerPosEx, 75.0);
+			AddVectors(fPlayerPosition, PlayerPosEx, PlayerPosAway);
+
+			_medPackTraceFilteredEnt = client;
+			Handle TraceEx = TR_TraceRayFilterEx(fPlayerPosition, PlayerPosAway, MASK_SOLID, RayType_EndPoint, MedipackTraceFilter);
+			TR_GetEndPosition(fPlayerPosition, TraceEx);
+			TraceEx.Close();
+		}
+
+		float Direction[3];
+		Direction[0] = fPlayerPosition[0];
+		Direction[1] = fPlayerPosition[1];
+		Direction[2] = fPlayerPosition[2]-1024;
+		Handle Trace = TR_TraceRayFilterEx(fPlayerPosition, Direction, MASK_SOLID, RayType_EndPoint, MedipackTraceFilter);
+
+		float MediPos[3];
+		TR_GetEndPosition(MediPos, Trace);
+		Trace.Close();
+		MediPos[2] += 4;
+
+		int Medipack = CreateEntityByName("item_healthkit_full");
+		DispatchKeyValue(Medipack, "OnPlayerTouch", "!self,Kill,,0,-1");
+		if(DispatchSpawn(Medipack))
+		{
+			SetEntProp(Medipack, Prop_Send, "m_iTeamNum", 0, 4);
+			TeleportEntity(Medipack, MediPos, NULL_VECTOR, NULL_VECTOR);
+			EmitSoundToAll("items/spawn_item.wav", Medipack, _, _, _, 0.75);
+		}
+	}
+}
+
+public bool MedipackTraceFilter(int ent, int contentMask)
+{
+	return (ent != _medPackTraceFilteredEnt);
+}
+
+public void OnPreThink(int client)
+{
+	if(chargingClassic[client])
+	{
+		int weapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+		int index = IsValidEntity(weapon) ? GetEntProp(weapon, Prop_Send, "m_iItemDefinitionIndex") : -1;
+
+		if(IsValidEntity(weapon) && index == 1098)  //Classic
+		{
+			SetEntPropFloat(weapon, Prop_Send, "m_flChargedDamage", GetEntPropFloat(weapon, Prop_Send, "m_flChargedDamage") * 10);
+		}
+	}
+
+	if(dalokohsTimer[client] && GetEngineTime() >= dalokohsTimer[client])
+	{
+		dalokohs[client] = 0;
+		dalokohsTimer[client] = 0.0;
+		SDKUnhook(client, SDKHook_GetMaxHealth, OnGetMaxHealth);
+	}
+}
+
+public Action OnTakeDamage(int client, int &attacker, int &inflictor, float &damage, int &damagetype, int &weapon, float damageForce[3], float damagePosition[3], int damagecustom)
+{
+	if(!cvarEnabled.BoolValue)
+	{
+		return Plugin_Continue;
+	}
+
+	char classname[64];
+	if(!IsValidEntity(weapon) || !GetEdictClassname(weapon, classname, sizeof(classname)))
+	{
+		return Plugin_Continue;
+	}
+
+	if(damagecustom == TF_CUSTOM_BOOTS_STOMP)
+	{
+		damage *= 10;
+		return Plugin_Changed;
+	}
+	/*else if(damagecustom == TF_CUSTOM_CHARGE_IMPACT)
+	{
+		int heads = GetEntProp(client, Prop_Send, "m_iDecapitations");
+		if(heads > cvarHeadCap.IntValue)
+		{
+			heads = cvarHeadCap.IntValue;
+		}
+
+		if(heads > 4)
+		{
+			Address attribute = TF2Attrib_GetByName(client, "charge impact damage increased");
+			float damageIncrease = attribute ? TF2Attrib_GetValue(attribute) : 1.0;
+			damage = damageIncrease * (heads * 10 + 50);  //50 being the base damage of the shield and 10 the default increase in damage per head
+			PrintToChatAll("[TF2x10] Damage is %f", damage);
+			return Plugin_Changed;
+		}
+	}*/
+
+	if(StrEqual(classname, "tf_weapon_bat_fish") && damagecustom != TF_CUSTOM_BLEEDING &&
+		damagecustom != TF_CUSTOM_BURNING && damagecustom != TF_CUSTOM_BURNING_ARROW &&
+		damagecustom != TF_CUSTOM_BURNING_FLARE && attacker != client && IsPlayerAlive(client))
+	{
+		float ang[3];
+		GetClientEyeAngles(client, ang);
+		ang[1] = ang[1] + 120.0;
+
+		TeleportEntity(client, NULL_VECTOR, ang, NULL_VECTOR);
+	}
+
+	//Alien Isolation bonuses
+	bool validWeapon = !StrContains(classname, "tf_weapon", false);
+	if(validWeapon && GetEntProp(weapon, Prop_Send, "m_iItemDefinitionIndex") == 30474 &&
+		TF2Attrib_GetByDefIndex(client, 694) &&
+		TF2Attrib_GetByDefIndex(attacker, 695))
+	{
+		damage *= 10;
+		return Plugin_Changed;
+	}
+	else if(validWeapon && weapon == GetPlayerWeaponSlot(attacker, TFWeaponSlot_Melee) &&
+		TF2Attrib_GetByDefIndex(client, 696) &&
+		TF2Attrib_GetByDefIndex(attacker, 693))
+	{
+		damage *= 10;
+		return Plugin_Changed;
+	}
+
+	if(aprilFools)
+	{
+		for(int i; i < GetRandomInt(0, 3); i++)
+		{
+			// Thanks to 404UserNotFound for portions of the following code
+			// https://github.com/404UserNotFound/SpawnBonusDucks/blob/master/scripting/tf2_duckspawn.sp
+			float position[3];
+			position[0] = damagePosition[0] + GetRandomFloat(-5.0, 5.0);
+			position[1] = damagePosition[1] + GetRandomFloat(-5.0, 5.0);
+			position[2] = damagePosition[2] + GetRandomFloat(-5.0, 5.0);
+
+			float velocity[3];
+			velocity[0] = GetRandomFloat(-50.0, 50.0);
+			velocity[1] = GetRandomFloat(-50.0, 50.0);
+			velocity[2] = GetRandomFloat(-50.0, 50.0);
+
+			int duck = CreateEntityByName("tf_bonus_duck_pickup");
+			SetEntityModel(duck, DUCK_MODEL);
+			if(!GetRandomInt(0, 10)) // Quackston?
+			{
+				SetEntProp(duck, Prop_Send, "m_bSpecial", 1);
+				SetEntProp(duck, Prop_Send, "m_nSkin", 21);
+			}
+			else
+			{
+				TFClassType class = TF2_GetPlayerClass(client);
+				TFTeam team = TF2_GetClientTeam(client);
+				switch(class)
+				{
+					case TFClass_Scout:
+					{
+						if(team == TFTeam_Red)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 3);
+						}
+						else if(team == TFTeam_Blue)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 12);
+						}
+					}
+					case TFClass_Sniper:
+					{
+						if(team == TFTeam_Red)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 4);
+						}
+						else if(team == TFTeam_Blue)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 13);
+						}
+					}
+					case TFClass_Soldier:
+					{
+						if(team == TFTeam_Red)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 5);
+						}
+						else if(team == TFTeam_Blue)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 14);
+						}
+					}
+					case TFClass_DemoMan:
+					{
+						if(team == TFTeam_Red)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 6);
+						}
+						else if(team == TFTeam_Blue)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 15);
+						}
+					}
+					case TFClass_Medic:
+					{
+						if(team == TFTeam_Red)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 7);
+						}
+						else if(team == TFTeam_Blue)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 16);
+						}
+					}
+					case TFClass_Heavy:
+					{
+						if(team == TFTeam_Red)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 8);
+						}
+						else if(team == TFTeam_Blue)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 17);
+						}
+					}
+					case TFClass_Pyro:
+					{
+						if(team == TFTeam_Red)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 9);
+						}
+						else if(team == TFTeam_Blue)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 18);
+						}
+					}
+					case TFClass_Spy:
+					{
+						if(team == TFTeam_Red)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 10);
+						}
+						else if(team == TFTeam_Blue)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 19);
+						}
+					}
+					case TFClass_Engineer:
+					{
+						if(team == TFTeam_Red)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 11);
+						}
+						else if(team == TFTeam_Blue)
+						{
+							SetEntProp(duck, Prop_Send, "m_nSkin", 20);
+						}
+					}
+				}
+			}
+			DispatchKeyValue(duck, "OnPlayerTouch", "!self,Kill,,0,-1");
+			DispatchSpawn(duck);
+			TeleportEntity(duck, position, NULL_VECTOR, velocity);
+			CreateTimer(30.0, Timer_RemoveDuck, EntIndexToEntRef(duck), TIMER_FLAG_NO_MAPCHANGE);
+
+			int random = GetRandomInt(1, 7);
+			if(random == 6)
+			{
+				random = 9;
+			}
+			else if(random == 7)
+			{
+				random = 11;
+			}
+
+			char sound[PLATFORM_MAX_PATH];
+			Format(sound, sizeof(sound), "ambient/bumper_car_quack%i.wav", random);
+			EmitSoundToAll(sound, duck, _, _, _, _, _, _, position, _, true);
+		}
+	}
+
+	// === Neo mode effects ===
+	if(cvarEnabled.IntValue == 2 && IsValidClient(attacker) && attacker != client && !ShouldDisableWeapons(attacker))
+	{
+		int effects = g_iNeoActiveEffects[attacker];
+		float victimPos[3];
+		GetClientAbsOrigin(client, victimPos);
+
+		// Chain lightning: 50% damage to nearest enemy within 300u
+		if(effects & NEO_CHAIN_LIGHTNING)
+		{
+			int chainTarget = -1;
+			float bestDist = 300.0;
+			for(int i = 1; i <= MaxClients; i++)
+			{
+				if(i == client || i == attacker || !IsValidClient(i) || !IsPlayerAlive(i)
+				   || GetClientTeam(i) == GetClientTeam(attacker))
+					continue;
+				float targPos[3];
+				GetClientAbsOrigin(i, targPos);
+				float dist = GetVectorDistance(victimPos, targPos);
+				if(dist < bestDist)
+				{
+					bestDist = dist;
+					chainTarget = i;
+				}
+			}
+			if(chainTarget != -1)
+			{
+				float chainPos[3];
+				GetClientAbsOrigin(chainTarget, chainPos);
+				SDKHooks_TakeDamage(chainTarget, inflictor, attacker, damage * 0.5, damagetype, -1, NULL_VECTOR, chainPos, true);
+			}
+		}
+
+		// Shrapnel: 50% splash damage to enemies within 100u of victim
+		if(effects & NEO_SHRAPNEL)
+		{
+			for(int i = 1; i <= MaxClients; i++)
+			{
+				if(i == client || i == attacker || !IsValidClient(i) || !IsPlayerAlive(i)
+				   || GetClientTeam(i) == GetClientTeam(attacker))
+					continue;
+				float targPos[3];
+				GetClientAbsOrigin(i, targPos);
+				if(GetVectorDistance(victimPos, targPos) <= 100.0)
+					SDKHooks_TakeDamage(i, inflictor, attacker, damage * 0.5, damagetype, -1, NULL_VECTOR, targPos, true);
+			}
+		}
+
+		// Shared damage: 50% reflected to attacker
+		if((effects & NEO_SHARED_DAMAGE) && !g_bNeoProcessingSharedDamage[attacker])
+		{
+			g_bNeoProcessingSharedDamage[attacker] = true;
+			float attackerPos[3];
+			GetClientAbsOrigin(attacker, attackerPos);
+			SDKHooks_TakeDamage(attacker, attacker, attacker, damage * 0.5, damagetype, -1, NULL_VECTOR, attackerPos, true);
+			g_bNeoProcessingSharedDamage[attacker] = false;
+		}
+
+		// Berserker: +20% damage below 50% HP
+		if(effects & NEO_BERSERKER)
+		{
+			int maxHealth = GetEntProp(attacker, Prop_Data, "m_iMaxHealth");
+			if(GetClientHealth(attacker) < maxHealth / 2)
+			{
+				damage *= 1.2;
+				return Plugin_Changed;
+			}
+		}
+
+		// Ambush: next attack after 5s of not attacking deals +30% damage, consumed on first hit
+		if(effects & NEO_AMBUSH)
+		{
+			float gameTime = GetGameTime();
+			if(g_fNeoLastAttackTime[attacker] > 0.0 && (gameTime - g_fNeoLastAttackTime[attacker]) >= 5.0)
+			{
+				damage *= 1.3;
+				g_fNeoLastAttackTime[attacker] = gameTime; // consume the ambush
+				return Plugin_Changed;
+			}
+		}
+
+		// Track last attack time for ambush
+		g_fNeoLastAttackTime[attacker] = GetGameTime();
+	}
+
+	return Plugin_Continue;
+}
+
+public void OnTakeDamagePost(int client, int attacker, int inflictor, float damage, int damagetype)
+{
+	if(!cvarEnabled.BoolValue)
+	{
+		return;
+	}
+
+	if(IsValidClient(client) && IsPlayerAlive(client) && !ShouldDisableWeapons(client))
+	{
+		CheckHealthCaps(client);
+	}
+
+	if(IsValidClient(attacker) && attacker != client && !ShouldDisableWeapons(attacker) && IsPlayerAlive(attacker))
+	{
+		CheckHealthCaps(attacker);
+	}
+
+	// === Neo mode post-damage effects ===
+	if(cvarEnabled.IntValue == 2 && IsValidClient(attacker) && attacker != client && IsPlayerAlive(client))
+	{
+		int effects = g_iNeoActiveEffects[attacker];
+
+		// Ice effect: slow target 30% for 2s
+		if(effects & NEO_ICE_EFFECT)
+			TF2_StunPlayer(client, 2.0, 0.3, TF_STUNFLAG_SLOWDOWN | TF_STUNFLAG_NOSOUNDOREFFECT, attacker);
+
+		// Fear on crit: on crits, mark target + push away
+		if((effects & NEO_FEAR_ON_CRIT) && (damagetype & DMG_CRIT))
+		{
+			TF2_AddCondition(client, TFCond_MarkedForDeath, 1.5);
+			float attackerPos[3], victimPos[3], dir[3];
+			GetClientAbsOrigin(attacker, attackerPos);
+			GetClientAbsOrigin(client, victimPos);
+			SubtractVectors(victimPos, attackerPos, dir);
+			NormalizeVector(dir, dir);
+			ScaleVector(dir, 300.0);
+			float vel[3];
+			GetEntPropVector(client, Prop_Data, "m_vecVelocity", vel);
+			AddVectors(vel, dir, vel);
+			TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vel);
+			TF2_StunPlayer(client, 0.5, 0.0, TF_STUNFLAG_BONKSTUCK | TF_STUNFLAG_NOSOUNDOREFFECT, attacker);
+		}
+
+		// Slap counter (Hot Hand): consecutive hits within 1.5s ramp damage
+		if(effects & NEO_ADRENALINE)
+		{
+			int defIndex = g_iNeoActiveDefIndex[attacker];
+			// Check if this is Hot Hand (id 1183)
+			float gameTime = GetGameTime();
+			bool isHotHand = (defIndex == 1183);
+			if(isHotHand)
+			{
+				if(gameTime - g_fNeoLastSlapTime[attacker] < 1.5)
+					g_iNeoSlapStreak[attacker] = (g_iNeoSlapStreak[attacker] + 1) % 4;
+				else
+					g_iNeoSlapStreak[attacker] = 0;
+				g_fNeoLastSlapTime[attacker] = gameTime;
+				// Bonus damage applied on hit — handled via attribute in config
+			}
+
+			// Saw frenzy (Bonesaw): consecutive hits ramp attack speed
+			bool isBonesaw = (defIndex > 0 && defIndex == 198); // base bonesaw; actual weapon IDs vary
+			if(isBonesaw)
+			{
+				if(gameTime - g_fNeoLastSawTime[attacker] < 2.0)
+					g_iNeoSawStreak[attacker] = (g_iNeoSawStreak[attacker] + 1) % 4;
+				else
+					g_iNeoSawStreak[attacker] = 0;
+				g_fNeoLastSawTime[attacker] = gameTime;
+			}
+		}
+
+		// Wound poison (Bushwacka): mark target for death on hit
+		if(effects & NEO_SHARED_DAMAGE)
+		{
+			int defIndex = g_iNeoActiveDefIndex[attacker];
+			if(defIndex == 232) // Bushwacka
+				TF2_AddCondition(client, TFCond_MarkedForDeath, 3.0);
+		}
+
+		// Focus breathing (Sniper Rifle): headshot heal
+		if(effects & NEO_SENTRY_LEECH)
+		{
+			int defIndex = g_iNeoActiveDefIndex[attacker];
+			// Sniper rifles that heal on headshot
+			if(defIndex == 14 || defIndex == 201 || defIndex == 230 || defIndex == 402 || defIndex == 526 || defIndex == 664 || defIndex == 752 || defIndex == 792 || defIndex == 801 || defIndex == 851)
+			{
+				if(damagetype & DMG_CRIT)
+				{
+					int health = GetClientHealth(attacker);
+					int maxHealth = GetEntProp(attacker, Prop_Data, "m_iMaxHealth");
+					if(health < maxHealth)
+						SetEntityHealth(attacker, health + 15 < maxHealth ? health + 15 : maxHealth);
+				}
+			}
+		}
+	}
+}
+
+public Action OnTakeDamage_Object(int building, int &attacker, int &inflictor, float &damage, int &damagetype, int &weapon, float damageForce[3], float damagePosition[3], int damagecustom)
+{
+	if(cvarEnabled.BoolValue && IsValidEntity(building) && damagecustom == TF_CUSTOM_PLASMA_CHARGED)
+	{
+		CreateTimer(4.1, Timer_DisableBuilding, EntIndexToEntRef(building), TIMER_FLAG_NO_MAPCHANGE);  //Wait 4 seconds for the default disable to end, then set ours
+		CreateTimer(40.0, Timer_EnableBuilding, EntIndexToEntRef(building), TIMER_FLAG_NO_MAPCHANGE);  //4 x 10 = 40
+	}
+	return Plugin_Continue;
+}
+
+public Action Timer_DisableBuilding(Handle timer, any buildingRef)
+{
+	int building = EntRefToEntIndex(buildingRef);
+	if(IsValidEntity(building) && building > MaxClients)
+	{
+		SetEntProp(building, Prop_Send, "m_bDisabled", 1);
+	}
+	return Plugin_Continue;
+}
+
+public Action Timer_EnableBuilding(Handle timer, any buildingRef)
+{
+	int building = EntRefToEntIndex(buildingRef);
+	if(IsValidEntity(building) && building > MaxClients)
+	{
+		SetEntProp(building, Prop_Send, "m_bDisabled", 0);
+	}
+	return Plugin_Continue;
+}
+
+// === Neo mode effect helpers ===
+
+void ApplyNeoEffects(int client, int itemDefIndex)
+{
+	if(cvarEnabled.IntValue != 2)
+		return;
+	if(!IsValidClient(client) || !IsPlayerAlive(client))
+		return;
+	if(ShouldDisableWeapons(client))
+		return;
+
+	char key[16];
+	IntToString(itemDefIndex, key, sizeof(key));
+
+	int flags;
+	if(!g_hNeoEffectFlags.GetValue(key, flags))
+	{
+		// Try classname fallback — but we don't have classname here
+		// Use a separate lookup from the trie (handled in TF2Items_OnGiveNamedItem_Post)
+		ClearNeoEffects(client);
+		return;
+	}
+
+	g_iNeoActiveEffects[client] = flags;
+	g_iNeoActiveDefIndex[client] = itemDefIndex;
+
+	g_fNeoLastSlapTime[client] = 0.0;
+	g_fNeoLastSawTime[client] = 0.0;
+	g_iNeoSlapStreak[client] = 0;
+	g_iNeoSawStreak[client] = 0;
+	g_bNeoProcessingSharedDamage[client] = false;
+	g_bNeoExplosiveJumpPrevAttack[client] = false;
+	g_bNeoWasCloakedPrev[client] = false;
+}
+
+void ClearNeoEffects(int client)
+{
+	g_iNeoActiveEffects[client] = 0;
+	g_iNeoActiveDefIndex[client] = -1;
+
+	if(g_fNeoBaseSpeed[client] > 0.0 && IsPlayerAlive(client))
+		SetEntPropFloat(client, Prop_Data, "m_flMaxspeed", g_fNeoBaseSpeed[client]);
+
+	g_fNeoLastSlapTime[client] = 0.0;
+	g_fNeoLastSawTime[client] = 0.0;
+	g_iNeoSlapStreak[client] = 0;
+	g_iNeoSawStreak[client] = 0;
+	g_bNeoProcessingSharedDamage[client] = false;
+	g_bNeoExplosiveJumpPrevAttack[client] = false;
+	g_bNeoWasCloakedPrev[client] = false;
+	g_fNeoRageEndTime[client] = 0.0;
+}
+
+public Action OnWeaponSwitch(int client, int weapon)
+{
+	int activeWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+	if(cvarEnabled.BoolValue && IsValidClient(client) && IsValidEntity(activeWeapon))
+	{
+		// Neo mode: apply effects on weapon switch
+		if(cvarEnabled.IntValue == 2 && !ShouldDisableWeapons(client))
+		{
+			ClearNeoEffects(client);
+			int defIndex = GetEntProp(activeWeapon, Prop_Send, "m_iItemDefinitionIndex");
+			ApplyNeoEffects(client, defIndex);
+		}
+
+		char classname[64];
+		GetEdictClassname(activeWeapon, classname, sizeof(classname));
+		if(StrEqual(classname, "tf_weapon_katana") && !GetEntProp(activeWeapon, Prop_Send, "m_bIsBloody"))
+		{
+			int health = GetClientHealth(client);
+			if(health - cvarZatoichiSheathThreshold.IntValue <= 0)
+			{
+				return Plugin_Handled;
+			}
+			else
+			{
+				SetEntityHealth(client, health - 450);  //50 + 450 = 500
+			}
+		}
+	}
+	return Plugin_Continue;
+}
+
+bool ShouldDisableWeapons(int client)
+{
+	//in case vsh/ff2 and other mods are running, disable x10 effects and checks
+	//this list may get extended as I check out more game mods
+
+	#if defined _FF2_included
+	if(ff2Running && FF2_GetBossTeam() == GetClientTeam(client))
+	{
+		return true;
+	}
+	#endif
+
+	#if defined _VSH_included
+	if(vshRunning && VSH_GetSaxtonHaleUserId() == GetClientUserId(client))
+	{
+		return true;
+	}
+	#endif
+
+	return (hiddenRunning && TF2_GetClientTeam(client) == TFTeam_Blue);
+}
+
+void CheckHealthCaps(int client)
+{
+	if(!aprilFools)  //April Fool's 2015: Unlimited health!
+	{
+		int cap = cvarHealthCap.IntValue;
+		if(cap > 0 && GetClientHealth(client) > cap)
+		{
+			TF2_SetHealth(client, cap);
+		}
+	}
+}
+
+public Action OnPlayerShieldBlocked(int msg_id, Handle bf, const int[] players, int playersNum, bool reliable, bool init)
+{
+	if(!cvarEnabled.BoolValue || playersNum < 2)
+	{
+		return Plugin_Continue;
+	}
+
+	int victim = players[0];
+	int entity;
+	while((entity = GetPlayerWeaponSlot_Wearable(victim, TFWeaponSlot_Secondary)) != -1)
+	{
+		TF2_RemoveWearable(victim, entity);
+	}
+	CreateTimer(3.0, Timer_RegenRazorback, GetClientUserId(victim), TIMER_FLAG_NO_MAPCHANGE);
+	return Plugin_Continue;
+}
+
+public Action Timer_RegenRazorback(Handle timer, any userid)
+{
+	int client = GetClientOfUserId(userid);
+	if(!IsValidClient(client))
+	{
+		return Plugin_Continue;
+	}
+
+	Handle weapon = TF2Items_CreateItem(OVERRIDE_CLASSNAME | OVERRIDE_ITEM_DEF | OVERRIDE_ITEM_LEVEL | OVERRIDE_ITEM_QUALITY | OVERRIDE_ATTRIBUTES);
+	TF2Items_SetClassname(weapon, "tf_wearable");
+	TF2Items_SetItemIndex(weapon, 57);  //Razorback
+	TF2Items_SetLevel(weapon, 10);
+	TF2Items_SetQuality(weapon, 6);
+	TF2Items_SetAttribute(weapon, 0, 52, 1.0);  //Block one backstab attempt
+	TF2Items_SetAttribute(weapon, 1, 292, 5.0);  //...kill eater score type?
+	TF2Items_SetNumAttributes(weapon, 2);
+
+	int entity = TF2Items_GiveNamedItem(client, weapon);
+	weapon.Close();
+	SDKCall(equipWearable, client, entity);
+	return Plugin_Continue;
+}
+
+/******************************************************************
+
+Gameplay: Player & Item Spawn
+
+******************************************************************/
+
+public int TF2Items_OnGiveNamedItem_Post(int client, char[] classname, int itemDefinitionIndex, int itemLevel, int itemQuality, int entityIndex)
+{
+	if(!cvarEnabled.BoolValue
+	|| (!cvarIncludeBots.BoolValue && IsFakeClient(client))
+	|| ShouldDisableWeapons(client)
+	|| !isCompatibleItem(classname, itemDefinitionIndex)
+	|| (itemQuality == 5 && itemDefinitionIndex != 266)
+	|| itemQuality == 8 || itemQuality == 10)
+	{
+		return;
+	}
+
+	int size = 0;
+
+	char attribName[64];
+	char attribValue[8];
+	char modToUse[16];
+	char tmpID[64];
+
+	Format(tmpID, sizeof(tmpID), "%s__%i_size", selectedMod, itemDefinitionIndex);
+	if(!itemInfoTrie.GetValue(tmpID, size))
+	{
+		Format(tmpID, sizeof(tmpID), "%s__%s_size", selectedMod, classname);
+		if(!itemInfoTrie.GetValue(tmpID, size))
+		{
+			Format(tmpID, sizeof(tmpID), "default__%i_size", itemDefinitionIndex);
+			if(!itemInfoTrie.GetValue(tmpID, size))
+			{
+				Format(tmpID, sizeof(tmpID), "default__%s_size", classname);
+				if(!itemInfoTrie.GetValue(tmpID, size))
+				{
+					return;
+				}
+				else
+				{
+					strcopy(modToUse, sizeof(modToUse), "default");
+				}
+			}
+			else
+			{
+				strcopy(modToUse, sizeof(modToUse), "default");
+			}
+		}
+		else
+		{
+			strcopy(modToUse, sizeof(modToUse), selectedMod);
+		}
+	}
+	else
+	{
+		strcopy(modToUse, sizeof(modToUse), selectedMod);
+	}
+
+	for(int i; i < size; i++)
+	{
+		Format(tmpID, sizeof(tmpID), "%s__%i_%i_name", modToUse, itemDefinitionIndex, i);
+		if(itemInfoTrie.GetString(tmpID, attribName, sizeof(attribName)))
+		{
+			Format(tmpID, sizeof(tmpID), "%s__%i_%i_val", modToUse, itemDefinitionIndex, i);
+			itemInfoTrie.GetString(tmpID, attribValue, sizeof(attribValue));
+
+			if(StrEqual(attribValue, "remove"))
+			{
+				TF2Attrib_RemoveByName(entityIndex, attribName);
+			}
+			else
+			{
+				TF2Attrib_SetByName(entityIndex, attribName, StringToFloat(attribValue));
+			}
+		}
+		else //Use the weapon classname as the backup
+		{
+			Format(tmpID, sizeof(tmpID), "%s__%s_%i_name", modToUse, classname, i);
+			itemInfoTrie.GetString(tmpID, attribName, sizeof(attribName));
+
+			Format(tmpID, sizeof(tmpID), "%s__%s_%i_val", modToUse, classname, i);
+			itemInfoTrie.GetString(tmpID, attribValue, sizeof(attribValue));
+
+			if(StrEqual(attribValue, "remove"))
+			{
+				TF2Attrib_RemoveByName(entityIndex, attribName);
+			}
+			else
+			{
+				TF2Attrib_SetByName(entityIndex, attribName, StringToFloat(attribValue));
+			}
+		}
+
+		//Engineer has the Panic Attack in the primary slot
+		if(itemDefinitionIndex==1153 && TF2_GetPlayerClass(client)==TFClass_Engineer && StrEqual(attribName, "maxammo secondary increased"))
+		{
+			TF2Attrib_RemoveByName(entityIndex, "maxammo secondary increased");
+			TF2Attrib_SetByName(entityIndex, "maxammo primary increased", StringToFloat(attribValue));
+		}
+	}
+
+	// Neo mode: apply effects if this is the active weapon we just gave
+	int activeWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+	if(activeWeapon == entityIndex)
+	{
+		char neoKey[16];
+		IntToString(itemDefinitionIndex, neoKey, sizeof(neoKey));
+		int flags;
+		if(g_hNeoEffectFlags.GetValue(neoKey, flags))
+			ApplyNeoEffects(client, itemDefinitionIndex);
+		else
+		{
+			// Check classname fallback
+			strcopy(neoKey, sizeof(neoKey), classname);
+			if(g_hNeoEffectFlags.GetValue(neoKey, flags))
+				ApplyNeoEffects(client, itemDefinitionIndex);
+			else
+				ClearNeoEffects(client);
+		}
+	}
+}
+
+bool isCompatibleItem(char[] classname, int iItemDefinitionIndex)
+{
+	return StrContains(classname, "tf_weapon") != -1 ||
+		StrEqual(classname, "saxxy") ||
+		StrEqual(classname, "tf_wearable_demoshield") ||
+		(StrEqual(classname, "tf_wearable") &&
+		(iItemDefinitionIndex == 133 ||
+		iItemDefinitionIndex == 444 ||
+		iItemDefinitionIndex == 405 ||
+		iItemDefinitionIndex == 608 ||
+		iItemDefinitionIndex == 57 ||
+		iItemDefinitionIndex == 231 ||
+		iItemDefinitionIndex == 642));
+}
+
+public Action OnPostInventoryApplication(Handle event, const char[] name, bool dontBroadcast)
+{
+	if(!cvarEnabled.BoolValue)
+	{
+		return Plugin_Continue;
+	}
+
+	int userid = GetEventInt(event, "userid");
+	float delay;
+	if(FindConVar("tf2items_rnd_enabled"))
+	{
+		delay = FindConVar("tf2items_rnd_enabled").BoolValue ? 0.3 : 0.1;
+	}
+	else
+	{
+		delay = 0.1;
+	}
+
+	// Vita-Saw organ collection * 10
+	int medigun = GetPlayerWeaponSlot(GetClientOfUserId(userid), TFWeaponSlot_Secondary);
+	if(IsValidEntity(medigun))
+	{
+		char classname[64];
+		if(GetEntityClassname(medigun, classname, sizeof(classname)) && StrContains(classname, "tf_weapon_medigun", false) == 0)
+		{
+			float uber = GetEntPropFloat(medigun, Prop_Send, "m_flChargeLevel");
+			if(uber * 10 < 1.0)
+			{
+				SetEntPropFloat(medigun, Prop_Send, "m_flChargeLevel", uber * 10);
+			}
+			else if(uber < 1.0)
+			{
+				SetEntPropFloat(medigun, Prop_Send, "m_flChargeLevel", 1.0);
+			}
+		}
+	}
+
+	UpdateVariables(GetClientOfUserId(userid));
+	CreateTimer(delay, Timer_FixClips, userid, TIMER_FLAG_NO_MAPCHANGE);
+
+	return Plugin_Continue;
+}
+
+public Action Timer_FixClips(Handle hTimer, any userid)
+{
+	int client = GetClientOfUserId(userid);
+
+	if(!cvarEnabled.BoolValue || !IsValidClient(client) || !IsPlayerAlive(client))
+	{
+		return Plugin_Continue;
+	}
+
+	int weapon;
+	for(int slot; slot < 2; slot++)
+	{
+		weapon = GetPlayerWeaponSlot(client, slot);
+
+		if(IsValidEntity(weapon))
+		{
+			CheckClips(weapon);
+
+			if(FindConVar("tf2items_rnd_enabled") && FindConVar("tf2items_rnd_enabled").BoolValue)
+			{
+				Randomizer_CheckAmmo(client, weapon);
+			}
+		}
+	}
+
+	int maxHealth = GetEntProp(client, Prop_Data, "m_iMaxHealth");
+	if(GetClientHealth(client) != maxHealth)
+	{
+		TF2_SetHealth(client, maxHealth);
+	}
+
+	UpdateVariables(client);
+	TF2_AddCondition(client, TFCond_SpeedBuffAlly, 0.01); //recalc speed - thx sarge
+
+	// Apparently the rage meter isn't resetting after switching buffs, so reset it forcefully
+	weapon = GetPlayerWeaponSlot(client, TFWeaponSlot_Secondary);
+	if(IsValidEntity(weapon) && WeaponHasAttribute(client, weapon, "mod soldier buff type"))
+	{
+		SetEntPropFloat(client, Prop_Send, "m_flRageMeter", 0.0);
+	}
+
+	return Plugin_Continue;
+}
+
+void CheckClips(int entityIndex)
+{
+	if((TF2Attrib_GetByName(entityIndex, "clip size penalty") != Address_Null ||
+		TF2Attrib_GetByName(entityIndex, "clip size bonus") != Address_Null ||
+		TF2Attrib_GetByName(entityIndex, "clip size penalty HIDDEN") != Address_Null) &&
+		TF2Attrib_GetByName(entityIndex, "can overload") != Address_Null)
+	{
+		SetEntProp(entityIndex, Prop_Send, "m_iClip1", 0);
+	}
+	else if(TF2Attrib_GetByName(entityIndex, "mod max primary clip override") != Address_Null)
+	{
+		Address attribAddress = TF2Attrib_GetByName(entityIndex, "mod max primary clip override");
+		SetEntProp(entityIndex, Prop_Send, "m_iClip1", RoundToNearest(TF2Attrib_GetValue(attribAddress)));
+	}
+}
+
+void Randomizer_CheckAmmo(int client, int entityIndex)
+{
+	//Canceling out Randomizer's own "give ammo" function to the right amount
+
+	int ammoCount = -1;
+	int iOffset = GetEntProp(entityIndex, Prop_Send, "m_iPrimaryAmmoType", 1) * 4;
+	int iAmmoTable = FindSendPropInfo("CTFPlayer", "m_iAmmo");
+	Address attribAddress;
+
+	if((attribAddress = TF2Attrib_GetByName(entityIndex, "maxammo primary increased")) != Address_Null ||
+		(attribAddress = TF2Attrib_GetByName(entityIndex, "maxammo secondary increased")) != Address_Null ||
+		(attribAddress = TF2Attrib_GetByName(entityIndex, "maxammo primary reduced")) != Address_Null ||
+		(attribAddress = TF2Attrib_GetByName(entityIndex, "maxammo secondary reduced")) != Address_Null)
+	{
+		ammoCount = RoundToCeil(GetEntData(client, iAmmoTable + iOffset) * TF2Attrib_GetValue(attribAddress));
+	}
+	else if((attribAddress = TF2Attrib_GetByName(entityIndex, "maxammo grenades1 increased")) != Address_Null)
+	{
+		ammoCount = RoundToCeil(TF2Attrib_GetValue(attribAddress));
+	}
+	else
+	{
+		return;
+	}
+
+	SetEntData(client, iAmmoTable+iOffset, ammoCount, 4, true);
+}
+
+public void OnEntityCreated(int entity, const char[] classname)
+{
+	if(StrContains(classname, "item_ammopack")!=-1 || StrEqual(classname, "tf_ammo_pack"))
+	{
+		SDKHook(entity, SDKHook_Spawn, OnItemSpawned);
+	}
+}
+
+public void OnItemSpawned(int entity)
+{
+	SDKHook(entity, SDKHook_StartTouch, OnPickup);
+	SDKHook(entity, SDKHook_Touch, OnPickup);
+}
+
+public Action OnPickup(int entity, int client)
+{
+	if(aprilFools && IsValidClient(client) && hasBazooka[client])
+	{
+		return Plugin_Stop;
+	}
+	return Plugin_Continue;
+}
+
+/******************************************************************
+
+Stock Functions In Gameplay
+
+******************************************************************/
+
+bool IsValidClient(int client)
+{
+	return client > 0 && client <= MaxClients && IsClientConnected(client)
+	&& !IsFakeClient(client) && IsClientInGame(client)
+	&& !GetEntProp(client, Prop_Send, "m_bIsCoaching")
+	&& !IsClientSourceTV(client) && !IsClientReplay(client);
+}
+
+void ResetVariables(int client)
+{
+	cabers[client] = 0;
+	dalokohsSeconds[client] = 0;
+	dalokohs[client] = 0;
+	//headsTaken[client] = 0;
+	revengeCrits[client] = 0;
+	amputatorHealing[client] = 0;
+	hasCaber[client] = false;
+	hasManmelter[client] = false;
+	takesHeads[client] = false;
+	hasBazooka[client] = false;
+	chargeBegin[client] = 0.0;
+}
+
+void UpdateVariables(int client)
+{
+	int primary = GetPlayerWeaponSlot(client, TFWeaponSlot_Primary);
+	int secondary = GetPlayerWeaponSlot_Wearable(client, TFWeaponSlot_Secondary);
+	int melee = GetPlayerWeaponSlot(client, TFWeaponSlot_Melee);
+
+	if(!IsValidEntity(secondary))
+	{
+		secondary = GetPlayerWeaponSlot(client, TFWeaponSlot_Secondary);
+	}
+
+	if(IsValidEntity(primary))
+	{
+		hasBazooka[client] = GetEntProp(primary, Prop_Send, "m_iItemDefinitionIndex") == 730;
+	}
+	else
+	{
+		hasBazooka[client] = false;
+	}
+
+	if(IsValidEntity(secondary))
+	{
+		hasManmelter[client] = WeaponHasAttribute(client, secondary, "extinguish earns revenge crits");
+	}
+	else
+	{
+		hasManmelter[client] = false;
+	}
+
+	if(IsValidEntity(melee))
+	{
+		hasCaber[client] = GetEntProp(melee, Prop_Send, "m_iItemDefinitionIndex") == 307;
+		takesHeads[client] = WeaponHasAttribute(client, melee, "decapitate type");
+		if(takesHeads[client])
+		{
+			SDKHook(client, SDKHook_GetMaxHealth, OnGetMaxHealth);
+		}
+	}
+	else
+	{
+		hasCaber[client] = hasManmelter[client] = hasBazooka[client] = takesHeads[client] = false;
+	}
+
+	cabers[client] = hasCaber[client] ? 10 : 0;
+
+	dalokohs[client] = 0;
+}
+
+public Action Timer_RemoveDuck(Handle timer, any duckRef)
+{
+	int duck = EntRefToEntIndex(duckRef);
+	if(cvarEnabled.BoolValue && IsValidEntity(duck) && duck > MaxClients)
+	{
+		AcceptEntityInput(duck, "Kill");
+	}
+	return Plugin_Continue;
+}
+
+stock void TF2_SetHealth(int client, int health)
+{
+	if(IsValidClient(client))
+	{
+		SetEntProp(client, Prop_Send, "m_iHealth", health);
+		SetEntProp(client, Prop_Data, "m_iHealth", health);
+	}
+}
+
+stock int GetPlayerWeaponSlot_Wearable(int client, int slot)
+{
+	int edict = MaxClients + 1;
+	if(slot == TFWeaponSlot_Secondary)
+	{
+		while((edict = FindEntityByClassname2(edict, "tf_wearable_demoshield")) != -1)
+		{
+			int idx = GetEntProp(edict, Prop_Send, "m_iItemDefinitionIndex");
+			if((idx == 131 || idx == 406) && GetEntPropEnt(edict, Prop_Send, "m_hOwnerEntity") == client && !GetEntProp(edict, Prop_Send, "m_bDisguiseWearable"))
+			{
+				return edict;
+			}
+		}
+	}
+
+	edict = MaxClients+1;
+	while((edict = FindEntityByClassname2(edict, "tf_wearable")) != -1)
+	{
+		char netclass[32];
+		if(GetEntityNetClass(edict, netclass, sizeof(netclass)) && StrEqual(netclass, "CTFWearable"))
+		{
+			int idx = GetEntProp(edict, Prop_Send, "m_iItemDefinitionIndex");
+			if(((slot == TFWeaponSlot_Primary && (idx == 405 || idx == 608))
+				|| (slot == TFWeaponSlot_Secondary && (idx == 57 || idx == 133 || idx == 231 || idx == 444 || idx == 642)))
+				&& GetEntPropEnt(edict, Prop_Send, "m_hOwnerEntity") == client && !GetEntProp(edict, Prop_Send, "m_bDisguiseWearable"))
+			{
+				return edict;
+			}
+		}
+	}
+	return -1;
+}
+
+stock int FindEntityByClassname2(int startEnt, const char[] classname)
+{
+	while(startEnt > -1 && !IsValidEntity(startEnt))
+	{
+		startEnt--;
+	}
+	return FindEntityByClassname(startEnt, classname);
+}
+
+//I have this in case TF2Attrib_GetByName acts up
+stock bool WeaponHasAttribute(int client, int entity, char[] name)
+{
+	if(TF2Attrib_GetByName(entity, name) != Address_Null)
+	{
+		return true;
+	}
+
+	if(StrEqual(name, "backstab shield") && (GetPlayerWeaponSlot_Wearable(client, TFWeaponSlot_Secondary) == 57))
+	{
+		return true;
+	}
+
+	int itemIndex = GetEntProp(entity, Prop_Send, "m_iItemDefinitionIndex");
+
+	return (StrEqual(name, "sapper kills collect crits") && (itemIndex == 525))
+		|| (StrEqual(name, "mod sentry killed revenge") &&
+		(itemIndex == 141 || itemIndex == 1004))
+		|| (StrEqual(name, "decapitate type") &&
+		(itemIndex == 132 || itemIndex == 266 || itemIndex == 482 || itemIndex == 1082))
+		|| (StrEqual(name, "ullapool caber") && (itemIndex == 307))
+		|| (StrEqual(name, "extinguish earns revenge crits") && (itemIndex == 595));
+}

@@ -24,8 +24,9 @@ public Action MenuOpen(int client, int args) {
 	}
 
 	if ((cvar = FindConVar("tf2x10_enabled")) != null) {
-		FormatToggle(cvar, state, sizeof(state));
-		Format(text, sizeof(text), "x10 mode (Respawn to apply) [%s]", state);
+		int mode = GetConVarInt(cvar);
+		FormatX10Mode(mode, state, sizeof(state));
+		Format(text, sizeof(text), "Weapon mode (Respawn to apply) [%s]", state);
 		menu.AddItem("silly_x10", text);
 	}
 
@@ -84,7 +85,7 @@ public int Handle_Menu(Menu menu, MenuAction action, int client, int item) {
 		if (StrEqual(info, "silly_gravity"))
 			Voting_CreateStringConVarVote(client, "sv_gravity", "Set Gravity (default: 800)", "Gravity", "10", "400", "800", "1600");
 		else if (StrEqual(info, "silly_x10"))
-			Voting_CreateYesNoConVarVote(client, "tf2x10_enabled", "Enable x10? (Respawn to apply)", 1, 0, "x10 mode");
+			Voting_CreateStringConVarVote(client, "tf2x10_enabled", "Select weapon mode (Respawn to apply)", "Weapon mode", "Normal|0", "Neo|2", "x10|1", "Neo x10|3");
 		else if (StrEqual(info, "silly_always_crits"))
 			Voting_CreateYesNoConVarVote(client, "sm_alwayscrits_enabled", "Enable always crits?", 1, 0, "Always crits");
 		else if (StrEqual(info, "silly_goomba_enabled"))

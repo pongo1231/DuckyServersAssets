@@ -23,7 +23,7 @@ public void OnConfigsExecuted()
     TrySetWithSMSpecial("tf_mvm_endless_force_on", "1", false);
     TrySetWithSMSpecial("sm_bottaunt_enabled", "1", true);
     TrySetWithSMSpecial("sm_bbr_enable", "1", false);
-    TrySetWithSMSpecial("tf2_x10_enabled", "1", false);
+    TrySetX10Mode();
     TrySetWithSMSpecial("sm_alwayscrits_enabled", "1", false);
     TrySetWithSMSpecial("sm_mvm_infinitemoney", "1", false);
     TrySetWithSMSpecial("nb_blind", "1", true);
@@ -77,6 +77,16 @@ void TrySetRCBotClassSpecial()
 
     int index = GetRandomInt(0, sizeof(classes) - 1);
     ServerCommand("sm_cvar menu_bots_rcbot_force_class %s", classes[index]);
+}
+
+void TrySetX10Mode()
+{
+    if (!RollChance()) return;
+
+    static const char modes[][] = {"1", "2", "3"};
+    char pick[2];
+    strcopy(pick, sizeof(pick), modes[GetRandomInt(0, sizeof(modes) - 1)]);
+    ServerCommand("sm_cvar tf2x10_enabled %s", pick);
 }
 
 bool RollChance()
