@@ -30,7 +30,7 @@ public Action MenuOpen(int client, int args) {
 	}
 
 	if ((cvar = FindConVar("mp_disable_respawn_times")) != null) {
-		FormatToggle(cvar, state, sizeof(state), true);
+		FormatToggle(cvar, state, sizeof(state));
 		Format(text, sizeof(text), "Instant Respawn [%s]", state);
 		menu.AddItem("server_instant_respawn", text);
 	}
@@ -52,7 +52,7 @@ public int Handle_Menu(Menu menu, MenuAction action, int client, int item) {
 		else if (StrEqual(info, "server_halloween"))
 			Voting_CreateYesNoConVarVote(client, "tf_forced_holiday", "Enable halloween mode?", 2, 0, "Halloween mode");
 		else if (StrEqual(info, "server_instant_respawn"))
-			Voting_CreateYesNoConVarVote(client, "mp_disable_respawn_times", "Enable instant respawning?", 0, 1, "Instant respawn");
+			Voting_CreateYesNoConVarVote(client, "mp_disable_respawn_times", "Enable instant respawning?", 1, 0, "Instant respawn");
 	} else if (action == MenuAction_Cancel) {
 		if (item == MenuCancel_ExitBack)
 			FakeClientCommand(client, "menu");
