@@ -38,24 +38,6 @@ stock void FormatHoliday(int value, char[] buffer, int maxlen) {
 }
 
 /**
- * Returns a human-readable mode name for a tf2x10_enabled value.
- *
- * @param value    The cvar's integer value (0=Off, 1=x10, 2=Neo)
- * @param buffer   Buffer to store the result
- * @param maxlen   Maximum length of buffer
- */
-stock void FormatX10Mode(int value, char[] buffer, int maxlen) {
-	if (value == 3)
-		strcopy(buffer, maxlen, "Neo x10");
-	else if (value == 2)
-		strcopy(buffer, maxlen, "Neo");
-	else if (value == 1)
-		strcopy(buffer, maxlen, "x10");
-	else
-		strcopy(buffer, maxlen, "Normal");
-}
-
-/**
  * Creates a Boolean ConVar Change Vote Menu
  *
  * @param client        The client index that started the vote

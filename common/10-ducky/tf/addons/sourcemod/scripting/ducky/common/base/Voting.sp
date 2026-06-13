@@ -12,7 +12,6 @@ int true_value;
 int false_value;
 bool g_isBooleanVote;
 bool vote_success = false;
-StringMap g_hVoteValueDisplay;
 
 bool IsVoteRunning() {
 	return g_convar || command_name[0] || command2_name[0];
@@ -45,7 +44,6 @@ public void OnMapStart() {
 	PrecacheSound("ui/vote_started.wav");
 	PrecacheSound("ui/vote_success.wav");
 	PrecacheSound("ui/vote_failure.wav");
-	g_hVoteValueDisplay = new StringMap();
 }
 
 public int Voting_CreateYesNoConVarVote(Handle plugin, int numParams) {
@@ -181,19 +179,10 @@ public int Voting_CreateStringConVarVote(Handle plugin, int numParams) {
 	Menu menu = new Menu(Handle_StringVoting);
 	menu.SetTitle(question);
 
-	g_hVoteValueDisplay.Clear();
-
 	for (int i = 5; i <= numParams; i++) {
-		char raw[64];
-		GetNativeString(i, raw, sizeof(raw));
-		int pos = StrContains(raw, "|");
-		if (pos != -1) {
-			raw[pos] = '\0';
-			menu.AddItem(raw[pos + 1], raw);
-			g_hVoteValueDisplay.SetString(raw[pos + 1], raw);
-		} else {
-			menu.AddItem(raw, raw);
-		}
+		char value[32];
+		GetNativeString(i, value, sizeof(value));
+		menu.AddItem(value, value);
 	}
 	menu.ExitButton = false;
 	menu.DisplayVoteToAll(countdown);
@@ -221,13 +210,9 @@ public int Handle_StringVoting(Menu menu, MenuAction action, int choice, int par
 			}
 		} else {
 			SetConVarString(g_convar, value);
-			if (friendly_name[0]) {
-				char displayValue[32];
-				if (g_hVoteValueDisplay.GetString(value, displayValue, sizeof(displayValue)))
-					Format(text, sizeof(text), "%s has been set to %s.", friendly_name, displayValue);
-				else
-					Format(text, sizeof(text), "%s has been set to %s.", friendly_name, value);
-			} else {
+			if (friendly_name[0])
+				Format(text, sizeof(text), "%s has been set to %s.", friendly_name, value);
+			else {
 				char convar_name[64];
 				GetConVarName(g_convar, convar_name, sizeof(convar_name));
 				Format(text, sizeof(text), "%s has been set to %s.", convar_name, value);
