@@ -2,6 +2,7 @@
 
 #include <tf2_stocks>
 #include <tf2attributes>
+#include <tf2items>
 
 #pragma semicolon 1
 #pragma newdecls required
@@ -27,6 +28,8 @@ int g_iGivenPDA2[MAXPLAYERS + 1];
 bool g_bWeaponsGiven[MAXPLAYERS + 1];
 
 int g_iSeedCounter;
+
+GlobalForward g_hForwardPost;
 
 int BotRandom(int client, int min, int max)
 {
@@ -108,6 +111,14 @@ public void OnPluginStart()
 	SetFailState("Failed to create call: CBasePlayer::EquipWearable");
 
 	delete hTF2; 
+
+	g_hForwardPost = new GlobalForward("TF2Items_OnGiveNamedItem_Post", ET_Ignore,
+		Param_Cell, Param_String, Param_Cell, Param_Cell, Param_Cell, Param_Cell);
+}
+
+public void OnPluginEnd()
+{
+	delete g_hForwardPost;
 }
  
 public void OnMapStart()
@@ -5100,6 +5111,20 @@ bool CreateWeapon(int client, char[] classname, int itemindex, int quality, int 
 	else
 	{
 		TF2_SwitchtoSlot(client, 0);
+	}
+	
+	if (g_hForwardPost != INVALID_HANDLE)
+	{
+		int actualLevel = GetEntProp(weapon, Prop_Send, "m_iEntityLevel");
+		int actualQuality = GetEntData(weapon, FindSendPropInfo(entclass, "m_iEntityQuality"));
+		Call_StartForward(g_hForwardPost);
+		Call_PushCell(client);
+		Call_PushString(classname);
+		Call_PushCell(itemindex);
+		Call_PushCell(actualLevel);
+		Call_PushCell(actualQuality);
+		Call_PushCell(weapon);
+		Call_Finish();
 	}
 	
 	return true;
