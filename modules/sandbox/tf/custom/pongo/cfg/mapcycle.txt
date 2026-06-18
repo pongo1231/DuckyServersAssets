@@ -140,7 +140,6 @@ cp_inferno
 cp_iron_v1a
 cp_junction_event_rc1
 cp_junglewatch_final
-cp_junglewatch_final.res
 cp_kakariko_a2
 cp_kalinka_rc6a
 cp_labor
@@ -509,7 +508,6 @@ pl_patagonia_winter_rc1d
 pl_pathway_event_rc8
 pl_pathway_rc8
 pl_pit
-pl_pit.res
 pl_ququmannz_rc2
 plr_desertbus_event_rc2
 plr_desertbus_rc2
@@ -569,7 +567,6 @@ stt_supercity
 tc_atlantic_v1
 tc_hydro_event_a4
 tc_meridian_rc3
-tc_meridian_rc3.res
 tdm_advent_rc1
 tdm_doublehouse_v1
 tdm_runoff_final
