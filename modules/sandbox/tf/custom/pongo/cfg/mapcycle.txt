@@ -218,7 +218,6 @@ ctf_darktower
 ctf_doublecross_chz2
 ctf_doublecross_event_v4
 ctf_doublecross_event_v5
-ctf_doublecross_event_v5.rcw
 ctf_doublecross_rainy
 ctf_exsmol_rc1
 ctf_facing_worlds_2011
@@ -455,7 +454,6 @@ pl_cactuscanyon_redux_m_rc2
 pl_candyland_b1a
 pl_candyland_b2a
 pl_candyland_b2b
-pl_candyland_b2b.rcw
 pl_candyland_b2
 pl_candyland_test6c
 pl_cashworks_final1
